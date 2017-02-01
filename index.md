@@ -1,3 +1,20 @@
+## Stage estivo di programmazione
+
+**Space Invaders in Python**
+
+Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
+
+- [Locandina in PDF](stage-2017.pdf)
+- [Presentazione dello stage](stage-2017.html)
+- [Modulo richiesta di iscrizione](stage-2017-iscrizione.rtf)
+- [Modulo liberatoria per minori](stage-2017-liberatoria.rtf)
+- [Esercizi di programmazione](esercizi-stage.html)
+- [Opinione degli studenti](http://goo.gl/forms/9KlO5dQ3LMw10rts2)
+
+----
+
+## Insegnamento per Ingegneria dell'Informazione
+
 - [Presentazione del corso](intro.html)
 - [Notizie aggiornate](http://elly.dii.unipr.it/2016/mod/forum/view.php?id=184)
 - [Forum di discussione](http://elly.dii.unipr.it/2016/mod/forum/view.php?id=185)
@@ -60,19 +77,4 @@
 ## Libri di testo, software e link utili
 
 - [Libri e link](link.html)
-
-----
-
-## Stage estivo di programmazione
-
-**“Bubble Bobble” in Python**
-
-Stage formativo per studenti delle scuole superiori, 20-24 giugno 2016
-
-- [Locandina in PDF](stage-2016.pdf)
-- [Presentazione dello stage](stage-2016.html)
-- [Modulo richiesta di iscrizione](stage-2016-iscrizione.rtf)
-- [Modulo liberatoria per minori](stage-2016-liberatoria.rtf)
-- [Esercizi di programmazione](esercizi-stage.html)
-- [Opinione degli studenti](http://goo.gl/forms/9KlO5dQ3LMw10rts2)
 
