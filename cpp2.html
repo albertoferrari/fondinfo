@@ -1,0 +1,1583 @@
+<!--
+Google IO 2012 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahe <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Linguaggio C++11</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/tomamic.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+<slide class="title-slide segue nobackground">
+  <aside class="gdbar"><img src="images/logo.png"></aside>
+  <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+  <h1 data-config-title><!-- populated from slide_config.json --></h1>
+  <figure><img src="images/misc/cpp-logo.jpg"></figure>
+  <hgroup>
+    <h2>Classi e oggetti</h2>
+    <p>Michele Tomaiuolo<br>Ingegneria dell'Informazione, UniPR</p>
+  </hgroup>
+</slide>
+
+
+<slide  >
+  
+    <hgroup>
+      <h2>Classi e Oggetti</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una classe è un tipo che ha variabili membro e funzioni membro</li>
+<li>Il valore di una variabile di un tipo classe è detto oggetto</li>
+<li>Un programma è un insieme di oggetti che interagiscono</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Incapsulamento</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una classe è un tipo completo</li>
+<li>Un tipo di dato consiste di<ul>
+<li>Un insieme di valori</li>
+<li>Un insieme di operazioni</li>
+</ul>
+</li>
+<li>È un tipo di dato astratto (ADT) se l’utilizzo è indipendente dall’implementazione dei valori e delle operazioni</li>
+<li>I tipi di dati predefiniti sono ADT</li>
+<li>Le classi devono essere ADT</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Membri Privati e Pubblici</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>I membri privati possono essere referenziati solo all’interno delle definizioni delle funzioni membro</li>
+<li>I membri pubblici possono essere referenziati ovunque</li>
+<li>È buona norma rendere private tutte le variabili membro e pubbliche le sole funzioni membro necessarie (quelle che espongono le funzionalità della classe)</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Sezioni Pubblica e Privata</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Generalmente si definisce una sola sezione pubblica e una sola sezione privata</li>
+<li>Generalmente la sezione pubblica compare prima (per maggior chiarezza verso chi legge il codice)</li>
+<li>In assenza di specificazione C++ considera i membri privati (il che è di nuovo indicativo della necessità di nascondere il maggior numero possibile di dettagli)</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Classi: Utilizzo Pratico</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una volta definita, la classe può essere usata per dichiarare oggetti, array, puntatori e riferimenti</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>Time sunset;
+Time arrayOfTimes[5];
+Time *pointerToTime;
+Time &amp;dinnerTime = sunset;
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Funzioni accessor e mutator</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Le funzioni accessor consentono di leggere i dati dell’oggetto</li>
+<li>Le funzioni mutator consentono di modificare i dati dell’oggetto</li>
+<li>Queste funzioni forniscono un accesso controllato ai dati</li>
+<li>Generalmente si definiscono setter/getter functions</li>
+<li>E’ buona norma mantenere private le variabili membro e dotarle di funzioni accessor e mutator solo se necessario</li>
+<li>Una funzione che setta il valore di un dato dovrebbe anche controllare la validità di tale valore (validation) e lasciare comunque il dato in uno stato consistente (oppure lanciare un’eccezione...)</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Interfaccia ed Implementazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>L’interfaccia di una classe consiste di<ul>
+<li>Dichiarazioni delle funzioni membro pubbliche</li>
+<li>Commenti</li>
+</ul>
+</li>
+<li>L’implementazione di una classe consiste di<ul>
+<li>Variabili membro e dichiarazioni delle funzioni membro private</li>
+<li>Definizioni delle funzioni membro</li>
+</ul>
+</li>
+<li>Generalmente stanno in file diversi, ma è importante la separazione concettuale</li>
+<li>L’interfaccia viene generalmente definita in un file header</li>
+<li>Il file header sarà incluso da tutti i file che vogliono fare uso della classe (direttiva <code>#include</code>)</li>
+<li>Chi vende librerie software, fornisce ai clienti i soli file header e il codice oggetto</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Programmazione Orientata agli Oggetti</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Un programmatore deve poter usare la classe conoscendo solo l’interfaccia</li>
+<li>Vantaggio: è possibile cambiare l’implementazione senza dover cambiare qualsiasi altro codice che usi la classe</li>
+<li>Filosofia: descrivere il problema in termini di oggetti che interagiscono, piuttosto che algoritmi che operano su dati (anche algoritmi e dati possono cambiare...)</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Classe di Esempio: Interfaccia</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="c++"><code>// prevent multiple inclusions of header file
+#ifndef TIME1_H
+#define TIME1_H
+// Time abstract data type definition
+class Time {
+public:
+    Time(); // constructor
+    void setTime( int, int, int ); // set hour, minute, second
+    void printMilitary(); // print military time format
+    void printStandard(); // print standard time format
+private:
+    int hour; // 0 - 23
+    int minute; // 0 - 59
+    int second; // 0 - 59
+};
+#endif
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Classe di Esempio: Implementazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="c++"><code>…
+#include "time1.h"
+Time::Time() { hour = minute = second = 0; }
+void Time::setTime( int h, int m, int s ) {
+    hour = (h &gt;= 0 &amp;&amp; h &lt; 24) ? h : 0;
+    minute = (m &gt;= 0 &amp;&amp; m &lt; 60) ? m : 0;
+    second = (s &gt;= 0 &amp;&amp; s &lt; 60) ? s : 0;
+}
+void Time::printMilitary() {
+    cout &lt;&lt; (hour &lt; 10 ? "0" : "") &lt;&lt; hour &lt;&lt; ":“
+         &lt;&lt; (minute &lt; 10 ? "0" : "") &lt;&lt; minute;
+}
+void Time::printStandard() {
+    cout &lt;&lt; ((hour == 0 || hour == 12) ? 12 : hour % 12) &lt;&lt; ":"
+         &lt;&lt; (minute &lt; 10 ? "0" : "") &lt;&lt; minute &lt;&lt; ":"
+         &lt;&lt; (second &lt; 10 ? "0" : "") &lt;&lt; second
+         &lt;&lt; (hour &lt; 12 ? " AM" : " PM");
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Classe di Esempio: Utilizzo</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="c++"><code>…
+#include "time1.h"
+int main() {
+    Time t1;
+    t1.setTime(17, 15, 0);
+    t1.printStandard();
+    Time *t2 = new Time();
+    t2-&gt;setTime(17, 20, 0); // (*t2).setTime(17, 20, 0);
+    t2-&gt;printStandard(); // (*t2).printStandard();
+    delete t2;
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      </article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Costruttore</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre><code>È una funzione membro che viene chiamata automaticamente quando viene dichiarato un oggetto della classe
+</code></pre>
+<ul>
+<li>Usata per operazioni di inizializzazione</li>
+<li>Deve avere lo stesso nome della classe</li>
+<li>Non può ritornare un valore</li>
+<li>Deve stare nella sezione pubblica della classe</li>
+<li>Non può essere invocato come le altre funzioni membro</li>
+<li>Definizione alternativa preferibile: sezione di inizializzazione (vedi)</li>
+<li>Spesso si ha overloading dei costruttori</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Costruttore senza Argomenti</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Quando si dichiara una variabile di tipo classe e si vuole invocato il costruttore senza argomenti, non si usano le parentesi<ul>
+<li>Esempio: DayOfYear date;</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Chiamata Esplicita del Costruttore</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Il costruttore può essere chiamato esplicitamente per modificare le variabili membro di un oggetto</li>
+<li>Crea un oggetto anonimo e lo inizializza con i valori degli argomenti</li>
+<li>L’oggetto anonimo può essere assegnato a una variabile del tipo classe<ul>
+<li>Esempio: DayOfYear date(4, 5);</li>
+<li>date = DayOfYear(10, 14);
+È più efficiente usare le mutator functions</li>
+</ul>
+</li>
+<li>Se sono disponibili sia costruttore/i che mutator functions, queste è consigliabile siano chiamate anche dal costruttore (per non ripetere codice)</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Costruttore di Default</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Un costruttore senza argomenti è detto costruttore di default</li>
+<li>Se non definiamo nessun costruttore viene creato un costruttore di default</li>
+<li>Se definiamo almeno un costruttore il costruttore di default non viene creato
+    È bene includere sempre il costruttore di default</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Sezione di Inizializzazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Le variabili membro vengono create e inizializzate dal costruttore nell’ordine in cui sono definite nella classe</li>
+<li>La sezione di inizializzazione è più efficiente per variabili membro di tipo classe</li>
+<li>Le variabili membro possono essere inizializzate all’interno di una sezione di inizializzazione, mentre costanti, riferimenti e membri di tipo classe devono utilizzare tale costrutto</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Sezione di Inizializzazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="c++"><code>class Increment {
+public:
+    Increment(int c = 0, int d = 1);
+    void addDelta() { count += delta; }
+    void print() const;
+private:
+    int count;
+    const int delta; // const data member
+};
+// Constructor for class Increment
+Increment::Increment(int c, int d)
+    : delta( d ) // initializer for const member
+{
+    count = c;
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Variabili Membro di Tipo Classe</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una classe può avere una variabile membro di tipo classe (ovvio: i programmi sono costruiti da classi!)</li>
+<li>Notazione speciale per invocare il costruttore della variabile membro nel costruttore della classe più esterna</li>
+<li>I parametri del costruttore della classe più esterna possono essere usati nella chiamata del costruttore della variabile membro</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Distruttori</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Funzione membro chiamata automaticamente quando un oggetto viene distrutto</li>
+<li>Non riceve parametri e non restituisce valori</li>
+<li>Una classe deve avere un unico distruttore</li>
+<li>Naming: ~ + nomeClasse</li>
+<li>Il distruttore non distrugge materialmente l’oggetto, ma è delegato a compiere tutte quelle operazioni utili prima che l’oggetto venga distrutto (es.: rilascio della memoria allocata dinamicamente)</li>
+<li>Chiamati in ordine inverso rispetto ai costruttori</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Il Modificatore const: 1° Uso</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Per un parametro di tipo classe il passaggio call-by-reference è più efficiente del passaggio call-by-value</li>
+<li>Per i parametri di tipo classe va sempre usato il passaggio call-by-reference</li>
+<li>Se la funzione non modifica il parametro si usa il modificatore const</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Il Modificatore const: 2° Uso</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Altro uso di const: per segnalare che una funzione membro non modifica l’oggetto chiamante</li>
+<li>Va messo sia nella dichiarazione che nella definizione</li>
+<li>Attenzione: const richiede consistenza!</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Reference come Valore di Ritorno</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>E’ possibile per una funzione membro pubblica ritornare una reference a membri privati della classe</li>
+<li>Per quanto sintatticamente corretta, questa operazione può violare il principio di information hiding</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Reference come Valore di Ritorno (2)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="c++"><code>#ifndef TIME4_H
+#define TIME4_H
+class Time {
+public:
+    Time( int = 0, int = 0, int = 0 );
+    void setTime( int, int, int );
+    int getHour();
+    int &amp;badSetHour( int ); // DANGEROUS reference return
+private:
+    int hour;
+    int minute;
+    int second;
+};
+#endif
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Funzioni inline</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>La definizione di una funzione membro può essere posta all’interno della definizione della classe</li>
+<li>Il compilatore inserisce il codice della funzione in ogni punto di chiamata</li>
+<li>Svantaggio: mescoliamo interfaccia e implementazione</li>
+<li>Definire inline solo funzioni molto corte</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Membri static: Variabili</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una variabile membro static è condivisa da tutti gli oggetti di una classe</li>
+<li>Usata dagli oggetti della classe per comunicare e coordinarsi</li>
+<li>Solo gli oggetti della classe possono accedervi</li>
+<li>Se public, allora accessibile con scope resolution</li>
+<li>Va inizializzata al di fuori della definizione della classe, una sola volta</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Membri static: Funzioni</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una funzione membro static accede solo ai membri static</li>
+<li>Non può accedere ai dati dell’oggetto chiamante</li>
+<li>Viene invocata usando il nome della classe e lo scope resolution operator (::)</li>
+<li>La parola chiave static va messa solo nella dichiarazione</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Overloading di operatori</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Gli operatori (+, -, ==, …) non sono altro che…</li>
+<li>Funzioni usate con una sintassi particolare</li>
+<li>C++ consente di sovraccaricare gli operatori così che accettino argomenti di tipo classe<ul>
+<li>Caratteristica tra le più apprezzate del linguaggio</li>
+<li>Può rendere alcuni programmi più chiari rispetto a chiamate a funzione equivalenti</li>
+<li>Non abusarne quando invece l’uso non è chiaro!</li>
+</ul>
+</li>
+<li>Almeno uno degli operandi deve essere di tipo classe</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Overloading di operatori</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Un operatore si scrive come una comune funzione<ul>
+<li>Nome dato dalla parola chiave operator seguita dal simbolo dell’operatore di cui fare l’overloading</li>
+</ul>
+</li>
+<li>Unici operatori predefiniti su membri di tipo classe:
+        = (assegnamento)
+        &amp; (indirizzo)</li>
+<li>L’overload deve essere sempre esplicito<ul>
+<li>Es. Overload di = non condiziona +=, -= o !=</li>
+<li>Es. Se si implementa solo l’op. +, non si può usare +=</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Overloading di operatori come funzioni membro</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Il primo operando è l’oggetto chiamante, quindi:<ul>
+<li>Gli operatori binari hanno un solo parametro</li>
+<li>Gli operatori unari non hanno parametri</li>
+</ul>
+</li>
+<li>Vantaggi
+        È più nello spirito OOP
+        È più efficiente</li>
+<li>C’è uno svantaggio<ul>
+<li>Il primo operando (l’oggetto più a sinistra) deve essere membro della classe</li>
+<li>Non sempre conviene, non sempre è possibile</li>
+<li>Es. operatori &gt;&gt; e &lt;&lt;</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Costruttori e conversione di tipo automatica</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Conversioni automatiche di tipo<ul>
+<li>Se definizione di classe contiene i costruttori appropriati</li>
+<li>Es.: myAmount + 25</li>
+<li>Creato un oggetto di classe Amount</li>
+<li>Al costruttore viene passato 25</li>
+</ul>
+</li>
+<li>Operatore binario sovraccaricato come membro<ul>
+<li>Conversione automatica del 2° operando (argomento)</li>
+<li>Non del 1° (oggetto chiamante)</li>
+<li>Es.: 25 + myAmount</li>
+<li>Non funziona, se operatore membro</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Overloading di operatori come funzioni non membro</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre><code>È possibile effettuare l’overloading semplicemente dichiarando le funzioni, senza necessità che siano membro della classe
+</code></pre>
+<ul>
+<li>Svantaggio: non potendo accedere ai campi privati, hanno necessità di utilizzare accessor<ul>
+<li>La classe è obbligata a fornire tali accessor</li>
+<li>Overhead nella chiamata degli accessor</li>
+</ul>
+</li>
+<li>Perciò, gli operatori non membro generalmente sono dichiarati come friend (…)</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Funzioni friend</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una funzione friend di una classe ha accesso ai membri privati della classe pur non essendone membro</li>
+<li>Dichiarata friend nella definizione della classe<ul>
+<li>Per chiarezza meglio se all’inizio</li>
+<li>Viene definita e chiamata come una funzione ordinaria</li>
+</ul>
+</li>
+<li>Le funzioni friend hanno migliori prestazioni<ul>
+<li>Non necessitano di accessor</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Funzioni friend</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Le funzioni friend più comuni sono gli operatori sovraccaricati</li>
+<li>Una funzione può essere friend di più classi</li>
+<li>Offrono il vantaggio della conversione automatica di tutti gli operandi</li>
+<li>Ma per alcuni autori non sono nello spirito OOP</li>
+<li>Evitarle, se possibile: violano l’incapsulamento</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Funzioni friend: esempio</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="c++"><code>#include &lt;iostream&gt;
+using std::cout;
+using std::endl;
+class Count {
+    friend void setX( Count &amp;, int ); // friend declaration
+public:
+    Count() { x = 0; }
+    void print() const { cout &lt;&lt; x &lt;&lt; endl; } // output
+private:
+    int x; // data member
+};
+// Can modify private data of Count because
+// setX is declared as a friend function of Count
+void setX( Count &amp;c, int val ) {
+    c.x = val; // legal: setX is a friend of Count
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Returning by const value</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Se una funzione ritorna un oggetto, l’uso di const per il valore ritornato impedisce che l’oggetto possa essere modificato<ul>
+<li>Es: (m1+m2).input(); // compiler error</li>
+</ul>
+</li>
+<li>Per le funzioni accessor che ritornano variabili membro di tipo classe è bene usare const per il valore ritornato</li>
+<li>Ritornare valori di tipi predefiniti come const non ha senso</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      </article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Operatori << e >></h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Operatori &lt;&lt; e &gt;&gt; sovraccaricati per I/O degli oggetti di una classe</li>
+<li>Notazione di immediata comprensione</li>
+<li>Non possono essere sovraccaricati come membri</li>
+<li>L’operatore più a sinistra è infatti rispettivamente ostream&amp; oppure istream&amp;</li>
+<li>Non è del tipo della classe per cui si vogliono sovraccaricare &lt;&lt; e &gt;&gt;</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Operatori << e >></h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Di fatto le chiamate effettuate sono nella forma:<ul>
+<li>cin &gt;&gt; object; // operator&gt;&gt;(cin, object);</li>
+</ul>
+</li>
+<li>Gli operatori &lt;&lt; e &gt;&gt; ritornano rispettivamente un oggetto ostream e istream</li>
+<li>In questo modo, si possono concatenare più chiamate all’operatore stesso<ul>
+<li>cout &lt;&lt; object1 &lt;&lt; object2;</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Operatore =</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>L’operatore = (assegnamento) deve essere sovraccaricato come membro</li>
+<li>Se non viene sovraccaricato, viene creato automaticamente</li>
+<li>L’operatore = di default copia i valori delle variabili membro di un oggetto nelle corrispondenti variabili membro di un altro oggetto</li>
+<li>Problemi nel caso ci siano puntatori: l’operatore = deve essere sovraccaricato!</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Puntatore this</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Un oggetto ha accesso al proprio indirizzo mediante il puntatore this</li>
+<li>this non è parte dell’oggetto, piuttosto è passato come argomento implicito a tutte le funzioni membro dell’oggetto</li>
+<li>Tipo del puntatore this:<ul>
+<li>Funzione membro non costante: Employee* const</li>
+<li>Funzione membro costante: const Employee* const</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Auto-assegnamento</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Se si fornisce un operatore =…<ul>
+<li>Bisogna evitare auto-assegnamenti</li>
+<li>
+<p>Altrimenti c’è rischio di memory leak</p>
+<p>// Overloaded = operator; avoids self assignment
+    - const String &amp;String::operator=( const String &amp;right )
+{
+    - cout &lt;&lt; "operator= called\n";
+    - if ( &amp;right != this ) { // avoid self assignment
+    - delete [] sPtr; // prevents memory leak
+    - length = right.length; // new String length
+    - setString( right.sPtr ); // call utility function
+}
+    - else
+    - cout &lt;&lt; "Attempted assignment of a String to itself\n";
+    - return *this; // enables cascaded assignments
+}</p>
+</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Memory leak</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Un memory leak (falla nella memoria) è un particolare tipo di consumo non voluto di memoria</li>
+<li>Dovuto al mancato rilascio della memoria non più utilizzata da parte dei processi<ul>
+<li>Il termine non è etimologicamente corretto, visto che la memoria non viene persa fisicamente, piuttosto diventa inutilizzabile per un difetto del software</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Operatori ++ e --</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Occorre un modo per distinguere la forma prefissa dalla forma postfissa</li>
+<li>La forma prefissa è sovraccaricata come qualsiasi altro operatore unario</li>
+<li>Nella forma postfissa si aggiunge un parametro fittizio di tipo int<ul>
+<li>Nella dichiarazione e nella definizione</li>
+<li>Si tratta di un “dummy value” senza nessun altro scopo</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Operatori ++ e --</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Operatori ++ e -- predefiniti ritornano…<ul>
+<li>Per riferimento nella forma prefissa</li>
+<li>
+<p>Per valore nella forma postfissa</p>
+<p>// Preincrement operator overloaded as a member function.
+    - Date &amp;Date::operator++()
+{
+    - helpIncrement(); // The increment is in this utility function
+    - return <em>this; // reference return to create an lvalue
+}
+// Postincrement operator overloaded as a member function. Note
+// that the dummy int parameter does not have a name.
+    - Date Date::operator++( int )
+{
+    - Date temp = </em>this;
+    - helpIncrement(); // The increment is in this utility function
+// return non-incremented, saved, temporary object
+    - return temp; // value return; not a reference return
+}</p>
+</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Operatore []</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>L’operatore [] deve essere sovraccaricato come membro</li>
+<li>Se si vuole usare il valore ritornato come l-value deve ritornare una reference</li>
+<li>Il parametro indice può essere di qualsiasi tipo ed è l’argomento della chiamata alla funzione membro</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Overloading: riassunto</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Almeno un operando deve essere di tipo classe</li>
+<li>Non si può:<ul>
+<li>Creare un nuovo operatore</li>
+<li>Cambiare il numero di operandi di un operatore</li>
+<li>Cambiare la precedenza di un operatore</li>
+<li>Dare un argomento di default a un operatore sovraccaricato</li>
+</ul>
+</li>
+<li>I seguenti operatori possono essere sovraccaricati solo come membri: =, [], -&gt;, ()</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Overloading: riassunto</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>I seguenti operatori possono essere sovraccaricati solo come non membri o friend:
+        &lt;&lt;, &gt;&gt;</li>
+<li>I seguenti operatori non possono essere sovraccaricati:
+        . :: sizeof ?:</li>
+<li>Per alcuni operatori l’overloading è sconsigliato:
+        &amp;&amp; e || quando sovraccaricati effettuano la valutazione completa dell’espressione
+        , quando sovraccaricato non garantisce l’ordine di valutazione da sinistra a destra</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      </article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Suddivisione del Codice in File</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Separazione tra la classe e i programmi che la usano<ul>
+<li>Riuso: parti separate facilmente riusabili (libreria)</li>
+<li>Compilazione selettiva</li>
+</ul>
+</li>
+<li>Separazione tra interfaccia e implementazione<ul>
+<li>Incapsulamento: occultamento dei dettagli</li>
+<li>Diverse implementazioni di una stessa libreria</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Regole per Incapsulamento</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Rendere private tutte le variabili membro</li>
+<li>Raggruppare definizione della classe, dichiarazioni degli operatori e commenti nel file di interfaccia (header file)</li>
+<li>Raggruppare le definizioni delle funzioni membro, degli operatori e delle funzioni ausiliarie e l’inizializzazione delle variabili static nel file di implementazione</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Compilazione Separata</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Il file che contiene il programma che usa la classe si chiama file di applicazione</li>
+<li>Sia l’implementazione che l’applicazione devono includere l’header file</li>
+<li>L’implementazione e l’applicazione vengono compilate separatamente</li>
+<li>Per ottenere l’eseguibile occorre linkare i due oggetti</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Compilazione Separata (2)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>
+<p>dtime.cpp</p>
+</li>
+<li>
+<p>dtime.o</p>
+</li>
+<li>
+<p>timedemo</p>
+</li>
+<li>
+<p>g++ -c dtime.cpp</p>
+</li>
+<li>
+<p>timedemo.cpp</p>
+</li>
+<li>
+<p>timedemo.o</p>
+</li>
+<li>
+<p>g++ -c timedemo.cpp</p>
+</li>
+<li>
+<p>g++ dtime.o timedemo.o –o timedemo</p>
+</li>
+<li>
+<p>sorgenti</p>
+</li>
+<li>
+<p>oggetti</p>
+</li>
+<li>
+<p>eseguibile</p>
+</li>
+<li>
+<p>dtime.h</p>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Comando make</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Capisce quali moduli devono essere ricompilati e invia i comandi opportuni</li>
+<li>Utilizza un file chiamato makefile o Makefile che descrive le dipendenze e contiene i comandi per aggiornare i file</li>
+<li>Verifica il tempo di ultima modifica dei file per decidere quali richiedono aggiornamento</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Makefile: Esempio</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>timedemo: timedemo.o dtime.o</li>
+<li>g++ timedemo.o dtime.o -o timedemo</li>
+<li>timedemo.o: timedemo.cpp dtime.h</li>
+<li>g++ -c -W -Wall -pedantic timedemo.cpp</li>
+<li>dtime.o: dtime.cpp dtime.h</li>
+<li>g++ -c -W -Wall -pedantic dtime.cpp</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Vantaggi della Compilazione Separata</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Separando l’interfaccia e l’implementazione della classe dall’applicazione<ul>
+<li>Posso riusare la classe in diversi programmi senza riscriverla</li>
+<li>Posso compilare l’implementazione solo una volta</li>
+</ul>
+</li>
+<li>Separando l’interfaccia dall’implementazione<ul>
+<li>Se cambio l’implementazione non devo cambiare i programmi che usano la classe</li>
+<li>Devo solo ricompilare l’implementazione e rifare il link</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Esempio: Inclusione Ripetuta</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>classA.h</li>
+<li>class A
+    {</li>
+<li>public:
+    …</li>
+<li>
+<p>private:
+    …
+    };</p>
+</li>
+<li>
+<p>implA.cpp</p>
+</li>
+<li>
+<p>implB.cpp</p>
+</li>
+<li>
+<p>classB.h
+    #include “classA.h”</p>
+</li>
+<li>class B
+    {</li>
+<li>public:
+    …</li>
+<li>private:</li>
+<li>
+<p>A var;
+    };</p>
+</li>
+<li>
+<p>Main.cpp
+    #include “classA.h”
+    #include “classB.h”
+    …</p>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Uso di #ifndef</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Un header file può includere altri header file</li>
+<li>Per evitare che il contenuto di un header file venga incluso più volte è necessario racchiudere il codice tra queste due sezioni:</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>#ifndef NOMEHEADER_H
+#define NOMEHEADER_H
+</code></pre>
+<pre class="prettyprint" data-lang="c++"><code>#endif
+</code></pre>
+<ul>
+<li>Come identificatore si usa il nome del file in maiuscolo e con l’underscore al posto del punto</li>
+<li>Convenzione usata in tutti gli header std (iostream, vector, string,…)</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Esempio: Inclusione Ripetuta (2)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>classA.h</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>#ifndef CLASSA_H
+#define CLASSA_H
+
+class A
+{
+    //…
+};
+#endif
+</code></pre>
+<ul>
+<li>classB.h</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>#ifndef CLASSB_H
+#define CLASSB_H
+#include “classA.h”
+class B
+{
+    //…
+};
+#endif
+</code></pre>
+<ul>
+<li>implA.cpp</li>
+<li>implB.cpp</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Namespace e Direttiva using</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Un namespace è un insieme di definizioni di nomi (classi, funzioni, …)</li>
+<li>Per creare un namespace</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>namespace Name_Space_Name
+{ /* Some code */ }
+</code></pre>
+<ul>
+<li>Per rendere disponibili tutti i nomi di un namespace si usa la direttiva using</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>using namespace Name_Space_Name;
+</code></pre>
+<ul>
+<li>Lo scope della direttiva using va dal punto di occorrenza alla fine del file o del blocco</li>
+<li>Se il codice non è messo esplicitamente in un namespace è nel namespace globale (accessibile ovunque)</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Dichiarazione using</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Per rendere disponibile un solo nome di un namespace uso la dichiarazione<ul>
+<li>using Name_Space_Name::One_Name;</li>
+</ul>
+</li>
+<li>Utile con (molte) chiamate a pochi nomi Es: using std::cin; using std::cout; using std::string;</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Differenze tra Direttiva e Dichiarazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>La direttiva introduce tutti i nomi del namespace, la dichiarazione introduce un solo nome</li>
+<li>La direttiva introduce i nomi del namespace solo potenzialmente<ul>
+<li>Si possono avere sovrapposizioni potenziali</li>
+<li>Non si possono avere sovrapposizioni esplicite</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Qualificazione dei Nomi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Se uso una definizione di un nome poche volte, posso qualificare il nome ogni volta che lo uso<ul>
+<li>esempio: std::cin</li>
+</ul>
+</li>
+<li>Questa forma è usata spesso per specificare il tipo dei parametri</li>
+<li>Posso qualificare un nome rispetto a un namespace anche entro lo scope di una direttiva using per un altro namespace che definisce lo stesso nome<ul>
+<li>esempio: using namespace MySpace;</li>
+<li>void someFunction(istream p1, std::istream p2);</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Come Specificare il namespace?</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Evitare l’uso della direttiva using all’inizio del file perché vanifica il meccanismo dei namespace</li>
+<li>La maggior parte delle volte è preferibile l’uso della dichiarazione using</li>
+<li>Se il programma usa namespace diversi in punti diversi può essere opportuno inserire le direttive o dichiarazioni using in blocchi</li>
+<li>Negli header file usare la qualificazione dei nomi</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Namespace senza Nome</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una unità di compilazione è costituita da un file e dagli header file da esso inclusi</li>
+<li>Ogni unità di compilazione ha un namespace senza nome<ul>
+<li>namespace
+    { … }</li>
+</ul>
+</li>
+<li>I nomi definiti nel namespace senza nome sono locali all’unità di compilazione</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Nascondere le Funzioni Ausiliarie</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Due modi:<ul>
+<li>Se la funzione accede ai dati dell’oggetto: funzione membro privata</li>
+<li>Se la funzione non accede ai dati dell’oggetto: nel namespace senza nome del file di implementazione (oppure nel namespace della classe)</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      </article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Variabili Dinamiche di Tipo Classe</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Quando si usa l’operatore new con un tipo classe viene chiamato il costruttore<ul>
+<li>Es: MyClass *classPtr;</li>
+<li>classPtr = new MyClass;</li>
+<li>classPtr = new MyClass(2, 45.3);
+    …</li>
+<li>delete classPtr;</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Il Puntatore this</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>this è un puntatore predefinito che punta all’oggetto chiamante</li>
+<li>Non si può cambiare il suo valore</li>
+<li>Non può essere usato nella definizione di una funzione membro static</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Operatore = di Default</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Copia i valori dell’oggetto sorgente (r-value) nell’oggetto destinazione (l-value)</li>
+<li>Se la classe include una variabile membro di tipo puntatore, dopo l’assegnamento il puntatore dell’oggetto destinazione punta alla stessa area di memoria a cui punta il puntatore dell’oggetto sorgente</li>
+<li>L’area che era puntata dall’oggetto di destinazione non è probabilmente referenziata da nessun altro puntatore: memory leak</li>
+<li>Il primo dei due distruttori ad essere chiamato distrugge la memoria a cui puntano entrambi: dangling pointer</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Shallow e Deep Copy</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>La shallow copy (o “copia superficiale”) di A in B si realizza copiando byte a byte i valori presenti in A. In questo modo viene di fatto copiato il solo oggetto, ma non gli oggetti “figli” a cui il “padre” fa riferimento</li>
+<li>La deep copy si realizza invece copiando anche tutti gli oggetti “figli” facenti parte dell’oggetto “padre”</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Overloading dell’Operatore =</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>L’operatore = predefinito ritorna il suo operando sinistro per reference (permettendo così assegnamenti in cascata)</li>
+<li>Quando si ridefinisce l’operatore = per una classe si ritorna l’oggetto chiamante per reference (usando il puntatore this)</li>
+<li>Fare attenzione al caso dell’auto-assegnamento</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Distruttore</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>È una funzione membro che viene chiamata automaticamente quando termina lo scope di un oggetto</li>
+<li>Se una classe ha variabili membro dinamiche è bene che il distruttore le de-allochi</li>
+<li>Ha lo stesso nome della classe preceduto dal simbolo “~”, non ha parametri e non ha valore di ritorno</li>
+<li>Non ha argomenti e non può essere sovraccaricato</li>
+<li>Quando vengono chiamati più costruttori, i distruttori vengono chiamati in ordine inverso</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Costruttore di Copia</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>È un costruttore con un parametro dello stesso tipo della classe (const call-by-ref)<ul>
+<li>const: deve semplicemente essere costruita una copia)</li>
+<li>by reference: altrimenti si creerebbe un ciclo ricorsivo di chiamate!</li>
+</ul>
+</li>
+<li>Viene chiamato automaticamente quando<ul>
+<li>Un oggetto viene dichiarato e inizializzato con un altro oggetto dello stesso tipo</li>
+<li>Una funzione ritorna un valore di tipo classe</li>
+<li>Un oggetto viene passato per valore a una funzione</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Costruttore di Copia di Default</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Se non viene definito viene creato automaticamente</li>
+<li>Il costruttore di copia di default fa una shallow copy</li>
+<li>Se la classe comprende puntatori e variabili dinamiche deve essere ri-definito</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The Big Three</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Operatore =, distruttore e costruttore di copia vengono creati automaticamente dal compilatore</li>
+<li>Se la classe usa puntatori e variabili dinamiche devono essere ri-definiti: non farlo è un grave errore logico</li>
+<li>Di fatto sono legati dalle stesse problematiche relative all’uso di puntatori
+    “If you need any of them, you need all three”</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      </article>
+ 
+</slide>
+
+
+<slide class="thank-you-slide segue nobackground">
+  <aside class="gdbar right"><img src="images/logo.png"></aside>
+  <article class="flexbox vleft auto-fadein">
+    <h2>&lt;Domande?&gt;</h2>
+  </article>
+  <p class="auto-fadein" data-config-contact>
+    Michele Tomaiuolo
+    <br>
+    Palazzina 1, int. 5708
+    <br>
+    Ingegneria dell'Informazione, UniPR
+    <br>
+    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+  </p>
+</slide>
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>

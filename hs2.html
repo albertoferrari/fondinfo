@@ -1,0 +1,1499 @@
+<!--
+Google IO 2012 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahe <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Haskell</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/tomamic.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+<slide class="title-slide segue nobackground">
+  <aside class="gdbar"><img src="images/logo.png"></aside>
+  <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+  <h1 data-config-title><!-- populated from slide_config.json --></h1>
+  <figure><img src="images/fun/haskell-logo.png"></figure>
+  <hgroup>
+    <h2>Functional programming</h2>
+    <p>Michele Tomaiuolo<br>Ingegneria dell'Informazione, UniPR</p>
+  </hgroup>
+</slide>
+
+
+<slide  >
+  
+    <hgroup>
+      <h2>Recursion</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <blockquote>
+<p>If you still don't know what recursion is, read this sentence</p>
+</blockquote>
+<ul>
+<li>Recursion is actually a way of defining functions in which the function is applied inside its own definition</li>
+<li>Definitions in mathematics are often given recursively. Ex.: Fibonacci sequence<ul>
+<li><code>F(0) = 0 and F(1) = 1</code>  (<em>edge condition</em>)</li>
+<li><code>F(n) = F(n-1) + F(n-2)</code></li>
+<li>=&gt; <code>F(3) = F(2) + F(1) = (F(1) + F(0)) + F(1) = 2</code></li>
+</ul>
+</li>
+<li>Having at least an element defined non-recursively is important for termination</li>
+<li>There are no loops in Haskell, we use recursion to <em>declare</em> what something is</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Maximum function</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>The maximum function takes a list of things that can be ordered (e.g. instances of the <code>Ord</code> typeclass) and returns the biggest of them</li>
+<li>Imperative paradigm<ul>
+<li>A variable to hold the maximum value so far</li>
+<li>Loop through the elements</li>
+</ul>
+</li>
+<li>Recursive definition<ul>
+<li>Edge condition, for a singleton list: the maximum is the only element in it</li>
+<li>Longer list: the maximum is the head, if it is bigger than the maximum of the tail; else, the maximum of the tail</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Maximum with recursion</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>maximum' :: (Ord a) =&gt; [a] -&gt; a
+maximum' [] = error "maximum of empty list"
+maximum' [x] = x
+maximum' (x:xs)
+    | x &gt; maxTail = x
+    | otherwise = maxTail
+    where maxTail = maximum' xs
+</code></pre>
+<ul>
+<li>Pattern matching goes great with recursion</li>
+<li>Otherwise, a lot of <code>if else</code> statements to test for edge conditions</li>
+<li>Common idiom when doing recursion with lists: pattern to split a list into a head and a tail</li>
+</ul>
+<blockquote></blockquote>
+<p>Example list of numbers, check out how this would work on them: [2,5,1]</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Maximum with max</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>max</code> is a function that takes two numbers and returns the bigger of them</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>maximum' :: (Ord a) =&gt; [a] -&gt; a
+maximum' [] = error "maximum of empty list"
+maximum' [x] = x
+maximum' (x:xs) = max x (maximum' xs)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Replicate with recursion</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>replicate</code> takes an <code>Int</code> and some element and returns a list that has several repetitions of the same element</li>
+<li>For instance, <code>replicate 3 5</code> returns <code>[5,5,5]</code></li>
+<li>Edge condition: if we try to replicate something zero times (or less) it should return an empty list</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>replicate' :: (Num i, Ord i) =&gt; i -&gt; a -&gt; [a]
+replicate' n x
+    | n &lt;= 0    = []
+    | otherwise = x:replicate' (n-1) x
+</code></pre>
+<ul>
+<li>Guards instead of patterns: testing for a boolean condition</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Take with recursion</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>take</code> takes a certain number of elements from a list</li>
+<li>For instance, <code>take 3 [5,4,3,2,1]</code> returns <code>[5,4,3]</code></li>
+<li>Edge conditions<ul>
+<li>Take 0 or less elements from a list =&gt; empty list</li>
+<li>Take anything from an empty list =&gt; empty list</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>take' :: (Num i, Ord i) =&gt; i -&gt; [a] -&gt; [a]
+take' n _
+    | n &lt;= 0   = []
+take' _ []     = []
+take' n (x:xs) = x : take' (n-1) xs
+</code></pre>
+<blockquote></blockquote>
+<p>Guard, without an otherwise part: if <code>n</code> turns out to be more than 0, the matching will fall through to the next pattern</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Reverse with recursion</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Edge condition: the empty list!</li>
+<li>Split a list to a head and a tail, the result is the reversed tail and then the head at the end</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>reverse' :: [a] -&gt; [a]
+reverse' [] = []
+reverse' (x:xs) = reverse' xs ++ [x]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Infinite recursion</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Haskell is <em>lazy</em> and supports infinite lists: recursion doesn't really have to have an edge condition</li>
+<li><code>repeat</code> takes an element and returns an infinite list...</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>repeat' :: a -&gt; [a]
+repeat' x = x:repeat' x
+</code></pre>
+<ul>
+<li><code>repeat 3</code> evaluates like <code>3:repeat 3</code>, which is <code>3:(3:repeat 3)</code>...</li>
+<li><code>repeat 3</code> gives us a list that starts with 3, and then has an infinite amount of 3's as a tail</li>
+<li><code>take 5 (repeat 3)</code> will give us a list of five 3's</li>
+<li>Essentially it's like doing replicate 5 3.</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Zip with recursion</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>zip [1,2,3] [2,3]</code> returns <code>[(1,2),(2,3)]</code></li>
+<li>It truncates the longer list to match the length of the shorter one</li>
+<li>zip something with an empty list =&gt; empty list (<em>edge conditions</em>)</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>zip' :: [a] -&gt; [b] -&gt; [(a,b)]
+zip' _ [] = []
+zip' [] _ = []
+zip' (x:xs) (y:ys) = (x,y):zip' xs ys
+</code></pre>
+<blockquote></blockquote>
+<p>Ex.: <code>zip [1,2,3] ['a','b']</code></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Elem with recursion</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>elem</code> takes an element and a list and sees if that element is in the list<ul>
+<li>If the head isn't the element, then we check the tail</li>
+<li>If we reach an empty list, the result is <code>False</code> (edge condition)</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>elem' :: (Eq a) =&gt; a -&gt; [a] -&gt; Bool
+elem' a [] = False
+elem' a (x:xs)
+    | a == x    = True
+    | otherwise = a `elem'` xs
+</code></pre></article>
+ 
+</slide>
+
+<slide class="large-figure" >
+  
+    <hgroup>
+      <h2>Quicksort</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/quicksort.png">
+        
+      </figure><ul>
+<li>We have a list of items that can be sorted (<code>Ord</code>)</li>
+<li>The edge condition? A sorted empty list is an empty list</li>
+<li>Algorithm:<ul>
+<li>All the values <code>≤</code> the head of the list in front (and those values are sorted)</li>
+<li>Then comes the head of the list in the middle</li>
+<li>Then come all the values <code>&gt;</code> the head (they're also sorted)</li>
+</ul>
+</li>
+<li>Idea:<ul>
+<li>We said sorted two times in this definition: recursion</li>
+<li>Filter to get only some elements: list comprehensions</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>quicksort :: (Ord a) =&gt; [a] -&gt; [a]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Haskell poster child</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>quicksort :: (Ord a) =&gt; [a] -&gt; [a]
+quicksort [] = []
+quicksort (x:xs) =
+    let smallerSorted = quicksort [a | a &lt;- xs, a &lt;= x]
+        biggerSorted = quicksort [a | a &lt;- xs, a &gt; x]
+    in  smallerSorted ++ [x] ++ biggerSorted
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; quicksort [5,1,9,4,6,7,3]
+[1,3,4,5,6,7,9]
+Prelude&gt; quicksort "the quick brown fox jumps over the lazy dog"
+"        abcdeeefghhijklmnoooopqrrsttuuvwxyz"
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Thinking recursively</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Thought pattern<ul>
+<li>Usually you define an edge case, ...</li>
+<li>then you define a function that does something between some element and...</li>
+<li>the function applied to the rest</li>
+</ul>
+</li>
+<li>Examples<ul>
+<li>Sum: the first element of a list plus the sum of the rest of the list</li>
+<li>Product: the first element times the product of the rest</li>
+<li>Length of a list: one plus the length of the tail</li>
+</ul>
+</li>
+<li>With lists, the edge case is most often the empty list</li>
+<li>With numbers, the edge case is often an identity</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Tail recursion example</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>-- traditional recursion
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+
+-- tail recursion
+fact_tr 0 acc = acc
+fact_tr n acc = fact_tr (n - 1) (n * acc)
+
+factorial' n = fact_tr n 1
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; factorial 4
+12
+Prelude&gt; factorial' 4
+12
+Prelude&gt; fact_tr 4 1
+12
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Tail recursion advantage</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Traditional recursion<ul>
+<li>Perform recursive call first</li>
+<li>Then use its result to calculate the new result</li>
+</ul>
+</li>
+<li>Tail recursion<ul>
+<li>Perform calculations first</li>
+<li>Then perform recursive call, passing current results to the next recursive step</li>
+<li>In <code>C</code>, last statement is ~ <code>return tr_fun(params)</code></li>
+<li>Return val of any recursive step is the same</li>
+</ul>
+</li>
+<li>Advantage<ul>
+<li>Once you are ready to perform your next recursive step, you don't need the current <em>stack frame</em> any more!</li>
+<li><strong>Optimization</strong>: <em>reuse the current stack frame</em> for the next recursive step</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Higher order functions</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Higher order functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>Higher order functions</strong><ul>
+<li>Haskell functions can take functions as parameters and return functions as return values</li>
+<li>A function that does either of those is called a <em>higher order function</em></li>
+<li>Essential feature of the language, indispensable for the functional paradigm</li>
+</ul>
+</li>
+<li><strong>Curried functions</strong><ul>
+<li>Every function in Haskell officially only takes one parameter (!)</li>
+<li>What's the “trick” for functions that take more than one parameter?</li>
+<li>All the functions that accepted several parameters so far have been <em>curried</em> functions</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Curried functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Apparently... the <code>max</code> function takes two <code>Ord</code> parameters and returns the one that's bigger</li>
+<li>In reality, <code>max 4 5</code> first creates a function that takes a parameter and returns either 4 or that parameter, depending on which is bigger</li>
+<li>Then, 5 is applied to that function and that function produces our desired result</li>
+<li>The following two calls are equivalent:</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; max 4 5
+5
+Prelude&gt; (max 4) 5
+5
+</code></pre>
+<blockquote></blockquote>
+<p>The space is like an operator, for function application, which has the highest precedence</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Currying and function types</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Let's examine the type of <code>max</code>:<ul>
+<li><code>max :: (Ord a) =&gt; a -&gt; a -&gt; a</code></li>
+<li><code>max :: (Ord a) =&gt; a -&gt; (a -&gt; a)  -- same as above</code></li>
+</ul>
+</li>
+<li>Read as:<ul>
+<li><code>max</code> takes an <code>a</code>...</li>
+<li>and returns (that's the <code>-&gt;</code>) a function...</li>
+<li>that takes an <code>a</code> and returns an <code>a</code></li>
+</ul>
+</li>
+<li>Currying is the reason why the return type and the parameters of functions are all simply separated with arrows</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Partially applied functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>If we call a f. with too few parameters, we get back a partially applied f.</li>
+<li>The returned f. takes as many parameters as we left out</li>
+<li>Using partial application is a neat way to create f.s on the fly</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>multThree :: (Num a) =&gt; a -&gt; a -&gt; a -&gt; a
+multThree x y z = x * y * z
+</code></pre>
+<ul>
+<li><code>multThree 3 5 9</code> or <code>((multThree 3) 5) 9</code><ul>
+<li>First, <code>3</code> is applied to <code>multThree</code>; that creates a f. that takes one parameter and returns a f.</li>
+<li>So then <code>5</code> is applied to that, which creates a f. that takes one parameter and multiply it by <code>15</code></li>
+<li><code>9</code> is applied to that function, so the result is <code>135</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Function types</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>multThree :: (Num a) =&gt; a -&gt; a -&gt; a -&gt; a
+</code></pre>
+<ul>
+<li>The thing before the <code>-&gt;</code> is the parameter that a f. takes</li>
+<li>The thing after it is what it returns</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>multThree :: (Num a) =&gt; a -&gt; (a -&gt; (a -&gt; a))  -- same as above
+</code></pre>
+<ul>
+<li>Our f. takes an <code>a</code> and returns a f. of type<ul>
+<li><code>(Num a) =&gt; a -&gt; (a -&gt; a)</code></li>
+</ul>
+</li>
+<li>Similarly, this f. takes an <code>a</code> and returns a f. of type<ul>
+<li><code>(Num a) =&gt; a -&gt; a</code></li>
+</ul>
+</li>
+<li>And this f., finally, just takes an <code>a</code> and returns an <code>a</code></li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Partial application</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>By calling functions with too few parameters, we're creating new functions on the fly</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let multTwoWithNine = multThree 9
+Prelude&gt; multTwoWithNine 2 3
+54
+Prelude&gt; let multWithEighteen = multTwoWithNine 2
+Prelude&gt; multWithEighteen 10
+180
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Currying for creating functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>compareWithHundred :: (Num a, Ord a) =&gt; a -&gt; Ordering
+compareWithHundred x = compare 100 x
+</code></pre>
+<ul>
+<li>Function that takes a number and compares it to 100</li>
+<li>Notice that the <code>x</code> is <em>on the right hand</em> on both sides of the equation</li>
+<li>However, <code>compare 100</code> returns a function, that takes a number and compares it with 100</li>
+<li>The type declaration stays the same</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>compareWithHundred :: (Num a, Ord a) =&gt; a -&gt; Ordering
+compareWithHundred = compare 100
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Function sections</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Operators and infix functions can also be partially applied<ul>
+<li><strong>Section</strong>: surround f. with parentheses and only supply a parameter on one side</li>
+<li>That creates a f. that takes just one parameter (the missing operand)</li>
+</ul>
+</li>
+<li>Examples:<ul>
+<li>Divide a number by 10</li>
+<li>Check if a char is uppercase</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>divideByTen :: (Floating a) =&gt; a -&gt; a
+divideByTen = (/10)
+
+isUpperAlphanum :: Char -&gt; Bool
+isUpperAlphanum = (`elem` ['A'..'Z'])
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Defining higher-order functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>F.s can take f.s as parameters and also return f.s</li>
+<li>Ex.: a f. that takes a f., and then applies it twice to something</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>applyTwice :: (a -&gt; a) -&gt; a -&gt; a
+applyTwice f x = f (f x)
+</code></pre>
+<ul>
+<li>Type declaration: parentheses because <code>-&gt;</code> is naturally right-associative<ul>
+<li>The first parameter is a function that takes something and returns that same thing</li>
+<li>The second parameter is something of that type also</li>
+<li>The return value is also of the same type</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Example of high-order function</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; applyTwice (+3) 10
+16
+Prelude&gt; applyTwice (++ " HAHA") "HEY"
+"HEY HAHA HAHA"
+Prelude&gt; applyTwice ("HAHA " ++) "HEY"
+"HAHA HAHA HEY"
+Prelude&gt; applyTwice (multThree 2 2) 9
+144
+Prelude&gt; applyTwice (3:) [1]
+[3,3,1]
+</code></pre>
+<ul>
+<li>The awesomeness and usefulness of partial application is evident<ul>
+<li>Our function requires us to pass it a function that takes only one parameter</li>
+<li>We can just partially apply a function to the point where it takes only one parameter and then pass it</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The zipWith function</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>In the standard library, <code>zipWith</code> takes a f. and two lists</li>
+<li>It joins the two lists by applying the f. between corresponding elements<ul>
+<li>1st param is a f. that takes two things and produces a third thing</li>
+<li>2nd and 3rd parameter are lists (of types <code>a</code> and <code>b</code>)</li>
+<li>Result is also a list (of type <code>c</code>)</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>zipWith' :: (a -&gt; b -&gt; c) -&gt; [a] -&gt; [b] -&gt; [c]
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Using zipWith</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Pretty similar to the normal zip, with a joining function</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; zipWith' (+) [4,2,5,6] [2,6,2,3]
+[6,8,7,9]
+Prelude&gt; zipWith' max [6,3,2,1] [7,3,1,5]
+[7,3,2,5]
+Prelude&gt; zipWith' (++) ["foo ", "bar ", "baz "]
+                       ["fighters", "hoppers", "aldrin"]
+["foo fighters","bar hoppers","baz aldrin"]
+Prelude&gt; zipWith' (zipWith' (*)) [[1,2,3],[3,5,6],[2,3,4]]
+                                 [[3,2,2],[3,4,5],[5,4,3]]
+[[3,4,6],[9,20,30],[10,12,12]]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The flip function</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>In the standard library, <code>flip</code> takes a f. and returns a f.<ul>
+<li>The returned f. is like the original one, only the first two arguments are flipped</li>
+<li>It takes a f. that takes an <code>a</code> and a <code>b</code></li>
+<li>It returns a f. that takes a <code>b</code> and an <code>a</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>flip' :: (a -&gt; b -&gt; c) -&gt; (b -&gt; a -&gt; c)
+flip' f y x = f x y
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; flip' zip [1,2,3,4,5] "hello"
+[('h',1),('e',2),('l',3),('l',4),('o',5)]
+Prelude&gt; zipWith (flip' div) [2,2..] [10,8,6,4,2]
+[5,4,3,2,1]
+</code></pre></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Mapping and filtering</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The map function</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>It takes a f. and a list</li>
+<li>It applies that f. to every element in the list</li>
+<li>It produces a new list</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>map :: (a -&gt; b) -&gt; [a] -&gt; [b]
+map _ [] = []
+map f (x:xs) = f x : map f xs
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Using map</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>map</code> is a really versatile higher-order function, can be used in many different ways</li>
+<li>These could be achieved with a list comprehension, but <code>map</code> can be more readable</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (+3) [1,5,3,1,6]
+[4,8,6,4,9]
+Prelude&gt; map (++ "!") ["BIFF", "BANG", "POW"]
+["BIFF!","BANG!","POW!"]
+Prelude&gt; map (replicate 3) [3..6]
+[[3,3,3],[4,4,4],[5,5,5],[6,6,6]]
+Prelude&gt; map (map (^2)) [[1,2],[3,4,5,6],[7,8]]
+[[1,4],[9,16,25,36],[49,64]]
+Prelude&gt; map fst [(1,2),(3,5),(6,3),(2,6),(2,5)]
+[1,3,6,2,2]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The filter function</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>It takes a predicate (a f. that returns a bool) and a list</li>
+<li>It returns the list of elements that satisfy the predicate</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+filter _ [] = []
+filter p (x:xs)
+    | p x       = x : filter p xs
+    | otherwise = filter p xs
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Using filter</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; filter (&gt;3) [1,5,3,2,1,6,4,3,2,1]
+[5,6,4]
+Prelude&gt; filter even [1..10]
+[2,4,6,8,10]
+Prelude&gt; filter (`elem` ['a'..'z']) "u LaUgH aT mE BeCaUsE I aM diFfeRent"
+"uagameasadifeent"
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>quicksort :: (Ord a) =&gt; [a] -&gt; [a]
+quicksort [] = []
+quicksort (x:xs) =
+    let smallerSorted = quicksort (filter (&lt;=x) xs)
+        biggerSorted = quicksort (filter (&gt;x) xs)
+    in  smallerSorted ++ [x] ++ biggerSorted
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Map and filter</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Mapping and filtering is the bread and butter of every functional programmer's toolbox<ul>
+<li>Imperative programming: nesting loops and testing</li>
+<li>Functional programming: mapping and filtering (or comprehensions)</li>
+</ul>
+</li>
+<li>Ex.: largest number under 100,000 that's divisible by 3829</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>largestDivisible :: (Integral a) =&gt; a
+largestDivisible = head (filter p [100000,99999..])
+    where p x = x `mod` 3829 == 0
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The takeWhile function</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>It takes a predicate and a list</li>
+<li>It goes from the beginning of the list and returns its elements while the predicate holds true</li>
+<li>Once an element is found for which the predicate doesn't hold, it stops</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; takeWhile (/=' ') "elephants know how to party"
+"elephants"
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Exercise</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Ex.: The sum of all odd squares that are smaller than 10,000</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; sum (takeWhile (&lt;10000) (filter odd (map (^2) [1..])))
+166650
+Prelude&gt; sum (takeWhile (&lt;10000) [n^2 | n &lt;- [1..], odd (n^2)])
+166650
+</code></pre>
+<ul>
+<li>Haskell's laziness makes this possible<ul>
+<li>We can map over and filter an infinite list</li>
+<li>It won't actually map and filter it right away, it'll delay those actions</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Collatz sequences</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>We take a natural number</li>
+<li>If that number is even, we divide it by two</li>
+<li>If it's odd, we multiply it by 3 and then add 1</li>
+<li>We take the resulting number and apply the same thing to it...</li>
+<li>It is thought that for all starting numbers, the chains finish at the number 1 (edge)</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>collatz :: (Integral a) =&gt; a -&gt; [a]
+collatz 1 = [1]
+collatz n
+    | even n =  n:collatz (n `div` 2)
+    | odd n  =  n:collatz (n*3 + 1)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Exercise</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>For all starting numbers between 1 and 100, how many chains have a length greater than 15?</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>numLongChains :: Int
+numLongChains = length (filter isLong (map collatz [1..100]))
+    where isLong xs = length xs &gt; 15
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Using map to create functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>So far, we've only mapped functions that take one parameter over lists, like <code>map (*2) [0..]</code></li>
+<li>We can also do <code>map (*) [0..]</code> without a problem<ul>
+<li>We get back a list of functions that only take one parameter</li>
+<li><code>[(0*),(1*),(2*),(3*),(4*),(5*)</code>...</li>
+<li>Applying only one parameter to a function that takes two parameters returns a function that takes one parameter</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let listOfFuns = map (*) [0..]
+Prelude&gt; (listOfFuns !! 4) 5
+20
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lambda</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>An anonymous f., needed only once, e.g., to be passed to a higher-order f.</li>
+<li>A <em>lambda</em> starts with a <code>\</code> (~ greek letter lambda), followed by params, a <code>-&gt;</code>, finally the body</li>
+<li>Usually, surrounded by parentheses</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>numLongChains :: Int
+numLongChains = length (filter (\xs -&gt; length xs &gt; 15) (map chain [1..100]))
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lambdas and currying</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>The expression <code>(\xs -&gt; length xs &gt; 15)</code> returns a f.</li>
+<li>
+<p>Functional programmers often replace lambdas with currying and partial application</p>
+<ul>
+<li><code>map (+3) [1,6,3,2]</code></li>
+<li><code>map (\x -&gt; x + 3) [1,6,3,2]</code></li>
+</ul>
+</li>
+<li>
+<p>Like normal functions, lambdas can take any number of parameters:</p>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; zipWith (\a b -&gt; (a * 30 + 3) / b) [5,4,3,2,1] [1,2,3,4,5]
+[153.0,61.5,31.0,15.75,6.6]
+</code></pre></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Folding</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Folding</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Recursion on lists<ul>
+<li>Usually empty list as edge case</li>
+<li><code>x:xs</code> pattern, action on head and recursion on the rest list</li>
+</ul>
+</li>
+<li>Common pattern, encapsulated in useful funtions: <em>folding</em><ul>
+<li>Similar to the <code>map</code> f., only they reduce the list to some single value</li>
+</ul>
+</li>
+<li>A fold takes a binary f., a starting value (accumulator) and a list<ul>
+<li>The binary f. is called with the accumulator and the head (or tail) and produces a new accumulator</li>
+<li>Then, the f. is called with the new accumulator and the now new head (or tail)...</li>
+<li>At the end, the accumulator holds the result</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Left fold</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/foldl.png">
+        
+      </figure><ul>
+<li>The <code>foldl</code> f. folds the list up from the left side</li>
+<li>Ex.: implement sum using a fold</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>sum' :: (Num a) =&gt; [a] -&gt; a
+sum' xs = foldl (\acc x -&gt; acc + x) 0 xs
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; sum' [3,5,2,1]
+11
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>foldl f z [] = z
+foldl f z (x:xs) = foldl f (f z x) xs
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Currying to spare params</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>The lambda <code>(\acc x -&gt; acc + x)</code> is the same as <code>(+)</code></li>
+<li>The <code>xs</code> param can be omitted<ul>
+<li>Calling <code>foldl (+) 0</code> returns a f. that takes a list</li>
+</ul>
+</li>
+<li>In general, because of currying ...<ul>
+<li>a f. like <code>foo a = bar b a</code> ...</li>
+<li>can rewritten as <code>foo = bar b</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>sum' :: (Num a) =&gt; [a] -&gt; a
+sum' = foldl (+) 0
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Fold for membership</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>elem' :: (Eq a) =&gt; a -&gt; [a] -&gt; Bool
+elem' y ys = foldl (\acc x -&gt; if x == y then True else acc) False ys
+</code></pre>
+<ul>
+<li>Accumulator is a <code>Bool</code><ul>
+<li>Accumulator and result have always the same type, in a fold</li>
+<li>It makes sense to start with <code>False</code>, assume the val isn't there</li>
+<li>On an empty list, result stays <code>False</code></li>
+</ul>
+</li>
+<li>Then we check: current element is the val we're looking for?<ul>
+<li>Yes: set accumulator to <code>True</code></li>
+<li>No: leave accumulator unchanged (either <code>True</code> or <code>False</code>)</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Right fold</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>With <code>foldr</code>, the accumulator eats up the values from the right</li>
+<li>The binary f. has the accumulator as 2nd parameter (so <code>\x acc -&gt;</code> ...)</li>
+<li>Ex.: implementing <code>map</code> with a right fold<ul>
+<li>Accumulator is a list, accumulating the mapped elements one by one</li>
+<li>Starting element is an empty list.</li>
+<li>E.g.: try mapping (+3) to [1,2,3]</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>map' :: (a -&gt; b) -&gt; [a] -&gt; [b]
+map' f xs = foldr (\x acc -&gt; f x : acc) [] xs
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>foldr f z [] = z
+foldr f z (x:xs) = f x (foldr f z xs)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Right vs. left fold</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>
+<p>Folding over the list [3,4,5,6], with <code>f</code> as f. and <code>z</code> as accumulator</p>
+<ul>
+<li>Right folding: <code>f 3 (f 4 (f 5 (f 6 z)))</code></li>
+<li>Left folding: <code>f (f (f (f z 3) 4) 5) 6</code></li>
+</ul>
+</li>
+<li>
+<p>Ex.: left fold for map</p>
+<ul>
+<li>The <code>++</code> f. is much more expensive than <code>:</code></li>
+<li>Prefer right folds when building up a new list</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>map' f xs = foldl (\acc x -&gt; acc ++ [f x]) [] xs
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Power of folds</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Along with maps and filters, folds are one of the most useful tools in functional programming<ul>
+<li>Folds can be used to implement any f. which...</li>
+<li>traverse a list once, element by element...</li>
+<li>and then return something based on that</li>
+</ul>
+</li>
+<li>The <code>foldl1</code> and <code>foldr1</code> f.s are similar<ul>
+<li>The first (or last) element is the starting value</li>
+<li>Runtime errors if called with empty lists</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Examples of folds</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>maximum' :: (Ord a) =&gt; [a] -&gt; a
+maximum' = foldr1 (\x acc -&gt; if x &gt; acc then x else acc)
+
+reverse' :: [a] -&gt; [a]
+reverse' = foldl (\acc x -&gt; x : acc) []
+
+product' :: (Num a) =&gt; [a] -&gt; a
+product' = foldr1 (*)
+
+filter' :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+filter' p = foldr (\x acc -&gt; if p x then x : acc else acc) []
+
+head' :: [a] -&gt; a
+head' = foldr1 (\x _ -&gt; x)
+
+last' :: [a] -&gt; a
+last' = foldl1 (\_ x -&gt; x)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Scans</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>scanl</code> and <code>scanr</code> are like <code>foldl</code> and <code>foldr</code><ul>
+<li>Only they report all the intermediate accumulator states in a list</li>
+<li><code>scanl</code>: final result is last element</li>
+<li><code>scanr</code>: final result is first element</li>
+<li>There are also <code>scanl1</code> and <code>scanr1</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; scanl (+) 0 [3,5,2,1]
+[0,3,8,10,11]
+Prelude&gt; scanr (+) 0 [3,5,2,1]
+[11,8,3,1,0]
+Prelude&gt; scanl1 (\acc x -&gt; if x &gt; acc then x else acc) [3,4,5,3,7,9,2,1]
+[3,4,5,5,7,9,9,9]
+Prelude&gt; scanl (flip (:)) [] [3,2,1]
+[[],[3],[2,3],[1,2,3]]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Example of scans</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>How many elements does it take for the sum of the roots of all natural numbers to exceed 1000?<ul>
+<li>Squares of all natural numbers: <code>map sqrt [1..]</code></li>
+<li>Then, <code>scan</code> shows how the sum progresses</li>
+<li>Easy to see how many sums are under 1000 (then +1)</li>
+<li><code>takeWhile</code>, as <code>filter</code> doesn't work on infinite lists</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>sqrtSums :: Int
+sqrtSums = length (takeWhile (&lt;1000) (scanl1 (+) (map sqrt [1..]))) + 1
+
+Prelude&gt; sqrtSums
+131
+Prelude&gt; sum (map sqrt [1..131])
+1005.0942035344083
+Prelude&gt; sum (map sqrt [1..130])
+993.6486803921487
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Dollar function</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>The <code>$</code> f. is also called <strong>function application</strong></li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>($) :: (a -&gt; b) -&gt; a -&gt; b
+f $ x = f x
+</code></pre>
+<ul>
+<li>Normal f. application (putting a space between two things) has a really high precedence</li>
+<li>The <code>$</code> f. has the lowest precedence</li>
+<li>It's mostly a convenience f., to spare so many parentheses</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Using dollar</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Same as a parentheses, closed at the far right side<ul>
+<li><code>sqrt (3 + 4 + 9)</code></li>
+<li><code>sqrt $ 3 + 4 + 9</code></li>
+<li><code>sum (map sqrt [1..130])</code></li>
+<li><code>sum $ map sqrt [1..130]</code></li>
+<li><code>sum (filter (&gt; 10) (map (*2) [2..10]))</code></li>
+<li><code>sum $ filter (&gt; 10) $ map (*2) [2..10]</code></li>
+</ul>
+</li>
+<li>Apart from getting rid of parentheses...<ul>
+<li><code>$</code> means that f. application is <em>yet another</em> f.</li>
+<li>Map f. application over a list of f.s</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map ($ 3) [(4+), (10*), (^2), sqrt]
+[7.0,30.0,9.0,1.7320508075688772]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Function composition</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>In mathematics, f. composition is defined like this:<ul>
+<li><code>(f . g)(x) = f(g(x))</code></li>
+<li>Composing two f.s produces a new f.</li>
+<li>Call <code>g</code> with param <code>x</code>, then call <code>f</code> with that result</li>
+</ul>
+</li>
+<li>In Haskell, the <code>.</code> f. does pretty much the same thing<ul>
+<li>Resulting f. takes a param of the same type that <code>g</code> takes...</li>
+<li>and returns a value of the same type that <code>f</code> returns</li>
+<li>Note: <code>f</code> takes a param of same type as <code>g</code>'s return value</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+f . g = \x -&gt; f (g x)
+</code></pre>
+<ul>
+<li>Ex.: <code>negate . (* 3)</code> returns a function that takes a number, multiplies it by 3 and then negates it.</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Use of composition</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Composition: glue simple f.s together, forming more complex f.s<ul>
+<li>More readable: think about f.s instead of data</li>
+<li>But long chains of f. composition is discouraged</li>
+</ul>
+</li>
+<li>Making f.s on the fly, to pass to other f.s<ul>
+<li>Often, f. composition is clearer and more concise than lambdas</li>
+<li>Ex.: turn a list of numbers into negative numbers</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (\x -&gt; negate (abs x)) [5,-3,-6,7,-3,2,-19,24]
+[-5,-3,-6,-7,-3,-2,-19,-24]
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (negate . abs) [5,-3,-6,7,-3,2,-19,24]
+[-5,-3,-6,-7,-3,-2,-19,-24]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Chained compositions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>F. composition is right-associative, so we can compose many f.s at a time</li>
+<li><code>f (g (z x))</code> is equivalent to <code>(f . g . z) x</code></li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (\xs -&gt; negate (sum (tail xs))) [[1..5],[3..6],[1..7]]
+[-14,-15,-27]
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (negate . sum . tail) [[1..5],[3..6],[1..7]]
+[-14,-15,-27]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Composition with several params</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Partially apply them so that each f. takes just one param<ul>
+<li><code>sum (replicate 5 (max 6.7 8.9))</code></li>
+<li><code>(sum . replicate 5 . max 6.7) 8.9</code></li>
+<li><code>sum . replicate 5 . max 6.7 $ 8.9</code></li>
+</ul>
+</li>
+<li>To rewrite an expression with a lot of parentheses by using f. composition...<ul>
+<li>first put last param of the innermost f. after a <code>$</code></li>
+<li>then compose all other f. calls, without their last param</li>
+</ul>
+</li>
+<li>Example:<ul>
+<li><code>replicate 100 (product (map (*3) (zipWith max [1,2,3,4,5] [4,5,6,7,8])))</code></li>
+<li><code>replicate 100 . product . map (*3) . zipWith max [1,2,3,4,5] $ [4,5,6,7,8]</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Point free style</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Another common use of f. composition: defining f.s in the <em>point free style</em> (or <em>pointless style</em>)</li>
+<li>Problem if param in the function body has parentheses after it</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>sum' :: (Num a) =&gt; [a] -&gt; a
+-- sum' xs = foldl (+) 0 xs
+sum' = foldl (+) 0
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>-- fn x = ceiling (negate (tan (cos (max 50 x))))
+fn = ceiling . negate . tan . cos . max 50
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Example of composition</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Ex.: sum of all odd squares that are smaller than 10,000</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>oddSquareSum :: Integer
+oddSquareSum = sum (takeWhile (&lt;10000) (filter odd (map (^2) [1..])))
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>oddSquareSum = sum . takeWhile (&lt;10000) . filter odd . map (^2) $ [1..]
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>oddSquareSum =
+    let oddSquares = filter odd $ map (^2) [1..]
+        belowLimit = takeWhile (&lt;10000) oddSquares
+    in  sum belowLimit
+</code></pre></article>
+ 
+</slide>
+
+
+<slide class="thank-you-slide segue nobackground">
+  <aside class="gdbar right"><img src="images/logo.png"></aside>
+  <article class="flexbox vleft auto-fadein">
+    <h2>&lt;Domande?&gt;</h2>
+  </article>
+  <p class="auto-fadein" data-config-contact>
+    Michele Tomaiuolo
+    <br>
+    Palazzina 1, int. 5708
+    <br>
+    Ingegneria dell'Informazione, UniPR
+    <br>
+    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+  </p>
+</slide>
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>

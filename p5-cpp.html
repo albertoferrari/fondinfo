@@ -261,12 +261,21 @@ another_list.assign(10, ""); // 10 strings
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>for (auto x : shopping_list) {  // for-each, C++11
+      <pre class="prettyprint" data-lang="c++"><code>// for-each, C++11
+for (auto x : shopping_list) {
     cout &lt;&lt; x &lt;&lt; endl;
 }
 
-for (int i = 0; i &lt; shopping_list.size(); ++i) {  // range, C++98
+// range, C++98
+for (int i = 0; i &lt; shopping_list.size(); ++i) {
     cout &lt;&lt; shopping_list[i] &lt;&lt; endl;
+}
+
+// equivalent while
+int i = 0;
+while (i &lt; shopping_list.size()) {
+    cout &lt;&lt; shopping_list[i] &lt;&lt; endl;
+    ++i;
 }
 </code></pre></article>
  
@@ -305,11 +314,39 @@ another_matrix.assign(rows, vector&lt;char&gt;(cols, '-'));
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>float cube(float x) {
-    return x * x * x;
+      <pre class="prettyprint" data-lang="c++"><code>#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+double hypotenuse(double a, double b) {
+    auto c = sqrt(a * a + b * b);
+    return c;
 }
 
-// pass by reference: external vars can be modified
+int main() {
+    auto side1 = 3.0, side2 = 4.0;
+    auto side3 = hypotenuse(side1, side2);
+    cout &lt;&lt; "3rd side: " &lt;&lt; side3 &lt;&lt; endl;
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Parametri per riferimento</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Parametri passati per riferimento sono <em>alias</em><ul>
+<li>Le modifiche riguardano anche le variabili esterne</li>
+<li>Limitarne l'uso!</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>// pass by reference: external vars can be modified
 void swap(int&amp; m, int&amp; n) {
     int tmp = m;
     m = n; n = tmp;
@@ -357,18 +394,19 @@ file2.close();
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>ifstream file1{"input.txt"};    // file input stream
+      <pre class="prettyprint" data-lang="c++"><code>ifstream file1{"input.txt"};
 </code></pre>
 <pre class="prettyprint" data-lang="c++"><code>string first_line, second_line;
 getline(file1, first_line);
 getline(file1, second_line);
-// read lines do not include newline
+// first_line and second_line do not include newlines
 </code></pre>
 <pre class="prettyprint" data-lang="c++"><code>string whole_text;
 getline(file1, whole_text, '\0');
+// read the whole file, including newlines
 </code></pre>
 <pre class="prettyprint" data-lang="c++"><code>string line;
-while (getline(file1, line)) {
+while (getline(file1, line)) {  // for each line in file1...
     cout &lt;&lt; line &lt;&lt; endl;
 }
 </code></pre></article>
