@@ -38,7 +38,85 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Interactive shell</h2>
+      <h2>Functional paradigm</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/function.png">
+        
+      </figure><ul>
+<li>Program execution: evaluation of <em>mathematical functions</em></li>
+<li>No <em>side effects</em>: easier to verify correctness</li>
+<li><em>Declarative</em> style: what the result is, vs. how to calculate it</li>
+<li><em>Immutable</em> variables and values: fewer inter-dependences</li>
+<li>Optimizable: fit for <em>parallel programming</em></li>
+<li><em>Expression</em>-oriented: everything is an expression, producing a value</li>
+<li>Functions are values, too: used as parameters and results of other, <em>higher-order</em>, functions</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Side effects</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/dognap.png">
+        
+      </figure><ul>
+<li>Modifications of objects passed as parameters or global variables, I/O operations...</li>
+<li>Nullify <strong>referential trasparency</strong><ul>
+<li>Impossible to simplify, sustituting a call to f. with its return value (ex. if I/O ops are present)</li>
+</ul>
+</li>
+<li>Make f. <strong>non-idempotent</strong><ul>
+<li>Called repeatedly, with the same params, returns different results</li>
+</ul>
+</li>
+<li>→ Mathematical proofs are difficult<ul>
+<li><code>z = f(sqrt(2), sqrt(2))</code></li>
+<li><code>s = sqrt(2)</code> <br> <code>z = f(s, s)</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Non-idempotent functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Example of simplification<ul>
+<li><code>p = rq(x) + rq(y) * (rq(x) – rq(x))</code></li>
+<li><code>p = rq(x) + rq(y) * (0)</code></li>
+<li><code>p = rq(x) + 0</code></li>
+<li><code>p = rq(x)</code></li>
+</ul>
+</li>
+<li>But if <code>rq</code> has side effects, you can't!</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>base_value = 0  # global variable
+
+def rq(x: int) -&gt; int:
+    global base_value
+    base_value += 1
+    return x + base_value
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Haskell</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -46,6 +124,32 @@ URL: https://code.google.com/p/io-2012-slides
         <img src="images/fun/haskell-xkcd.png">
         
       </figure><ul>
+<li>Pure functional language named after Haskell Curry<ul>
+<li>Mathematical logics, 1900-1982</li>
+</ul>
+</li>
+<li>Compiled to native code, no virtual machine<ul>
+<li>Concise, declarative, efficient</li>
+</ul>
+</li>
+<li>Static typing<ul>
+<li>Type variables, typeclasses, type constaints</li>
+</ul>
+</li>
+<li>Lazy evaluation</li>
+<li>Pattern matching</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Interactive shell</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
 <li>Install the “<em>Glasgow Haskell Compiler</em>”<ul>
 <li><code>sudo apt install ghc</code></li>
 </ul>
@@ -76,13 +180,13 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <ul>
 <li>Function calling: prefix notation<ul>
-<li>Fun and params separated by blanks</li>
+<li>F. name and params separated by blanks</li>
 <li>No parens</li>
 </ul>
 </li>
 <li>Infix notation<ul>
-<li>Surround the function name with ticks (`)</li>
-<li>Operators (function named with symbols)</li>
+<li>Surround f. name with ticks (`)</li>
+<li>Operator (f. named with symbols)</li>
 </ul>
 </li>
 </ul>
