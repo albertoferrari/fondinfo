@@ -74,6 +74,18 @@ Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
 
 ----
 
+## Paradigmi e linguaggi di programmazione
+
+- [Haskell: lists & funs](hs1.html)
+- [Haskell: more funs](hs2.html)
+- [Haskell: types and I/O](hs3.html)
+- [C++: basics](cpp1.html)
+- [C++: classes](cpp2.html)
+- [C++: inheritance](cpp3.html)
+- [Go: basics](go1.html)
+
+----
+
 ## Libri di testo, software e link utili
 
 - [Libri e link](link.html)
