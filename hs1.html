@@ -813,6 +813,9 @@ Prelude&gt; take 12 (cycle "LOL ")
 </ul>
 <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; range(5, 15, 2)
 range(5, 15, 2)
+&gt;&gt;&gt; for v in range(5, 15, 2): print(v, end=' ')
+
+5 7 9 11 13
 &gt;&gt;&gt; list(range(5, 15, 2))
 [5, 7, 9, 11, 13]
 </code></pre></article>
@@ -857,7 +860,7 @@ range(5, 15, 2)
       <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; f = Fib(13)
 &gt;&gt;&gt; f
 &lt;__main__.Fib object at 0x7fc31dbbdbe0&gt;
-&gt;&gt;&gt; for n in f: print(n, end=' ')
+&gt;&gt;&gt; for v in f: print(v, end=' ')
 
 1 1 2 3 5 8 13 
 &gt;&gt;&gt; list(f)
@@ -1129,7 +1132,10 @@ False
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
+      <figure>
+        <img src="images/fun/zip.jpg">
+        
+      </figure><ul>
 <li><code>zip</code> takes two lists and returns one list, by joining the matching elements into pairs<ul>
 <li>The 1st element goes with the 1st, 2nd with 2nd, etc.</li>
 <li>The two lists can contain different types</li>
@@ -1141,14 +1147,45 @@ False
 [(1,5),(2,5),(3,5),(4,5),(5,5)]
 Prelude&gt; zip [1 .. 5] ["one", "two", "three", "four", "five"]
 [(1,"one"),(2,"two"),(3,"three"),(4,"four"),(5,"five")]
-</code></pre>
-<ul>
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>More zipping</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/zip.jpg">
+        
+      </figure><ul>
 <li>If a list is longer than the other, it gets cut off</li>
 <li>Haskell is <em>lazy</em>: zip finite lists with infinite lists</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; zip [1..] ["apple", "orange", "cherry", "mango"]
 [(1,"apple"),(2,"orange"),(3,"cherry"),(4,"mango")]
 </code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ex.: Pythagoras</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Which right triangle...<ul>
+<li>that has integers for all sides...</li>
+<li>and all sides equal to or smaller than 10...</li>
+<li>has a perimeter of 24?</li>
+</ul>
+</li>
+</ul></article>
  
 </slide>
 
