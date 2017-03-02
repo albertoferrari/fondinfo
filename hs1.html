@@ -52,8 +52,8 @@ URL: https://code.google.com/p/io-2012-slides
 <li>To learn a new way of thinking</li>
 </ul>
 <blockquote>
-<p>A language that does not affect the way you think aboutprogramming, is not worth knowing. <em>(Alan Perlis, 1966 Turing Award)</em></p>
-<p>If you want to teach people a new way of thinking, don't bother trying to teach them. Instead, give them a tool, the use of which will lead to new ways of thinking. <em>(R.B. Fuller, Architect 1970 gold medal AIA)</em></p>
+<p>A language that does not affect the way you think about programming, is not worth knowing. <em>(Alan Perlis, 1966 Turing Award)</em></p>
+<p>If you want to teach people a new way of thinking, don't bother trying to teach them. Instead, give them a tool, the use of which will lead to new ways of thinking. <em>(Buckminster Fuller, Architect 1970 gold medal AIA)</em></p>
 </blockquote></article>
  
 </slide>
@@ -165,6 +165,28 @@ def rq(x: int) -&gt; int:
  
 </slide>
 
+<slide class="large-image" >
+  
+    <hgroup>
+      <h2>The Top 30 (IEEE Spectrum, 2016)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/dev/languages-spectrum-2016.png" /></p></article>
+ 
+</slide>
+
+<slide class="large-image" >
+  
+    <hgroup>
+      <h2>Weekend programming</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/dev/so-weekend.png" /></p></article>
+ 
+</slide>
+
 <slide  >
   
     <hgroup>
@@ -172,7 +194,10 @@ def rq(x: int) -&gt; int:
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
+      <figure>
+        <img src="images/fun/learn-haskell.png">
+        
+      </figure><ul>
 <li>Install the “<em>Glasgow Haskell Compiler</em>”<ul>
 <li><code>sudo apt install ghc</code></li>
 </ul>
@@ -181,7 +206,7 @@ def rq(x: int) -&gt; int:
 <li><code>ghci</code></li>
 </ul>
 </li>
-<li>Expressions an operators<ul>
+<li>Expressions and operators<ul>
 <li><code>+, -, *, /, ^, **</code></li>
 <li><code>&amp;&amp;, ||, not</code></li>
 <li><code>==, /=, &lt;, &lt;=, &gt;, &gt;=</code></li>
@@ -190,7 +215,10 @@ def rq(x: int) -&gt; int:
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; 2 ^ 3
 8
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://learnyouahaskell.com/">http://learnyouahaskell.com/</a></p>
+<p><a href="http://www.haskell.org/">http://www.haskell.org/</a></p></article>
  
 </slide>
 
@@ -268,7 +296,11 @@ k = 11
 k = k + 1    -- error!
 </code></pre>
 <ul>
-<li>Use <code>let</code> to define functions directly in GHCi</li>
+<li>Use <strong><code>let</code></strong> to define functions directly in GHCi<ul>
+<li>Doing <code>let a = 1</code> inside GHCi is the equivalent of...</li>
+<li>writing <code>a = 1</code> in a script and then loading it</li>
+</ul>
+</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let doubleMe x = x + x
 Prelude&gt; doubleMe 5
@@ -284,17 +316,18 @@ Prelude&gt; doubleMe 5
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
+      <figure>
+        <img src="images/fun/shopping-list.jpg">
+        
+      </figure><ul>
 <li>Much like shopping lists in the real world, lists in Haskell are very useful</li>
 <li>Lists are denoted by square brackets and the values in the lists are separated by commas</li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let lostNumbers = [4,8,15,16,23,42]
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let lostNumbers = [12,99,37]
 Prelude&gt; lostNumbers
-[4,8,15,16,23,42]
+[12,99,37]
 </code></pre>
-<blockquote></blockquote>
-<p>Note: We can use the <code>let</code> keyword to define a name right in GHCi</p>
-<p>Doing <code>let a = 1</code> inside GHCi is the equivalent of writing <code>a = 1</code> in a script and then loading it</p></article>
+<p><img alt="" src="images/fun/linked-list.svg" /></p></article>
  
 </slide>
 
@@ -751,6 +784,183 @@ Prelude&gt; take 12 (cycle "LOL ")
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Python's corner</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Python ranges</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><em>List slice</em>, to get some sublist</li>
+<li><em>Range</em>, to get some sequence of integers<ul>
+<li>Min val is included</li>
+<li>Max val is excluded</li>
+<li>Optional step</li>
+</ul>
+</li>
+<li>Pyhton ranges are <em>lazy</em>, too</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; range(5, 15, 2)
+range(5, 15, 2)
+&gt;&gt;&gt; list(range(5, 15, 2))
+[5, 7, 9, 11, 13]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Python iterators</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>class Fib:
+    '''iterator that yields Fibonacci numbers'''
+
+    def __init__(self, max):
+        self._max = max
+
+    def __iter__(self):
+        self._a = 1
+        self._b = 1
+        return self
+
+    def __next__(self):
+        fib = self._a
+        if fib &gt; self._max:
+            raise StopIteration
+        self._a, self._b = self._b, self._a + self._b
+        return fib
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Using an iterator</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; f = Fib(13)
+&gt;&gt;&gt; f
+&lt;__main__.Fib object at 0x7fc31dbbdbe0&gt;
+&gt;&gt;&gt; for n in f: print(n, end=' ')
+
+1 1 2 3 5 8 13 
+&gt;&gt;&gt; list(f)
+[1, 1, 2, 3, 5, 8, 13]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Python generators</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>def fib(max):
+    '''generator that yields Fibonacci numbers'''
+
+    a, b = 1, 1
+    while a &lt;= max:
+        yield(a)
+        a, b = b, a + b
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; f = fib(13)
+&gt;&gt;&gt; f
+&lt;generator object fib at 0x7fc31db9b308&gt;
+&gt;&gt;&gt; list(f)
+[1, 1, 2, 3, 5, 8, 13]
+&gt;&gt;&gt; f.__iter__
+&lt;method-wrapper '__iter__' of generator object at 0x7fc31db9b308&gt;
+&gt;&gt;&gt; f.__next__
+&lt;method-wrapper '__next__' of generator object at 0x7fc31db9b308&gt;
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Unbounded sequences</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>def fib2():
+    '''generator that yields Fibonacci numbers'''
+
+    a, b = 1, 1
+    while True:
+        yield(a)
+        a, b = b, a + b
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; f = fib2()
+&gt;&gt;&gt; f
+&lt;generator object fib2 at 0x7f5946caf4c0&gt;
+&gt;&gt;&gt; from itertools import islice
+&gt;&gt;&gt; islice(f, 7)
+&lt;itertools.islice object at 0x7f594a2f7ea8&gt;
+&gt;&gt;&gt; list(islice(f, 7))
+[1, 1, 2, 3, 5, 8, 13]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Infinite iterators</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Much more, in the <code>itertools</code> module</li>
+<li><code>count(start, [step])</code><ul>
+<li><code>count(10, 2) --&gt; 10 12 14 ...</code></li>
+</ul>
+</li>
+<li><code>cycle(p)</code><ul>
+<li><code>cycle('ABC') --&gt; A B C A B C ...</code></li>
+</ul>
+</li>
+<li>
+<p><code>repeat(elem [,n])</code></p>
+<ul>
+<li><code>repeat(10) --&gt; 10 10 10 ...</code></li>
+</ul>
+</li>
+<li>
+<p>See <a href="https://docs.python.org/3/library/itertools.html">https://docs.python.org/3/library/itertools.html</a></p>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>List comprehensions</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
 <slide  >
   
     <hgroup>
@@ -770,9 +980,9 @@ Prelude&gt; take 12 (cycle "LOL ")
 </code></pre>
 <ul>
 <li>In Haskell, list comprehensions are very similar to set comprehensions<ul>
-<li>The part before the pipe is called the output function</li>
-<li>x is the variable</li>
-<li>[1..10] is the input list</li>
+<li>The part before the pipe is called the <em>output function</em></li>
+<li><code>x</code> is the <em>variable</em></li>
+<li><code>[1..10]</code> is the <em>input list</em></li>
 <li>For every element in <code>[1..10]</code> (which we have bound to <code>x</code>), we get that element, only doubled</li>
 </ul>
 </li>
@@ -796,6 +1006,12 @@ Prelude&gt; take 12 (cycle "LOL ")
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [x | x &lt;- [50..100], x `mod` 7 == 3]
 [52,59,66,73,80,87,94]
+</code></pre>
+<ul>
+<li><em>Python</em> also has comprehensions</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; [x for x in range(50, 101) if  x % 7 == 3]
+[52, 59, 66, 73, 80, 87, 94]
 </code></pre></article>
  
 </slide>
@@ -829,19 +1045,25 @@ Prelude&gt; removeNonUppercase "IdontLIKEFROGS"
     <article >
       <ul>
 <li>We can include several predicates</li>
-<li>Ex.: all numbers from 10 to 20 that are not 13, 15 or 19</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [x | x &lt;- [10..20], x /= 13, x /= 15, x /= 19]
 [10,11,12,14,16,17,18,20]
 </code></pre>
 <ul>
 <li>We can also draw from several lists<ul>
-<li>Comprehensions produce all combinations of the input lists and then join them by the output function</li>
+<li>Produce all <em>combinations</em> of the input lists</li>
+<li>Then join them by the output function</li>
 </ul>
 </li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [x*y | x &lt;- [2,5,10], y &lt;- [8,10,11]]
 [16,20,22,40,50,55,80,100,110]
+</code></pre>
+<ul>
+<li>In <em>Python</em> too</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; [x * y for x in (2, 5, 10) for y in (8, 10, 11)]
+[16, 20, 22, 40, 50, 55, 80, 100, 110]
 </code></pre></article>
  
 </slide>
@@ -1159,7 +1381,7 @@ fst :: (a, b) -&gt; a
 </li>
 <li>The <code>Eq</code> typeclass provides an interface for testing for equality<ul>
 <li>Its member types implement the functions <code>==</code> and/or <code>/=</code></li>
-<li>All standard Haskell types (except for IO, for dealing with input and output) and functions are a part of the <code>Eq</code> typeclass</li>
+<li>Most standard Haskell types are part of the <code>Eq</code> typeclass</li>
 </ul>
 </li>
 <li>The <code>elem</code> f. has a type of <code>(Eq a) =&gt; a -&gt; [a] -&gt; Bool</code><ul>
