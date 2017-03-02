@@ -932,7 +932,10 @@ range(5, 15, 2)
     </hgroup>
     <article >
       <ul>
-<li>Much more, in the <code>itertools</code> module</li>
+<li>Much more, in the <code>itertools</code> module<ul>
+<li>See: <a href="https://docs.python.org/3/library/itertools.html">https://docs.python.org/3/library/itertools.html</a></li>
+</ul>
+</li>
 <li><code>count(start, [step])</code><ul>
 <li><code>count(10, 2) --&gt; 10 12 14 ...</code></li>
 </ul>
@@ -941,16 +944,14 @@ range(5, 15, 2)
 <li><code>cycle('ABC') --&gt; A B C A B C ...</code></li>
 </ul>
 </li>
-<li>
-<p><code>repeat(elem [,n])</code></p>
-<ul>
+<li><code>repeat(elem [,n])</code><ul>
 <li><code>repeat(10) --&gt; 10 10 10 ...</code></li>
 </ul>
 </li>
-<li>
-<p>See <a href="https://docs.python.org/3/library/itertools.html">https://docs.python.org/3/library/itertools.html</a></p>
-</li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p>See also: <a href="https://docs.python.org/3/library/functools.html">https://docs.python.org/3/library/functools.html</a></p>
+<p>See also: <a href="https://docs.python.org/3/library/operator.html">https://docs.python.org/3/library/operator.html</a></p></article>
  
 </slide>
 
@@ -1154,19 +1155,42 @@ Prelude&gt; zip [1 .. 5] ["one", "two", "three", "four", "five"]
 <slide  >
   
     <hgroup>
-      <h2>More zipping</h2>
+      <h2>Zipping infinite lists</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <figure>
-        <img src="images/fun/zip.jpg">
-        
-      </figure><ul>
-<li>If a list is longer than the other, it gets cut off</li>
+      <ul>
+<li>If a list is longer than the other, it gets <em>cut off</em></li>
 <li>Haskell is <em>lazy</em>: zip finite lists with infinite lists</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; zip [1..] ["apple", "orange", "cherry", "mango"]
 [(1,"apple"),(2,"orange"),(3,"cherry"),(4,"mango")]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Zipping in Python</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Python's <code>zip</code> is <em>lazy</em>, too</li>
+<li>It can work on infinite sequences</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; list(zip([0, 1, 2, 3], ['A', 'B', 'C', 'D']))
+[(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
+&gt;&gt;&gt; list(zip(count(0), "ABCD"))
+[(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
+&gt;&gt;&gt; list(enumerate("ABCD"))
+[(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
+&gt;&gt;&gt; for i, v in enumerate([17, 21, 19]): print(i, v)
+... 
+0 17
+1 21
+2 19
 </code></pre></article>
  
 </slide>
@@ -1262,8 +1286,8 @@ removeNonUppercase st = [ c | c &lt;- st, c `elem` ['A'..'Z']]
     </hgroup>
     <article >
       <ul>
-<li>The parameters are all separated with <code>-&gt;</code></li>
-<li>The return type is the last item</li>
+<li>The <em>parameters</em> are all separated with <code>-&gt;</code></li>
+<li>The <em>return type</em> is the last item</li>
 <li>There's no special distinction between the parameters and the return type</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>addThree :: Int -&gt; Int -&gt; Int -&gt; Int
@@ -1632,7 +1656,7 @@ lucky x = "Sorry, you're out of luck, pal!"
     <article >
       <ul>
 <li>Define a factorial function <em>recursively</em>, the way it is usually defined in mathematics<ul>
-<li>The factorial of 0 is 1</li>
+<li>The factorial of <code>0</code> is <code>1</code></li>
 <li>The factorial of any positive integer is that integer multiplied by the factorial of its predecessor</li>
 </ul>
 </li>
@@ -1782,13 +1806,13 @@ capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
 <li>The <code>where</code> clause define names, across guards</li>
 <li>Ex.: a simple function that berates you differently depending on your “body mass index”</li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>bmiTell :: (RealFloat a) =&gt; a -&gt; a -&gt; String
+<pre class="prettyprint" data-lang="haskell"><code>bmiTell :: Float -&gt; Float -&gt; String
 bmiTell weight height
     | bmi &lt;= 18.5 = "Underweight, you emo, you!"
     | bmi &lt;= 25.0 = "Normal. Pffft, I bet you're ugly!"
     | bmi &lt;= 30.0 = "Fat! Lose some weight, fatty!"
     | otherwise   = "A whale, congratulations!"
-    where bmi = weight / height ^ 2
+    where bmi = weight / height ** 2
 </code></pre></article>
  
 </slide>
