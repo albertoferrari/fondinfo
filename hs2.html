@@ -189,6 +189,10 @@ take' n (x:xs) = x : take' (n-1) xs
 <pre class="prettyprint" data-lang="haskell"><code>reverse' :: [a] -&gt; [a]
 reverse' [] = []
 reverse' (x:xs) = reverse' xs ++ [x]
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>rev xs = rev' xs [] where
+  rev' [] acc = acc
+  rev' (x:xs) acc = rev' xs (x:acc)
 </code></pre></article>
  
 </slide>
@@ -874,19 +878,8 @@ largestDivisible = head (filter p [100000,99999..])
     </hgroup>
     <article >
       <ul>
-<li>Ex.: The sum of all odd squares that are smaller than 10,000</li>
-</ul>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; sum (takeWhile (&lt;10000) (filter odd (map (^2) [1..])))
-166650
-Prelude&gt; sum (takeWhile (&lt;10000) [n^2 | n &lt;- [1..], odd (n^2)])
-166650
-</code></pre>
-<ul>
-<li>Haskell's laziness makes this possible<ul>
-<li>We can map over and filter an infinite list</li>
-<li>It won't actually map and filter it right away, it'll delay those actions</li>
-</ul>
-</li>
+<li>Sum of all odd squares that are smaller than 10,000</li>
+<li>Laziness: map over and filter an infinite list</li>
 </ul></article>
  
 </slide>
@@ -923,11 +916,7 @@ collatz n
     <article >
       <ul>
 <li>For all starting numbers between 1 and 100, how many chains have a length greater than 15?</li>
-</ul>
-<pre class="prettyprint" data-lang="haskell"><code>numLongChains :: Int
-numLongChains = length (filter isLong (map collatz [1..100]))
-    where isLong xs = length xs &gt; 15
-</code></pre></article>
+</ul></article>
  
 </slide>
 
@@ -994,6 +983,188 @@ numLongChains = length (filter (\xs -&gt; length xs &gt; 15) (map chain [1..100]
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; zipWith (\a b -&gt; (a * 30 + 3) / b) [5,4,3,2,1] [1,2,3,4,5]
 [153.0,61.5,31.0,15.75,6.6]
+</code></pre></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Python's corner</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Partials</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Python has a <code>partial</code> f. in <code>functools</code> module<ul>
+<li>Returns a <code>partial</code> object, which is callable</li>
+<li>“Freezes” some arguments, simplified signature</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from functools import partial
+&gt;&gt;&gt; pow(2, 5)
+32
+&gt;&gt;&gt; pow2 = partial(pow, 2)
+&gt;&gt;&gt; pow2(5)
+32
+&gt;&gt;&gt; basetwo = partial(int, base=2)
+&gt;&gt;&gt; basetwo('10010')
+18
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Callable objects</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Callable: any object with <code>__call__</code> method</li>
+<li><code>foo()</code> is interpreted as <code>foo.__call__()</code></li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>class Multiplier:
+    def __init__(self, to_mul):
+        self._to_mul = to_mul
+
+    def __call__(self, val):
+        return self._to_mul * val
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; triple = Multiplier(3)
+&gt;&gt;&gt; triple(5)
+15
+</code></pre>
+<blockquote></blockquote>
+<p>Also in C++, <code>operator()</code> can be overloaded, to create a so-called <em>function object</em> or <em>functor</em></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Map function</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><em>Higher order f.</em>: takes as params a f. and a sequence</li>
+<li>Applies the f. to each value in the sequence</li>
+<li>Returns the sequence of results</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from math import sqrt
+&gt;&gt;&gt; values = [0, 1, 2, 3, 4]
+&gt;&gt;&gt; list(map(sqrt, values))
+[0.0, 1.0, 1.4142, 1.7320, 2.0]
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from math import sqrt
+&gt;&gt;&gt; list(map(sqrt, range(5)))
+[0.0, 1.0, 1.4142, 1.7320, 2.0]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Multiprocessing</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Module for working with multiple processes</li>
+<li>A <code>Pool</code> object represents a pool of processes</li>
+<li>Provides a <code>map</code> method for parallel application of a f.<ul>
+<li>Accepts a f., or...</li>
+<li>Any callable object (with <code>__call__</code> method),</li>
+<li>Including a <code>partial</code> object (“freezing” some params of a f.)</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>from multiprocessing import Pool
+
+with Pool(5) as p:
+    print(p.map(sqrt, [1, 2, 3]))
+</code></pre>
+<blockquote></blockquote>
+<p>Example: PaNDEMON</p>
+<p>Note: <em>lambdas</em> are not <em>pickable</em>...</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lambda functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Anonymous function, body is a single expression<ul>
+<li>For a longer body, use a (nested) <code>def</code></li>
+</ul>
+</li>
+<li>Closure for referenced variables (<em>by ref</em>)<ul>
+<li>To get stg <em>by val</em>, add it as a default param</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Example: <code>min</code> on inverse key</p>
+<p>Example: behaviours of GUI widgets</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Reduce</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/foldl.png">
+        
+      </figure><ul>
+<li><code>reduce</code> f. in <code>functools</code> module<ul>
+<li>Takes a f., a sequence and an (optional) initial value</li>
+<li>The f. is applied repeatedly, on previous result and next value in sequence</li>
+<li>Without initial value, f. is applied to first 2 elements</li>
+<li>Similar to Haskell <em>folding</em></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; reduce(lambda a, b: a + b, [3, 5, 2, 1], 0)
+11
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Operators as functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre><code>&gt;&gt;&gt; from operator import add, mul
+&gt;&gt;&gt; add(2, 3)
+5
+&gt;&gt;&gt; reduce(add, [3, 5, 2, 1])
+11
+&gt;&gt;&gt; reduce(mul, [3, 5, 2, 1])
+30
 </code></pre></article>
  
 </slide>
@@ -1272,6 +1443,16 @@ Prelude&gt; sum (map sqrt [1..130])
 993.6486803921487
 </code></pre></article>
  
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Function composition</h2>
+      <h3></h3>
+    </hgroup>
+  
 </slide>
 
 <slide  >
