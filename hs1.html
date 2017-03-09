@@ -1372,8 +1372,14 @@ head :: [a] -&gt; a
 </code></pre>
 <ul>
 <li>Types are written in capital case, so <code>a</code> isn't exactly a type</li>
-<li>It's actually a type variable: it can be of any type, much like generics in other languages</li>
-<li>Functions that have type variables are called polymorphic functions</li>
+<li>It's actually a <em>type variable</em><ul>
+<li>It can be of any type, much like <em>generics</em> in other languages</li>
+</ul>
+</li>
+<li>Functions that have type variables are called <em>polymorphic</em><ul>
+<li>Compile-time polymorphism</li>
+</ul>
+</li>
 </ul></article>
  
 </slide>
@@ -1417,10 +1423,10 @@ fst :: (a, b) -&gt; a
 (==) :: (Eq a) =&gt; a -&gt; a -&gt; Bool
 </code></pre>
 <ul>
-<li>Note: the equality operator, <code>==</code> is a function<ul>
+<li>Note: the equality operator, <code>==</code>, is a function<ul>
 <li>So are <code>+, *, -, /</code> and pretty much all operators</li>
-<li>A function, named only with special characters, is considered infix by default</li>
-<li>Operators can be hadled as normal functions: surround them in parentheses</li>
+<li>A f. named only with special chars is infix by default</li>
+<li>Handle an op. as a normal f.: surround it in parentheses</li>
 </ul>
 </li>
 </ul></article>
@@ -1436,13 +1442,13 @@ fst :: (a, b) -&gt; a
     <article >
       <ul>
 <li>A <em>typeclass</em> is a sort of interface that defines some behavior<ul>
-<li>A type is a part of a typeclass, if it supports and implements the behavior the typeclass describes</li>
-<li>You can think of them kind of as Java interfaces, only better</li>
+<li>A <em>type</em> is a part of a typeclass, if it supports and implements the behavior the typeclass describes</li>
+<li>Kind of as Java interfaces, with different aim (...)</li>
 </ul>
 </li>
-<li>The <code>Eq</code> typeclass provides an interface for testing for equality<ul>
-<li>Its member types implement the functions <code>==</code> and/or <code>/=</code></li>
-<li>Most standard Haskell types are part of the <code>Eq</code> typeclass</li>
+<li>The <strong><code>Eq</code></strong> typeclass provides an interface for testing for equality<ul>
+<li>Its member types implement op.s <code>==</code> and/or <code>/=</code></li>
+<li>Most standard types are part of the <code>Eq</code> typeclass</li>
 </ul>
 </li>
 <li>The <code>elem</code> f. has a type of <code>(Eq a) =&gt; a -&gt; [a] -&gt; Bool</code><ul>
@@ -1461,11 +1467,10 @@ fst :: (a, b) -&gt; a
     </hgroup>
     <article >
       <ul>
-<li><code>Ord</code> is for types that have an ordering<ul>
-<li>Member types implement <code>&lt;=</code> and/or <code>compare</code></li>
-<li><code>Ord</code> covers all the comparing functions: <code>&gt;, &lt;, &gt;=, &lt;=</code></li>
+<li><strong><code>Ord</code></strong> is for types that have an ordering<ul>
+<li>Member types implement comparing f.s (<code>&gt;, &lt;, &gt;=, &lt;=</code>) and/or <code>compare</code></li>
 <li>A member of <code>Ord</code> must first be member of <code>Eq</code></li>
-<li>All types covered so far are part of <code>Ord</code> (except for functions)</li>
+<li>All types so far are part of <code>Ord</code> (except for f.s)</li>
 </ul>
 </li>
 <li>The <code>compare</code> f. takes two <code>Ord</code> members of the same type<ul>
@@ -1491,10 +1496,13 @@ GT
     </hgroup>
     <article >
       <ul>
-<li><code>Show</code> is for types that can be represented as strings<ul>
-<li>All types covered so far are part of <code>Show</code> (except for functions)</li>
-<li>Its member types implement the function <code>show</code></li>
-<li>It takes a value whose type is a member of <code>Show</code> and returns its string representation</li>
+<li><strong><code>Show</code></strong> is for types that can be represented as strings<ul>
+<li>All types so far are part of <code>Show</code> (except for f.s)</li>
+<li>Member types implement the <code>show</code> f.</li>
+</ul>
+</li>
+<li><code>show</code> takes a value (member of <code>Show</code>)<ul>
+<li>Returns its <em>string</em> representation</li>
 </ul>
 </li>
 </ul>
@@ -1516,12 +1524,12 @@ Prelude&gt; show True
     </hgroup>
     <article >
       <ul>
-<li><code>Read</code> is for types that can be extracted from strings<ul>
-<li>All types covered so far are part of <code>Read</code> (except for functions)</li>
-<li>Its member types implement the function <code>read</code></li>
-<li>It takes a string and returns a type which is a member of <code>Read</code></li>
+<li><strong><code>Read</code></strong> is for types that can be extracted from strings<ul>
+<li>All types so far are part of <code>Read</code> (except for f.s)</li>
+<li>Its member types implement the <code>read</code> f.</li>
 </ul>
 </li>
+<li><code>read</code> takes a <em>string</em> and returns a member of <code>Read</code></li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; read "True" || False
 True
@@ -1570,10 +1578,10 @@ Prelude&gt; read "(3, 'a')" :: (Int, Char)
     </hgroup>
     <article >
       <ul>
-<li><code>Enum</code> members are sequentially ordered types, which can be enumerated<ul>
-<li>Its types have defined successors and predecesors (<code>succ</code> and <code>pred</code>)</li>
+<li><strong><code>Enum</code></strong> members are sequentially ordered types, which can be enumerated<ul>
+<li>Its types define <code>succ</code> and <code>pred</code> f.s</li>
 <li>They can be used in list ranges</li>
-<li>Types in this class include: <code>Bool, Char, Ordering, Int, Integer...</code></li>
+<li>Types include: <code>Bool, Char, Ordering, Int, Integer...</code></li>
 </ul>
 </li>
 </ul>
@@ -1597,20 +1605,19 @@ Prelude&gt; succ 'B'
     </hgroup>
     <article >
       <ul>
-<li><code>Bounded</code> members have an upper and a lower bound (<code>maxBound</code> and <code>minBound</code>)<ul>
-<li>Types that are in the <code>Bounded</code> typeclass: <code>Int, Char, Bool...</code></li>
+<li><strong><code>Bounded</code></strong> members have upper and lower bounds<ul>
+<li>Its types define <code>maxBound</code> and <code>minBound</code> f.s</li>
+<li>Types: <code>Int, Char, Bool...</code></li>
 </ul>
 </li>
-<li><code>Num</code> is a numeric typeclass<ul>
-<li>Types that are in the <code>Num</code> typeclass: <code>Int, Integer, Float, Double</code></li>
-<li>To join Num, a type must already be friends with <code>Show</code> and <code>Eq</code></li>
+<li><strong><code>Num</code></strong> is a numeric typeclass<ul>
+<li>Its types define <code>+, -, *</code> etc.</li>
+<li>They must also be in <code>Show</code> and <code>Eq</code></li>
+<li>Types: <code>Int, Integer, Float, Double</code></li>
 </ul>
 </li>
-<li><code>Integral</code> and <code>Floating</code> are also numeric typeclasses<ul>
-<li>In the <code>Integral</code> typeclass are only <code>Int</code> and <code>Integer</code></li>
-<li>In the <code>Floating</code> typeclass are only <code>Float</code> and <code>Double</code></li>
-</ul>
-</li>
+<li><strong><code>Integral</code></strong> typeclass: <code>Int</code> and <code>Integer</code> types</li>
+<li><strong><code>Floating</code></strong> typeclass: <code>Float</code> and <code>Double</code> types</li>
 </ul></article>
  
 </slide>

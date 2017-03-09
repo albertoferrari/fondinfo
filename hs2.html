@@ -42,15 +42,18 @@ URL: https://code.google.com/p/io-2012-slides
       <h3></h3>
     </hgroup>
     <article >
-      <blockquote>
+      <figure>
+        <img src="images/fun/matryoshka.png">
+        
+      </figure><blockquote>
 <p>If you still don't know what recursion is, read this sentence</p>
 </blockquote>
 <ul>
 <li>Recursion is actually a way of defining functions in which the function is applied inside its own definition</li>
 <li>Definitions in mathematics are often given recursively. Ex.: Fibonacci sequence<ul>
-<li><code>F(0) = 0 and F(1) = 1</code>  (<em>edge condition</em>)</li>
+<li><code>F(0) = 1, F(1) = 1</code>  (<em>edge condition</em>)</li>
 <li><code>F(n) = F(n-1) + F(n-2)</code></li>
-<li>=&gt; <code>F(3) = F(2) + F(1) = (F(1) + F(0)) + F(1) = 2</code></li>
+<li>=&gt; <code>F(3) = F(2) + F(1) = (F(1) + F(0)) + F(1) = 3</code></li>
 </ul>
 </li>
 <li>Having at least an element defined non-recursively is important for termination</li>
@@ -67,13 +70,14 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article >
       <ul>
-<li>The maximum function takes a list of things that can be ordered (e.g. instances of the <code>Ord</code> typeclass) and returns the biggest of them</li>
-<li>Imperative paradigm<ul>
+<li>Takes a list of things that can be ordered (<code>Ord</code> typeclass)</li>
+<li>Returns the biggest of them</li>
+<li><em>Imperative paradigm</em><ul>
 <li>A variable to hold the maximum value so far</li>
 <li>Loop through the elements</li>
 </ul>
 </li>
-<li>Recursive definition<ul>
+<li><em>Recursive definition</em><ul>
 <li>Edge condition, for a singleton list: the maximum is the only element in it</li>
 <li>Longer list: the maximum is the head, if it is bigger than the maximum of the tail; else, the maximum of the tail</li>
 </ul>
@@ -98,9 +102,11 @@ maximum' (x:xs)
     where maxTail = maximum' xs
 </code></pre>
 <ul>
-<li>Pattern matching goes great with recursion</li>
-<li>Otherwise, a lot of <code>if else</code> statements to test for edge conditions</li>
-<li>Common idiom when doing recursion with lists: pattern to split a list into a head and a tail</li>
+<li><em>Pattern</em> to split a list into head and tail<ul>
+<li>Common idiom when doing recursion with lists</li>
+<li>Otherwise, a lot of <code>if / else</code> statements for edge conditions</li>
+</ul>
+</li>
 </ul>
 <blockquote></blockquote>
 <p>Example list of numbers, check out how this would work on them: [2,5,1]</p></article>
@@ -171,7 +177,7 @@ take' _ []     = []
 take' n (x:xs) = x : take' (n-1) xs
 </code></pre>
 <blockquote></blockquote>
-<p>Guard, without an otherwise part: if <code>n</code> turns out to be more than 0, the matching will fall through to the next pattern</p></article>
+<p>Guard, without an otherwise part: if <code>n &gt; 0</code>, the matching falls through to the next pattern</p></article>
  
 </slide>
 
@@ -189,10 +195,6 @@ take' n (x:xs) = x : take' (n-1) xs
 <pre class="prettyprint" data-lang="haskell"><code>reverse' :: [a] -&gt; [a]
 reverse' [] = []
 reverse' (x:xs) = reverse' xs ++ [x]
-</code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>rev xs = rev' xs [] where
-  rev' [] acc = acc
-  rev' (x:xs) acc = rev' xs (x:acc)
 </code></pre></article>
  
 </slide>
@@ -276,16 +278,16 @@ elem' a (x:xs)
         <img src="images/fun/quicksort.png">
         
       </figure><ul>
-<li>We have a list of items that can be sorted (<code>Ord</code>)</li>
-<li>The edge condition? A sorted empty list is an empty list</li>
+<li>List of comparable things (<code>Ord</code>)</li>
+<li>Edge condition: empty list</li>
 <li>Algorithm:<ul>
-<li>All the values <code>≤</code> the head of the list in front (and those values are sorted)</li>
-<li>Then comes the head of the list in the middle</li>
-<li>Then come all the values <code>&gt;</code> the head (they're also sorted)</li>
+<li>All values <code>≤</code> head, in front (and those values are sorted)</li>
+<li>Then, head (<em>pivot</em>) in the middle</li>
+<li>Then, all values <code>&gt;</code> head (they're also sorted)</li>
 </ul>
 </li>
 <li>Idea:<ul>
-<li>We said sorted two times in this definition: recursion</li>
+<li>We said “sorted” two times in this definition: recursion</li>
 <li>Filter to get only some elements: list comprehensions</li>
 </ul>
 </li>
@@ -346,6 +348,30 @@ Prelude&gt; quicksort "the quick brown fox jumps over the lazy dog"
 <slide  >
   
     <hgroup>
+      <h2>Ex.: Merge sort</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Define a <code>merge</code> function<ul>
+<li>Takes two sorted lists</li>
+<li>Returns a sorted list, with all the elems</li>
+</ul>
+</li>
+<li>Define a <code>mergeSort</code> function<ul>
+<li>Takes a list</li>
+<li>Splits it at half</li>
+<li>Sorts each part</li>
+<li>Merges the two sorted parts</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Tail recursion example</h2>
       <h3></h3>
     </hgroup>
@@ -395,6 +421,24 @@ Prelude&gt; fact_tr 4 1
 <li><strong>Optimization</strong>: <em>reuse the current stack frame</em> for the next recursive step</li>
 </ul>
 </li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ex.: Reverse with tail recursion</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>reverse' :: [a] -&gt; [a]
+reverse' [] = []
+reverse' (x:xs) = reverse' xs ++ [x]
+</code></pre>
+<ul>
+<li>Inefficient</li>
+<li>Define <code>reverse</code> with tail recursion</li>
 </ul></article>
  
 </slide>
