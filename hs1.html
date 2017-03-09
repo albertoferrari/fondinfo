@@ -1462,7 +1462,7 @@ fst :: (a, b) -&gt; a
 <slide  >
   
     <hgroup>
-      <h2>Ord</h2>
+      <h2>Ord typeclass</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1491,7 +1491,7 @@ GT
 <slide  >
   
     <hgroup>
-      <h2>Show</h2>
+      <h2>Show typeclass</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1519,7 +1519,7 @@ Prelude&gt; show True
 <slide  >
   
     <hgroup>
-      <h2>Read</h2>
+      <h2>Read typeclass</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1573,7 +1573,7 @@ Prelude&gt; read "(3, 'a')" :: (Int, Char)
 <slide  >
   
     <hgroup>
-      <h2>Enum</h2>
+      <h2>Enum typeclass</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1690,8 +1690,9 @@ factorial n = n * factorial (n - 1)
     </hgroup>
     <article >
       <ul>
-<li>Function that takes two vectors in a 2D space (that are in the form of pairs) and adds them together<ul>
-<li>Add their x components separately and then their y components separately</li>
+<li>Function that takes two vectors and adds them together<ul>
+<li>Vectors in a 2D space, in the form of pairs</li>
+<li>Add their x components, and then their y components</li>
 </ul>
 </li>
 </ul>
@@ -1734,12 +1735,12 @@ third (_, _, z) = z
     </hgroup>
     <article >
       <ul>
-<li>The <code>x:xs</code> pattern is used a lot, especially with recursive functions</li>
+<li>The <code>x:xs</code> pattern is used a lot, especially with recursive f.s</li>
 <li>Bind the first 3 elements to variables and the rest of the list to another variable: <code>x:y:z:zs</code><ul>
 <li>It will only match against lists with 3 elements or more</li>
 </ul>
 </li>
-<li>Function that tells us about the first elements of a list</li>
+<li>Ex.: f. that tells us about first elements of a list</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>tell :: (Show a) =&gt; [a] -&gt; String
 tell [] = "The list is empty"
@@ -1819,7 +1820,7 @@ bmiTell weight height
     | bmi &lt;= 25.0 = "Normal. Pffft, I bet you're ugly!"
     | bmi &lt;= 30.0 = "Fat! Lose some weight, fatty!"
     | otherwise   = "A whale, congratulations!"
-    where bmi = weight / height ** 2
+    where bmi = weight / (height ** 2)
 </code></pre></article>
  
 </slide>

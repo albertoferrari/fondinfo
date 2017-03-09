@@ -49,15 +49,18 @@ URL: https://code.google.com/p/io-2012-slides
 <p>If you still don't know what recursion is, read this sentence</p>
 </blockquote>
 <ul>
-<li>Recursion is actually a way of defining functions in which the function is applied inside its own definition</li>
-<li>Definitions in mathematics are often given recursively. Ex.: Fibonacci sequence<ul>
-<li><code>F(0) = 1, F(1) = 1</code>  (<em>edge condition</em>)</li>
-<li><code>F(n) = F(n-1) + F(n-2)</code></li>
-<li>=&gt; <code>F(3) = F(2) + F(1) = (F(1) + F(0)) + F(1) = 3</code></li>
+<li>Recursion is a way of defining f.s<ul>
+<li>The f. is applied inside its own definition</li>
 </ul>
 </li>
-<li>Having at least an element defined non-recursively is important for termination</li>
-<li>There are no loops in Haskell, we use recursion to <em>declare</em> what something is</li>
+<li>Definitions in maths are often given recursively; ex.: Fibonacci sequence<ul>
+<li><code>F(0) = 1; F(1) = 1</code>  (<em>edge condition</em>)</li>
+<li><code>F(n) = F(n-1) + F(n-2)</code></li>
+<li>=&gt; <code>F(3) = F(2)+F(1) = (F(1)+F(0))+F(1) = 3</code></li>
+</ul>
+</li>
+<li>An element defined non-recursively, for termination</li>
+<li>No loops in Haskell, recursion to <em>declare</em> what something is</li>
 </ul></article>
  
 </slide>
@@ -104,7 +107,7 @@ maximum' (x:xs)
 <ul>
 <li><em>Pattern</em> to split a list into head and tail<ul>
 <li>Common idiom when doing recursion with lists</li>
-<li>Otherwise, a lot of <code>if / else</code> statements for edge conditions</li>
+<li>Otherwise, a lot of <code>if-else</code> statements</li>
 </ul>
 </li>
 </ul>
@@ -121,7 +124,7 @@ maximum' (x:xs)
     </hgroup>
     <article >
       <ul>
-<li><code>max</code> is a function that takes two numbers and returns the bigger of them</li>
+<li><code>max</code> takes two numbers and returns the bigger</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>maximum' :: (Ord a) =&gt; [a] -&gt; a
 maximum' [] = error "maximum of empty list"
@@ -140,9 +143,10 @@ maximum' (x:xs) = max x (maximum' xs)
     </hgroup>
     <article >
       <ul>
-<li><code>replicate</code> takes an <code>Int</code> and some element and returns a list that has several repetitions of the same element</li>
+<li><code>replicate</code> takes an <code>Int</code> and some element</li>
+<li>Returns a list with repetitions of same element</li>
 <li>For instance, <code>replicate 3 5</code> returns <code>[5,5,5]</code></li>
-<li>Edge condition: if we try to replicate something zero times (or less) it should return an empty list</li>
+<li>Edge condition: replicate something zero times (or less) → empty list</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>replicate' :: (Num i, Ord i) =&gt; i -&gt; a -&gt; [a]
 replicate' n x
@@ -166,8 +170,8 @@ replicate' n x
 <li><code>take</code> takes a certain number of elements from a list</li>
 <li>For instance, <code>take 3 [5,4,3,2,1]</code> returns <code>[5,4,3]</code></li>
 <li>Edge conditions<ul>
-<li>Take 0 or less elements from a list =&gt; empty list</li>
-<li>Take anything from an empty list =&gt; empty list</li>
+<li>Take 0 or less elements from a list → empty list</li>
+<li>Take anything from an empty list → empty list</li>
 </ul>
 </li>
 </ul>
@@ -208,7 +212,8 @@ reverse' (x:xs) = reverse' xs ++ [x]
     </hgroup>
     <article >
       <ul>
-<li>Haskell is <em>lazy</em> and supports infinite lists: recursion doesn't really have to have an edge condition</li>
+<li>Haskell is <em>lazy</em> and supports infinite lists</li>
+<li>Recursion without edge condition</li>
 <li><code>repeat</code> takes an element and returns an infinite list...</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>repeat' :: a -&gt; [a]
@@ -218,7 +223,7 @@ repeat' x = x:repeat' x
 <li><code>repeat 3</code> evaluates like <code>3:repeat 3</code>, which is <code>3:(3:repeat 3)</code>...</li>
 <li><code>repeat 3</code> gives us a list that starts with 3, and then has an infinite amount of 3's as a tail</li>
 <li><code>take 5 (repeat 3)</code> will give us a list of five 3's</li>
-<li>Essentially it's like doing replicate 5 3.</li>
+<li>Essentially it's like doing <code>replicate 5 3</code></li>
 </ul></article>
  
 </slide>
@@ -232,7 +237,7 @@ repeat' x = x:repeat' x
     <article >
       <ul>
 <li><code>zip [1,2,3] [2,3]</code> returns <code>[(1,2),(2,3)]</code></li>
-<li>It truncates the longer list to match the length of the shorter one</li>
+<li>Truncates the longer list to match the shorter</li>
 <li>zip something with an empty list =&gt; empty list (<em>edge conditions</em>)</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>zip' :: [a] -&gt; [b] -&gt; [(a,b)]
@@ -330,18 +335,18 @@ Prelude&gt; quicksort "the quick brown fox jumps over the lazy dog"
       <ul>
 <li>Thought pattern<ul>
 <li>Usually you define an edge case, ...</li>
-<li>then you define a function that does something between some element and...</li>
-<li>the function applied to the rest</li>
+<li>then you define a f., operating on some element and...</li>
+<li>the same f. applied to the rest</li>
 </ul>
 </li>
 <li>Examples<ul>
-<li>Sum: the first element of a list plus the sum of the rest of the list</li>
+<li>Sum: the first element plus the sum of the rest</li>
 <li>Product: the first element times the product of the rest</li>
 <li>Length of a list: one plus the length of the tail</li>
 </ul>
 </li>
-<li>With lists, the edge case is most often the empty list</li>
-<li>With numbers, the edge case is often an identity</li>
+<li>With lists, edge case is most often the empty list</li>
+<li>With numbers, edge case is often an identity</li>
 </ul></article>
  
 </slide>
@@ -362,7 +367,7 @@ Prelude&gt; quicksort "the quick brown fox jumps over the lazy dog"
 <li>Define a <code>mergeSort</code> function<ul>
 <li>Takes a list</li>
 <li>Splits it at half</li>
-<li>Sorts each part</li>
+<li>Sorts each part, recursively</li>
 <li>Merges the two sorted parts</li>
 </ul>
 </li>
