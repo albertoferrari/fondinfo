@@ -127,7 +127,8 @@ maximum' (x:xs)
 maximum' [] = error "maximum of empty list"
 maximum' [x] = x
 maximum' (x:xs) = max x (maximum' xs)
-</code></pre></article>
+</code></pre>
+<p><img alt="" src="images/fun/maxs.png" /></p></article>
  
 </slide>
 
@@ -372,55 +373,76 @@ Prelude&gt; quicksort "the quick brown fox jumps over the lazy dog"
 <slide  >
   
     <hgroup>
-      <h2>Tail recursion example</h2>
+      <h2>Traditional recursion example</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="haskell"><code>-- traditional recursion
-factorial 0 = 1
+      <figure>
+        <img src="images/fun/stack.svg">
+        
+      </figure><pre class="prettyprint" data-lang="haskell"><code>factorial 0 = 1
 factorial n = n * factorial (n - 1)
-
--- tail recursion
-fact_tr 0 acc = acc
-fact_tr n acc = fact_tr (n - 1) (n * acc)
-
-factorial' n = fact_tr n 1
 </code></pre>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; factorial 4
 12
-Prelude&gt; factorial' 4
-12
-Prelude&gt; fact_tr 4 1
-12
-</code></pre></article>
+</code></pre>
+<ul>
+<li>Perform recursive call first</li>
+<li>Then use its result to calculate the new result</li>
+</ul></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>Tail recursion advantage</h2>
+      <h2>Tail recursion example</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li>Traditional recursion<ul>
-<li>Perform recursive call first</li>
-<li>Then use its result to calculate the new result</li>
-</ul>
-</li>
-<li>Tail recursion<ul>
+      <figure>
+        <img src="images/fun/stack-tr.svg">
+        
+      </figure><pre class="prettyprint" data-lang="haskell"><code>fact_tr 0 acc = acc
+fact_tr n acc = fact_tr (n - 1) (n * acc)
+
+factorial' n = fact_tr n 1
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; factorial' 4
+12
+Prelude&gt; fact_tr 4 1
+12
+</code></pre>
+<ul>
 <li>Perform calculations first</li>
 <li>Then perform recursive call, passing current results to the next recursive step</li>
-<li>In <code>C</code>, last statement is ~ <code>return tr_fun(params)</code></li>
 <li>Return val of any recursive step is the same</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Tail recursion optimization</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/stack-tr.svg">
+        
+      </figure><pre class="prettyprint" data-lang="c"><code>int fact_tr(int n, int acc) {
+    if (n == 0) return acc;
+    return fact_tr(n - 1, acc * n);
+}
+</code></pre>
+<ul>
+<li>Observe last statement, with recursive call<ul>
+<li>Once you are ready to perform your next recursive step...</li>
+<li>You don't need the current <em>stack frame</em> any more!</li>
 </ul>
 </li>
-<li>Advantage<ul>
-<li>Once you are ready to perform your next recursive step, you don't need the current <em>stack frame</em> any more!</li>
 <li><strong>Optimization</strong>: <em>reuse the current stack frame</em> for the next recursive step</li>
-</ul>
-</li>
 </ul></article>
  
 </slide>
@@ -693,11 +715,8 @@ Prelude&gt; applyTwice (3:) [1]
 [3,3,1]
 </code></pre>
 <ul>
-<li>The awesomeness and usefulness of partial application is evident<ul>
-<li>Our function requires us to pass it a function that takes only one parameter</li>
-<li>We can just partially apply a function to the point where it takes only one parameter and then pass it</li>
-</ul>
-</li>
+<li>Our f. requires us to pass it a f. that takes only one param</li>
+<li>We can just partially apply a f. to the point where it takes only one param and then pass it</li>
 </ul></article>
  
 </slide>
@@ -917,14 +936,16 @@ largestDivisible = head (filter p [100000,99999..])
 <slide  >
   
     <hgroup>
-      <h2>Exercise</h2>
+      <h2>Ex.: Odd squares</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>Sum of all odd squares that are smaller than 10,000</li>
 <li>Laziness: map over and filter an infinite list</li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p>166650</p></article>
  
 </slide>
 
@@ -951,16 +972,22 @@ collatz n
  
 </slide>
 
-<slide  >
+<slide class="large-figure" >
   
     <hgroup>
-      <h2>Exercise</h2>
+      <h2>Ex.: Collatz</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li>For all starting numbers between 1 and 100, how many chains have a length greater than 15?</li>
-</ul></article>
+      <figure>
+        <img src="images/fun/collatz-xkcd.png">
+        
+      </figure><ul>
+<li>For all starting numbers between 1 and 100...</li>
+<li>How many Collatz chains have a length greater than 15?</li>
+</ul>
+<blockquote></blockquote>
+<p>66</p></article>
  
 </slide>
 
