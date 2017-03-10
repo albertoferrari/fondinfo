@@ -443,7 +443,7 @@ Prelude&gt; fact_tr 4 1
 </code></pre>
 <ul>
 <li>Observe last statement, with recursive call<ul>
-<li>Once you are ready to perform your next recursive step...</li>
+<li>Once ready to perform the next recursive step...</li>
 <li>You don't need the current <em>stack frame</em> any more!</li>
 </ul>
 </li>
@@ -513,15 +513,19 @@ reverse' (x:xs) = reverse' xs ++ [x]
     <article >
       <ul>
 <li>Apparently... the <code>max</code> function takes two <code>Ord</code> parameters and returns the one that's bigger</li>
-<li>In reality, <code>max 4 5</code> first creates a function that takes a parameter and returns either 4 or that parameter, depending on which is bigger</li>
-<li>Then, 5 is applied to that function and that function produces our desired result</li>
-<li>The following two calls are equivalent:</li>
+<li>In reality, the following two calls are equivalent:</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; max 4 5
 5
 Prelude&gt; (max 4) 5
 5
 </code></pre>
+<ul>
+<li><code>max 4 5</code> first creates a f. that takes a param</li>
+<li>Returns either 4 or that param, depending on which is bigger</li>
+<li>Then, 5 is applied and that f. produces our desired result</li>
+<li></li>
+</ul>
 <blockquote></blockquote>
 <p>The space is like an operator, for function application, which has the highest precedence</p></article>
  

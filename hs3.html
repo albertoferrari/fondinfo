@@ -1,0 +1,1852 @@
+<!--
+Google IO 2012 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahe <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Haskell</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/tomamic.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+<slide class="title-slide segue nobackground">
+  <aside class="gdbar"><img src="images/logo.png"></aside>
+  <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+  <h1 data-config-title><!-- populated from slide_config.json --></h1>
+  <figure><img src="images/fun/haskell-logo.png"></figure>
+  <hgroup>
+    <h2>Functional programming</h2>
+    <p>Michele Tomaiuolo<br>Ingegneria dell'Informazione, UniPR</p>
+  </hgroup>
+</slide>
+
+
+<slide  >
+  
+    <hgroup>
+      <h2>Making our own modules</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Start by creating a file called <code>Geometry.hs</code></li>
+<li>A module exports functions, to be imported elsewhere<ul>
+<li>It can define other f.s, to be be used only internally</li>
+</ul>
+</li>
+<li>At the beginning of a module, it specifies its <em>name</em> and the <em>functions</em> it exports<ul>
+<li>Ex.: <code>Geometry</code> module in a file called <code>Geometry.hs</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>module Geometry
+( sphereVolume
+, sphereArea
+, cubeVolume
+, cubeArea
+, cuboidArea
+, cuboidVolume
+) where
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Module functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>sphereVolume :: Float -&gt; Float
+sphereVolume radius = (4.0 / 3.0) * pi * (radius ^ 3)
+sphereArea :: Float -&gt; Float
+sphereArea radius = 4 * pi * (radius ^ 2)
+cubeVolume :: Float -&gt; Float
+cubeVolume side = cuboidVolume side side side
+cubeArea :: Float -&gt; Float
+cubeArea side = cuboidArea side side side
+cuboidVolume :: Float -&gt; Float -&gt; Float -&gt; Float
+cuboidVolume a b c = rectangleArea a b * c
+cuboidArea :: Float -&gt; Float -&gt; Float -&gt; Float
+cuboidArea a b c = rectangleArea a b * 2
+                   + rectangleArea a c * 2
+                   + rectangleArea c b * 2
+rectangleArea :: Float -&gt; Float -&gt; Float
+rectangleArea a b = a * b  -- helper f.
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Hierarchical modules</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Folder called <code>Geometry</code><ul>
+<li>In it, three files: <code>Sphere.hs, Cuboid.hs, and Cube.hs</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>-- Cuboid.hs
+module Geometry.Cuboid
+( volume
+, area
+) where
+volume :: Float -&gt; Float -&gt; Float -&gt; Float
+volume a b c = rectangleArea a b * c
+area :: Float -&gt; Float -&gt; Float -&gt; Float
+area a b c = rectangleArea a b * 2
+             + rectangleArea a c * 2
+             + rectangleArea c b * 2
+rectangleArea :: Float -&gt; Float -&gt; Float
+rectangleArea a b = a * b
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Qualified importing</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>-- Cube.hs
+module Geometry.Cube
+( volume
+, area
+) where
+import qualified Geometry.Cuboid as Cuboid
+volume :: Float -&gt; Float
+volume side = Cuboid.volume side side side
+area :: Float -&gt; Float
+area side = Cuboid.area side side side
+</code></pre></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Making types</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Algebraic data types</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>We've run into a lot of data types: <code>Bool, Int, Char</code>...</li>
+<li>How do we make our own?</li>
+<li>One way is to use the <code>data</code> keyword to define a <em>type</em><ul>
+<li><em>Type name</em> and <em>value constructors</em>: capital cased</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>data Bool = False | True  -- stdlib
+</code></pre>
+<ul>
+<li>Make our own type to represent a shape</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>data Shape = Circle Float Float Float
+             | Rectangle Float Float Float Float
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Value constructors</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Value constructors are f.s<ul>
+<li>They return a value of a data type</li>
+<li>Fields are actually params</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t Circle
+Circle :: Float -&gt; Float -&gt; Float -&gt; Shape
+Prelude&gt; :t Rectangle
+Rectangle :: Float -&gt; Float -&gt; Float -&gt; Float -&gt; Shape
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Functions on datatypes</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>F. that takes a shape and returns its surface<ul>
+<li><code>Circle</code> is not a type, <code>Shape</code> is</li>
+<li>We can pattern match against constructors</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>surface :: Shape -&gt; Float
+surface (Circle _ _ r) = pi * r ^ 2
+surface (Rectangle x1 y1 x2 y2)
+        = (abs $ x2 - x1) * (abs $ y2 - y1)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; surface $ Circle 10 20 10
+314.15927
+Prelude&gt; surface $ Rectangle 0 0 100 100
+10000.0
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Show typeclass</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Error if we try to just print out <code>Circle 10 20 5</code><ul>
+<li>Haskell doesn't know how to display our data type as a string (yet)</li>
+<li>Make our <code>Shape</code> type part of the <code>Show</code> typeclass</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>data Shape = Circle Float Float Float
+             | Rectangle Float Float Float Float
+             deriving (Show)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; Circle 10 20 5
+Circle 10.0 20.0 5.0
+Prelude&gt; Rectangle 50 230 60 90
+Rectangle 50.0 230.0 60.0 90.0
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Point datatype</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>data Point = Point Float Float deriving (Show)
+data Shape = Circle Point Float |
+             Rectangle Point Point deriving (Show)
+</code></pre>
+<ul>
+<li>Same name for the data type and the value constructor<ul>
+<li>Idiomatic if there's only one value constructor</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>surface :: Shape -&gt; Float
+surface (Circle _ r) = pi * r ^ 2
+surface (Rectangle (Point x1 y1) (Point x2 y2))
+        = (abs $ x2 - x1) * (abs $ y2 - y1)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; surface (Rectangle (Point 0 0) (Point 100 100))
+10000.0
+Prelude&gt; surface (Circle (Point 0 0) 24)
+1809.5574
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Nudging a shape</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>F. that takes shape, dx, dy...<ul>
+<li>and returns a <strong>new shape</strong>, located somewhere</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>nudge :: Shape -&gt; Float -&gt; Float -&gt; Shape
+nudge (Circle (Point x y) r) a b = Circle (Point (x+a) (y+b)) r
+nudge (Rectangle (Point x1 y1) (Point x2 y2)) a b
+      = Rectangle (Point (x1+a) (y1+b)) (Point (x2+a) (y2+b))
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; nudge (Circle (Point 34 34) 10) 5 10
+Circle (Point 39.0 44.0) 10.0
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Shapes at the origin</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>baseCircle :: Float -&gt; Shape
+baseCircle r = Circle (Point 0 0) r
+
+baseRect :: Float -&gt; Float -&gt; Shape
+baseRect width height = Rectangle (Point 0 0) (Point width height)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; nudge (baseRect 40 100) 60 23
+Rectangle (Point 60.0 23.0) (Point 100.0 123.0)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Shapes in a module</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>module Shapes
+( Point(..)
+, Shape(..)
+, surface
+, nudge
+, baseCircle
+, baseRect
+) where
+</code></pre>
+<ul>
+<li><code>Shape(..)</code> exports all the value constructors for <code>Shape</code><ul>
+<li>Same as writing <code>Shape (Rectangle, Circle)</code></li>
+</ul>
+</li>
+<li><code>Shape</code> does not export any value constructor<ul>
+<li>Use auxilliary functions <code>baseCircle</code> and <code>baseRect</code></li>
+<li>Makes data types more abstract, hides their implementation</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Record syntax</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Create a data type that describes a person<ul>
+<li>first name, last name, age, height, phone number, and favorite ice-cream flavor</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>data Person = Person String String Int Float
+                     String String deriving (Show)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let guy = Person "Buddy" "Finklestein" 43 184.2
+                          "526-2928" "Chocolate"
+Prelude&gt; guy
+Person "Buddy" "Finklestein" 43 184.2 "526-2928" "Chocolate"
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Accessing fields</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>firstName :: Person -&gt; String
+firstName (Person firstname _ _ _ _ _) = firstname
+lastName :: Person -&gt; String
+lastName (Person _ lastname _ _ _ _) = lastname
+age :: Person -&gt; Int
+age (Person _ _ age _ _ _) = age
+height :: Person -&gt; Float
+height (Person _ _ _ height _ _) = height
+phoneNumber :: Person -&gt; String
+phoneNumber (Person _ _ _ _ number _) = number
+flavor :: Person -&gt; String
+flavor (Person _ _ _ _ _ flavor) = flavor
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Record syntax</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Haskell automatically create accessor f.s</li>
+<li>Deriving <code>Show</code>, output is more complete</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>data Person = Person { firstName :: String
+                     , lastName :: String
+                     , age :: Int
+                     , height :: Float
+                     , phoneNumber :: String
+                     , flavor :: String
+                     } deriving (Show)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t flavor
+flavor :: Person -&gt; String
+Prelude&gt; :t firstName
+firstName :: Person -&gt; String
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Type parameters</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Type constructors take types as params to produce new types<ul>
+<li>Similar to templates in C++</li>
+<li>Ex.: <code>Maybe</code> is defined with a type parameter (<code>a</code>)</li>
+<li>Ex.: list type takes a param to produce a concrete type</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>data Maybe a = Nothing | Just a
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t Just 84
+Just 84 :: (Num t) =&gt; Maybe t
+Prelude&gt; :t Nothing
+Nothing :: Maybe a
+</code></pre>
+<ul>
+<li>The type of <code>Nothing</code> is polymorphic<ul>
+<li><code>Maybe a</code> can act like a <code>Maybe Int</code> if it has to</li>
+<li>Similarly, the type of the empty list is <code>[a]</code>, it can act like a list of anything</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Derived instances</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Typeclass: interface that defines some behavior<ul>
+<li>Type as instance, if it supports that behavior</li>
+<li>Ex.: <code>==</code> and <code>/=</code> act as interface for <code>Eq</code></li>
+</ul>
+</li>
+<li>Haskell can <em>automatically</em> make our type an instance of:<ul>
+<li><code>Eq, Ord, Enum, Bounded, Show, Read</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>data Person = Person { firstName :: String
+                     , lastName :: String
+                     , age :: Int
+                     } deriving (Eq)
+</code></pre>
+<ul>
+<li>Haskell will see if<ul>
+<li>The value constructors match (only one here)</li>
+<li>Each pair of fields match, using <code>==</code> (fields are <code>Eq</code>)</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Show and Read types</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>data Person = Person { firstName :: String
+                     , lastName :: String
+                     , age :: Int
+                     } deriving (Eq, Show, Read)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let mikeD = Person {firstName = "Michael",
+                     lastName = "Diamond", age = 43}
+Prelude&gt; "mikeD is: " ++ show mikeD
+"mikeD is: Person {firstName = \"Michael\",
+                   lastName = \"Diamond\", age = 43}"
+Prelude&gt; read "Person {firstName =\"Michael\",
+               lastName =\"Diamond\", age = 43}" :: Person
+Person {firstName = "Michael", lastName = "Diamond", age = 43}
+Prelude&gt; read "Person {firstName =\"Michael\",
+               lastName =\"Diamond\", age = 43}" == mikeD
+True
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Enum and Bound types</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Use algebraic data types to make enumerations</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>data Day = Monday | Tuesday | Wednesday | Thursday
+           | Friday | Saturday | Sunday
+           deriving (Eq, Ord, Show, Read, Bounded, Enum)
+</code></pre>
+<ul>
+<li>...</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Type synonyms</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Type synonyms allow giving some types different names<ul>
+<li>The <code>[Char]</code> and <code>String</code> types are equivalent and interchangeable</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>type String = [Char]
+</code></pre>
+<ul>
+<li>Create type synonyms for <code>String</code>, to convey more information about data</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>-- inPhoneBook:: String -&gt; String -&gt; [(String,String)] -&gt; Bool
+inPhoneBook :: Name -&gt; PhoneNumber -&gt; PhoneBook -&gt; Bool
+inPhoneBook name pnumber pbook = (name,pnumber) `elem` pbook
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Parameterized synonyms</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Ex.: an association list type, but any type as keys and values</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>type AssocList k v = [(k,v)]
+</code></pre>
+<ul>
+<li><code>AssocList</code> is a <strong>type constructor</strong><ul>
+<li>It takes two types and produces a concrete type</li>
+<li><code>AssocList Int String</code>, for instance</li>
+</ul>
+</li>
+<li>F. that gets the value by a key in an association list:<ul>
+<li><code>(Eq k) =&gt; k -&gt; AssocList k v -&gt; Maybe v</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Either</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Encapsulate a value of one type or another</li>
+<li>Two value constructors<ul>
+<li>If <code>Left</code> is used, then its contents are of type <code>a</code></li>
+<li>If <code>Right</code> is used, then its contents are of type <code>b</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>data Either a b = Left a | Right b
+                  deriving (Eq, Ord, Read, Show)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; Right 20
+Right 20
+Prelude&gt; Left "w00t"
+Left "w00t"
+Prelude&gt; :t Right 'a'
+Right 'a' :: Either a Char
+Prelude&gt; :t Left True
+Left True :: Either Bool b
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Use of Either</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>Maybe</code> can represent a result that could have either failed or not<ul>
+<li><code>Nothing</code> doesn't convey details about failure</li>
+</ul>
+</li>
+<li><code>Either a b</code>, when interested in how some function failed or why<ul>
+<li>Errors use the <code>Left</code> value constructor</li>
+<li>While results use <code>Right</code></li>
+<li><code>a</code> is a type that tells something about failure</li>
+<li><code>b</code> type of a successful computation</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Recursive data structures</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>One value of some type contains values of that type...<ul>
+<li>We can make types whose constructors have fields...</li>
+<li>that are of the same type</li>
+</ul>
+</li>
+<li>List <code>[4,5]</code> same as <code>4:(5:[])</code><ul>
+<li>First <code>:</code> has an element on its left side...</li>
+<li>and a list (<code>5:[]</code>) on its right side</li>
+</ul>
+</li>
+<li>A list can be:<ul>
+<li>An empty list, or</li>
+<li>An element joined together with a <code>:</code> with another list</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>List definition</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>data List a = Empty
+              | Cons a (List a)
+              deriving (Show, Read, Eq, Ord)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>data List a = Empty
+              | Cons { listHead :: a, listTail :: List a}
+              deriving (Show, Read, Eq, Ord)
+</code></pre>
+<ul>
+<li><code>Cons</code> constructor represents <code>:</code><ul>
+<li>In lists, <code>:</code> is actually a constructor</li>
+<li>It takes a value and another list and returns a list</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; Empty
+Empty
+Prelude&gt; 4 `Cons` (5 `Cons` Empty)
+Cons 4 (Cons 5 Empty)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Defining operators</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>F.s automatically infix if comprised of only special chars</li>
+<li>Constructors are f.s that return a data type</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>infixr 5 :-:
+data List a = Empty | a :-: (List a) deriving (Show, Read, Eq, Ord)
+</code></pre>
+<ul>
+<li><em>Fixity</em> declaration (opt.): right associative, medium priority</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; 3 :-: 4 :-: 5 :-: Empty
+(:-:) 3 ((:-:) 4 ((:-:) 5 Empty))
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>List concat</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Similarly to how <code>++</code> is defined for normal lists</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>infixr 5  .++
+(.++) :: List a -&gt; List a -&gt; List a
+Empty .++ ys = ys
+(x :-: xs) .++ ys = x :-: (xs .++ ys)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let a = 3 :-: 4 :-: 5 :-: Empty
+Prelude&gt; let b = 6 :-: 7 :-: Empty
+Prelude&gt; a .++ b
+(:-:) 3 ((:-:) 4 ((:-:) 5 ((:-:) 6 ((:-:) 7 Empty))))
+</code></pre>
+<ul>
+<li>Pattern matching works (only) on constructors<ul>
+<li>Match on the <code>:-:</code> and <code>:</code> constructors</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Binary search tree</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>A tree is either an empty tree, or...</li>
+<li>it's an element that contains some value and two trees<ul>
+<li>Elements at the left sub-tree are smaller than the value</li>
+<li>Elements in the right sub-tree are bigger</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>data Tree a = EmptyTree
+              | Node a (Tree a) (Tree a)
+              deriving (Show, Read, Eq)
+</code></pre>
+<ul>
+<li>Instead of manually building a tree...</li>
+<li>Make a f. that takes a tree and an element to insert</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Inserting an element</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>In C etc., we modify the pointers and values inside the tree</li>
+<li>In Haskell, the insertion function returns a <strong>new tree</strong><ul>
+<li><code>a -&gt; Tree a - &gt; Tree a</code></li>
+</ul>
+</li>
+<li>It seems inefficient, but most of the structure is shared</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>singleton :: a -&gt; Tree a    -- just a shortcut f.
+singleton x = Node x EmptyTree EmptyTree
+
+treeInsert :: (Ord a) =&gt; a -&gt; Tree a -&gt; Tree a
+treeInsert x EmptyTree = singleton x
+treeInsert x (Node a left right)
+    | x == a = Node x left right
+    | x &lt; a  = Node a (treeInsert x left) right
+    | x &gt; a  = Node a left (treeInsert x right)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Folding into a tree</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Folding: traversing a list and returning some value</li>
+<li>Use a fold to build up a tree from a list</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let nums = [8,6,4,1,7,3,5]
+Prelude&gt; let numsTree = foldr treeInsert EmptyTree nums
+Prelude&gt; numsTree
+Node 5 (Node 3 ...
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Checking for membership</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>treeElem :: (Ord a) =&gt; a -&gt; Tree a -&gt; Bool
+treeElem x EmptyTree = False
+treeElem x (Node a left right)
+    | x == a = True
+    | x &lt; a  = treeElem x left
+    | x &gt; a  = treeElem x right
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; 8 `treeElem` numsTree
+True
+Prelude&gt; 100 `treeElem` numsTree
+False
+</code></pre></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Making typeclasses</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Defining a typeclass</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>class Eq a where    -- stdlib
+    (==) :: a -&gt; a -&gt; Bool
+    (/=) :: a -&gt; a -&gt; Bool
+    x == y = not (x /= y)
+    x /= y = not (x == y)
+</code></pre>
+<ul>
+<li>Keyword <strong><code>class</code></strong> for defining a new typeclass<ul>
+<li><code>a</code> is the type variable</li>
+</ul>
+</li>
+<li>Then, we define several f.s<ul>
+<li>Just specify the type declarations</li>
+<li>It's not mandatory to implement the function bodies</li>
+</ul>
+</li>
+<li>Here, f.s are mutually recursive<ul>
+<li>Two <code>Eq</code> are equal if they are not different</li>
+<li>They are different if they are not equal</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Creating instances</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>data TrafficLight = Red | Yellow | Green
+</code></pre>
+<ul>
+<li>Let's write up an <em>instance</em> by hand</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>instance Eq TrafficLight where
+    Red == Red = True
+    Green == Green = True
+    Yellow == Yellow = True
+    _ == _ = False
+</code></pre>
+<ul>
+<li>Because <code>==</code> was defined in terms of <code>/=</code> and vice versa in the class declaration...</li>
+<li>We only had to overwrite one of them in the instance declaration</li>
+<li>That's called the <em>minimal complete definition</em> for the typeclass</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Show instance</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Satisfy the minimal complete definition for Show...<ul>
+<li>Implement its <em>show</em> function</li>
+<li>It takes a value and turns it into a string</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>instance Show TrafficLight where
+    show Red = "Red light"
+    show Yellow = "Yellow light"
+    show Green = "Green light"
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; Red == Red
+True
+Prelude&gt; Red == Yellow
+False
+Prelude&gt; Red `elem` [Red, Yellow, Green]
+True
+Prelude&gt; [Red, Yellow, Green]
+[Red light,Yellow light,Green light]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Subclasses</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>You can also make typeclasses that are <em>subclasses</em> of other typeclasses</li>
+<li>Ex.: class declaration for <code>Num</code></li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>class (Eq a) =&gt; Num a where
+   ...
+</code></pre>
+<ul>
+<li>We have to make a type an instance of <code>Eq</code>...</li>
+<li>Before we can make it an instance of <code>Num</code></li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Info about types</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>The <code>a</code> from <code>class Eq a</code> will be replaced with a real type, when you make an instance</li>
+<li>So try mentally putting your type into the function type declarations as well</li>
+<li>To see what the instances of a typeclass are, just do <code>:info YourTypeClass</code> in GHCI<ul>
+<li><code>:info</code> works for types, type constructors, functions</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Functor typeclass</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>The <code>Functor</code> typeclass is basically for things that can be mapped over<ul>
+<li>(Yes, <em>list</em> type is part of <code>Functor</code>)</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>class Functor f where
+    fmap :: (a -&gt; b) -&gt; f a -&gt; f b
+</code></pre>
+<ul>
+<li>It defines one function, <code>fmap</code>, no default implementation</li>
+<li>Type: <code>fmap</code> takes a f. from one type <code>a</code> to another <code>b</code> and a <em>functor</em> applied to <code>a</code> and returns the functor applied to <code>b</code></li>
+<li><code>f</code> not a concrete type<ul>
+<li>But a type constructor that takes one type param</li>
+<li>Ex.: <code>Maybe Int</code> concrete type, <code>Maybe</code> type constructor</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>List as a functor</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>map</code> takes a f. from type <code>a</code> to <code>b</code>, a list of <code>a</code>, returns a list of <code>b</code><ul>
+<li><code>map</code> is just a <code>fmap</code> that works only on lists</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>map :: (a -&gt; b) -&gt; [a] -&gt; [b]
+
+instance Functor [] where
+    fmap = map
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; fmap (*2) [1..3]  -- same as map
+[2,4,6]
+</code></pre>
+<ul>
+<li>We didn't write <code>instance Functor [a]</code>, because <code>f</code> has to be a type constructor that takes one type<ul>
+<li><code>[a]</code> is already a concrete type</li>
+<li><code>[]</code> is a type constructor that takes one type</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Maybe as a functor</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Types that can act <em>like a box</em> can be functors</li>
+<li>Here's how <code>Maybe</code> is a functor</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>instance Functor Maybe where
+    fmap f (Just x) = Just (f x)
+    fmap f Nothing = Nothing
+</code></pre>
+<ul>
+<li>We wrote <code>Functor Maybe</code> instead of <code>Functor (Maybe m)</code></li>
+<li>Functor wants a type constructor that takes one type and not a concrete type</li>
+<li>Mentally replace each <code>f</code> with <code>Maybe</code>, or <code>Maybe m</code> (nonsense)<ul>
+<li><code>(a -&gt; b) -&gt; Maybe a -&gt; Maybe b</code></li>
+<li><code>(a -&gt; b) -&gt; Maybe m a -&gt; Maybe m b</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Mapping over a Maybe</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>If it's an empty value of <code>Nothing</code>, then just return a <code>Nothing</code></li>
+<li>If it's a single value packed up in a <code>Just</code>, then we apply the function on the contents of the <code>Just</code></li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; fmap (++ " HEY GUYS IM INSIDE THE JUST") (Just "Something serious.")
+Just "Something serious. HEY GUYS IM INSIDE THE JUST"
+Prelude&gt; fmap (++ " HEY GUYS IM INSIDE THE JUST") Nothing
+Nothing
+Prelude&gt; fmap (*2) (Just 200)
+Just 400
+Prelude&gt; fmap (*2) Nothing
+Nothing
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Tree as a functor</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>instance Functor Tree where
+    fmap f EmptyTree = EmptyTree
+    fmap f (Node x leftsub rightsub)
+           = Node (f x) (fmap f leftsub) (fmap f rightsub)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; fmap (*4) (foldr treeInsert EmptyTree [5,7,3,2,1,7])
+Node 28 (Node 4 EmptyTree (Node 8 EmptyTree ...
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Either as a functor</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>The <code>Functor</code> typeclass wants a type constructor that takes only one type parameter but <code>Either</code> takes two</li>
+<li>Partial application: <code>Either a</code> is a type constructor that takes one parameter</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>instance Functor (Either a) where
+    fmap f (Right x) = Right (f x)
+    fmap f (Left x) = Left x
+</code></pre>
+<ul>
+<li>We mapped in the case of a <code>Right</code> value constructor, but we didn't in the case of a <code>Left</code><ul>
+<li>To map one f. over both of them, <code>a</code> and <code>b</code> same type</li>
+<li>The first parameter <code>a</code> (for <code>Left</code>) has to remain the same</li>
+<li>Left part: ~ empty box, with an error message written on the side</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>The impure</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Input and output</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Imperative languages: series of steps to execute</li>
+<li>Functional programming: defining what stuff is</li>
+<li>Haskell is a purely functional language<ul>
+<li>A f. can't change some state, or produce side-effects</li>
+<li>It gives back a result based on the parameters we gave it</li>
+<li>If it is called twice with the same parameters, it returns the same result</li>
+</ul>
+</li>
+<li>I/O ops require changing some state<ul>
+<li>Haskell separates the part of the program that is pure...</li>
+<li>from the impure, which does all the dirty work...</li>
+<li>like talking to the keyboard and the screen</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Hello, world!</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Up until now, we've always loaded our functions into GHCI to test them</li>
+<li>Let's write our first Haskell program (<code>helloworld.hs</code>)</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>main = putStrLn "hello, world"
+</code></pre>
+<ul>
+<li>And now let's build and run it</li>
+</ul>
+<pre class="prettyprint" data-lang="shell"><code>$ ghc --make helloworld
+[1 of 1] Compiling Main             ( helloworld.hs, helloworld.o )
+Linking helloworld ...
+$ ./helloworld
+hello, world
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>I/O actions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t putStrLn
+putStrLn :: String -&gt; IO ()
+Prelude&gt; :t putStrLn "hello, world"
+putStrLn "hello, world" :: IO ()
+</code></pre>
+<ul>
+<li><code>putStrLn</code> takes a string and returns an <em>I/O action</em> that has a result type of <code>()</code> (i.e., the empty tuple, also know as <em>unit</em>)</li>
+<li><em>I/O action</em>: when performed, it carries out an action with a side-effect<ul>
+<li>e.g., reading from the input or printing stuff to the screen</li>
+<li>and will also contain some return value</li>
+</ul>
+</li>
+<li>When will an I/O action be performed?<ul>
+<li>When we give it a name of <code>main</code> and run our program</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Sequence of actions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>One I/O action seems limiting, but...</li>
+<li>Use <strong><code>do</code></strong> syntax to glue together several I/O actions into one</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>main = do
+    putStrLn "Hello, what's your name?"
+    name &lt;- getLine
+    putStrLn ("Hey " ++ name ++ ", you rock!")
+</code></pre>
+<ul>
+<li>This reads like an imperative program<ul>
+<li>We laid out a series of steps into a single <code>do</code></li>
+<li>Each step is an I/O action</li>
+<li>The whole <code>do</code> has type <code>IO ()</code>, same as last I/O action inside</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Getting data</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t getLine
+getLine :: IO String
+</code></pre>
+<ul>
+<li>What's the meaning of "<code>name &lt;- getLine</code>" then?<ul>
+<li>Perform the I/O action <code>getLine</code> (get a line from <em>stdin</em>)</li>
+<li>Then bind its result value to <code>name</code></li>
+</ul>
+</li>
+<li>I/O action ~ <em>box</em> that:<ul>
+<li>Is sent into the real, impure world</li>
+<li>Do something there</li>
+<li>Maybe bring back some data</li>
+<li>In particular, <code>getLine</code> contains a <code>String</code></li>
+</ul>
+</li>
+<li>Construct <code>&lt;-</code>: only way to open the box and get its data<ul>
+<li>This can be done only inside another I/O action</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>I/O results</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Take a look at this piece of code. Is it valid?</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>nameTag = "Hello, my name is " ++ getLine
+</code></pre>
+<ul>
+<li><code>++</code> requires both its params to be lists over the same type<ul>
+<li>The left parameter has a type of <code>String</code> (or <code>[Char]</code>)</li>
+<li><code>getLine</code> has a type of <code>IO String</code></li>
+<li>You can't concatenate a string and an I/O action</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Binding</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>name = getLine
+</code></pre>
+<ul>
+<li>This code doesn't read text from the input and bind it to a name<ul>
+<li>It gives the getLine I/O action a different name</li>
+</ul>
+</li>
+<li>To get the value out of an I/O action<ul>
+<li>Perform the action inside another I/O action by binding it to a name with <code>&lt;-</code></li>
+<li>Deal with impure data, in impure env</li>
+<li>Keep the I/O parts of your code as small as possible!</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lines with reversed words</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Continuously read a line and print it out with the words reversed, until reading a blank line</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>main = do
+    line &lt;- getLine
+    if null line
+        then return ()
+        else do
+            putStrLn $ reverseWords line
+            main
+reverseWords :: String -&gt; String
+reverseWords = unwords . map reverse . words
+</code></pre>
+<ul>
+<li>Protip: <code>runhaskell</code> runs a program on the fly<ul>
+<li><code>runhaskell helloworld.hs</code></li>
+</ul>
+</li>
+<li>The <code>words</code>, <code>unwords</code> f.s are in the stdlib</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The return action</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>return</code> in Haskell is different from other languages<ul>
+<li>It doesn't stop the execution of the I/O <code>do</code> block</li>
+<li>It just makes an I/O action out of a pure value</li>
+</ul>
+</li>
+<li>Mostly use return to create an I/O action that either:<ul>
+<li>Doesn't do anything, or</li>
+<li>Always contains the desired result (we put it at the end)</li>
+</ul>
+</li>
+<li>We can use <code>return</code> in combination with <code>&lt;-</code><ul>
+<li>In fact, they're sort of opposite</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>main = do
+    a &lt;- return "hell"     -- hey, just use let!
+    b &lt;- return "yeah!"    -- hey, just use let!
+    putStrLn $ a ++ " " ++ b
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>putChar e putStr</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>putChar</code> takes a char and returns an I/O action to print it</li>
+<li><code>putStr</code> is much like <code>putStrLn</code>, without a new line<ul>
+<li>Defined recursively with the help of <code>putChar</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>putStr :: String -&gt; IO ()
+putStr [] = return ()
+putStr (x:xs) = do
+    putChar x
+    putStr xs
+</code></pre>
+<ul>
+<li><code>print</code> prints an instance of <code>Show</code>; it's basically <code>putStrLn . show</code></li>
+<li><code>getChar</code> reads a <code>Char</code> from the input (with buffering)</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The when action</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Like a control flow statement, but actually a normal f.</li>
+<li>It takes a boolean value and an I/O action<ul>
+<li>If value is True, it returns the same I/O action</li>
+<li>If it's False, it returns <code>return ()</code> -- void action</li>
+</ul>
+</li>
+<li>Useful for encapsulating the <code>if ... else return ()</code> pattern</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>import Control.Monad
+
+main = do
+    c &lt;- getChar
+    when (c /= ' ') $ do
+        putChar c
+        main
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The sequence action</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>It takes a list of I/O actions and returns an I/O action to perform theme in sequence</li>
+<li>Action result: list of the results</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>sequence :: [IO a] -&gt; IO [a]
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>main = do
+    rs &lt;- sequence [getLine, getLine, getLine]
+    print rs
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>main = do
+    a &lt;- getLine
+    b &lt;- getLine
+    c &lt;- getLine
+    print [a,b,c]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The sequence action</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Useful when mapping f.s like <code>print</code> or <code>putStrLn</code> over lists</li>
+<li><code>map print [1,2,3,4]</code> creates a list of I/O actions</li>
+<li><code>sequence</code> transforms that list into an I/O action</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; sequence (map print [1,2,3,4,5])
+1
+2
+3
+4
+5
+[(),(),(),(),()]
+</code></pre>
+<ul>
+<li>What's with the [(),(),(),(),()] at the end?</li>
+<li>When we evaluate an I/O action in GHCI, it's performed, and...</li>
+<li>Then its result is printed out, unless it's <code>()</code></li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The mapM action</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Mapping a f. that returns an I/O action over a list and then sequencing: very common</li>
+<li><code>mapM</code> takes a f. and a list, maps the function over the list, then sequences it</li>
+<li><code>mapM_</code> does the same, only it throws away the result</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; mapM print [1,2,3]
+1
+2
+3
+[(),(),()]
+Prelude&gt; mapM_ print [1,2,3]
+1
+2
+3
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The forever action</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>forever</code> takes an I/O action <code>act</code> and...</li>
+<li>Returns an I/O action that just repeats <code>act</code> forever</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>import Control.Monad
+import Data.Char
+
+main = forever $ do
+    putStr "Give me some input: "
+    l &lt;- getLine
+    putStrLn $ map toUpper l
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The forM action</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>forM</code> is like <code>mapM</code>, with switched params</li>
+<li>Useful in combination with lambdas and <code>do</code> notation</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>import Control.Monad
+
+main = do
+    colors &lt;- forM [1,2,3,4] (\a -&gt; do
+        putStrLn $ "Which color do you associate with the number " ++ show a ++ "?"
+        color &lt;- getLine
+        return color)
+    putStrLn "The colors that you associate with 1, 2, 3 and 4 are: "
+    mapM putStrLn colors
+</code></pre>
+<ul>
+<li>Simply <code>getLine</code>, which already contains same data<ul>
+<li><code>color &lt;- getLine; return color;</code> is just unpacking and repackaging the result</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Files and streams</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>[Just few pointers]</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Randomness</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>The <code>System.Random</code> module has all needed f.s, including <code>random</code></li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>random :: (RandomGen g, Random a) =&gt; g -&gt; (a, g)
+</code></pre>
+<ul>
+<li>
+<p>It takes a random generator and returns a random value and a new random generator</p>
+<ul>
+<li><code>RandomGen</code>: types acting as sources of randomness</li>
+<li><code>Random</code>: types representing random values</li>
+</ul>
+</li>
+<li>
+<p>Why does it also return a new generator as well as a random value?</p>
+</li>
+<li>Referential transparency: calling a f. with same params twice, produces same result</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Rnd generators</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>StdGen</code>: instance of <code>RandomGen</code></li>
+<li><code>mkStdGen</code> f., to manually make a random generator</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>mkStdGen :: Int -&gt; StdGen
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; random (mkStdGen 100) :: (Int, StdGen)
+(-1352021624,651872571 1655838864)
+Prelude&gt; random (mkStdGen 100) :: (Int, StdGen)
+(-1352021624,651872571 1655838864)
+</code></pre>
+<ul>
+<li>Same result for the parameters</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Tossing a coin</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Represent a coin with a simple <code>Bool</code>: <code>True</code> is tails, <code>False</code> is heads</li>
+<li>Call <code>random</code> with a generator, get a coin and a new generator</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>threeCoins :: StdGen -&gt; (Bool, Bool, Bool)
+threeCoins gen =
+    let (firstCoin, newGen) = random gen
+        (secondCoin, newGen') = random newGen
+        (thirdCoin, newGen'') = random newGen'
+    in  (firstCoin, secondCoin, thirdCoin)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; threeCoins (mkStdGen 21)
+(True,True,True)
+Prelude&gt; threeCoins (mkStdGen 943)
+(True,False,True)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Multiple random values</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>randoms</code> f. takes a generator and returns an infinite sequence of values</li>
+<li>Generate infinite numbers, can't give the new random generator back</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>randoms :: (RandomGen g, Random a) =&gt; g -&gt; [a]
+randoms gen = let (value, newGen) = random gen in value:randoms' newGen
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; take 5 $ randoms (mkStdGen 11) :: [Int]
+[-1807975507,545074951,-1015194702,-1622477312,-502893664]
+Prelude&gt; take 5 $ randoms (mkStdGen 11) :: [Bool]
+[True,True,True,True,False]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Random in a range</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>randomR :: (RandomGen g, Random a) =&gt; (a, a) -&gt; g -&gt; (a, g)</code></li>
+<li><code>randomRs</code>, stream of random values within a defined range</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; take 10 $ randomRs ('a','z') (mkStdGen 3) :: [Char]
+"ndkxbvmomg"
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Getting a rnd generator</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>getStdGen</code> of type <code>IO StdGen</code></li>
+<li>At program start, it asks the system for a rnd generator and stores that in a so called global generator</li>
+<li>Notice: performing <code>getStdGen</code> twice will ask the system for the same global generator twice<ul>
+<li><code>newStdGen</code> instead updates the global rnd gen and encapsulates another gen as result</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>import System.Random
+
+main = do
+    gen &lt;- getStdGen
+    putStr $ take 20 (randomRs ('a','z') gen)
+
+$ runhaskell random_string.hs
+pybphhzzhuepknbykxhe
+$ runhaskell random_string.hs
+eiqgcxykivpudlsvvjpg
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Guess the number</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>import System.Random
+import Control.Monad(when)
+
+main = do
+    gen &lt;- getStdGen
+    askForNumber gen
+
+askForNumber :: StdGen -&gt; IO ()
+askForNumber gen = do
+    let (randNumber, newGen) = randomR (1,10) gen :: (Int, StdGen)
+    putStr "Which number in the range from 1 to 10 am I thinking of? "
+    numberString &lt;- getLine
+    when (not $ null numberString) $ do
+        let number = read numberString
+        if randNumber == number
+            then putStrLn "You are correct!"
+            else putStrLn $ "Sorry, it was " ++ show randNumber
+        askForNumber newGen
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p>We make a function askForNumber, which takes a random number generator and returns an I/O action that will prompt the user for a number and tell him if he guessed it right. In that function, we first generate a random number and a new generator based on the generator that we got as a parameter and call them randNumber and newGen. Let's say that the number generated was 7. Then we tell the user to guess which number we're thinking of. We perform getLine and bind its result to numberString. When the user enters 7, numberString becomes "7". Next, we use when to check if the string the user entered is an empty string. If it is, an empty I/O action of return () is performed, which effectively ends the program. If it isn't, the action consisting of that do block right there gets performed. We use read on numberString to convert it to a number, so number is now 7.
+Excuse me! If the user gives us some input here that read can't read (like "haha"), our program will crash with an ugly error message. If you don't want your program to crash on erronous input, use reads, which returns an empty list when it fails to read a string. When it succeeds, it returns a singleton list with a tuple that has our desired value as one component and a string with what it didn't consume as the other.</p>
+<p>We check if the number that we entered is equal to the one generated randomly and give the user the appropriate message. And then we call askForNumber recursively, only this time with the new generator that we got, which gives us an I/O action that's just like the one we performed, only it depends on a different generator and we perform it.</p>
+<p>main consists of just getting a random generator from the system and calling askForNumber with it to get the initial action.</p>
+<p>Here's our program in action!</p>
+<pre><code>$ runhaskell guess_the_number.hs
+Which number in the range from 1 to 10 am I thinking of? 4
+Sorry, it was 3
+Which number in the range from 1 to 10 am I thinking of? 10
+You are correct!
+Which number in the range from 1 to 10 am I thinking of? 2
+Sorry, it was 4
+Which number in the range from 1 to 10 am I thinking of? 5
+Sorry, it was 10
+Which number in the range from 1 to 10 am I thinking of?
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>I/O exceptions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>catch :: IO a -&gt; (IOError -&gt; IO a) -&gt; IO a</code><ul>
+<li>It takes two parameters: an I/O action (e.g., open a file) and an *handler</li>
+<li>The handler is invoked if an exception is thrown</li>
+<li>The handler takes an <code>IOError</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>import System.Environment
+import System.IO
+import System.IO.Error
+
+main = toTry `catch` handler
+
+toTry :: IO ()
+toTry = do (fileName:_) &lt;- getArgs
+           contents &lt;- readFile fileName
+           putStrLn $ "The file has " ++ show (length (lines contents)) ++ " lines!"
+
+handler :: IOError -&gt; IO ()
+handler e = putStrLn "Whoops, had some trouble!"
+</code></pre></article>
+ 
+</slide>
+
+
+<slide class="thank-you-slide segue nobackground">
+  <aside class="gdbar right"><img src="images/logo.png"></aside>
+  <article class="flexbox vleft auto-fadein">
+    <h2>&lt;Domande?&gt;</h2>
+  </article>
+  <p class="auto-fadein" data-config-contact>
+    Michele Tomaiuolo
+    <br>
+    Palazzina 1, int. 5708
+    <br>
+    Ingegneria dell'Informazione, UniPR
+    <br>
+    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+  </p>
+</slide>
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>
