@@ -38,124 +38,6 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Making our own modules</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Start by creating a file called <code>Geometry.hs</code></li>
-<li>A module exports functions, to be imported elsewhere<ul>
-<li>It can define other f.s, to be be used only internally</li>
-</ul>
-</li>
-<li>At the beginning of a module, it specifies its <em>name</em> and the <em>functions</em> it exports<ul>
-<li>Ex.: <code>Geometry</code> module in a file called <code>Geometry.hs</code></li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="haskell"><code>module Geometry
-( sphereVolume
-, sphereArea
-, cubeVolume
-, cubeArea
-, cuboidArea
-, cuboidVolume
-) where
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Module functions</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="haskell"><code>sphereVolume :: Float -&gt; Float
-sphereVolume radius = (4.0 / 3.0) * pi * (radius ^ 3)
-sphereArea :: Float -&gt; Float
-sphereArea radius = 4 * pi * (radius ^ 2)
-cubeVolume :: Float -&gt; Float
-cubeVolume side = cuboidVolume side side side
-cubeArea :: Float -&gt; Float
-cubeArea side = cuboidArea side side side
-cuboidVolume :: Float -&gt; Float -&gt; Float -&gt; Float
-cuboidVolume a b c = rectangleArea a b * c
-cuboidArea :: Float -&gt; Float -&gt; Float -&gt; Float
-cuboidArea a b c = rectangleArea a b * 2
-                   + rectangleArea a c * 2
-                   + rectangleArea c b * 2
-rectangleArea :: Float -&gt; Float -&gt; Float
-rectangleArea a b = a * b  -- helper f.
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Hierarchical modules</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Folder called <code>Geometry</code><ul>
-<li>In it, three files: <code>Sphere.hs, Cuboid.hs, and Cube.hs</code></li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="haskell"><code>-- Cuboid.hs
-module Geometry.Cuboid
-( volume
-, area
-) where
-volume :: Float -&gt; Float -&gt; Float -&gt; Float
-volume a b c = rectangleArea a b * c
-area :: Float -&gt; Float -&gt; Float -&gt; Float
-area a b c = rectangleArea a b * 2
-             + rectangleArea a c * 2
-             + rectangleArea c b * 2
-rectangleArea :: Float -&gt; Float -&gt; Float
-rectangleArea a b = a * b
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Qualified importing</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="haskell"><code>-- Cube.hs
-module Geometry.Cube
-( volume
-, area
-) where
-import qualified Geometry.Cuboid as Cuboid
-volume :: Float -&gt; Float
-volume side = Cuboid.volume side side side
-area :: Float -&gt; Float
-area side = Cuboid.area side side side
-</code></pre></article>
- 
-</slide>
-
-<slide class="segue dark" >
-  
-    <aside class="gdbar"><img src="images/logo.png"></aside>
-    <hgroup class="auto-fadein">
-      <h2>Making types</h2>
-      <h3></h3>
-    </hgroup>
-  
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Algebraic data types</h2>
       <h3></h3>
     </hgroup>
@@ -330,36 +212,6 @@ Rectangle (Point 60.0 23.0) (Point 100.0 123.0)
 <slide  >
   
     <hgroup>
-      <h2>Shapes in a module</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="haskell"><code>module Shapes
-( Point(..)
-, Shape(..)
-, surface
-, nudge
-, baseCircle
-, baseRect
-) where
-</code></pre>
-<ul>
-<li><code>Shape(..)</code> exports all the value constructors for <code>Shape</code><ul>
-<li>Same as writing <code>Shape (Rectangle, Circle)</code></li>
-</ul>
-</li>
-<li><code>Shape</code> does not export any value constructor<ul>
-<li>Use auxilliary functions <code>baseCircle</code> and <code>baseRect</code></li>
-<li>Makes data types more abstract, hides their implementation</li>
-</ul>
-</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Record syntax</h2>
       <h3></h3>
     </hgroup>
@@ -388,18 +240,15 @@ Person "Buddy" "Finklestein" 43 184.2 "526-2928" "Chocolate"
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="haskell"><code>firstName :: Person -&gt; String
-firstName (Person firstname _ _ _ _ _) = firstname
-lastName :: Person -&gt; String
-lastName (Person _ lastname _ _ _ _) = lastname
-age :: Person -&gt; Int
-age (Person _ _ age _ _ _) = age
-height :: Person -&gt; Float
-height (Person _ _ _ height _ _) = height
-phoneNumber :: Person -&gt; String
-phoneNumber (Person _ _ _ _ number _) = number
+      <pre class="prettyprint" data-lang="haskell"><code>firstName   (Person firstname _ _ _ _ _) = firstname
+lastName    (Person _ lastname  _ _ _ _) = lastname
+age         (Person _ _ age       _ _ _) = age
+height      (Person _ _ _ height    _ _) = height
+phoneNumber (Person _ _ _ _ number    _) = number
+flavor      (Person _ _ _ _ _ flavor   ) = flavor
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t flavor
 flavor :: Person -&gt; String
-flavor (Person _ _ _ _ _ flavor) = flavor
 </code></pre></article>
  
 </slide>
@@ -537,9 +386,11 @@ True
            | Friday | Saturday | Sunday
            deriving (Eq, Ord, Show, Read, Bounded, Enum)
 </code></pre>
-<ul>
-<li>...</li>
-</ul></article>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; succ Friday
+Saturday
+Prelude&gt; Friday &gt;= Wednesday
+True
+</code></pre></article>
  
 </slide>
 
@@ -565,32 +416,6 @@ True
 inPhoneBook :: Name -&gt; PhoneNumber -&gt; PhoneBook -&gt; Bool
 inPhoneBook name pnumber pbook = (name,pnumber) `elem` pbook
 </code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Parameterized synonyms</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Ex.: an association list type, but any type as keys and values</li>
-</ul>
-<pre class="prettyprint" data-lang="haskell"><code>type AssocList k v = [(k,v)]
-</code></pre>
-<ul>
-<li><code>AssocList</code> is a <strong>type constructor</strong><ul>
-<li>It takes two types and produces a concrete type</li>
-<li><code>AssocList Int String</code>, for instance</li>
-</ul>
-</li>
-<li>F. that gets the value by a key in an association list:<ul>
-<li><code>(Eq k) =&gt; k -&gt; AssocList k v -&gt; Maybe v</code></li>
-</ul>
-</li>
-</ul></article>
  
 </slide>
 
