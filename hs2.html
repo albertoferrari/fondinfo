@@ -524,7 +524,6 @@ Prelude&gt; (max 4) 5
 <li><code>max 4 5</code> first creates a f. that takes a param</li>
 <li>Returns either 4 or that param, depending on which is bigger</li>
 <li>Then, 5 is applied and that f. produces our desired result</li>
-<li></li>
 </ul>
 <blockquote></blockquote>
 <p>The space is like an operator, for function application, which has the highest precedence</p></article>
@@ -764,15 +763,15 @@ zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
       <ul>
 <li>Pretty similar to the normal zip, with a joining function</li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; zipWith' (+) [4,2,5,6] [2,6,2,3]
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; zipWith (+) [4,2,5,6] [2,6,2,3]
 [6,8,7,9]
-Prelude&gt; zipWith' max [6,3,2,1] [7,3,1,5]
+Prelude&gt; zipWith max [6,3,2,1] [7,3,1,5]
 [7,3,2,5]
-Prelude&gt; zipWith' (++) ["foo ", "bar ", "baz "]
-                       ["fighters", "hoppers", "aldrin"]
+Prelude&gt; zipWith (++) ["foo ", "bar ", "baz "]
+                      ["fighters", "hoppers", "aldrin"]
 ["foo fighters","bar hoppers","baz aldrin"]
-Prelude&gt; zipWith' (zipWith' (*)) [[1,2,3],[3,5,6],[2,3,4]]
-                                 [[3,2,2],[3,4,5],[5,4,3]]
+Prelude&gt; zipWith (zipWith (*)) [[1,2,3],[3,5,6],[2,3,4]]
+                               [[3,2,2],[3,4,5],[5,4,3]]
 [[3,4,6],[9,20,30],[10,12,12]]
 </code></pre></article>
  
@@ -796,9 +795,9 @@ Prelude&gt; zipWith' (zipWith' (*)) [[1,2,3],[3,5,6],[2,3,4]]
 <pre class="prettyprint" data-lang="haskell"><code>flip' :: (a -&gt; b -&gt; c) -&gt; (b -&gt; a -&gt; c)
 flip' f y x = f x y
 </code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; flip' zip [1,2,3,4,5] "hello"
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; flip zip [1,2,3,4,5] "hello"
 [('h',1),('e',2),('l',3),('l',4),('o',5)]
-Prelude&gt; zipWith (flip' div) [2,2..] [10,8,6,4,2]
+Prelude&gt; zipWith (flip div) [2,2..] [10,8,6,4,2]
 [5,4,3,2,1]
 </code></pre></article>
  
@@ -826,9 +825,9 @@ Prelude&gt; zipWith (flip' div) [2,2..] [10,8,6,4,2]
 <li>It applies that f. to every element in the list</li>
 <li>It produces a new list</li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>map :: (a -&gt; b) -&gt; [a] -&gt; [b]
-map _ [] = []
-map f (x:xs) = f x : map f xs
+<pre class="prettyprint" data-lang="haskell"><code>map' :: (a -&gt; b) -&gt; [a] -&gt; [b]
+map' _ [] = []
+map' f (x:xs) = f x : map' f xs
 </code></pre></article>
  
 </slide>
@@ -869,11 +868,11 @@ Prelude&gt; map fst [(1,2),(3,5),(6,3),(2,6),(2,5)]
 <li>It takes a predicate (a f. that returns a bool) and a list</li>
 <li>It returns the list of elements that satisfy the predicate</li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
-filter _ [] = []
-filter p (x:xs)
-    | p x       = x : filter p xs
-    | otherwise = filter p xs
+<pre class="prettyprint" data-lang="haskell"><code>filter' :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+filter' _ [] = []
+filter' p (x:xs)
+    | p x       = x : filter' p xs
+    | otherwise = filter' p xs
 </code></pre></article>
  
 </slide>
@@ -910,7 +909,7 @@ quicksort (x:xs) =
     </hgroup>
     <article >
       <ul>
-<li>Mapping and filtering is the bread and butter of every functional programmer's toolbox<ul>
+<li>Mapping and filtering is the bread and butter of every functional programmer<ul>
 <li>Imperative programming: nesting loops and testing</li>
 <li>Functional programming: mapping and filtering (or comprehensions)</li>
 </ul>
@@ -966,18 +965,20 @@ largestDivisible = head (filter p [100000,99999..])
     </hgroup>
     <article >
       <ul>
-<li>We take a natural number</li>
-<li>If that number is even, we divide it by two</li>
-<li>If it's odd, we multiply it by 3 and then add 1</li>
-<li>We take the resulting number and apply the same thing to it...</li>
-<li>It is thought that for all starting numbers, the chains finish at the number 1 (edge)</li>
+<li>Take a natural number <code>n</code></li>
+<li>If <code>n</code> is even, divide it by <code>2</code></li>
+<li>If it's odd, multiply it by <code>3</code> and then add <code>1</code></li>
+<li>Take the resulting number and apply the same thing to it...</li>
+<li><em>Conjecture</em>: for all starting numbers, the chains finish at the number <code>1</code> (edge, cycle <code>1-4-2-1</code>)</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>collatz :: (Integral a) =&gt; a -&gt; [a]
 collatz 1 = [1]
 collatz n
     | even n =  n:collatz (n `div` 2)
     | odd n  =  n:collatz (n*3 + 1)
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p>https://www.jasondavies.com/collatz-graph/</p></article>
  
 </slide>
 
@@ -1008,11 +1009,12 @@ collatz n
     </hgroup>
     <article >
       <ul>
-<li>So far, we've only mapped functions that take one parameter over lists, like <code>map (*2) [0..]</code></li>
+<li>So far, we've only mapped f.s that take one parameter over lists, like <code>map (*2) [0..]</code></li>
 <li>We can also do <code>map (*) [0..]</code> without a problem<ul>
-<li>We get back a list of functions that only take one parameter</li>
+<li>We get back a list of f.s that only take one param</li>
 <li><code>[(0*),(1*),(2*),(3*),(4*),(5*)</code>...</li>
-<li>Applying only one parameter to a function that takes two parameters returns a function that takes one parameter</li>
+<li>Applying only one param to a f. that takes two params...</li>
+<li>Returns a f. that takes one param</li>
 </ul>
 </li>
 </ul>
@@ -1036,7 +1038,8 @@ Prelude&gt; (listOfFuns !! 4) 5
 <li>Usually, surrounded by parentheses</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>numLongChains :: Int
-numLongChains = length (filter (\xs -&gt; length xs &gt; 15) (map chain [1..100]))
+numLongChains = length (filter (\xs -&gt; length xs &gt; 15)
+                               (map collatz [1..100]))
 </code></pre></article>
  
 </slide>
@@ -1061,8 +1064,37 @@ numLongChains = length (filter (\xs -&gt; length xs &gt; 15) (map chain [1..100]
 <p>Like normal functions, lambdas can take any number of parameters:</p>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; zipWith (\a b -&gt; (a * 30 + 3) / b) [5,4,3,2,1] [1,2,3,4,5]
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :set +m
+Prelude&gt; let xs = zipWith (\a b -&gt; (a * 30 + 3) / b)
+Prelude|                  [5,4,3,2,1] [1,2,3,4,5]
+Prelude|
+Prelude&gt; xs
 [153.0,61.5,31.0,15.75,6.6]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Closure</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Lambdas can use <em>free variables</em><ul>
+<li>Names that are not bounded as params</li>
+<li>Mechanism often called <em>closure</em></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>map (\x -&gt; x + 3) [1,6,3,2]
+
+map (let n = 3 in \x -&gt; x + n) [1,6,3,2]
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>f a b c = a * b + c
+
+f' a b = \c -&gt; a * b + c
 </code></pre></article>
  
 </slide>
@@ -1087,7 +1119,7 @@ numLongChains = length (filter (\xs -&gt; length xs &gt; 15) (map chain [1..100]
       <ul>
 <li>Python has a <code>partial</code> f. in <code>functools</code> module<ul>
 <li>Returns a <code>partial</code> object, which is callable</li>
-<li>“Freezes” some arguments, simplified signature</li>
+<li>“Freezes” some params, f. with simpler signature</li>
 </ul>
 </li>
 </ul>
@@ -1191,7 +1223,7 @@ with Pool(5) as p:
     </hgroup>
     <article >
       <ul>
-<li>Anonymous function, body is a single expression<ul>
+<li>Anonymous function, body is a <em>single expression</em><ul>
 <li>For a longer body, use a (nested) <code>def</code></li>
 </ul>
 </li>
@@ -1200,8 +1232,14 @@ with Pool(5) as p:
 </ul>
 </li>
 </ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; sorted([3, -4, 5, -2])
+[-4, -2, 3, 5]
+&gt;&gt;&gt; sorted([3, -4, 5, -2], key=abs)
+[-2, 3, -4, 5]
+&gt;&gt;&gt; sorted([3, -4, 5, -2], key=lambda x:1/x)
+[-2, -4, 5, 3]
+</code></pre>
 <blockquote></blockquote>
-<p>Example: <code>min</code> on inverse key</p>
 <p>Example: behaviours of GUI widgets</p></article>
  
 </slide>
@@ -1225,7 +1263,8 @@ with Pool(5) as p:
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; reduce(lambda a, b: a + b, [3, 5, 2, 1], 0)
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from functools import reduce
+&gt;&gt;&gt; reduce(lambda a, b: a + b, [3, 5, 2, 1], 0)
 11
 </code></pre></article>
  
@@ -1238,14 +1277,20 @@ with Pool(5) as p:
       <h3></h3>
     </hgroup>
     <article >
-      <pre><code>&gt;&gt;&gt; from operator import add, mul
+      <ul>
+<li>The <code>operator</code> module defines f.s representing operators</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from operator import add, mul
 &gt;&gt;&gt; add(2, 3)
 5
 &gt;&gt;&gt; reduce(add, [3, 5, 2, 1])
 11
 &gt;&gt;&gt; reduce(mul, [3, 5, 2, 1])
 30
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p>Reducing with a non-associative f. is considered bad style, in Python</p>
+<p><code>(4 ** 3) ** 2 != 4 ** (3 ** 2)</code></p></article>
  
 </slide>
 
@@ -1267,19 +1312,19 @@ with Pool(5) as p:
     </hgroup>
     <article >
       <ul>
-<li>Recursion on lists<ul>
+<li>Recursion on lists, common code structure<ul>
 <li>Usually empty list as edge case</li>
-<li><code>x:xs</code> pattern, action on head and recursion on the rest list</li>
+<li><code>x:xs</code> pattern, action on head and recursion on rest</li>
 </ul>
 </li>
-<li>Common pattern, encapsulated in useful funtions: <em>folding</em><ul>
-<li>Similar to the <code>map</code> f., only they reduce the list to some single value</li>
+<li>Behaviour encapsulated in <em>folding</em> f.s<ul>
+<li>Similar to the <code>map</code> f., only they reduce a list to some single value</li>
 </ul>
 </li>
 <li>A fold takes a binary f., a starting value (accumulator) and a list<ul>
-<li>The binary f. is called with the accumulator and the head (or tail) and produces a new accumulator</li>
-<li>Then, the f. is called with the new accumulator and the now new head (or tail)...</li>
-<li>At the end, the accumulator holds the result</li>
+<li>Binary f. is called with accumulator and head (or tail) and produces a new accumulator</li>
+<li>Then, f. is called with new accumulator and new head (or tail)...</li>
+<li>At the end, accumulator holds the result</li>
 </ul>
 </li>
 </ul></article>
@@ -1306,8 +1351,8 @@ sum' xs = foldl (\acc x -&gt; acc + x) 0 xs
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; sum' [3,5,2,1]
 11
 </code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>foldl f z [] = z
-foldl f z (x:xs) = foldl f (f z x) xs
+<pre class="prettyprint" data-lang="haskell"><code>foldl' f z [] = z
+foldl' f z (x:xs) = foldl' f (f z x) xs
 </code></pre></article>
  
 </slide>
@@ -1326,8 +1371,8 @@ foldl f z (x:xs) = foldl f (f z x) xs
 </ul>
 </li>
 <li>In general, because of currying ...<ul>
-<li>a f. like <code>foo a = bar b a</code> ...</li>
-<li>can rewritten as <code>foo = bar b</code></li>
+<li>A f. like <code>foo a = bar b a</code> ...</li>
+<li>Can rewritten as <code>foo = bar b</code></li>
 </ul>
 </li>
 </ul>
@@ -1345,7 +1390,8 @@ sum' = foldl (+) 0
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="haskell"><code>elem' :: (Eq a) =&gt; a -&gt; [a] -&gt; Bool
-elem' y ys = foldl (\acc x -&gt; if x == y then True else acc) False ys
+elem' y ys = foldl (\acc x -&gt; x == y || acc) False ys
+-- if x == y then True else acc
 </code></pre>
 <ul>
 <li>Accumulator is a <code>Bool</code><ul>
@@ -1371,20 +1417,22 @@ elem' y ys = foldl (\acc x -&gt; if x == y then True else acc) False ys
     </hgroup>
     <article >
       <ul>
-<li>With <code>foldr</code>, the accumulator eats up the values from the right</li>
-<li>The binary f. has the accumulator as 2nd parameter (so <code>\x acc -&gt;</code> ...)</li>
+<li>With <code>foldr</code>, accumulator eats up values from the right<ul>
+<li>The binary f. has the accumulator as 2nd param</li>
+</ul>
+</li>
 <li>Ex.: implementing <code>map</code> with a right fold<ul>
 <li>Accumulator is a list, accumulating the mapped elements one by one</li>
-<li>Starting element is an empty list.</li>
-<li>E.g.: try mapping (+3) to [1,2,3]</li>
+<li>Starting element is an empty list</li>
+<li>E.g.: try mapping <code>(+3)</code> to <code>[1,2,3]</code></li>
 </ul>
 </li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>map' :: (a -&gt; b) -&gt; [a] -&gt; [b]
 map' f xs = foldr (\x acc -&gt; f x : acc) [] xs
 </code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>foldr f z [] = z
-foldr f z (x:xs) = f x (foldr f z xs)
+<pre class="prettyprint" data-lang="haskell"><code>foldr' f z [] = z
+foldr' f z (x:xs) = f x (foldr' f z xs)
 </code></pre></article>
  
 </slide>
@@ -1398,14 +1446,14 @@ foldr f z (x:xs) = f x (foldr f z xs)
     <article >
       <ul>
 <li>
-<p>Folding over the list [3,4,5,6], with <code>f</code> as f. and <code>z</code> as accumulator</p>
+<p>Folding over <code>[3,4,5,6]</code>, with <code>f</code> and <code>z</code> (as f. and accumulator)</p>
 <ul>
 <li>Right folding: <code>f 3 (f 4 (f 5 (f 6 z)))</code></li>
 <li>Left folding: <code>f (f (f (f z 3) 4) 5) 6</code></li>
 </ul>
 </li>
 <li>
-<p>Ex.: left fold for map</p>
+<p>Ex.: left fold for <code>map</code></p>
 <ul>
 <li>The <code>++</code> f. is much more expensive than <code>:</code></li>
 <li>Prefer right folds when building up a new list</li>
@@ -1450,19 +1498,14 @@ foldr f z (x:xs) = f x (foldr f z xs)
       <pre class="prettyprint" data-lang="haskell"><code>maximum' :: (Ord a) =&gt; [a] -&gt; a
 maximum' = foldr1 (\x acc -&gt; if x &gt; acc then x else acc)
 
-reverse' :: [a] -&gt; [a]
 reverse' = foldl (\acc x -&gt; x : acc) []
 
-product' :: (Num a) =&gt; [a] -&gt; a
 product' = foldr1 (*)
 
-filter' :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
 filter' p = foldr (\x acc -&gt; if p x then x : acc else acc) []
 
-head' :: [a] -&gt; a
 head' = foldr1 (\x _ -&gt; x)
 
-last' :: [a] -&gt; a
 last' = foldl1 (\_ x -&gt; x)
 </code></pre></article>
  
@@ -1508,7 +1551,7 @@ Prelude&gt; scanl (flip (:)) [] [3,2,1]
 <li>Squares of all natural numbers: <code>map sqrt [1..]</code></li>
 <li>Then, <code>scan</code> shows how the sum progresses</li>
 <li>Easy to see how many sums are under 1000 (then +1)</li>
-<li><code>takeWhile</code>, as <code>filter</code> doesn't work on infinite lists</li>
+<li><code>takeWhile</code>, since <code>filter</code> doesn't work on infinite lists</li>
 </ul>
 </li>
 </ul>
@@ -1517,10 +1560,8 @@ sqrtSums = length (takeWhile (&lt;1000) (scanl1 (+) (map sqrt [1..]))) + 1
 
 Prelude&gt; sqrtSums
 131
-Prelude&gt; sum (map sqrt [1..131])
+Prelude&gt; sum (map sqrt [1..131])  -- try also 130
 1005.0942035344083
-Prelude&gt; sum (map sqrt [1..130])
-993.6486803921487
 </code></pre></article>
  
 </slide>
@@ -1550,7 +1591,7 @@ f $ x = f x
 </code></pre>
 <ul>
 <li>Normal f. application (putting a space between two things) has a really high precedence</li>
-<li>The <code>$</code> f. has the lowest precedence</li>
+<li>The <code>$</code> f. has the <em>lowest precedence</em></li>
 <li>It's mostly a convenience f., to spare so many parentheses</li>
 </ul></article>
  
@@ -1593,16 +1634,15 @@ f $ x = f x
     </hgroup>
     <article >
       <ul>
-<li>In mathematics, f. composition is defined like this:<ul>
-<li><code>(f . g)(x) = f(g(x))</code></li>
-<li>Composing two f.s produces a new f.</li>
+<li>In maths, two f.s can be composed to produce a <em>new</em> f.<ul>
+<li><code>(f.g)(x) = f(g(x))</code></li>
 <li>Call <code>g</code> with param <code>x</code>, then call <code>f</code> with that result</li>
 </ul>
 </li>
 <li>In Haskell, the <code>.</code> f. does pretty much the same thing<ul>
-<li>Resulting f. takes a param of the same type that <code>g</code> takes...</li>
-<li>and returns a value of the same type that <code>f</code> returns</li>
-<li>Note: <code>f</code> takes a param of same type as <code>g</code>'s return value</li>
+<li><code>f.g</code> takes a param of the same type that <code>g</code> takes...</li>
+<li><code>f.g</code> returns a value of the same type that <code>f</code> returns</li>
+<li><code>f</code> takes a param of same type as <code>g</code>'s return value</li>
 </ul>
 </li>
 </ul>
@@ -1623,22 +1663,21 @@ f . g = \x -&gt; f (g x)
     </hgroup>
     <article >
       <ul>
-<li>Composition: glue simple f.s together, forming more complex f.s<ul>
+<li>Composition: glue simple f.s together, form complex f.s<ul>
 <li>More readable: think about f.s instead of data</li>
 <li>But long chains of f. composition is discouraged</li>
 </ul>
 </li>
 <li>Making f.s on the fly, to pass to other f.s<ul>
-<li>Often, f. composition is clearer and more concise than lambdas</li>
+<li>Often, clearer and more concise than lambdas</li>
 <li>Ex.: turn a list of numbers into negative numbers</li>
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (\x -&gt; negate (abs x)) [5,-3,-6,7,-3,2,-19,24]
-[-5,-3,-6,-7,-3,-2,-19,-24]
-</code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (negate . abs) [5,-3,-6,7,-3,2,-19,24]
-[-5,-3,-6,-7,-3,-2,-19,-24]
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (negate . abs) [5,-3,-6,7,-3,2] 
+[-5,-3,-6,-7,-3,-2]
+Prelude&gt; map (\x -&gt; negate (abs x)) [5,-3,-6,7,-3,2]
+[-5,-3,-6,-7,-3,-2]
 </code></pre></article>
  
 </slide>
@@ -1654,10 +1693,9 @@ f . g = \x -&gt; f (g x)
 <li>F. composition is right-associative, so we can compose many f.s at a time</li>
 <li><code>f (g (z x))</code> is equivalent to <code>(f . g . z) x</code></li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (\xs -&gt; negate (sum (tail xs))) [[1..5],[3..6],[1..7]]
-[-14,-15,-27]
-</code></pre>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (negate . sum . tail) [[1..5],[3..6],[1..7]]
+[-14,-15,-27]
+Prelude&gt; map (\xs -&gt; negate (sum (tail xs))) [[1..5],[3..6],[1..7]]
 [-14,-15,-27]
 </code></pre></article>
  
@@ -1678,8 +1716,8 @@ f . g = \x -&gt; f (g x)
 </ul>
 </li>
 <li>To rewrite an expression with a lot of parentheses by using f. composition...<ul>
-<li>first put last param of the innermost f. after a <code>$</code></li>
-<li>then compose all other f. calls, without their last param</li>
+<li>First put last param of the innermost f. after a <code>$</code></li>
+<li>Then compose all other f.s, without their last param</li>
 </ul>
 </li>
 <li>Example:<ul>
@@ -1700,7 +1738,7 @@ f . g = \x -&gt; f (g x)
     <article >
       <ul>
 <li>Another common use of f. composition: defining f.s in the <em>point free style</em> (or <em>pointless style</em>)</li>
-<li>Problem if param in the function body has parentheses after it</li>
+<li>Problem if param in the f. body has parentheses after it</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>sum' :: (Num a) =&gt; [a] -&gt; a
 -- sum' xs = foldl (+) 0 xs
@@ -1724,10 +1762,10 @@ fn = ceiling . negate . tan . cos . max 50
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>oddSquareSum :: Integer
 oddSquareSum = sum (takeWhile (&lt;10000) (filter odd (map (^2) [1..])))
-</code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>oddSquareSum = sum . takeWhile (&lt;10000) . filter odd . map (^2) $ [1..]
-</code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>oddSquareSum =
+
+oddSquareSum' = sum . takeWhile (&lt;10000) . filter odd . map (^2) $ [1..]
+
+oddSquareSum'' =
     let oddSquares = filter odd $ map (^2) [1..]
         belowLimit = takeWhile (&lt;10000) oddSquares
     in  sum belowLimit

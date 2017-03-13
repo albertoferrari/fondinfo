@@ -402,17 +402,18 @@ True
     </hgroup>
     <article >
       <ul>
-<li>Type synonyms allow giving some types different names<ul>
-<li>The <code>[Char]</code> and <code>String</code> types are equivalent and interchangeable</li>
+<li>Giving some types different names</li>
 </ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="haskell"><code>type String = [Char]
+<pre class="prettyprint" data-lang="haskell"><code>type String = [Char]  -- equivalent and interchangeable
 </code></pre>
 <ul>
-<li>Create type synonyms for <code>String</code>, to convey more information about data</li>
+<li>To convey more information about data</li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>-- inPhoneBook:: String -&gt; String -&gt; [(String,String)] -&gt; Bool
+<pre class="prettyprint" data-lang="haskell"><code>type Name = String
+type PhoneNumber = String
+type PhoneBook = [(Name,PhoneNumber)]
+
+-- inPhoneBook :: String -&gt; String -&gt; [(String,String)] -&gt; Bool
 inPhoneBook :: Name -&gt; PhoneNumber -&gt; PhoneBook -&gt; Bool
 inPhoneBook name pnumber pbook = (name,pnumber) `elem` pbook
 </code></pre></article>
@@ -439,8 +440,6 @@ inPhoneBook name pnumber pbook = (name,pnumber) `elem` pbook
 </code></pre>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; Right 20
 Right 20
-Prelude&gt; Left "w00t"
-Left "w00t"
 Prelude&gt; :t Right 'a'
 Right 'a' :: Either a Char
 Prelude&gt; :t Left True
@@ -516,8 +515,7 @@ Left True :: Either Bool b
 </code></pre>
 <ul>
 <li><code>Cons</code> constructor represents <code>:</code><ul>
-<li>In lists, <code>:</code> is actually a constructor</li>
-<li>It takes a value and another list and returns a list</li>
+<li><code>:</code> is a constructor for lists (params: value, list)</li>
 </ul>
 </li>
 </ul>
@@ -526,58 +524,6 @@ Empty
 Prelude&gt; 4 `Cons` (5 `Cons` Empty)
 Cons 4 (Cons 5 Empty)
 </code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Defining operators</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>F.s automatically infix if comprised of only special chars</li>
-<li>Constructors are f.s that return a data type</li>
-</ul>
-<pre class="prettyprint" data-lang="haskell"><code>infixr 5 :-:
-data List a = Empty | a :-: (List a) deriving (Show, Read, Eq, Ord)
-</code></pre>
-<ul>
-<li><em>Fixity</em> declaration (opt.): right associative, medium priority</li>
-</ul>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; 3 :-: 4 :-: 5 :-: Empty
-(:-:) 3 ((:-:) 4 ((:-:) 5 Empty))
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>List concat</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Similarly to how <code>++</code> is defined for normal lists</li>
-</ul>
-<pre class="prettyprint" data-lang="haskell"><code>infixr 5  .++
-(.++) :: List a -&gt; List a -&gt; List a
-Empty .++ ys = ys
-(x :-: xs) .++ ys = x :-: (xs .++ ys)
-</code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let a = 3 :-: 4 :-: 5 :-: Empty
-Prelude&gt; let b = 6 :-: 7 :-: Empty
-Prelude&gt; a .++ b
-(:-:) 3 ((:-:) 4 ((:-:) 5 ((:-:) 6 ((:-:) 7 Empty))))
-</code></pre>
-<ul>
-<li>Pattern matching works (only) on constructors<ul>
-<li>Match on the <code>:-:</code> and <code>:</code> constructors</li>
-</ul>
-</li>
-</ul></article>
  
 </slide>
 
@@ -615,8 +561,8 @@ Prelude&gt; a .++ b
     </hgroup>
     <article >
       <ul>
-<li>In C etc., we modify the pointers and values inside the tree</li>
-<li>In Haskell, the insertion function returns a <strong>new tree</strong><ul>
+<li>In <em>C</em> etc., we modify the pointers and values inside the tree</li>
+<li>In <em>Haskell</em>, the insertion function returns a <strong>new tree</strong><ul>
 <li><code>a -&gt; Tree a - &gt; Tree a</code></li>
 </ul>
 </li>
@@ -701,12 +647,11 @@ False
 </code></pre>
 <ul>
 <li>Keyword <strong><code>class</code></strong> for defining a new typeclass<ul>
-<li><code>a</code> is the type variable</li>
+<li><code>a</code> is the <em>type variable</em></li>
 </ul>
 </li>
-<li>Then, we define several f.s<ul>
-<li>Just specify the type declarations</li>
-<li>It's not mandatory to implement the function bodies</li>
+<li>Then, specify some f.s (<em>type declarations</em>)<ul>
+<li>It's not mandatory to implement them</li>
 </ul>
 </li>
 <li>Here, f.s are mutually recursive<ul>
@@ -737,9 +682,11 @@ False
     _ == _ = False
 </code></pre>
 <ul>
-<li>Because <code>==</code> was defined in terms of <code>/=</code> and vice versa in the class declaration...</li>
-<li>We only had to overwrite one of them in the instance declaration</li>
-<li>That's called the <em>minimal complete definition</em> for the typeclass</li>
+<li>In class declaration, <code>==</code> defined in terms of <code>/=</code> and vice versa <ul>
+<li>In instance declaration, only overwrite one of them</li>
+<li>Called <em>minimal complete definition</em> for the typeclass</li>
+</ul>
+</li>
 </ul></article>
  
 </slide>
@@ -763,9 +710,7 @@ False
     show Yellow = "Yellow light"
     show Green = "Green light"
 </code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; Red == Red
-True
-Prelude&gt; Red == Yellow
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; Red == Yellow
 False
 Prelude&gt; Red `elem` [Red, Yellow, Green]
 True
@@ -911,10 +856,10 @@ instance Functor [] where
 <li>If it's an empty value of <code>Nothing</code>, then just return a <code>Nothing</code></li>
 <li>If it's a single value packed up in a <code>Just</code>, then we apply the function on the contents of the <code>Just</code></li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; fmap (++ " HEY GUYS IM INSIDE THE JUST") (Just "Something serious.")
-Just "Something serious. HEY GUYS IM INSIDE THE JUST"
-Prelude&gt; fmap (++ " HEY GUYS IM INSIDE THE JUST") Nothing
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; fmap (++ " LOOK MA, INSIDE JUST") Nothing
 Nothing
+Prelude&gt; fmap (++ " LOOK MA, INSIDE JUST") (Just "Stg serious.")
+Just "Stg serious. LOOK MA, INSIDE JUST"
 Prelude&gt; fmap (*2) (Just 200)
 Just 400
 Prelude&gt; fmap (*2) Nothing
@@ -935,7 +880,9 @@ Nothing
     fmap f (Node x leftsub rightsub)
            = Node (f x) (fmap f leftsub) (fmap f rightsub)
 </code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; fmap (*4) (foldr treeInsert EmptyTree [5,7,3,2,1,7])
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; fmap (*4) EmptyTree
+EmptyTree
+Prelude&gt; fmap (*4) (foldr treeInsert EmptyTree [5,7,3,2,1,7])
 Node 28 (Node 4 EmptyTree (Node 8 EmptyTree ...
 </code></pre></article>
  
@@ -989,12 +936,12 @@ Node 28 (Node 4 EmptyTree (Node 8 EmptyTree ...
 <li>Functional programming: defining what stuff is</li>
 <li>Haskell is a purely functional language<ul>
 <li>A f. can't change some state, or produce side-effects</li>
-<li>It gives back a result based on the parameters we gave it</li>
-<li>If it is called twice with the same parameters, it returns the same result</li>
+<li>Result based only on the params</li>
+<li>Called twice with same params: same result</li>
 </ul>
 </li>
 <li>I/O ops require changing some state<ul>
-<li>Haskell separates the part of the program that is pure...</li>
+<li>Haskell separates the pure part of the program...</li>
 <li>from the impure, which does all the dirty work...</li>
 <li>like talking to the keyboard and the screen</li>
 </ul>
