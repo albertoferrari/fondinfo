@@ -47,14 +47,12 @@ URL: https://code.google.com/p/io-2012-slides
 <li>How do we make our own?</li>
 <li>One way is to use the <code>data</code> keyword to define a <em>type</em><ul>
 <li><em>Type name</em> and <em>value constructors</em>: capital cased</li>
+<li><em>Algebra</em> of <em>sums</em> (alternations) and <em>products</em> (combinations)</li>
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>data Bool = False | True  -- stdlib
+<pre class="prettyprint" data-lang="haskell"><code>data TrafficLight = Red | Yellow | Green
 </code></pre>
-<ul>
-<li>Make our own type to represent a shape</li>
-</ul>
 <pre class="prettyprint" data-lang="haskell"><code>data Shape = Circle Float Float Float
              | Rectangle Float Float Float Float
 </code></pre></article>
@@ -174,10 +172,8 @@ Prelude&gt; surface (Circle (Point 0 0) 24)
     </hgroup>
     <article >
       <ul>
-<li>F. that takes shape, dx, dy...<ul>
-<li>and returns a <strong>new shape</strong>, located somewhere</li>
-</ul>
-</li>
+<li>F. that takes shape, dx, dy...</li>
+<li>Returns a <em>new shape</em>, located somewhere</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>nudge :: Shape -&gt; Float -&gt; Float -&gt; Shape
 nudge (Circle (Point x y) r) a b = Circle (Point (x+a) (y+b)) r
@@ -218,7 +214,7 @@ Rectangle (Point 60.0 23.0) (Point 100.0 123.0)
     <article >
       <ul>
 <li>Create a data type that describes a person<ul>
-<li>first name, last name, age, height, phone number, and favorite ice-cream flavor</li>
+<li>First name, last name, age, height, phone number, and favorite ice-cream flavor</li>
 </ul>
 </li>
 </ul>
@@ -261,7 +257,7 @@ flavor :: Person -&gt; String
     </hgroup>
     <article >
       <ul>
-<li>Haskell automatically create accessor f.s</li>
+<li>Haskell automatically creates accessor f.s</li>
 <li>Deriving <code>Show</code>, output is more complete</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>data Person = Person { firstName :: String
@@ -305,7 +301,7 @@ Nothing :: Maybe a
 <ul>
 <li>The type of <code>Nothing</code> is polymorphic<ul>
 <li><code>Maybe a</code> can act like a <code>Maybe Int</code> if it has to</li>
-<li>Similarly, the type of the empty list is <code>[a]</code>, it can act like a list of anything</li>
+<li>Similarly, empty list has type <code>[a]</code>: list of anything</li>
 </ul>
 </li>
 </ul></article>

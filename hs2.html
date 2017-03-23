@@ -388,8 +388,8 @@ Prelude&gt; quicksort "the quick brown fox jumps over the lazy dog"
       </figure><pre class="prettyprint" data-lang="haskell"><code>factorial 0 = 1
 factorial n = n * factorial (n - 1)
 </code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; factorial 4
-12
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; factorial 3
+6
 </code></pre>
 <ul>
 <li>Perform recursive call first</li>
@@ -413,10 +413,10 @@ fact_tr n acc = fact_tr (n - 1) (n * acc)
 
 factorial' n = fact_tr n 1
 </code></pre>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; factorial' 4
-12
-Prelude&gt; fact_tr 4 1
-12
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; factorial' 3
+6
+Prelude&gt; fact_tr 3 1
+6
 </code></pre>
 <ul>
 <li>Perform calculations first</li>
@@ -1287,10 +1287,111 @@ with Pool(5) as p:
 11
 &gt;&gt;&gt; reduce(mul, [3, 5, 2, 1])
 30
+&gt;&gt;&gt; reduce(pow, [2, 3, 4])
+4096
 </code></pre>
 <blockquote></blockquote>
 <p>Reducing with a non-associative f. is considered bad style, in Python</p>
 <p><code>(4 ** 3) ** 2 != 4 ** (3 ** 2)</code></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Partial with built-ins</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>In Python, most f.s accept indifferently positional params, or keyword params</li>
+<li>However, <em>some built-in f.s and operators</em> accept only positional params<ul>
+<li>Params have to be passed in a fixed order</li>
+<li>Cannot partially apply (or even pass) params by name</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; def mypow(x, y): return x ** y  # or a lambda...
+&gt;&gt;&gt; cube = partial(mypow, y=3)
+&gt;&gt;&gt; cube(2)
+8
+&gt;&gt;&gt; cube = partial(pow, y=3)
+&gt;&gt;&gt; cube(2)
+Traceback...
+TypeError: pow() takes no keyword arguments
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Variadic functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>def func(required_arg, *args, **kwargs):
+    print(required_arg)
+    # args is a tuple of positional arguments,
+    if args: # if not empty.
+        print(args)
+    # kwargs is a dictionary of keyword arguments,
+    if kwargs: # if not empty.
+        print(kwargs)
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; func()
+TypeError: func() takes at least 1 argument (0 given)
+&gt;&gt;&gt; func("required argument", 1, 2, '3', key1=4, key2="foo")
+required argument
+(1, 2, '3')
+{'key2': 'foo', 'key1': 4}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Positional parameters unpacking</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Call with <code>*</code> to unpack params out of a sequence</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; pow(3, 2)
+9
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; values = [3, 2]
+&gt;&gt;&gt; pow(*values)
+9
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Keyword parameters unpacking</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Dictionaries can deliver keyword params with <code>**</code></li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>def parrot(voltage, state='a stiff', action='voom'):
+    print("-- This parrot wouldn't", action)
+    print("if you put", voltage, "volts through it.")
+    print("E's", state, "!")
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; d = {"voltage": "four million",
+         "state": "bleedin' demised",
+         "action": "VOOM"}
+&gt;&gt;&gt; parrot(**d)
+-- This parrot wouldn't VOOM
+if you put four million volts through it.
+E's bleedin' demised !
+</code></pre></article>
  
 </slide>
 
@@ -1503,10 +1604,6 @@ reverse' = foldl (\acc x -&gt; x : acc) []
 product' = foldr1 (*)
 
 filter' p = foldr (\x acc -&gt; if p x then x : acc else acc) []
-
-head' = foldr1 (\x _ -&gt; x)
-
-last' = foldl1 (\_ x -&gt; x)
 </code></pre></article>
  
 </slide>
@@ -1639,7 +1736,7 @@ f $ x = f x
 <li>Call <code>g</code> with param <code>x</code>, then call <code>f</code> with that result</li>
 </ul>
 </li>
-<li>In Haskell, the <code>.</code> f. does pretty much the same thing<ul>
+<li>In Haskell, <code>.</code> does pretty much the same thing<ul>
 <li><code>f.g</code> takes a param of the same type that <code>g</code> takes...</li>
 <li><code>f.g</code> returns a value of the same type that <code>f</code> returns</li>
 <li><code>f</code> takes a param of same type as <code>g</code>'s return value</li>
@@ -1732,12 +1829,13 @@ Prelude&gt; map (\xs -&gt; negate (sum (tail xs))) [[1..5],[3..6],[1..7]]
 <slide  >
   
     <hgroup>
-      <h2>Point free style</h2>
+      <h2>Tacit programming</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>Another common use of f. composition: defining f.s in the <em>point free style</em> (or <em>pointless style</em>)</li>
+<li>Another common use of f. composition</li>
+<li>Defining f.s in the <em>point free style</em> (or <em>pointless style</em>)</li>
 <li>Problem if param in the f. body has parentheses after it</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>sum' :: (Num a) =&gt; [a] -&gt; a
