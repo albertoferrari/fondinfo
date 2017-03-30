@@ -279,14 +279,14 @@ firstName :: Person -&gt; String
 <slide  >
   
     <hgroup>
-      <h2>Type parameters</h2>
+      <h2>Type constructors</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>Type constructors take types as params to produce new types<ul>
 <li>Similar to templates in C++</li>
-<li>Ex.: <code>Maybe</code> is defined with a type parameter (<code>a</code>)</li>
+<li>Ex.: <code>Maybe</code> is defined with a <em>type parameter</em> (<code>a</code>)</li>
 <li>Ex.: list type takes a param to produce a concrete type</li>
 </ul>
 </li>
@@ -412,6 +412,53 @@ type PhoneBook = [(Name,PhoneNumber)]
 -- inPhoneBook :: String -&gt; String -&gt; [(String,String)] -&gt; Bool
 inPhoneBook :: Name -&gt; PhoneNumber -&gt; PhoneBook -&gt; Bool
 inPhoneBook name pnumber pbook = (name,pnumber) `elem` pbook
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ex.: Search in phone book</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Implement a f. for <code>PhoneBook</code></li>
+<li><code>getPhoneNumber :: Name -&gt; PhoneBook -&gt; PhoneNumber</code></li>
+</ul>
+<blockquote></blockquote>
+<p>(1) return <code>PhoneNumber</code>, <code>""</code> if not found, pattern <code>x:xs</code>, use <code>if</code></p>
+<p>(2) pattern <code>((k,v):xs)</code>, use guards</p>
+<p>(3) <code>error "No phone number for " ++ name</code></p>
+<p>(4) <code>Maybe PhoneNumber</code></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ex.: Bouncing ball</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/ball-object.svg"><img src="images/oop/ball-uml.svg">
+        <figcaption>Class diagram UML</figcaption>
+      </figure><ul>
+<li>Mimic the following Python datatype, in Haskell <em>functional</em> style</li>
+<li>Implement a <code>move</code> f., for advancing a step and bouncing at borders</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>class Ball:
+    W, H = 20, 20
+    ARENA_W, ARENA_H = 320, 240
+
+    def __init__(self, x: int, y: int):
+        self._x = x
+        self._y = y
+        self._dx = 5
+        self._dy = 5
+    # ...
 </code></pre></article>
  
 </slide>
@@ -635,7 +682,7 @@ False
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="haskell"><code>class Eq a where    -- stdlib
+      <pre class="prettyprint" data-lang="haskell"><code>class Eq a where            -- stdlib
     (==) :: a -&gt; a -&gt; Bool
     (/=) :: a -&gt; a -&gt; Bool
     x == y = not (x /= y)
@@ -805,7 +852,7 @@ instance Functor [] where
 [2,4,6]
 </code></pre>
 <ul>
-<li>We didn't write <code>instance Functor [a]</code>, because <code>f</code> has to be a type constructor that takes one type<ul>
+<li>We didn't write <code>instance Functor [a]</code>, because <code>f</code> has to be a <em>type constructor</em> that takes one type<ul>
 <li><code>[a]</code> is already a concrete type</li>
 <li><code>[]</code> is a type constructor that takes one type</li>
 </ul>
@@ -892,7 +939,7 @@ Node 28 (Node 4 EmptyTree (Node 8 EmptyTree ...
     </hgroup>
     <article >
       <ul>
-<li>The <code>Functor</code> typeclass wants a type constructor that takes only one type parameter but <code>Either</code> takes two</li>
+<li>The <code>Functor</code> typeclass wants a <em>type constructor</em> that takes only one type parameter but <code>Either</code> takes two</li>
 <li>Partial application: <code>Either a</code> is a type constructor that takes one parameter</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>instance Functor (Either a) where
@@ -907,6 +954,39 @@ Node 28 (Node 4 EmptyTree (Node 8 EmptyTree ...
 </ul>
 </li>
 </ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ex.: Actor typeclass</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/actors.svg">
+        
+      </figure><ul>
+<li>Define a <code>Actor</code> typeclass, for things that can be moved<ul>
+<li><code>move :: (Actor a) =&gt; a -&gt; a</code></li>
+</ul>
+</li>
+<li>Create a container type for generic <code>Actor</code> things<ul>
+<li><em>In Haskell: compile-time polymorphism!</em></li>
+<li>Cannot mix different types in a list, even if they are part of the same typeclass</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>class Arena:  # ...
+    def __init__(self):
+        self._actors = []
+    def add(self, a: Actor):
+        self._actors.append(a)
+    def move_all(self):
+        for a in self._actors:
+            a.move()
+</code></pre></article>
  
 </slide>
 
