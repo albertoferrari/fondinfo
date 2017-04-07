@@ -317,15 +317,15 @@ Nothing :: Maybe a
     <article >
       <ul>
 <li>Without the <em>type parameter</em> (<code>a</code>)...</li>
-<li><code>Maybe</code> should be defined for a precise content type, e.g. <code>Int</code></li>
-<li>For containing a <code>String</code>, for example, a different definition of <code>Maybe</code> would be needed</li>
+<li>A <code>Maybe'</code> should be defined for a precise content type, e.g. <code>Int</code></li>
+<li>For containing a <code>String</code>, for example, a different definition of <code>Maybe'</code> would be needed</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>data Maybe' = Nothing' | Just' Int
 </code></pre>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t Just' 84
-Just 84 :: Maybe'
+Just' 84 :: Maybe'
 Prelude&gt; :t Nothing'
-Nothing :: Maybe'
+Nothing' :: Maybe'
 Prelude&gt; Just' "Hello"
 ...
     Couldn't match expected type ‘Int’ with actual type ‘[Char]’
@@ -341,13 +341,9 @@ Prelude&gt; Just' "Hello"
     </hgroup>
     <article >
       <ul>
-<li>Typeclass: interface that defines some behavior<ul>
-<li>Type as instance, if it supports that behavior</li>
+<li><em>Typeclass</em>: interface that defines some behavior<ul>
+<li><em>Type</em> as instance, if it supports that behavior</li>
 <li>Ex.: <code>==</code> and <code>/=</code> act as interface for <code>Eq</code></li>
-</ul>
-</li>
-<li>Haskell can <em>automatically</em> make our type an instance of:<ul>
-<li><code>Eq, Ord, Enum, Bounded, Show, Read</code></li>
 </ul>
 </li>
 </ul>
@@ -357,6 +353,10 @@ Prelude&gt; Just' "Hello"
                      } deriving (Eq)
 </code></pre>
 <ul>
+<li>Haskell can <em>automatically</em> make our type an instance of:<ul>
+<li><code>Eq, Ord, Enum, Bounded, Show, Read</code></li>
+</ul>
+</li>
 <li>Haskell will see if<ul>
 <li>The value constructors match (only one here)</li>
 <li>Each pair of fields match, using <code>==</code> (fields are <code>Eq</code>)</li>
@@ -604,8 +604,8 @@ Cons 4 (Cons 5 Empty)
     <article >
       <ul>
 <li>Without the <em>type parameter</em> (<code>a</code>)...</li>
-<li><code>List</code> should be defined for a precise content type, e.g. <code>Int</code></li>
-<li>For containing a <code>String</code>, for example, a different definition of <code>List</code> would be needed</li>
+<li>A <code>List'</code> should be defined for a precise content type, e.g. <code>Int</code></li>
+<li>For containing a <code>String</code>, for example, a different definition of <code>List'</code> would be needed</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>data List' = Empty'
              | Cons' Int (List')
@@ -774,7 +774,7 @@ False
     _ == _ = False
 </code></pre>
 <ul>
-<li>In class declaration, <code>==</code> defined in terms of <code>/=</code> and vice versa <ul>
+<li>In class declaration, <code>==</code> defined in terms of <code>/=</code> and vice versa<ul>
 <li>In instance declaration, only overwrite one of them</li>
 <li>Called <em>minimal complete definition</em> for the typeclass</li>
 </ul>
@@ -1115,8 +1115,15 @@ Prelude&gt; take 5 $ randoms (mkStdGen 11) :: [Bool]
     </hgroup>
     <article >
       <ul>
-<li><code>randomR :: (RandomGen g, Random a) =&gt; (a, a) -&gt; g -&gt; (a, g)</code></li>
-<li><code>randomRs</code>, stream of random values within a defined range</li>
+<li><code>randomR</code>: single random value within a defined range</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; randomR (1,6) (mkStdGen 123456)
+(4,645041272 40692)
+Prelude&gt; randomR (1,6) (mkStdGen 654321)
+(6,412237752 40692)
+</code></pre>
+<ul>
+<li><code>randomRs</code>: stream of random values within a defined range</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; take 10 $ randomRs ('a','z') (mkStdGen 3) :: [Char]
 "ndkxbvmomg"
@@ -1200,11 +1207,14 @@ Prelude&gt; take 5 $ randoms (mkStdGen 11) :: [Bool]
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
+      <figure>
+        <img src="images/algo/helloworld.png">
+        
+      </figure><ul>
 <li>Up until now, we've always loaded our functions into GHCI to test them</li>
 <li>Let's write our first Haskell program (<code>helloworld.hs</code>)</li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>main = putStrLn "hello, world"
+<pre class="prettyprint" data-lang="haskell"><code>main = print "hello, world"
 </code></pre>
 <ul>
 <li>And now let's build and run it</li>
@@ -1225,20 +1235,23 @@ hello, world
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t putStrLn
-putStrLn :: String -&gt; IO ()
-Prelude&gt; :t putStrLn "hello, world"
-putStrLn "hello, world" :: IO ()
+      <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t print
+print :: Show a =&gt; a -&gt; IO ()
+Prelude&gt; :t print "hello, world"
+print "hello, world" :: IO ()
 </code></pre>
 <ul>
-<li><code>putStrLn</code> takes a string and returns an <em>I/O action</em> that has a result type of <code>()</code> (i.e., the empty tuple, also know as <em>unit</em>)</li>
-<li><em>I/O action</em>: when performed, it carries out an action with a side-effect<ul>
-<li>e.g., reading from the input or printing stuff to the screen</li>
-<li>and will also contain some return value</li>
+<li><em>I/O action</em>: action with side-effects<ul>
+<li>E.g., reading input or writing to screen</li>
+<li>And may also contain some result value</li>
 </ul>
 </li>
-<li>When will an I/O action be performed?<ul>
-<li>When we give it a name of <code>main</code> and run our program</li>
+<li><code>print</code> takes a value and returns an <em>I/O action</em><ul>
+<li>Result type <code>()</code> -- empty tuple, aka <em>unit</em></li>
+</ul>
+</li>
+<li>I/O action performed when named as <strong><code>main</code></strong><ul>
+<li>And the program is run</li>
 </ul>
 </li>
 </ul></article>
@@ -1253,13 +1266,13 @@ putStrLn "hello, world" :: IO ()
     </hgroup>
     <article >
       <ul>
-<li>One I/O action seems limiting, but...</li>
+<li>One I/O action seems limiting...</li>
 <li>Use <strong><code>do</code></strong> syntax to glue together several I/O actions into one</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>main = do
-    putStrLn "Hello, what's your name?"
+    print "Hello, what's your name?"
     name &lt;- getLine
-    putStrLn ("Hey " ++ name ++ ", you rock!")
+    print ("Hey " ++ name ++ ", you rock!")
 </code></pre>
 <ul>
 <li>This reads like an imperative program<ul>
@@ -1279,11 +1292,14 @@ putStrLn "hello, world" :: IO ()
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t getLine
+      <figure>
+        <img src="images/algo/luggage.png">
+        
+      </figure><pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t getLine
 getLine :: IO String
 </code></pre>
 <ul>
-<li>What's the meaning of "<code>name &lt;- getLine</code>" then?<ul>
+<li>What does "<code>name &lt;- getLine</code>" mean?<ul>
 <li>Perform the I/O action <code>getLine</code> (get a line from <em>stdin</em>)</li>
 <li>Then bind its result value to <code>name</code></li>
 </ul>
@@ -1292,10 +1308,10 @@ getLine :: IO String
 <li>Is sent into the real, impure world</li>
 <li>Do something there</li>
 <li>Maybe bring back some data</li>
-<li>In particular, <code>getLine</code> contains a <code>String</code></li>
 </ul>
 </li>
-<li>Construct <code>&lt;-</code>: only way to open the box and get its data<ul>
+<li>Arrow (<code>&lt;-</code>) to open box and get data<ul>
+<li>In particular, <code>getLine</code> contains a <code>String</code></li>
 <li>This can be done only inside another I/O action</li>
 </ul>
 </li>
@@ -1343,7 +1359,7 @@ getLine :: IO String
 <li>To get the value out of an I/O action<ul>
 <li>Perform the action inside another I/O action by binding it to a name with <code>&lt;-</code></li>
 <li>Deal with impure data, in impure env</li>
-<li>Keep the I/O parts of your code as small as possible!</li>
+<li><em>Keep the I/O parts of your code as small as possible!</em></li>
 </ul>
 </li>
 </ul></article>
@@ -1365,7 +1381,7 @@ getLine :: IO String
     if null line
         then return ()
         else do
-            putStrLn $ reverseWords line
+            print $ reverseWords line
             main
 reverseWords :: String -&gt; String
 reverseWords = unwords . map reverse . words
@@ -1388,7 +1404,7 @@ reverseWords = unwords . map reverse . words
     </hgroup>
     <article >
       <ul>
-<li><code>return</code> in Haskell is different from other languages<ul>
+<li><code>return</code> in Haskell is <em>different</em> from other languages<ul>
 <li>It doesn't stop the execution of the I/O <code>do</code> block</li>
 <li>It just makes an I/O action out of a pure value</li>
 </ul>
@@ -1399,14 +1415,14 @@ reverseWords = unwords . map reverse . words
 </ul>
 </li>
 <li>We can use <code>return</code> in combination with <code>&lt;-</code><ul>
-<li>In fact, they're sort of opposite</li>
+<li>In fact, they're sort of <em>opposite</em></li>
 </ul>
 </li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>main = do
     a &lt;- return "hell"     -- hey, just use let!
     b &lt;- return "yeah!"    -- hey, just use let!
-    putStrLn $ a ++ " " ++ b
+    print $ a ++ " " ++ b
 </code></pre></article>
  
 </slide>
@@ -1414,7 +1430,7 @@ reverseWords = unwords . map reverse . words
 <slide  >
   
     <hgroup>
-      <h2>putChar e putStr</h2>
+      <h2>putChar and putStr</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1432,7 +1448,8 @@ putStr (x:xs) = do
     putStr xs
 </code></pre>
 <ul>
-<li><code>print</code> prints an instance of <code>Show</code>; it's basically <code>putStrLn . show</code></li>
+<li><code>print</code> prints an instance of <code>Show</code></li>
+<li>It's basically <code>putStrLn . show</code></li>
 <li><code>getChar</code> reads a <code>Char</code> from the input (with buffering)</li>
 </ul></article>
  
@@ -1448,11 +1465,11 @@ putStr (x:xs) = do
       <ul>
 <li>Like a control flow statement, but actually a normal f.</li>
 <li>It takes a boolean value and an I/O action<ul>
-<li>If value is True, it returns the same I/O action</li>
-<li>If it's False, it returns <code>return ()</code> -- void action</li>
+<li>If value is <code>True</code>, it returns the same I/O action</li>
+<li>If it's <code>False</code>, it returns <code>return ()</code> -- void action</li>
 </ul>
 </li>
-<li>Useful for encapsulating the <code>if ... else return ()</code> pattern</li>
+<li>Encapsulats <code>if ... else return ()</code> pattern</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>import Control.Monad
 
@@ -1473,7 +1490,8 @@ main = do
     </hgroup>
     <article >
       <ul>
-<li>It takes a list of I/O actions and returns an I/O action to perform theme in sequence</li>
+<li>It takes a list of I/O actions</li>
+<li>It returns an I/O action to perform them in sequence</li>
 <li>Action result: list of the results</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>sequence :: [IO a] -&gt; IO [a]
@@ -1512,7 +1530,7 @@ main = do
 [(),(),(),(),()]
 </code></pre>
 <ul>
-<li>What's with the [(),(),(),(),()] at the end?</li>
+<li>What's with the <code>[(),(),(),(),()]</code> at the end?</li>
 <li>When we evaluate an I/O action in GHCI, it's performed, and...</li>
 <li>Then its result is printed out, unless it's <code>()</code></li>
 </ul></article>
@@ -1559,9 +1577,9 @@ Prelude&gt; mapM_ print [1,2,3]
 import Data.Char
 
 main = forever $ do
-    putStr "Give me some input: "
+    print "Give me some input:"
     l &lt;- getLine
-    putStrLn $ map toUpper l
+    print $ map toUpper l
 </code></pre></article>
  
 </slide>
@@ -1581,11 +1599,11 @@ main = forever $ do
 
 main = do
     colors &lt;- forM [1,2,3,4] (\a -&gt; do
-        putStrLn $ "Which color do you associate with the number " ++ show a ++ "?"
+        print $ "Which color do you associate with the number " ++ show a ++ "?"
         color &lt;- getLine
         return color)
-    putStrLn "The colors that you associate with 1, 2, 3 and 4 are: "
-    mapM putStrLn colors
+    print "The colors that you associate with 1, 2, 3 and 4 are: "
+    mapM print colors
 </code></pre>
 <ul>
 <li>Simply <code>getLine</code>, which already contains same data<ul>
@@ -1599,12 +1617,79 @@ main = do
 <slide  >
   
     <hgroup>
-      <h2>Files and streams</h2>
+      <h2>Interact</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>[Just few pointers]</li>
+<li><code>getContents</code>: whole stdin as a <code>String</code> (<em>lazy</em>)</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>main = do
+    contents &lt;- getContents
+    putStr (shortLinesOnly contents)
+
+shortLinesOnly :: String -&gt; String
+shortLinesOnly input =
+    let allLines = lines input
+        shortLines = filter (\line -&gt; length line &lt; 10) allLines
+        result = unlines shortLines
+    in  result
+</code></pre>
+<ul>
+<li><code>interact</code>: applies a <code>String -&gt; String</code> f. between stdin and stdout (<em>lazy</em>)</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>main = interact $ unlines . filter ((&lt;10) . length) . lines
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Basic operations on files</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Basic operations on file:<ul>
+<li>Open/close: <code>openFile</code>, <code>hClose</code>, <code>withFile</code></li>
+<li>Mode: <code>ReadMode | WriteMode | AppendMode | ReadWriteMode</code></li>
+<li>Read: <code>hGetContents</code>, <code>hGetLine</code>, <code>hGetChar</code></li>
+<li>Write: <code>hPrint</code>, <code>hPutStr</code>, <code>hPutStrLn</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>import System.IO
+import Data.Char
+
+main = do
+    withFile "something.txt" ReadMode (\handle -&gt; do
+        contents &lt;- hGetContents handle
+        putStr contents)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Read and write on files</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>simpler</strong> f.s: <code>readFile</code>, <code>writeFile</code>, <code>appendFile</code></li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>import System.IO
+import Data.Char
+
+main = do
+    contents &lt;- readFile "girlfriend.txt"
+    writeFile "girlfriendcaps.txt" (map toUpper contents)
+</code></pre>
+<ul>
+<li>F.s to <em>split</em> text: <code>lines</code>, <code>words</code>, <code>splitOn</code></li>
+<li>F.s to <em>join</em> text: <code>unlines</code>, <code>unwords</code></li>
 </ul></article>
  
 </slide>
@@ -1617,12 +1702,11 @@ main = do
     </hgroup>
     <article >
       <ul>
-<li><code>getStdGen</code> of type <code>IO StdGen</code></li>
-<li>At program start, it asks the system for a rnd generator and stores that in a so called global generator</li>
-<li>Notice: performing <code>getStdGen</code> twice will ask the system for the same global generator twice<ul>
-<li><code>newStdGen</code> instead updates the global rnd gen and encapsulates another gen as result</li>
+<li><code>getStdGen</code>, get the global rnd generator (<code>:: IO StdGen</code>)<ul>
+<li>Performed twice: get same generator</li>
 </ul>
 </li>
+<li><code>newStdGen</code>, get a new generator, update the global one</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>import System.Random
 
@@ -1651,47 +1735,14 @@ eiqgcxykivpudlsvvjpg
 
 askForNumber :: StdGen -&gt; IO ()
 askForNumber gen = do
-    let (randNumber, newGen) = randomR (1,10) gen :: (Int, StdGen)
-    putStr "Which number in the range from 1 to 10 am I thinking of? "
-    numberString &lt;- getLine
-    when (not $ null numberString) $ do
-        let number = read numberString
-        if randNumber == number
-            then putStrLn "You are correct!"
-            else putStrLn $ "Sorry, it was " ++ show randNumber
+    let (secret, newGen) = randomR (1,10) gen :: (Int, StdGen)
+    print "Which number (1-10) am I thinking of?"
+    guess &lt;- getLine
+    when (not $ null guess) $ do
+        if secret == (read guess)
+            then print "You are correct!"
+            else print $ "Sorry, it was " ++ show secret
         askForNumber newGen
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>I/O exceptions</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li><code>catch :: IO a -&gt; (IOError -&gt; IO a) -&gt; IO a</code><ul>
-<li>It takes two parameters: an I/O action (e.g., open a file) and an *handler</li>
-<li>The handler is invoked if an exception is thrown</li>
-<li>The handler takes an <code>IOError</code></li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="haskell"><code>import System.Environment
-import System.IO
-import System.IO.Error
-
-main = toTry `catch` handler
-
-toTry :: IO ()
-toTry = do (fileName:_) &lt;- getArgs
-           contents &lt;- readFile fileName
-           putStrLn $ "The file has " ++ show (length (lines contents)) ++ " lines!"
-
-handler :: IOError -&gt; IO ()
-handler e = putStrLn "Whoops, had some trouble!"
 </code></pre></article>
  
 </slide>
