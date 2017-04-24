@@ -1,0 +1,1282 @@
+title: Haskell
+subtitle: Functional programming
+figure: images/fun/haskell-logo.png
+
+---
+
+title: Why learning a new language
+figure: images/fun/rbfuller.jpg
+
+- Because it makes easier to perform some tasks
+- To land a (better) job
+- To work with some other software / in some environment
+- To learn a new way of thinking
+
+> A language that does not affect the way you think about programming, is not worth knowing. *(Alan Perlis, 1966 Turing Award)*
+
+> If you want to teach people a new way of thinking, don't bother trying to teach them. Instead, give them a tool, the use of which will lead to new ways of thinking. *(Buckminster Fuller, Architect 1970 gold medal AIA)*
+
+---
+
+title: Functional paradigm
+figure: images/fun/function.png
+
+- Program execution: evaluation of *mathematical functions*
+- No *side effects*: easier to verify correctness
+- *Declarative* style: what the result is, vs. how to calculate it
+- *Immutable* variables and values: fewer inter-dependences
+- Optimizable: fit for *parallel programming*
+- *Expression*-oriented: everything is an expression, producing a value
+- Functions are values, too: used as parameters and results of other, *higher-order*, functions
+
+---
+
+title: Side effects
+figure: images/fun/dognap.png
+
+- Modifications of objects passed as parameters or global variables, I/O operations...
+- Nullify **referential trasparency**
+    - Impossible to simplify, sustituting a call to f. with its return value (ex. if I/O ops are present)
+- Make f. **non-idempotent**
+    - Called repeatedly, with the same params, returns different results
+- → Mathematical proofs are difficult
+    - `z = f(sqrt(2), sqrt(2))`
+    - `s = sqrt(2)` <br> `z = f(s, s)`
+
+---
+
+title: Non-idempotent functions
+
+- Example of simplification
+    - `p = rq(x) + rq(y) * (rq(x) – rq(x))`
+    - `p = rq(x) + rq(y) * (0)`
+    - `p = rq(x) + 0`
+    - `p = rq(x)`
+- But if `rq` has side effects, you can't!
+
+code: python
+
+    base_value = 0  # global variable
+
+    def rq(x: int) -> int:
+        global base_value
+        base_value += 1
+        return x + base_value
+
+---
+
+title: Haskell
+figure: images/fun/haskell-xkcd.png
+
+- Pure functional language named after Haskell Curry
+    - Mathematical logics, 1900-1982
+- Compiled to native code, no virtual machine
+    - Concise, declarative, efficient
+- Static typing
+    - Type variables, typeclasses, type constaints
+- Lazy evaluation
+- Pattern matching
+
+---
+
+title: The Top 30 (IEEE Spectrum, 2016)
+class: large-image
+
+![](images/dev/languages-spectrum-2016.png)
+
+---
+
+title: Weekend programming
+class: large-image
+
+![](images/dev/so-weekend.png)
+
+---
+
+title: Interactive shell
+figure: images/fun/learn-haskell.png
+
+- Install the “*Glasgow Haskell Compiler*”
+    - `sudo apt install ghc`
+- REPL: Read-Eval-Print Loop
+    - `ghci`
+- Expressions and operators
+    - `+, -, *, /, ^, **`
+    - `&&, ||, not`
+    - `==, /=, <, <=, >, >=`
+
+code: haskell
+
+    Prelude> 2 ^ 3
+    8
+
+>
+
+<http://learnyouahaskell.com/>
+
+<http://www.haskell.org/>
+
+---
+
+title: Prefix and infix calls
+
+- Function calling: prefix notation
+    - F. name and params separated by blanks
+    - No parens
+- Infix notation
+    - Surround f. name with ticks (`)
+    - Operator (f. named with symbols)
+
+code: haskell
+
+    Prelude> div 5 3
+    1
+    Prelude> 5 `div` 3
+    1
+    Prelude> 5 `rem` 3
+    2
+
+---
+
+title: Defining functions
+figure: images/fun/fx.png
+
+code: haskell
+
+    doubleMe x = x + x
+
+    doubleUs x y = doubleMe x + doubleMe y
+
+- Save the previous code in a file: `baby.hs`
+- In GHCi enter: `:l baby`
+
+code: haskell
+
+    Prelude> :l baby
+    Prelude> doubleMe 5
+    10
+    Prelude> doubleUs 4 3
+    14
+
+---
+
+title: Variables
+
+- A function without params is a constant
+    - I.e., an *immutable* variable
+
+code: haskell
+
+    greetings = "Hi, there!"
+    k = 11
+    k = k + 1    -- error!
+
+- Use **`let`** to define functions directly in GHCi
+    - Doing `let a = 1` inside GHCi is the equivalent of...
+    - writing `a = 1` in a script and then loading it
+
+
+code: haskell
+
+    Prelude> let doubleMe x = x + x
+    Prelude> doubleMe 5
+    10
+
+---
+
+title: Lists
+figure: images/fun/shopping-list.jpg
+
+- Much like shopping lists in the real world, lists in Haskell are very useful
+- Lists are denoted by square brackets and the values in the lists are separated by commas
+
+code: haskell
+
+    Prelude> let lostNumbers = [12,99,37]
+    Prelude> lostNumbers
+    [12,99,37]
+
+![](images/fun/linked-list.svg)
+
+---
+
+title: Homogeneous lists
+
+- In Haskell, lists are a homogenous data structure
+    - They store several elements of the same type
+    - We can have a list of integers or a list of characters but we can't have a list that has a few integers and then a few characters
+    - `[1,2,'a',3,'b','c',4]  -- error!`
+- Strings are just lists of characters
+    - `"hello"` is just syntactic sugar for `['h','e','l','l','o']`
+    - Because strings are lists, we can use list functions on them, which is really handy
+
+>
+
+The character type is denoted as a character between single quotes
+
+---
+
+title: List concatenation
+
+- A common task is putting two lists together
+- This is done by using the `++` operator
+
+code: haskell
+
+    Prelude> [1,2,3,4] ++ [9,10,11,12]
+    [1,2,3,4,9,10,11,12]
+    Prelude> [1,2,3] ++ [4]
+    [1,2,3,4]
+    Prelude> "hello" ++ " " ++ "world"
+    "hello world"
+    Prelude> ['w','o'] ++ ['o','t']
+    "woot"
+
+>
+
+Even if you're adding an element to the end of a list with `++`, you have to surround it with square brackets so it becomes a list
+
+---
+
+title: Prepending an element
+
+- Watch out when repeatedly using the `++` operator on long strings
+    - When you put together two lists, internally, Haskell has to walk through (and duplicate) the whole list on the left side of `++`
+- However, putting something at the beginning of a list using the `:` operator (also called the *cons* operator) is instantaneous
+    - `:` takes a value and a list, whereas `++` takes two lists
+
+code: haskell
+
+    Prelude> 'A':" SMALL CAT"
+    "A SMALL CAT"
+    Prelude> 5:[1,2,3,4,5]
+    [5,1,2,3,4,5]
+
+---
+
+title: More on lists
+
+- `[1,2,3]` is actually just syntactic sugar for `1:2:3:[]`
+    - `[]` is an empty list; if we prepend `3` to it, it becomes `[3]`; if we prepend `2` to that, it becomes `[2,3]`, and so on
+- Note: `[], [[]] and[[],[],[]]` are all different things
+    - The first one is an empty list
+    - The seconds one is a list that contains one empty list
+    - The third one is a list that contains three empty lists
+
+---
+
+title: Get an element
+
+- If you want to get an element out of a list by index, use `!!`
+- The indices start at `0`
+
+code: haskell
+
+    Prelude> "Steve Buscemi" !! 6
+    'B'
+    Prelude> [9.4,33.2,96.2,11.2,23.25] !! 1
+    33.2
+
+- But if you try to get the sixth element from a list that only has four elements, you'll get an error so be careful!
+
+---
+
+title: Lists of lists
+
+code: haskell
+
+    Prelude> let b = [[1,2,3,4],[5,3,3,3],[1,2,2,3,4],[1,2,3]]
+    Prelude> b
+    [[1,2,3,4],[5,3,3,3],[1,2,2,3,4],[1,2,3]]
+    Prelude> b ++ [[1,1,1,1]]
+    [[1,2,3,4],[5,3,3,3],[1,2,2,3,4],[1,2,3],[1,1,1,1]]
+    Prelude> [6,6,6]:b
+    [[6,6,6],[1,2,3,4],[5,3,3,3],[1,2,2,3,4],[1,2,3]]
+    Prelude> b !! 2
+    [1,2,2,3,4]
+
+- The lists within a list can be of different lengths but they can't be of different types
+- Just like you can't have a list that has some characters and some numbers, you can't have a list that has some lists of characters and some lists of numbers
+
+---
+
+title: List comparison
+
+- Lists can be compared if the stuff they contain can be compared
+- When using `<, <=, >, >=` to compare lists, they are compared in *lexicographical* order
+    - First the heads are compared
+    - If they are equal then the second elements are compared, etc.
+
+code: haskell
+
+    Prelude> [3,2,1] > [2,1,0]
+    True
+    Prelude> [3,2,1] > [2,10,100]
+    True
+    Prelude> [3,4,2] > [3,4]
+    True
+    Prelude> [3,4,2] == [3,4,2]
+    True
+
+---
+
+title: List monster
+figure: images/fun/list-monster.png
+
+- If we think of a list as a monster, here's what's what
+- `head` takes a list and returns its head
+    - The head of a list is basically its first element.
+- `tail` takes a list and returns its tail
+    - In other words, it chops off a list's head.
+- `last` takes a list and returns its last element
+- `init` takes a list and returns everything except its last element
+
+---
+
+title: List errors
+
+code: haskell
+
+    Prelude> head [5,4,3,2,1]
+    5
+    Prelude> tail [5,4,3,2,1]
+    [4,3,2,1]
+    Prelude> last [5,4,3,2,1]
+    1
+    Prelude> init [5,4,3,2,1]
+    [5,4,3,2]
+    Prelude> head []
+    *** Exception: Prelude.head: empty list
+
+- When using `head, tail, last, init`, be careful not to use them on empty lists
+- This error cannot be caught at compile time
+
+---
+
+title: Size and reverse
+
+- `length` takes a list and returns its length, obviously
+- `null` checks if a list is empty; if it is, it returns `True`, otherwise it returns `False`
+- `reverse` reverses a list
+
+code: haskell
+
+    Prelude> length [5,4,3,2,1]
+    5
+    Prelude> null [1,2,3]
+    False
+    Prelude> null []
+    True
+    Prelude> reverse [5,4,3,2,1]
+    [1,2,3,4,5]
+
+---
+
+title: Taking from a list
+
+- `take` takes number and a list
+- It extracts that many elements from the beginning of the list
+
+code: haskell
+
+    Prelude> take 3 [5,4,3,2,1]
+    [5,4,3]
+    Prelude> take 1 [3,9,3]
+    [3]
+    Prelude> take 5 [1,2]
+    [1,2]
+    Prelude> take 0 [6,6,6]
+    []
+
+- See how if we try to take more elements than there are in the list, it just returns the list
+- If we try to take 0 elements, we get an empty list
+
+---
+
+title: Dropping from a list
+
+- `drop` works in a similar way, only it drops the number of elements from the beginning of a list
+
+code: haskell
+
+    Prelude> drop 3 [8,4,2,1,5,6]
+    [1,5,6]
+    Prelude> drop 0 [1,2,3,4]
+    [1,2,3,4]
+    Prelude> drop 100 [1,2,3,4]
+    []
+
+---
+
+title: Membership
+
+- `elem` takes a thing and a list of things and tells us if that thing is an element of the list
+    - It's usually called as an infix function because it's easier to read that way
+
+code: haskell
+
+    Prelude> 4 `elem` [3,4,5,6]
+    True
+    Prelude> 10 `elem` [3,4,5,6]
+    False
+
+---
+
+title: Aggregate functions
+
+- `sum` takes a list of numbers and returns their sum
+- `product` takes a list of numbers and returns their product
+- `maximum` takes a list of stuff (that can be put in some kind of order) and returns the biggest element
+- `minimum` returns the smallest
+
+code: haskell
+
+    Prelude> sum [5,2,1,6,3,2,5,7]
+    31
+    Prelude> product [6,2,1,2]
+    24
+    Prelude> minimum [8,4,2,1,5,6]
+    1
+    Prelude> maximum [1,9,2,3,4]
+    9
+
+---
+
+title: Ranges
+
+- Ranges are a way of making lists that are arithmetic sequences of elements that can be enumerated
+    - Integers, characters, ...
+
+code: haskell
+
+    Prelude> [1..10]
+    [1,2,3,4,5,6,7,8,9,10]
+    Prelude> ['a'..'z']
+    "abcdefghijklmnopqrstuvwxyz"
+    Prelude> ['K'..'Z']
+    "KLMNOPQRSTUVWXYZ"
+
+---
+
+title: Ranges with step
+
+- You can also specify a step
+    - Separate the first two elements with a comma
+    - Then specify what the upper limit is
+    - Works only for arithmetic sequences
+
+code: haskell
+
+    Prelude> [2,4..20]  -- Even numbers between 1 and 20
+    [2,4,6,8,10,12,14,16,18,20]
+    Prelude> [3,6..20]  -- Every third number between 1 and 20
+    [3,6,9,12,15,18]
+    Prelude> [5,4..1]   -- Negative step: you can't just do `[5..1]`
+    [5,4,3,2,1]
+
+---
+
+title: Unbounded ranges
+
+- By not specifying an upper limit in a range, you create an infinite list
+    - Haskell is *lazy*, it won't try to evaluate the infinite list immediately...
+    - Otherwise it would never finish
+    - It'll wait to see what you want to get out of that infinite list
+    - If you just try to display the result, it will go on forever so you have to slice it off somewhere
+- Ex.: get the first 24 multiples of 13
+    - `[13,26..24*13]`
+    - `take 24 [13,26..]`
+
+---
+
+title: List repetitions
+
+- `cycle` takes a list and cycles it into an infinite list
+
+code: haskell
+
+    Prelude> take 10 (cycle [1,2,3])
+    [1,2,3,1,2,3,1,2,3,1]
+    Prelude> take 12 (cycle "LOL ")
+    "LOL LOL LOL "
+
+---
+
+title: More list repetitions
+
+- `repeat` takes an element and produces an infinite list of just that element
+    - It's like cycling a list with only one element
+
+code: haskell
+
+    Prelude> take 10 (repeat 5)
+    [5,5,5,5,5,5,5,5,5,5]
+
+- Although it's simpler to just use the `replicate` function if you want some number of the same element in a list
+
+code: haskell
+
+    Prelude> replicate 3 10
+    [10,10,10]
+
+---
+
+title: Python's corner
+class: segue dark
+
+---
+
+title: Python ranges
+
+- *List slice*, to get some sublist
+- *Range*, to get some sequence of integers
+    - Min val is included
+    - Max val is excluded
+    - Optional step
+- Pyhton ranges are *lazy*, too
+
+code: python
+
+    >>> range(5, 15, 2)
+    range(5, 15, 2)
+    >>> for v in range(5, 15, 2): print(v, end=' ')
+    
+    5 7 9 11 13
+    >>> list(range(5, 15, 2))
+    [5, 7, 9, 11, 13]
+
+---
+
+title: Python iterators
+
+code: python
+
+    class Fib:
+        '''iterator that yields Fibonacci numbers'''
+
+        def __init__(self, max):
+            self._max = max
+
+        def __iter__(self):
+            self._a = 1
+            self._b = 1
+            return self
+
+        def __next__(self):
+            fib = self._a
+            if fib > self._max:
+                raise StopIteration
+            self._a, self._b = self._b, self._a + self._b
+            return fib
+
+---
+
+title: Using an iterator
+
+code: python
+
+    >>> f = Fib(13)
+    >>> f
+    <__main__.Fib object at 0x7fc31dbbdbe0>
+    >>> for v in f: print(v, end=' ')
+
+    1 1 2 3 5 8 13 
+    >>> list(f)
+    [1, 1, 2, 3, 5, 8, 13]
+
+---
+
+title: Python generators
+
+code: python
+
+    def fib(max):
+        '''generator that yields Fibonacci numbers'''
+
+        a, b = 1, 1
+        while a <= max:
+            yield(a)
+            a, b = b, a + b
+
+code: python
+
+    >>> f = fib(13)
+    >>> f
+    <generator object fib at 0x7fc31db9b308>
+    >>> list(f)
+    [1, 1, 2, 3, 5, 8, 13]
+    >>> f.__iter__
+    <method-wrapper '__iter__' of generator object at 0x7fc31db9b308>
+    >>> f.__next__
+    <method-wrapper '__next__' of generator object at 0x7fc31db9b308>
+
+---
+
+title: Unbounded sequences
+
+code: python
+
+    def fib2():
+        '''generator that yields Fibonacci numbers'''
+
+        a, b = 1, 1
+        while True:
+            yield(a)
+            a, b = b, a + b
+
+code: python
+
+    >>> f = fib2()
+    >>> f
+    <generator object fib2 at 0x7f5946caf4c0>
+    >>> from itertools import islice
+    >>> islice(f, 7)
+    <itertools.islice object at 0x7f594a2f7ea8>
+    >>> list(islice(f, 7))
+    [1, 1, 2, 3, 5, 8, 13]
+
+---
+
+title: Infinite iterators
+
+- Much more, in the `itertools` module
+    - See: <https://docs.python.org/3/library/itertools.html>
+- `count(start, [step])`
+    - `count(10, 2) --> 10 12 14 ...`
+- `cycle(p)`
+    - `cycle('ABC') --> A B C A B C ...`
+- `repeat(elem [,n])`
+    - `repeat(10) --> 10 10 10 ...`
+
+>
+
+See also: <https://docs.python.org/3/library/functools.html>
+
+See also: <https://docs.python.org/3/library/operator.html>
+
+---
+
+title: List comprehensions
+class: segue dark
+
+---
+
+title: List comprehensions
+
+- In mathematics, set comprehensions are normally used for building more specific sets out of general sets
+    - Ex.: set of first ten even natural numbers
+    - `S = {2·x | x ∈ N, x ≤ 10}`
+
+code: haskell
+
+    Prelude> [x*2 | x <- [1..10]]
+    [2,4,6,8,10,12,14,16,18,20]
+
+- In Haskell, list comprehensions are very similar to set comprehensions
+    - The part before the pipe is called the *output function*
+    - `x` is the *variable*
+    - `[1..10]` is the *input list*
+    - For every element in `[1..10]` (which we have bound to `x`), we get that element, only doubled
+
+---
+
+title: Filtered comprehensions
+
+- Now let's add a condition (or a *predicate*) to that comprehension
+    - Weeding out lists by predicates is also called *filtering*
+- Ex.: all numbers from 50 to 100 whose remainder when divided with the number 7 is 3
+
+code: haskell
+
+    Prelude> [x | x <- [50..100], x `mod` 7 == 3]
+    [52,59,66,73,80,87,94]
+
+- *Python* also has comprehensions
+
+code: python
+
+    >>> [x for x in range(50, 101) if  x % 7 == 3]
+    [52, 59, 66, 73, 80, 87, 94]
+
+---
+
+title: Examples of comprehensions
+
+code: haskell
+
+    Prelude> let boomBangs xs = [if x < 10 then "BOOM!"
+                          else "BANG!" | x <- xs, odd x]
+    Prelude> boomBangs [7..13]
+    ["BOOM!","BOOM!","BANG!","BANG!"]
+
+code: haskell
+
+    Prelude> let removeNonUppercase st = [c | c <- st,
+                                    c `elem` ['A'..'Z']]
+    Prelude> removeNonUppercase "IdontLIKEFROGS"
+    "ILIKEFROGS"
+
+---
+
+title: More comprehensions
+
+- We can include several predicates
+
+code: haskell
+
+    Prelude> [x | x <- [10..20], x /= 13, x /= 15, x /= 19]
+    [10,11,12,14,16,17,18,20]
+
+- We can also draw from several lists
+    - Produce all *combinations* of the input lists
+    - Then join them by the output function
+
+code: haskell
+
+    Prelude> [x*y | x <- [2,5,10], y <- [8,10,11]]
+    [16,20,22,40,50,55,80,100,110]
+
+- In *Python* too
+
+code: python
+
+    >>> [x * y for x in (2, 5, 10) for y in (8, 10, 11)]
+    [16, 20, 22, 40, 50, 55, 80, 100, 110]
+
+---
+
+title: Tuples
+
+- Tuples are a way to store several values into a single value
+    - They are denoted with parentheses and their components are separated by commas
+- A list of numbers is... a list of numbers
+    - That's its type
+    - It can have only one number in it or an infinite amount of numbers
+- A tuple is different
+    - You know exactly how many values you want to combine and their own type
+    - A tuple can combine several types: values don't have to be homogenous
+
+---
+
+title: Functions on tuples
+
+- Tuples can be compared with each other if they have the same size and their components can be compared
+- The type of a tuple depends on how many components it has and the types of the components
+    - Each different size of tuple is its own type
+    - You can't write a general function to append an element to a generic tuple
+- Two useful functions that operate on pairs (*and only pairs!*):
+    - `fst` takes a pair and returns its first component
+    - `snd` takes a pair and returns its second component
+
+code: haskell
+
+    Prelude> fst (8,11)
+    8
+    Prelude> snd ("Wow", False)
+    False
+
+---
+
+title: Zipping
+figure: images/fun/zip.jpg
+
+- `zip` takes two lists and returns one list, by joining the matching elements into pairs
+    - The 1st element goes with the 1st, 2nd with 2nd, etc.
+    - The two lists can contain different types
+    - Ex.: to traverse two lists simultaneously
+
+code: haskell
+
+    Prelude> zip [1,2,3,4,5] [5,5,5,5,5]
+    [(1,5),(2,5),(3,5),(4,5),(5,5)]
+    Prelude> zip [1 .. 5] ["one", "two", "three", "four", "five"]
+    [(1,"one"),(2,"two"),(3,"three"),(4,"four"),(5,"five")]
+
+---
+
+title: Zipping infinite lists
+
+- If a list is longer than the other, it gets *cut off*
+- Haskell is *lazy*: zip finite lists with infinite lists
+
+code: haskell
+
+    Prelude> zip [1..] ["apple", "orange", "cherry", "mango"]
+    [(1,"apple"),(2,"orange"),(3,"cherry"),(4,"mango")]
+
+---
+
+title: Zipping in Python
+
+- Python's `zip` is *lazy*, too
+- It can work on infinite sequences
+
+code: python
+
+    >>> list(zip([0, 1, 2, 3], ['A', 'B', 'C', 'D']))
+    [(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
+    >>> list(zip(count(0), "ABCD"))
+    [(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
+    >>> list(enumerate("ABCD"))
+    [(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
+    >>> for i, v in enumerate([17, 21, 19]): print(i, v)
+    ... 
+    0 17
+    1 21
+    2 19
+
+---
+
+title: Ex.: Pythagoras
+
+- Which right triangle...
+    - that has integers for all sides...
+    - and all sides equal to or smaller than 10...
+    - has a perimeter of 24?
+
+---
+
+title: Types and typeclasses
+class: segue dark
+
+---
+
+title: Types
+
+- *Static type system*: type of every expression known at compile time → Safe and efficient code
+- *Type inference*: if we write a number, we don't have to tell Haskell it's a number
+- However, understanding the type system is very important.
+    - `:t` command tells us the type of an expression
+    - `::` is read as “*has type of*”
+
+code: haskell
+
+    Prelude> :t 'a'
+    'a' :: Char
+    Prelude> :t 4 == 5
+    4 == 5 :: Bool
+    Prelude> :t "HELLO!"
+    "HELLO!" :: [Char]
+    Prelude> :t (True, 'a')
+    (True, 'a') :: (Bool, Char)
+
+---
+
+title: Types of functions
+
+- Functions are expressions
+    - So they also have types and you can use `:t` on them
+- We can give functions an explicit type declaration
+
+code: haskell
+
+    removeNonUppercase :: [Char] -> [Char]
+    removeNonUppercase st = [ c | c <- st, c `elem` ['A'..'Z']]
+
+- `removeNonUppercase` has a type of `[Char] -> [Char]`
+    - It takes one string as a parameter and returns another as a result
+    - In this case, the compiler can infer by itself that it's a function from a string to a string!
+
+---
+
+title: Functions with several parameters
+
+- The *parameters* are all separated with `->`
+- The *return type* is the last item
+- There's no special distinction between the parameters and the return type
+
+code: haskell
+
+    addThree :: Int -> Int -> Int -> Int
+    addThree x y z = x + y + z
+
+---
+
+title: Integer numbers
+
+- `Integer` stands for (unbounded) integer
+- `Int` stands for (bounded) integer -- It's more efficient
+
+code: haskell
+
+    factorial :: Integer -> Integer
+    factorial n = product [1..n]
+
+    Prelude> factorial 50
+    30414093201713378043612608166064768844377641568960512000000000000
+
+---
+
+title: Real numbers
+
+- `Float` is a real floating point with single precision
+- `Double` is a real floating point with double precision
+
+code: haskell
+
+    circumference :: Float -> Float
+    circumference r = 2 * pi * r
+
+    circumference' :: Double -> Double
+    circumference' r = 2 * pi * r
+
+    Prelude> circumference 4.0
+    25.132742
+    Prelude> circumference' 4.0
+    25.132741228718345
+
+---
+
+title: More types
+
+- `Bool` is a boolean type, with only two possible values: `True` and `False`
+- `Char` represents a character (denoted by single quotes)
+- `String` is an alias for a list of characters (denoted by double quotes)
+- `Tuples` are types, which depend on their length as well as the types of their components
+
+---
+
+title: Type variables
+
+- What is the type of the `head` function?
+
+code: haskell
+
+    Prelude> :t head
+    head :: [a] -> a
+
+- Types are written in capital case, so `a` isn't exactly a type
+- It's actually a *type variable*
+    - It can be of any type, much like *generics* in other languages
+- Functions that have type variables are called *polymorphic*
+    - Compile-time polymorphism
+
+---
+
+title: Multiple type variables
+
+- What is the type of the `fst` function?
+
+code: haskell
+
+    Prelude> :t fst
+    fst :: (a, b) -> a
+
+- `fst` takes a tuple which contains two types, and returns an element of the same type as first component
+- Note: `a` and `b` are different type variables, but they don't have to be different types
+
+---
+
+title: Class constraint
+
+- What's the type signature of the `==` function?
+- The equality function takes any two values that are of the same type and returns a `Bool`
+- Everything before the `=>` symbol is called a *class constraint*
+    - The type of those two values must be a member of `Eq`
+
+code: haskell
+
+    Prelude> :t (==)
+    (==) :: (Eq a) => a -> a -> Bool
+
+- Note: the equality operator, `==`, is a function
+    - So are `+, *, -, /` and pretty much all operators
+    - A f. named only with special chars is infix by default
+    - Handle an op. as a normal f.: surround it in parentheses
+
+---
+
+title: Typeclasses
+
+- A *typeclass* is a sort of interface that defines some behavior
+    - A *type* is a part of a typeclass, if it supports and implements the behavior the typeclass describes
+    - Kind of as Java interfaces, with different aim (...)
+- The **`Eq`** typeclass provides an interface for testing for equality
+    - Its member types implement op.s `==` and/or `/=`
+    - Most standard types are part of the `Eq` typeclass
+- The `elem` f. has a type of `(Eq a) => a -> [a] -> Bool`
+    - In fact, it uses `==` over a list to check whether some value is in it
+
+---
+
+title: Ord typeclass
+
+- **`Ord`** is for types that have an ordering
+    - Member types implement comparing f.s (`>, <, >=, <=`) and/or `compare`
+    - A member of `Ord` must first be member of `Eq`
+    - All types so far are part of `Ord` (except for f.s)
+- The `compare` f. takes two `Ord` members of the same type
+    - It returns an `Ordering`: a type that can be `GT, LT, EQ`
+
+code: haskell
+
+    Prelude> :t (>)
+    (>) :: (Ord a) => a -> a -> Bool
+    Prelude> "Abrakadabra" `compare` "Zebra"
+    LT
+    Prelude> 5 `compare` 3
+    GT
+
+---
+
+title: Show typeclass
+
+- **`Show`** is for types that can be represented as strings
+    - All types so far are part of `Show` (except for f.s)
+    - Member types implement the `show` f.
+- `show` takes a value (member of `Show`)
+    - Returns its *string* representation
+
+code:haskell
+
+    Prelude> show 3
+    "3"
+    Prelude> show 5.334
+    "5.334"
+    Prelude> show True
+    "True"
+
+---
+
+title: Read typeclass
+
+- **`Read`** is for types that can be extracted from strings
+    - All types so far are part of `Read` (except for f.s)
+    - Its member types implement the `read` f.
+- `read` takes a *string* and returns a member of `Read`
+
+code: haskell
+
+    Prelude> read "True" || False
+    True
+    Prelude> read "8.2" + 3.8
+    12.0
+    Prelude> read "5" - 2
+    3
+    Prelude> read "[1,2,3,4]" ++ [3]
+    [1,2,3,4,3]
+
+---
+
+title: Type annotations
+
+- Explicitly saying what the type of an expression should be
+    - Add `::` at the end of the expression and then specify a type
+
+code:haskell
+
+    Prelude> read "5" :: Int
+    5
+    Prelude> read "5" :: Float
+    5.0
+    Prelude> (read "5" :: Float) * 4
+    20.0
+    Prelude> read "[1,2,3,4]" :: [Int]
+    [1,2,3,4]
+    Prelude> read "(3, 'a')" :: (Int, Char)
+    (3, 'a')
+
+---
+
+title: Enum typeclass
+
+- **`Enum`** members are sequentially ordered types, which can be enumerated
+    - Its types define `succ` and `pred` f.s
+    - They can be used in list ranges
+    - Types include: `Bool, Char, Ordering, Int, Integer...`
+
+code:haskell
+
+    Prelude> ['a'..'e']
+    "abcde"
+    Prelude> [LT .. GT]
+    [LT,EQ,GT]
+    Prelude> [3 .. 5]
+    [3,4,5]
+    Prelude> succ 'B'
+    'C'
+
+---
+
+title: Other num classes
+
+- **`Bounded`** members have upper and lower bounds
+    - Its types define `maxBound` and `minBound` f.s
+    - Types: `Int, Char, Bool...`
+- **`Num`** is a numeric typeclass
+    - Its types define `+, -, *` etc.
+    - They must also be in `Show` and `Eq`
+    - Types: `Int, Integer, Float, Double`
+- **`Integral`** typeclass: `Int` and `Integer` types
+- **`Floating`** typeclass: `Float` and `Double` types
+
+---
+
+title: Pattern matching
+class: segue dark
+
+---
+
+title: Pattern matching
+
+- Specify patterns to which some data should conform, and...
+- Deconstruct the data according to those patterns
+- Define separate function bodies for different patterns
+    - Simple and readable code
+
+code: haskell
+
+    lucky :: (Integral a) => a -> String
+    lucky 7 = "LUCKY NUMBER SEVEN!"
+    lucky x = "Sorry, you're out of luck, pal!"
+
+---
+
+title: Factorial
+
+- Define a factorial function *recursively*, the way it is usually defined in mathematics
+    - The factorial of `0` is `1`
+    - The factorial of any positive integer is that integer multiplied by the factorial of its predecessor
+
+code: haskell
+
+    factorial :: (Integral a) => a -> a
+    factorial 0 = 1
+    factorial n = n * factorial (n - 1)
+
+- Checked from top to bottom
+    - Specify the most specific patterns first and then the more general ones later
+    - Pattern matching can also fail
+
+---
+
+title: Matching on tuples
+
+- Function that takes two vectors and adds them together
+    - Vectors in a 2D space, in the form of pairs
+    - Add their x components, and then their y components
+
+code: haskell
+
+    addVectors :: (Num a) => (a, a) -> (a, a) -> (a, a)
+    addVectors a b = (fst a + fst b, snd a + snd b)
+
+code: haskell
+
+    addVectors :: (Num a) => (a, a) -> (a, a) -> (a, a)
+    addVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
+
+---
+
+title: Extracting from triples
+
+code: haskell
+
+    first :: (a, b, c) -> a
+    first (x, _, _) = x
+
+    second :: (a, b, c) -> b
+    second (_, y, _) = y
+
+    third :: (a, b, c) -> c
+    third (_, _, z) = z
+
+- We really don't care what a part is, so we just write a `_`
+
+---
+
+title: Matching on lists
+
+- The `x:xs` pattern is used a lot, especially with recursive f.s
+- Bind the first 3 elements to variables and the rest of the list to another variable: `x:y:z:zs`
+    - It will only match against lists with 3 elements or more
+- Ex.: f. that tells us about first elements of a list
+
+code: haskell
+
+    tell :: (Show a) => [a] -> String
+    tell [] = "The list is empty"
+    tell (x:[]) = "The list has one element: " ++ show x
+    tell (x:y:[]) = "The list has two elements: " ++ show x ++ ", " ++ show y
+    tell (x:y:_) = "This long list starts with: " ++ show x ++ ", " ++ show y
+
+---
+
+title: Length and sum of a list
+
+code: haskell
+
+    length' :: (Num b) => [a] -> b
+    length' [] = 0
+    length' (_:xs) = 1 + length' xs
+
+code: haskell
+
+    sum' :: (Num a) => [a] -> a
+    sum' [] = 0
+    sum' (x:xs) = x + sum' xs
+
+- First we defined the the edge condition
+- Then in the second pattern we take the list apart by splitting it into a head and a tail
+
+>
+
+Let's see what happens if we call length' on "ham"... In the end we have 1 + (1 + (1 + 0)).
+
+---
+
+title: Patterns and whole values
+
+- Break something up according to a pattern, binding it to names, but still keep a reference to the whole thing
+    - Put a name and an `@` in front of a pattern
+    - Ex. `xs@(x:y:ys)` to get the whole list via `xs`
+
+code: haskell
+
+    capital :: String -> String
+    capital "" = "Empty string, whoops!"
+    capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
+
+>
+
+Note: you can't use ++ in patterns, like `xs ++ ys`. What would be in the first and what would be in the second list?
+
+---
+
+title: Guards
+figure: images/fun/guards.png
+
+- Like an `if` statement, but more readable
+- They play really nicely with patterns
+- The `where` clause define names, across guards
+- Ex.: a simple function that berates you differently depending on your “body mass index”
+
+code: haskell
+
+    bmiTell :: Float -> Float -> String
+    bmiTell weight height
+        | bmi <= 18.5 = "Underweight, you emo, you!"
+        | bmi <= 25.0 = "Normal. Pffft, I bet you're ugly!"
+        | bmi <= 30.0 = "Fat! Lose some weight, fatty!"
+        | otherwise   = "A whale, congratulations!"
+        where bmi = weight / (height ** 2)
+
+---
+
+title: Local definitions
+
+code: haskell
+
+    heron a b c =
+        sqrt (s * (s - a) * (s - b) * (s - c))
+        where s = (a + b + c) / 2
+
+    heron2 a b c =
+        let s = (a + b + c) / 2
+        in sqrt (s * (s - a) * (s - b) * (s - c))
+
+- `let` bindings *are expressions* themselves
+- `where` bindings are just syntactic constructs for f. definition
+    - `where` bindings can be used across `guards`
+
+
