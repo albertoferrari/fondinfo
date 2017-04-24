@@ -38,11 +38,13 @@ Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
 ## Introduzione alla programmazione
 
 - [Algoritmi in Python 3](p1-algoritmi.html)
-- [Sequenze di dati](p2-sequenze.html)
+- [Liste e grafica](p2-liste.html)
 - [Funzioni](p3-funzioni.html)
 - [Oggetti](p4-oggetti.html)
-- [Linguaggio C++11](p5-cpp.html)
-- [Interfacce grafiche in Qt](p6-gui.html)
+- [Ricorsione](p5-ricorsione.html)
+- [Matrici e file](p6-matrici.html)
+- [Linguaggio C++11](p7-cpp.html)
+- [Interfacce grafiche in Qt](p8-gui.html)
 
 - [Slide in PDF (2x2, non aggiornate)](programmazione-2x2.pdf)
 
