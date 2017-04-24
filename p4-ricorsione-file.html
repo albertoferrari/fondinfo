@@ -9,7 +9,7 @@ URL: https://code.google.com/p/io-2012-slides
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Matrici e file</title>
+  <title>Ricorsione e file</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -27,13 +27,359 @@ URL: https://code.google.com/p/io-2012-slides
   <aside class="gdbar"><img src="images/logo.png"></aside>
   <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
   <h1 data-config-title><!-- populated from slide_config.json --></h1>
-  <figure><img src="images/fun/magnetic-tape.png"></figure>
+  <figure><img src="images/fun/matryoshka.png"></figure>
   <hgroup>
     <h2>Introduzione alla programmazione</h2>
     <p>Michele Tomaiuolo<br>Ingegneria dell'Informazione, UniPR</p>
   </hgroup>
 </slide>
 
+
+<slide  >
+  
+    <hgroup>
+      <h2>Programmazione ricorsiva</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Molti linguaggi consentono ad una funzione (o procedura) di chiamare se stessa</li>
+<li>Chiamata ricorsiva, diretta o indiretta</li>
+</ul>
+<p><img alt="" src="images/fun/recursion.svg" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Fattoriale, ricorsione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/stack.svg">
+        
+      </figure><ul>
+<li>Ad ogni invocazione di una funzione, viene creato nello <strong>stack</strong> un nuovo record</li>
+<li><strong>Contesto locale</strong> alla particolare attivazione della funzione stessa</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>def factorial(n: int) -&gt; int:
+    result = 1
+    if n &gt; 1:
+        result = n * factorial(n - 1)
+    return result
+</code></pre>
+<p>Ai primordi (Fortran 66 ecc.) solo allocazione statica <br> Spazio fisso ed unico per dati locali ad una funzione → no ricorsione</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Stack dell'applicazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/books-stack.png">
+        
+      </figure><ul>
+<li>Pila: memoria dinamica <em>LIFO (Last In First Out)</em><ul>
+<li>Dimensione massima prefissata</li>
+</ul>
+</li>
+<li>Il programma ci memorizza automaticamente:<ul>
+<li><strong>Indirizzo di ritorno</strong> per la funzione <br> Inserito alla chiamata, estratto all'uscita</li>
+<li><strong>Parametri</strong> della funzione <br> Inseriti alla chiamata, eliminati all'uscita</li>
+<li><strong>Variabili locali</strong>, definite nella funzione <br> Eliminate fuori dall'ambito di visibilità</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="large-image" >
+  
+    <hgroup>
+      <h2>Vista semplificata dello stack</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/fun/stack-content.svg" /></p></article>
+ 
+</slide>
+
+<slide class="large-image" >
+  
+    <hgroup>
+      <h2>Record di attivazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/fun/records.svg" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Visibilità di una variabile</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Insieme di istruzioni da cui è accessibile<ul>
+<li><em>Ciclo di vita</em>: esistenza in memoria della var (etichetta)</li>
+<li>I valori (oggetti) in Python sono tutti gestiti dinamicamente</li>
+</ul>
+</li>
+<li>Visibilità <strong>globale</strong><ul>
+<li>Variabili fuori da ogni funzione - <em>Meglio evitare!</em></li>
+<li>Allocazione <em>statica</em> in alcuni linguaggi</li>
+</ul>
+</li>
+<li>Visibilità <strong>locale</strong> alla funzione<ul>
+<li>Variabili locali e parametri</li>
+<li>Allocazione <em>automatica</em> di spazio in <em>stack</em> ad ogni attivazione della funzione (possibile la ricorsione)</li>
+</ul>
+</li>
+<li>Visibilità locale al blocco (es. <code>if</code>): non in Python!</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esempi di ricorsione</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide class="large-image" >
+  
+    <hgroup>
+      <h2>I conigli di Fibonacci</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/fun/fib-rabbits.png" /></p>
+<blockquote></blockquote>
+<p>fib(0) = fib(1) = 1;  fib(n) = fib(n-1) + fib(n-2);</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Fibonacci, ricorsione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>def fibonacci(n: int) -&gt; int:
+    result = 1
+    if n &gt; 1:
+        result = fibonacci(n-1) + fibonacci(n-2)
+    return result
+</code></pre>
+<p><img alt="" src="images/fun/fib-calls.svg" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Fibonacci, memoization</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>_fibonacci_lookup = [1, 1]
+
+def fibonacci(n: int) -&gt; int:
+    if n &lt; len(_fibonacci_lookup):
+        return _fibonacci_lookup[n]
+    result = fibonacci(n - 1) + fibonacci(n - 2)
+    _fibonacci_lookup.append(result)
+    return result
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>from functools import lru_cache
+
+@lru_cache()                   # function decoration
+def fibonacci(n: int) -&gt; int:
+    result = 1
+    if n &gt; 1:
+        result = fibonacci(n-1) + fibonacci(n-2)
+    return result
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Fibonacci, iterazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>def fibonacci(n: int) -&gt; int:
+    value = 1
+    previous = 0
+
+    for i in range(n):
+        value, previous = value + previous, value
+
+    return value
+</code></pre></article>
+ 
+</slide>
+
+<slide class="large-image" >
+  
+    <hgroup>
+      <h2>N regine, backtracking</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/fun/queens.svg" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>N regine, verifica</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/queens-sol.svg">
+        
+      </figure><pre class="prettyprint" data-lang="python"><code>def print_board(board: list):
+    for y in range(len(board)):
+        for x in range(len(board)):
+            if x == board[y]: print('|Q', end='')
+            else: print('| ', end='')
+        print('|')
+
+def under_attack(board: list, x: int, y: int) -&gt; bool:
+    for i in range(y):  # for all rows above y
+        d = y - i
+        # directions: ↖↑↗ (no queens below)
+        if board[i] in (x - d, x, x + d):
+            return True
+    return False
+</code></pre>
+<blockquote></blockquote>
+<p><code>board</code> è una lista di <code>int</code>: per ogni riga della scacchiera, memorizza la posizione <code>x</code> della regina</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>N regine, ricorsione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>def place_queens(board: list, y=0) -&gt; bool:
+    if y == len(board):
+        return True  # all queens already placed
+    for x in range(len(board)):
+        if not under_attack(board, x, y):
+            board[y] = x  # (x, y) is safe: place a queen
+
+            # try and place queens in the following rows
+            if place_queens(board, y + 1):
+                return True
+
+            board[y] = None  # no luck, backtrack
+    return False
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Esercizio - Massimo Comun Divisore</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/hist/euclid.jpg">
+        
+      </figure><ul>
+<li>Leggere due numeri</li>
+<li>Calcolare in una funzione il loro Massimo Comun Divisore</li>
+<li>Visualizzare il risultato della funzione</li>
+</ul>
+<blockquote></blockquote>
+<p>Provare ad usare sia l'iterazione che la ricorsione</p>
+<p>Euclide: MCD(a, b) = a, se b = 0; <br>
+MCD(a, b) = MCD(b, a mod b), se b &gt; 0</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Esercizio - Torre di Hanoi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/hanoi-tower.png">
+        
+      </figure><ul>
+<li>Tre paletti + N dischi di diametro decrescente</li>
+<li>Portare tutti i dischi dal primo all'ultimo paletto</li>
+<li>Si può spostare solo un disco alla volta</li>
+<li>Non si può mettere un disco su uno più piccolo</li>
+</ul>
+<blockquote></blockquote>
+<p>Usare la ricorsione. Immediato spostare un solo disco. <br>
+N dischi: spostarne N-1 sul piolo né origine né dest., <br>
+spostare l'ultimo disco sul piolo giusto, <br>
+spostare ancora gli altri N-1 dischi.</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Esercizio - Spirale</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/spiral.png">
+        
+      </figure><ul>
+<li>Scrivere una funzione per riempire di numeri crescenti una matrice quadrata (o rettangolare)</li>
+<li>Seguire il percorso a spirale suggerito nella figura a fianco</li>
+<li>Dimensioni della matrice indicate dall'utente a runtime</li>
+</ul>
+<blockquote></blockquote>
+<p>Tenere traccia della direzione attuale (∆y, ∆x) <br>
+Avanzare fino al bordo o ad una cella già visitata, <br>
+poi cambiare la direzione in senso orario</p>
+<p>Coordinate raster, rotazione oraria di 90°: <code>(x', y') = (-y, x)</code> <br>
+In generale: <code>(x', y') = (x⋅cos(θ) - y⋅sin(θ), x⋅sin(θ) + y⋅cos(θ))</code> <br></p></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Sequenze annidate</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
 
 <slide  >
   
