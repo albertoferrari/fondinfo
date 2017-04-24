@@ -89,4 +89,4 @@ Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
 - [C++: classes](cpp2.html)
 - [C++: inheritance](cpp3.html)
 - [Go: basics](go1.html)
-
+- [More](http://sowide.ce.unipr.it/teaching/linguaggi)
