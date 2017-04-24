@@ -1568,6 +1568,203 @@ list = NULL; // No need to do anything else!
  
 </slide>
 
+<slide  >
+  
+    <hgroup>
+      <h2>Hidden this pointer</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="C++"><code>class Accumulator {
+private:
+    int value = 0;
+public:
+    add(int inc) {
+        value += inc;
+    }
+    get_val() { return y; }
+};
+</code></pre>
+<pre class="prettyprint" data-lang="C++"><code>int main() {
+    Accumulator a;
+    a.add(10);
+    cout &lt;&lt; a.get_val() &lt;&lt; endl;
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Hidden this, exposed</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>When we call <code>a.add(10)</code>, compiler actually calls stg. like <code>Accumulator__add(&amp;a, 10)</code><ul>
+<li>Real name mangling is more complicated and proprietary</li>
+</ul>
+</li>
+<li>Inside <code>add</code> f., the <code>this</code> pointer holds the address of object <code>a</code><ul>
+<li>Any member variables inside <code>add</code> f. are prefixed with <code>this-&gt;</code></li>
+<li>So when we say <code>value += inc</code>, compiler actually executes <code>this-&gt;value += inc</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>C++ class layout</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/cpp-struct-layout-1.png">
+        
+      </figure><ul>
+<li>C-like structs<ul>
+<li>C++mostly upwards-compatible with C</li>
+<li>Same simple struct layout rules</li>
+<li>Members laid out in their declaration order</li>
+<li>Implementation defined alignment padding</li>
+</ul>
+</li>
+<li><em>Note</em>: C++ structs are like classes, defaulting to <code>public</code></li>
+</ul>
+<pre class="prettyprint" data-lang="C++"><code>struct A {  // or class
+    char c;
+    int i;
+};
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>More members</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/cpp-struct-layout-2.png">
+        
+      </figure><pre class="prettyprint" data-lang="C++"><code>struct B {  // or class
+public:
+    int bm1;
+protected:
+    int bm2;
+private:
+    int bm3;
+    static int bsm;
+    void bf();
+    static void bsf();
+    typedef void* bpv;
+    struct N { };
+};
+</code></pre>
+<ul>
+<li>Only the <em>non-static data members</em> occupy space in each instance</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Single inheritance</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="C++"><code>struct C {
+    int c1;
+    void cf();
+};
+
+struct D : C {
+    int d1;
+    void df();
+};
+</code></pre>
+<ul>
+<li>Derived class inherits all features of base class</li>
+<li>Each instance of <code>D</code> must contain a complete copy of the instance data of <code>C</code></li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Upcast for single inheritance</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/cpp-single-inheritance-1.png"><img src="images/oop/cpp-single-inheritance-2.png">
+        
+      </figure><pre class="prettyprint" data-lang="C++"><code>struct C {
+    int c1;
+    void cf();
+};
+
+struct D : C {
+    int d1;
+    void df();
+};
+</code></pre>
+<ul>
+<li>New instance data of <code>D</code> is simply <em>appended</em> to layout of <code>C</code><ul>
+<li>Layout used by <em>all</em> known C++ <em>implementations</em></li>
+<li>Address of <code>C</code> object within <code>D</code> == first byte of <code>D</code> object</li>
+<li>No displacement for <em>upcasting</em>, to obtain address of embedded <code>C</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Multiple inheritance</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Model for an organization that has:<ul>
+<li>A class <code>Manager</code> (who delegates), and</li>
+<li>A class <code>Worker</code> (who actually does the work)</li>
+</ul>
+</li>
+<li>How can we model a class <code>MiddleManager</code>?<ul>
+<li>Like a <code>Worker</code>, accepts work assignments from manager</li>
+<li>Like a <code>Manager</code>, delegates work to employees</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="C++"><code>struct Manager ... { ... };
+struct Worker ... { ... };
+struct MiddleManager : Manager, Worker { ... };
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      </article>
+ 
+</slide>
+
 
 <slide class="thank-you-slide segue nobackground">
   <aside class="gdbar right"><img src="images/logo.png"></aside>

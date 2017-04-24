@@ -62,6 +62,12 @@ Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
 
 ----
 
+## Libri di testo, software e link utili
+
+- [Libri e link](link.html)
+
+----
+
 ## Approfondimenti
 
 - [Sistemi ad oggetti](x1-oop.html)
@@ -74,7 +80,7 @@ Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
 
 ----
 
-## Paradigmi e linguaggi di programmazione
+## Paradigmi e linguaggi di programmazione (corso magistrale)
 
 - [Haskell: lists & funs](hs1.html)
 - [Haskell: more funs](hs2.html)
@@ -83,10 +89,4 @@ Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
 - [C++: classes](cpp2.html)
 - [C++: inheritance](cpp3.html)
 - [Go: basics](go1.html)
-
-----
-
-## Libri di testo, software e link utili
-
-- [Libri e link](link.html)
 
