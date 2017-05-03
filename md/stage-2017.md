@@ -1,6 +1,6 @@
 title: Bubble Bobble in Python
 subtitle: Stage formativo a Ingegneria Informatica 12-16 giugno 2017
-figure: images/misc/bubble-bobble.png
+figure: images/misc/space-invaders.png
 
 ---
 
