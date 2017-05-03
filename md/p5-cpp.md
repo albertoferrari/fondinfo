@@ -200,9 +200,9 @@ title: Somma colonne: matrice
 
 code: c++
 
-    vector<vector<int>> matrix = {{2, 4, 3, 8},
-                                  {9, 3, 2, 7},
-                                  {5, 6, 9, 1}};
+    vector<vector<int>> matrix = { {2, 4, 3, 8},
+                                   {9, 3, 2, 7},
+                                   {5, 6, 9, 1} };
     auto rows = matrix.size();
     auto cols = matrix[0].size();
     for (auto x = 0; x < cols; ++x) {
