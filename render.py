@@ -86,8 +86,8 @@ def postprocess_html(html, metadata):
 
 if __name__ == '__main__':
     while True:
-        for filename in os.listdir('md'):
-            inpath = 'md/' + filename
+        for filename in os.listdir('~md'):
+            inpath = '~md/' + filename
             outpath = filename[:-3] + '.html'
             if (not os.path.isfile(outpath) or
                 os.path.getmtime(outpath) < os.path.getmtime(inpath)):
