@@ -1,4 +1,4 @@
-title: C++11 internals
+title: C++ internals
 subtitle: Object oriented programming in C++
 figure: images/misc/cpp-logo.jpg
 
@@ -294,6 +294,7 @@ code: C++
 
 title: Member functions
 figure: images/oop/cpp-struct-layout-p.png
+class: large-figure
 
 - Virtual member functions incur an instance size hit
 - They require a pointer to a (*per-class*) **virtual function table**
@@ -324,6 +325,7 @@ code: C++
 
 title: Overriding member functions
 figure: images/oop/cpp-struct-layout-q.png
+class: large-figure
 
 - A derived class can override, or replace, an hinerited function definition
 - Type of override depends upon whether the member function is declared `virtual`
@@ -375,6 +377,7 @@ code: C++
 
 title: Multiple inheritance of virtual f.s
 figure: images/oop/cpp-struct-layout-r.png images/oop/cpp-struct-layout-s.png
+class: large-figure
 
 code: C++
 
@@ -409,9 +412,6 @@ code: C++
 - `S::pvf()` an `S*` as `this` parameter
 - Automatically convert `R*` at call site into `S*` at callee
 - In `vftable`, `pvf` slot points to an adjuster *thunk*
-
----
-
 
 
 
