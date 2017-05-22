@@ -35,10 +35,248 @@ URL: https://code.google.com/p/io-2012-slides
 </slide>
 
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Function pointers</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
 <slide  >
   
     <hgroup>
-      <h2>Hidden this pointer</h2>
+      <h2>Initializing function pointers</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>Declarating a function pointer.</strong> Write out the declaration of a function, but with <code>(*func_name)</code> where you'd normally just put <code>func_name</code></li>
+<li><strong>Initializing.</strong> Give it the address of a function in your program; the syntax is like any other variable</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>void my_int_func(int x) {
+    cout &lt;&lt; x &lt;&lt; endl;
+}
+
+int main() {
+    void (*foo)(int);
+    foo = &amp;my_int_func;
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Using a function pointer</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>Calling the pointed function.</strong> Treat the function pointer as though it were the name of the function<ul>
+<li>The act of calling it performs the dereference; there's no need to do it yourself</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>int main() {
+    void (*foo)(int);
+    foo = &amp;my_int_func;
+
+    /* call my_int_func */
+    foo(2);
+
+    /* no need to write (*foo)(2), but you can */
+    (*foo)(2);
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Example of a callback</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="c++"><code>void qsort(void *base, size_t nmemb, size_t size,
+            int(*compar)(const void *, const void *));
+</code></pre>
+<ul>
+<li><code>compar</code> is a function pointer (<em>callback</em>)<ul>
+<li>Negative result if 1st &lt; 2nd arg</li>
+<li>Zero if they are equal</li>
+<li>Positive result if 1st &lt; 2nd arg</li>
+</ul>
+</li>
+</ul>
+<p>code: c++</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>A comparison function</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="C++"><code>int int_sorter(const void * a, const void * b) {
+    return *(int*)a - *(int*)b;
+}
+
+int main() {
+    int array[10];
+    for (int i = 0; i &lt; 10; ++i) {
+        array[ i ] = 10 - i;
+    }
+    qsort(array, 10, sizeof(int), int_sorter);
+    for (int i = 0; i &lt; 10; ++i) {
+        cout &lt;&lt; array[i] &lt;&lt; endl;
+    }
+
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Function pointers summary</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>Declaring.</strong> As though you were declaring a function, except with a name like <code>*foo</code> instead of just <code>foo</code></li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>void (*foo)(int);
+</code></pre>
+<ul>
+<li><strong>Initializing.</strong> Get the address of a function simply by naming it</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>void foo();
+func_pointer = foo;
+</code></pre>
+<ul>
+<li>Or, <em>optionally</em>, by prefixing the name with an ampersand</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>void foo();
+func_pointer = &amp;foo;
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Function pointers summary</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>Invoking.</strong> Just as if you were calling a function</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>func_pointer( arg1, arg2 );
+</code></pre>
+<ul>
+<li>Or, optionally <em>dereferencing</em> the function pointer before calling</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>(*func_pointer)( arg1, arg2 );
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Function objects</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>C++ allows you to overload <code>operator()</code>, the <em>function call</em> operator<ul>
+<li>Flexible: it can take any number of arguments of any types and return anything it wishes to</li>
+<li>All the other operators have a fixed number of arguments</li>
+</ul>
+</li>
+<li>Mechanism to create <em>function objects</em>, aka <em>functors</em><ul>
+<li>Treated as though they are a function or function pointer</li>
+<li>Use a a functor's constructor to embed information that is later used inside the implementation of <code>operator()</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Functor example</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="c++"><code>class MyFunctorClass {
+public:
+    MyFunctorClass (int x) : x_(x) {}
+    int operator() (int y) { return x_ + y; }
+private:
+    int x_;
+};
+
+int main() {
+    MyFunctorClass addFive(5);
+    std::cout &lt;&lt; addFive(6);     
+    return 0;
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lambda functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>[ capture-list ] ( params ) { body }</code></li>
+<li><em>Capture list</em>, for variables to be used in body of lambda<ul>
+<li><code>[a,&amp;b]</code>, captures <code>a</code> by <em>copy</em>, and <code>b</code> by <em>reference</em></li>
+<li><code>[&amp;]</code>, captures everything by <em>reference</em></li>
+<li><code>[=]</code>, captures everything by <em>copy</em></li>
+<li><code>[]</code> captures nothing </li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>vector&lt;int&gt; c = {1, 2, 3, 4, 5, 6, 7};
+int x = 5;
+c.erase(remove_if(c.begin(), c.end(),
+    [x](int n) { return n &lt; x; }), c.end());
+</code></pre>
+<blockquote></blockquote>
+<p><a href="https://github.com/tomamic/fondinfo/blob/master/cpp/fifteen/gamegui.cpp">https://github.com/tomamic/fondinfo/blob/master/cpp/fifteen/gamegui.cpp</a></p></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>C++, or C with classes</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Simple C++ class</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -46,16 +284,40 @@ URL: https://code.google.com/p/io-2012-slides
 private:
     int value = 0;
 public:
-    add(int inc) {
-        value += inc;
-    }
-    get_val() { return y; }
+    void add(int inc) { value += inc; }
+    int get_val() { return y; }
 };
 </code></pre>
 <pre class="prettyprint" data-lang="C++"><code>int main() {
     Accumulator a;
     a.add(10);
     cout &lt;&lt; a.get_val() &lt;&lt; endl;
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The traditional C way</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="C"><code>struct Accumulator {
+    int value;
+};
+void Accumulator__add(Accumulator* this, int inc) {
+    (*this).value += inc;
+}
+int Accumulator__get_val(Accumulator* this) {
+    return (*this).y;
+}
+</code></pre>
+<pre class="prettyprint" data-lang="C"><code>int main() {
+    Accumulator a; a.value = 0;
+    Accumulator__add(&amp;a, 10);
+    cout &lt;&lt; Accumulator__get_val(&amp;a) &lt;&lt; endl;
 }
 </code></pre></article>
  
@@ -138,6 +400,16 @@ private:
 <li>Only the <em>non-static data members</em> occupy space in each instance</li>
 </ul></article>
  
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Inheritance</h2>
+      <h3></h3>
+    </hgroup>
+  
 </slide>
 
 <slide  >
@@ -424,6 +696,16 @@ i.c1; // *(&amp;i + IdIC + dCc1); // *(&amp;i + IdIc1);
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Virtual functions</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
 <slide class="large-figure" >
   
     <hgroup>
@@ -477,10 +759,10 @@ i.c1; // *(&amp;i + IdIC + dCc1); // *(&amp;i + IdIc1);
         <img src="images/oop/cpp-struct-layout-q.png">
         
       </figure><ul>
-<li>A derived class can override, or replace, an hinerited function definition</li>
+<li>A derived class can override, or replace, an inherited function definition</li>
 <li>Type of override depends upon whether the member function is declared <code>virtual</code><ul>
-<li>Static override: determined at compile time</li>
-<li>Dynamic override: determined at run-time, by concrete object addressed by object pointer</li>
+<li><em>Static override</em>: determined at compile time</li>
+<li><em>Dynamic override</em>: determined at run-time, by concrete object addressed by object pointer</li>
 </ul>
 </li>
 </ul>

@@ -315,9 +315,9 @@ int main() {
 <li>Il costruttore può essere chiamato esplicitamente per modificare le variabili membro di un oggetto</li>
 <li>Crea un oggetto anonimo e lo inizializza con i valori degli argomenti</li>
 <li>L’oggetto anonimo può essere assegnato a una variabile del tipo classe<ul>
-<li>Esempio: DayOfYear date(4, 5);</li>
-<li>date = DayOfYear(10, 14);
-È più efficiente usare le mutator functions</li>
+<li>Ex.: <code>DayOfYear date(4, 5);</code></li>
+<li><code>date = DayOfYear(10, 14);</code></li>
+<li>È più efficiente usare le mutator functions</li>
 </ul>
 </li>
 <li>Se sono disponibili sia costruttore/i che mutator functions, queste è consigliabile siano chiamate anche dal costruttore (per non ripetere codice)</li>
@@ -335,8 +335,8 @@ int main() {
       <ul>
 <li>Un costruttore senza argomenti è detto costruttore di default</li>
 <li>Se non definiamo nessun costruttore viene creato un costruttore di default</li>
-<li>Se definiamo almeno un costruttore il costruttore di default non viene creato
-    È bene includere sempre il costruttore di default</li>
+<li>Se definiamo almeno un costruttore il costruttore di default non viene creato</li>
+<li>È bene includere sempre il costruttore di default</li>
 </ul></article>
  
 </slide>
@@ -566,12 +566,14 @@ private:
 <li>Nome dato dalla parola chiave operator seguita dal simbolo dell’operatore di cui fare l’overloading</li>
 </ul>
 </li>
-<li>Unici operatori predefiniti su membri di tipo classe:
-        = (assegnamento)
-        &amp; (indirizzo)</li>
+<li>Unici operatori predefiniti su membri di tipo classe:<ul>
+<li><code>=</code> (assegnamento)</li>
+<li><code>&amp;</code> (indirizzo)</li>
+</ul>
+</li>
 <li>L’overload deve essere sempre esplicito<ul>
-<li>Es. Overload di = non condiziona +=, -= o !=</li>
-<li>Es. Se si implementa solo l’op. +, non si può usare +=</li>
+<li>Es. Overload di <code>=</code> non condiziona <code>+=</code>, <code>-=</code>, o <code>!=</code></li>
+<li>Es. Se si implementa solo l’op. <code>+</code>, non si può usare <code>+=</code></li>
 </ul>
 </li>
 </ul></article>
@@ -591,9 +593,11 @@ private:
 <li>Gli operatori unari non hanno parametri</li>
 </ul>
 </li>
-<li>Vantaggi
-        È più nello spirito OOP
-        È più efficiente</li>
+<li>Vantaggi<ul>
+<li>È più nello spirito OOP</li>
+<li>È più efficiente</li>
+</ul>
+</li>
 <li>C’è uno svantaggio<ul>
 <li>Il primo operando (l’oggetto più a sinistra) deve essere membro della classe</li>
 <li>Non sempre conviene, non sempre è possibile</li>
@@ -637,9 +641,8 @@ private:
       <h3></h3>
     </hgroup>
     <article >
-      <pre><code>È possibile effettuare l’overloading semplicemente dichiarando le funzioni, senza necessità che siano membro della classe
-</code></pre>
-<ul>
+      <ul>
+<li>È possibile effettuare l’overloading semplicemente dichiarando le funzioni, senza necessità che siano membro della classe</li>
 <li>Svantaggio: non potendo accedere ai campi privati, hanno necessità di utilizzare accessor<ul>
 <li>La classe è obbligata a fornire tali accessor</li>
 <li>Overhead nella chiamata degli accessor</li>
@@ -826,27 +829,22 @@ void setX( Count &amp;c, int val ) {
     </hgroup>
     <article >
       <ul>
-<li>Se si fornisce un operatore =…<ul>
-<li>Bisogna evitare auto-assegnamenti</li>
-<li>
-<p>Altrimenti c’è rischio di memory leak</p>
-<p>// Overloaded = operator; avoids self assignment
-    - const String &amp;String::operator=( const String &amp;right )
-{
-    - cout &lt;&lt; "operator= called\n";
-    - if ( &amp;right != this ) { // avoid self assignment
-    - delete [] sPtr; // prevents memory leak
-    - length = right.length; // new String length
-    - setString( right.sPtr ); // call utility function
-}
-    - else
-    - cout &lt;&lt; "Attempted assignment of a String to itself\n";
-    - return *this; // enables cascaded assignments
-}</p>
-</li>
+<li>Se si fornisce un operatore <code>=</code>...</li>
+<li>Evitare auto-assegnamenti, o rischio memory-leak</li>
 </ul>
-</li>
-</ul></article>
+<pre class="prettyprint" data-lang="c++"><code>// Overloaded = operator; avoids self assignment
+const String &amp;String::operator=(const String &amp;right) {
+    cout &lt;&lt; "operator= called\n";
+    if ( &amp;right != this ) { // avoid self assignment
+        delete [] sPtr; // prevents memory leak
+        length = right.length; // new String length
+        setString( right.sPtr ); // call utility function
+    } else {
+        cout &lt;&lt; "Attempted assignment of a String to itself\n";
+    }
+    return *this; // enables cascaded assignments
+}
+</code></pre></article>
  
 </slide>
 
@@ -896,27 +894,25 @@ void setX( Count &amp;c, int val ) {
       <ul>
 <li>Operatori ++ e -- predefiniti ritornano…<ul>
 <li>Per riferimento nella forma prefissa</li>
-<li>
-<p>Per valore nella forma postfissa</p>
-<p>// Preincrement operator overloaded as a member function.
-    - Date &amp;Date::operator++()
-{
-    - helpIncrement(); // The increment is in this utility function
-    - return <em>this; // reference return to create an lvalue
-}
-// Postincrement operator overloaded as a member function. Note
-// that the dummy int parameter does not have a name.
-    - Date Date::operator++( int )
-{
-    - Date temp = </em>this;
-    - helpIncrement(); // The increment is in this utility function
-// return non-incremented, saved, temporary object
-    - return temp; // value return; not a reference return
-}</p>
-</li>
+<li>Per valore nella forma postfissa</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>// Preincrement operator overloaded as a member function.
+Date &amp;Date::operator++() {
+    helpIncrement(); // The increment is in this utility function
+    return *this; // reference return to create an lvalue
+}
+
+// Postincrement operator overloaded as a member function. Note
+// that the dummy int parameter does not have a name.
+Date Date::operator++(int) {
+    Date temp = *this;
+    helpIncrement(); // The increment is in this utility function
+    // return non-incremented, saved, temporary object
+    return temp; // value return; not a reference return
+}
+</code></pre></article>
  
 </slide>
 
@@ -928,7 +924,7 @@ void setX( Count &amp;c, int val ) {
     </hgroup>
     <article >
       <ul>
-<li>L’operatore [] deve essere sovraccaricato come membro</li>
+<li>L’operatore <code>[]</code> deve essere sovraccaricato come membro</li>
 <li>Se si vuole usare il valore ritornato come l-value deve ritornare una reference</li>
 <li>Il parametro indice può essere di qualsiasi tipo ed è l’argomento della chiamata alla funzione membro</li>
 </ul></article>
@@ -964,25 +960,20 @@ void setX( Count &amp;c, int val ) {
     </hgroup>
     <article >
       <ul>
-<li>I seguenti operatori possono essere sovraccaricati solo come non membri o friend:
-        &lt;&lt;, &gt;&gt;</li>
-<li>I seguenti operatori non possono essere sovraccaricati:
-        . :: sizeof ?:</li>
-<li>Per alcuni operatori l’overloading è sconsigliato:
-        &amp;&amp; e || quando sovraccaricati effettuano la valutazione completa dell’espressione
-        , quando sovraccaricato non garantisce l’ordine di valutazione da sinistra a destra</li>
+<li>I seguenti operatori possono essere sovraccaricati solo come non membri o friend:<ul>
+<li><code>&lt;&lt; &gt;&gt;</code></li>
+</ul>
+</li>
+<li>I seguenti operatori non possono essere sovraccaricati:<ul>
+<li><code>. :: sizeof ?:</code></li>
+</ul>
+</li>
+<li>Per alcuni operatori l’overloading è sconsigliato:<ul>
+<li><code>&amp;&amp;</code> e <code>||</code> quando sovraccaricati effettuano la valutazione completa dell’espressione</li>
+<li><code>,</code> quando sovraccaricato non garantisce l’ordine di valutazione da sinistra a destra</li>
+</ul>
+</li>
 </ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2></h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      </article>
  
 </slide>
 
@@ -1047,41 +1038,23 @@ void setX( Count &amp;c, int val ) {
     </hgroup>
     <article >
       <ul>
-<li>
-<p>dtime.cpp</p>
+<li>Sorgenti<ul>
+<li><code>dtime.cpp</code></li>
+<li><code>timedemo.cpp</code></li>
+<li><code>dtime.h</code></li>
+</ul>
 </li>
-<li>
-<p>dtime.o</p>
+<li>Oggetti<ul>
+<li><code>g++ -c dtime.cpp</code></li>
+<li><code>dtime.o</code></li>
+<li><code>timedemo.o</code></li>
+</ul>
 </li>
-<li>
-<p>timedemo</p>
-</li>
-<li>
-<p>g++ -c dtime.cpp</p>
-</li>
-<li>
-<p>timedemo.cpp</p>
-</li>
-<li>
-<p>timedemo.o</p>
-</li>
-<li>
-<p>g++ -c timedemo.cpp</p>
-</li>
-<li>
-<p>g++ dtime.o timedemo.o –o timedemo</p>
-</li>
-<li>
-<p>sorgenti</p>
-</li>
-<li>
-<p>oggetti</p>
-</li>
-<li>
-<p>eseguibile</p>
-</li>
-<li>
-<p>dtime.h</p>
+<li>Eseguibile<ul>
+<li><code>g++ -c timedemo.cpp</code></li>
+<li><code>g++ dtime.o timedemo.o –o timedemo</code></li>
+<li><code>timedemo</code></li>
+</ul>
 </li>
 </ul></article>
  
@@ -1109,14 +1082,13 @@ void setX( Count &amp;c, int val ) {
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li>timedemo: timedemo.o dtime.o</li>
-<li>g++ timedemo.o dtime.o -o timedemo</li>
-<li>timedemo.o: timedemo.cpp dtime.h</li>
-<li>g++ -c -W -Wall -pedantic timedemo.cpp</li>
-<li>dtime.o: dtime.cpp dtime.h</li>
-<li>g++ -c -W -Wall -pedantic dtime.cpp</li>
-</ul></article>
+      <pre class="prettyprint" data-lang="make"><code>timedemo: timedemo.o dtime.o
+g++ timedemo.o dtime.o -o timedemo
+timedemo.o: timedemo.cpp dtime.h
+g++ -c -W -Wall -pedantic timedemo.cpp
+dtime.o: dtime.cpp dtime.h
+g++ -c -W -Wall -pedantic dtime.cpp
+</code></pre></article>
  
 </slide>
 
@@ -1149,43 +1121,33 @@ void setX( Count &amp;c, int val ) {
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li>classA.h</li>
-<li>class A
-    {</li>
-<li>public:
-    …</li>
-<li>
-<p>private:
+      <pre class="prettyprint" data-lang="c++"><code>// classA.h
+class A {
+public:
+    // ...
+private:
+    // ...
+};
+
+implA.cpp
+
+implB.cpp
+
+//classB.h
+    #include “classA.h”
+- class B
+    {
+- public:
     …
-    };</p>
-</li>
-<li>
-<p>implA.cpp</p>
-</li>
-<li>
-<p>implB.cpp</p>
-</li>
-<li>
-<p>classB.h
-    #include “classA.h”</p>
-</li>
-<li>class B
-    {</li>
-<li>public:
-    …</li>
-<li>private:</li>
-<li>
-<p>A var;
-    };</p>
-</li>
-<li>
-<p>Main.cpp
+- private:
+- A var;
+    };
+
+- Main.cpp
     #include “classA.h”
     #include “classB.h”
-    …</p>
-</li>
-</ul></article>
+    …
+</code></pre></article>
  
 </slide>
 
@@ -1265,14 +1227,12 @@ class B
 { /* Some code */ }
 </code></pre>
 <ul>
-<li>Per rendere disponibili tutti i nomi di un namespace si usa la direttiva using</li>
-</ul>
-<pre class="prettyprint" data-lang="c++"><code>using namespace Name_Space_Name;
-</code></pre>
-<ul>
+<li>Per rendere disponibili tutti i nomi di un namespace si usa la <em>direttiva</em> <code>using</code></li>
 <li>Lo scope della direttiva using va dal punto di occorrenza alla fine del file o del blocco</li>
 <li>Se il codice non è messo esplicitamente in un namespace è nel namespace globale (accessibile ovunque)</li>
-</ul></article>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>using namespace Name_Space_Name;
+</code></pre></article>
  
 </slide>
 
@@ -1382,17 +1342,6 @@ class B
 </ul>
 </li>
 </ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2></h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      </article>
  
 </slide>
 
@@ -1539,22 +1488,13 @@ class B
     </hgroup>
     <article >
       <ul>
-<li>Operatore =, distruttore e costruttore di copia vengono creati automaticamente dal compilatore</li>
+<li>Operatore <code>=</code>, distruttore e costruttore di copia vengono creati automaticamente dal compilatore</li>
 <li>Se la classe usa puntatori e variabili dinamiche devono essere ri-definiti: non farlo è un grave errore logico</li>
-<li>Di fatto sono legati dalle stesse problematiche relative all’uso di puntatori
-    “If you need any of them, you need all three”</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2></h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      </article>
+<li>Di fatto sono legati dalle stesse problematiche relative all’uso di puntatori</li>
+</ul>
+<blockquote>
+<p>If you need any of them, you need all three</p>
+</blockquote></article>
  
 </slide>
 

@@ -38,7 +38,7 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>title: Ereditarietà</h2>
+      <h2>Ereditarietà</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -60,18 +60,17 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <ul>
 <li>Un oggetto di una classe derivata può essere usato ovunque può essere usato uno della classe base</li>
-<li>Un oggetto di una classe derivata ha più di un tipo<ul>
-<li>class HourlyEmployee : public Employee {</li>
-<li>public:</li>
-<li>HourlyEmployee(string name, string code,</li>
-<li>double wageRate, double hours);</li>
-<li>// …</li>
-<li>private:</li>
-<li>// …</li>
-<li>};</li>
+<li>Un oggetto di una classe derivata ha più di un tipo</li>
 </ul>
-</li>
-</ul></article>
+<pre class="prettyprint" data-lang="c++"><code>class HourlyEmployee : public Employee {
+public:
+    HourlyEmployee(string name, string code,
+                   double wageRate, double hours);
+    // …
+private:
+    // …
+};
+</code></pre></article>
  
 </slide>
 
@@ -112,14 +111,15 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article >
       <ul>
-<li>Overriding<ul>
-<li>Una funzione ridefinita in una classe derivata ha lo stesso numero e tipo di parametri della funzione della classe base</li>
+<li><strong>Overriding</strong><ul>
+<li>Una funzione ridefinita in una <em>classe derivata</em> ha lo <em>stesso numero e tipo di parametri</em> della funzione della classe base</li>
 <li>Sostituisce la funzione della classe base</li>
 </ul>
 </li>
-<li>Overloading<ul>
-<li>Una funzione sovraccaricata in una classe derivata ha un diverso numero e/o tipo di parametri rispetto alla funzione della classe base</li>
+<li><strong>Overloading</strong><ul>
+<li>Una funzione sovraccaricata in una classe derivata ha un diverso <em>numero e/o tipo di parametri</em> rispetto alla funzione della classe base</li>
 <li>La classe derivata ha entrambe le funzioni</li>
+<li>Stesso meccanismo delle <em>normali funzioni</em></li>
 </ul>
 </li>
 </ul></article>
@@ -129,14 +129,14 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Uso dei membri privati della classe base</h2>
+      <h2>Membri privati della classe base</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>I membri privati della classe base non sono referenziabili nelle definizioni delle funzioni membro della classe derivata</li>
 <li>Diversamente verrebbe violato il principio di incapsulamento</li>
-<li>Le funzioni membro della classe derivata possono accedere alle variabili membro private della classe base tramite le funzioni accessor e mutator</li>
+<li>Le funzioni membro della classe derivata possono accedere alle variabili membro private della classe base tramite le funzioni <em>accessor</em> e <em>mutator</em></li>
 <li>Le funzioni membro private della classe base non sono accessibili (di fatto non sono ereditate)</li>
 </ul></article>
  
@@ -145,15 +145,17 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Il qualificatore protected</h2>
+      <h2>Qualificatore protected</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>Una variabile o funzione membro qualificata come protected può essere referenziata nelle funzioni membro di una classe derivata</li>
-<li>Le variabili membro protected agiscono come se fossero protected in ogni classe derivata</li>
-<li>Molti ritengono che l’uso di variabili membro protected comprometta l’incapsulamento
-    È quindi buona norma utilizzare protected solo quando assolutamente necessario</li>
+<li>Una variabile o funzione membro qualificata come <code>protected</code> può essere referenziata nelle funzioni membro di una classe derivata</li>
+<li>Le variabili membro protette agiscono come se fossero protette in ogni classe derivata</li>
+<li>Molti ritengono che l’uso di variabili membro protetta comprometta l’incapsulamento<ul>
+<li>È quindi buona norma utilizzare <code>protected</code> solo quando assolutamente necessario</li>
+</ul>
+</li>
 </ul></article>
  
 </slide>
@@ -190,14 +192,16 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Per inizializzare le variabili ereditate…<ul>
 <li>Un costruttore della classe derivata può invocare esplicitamente un costruttore della classe base</li>
 <li>Altrimenti, viene invocato automaticamente il costruttore di default della classe base</li>
-<li>HourlyEmployee::HourlyEmployee(string name, string number,</li>
-<li>double wageRate, double hours)</li>
-<li>: Employee(name, number), wageRate(wageRate), hours(hours) {</li>
-<li>//deliberately empty</li>
-<li>}</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>HourlyEmployee::HourlyEmployee(string name, string number,
+                               double wageRate, double hours)
+        : Employee(name, number), wageRate(wageRate), hours(hours)
+{
+    // deliberately empty
+}
+</code></pre></article>
  
 </slide>
 
@@ -211,9 +215,9 @@ URL: https://code.google.com/p/io-2012-slides
       <ul>
 <li>La chiamata del costruttore della classe base è la prima azione del costruttore della classe derivata</li>
 <li>Se A ◅- B ◅- C, quando viene creato un oggetto di classe C…<ul>
-<li>prima viene chiamato un costruttore della classe A</li>
-<li>poi un costruttore della classe B</li>
-<li>poi vengono intraprese le rimanenti azioni del costruttore di classe C</li>
+<li>Prima viene chiamato un costruttore della classe A</li>
+<li>Poi un costruttore della classe B</li>
+<li>Poi vengono intraprese le rimanenti azioni del costruttore di classe C</li>
 </ul>
 </li>
 </ul></article>
@@ -231,9 +235,9 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Quando il distruttore di una classe derivata è invocato, viene invocato automaticamente il distruttore della classe base</li>
 <li>I distruttori sono chiamati in ordine inverso rispetto ai costruttori</li>
 <li>Se A ◅- B ◅- C, quando termina lo scope di un oggetto di classe C…<ul>
-<li>viene chiamato prima il distruttore della classe C</li>
-<li>poi quello della classe B</li>
-<li>infine quello della classe A</li>
+<li>Viene chiamato prima il distruttore della classe C</li>
+<li>Poi quello della classe B</li>
+<li>Infine quello della classe A</li>
 </ul>
 </li>
 </ul></article>
@@ -248,13 +252,13 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article >
       <ul>
-<li>Relazione “is a”<ul>
+<li>Relazione “<strong>is a</strong>”<ul>
 <li>Esempio: a HourlyEmployee is an Employee</li>
 <li>Utile soprattutto per polimorfismo</li>
 <li>Sempre possibile usare un oggetto di una sotto-classe al posto di un oggetto di una classe base</li>
 </ul>
 </li>
-<li>Relazione “has a”<ul>
+<li>Relazione “<strong>has a</strong>”<ul>
 <li>Esempio: <em>an Employee has a Date (of employment)</em></li>
 <li>Serve per riutilizzo di funzionalità</li>
 <li>Grado elevato di flessibilità: ...</li>
@@ -387,7 +391,8 @@ URL: https://code.google.com/p/io-2012-slides
 </ul>
 </li>
 <li>Se invocato su un oggetto…<ul>
-<li>La risoluzione del riferimento avviene a tempo di compilazione (static binding) e la funzione chiamata è quella della classe dell’oggetto (ottimizzazione)</li>
+<li>La risoluzione del riferimento avviene a tempo di compilazione (static binding)</li>
+<li>La funzione chiamata è quella della classe dell’oggetto (ottimizzazione)</li>
 </ul>
 </li>
 </ul></article>
@@ -480,10 +485,18 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article >
       <ul>
-<li>Se una classe ha una o più funzioni membro virtuali il compilatore crea una tabella che per ogni funzione virtuale contiene l’indirizzo in memoria del codice della funzione</li>
-<li>Quando viene creato un oggetto della classe, la sua descrizione contiene un puntatore alla tabella delle funzioni virtuali</li>
-<li>Quando una funzione virtuale viene chiamata usando un puntatore all’oggetto, il sistema runtime usa la tabella invece del tipo del puntatore per decidere quale definizione della funzione usare</li>
-<li>Le funzioni virtuali introducono overhead</li>
+<li>Le funzioni virtuali introducono <em>overhead</em></li>
+<li>Compilatore crea una <strong>tabella delle funzioni virtuali</strong><ul>
+<li>Solo se una classe ha una o più funzioni membro virtuali</li>
+<li>La tabella contiene l’indirizzo di ciascuna funzione virtuale</li>
+</ul>
+</li>
+<li>Ogni <em>istanza</em> contiene un puntatore alla tabella delle funzioni virtuali</li>
+<li>Quando una funzione virtuale viene chiamata usando un <em>puntatore</em> all’oggetto...<ul>
+<li>Il sistema runtime deve decidere quale definizione della funzione usare</li>
+<li>Usa la tabella, invece del tipo del puntatore</li>
+</ul>
+</li>
 </ul></article>
  
 </slide>
@@ -498,11 +511,13 @@ URL: https://code.google.com/p/io-2012-slides
       <ul>
 <li>Se una funzione è virtuale pura la sua definizione non è necessaria</li>
 <li>Una classe con una o più funzioni virtuali pure è detta astratta</li>
-<li>Una classe astratta può essere usata solo come classe base per derivare altre classi, non si possono creare oggetti<ul>
-<li>Ex: class Abs { public: virtual void f() = 0; };</li>
+<li>Una classe astratta può essere usata solo come classe base per derivare altre classi, non si possono creare oggetti</li>
 </ul>
-</li>
-</ul></article>
+<pre class="prettyprint" data-lang="C++"><code>class Abs {
+public:
+    virtual void f() = 0;
+};
+</code></pre></article>
  
 </slide>
 
@@ -580,25 +595,27 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article >
       <ul>
-<li>Il casting da un tipo discendente a un tipo antenato è detto upcasting ed è sicuro</li>
-<li>Il casting da un tipo antenato a un tipo discendente è detto downcasting ed è pericoloso</li>
+<li>Il casting da un tipo discendente a un tipo antenato è detto <strong>upcasting</strong> ed è sicuro</li>
+<li>Il casting da un tipo antenato a un tipo discendente è detto <strong>downcasting</strong> ed è pericoloso</li>
+<li><strong>Dynamic cast</strong> per downcasting sicuro, su puntatori<ul>
+<li><code>dynamic_cast &lt; new_type &gt; ( expression )</code></li>
+<li>Se il cast riesce (cioè se il tipo dinamico corrisponde al tipo che si vuole ottenere)...</li>
+<li>Restituisce un puntatore al nuovo tipo</li>
+<li>Altrimenti restituisce <code>nullptr</code></li>
+</ul>
+</li>
 </ul></article>
  
 </slide>
 
-<slide  >
+<slide class="segue dark" >
   
-    <hgroup>
-      <h2>Dynamic cast</h2>
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Template</h2>
       <h3></h3>
     </hgroup>
-    <article >
-      <ul>
-<li>Consente di fare un downcasting sicuro</li>
-<li>Va usato su puntatori</li>
-<li>Se il cast riesce (cioè se il tipo dinamico corrisponde al tipo che si vuole ottenere), restituisce un puntatore al nuovo tipo, altrimenti restituisce NULL</li>
-</ul></article>
- 
+  
 </slide>
 
 <slide  >

@@ -38,7 +38,7 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>C++ Basics</h2>
+      <h2>C++ basics</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -71,10 +71,10 @@ URL: https://code.google.com/p/io-2012-slides
       <ul>
 <li>Punto di partenza del programma</li>
 <li>Lo standard ANSI/ISO C++<ul>
-<li>Impedisce la dichiarazione priva di tipo (int) della funzione main</li>
+<li>Impedisce la dichiarazione priva di tipo (<code>int</code>) della funzione main</li>
 <li>Consente di omettere l’istruzione</li>
-<li>return 0;</li>
-<li>nella funzione main</li>
+<li><code>return 0;</code></li>
+<li>nella funzione <code>main</code></li>
 </ul>
 </li>
 </ul></article>
@@ -90,26 +90,21 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <ul>
 <li>Variabili<ul>
-<li>Convenzione sui nomi (camelCase)</li>
+<li>Convenzione sui nomi (<code>lower_case</code>, o <code>camelCase</code>)</li>
 <li>Convenzione da usare per:</li>
 <li>variabili, parametri, funzioni, campi e metodi</li>
 <li>Posizione della dichiarazione</li>
 </ul>
 </li>
 <li>Costanti<ul>
-<li>Convenzione sui nomi (UPPER_CASE)</li>
+<li>Convenzione sui nomi (<code>UPPER_CASE</code>)</li>
 </ul>
 </li>
 <li>Tipi e classi<ul>
-<li>Convenzione sui nomi (TitleCase)</li>
+<li>Convenzione sui nomi (<code>TitleCase</code>)</li>
 </ul>
 </li>
-<li>
-<p>Suggerimento: mantenere nomi di variabili, costanti, ecc... in lingua inglese</p>
-</li>
-<li>
-<p>Variabili e Costanti</p>
-</li>
+<li>Suggerimento: mantenere nomi di variabili, costanti, ecc. in lingua inglese</li>
 </ul></article>
  
 </slide>
@@ -123,13 +118,13 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <ul>
 <li>Insiemi di definizioni di nomi (classi, funzioni, …)</li>
-<li>Le librerie standard mettono i loro nomi nel namespace std</li>
+<li>Le librerie standard mettono i loro nomi nel namespace <code>std</code></li>
 <li>Per usare queste definizioni occorre la direttiva<ul>
-<li>using namespace std;</li>
+<li><code>using namespace std;</code></li>
 </ul>
 </li>
 <li>Per usare una specifica definizione<ul>
-<li>using std::cin;</li>
+<li><code>using std::cin;</code></li>
 </ul>
 </li>
 </ul></article>
@@ -188,7 +183,7 @@ int main()
 <slide  >
   
     <hgroup>
-      <h2>Strutture di Controllo</h2>
+      <h2>Strutture di controllo</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -268,7 +263,7 @@ int cube( int y )
 <slide  >
   
     <hgroup>
-      <h2>Parametri Call-by-value e Call-by-reference</h2>
+      <h2>Parametri call-by-value e call-by-reference</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -294,7 +289,7 @@ int cube( int y )
 <slide  >
   
     <hgroup>
-      <h2>Parametri Call-by-value e Call-by-reference</h2>
+      <h2>Parametri call-by-value e call-by-reference</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -358,20 +353,20 @@ int main()
 <slide  >
   
     <hgroup>
-      <h2>Puntatori e Allocazione Dinamica</h2>
+      <h2>Puntatori e allocazione dinamica</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>L’operatore new crea una variabile dinamica e restituisce un puntatore ad essa<ul>
 <li>Esempio:</li>
-<li>int *p;</li>
-<li>p = new int;</li>
+<li><code>int *p;</code></li>
+<li><code>p = new int;</code></li>
 </ul>
 </li>
 <li>L’operatore delete distrugge la variabile e dealloca la memoria<ul>
 <li>Esempio:</li>
-<li>delete p;</li>
+<li><code>delete p;</code></li>
 </ul>
 </li>
 </ul></article>
@@ -381,7 +376,7 @@ int main()
 <slide  >
   
     <hgroup>
-      <h2>Arrays, Dynamic Arrays, Vectors</h2>
+      <h2>Arrays, dynamic arrays, vectors</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -406,7 +401,7 @@ int main()
 <slide  >
   
     <hgroup>
-      <h2>Parametri Array</h2>
+      <h2>Parametri array</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -421,7 +416,7 @@ int main()
 <slide  >
   
     <hgroup>
-      <h2>Il Modificatore di Parametro const</h2>
+      <h2>Il modificatore di parametro const</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -437,7 +432,7 @@ int main()
 <slide  >
   
     <hgroup>
-      <h2>Il Modificatore di Parametro const</h2>
+      <h2>Il modificatore di parametro const</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -527,7 +522,7 @@ void printCharacters( const char *sPtr )
 <slide  >
   
     <hgroup>
-      <h2>Regole per Risolvere l’Overloading</h2>
+      <h2>Risoluzione overloading</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -570,7 +565,7 @@ int main()
 <slide  >
   
     <hgroup>
-      <h2>Argomenti di Default</h2>
+      <h2>Argomenti di default</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -587,7 +582,7 @@ int main()
 <slide  >
   
     <hgroup>
-      <h2>Overloading e Argomenti di Default</h2>
+      <h2>Overloading e arg. default</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -606,13 +601,13 @@ int main()
 <slide  >
   
     <hgroup>
-      <h2>Rappresentazione delle Stringhe</h2>
+      <h2>Rappresentazione stringhe</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>C++ offre due modi per rappresentare le stringhe di caratteri<ul>
-<li>Il modo ereditato dal linguaggio C (C-strings)</li>
+<li>Il modo ereditato dal linguaggio C (<em>C-strings</em>)</li>
 <li>Oggetti della classe string (presente nella libreria standard)</li>
 </ul>
 </li>
@@ -628,8 +623,8 @@ int main()
     </hgroup>
     <article >
       <ul>
-<li>Array di char terminati col carattere ‘\0’<ul>
-<li>Es: char message[10] = “Ciao”; char shortString[] = “abc”; char arrayOfChar[] = {‘a’,‘b’,‘c’}; char s[10];</li>
+<li>Array di char terminati col carattere <code>\0</code><ul>
+<li>Es: <code>char message[10] = “Ciao”; char short_string[] = “abc”; char array_of_char[] = {‘a’,‘b’,‘c’}; char s[10];</code></li>
 </ul>
 </li>
 <li>I valori di tipo stringa (es. “Hello”) sono implementati come C-string</li>
@@ -645,13 +640,13 @@ int main()
     </hgroup>
     <article >
       <ul>
-<li>Le C-strings non consentono l’uso degli operatori = e ==</li>
+<li>Le C-strings non consentono l’uso degli operatori <code>=</code> e <code>==</code></li>
 <li>La libreria cstring contiene funzioni per la manipolazione delle C-strings (definizioni nel namespace globale)<ul>
-<li>Es. strcpy, strcmp, strcat, strlen</li>
+<li>Es. <code>strcpy, strcmp, strcat, strlen</code></li>
 </ul>
 </li>
 <li>Lo standard C++ ha aggiunto versioni safe di queste funzioni<ul>
-<li>Es. strncpy, strncmp, strncat, strnlen</li>
+<li>Es. <code>strncpy, strncmp, strncat, strnlen</code></li>
 </ul>
 </li>
 </ul></article>
@@ -666,15 +661,15 @@ int main()
     </hgroup>
     <article >
       <ul>
-<li>L’operatore &lt;&lt; consente di inserire il valore di una C-string in un output stream<ul>
-<li>Es: char message[] = “Hello”; cout &lt;&lt; message;</li>
+<li>L’operatore <code>&lt;&lt;</code> consente di inserire il valore di una C-string in un output stream<ul>
+<li>Es: <code>char message[] = “Hello”; cout &lt;&lt; message;</code></li>
 </ul>
 </li>
-<li>L’operatore &gt;&gt; consente di estrarre una stringa da un input stream<ul>
+<li>L’operatore <code>&gt;&gt;</code> consente di estrarre una stringa da un input stream<ul>
 <li>Ignora eventuali caratteri di spaziatura iniziali, la lettura si ferma al primo carattere di spaziatura</li>
-<li>Es: char a[80], b[80]; cin &gt;&gt; a &gt;&gt; b;</li>
-<li>Lettura di un’intera linea di input con la funzione membro della classe istream: getline(cstringVar, maxCar+1)</li>
-<li>Es: cin.getline(a, 80);</li>
+<li>Es: <code>char a[80], b[80]; cin &gt;&gt; a &gt;&gt; b;</code></li>
+<li>Lettura di un’intera linea di input con la funzione membro della classe istream:</li>
+<li>Es: <code>cin.getline(a, 80);</code></li>
 </ul>
 </li>
 </ul></article>
@@ -691,8 +686,8 @@ int main()
       <ul>
 <li>Con le C-strings ci si deve occupare dei dettagli di implementazione</li>
 <li>La classe string consente di trattare le stringhe di caratteri come un tipo base<ul>
-<li>Con l’operatore = si può assegnare un valore a una variabile string</li>
-<li>Con l’operatore + si possono concatenare due stringhe</li>
+<li>Con l’operatore <code>=</code> si può assegnare un valore a una variabile string</li>
+<li>Con l’operatore <code>+</code> si possono concatenare due stringhe</li>
 </ul>
 </li>
 <li>Classe string: definita nella libreria string, definizioni nel namespace std</li>
@@ -715,7 +710,7 @@ int main()
 </ul>
 </li>
 <li>Non c’è conversione automatica di oggetti string in C-strings<ul>
-<li>Funzione membro c_str()</li>
+<li>Funzione membro <code>c_str()</code></li>
 </ul>
 </li>
 </ul></article>
@@ -730,14 +725,14 @@ int main()
     </hgroup>
     <article >
       <ul>
-<li>L’operatore &lt;&lt; (insertion) consente di inserire un oggetto string in un output stream<ul>
-<li>Es: string message(“Hello”); cout &lt;&lt; message;</li>
+<li>L’operatore <code>&lt;&lt;</code> (<em>insertion</em>) consente di inserire un oggetto string in un output stream<ul>
+<li>Es: <code>string message("Hello"); cout &lt;&lt; message;</code></li>
 </ul>
 </li>
-<li>L’operatore &gt;&gt; (extraction) consente di estrarre un oggetto string da un input stream<ul>
+<li>L’operatore <code>&gt;&gt;</code> (<em>extraction</em>) consente di estrarre un oggetto string da un input stream<ul>
 <li>Ignora eventuali caratteri di spaziatura iniziali, la lettura si ferma al primo carattere di spaziatura</li>
-<li>Es: string s1, s2; cin &gt;&gt; s1 &gt;&gt; s2;</li>
-<li>Lettura di un’intera linea di input con la funzione getline(aStream, aString) definita nella libreria string</li>
+<li>Es: <code>string s1, s2; cin &gt;&gt; s1 &gt;&gt; s2;</code></li>
+<li>Lettura di un’intera linea di input con la funzione <code>getline(a_stream, a_string)</code> definita nella libreria string</li>
 </ul>
 </li>
 </ul></article>
@@ -775,11 +770,12 @@ int main()
       <ul>
 <li>I vettori sono array la cui dimensione può cambiare durante l’esecuzione</li>
 <li>Sono oggetti della classe vector, una classe template della Standard Template Library (STL)<ul>
-<li>Ex: vector<int> v;</li>
+<li>Ex: <code>vector&lt;int&gt; v;</code></li>
 </ul>
 </li>
 <li>La classe è definita nella libreria vector all’interno del namespace std<ul>
-<li>Ex: #include <vector> using namespace std;</li>
+<li>Ex: <code>#include &lt;vector&gt;</code></li>
+<li><code>using namespace std;</code></li>
 </ul>
 </li>
 </ul></article>
@@ -794,7 +790,7 @@ int main()
     </hgroup>
     <article >
       <ul>
-<li>La notazione []<ul>
+<li>La notazione <code>[]</code><ul>
 <li>può essere usata per<ul>
 <li>leggere un elemento</li>
 <li>cambiare un elemento che ha già un valore</li>
@@ -807,7 +803,7 @@ int main()
 <li>non controlla se l’elemento esiste</li>
 </ul>
 </li>
-<li>Per aggiungere elementi (in ordine di posizione) si usa il metodo push_back()</li>
+<li>Per aggiungere elementi (in ordine di posizione) si usa il metodo <code>push_back()</code></li>
 <li>Accesso agli elementi di un vector</li>
 </ul></article>
  

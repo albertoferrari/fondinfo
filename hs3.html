@@ -1599,7 +1599,8 @@ main = forever $ do
 
 main = do
     colors &lt;- forM [1,2,3,4] (\a -&gt; do
-        print $ "Which color do you associate with the number " ++ show a ++ "?"
+        print $ "Which color do you associate with the number "
+                ++ show a ++ "?"
         color &lt;- getLine
         return color)
     print "The colors that you associate with 1, 2, 3 and 4 are: "
@@ -1689,7 +1690,7 @@ main = do
 </code></pre>
 <ul>
 <li>F.s to <em>split</em> text: <code>lines</code>, <code>words</code>, <code>splitOn</code></li>
-<li>F.s to <em>join</em> text: <code>unlines</code>, <code>unwords</code></li>
+<li>F.s to <em>join</em> text: <code>unlines</code>, <code>unwords</code>, <code>intercalate</code></li>
 </ul></article>
  
 </slide>
