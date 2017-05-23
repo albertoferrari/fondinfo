@@ -112,8 +112,7 @@ int main() {
 <li>Positive result if 1st &lt; 2nd arg</li>
 </ul>
 </li>
-</ul>
-<p>code: c++</p></article>
+</ul></article>
  
 </slide>
 
@@ -153,7 +152,7 @@ int main() {
       <ul>
 <li><strong>Declaring.</strong> As though you were declaring a function, except with a name like <code>*foo</code> instead of just <code>foo</code></li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>void (*foo)(int);
+<pre class="prettyprint" data-lang="c++"><code>void (*func_pointer)(int);
 </code></pre>
 <ul>
 <li><strong>Initializing.</strong> Get the address of a function simply by naming it</li>
@@ -308,7 +307,7 @@ private:
     int value = 0;
 public:
     void add(int inc) { value += inc; }
-    int get_val() { return y; }
+    int get_val() { return value; }
 };
 </code></pre>
 <pre class="prettyprint" data-lang="C++"><code>int main() {
@@ -334,7 +333,7 @@ void Accumulator__add(Accumulator* this, int inc) {
     (*this).value += inc;
 }
 int Accumulator__get_val(Accumulator* this) {
-    return (*this).y;
+    return (*this).value;
 }
 </code></pre>
 <pre class="prettyprint" data-lang="C"><code>int main() {
