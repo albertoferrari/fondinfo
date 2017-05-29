@@ -369,7 +369,8 @@ func main() {
 <li>Avoid copying the value on each method call, for efficiency</li>
 </ul>
 </li>
-<li>In general, all methods on a given type should have <em>either</em> value or pointer receivers<ul>
+<li>In general, all methods on a given type should have:<ul>
+<li><em>Either</em> value, or pointer receivers</li>
 <li>But <strong>not a mixture</strong> of both</li>
 <li>Problems with <em>interfaces</em>...</li>
 </ul>
@@ -412,7 +413,8 @@ func (v *Vertex) Scale(f float64) {
       <ul>
 <li>A set of method signatures<ul>
 <li>Methods, not ordinary functions</li>
-<li>A value of interface type can hold any value... <br> that implements all those methods (<em>duck typing</em>)</li>
+<li>A value of interface type can hold any value...</li>
+<li>That implements all those methods (<em>duck typing</em>)</li>
 </ul>
 </li>
 <li>A type implements an interface by implementing its methods<ul>
