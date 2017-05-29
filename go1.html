@@ -299,6 +299,16 @@ v3 := Vertex{}      // X:0 and Y:0
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Duck typing</h2>
+      <h3>Methods and interfaces</h3>
+    </hgroup>
+  
+</slide>
+
 <slide  >
   
     <hgroup>
@@ -364,9 +374,9 @@ func main() {
     </hgroup>
     <article >
       <ul>
-<li>There are two reasons to use a pointer receiver<ul>
-<li>Modify the value that its receiver points to</li>
-<li>Avoid copying the value on each method call, for efficiency</li>
+<li>Two reasons to use a pointer receiver<ul>
+<li>Modify the pointed value</li>
+<li>Avoid copying value at call, for efficiency</li>
 </ul>
 </li>
 <li>In general, all methods on a given type should have:<ul>
@@ -375,7 +385,6 @@ func main() {
 <li>Problems with <em>interfaces</em>...</li>
 </ul>
 </li>
-<li>For <code>Vertex</code>, both <code>Abs</code> and <code>Scale</code> should use a pointer receiver!</li>
 </ul></article>
  
 </slide>
@@ -387,7 +396,10 @@ func main() {
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="go"><code>type Vertex struct {
+      <ul>
+<li><code>Vertex</code>: pointer receiver for both <code>Abs</code> and <code>Scale</code></li>
+</ul>
+<pre class="prettyprint" data-lang="go"><code>type Vertex struct {
     X, Y float64
 }
 
@@ -484,15 +496,15 @@ func main() {
     </hgroup>
     <article >
       <ul>
-<li>The interface type that specifies zero methods is known as the empty interface</li>
+<li>Empty interface<ul>
+<li>Specifies zero methods</li>
+<li>May hold values of any type</li>
+</ul>
+</li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>interface{}
 </code></pre>
 <ul>
-<li>An empty interface may hold values of any type<ul>
-<li>Every type implements at least zero methods</li>
-</ul>
-</li>
 <li>Empty interfaces are used by code that handles values of <em>unknown type</em><ul>
 <li>For example, <code>fmt.Print</code> takes any number of arguments of type <code>interface{}</code></li>
 <li>Used for (<em>unsafe</em>) <em>generic</em> code (<strong>no templates</strong>)</li>
