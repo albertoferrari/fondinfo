@@ -77,9 +77,9 @@ URL: https://code.google.com/p/io-2012-slides
         <img src="images/misc/three-brothers.png">
         
       </figure><ul>
-<li>Chiedere all'utente tre numeri interi: <code>a</code>, <code>b</code>, <code>c</code></li>
-<li>Determinare qual è il minore dei tre</li>
-<li>Determinare qual è il maggiore dei tre</li>
+<li>Generare e stampare tre numeri interi casuali: <code>a</code>, <code>b</code>, <code>c</code></li>
+<li>Ciascuno compreso tra 1 e 6</li>
+<li>Determinare e mostrare qual è il minore dei tre</li>
 </ul>
 <blockquote></blockquote>
 <p>Controllare prima di tutto se <code>a</code> è minore degli altri due <br>
@@ -91,28 +91,57 @@ Altrimenti ...</p></article>
 <slide  >
   
     <hgroup>
-      <h2>1.3 Cubi in ciclo</h2>
+      <h2>1.3 Quadrati casuali</h2>
       <h3></h3>
     </hgroup>
     <article >
       <figure>
-        <img src="images/misc/rock-cubes.png">
+        <img src="images/misc/random-squares.png">
         
       </figure><ul>
-<li>In un ciclo, ripetere le seguenti operazioni<ul>
-<li>Chiedere all'utente un numero</li>
-<li>Mostrare il suo valore al cubo</li>
-<li>Il valore 0 indica il termine della sequenza</li>
+<li>Chiedere all'utente un numero <code>n</code></li>
+<li>Disegnare <code>n</code> quadrati<ul>
+<li>Tutti con lato di 100 pixel</li>
+<li>Ciascuno in posizione casuale</li>
+<li>Ciascuno con un colore casuale</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p>Cominciare a disegnare un solo quadrato grigio, in posizione casuale</p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>1.4 Numero segreto</h2>
+      <h2>1.4 Cerchi concentrici</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/red-circles.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente il numero di cerchi da disegnare</li>
+<li>Disegnare i cerchi con raggio decrescente, ma tutti con lo stesso centro</li>
+<li>Far variare il colore dei cerchi<ul>
+<li>Dal rosso del livello più esterno</li>
+<li>Fino al nero del livello più interno</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Cominciare a disegnare un grosso cerchio rosso</p>
+<p>Poi, inserire l'operazione di disegno un ciclo, togliendo ad ogni passo <code>10</code> (p.es.) al raggio e al livello di rosso</p>
+<p>Infine, determinare automaticamente, prima del ciclo, le variazioni migliori per raggio e colore</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.5 Numero segreto</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -123,31 +152,7 @@ Altrimenti ...</p></article>
 <li>Generare un intero “segreto” a caso tra 1 e 90</li>
 <li>Chiedere ripetutamente all'utente di immettere un numero, finché non indovina quello generato</li>
 <li>Ad ogni tentativo, dire se il numero immesso è maggiore o minore del numero segreto</li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code>from random import randint
-secret = randint(1, 90)
-# `randint` is a function defined in the `random` module
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>1.5 Lunghezza righe (*)</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/measure-tape.png">
-        
-      </figure><ul>
-<li>Leggere una sequenza di righe di testo, in un ciclo</li>
-<li>La sequenza termina con una riga vuota</li>
-<li>Visualizzare la lunghezza media delle righe</li>
-</ul>
-<blockquote></blockquote>
-<p>Lunghezza di una variabile <code>line</code> di tipo stringa: <code>len(line)</code></p></article>
+</ul></article>
  
 </slide>
 
@@ -240,12 +245,7 @@ Anno 3: 114.12€ ...
 <li>Se capita sulla cella del mostro, ha perso</li>
 </ul>
 </li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code>from random import randint
-# ...
-monster_x = randint(0, 4)  # something between 0 and 4
-monster_y = randint(0, 4)  # something between 0 and 4
-</code></pre></article>
+</ul></article>
  
 </slide>
 
@@ -490,14 +490,16 @@ for i in range(8):
 <slide  >
   
     <hgroup>
-      <h2>3.1 Palline con gravità</h2>
+      <h2>3.1 Movimento a serpentina</h2>
       <h3></h3>
     </hgroup>
     <article >
       <figure>
-        <img src="images/misc/bouncing-ball.jpg">
+        <img src="images/misc/science-of-spaceships.jpg">
         
-      </figure><ul>
+      </figure><p>title: 3.1 Palline con gravità
+figure: images/misc/bouncing-ball.jpg</p>
+<ul>
 <li>Riprendere l'esercizio 2.9, ma visualizzare numerose palline in movimento</li>
 <li>Incapsulare tutti i dati di una pallina in un oggetto Ball</li>
 <li>Dotare gli oggetti pallina di un metodo <code>move</code>, per farli avanzare</li>

@@ -190,6 +190,30 @@ days = "mon|wed|fri".split("|")
 <slide  >
   
     <hgroup>
+      <h2>Tupla</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Sequenza <strong>immutabile</strong> di valori, anche di <em>tipo diverso</em></li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code># Tuple packing
+pt = 5, 6, "red"
+pt[0]  # 5
+pt[1]  # 6
+pt[2]  # "red"
+
+# multiple assignments, from a tuple
+x, y, colour = pt  # sequence unpacking
+a, b = 3, 4
+a, b = b, a
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Cicli su liste: for</h2>
       <h3></h3>
     </hgroup>
@@ -242,6 +266,29 @@ for i in range(1, 11):
 <slide  >
   
     <hgroup>
+      <h2>Sequenza di quadrati</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/red-squares.png">
+        
+      </figure><pre class="prettyprint" data-lang="python"><code>from game2d import *
+
+canvas = canvas_init((300, 300))
+
+for i in range(5):
+    x = i * 40
+    y = x
+    red = i * 60
+    draw_rect(canvas, (red, 0, 0), (x, y, 140, 140))
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Cicli e annidamento</h2>
       <h3></h3>
     </hgroup>
@@ -265,274 +312,6 @@ for y in range(1, MAX + 1):
 <p>Per fare in modo che ciascun valore richieda almeno 3 caratteri:
 <br>
 <code>val = "{:3}".format(x * y)</code></p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Tupla</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Sequenza <strong>immutabile</strong> di valori, anche di <em>tipo diverso</em></li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code># Tuple packing
-pt = 5, 6, "red"
-pt[0]  # 5
-pt[1]  # 6
-pt[2]  # "red"
-
-# multiple assignments, from a tuple
-x, y, colour = pt  # sequence unpacking
-a, b = 3, 4
-a, b = b, a
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Brython</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/brython.png">
-        <figcaption>→ brython.info</figcaption>
-      </figure><ul>
-<li><em>Transpiler</em>: converte codice Python in JavaScript<ul>
-<li>Sia traduttore che codice generato girano nel <em>browser</em></li>
-</ul>
-</li>
-<li>Useremo un modulo <em>ad-hoc</em>: <code>game2d</code><ul>
-<li>Genera html e lancia web-server locale</li>
-<li>Definisce funzioni di disegno</li>
-</ul>
-</li>
-<li>Spesso i parametri sono tuple<ul>
-<li><em>Color</em>: <code>(red, green, blue)</code> <br> Ogni componente nel range <code>0..255</code><br></li>
-<li><em>Point</em>: <code>(x, y)</code><br></li>
-<li><em>Size</em>: <code>(width, height)</code><br></li>
-<li><em>Rect</em>: <code>(left, top, width, height)</code></li>
-</ul>
-</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Disegno nel browser</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/oop/raster-coord.png">
-        
-      </figure><pre class="prettyprint" data-lang="python"><code>from game2d import *
-
-# New canvas, width=600, height=400
-canvas = canvas_init((600, 400))
-
-# Yellow rectangle, left=100, top=150, w=250, h=200
-# red=255 (max), green=255 (max), blue=0 (min)
-draw_rect(canvas, (255, 255, 0), (100, 150, 250, 200))
-
-# Blue circle, center=(100, 150), radius=20
-draw_circle(canvas, (0, 0, 255), (100, 150), 20)
-</code></pre>
-<p>Servono i file <code>brython_dist.js</code> e <code>game2d.py</code>, in <code>examples</code>: <br>
-<a href="https://github.com/tomamic/fondinfo/archive/master.zip">https://github.com/tomamic/fondinfo/archive/master.zip</a></p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Sequenza di quadrati</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/red-squares.png">
-        
-      </figure><pre class="prettyprint" data-lang="python"><code>from game2d import *
-
-canvas = canvas_init((300, 300))
-
-for i in range(5):
-    x = i * 40
-    y = x
-    red = i * 60
-    draw_rect(canvas, (red, 0, 0), (x, y, 140, 140))
-</code></pre>
-<p>Servono i file <code>brython_dist.js</code> e <code>game2d.py</code>, in <code>examples</code>: <br>
-<a href="https://github.com/tomamic/fondinfo/archive/master.zip">https://github.com/tomamic/fondinfo/archive/master.zip</a></p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Animazione</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="python"><code>from game2d import *
-
-def update():
-    global x
-    canvas_fill(canvas, (255, 255, 255))  # Draw background        
-    image_blit(canvas, image, (x, 50))    # Draw foreground
-    x = (x + 5) % 320                     # Update ball's position
-
-canvas = canvas_init((320, 240))
-image = image_load("ball.png")
-x = 50
-
-set_interval(update, 1000 // 30)    # Call update 30 times/second
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Eventi della tastiera</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="python"><code>from game2d import *
-
-def keydown(event: DOMEvent):
-    print("Key down: ", event.key, event.code)
-
-def keyup(event: DOMEvent):
-    print("Key up: ", event.key, event.code)
-
-doc.onkeydown = keydown
-doc.onkeyup = keyup
-</code></pre>
-<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent</a></p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Es.: Conteggio cifre</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/numbers.jpg">
-        
-      </figure><ul>
-<li>Chiedere una riga di testo all'utente</li>
-<li>Contare il numero complessivo di cifre presenti (da <code>'0'</code> a <code>'9'</code>)</li>
-<li>Valutare anche la somma di tutte le singole cifre trovate</li>
-</ul>
-<blockquote></blockquote>
-<p>Usare un ciclo <code>for</code> sulla stringa (sequenza di caratteri)</p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Es.: Conteggio di diversi caratteri</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/characters.png">
-        
-      </figure><ul>
-<li>Chiedere una riga di testo all'utente</li>
-<li>Contare separatamente le occorrenze di ciascuna lettera maiuscola (da <code>'A'</code> a <code>'Z'</code>)</li>
-</ul>
-<blockquote></blockquote>
-<p>Creare una lista (array) di 26 elementi, inizialmente tutti posti a <code>0</code></p>
-<p>Ciascun elemento è il contatore per una certa lettera</p>
-<p>L'indice del contatore corrispondente ad una lettera <code>val</code> può essere ottenuto come <code>ord(val) - ord('A')</code></p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Es.: Array, precalcolo</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/sin-cos.png">
-        
-      </figure><ul>
-<li>Riempire una lista con i valori di <code>sin(x)</code><ul>
-<li>360 elementi, indice <code>x</code> tra 0 e 359</li>
-</ul>
-</li>
-<li>Chiedere ripetutamente un angolo all'utente, visualizzare il corrispondente valore precalcolato</li>
-</ul>
-<blockquote></blockquote>
-<p><code>sin</code>, <code>pi</code> in modulo <code>math</code>
-<br>
-<code>sin</code> opera su radianti: <code>rad = x * pi / 180</code></p>
-<p>Estensione opzionale: salvare la lista di valori in un file e ricaricarla all'avvio, se già disponibile</p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Es.: Cerchi concentrici</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/red-circles.png">
-        
-      </figure><ul>
-<li>Chiedere all'utente il numero di cerchi da disegnare</li>
-<li>Disegnare i cerchi con raggio decrescente, ma tutti con lo stesso centro</li>
-<li>Far variare il colore dei cerchi<ul>
-<li>Dal rosso del livello più esterno</li>
-<li>Fino al nero del livello più interno</li>
-</ul>
-</li>
-</ul>
-<blockquote></blockquote>
-<p>Cominciare a disegnare un grosso cerchio rosso</p>
-<p>Poi, inserire l'operazione di disegno un ciclo, togliendo ad ogni passo <code>10</code> (p.es.) al raggio e al livello di rosso</p>
-<p>Infine, determinare automaticamente, prima del ciclo, le variazioni migliori per raggio e colore</p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Es.: Griglia di colori</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/color-grid.png"><img src="images/oop/raster-tile.png">
-        
-      </figure><ul>
-<li>Chidere all'utente dei valori per <code>rows</code> e <code>cols</code></li>
-<li>Mostrare una griglia di rettangoli di dimensione <code>rows×cols</code></li>
-<li>Partire da un rettangolo nero in alto a sinistra</li>
-<li>In orizzontale, aumentare gradatamente la componente di blu</li>
-<li>In verticale, aumentare gradatamente la componente di verde</li>
-</ul>
-<blockquote></blockquote>
-<p>Cominciare a creare una griglia di riquadri tutti neri, con due cicli <code>for</code> annidati</p>
-<p>Lasciare tra i riquadri un piccolo margine</p></article>
  
 </slide>
 
@@ -771,7 +550,113 @@ def rq(x: int) -&gt; int:
 <slide  >
   
     <hgroup>
-      <h2>Esercizio - Area di un'ellisse</h2>
+      <h2>Animazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>from game2d import *
+
+def update():
+    global x
+    canvas_fill(canvas, (255, 255, 255))  # Draw background        
+    image_blit(canvas, image, (x, 50))    # Draw foreground
+    x = (x + 5) % 320                     # Update ball's position
+
+canvas = canvas_init((320, 240))
+image = image_load("ball.png")
+x = 50
+
+set_interval(update, 1000 // 30)    # Call update 30 times/second
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Eventi della tastiera</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>from game2d import *
+
+def keydown(event: DOMEvent):
+    print("Key down: ", event.key, event.code)
+
+def keyup(event: DOMEvent):
+    print("Key up: ", event.key, event.code)
+
+doc.onkeydown = keydown
+doc.onkeyup = keyup
+</code></pre>
+<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent</a></p></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercizi</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.1 Conteggio cifre</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/numbers.jpg">
+        
+      </figure><ul>
+<li>Chiedere una riga di testo all'utente</li>
+<li>Contare il numero complessivo di cifre presenti (da <code>'0'</code> a <code>'9'</code>)</li>
+<li>Valutare anche la somma di tutte le singole cifre trovate</li>
+</ul>
+<blockquote></blockquote>
+<p>Usare un ciclo <code>for</code> sulla stringa (sequenza di caratteri)</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.2 Array, precalcolo</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/sin-cos.png">
+        
+      </figure><ul>
+<li>Riempire una lista con i valori di <code>sin(x)</code><ul>
+<li>360 elementi, indice <code>x</code> tra 0 e 359</li>
+</ul>
+</li>
+<li>Poi, ciclicamente...<ul>
+<li>Chiedere un angolo all'utente</li>
+<li>Visualizzare il corrispondente valore precalcolato</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>from math import pi, sin
+</code></pre>
+<p><code>sin</code> opera su radianti: calcolare <code>sin(x * pi / 180)</code>, anzichè <code>sin(x)</code></p>
+<p>Creare una lista vuota, e poi aggiungere un valore alla volta con <code>append</code>
+<br>
+In alternativa, usare la <code>list comprehension</code></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.3 Area di un'ellisse</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -779,18 +664,157 @@ def rq(x: int) -&gt; int:
         <img src="images/misc/ellipse.svg">
         
       </figure><ul>
-<li>Definire una funzione che:<ul>
-<li>Riceve come parametri i semiassi di una ellisse: <code>a</code>, <code>b</code></li>
-<li>Restituisce l'area dell'ellisse: <code>A = π*a*b</code></li>
+<li>Definire una <em>funzione</em> <code>ellipse_area</code> che:<ul>
+<li>Riceve come <em>parametri</em> i semiassi di una ellisse: <code>a</code>, <code>b</code></li>
+<li>Restituisce come risultato l'area dell'ellisse: <code>area = pi * a * b</code></li>
 </ul>
 </li>
-<li>Nel <code>main</code><ul>
-<li>Chiedere ripetutamente all'utente una coppia di valori</li>
-<li>Invocare ogni volta la funzione con i valori inseriti dall'utente</li>
-<li>Visualizzare il risultato</li>
+<li>Definire una <em>funzione</em> <code>main</code> che:<ul>
+<li>Chiede all'utente due valori</li>
+<li>Invoca la funzione <code>ellipse_area</code> con questi parametri</li>
+<li>Stampa il risultato ottenuto</li>
 </ul>
 </li>
 </ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.4 Cerchi concentrici</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/red-circles.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente il numero di cerchi da disegnare</li>
+<li>Disegnare i cerchi con raggio decrescente, ma tutti con lo stesso centro</li>
+<li>Far variare il colore dei cerchi<ul>
+<li>Dal rosso del livello più esterno</li>
+<li>Fino al nero del livello più interno</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Cominciare a disegnare un grosso cerchio rosso</p>
+<p>Poi, inserire l'operazione di disegno un ciclo, togliendo ad ogni passo <code>10</code> (p.es.) al raggio e al livello di rosso</p>
+<p>Infine, determinare automaticamente, prima del ciclo, le variazioni migliori per raggio e colore</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.5 Movimento orizzontale</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/street-fighter.jpg">
+        
+      </figure><ul>
+<li>Mostrare una pallina che si muove in orizzontale</li>
+<li>La pallina rimbalza sui bordi<ul>
+<li>Memorizzare in una variabile <code>dx</code> lo spostamento orizzontale da effettuare ad ogni ciclo</li>
+<li>Cambiare segno a <code>dx</code> quando <code>x &lt; 0</code> oppure <code>x + w &gt; screen_width</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.6 Movimento a serpentina</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/science-of-spaceships.jpg">
+        
+      </figure><ul>
+<li>Mostrare una pallina che si muove a serpentina</li>
+<li>Partire dall'esercizio precedente<ul>
+<li>Al momento del rimbalzo, imporre un spostamento verticale</li>
+<li>Fare in modo che, in ogni frame, lo spostamento sia solo orizzontale, o solo verticale, ma <em>non</em> in diagonale</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.7 Griglia di colori (*)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/color-grid.png"><img src="images/oop/raster-tile.png">
+        
+      </figure><ul>
+<li>Chidere all'utente dei valori per <code>rows</code> e <code>cols</code></li>
+<li>Mostrare una griglia di rettangoli di dimensione <code>rows×cols</code></li>
+<li>Partire da un rettangolo nero in alto a sinistra</li>
+<li>In orizzontale, aumentare gradatamente la componente di blu</li>
+<li>In verticale, aumentare gradatamente la componente di verde</li>
+</ul>
+<blockquote></blockquote>
+<p>Cominciare a creare una griglia di riquadri tutti neri, con due cicli <code>for</code> annidati</p>
+<p>Lasciare tra i riquadri un piccolo margine</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.8 Serpentina (*)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/winding-path.png">
+        
+      </figure><ul>
+<li>Chidere all'utente dei valori per <code>rows</code> e <code>cols</code></li>
+<li>Mostrare una griglia di rettangoli di dimensione <code>rows×cols</code></li>
+<li>Partire da un rettangolo nero in alto a sinistra</li>
+<li>Aumentare gradatamente la componente di blu, lungo un percorso a serpentina</li>
+</ul>
+<blockquote></blockquote>
+<p>Per iniziare, seguire un più semplice percorso "a macchina da scrivere"</p>
+<p>Poi invertire il verso delle righe con indice dispari</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.9 Spirale (*)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/spiral-circles.png">
+        
+      </figure><ul>
+<li>Disegnare una sequenza di cerchi (<code>n</code> scelto dall'utente) lungo una spirale</li>
+<li>Alla prima implementazione, procedere su un percorso circolare di raggio <code>r</code>, attorno al punto <code>(xc, yc)</code></li>
+<li>Poi, su una spirale, aumentando passo a passo anche <code>r</code></li>
+<li>Infine, disegnare lungo il percorso dei cerchi sempre più grandi e di colore diverso</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>xc, yc, r, angle = 320, 240, 40, 0.0
+for i in range(8):
+    y = yc + int(r * math.sin(angle))
+    x = xc + int(r * math.cos(angle))
+    pygame.draw.circle(screen, (0, 0, 0), (x, y), 10)
+    angle += math.pi / 4
+</code></pre></article>
  
 </slide>
 
