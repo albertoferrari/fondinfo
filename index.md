@@ -10,7 +10,7 @@ Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
 - [Modulo liberatoria per minori](stage-2017-liberatoria.rtf)
 - [Organizzazione dello stage](stage-2017-logistica.html)
 - [Esercizi di programmazione](esercizi-stage.html)
-- [Opinione degli studenti](http://goo.gl/forms/9KlO5dQ3LMw10rts2)
+- [Opinione degli studenti](https://goo.gl/forms/vPxZkqdhgWMLDRch1)
 
 ----
 
