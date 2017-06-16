@@ -43,12 +43,11 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article >
       <ul>
-<li>Made in ~2007 at Google, starting roughly from C<ul>
-<li>By the Unix pioneers Rob <em>Pike</em> and Ken <em>Thompson</em>, together with Robert Griesemer</li>
-<li>Book: “The Go Programming Language” by Brian W. <em>Kernighan</em>, Alan Donovan</li>
-</ul>
-</li>
-<li>Very few, orthogonal concepts<ul>
+<li>Made in ~2007 by the Unix pioneers Rob Pike and Ken Thompson, together with Robert Griesemer</li>
+<li>Book: “The Go Programming Language” by Brian W. Kernighan, Alan Donovan</li>
+<li>Ideas after a talk about 35 new features of C++11, and at C++ compile time...<ul>
+<li><a href="https://commandcenter.blogspot.it/2012/06/less-is-exponentially-more.html">https://commandcenter.blogspot.it/2012/06/less-is-exponentially-more.html</a></li>
+<li>Starting roughly from C</li>
 <li>No exceptions, no template, no inheritance</li>
 <li>Interfaces and duck typing</li>
 <li>Type inference</li>
@@ -56,10 +55,7 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Communicating sequential processes</li>
 </ul>
 </li>
-</ul>
-<blockquote></blockquote>
-<p>After a talk of 35 new features of C++11, and at pauses for compiling C++...
-<a href="https://commandcenter.blogspot.it/2012/06/less-is-exponentially-more.html">https://commandcenter.blogspot.it/2012/06/less-is-exponentially-more.html</a></p></article>
+</ul></article>
  
 </slide>
 
@@ -185,8 +181,8 @@ fmt.Println(sum)
     <article >
       <ul>
 <li>Range <code>for</code> loop, to iterate over a <strong>slice</strong> (<em>explained later</em>)</li>
-<li>A couple of values at each iteration: index, element</li>
-<li>Drop the index using <code>_</code>, or drop the element entirely</li>
+<li>Two values are returned for each iteration: index, copy of the element</li>
+<li>Drop the index using <code>_</code>, or drop the value entirely</li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>pow := []int{1, 2, 4, 8, 16, 32, 64, 128}
 
@@ -231,7 +227,7 @@ for i, v := range pow {
     </hgroup>
     <article >
       <ul>
-<li>Like C, <em>without</em> pointer arithmetics</li>
+<li>Like C, w/o pointer arithmetics</li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>i, j := 42, 2701
 
@@ -283,30 +279,18 @@ func main() {
       <ul>
 <li>Access to fields: we could write <code>(*p).X</code>, or...</li>
 <li>Just <code>p.X</code>, without the explicit <em>dereference</em></li>
+<li>Fields can be intialized by name</li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>v := Vertex{1, 2}
-p := &amp;v             // has type *Vertex
+p := &amp;v
 p.X = 4
 fmt.Println(v)
-p1:= &amp;Vertex{3, 4}  // also, has type *Vertex
 </code></pre>
-<ul>
-<li>In general, fields can be intialized by name</li>
-</ul>
 <pre class="prettyprint" data-lang="go"><code>v2 := Vertex{X: 1}  // Y:0 is implicit
 v3 := Vertex{}      // X:0 and Y:0
+p1:= &amp;Vertex{3, 4}  // has type *Vertex
 </code></pre></article>
  
-</slide>
-
-<slide class="segue dark" >
-  
-    <aside class="gdbar"><img src="images/logo.png"></aside>
-    <hgroup class="auto-fadein">
-      <h2>Duck typing</h2>
-      <h3>Methods and interfaces</h3>
-    </hgroup>
-  
 </slide>
 
 <slide  >
@@ -317,9 +301,9 @@ v3 := Vertex{}      // X:0 and Y:0
     </hgroup>
     <article >
       <ul>
-<li>No classes, but methods on types</li>
+<li>No classes, but possible to define methods on types</li>
 <li>A method is just a function with a <em>receiver</em> argument</li>
-<li>Receiver type must be defined in same <em>package</em></li>
+<li>The receiver type must be defined in the same <em>package</em></li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>type Vertex struct {
     X, Y float64
@@ -369,22 +353,47 @@ func main() {
 <slide  >
   
     <hgroup>
+      <h2>Methods vs. functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="go"><code>func Abs(v Vertex) float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func Scale(v *Vertex, f float64) {
+    v.X = v.X * f
+    v.Y = v.Y * f
+}
+
+func main() {
+    v := Vertex{3, 4}
+    Scale(&amp;v, 10)
+    fmt.Println(Abs(v))
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Value or pointer receiver?</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>Two reasons to use a pointer receiver<ul>
-<li>Modify the pointed value</li>
-<li>Avoid copying value at call, for efficiency</li>
+<li>There are two reasons to use a pointer receiver<ul>
+<li>Modify the value that its receiver points to</li>
+<li>Avoid copying the value on each method call, for efficiency</li>
 </ul>
 </li>
-<li>In general, all methods on a given type should have:<ul>
-<li><em>Either</em> value, or pointer receivers</li>
+<li>In general, all methods on a given type should have <em>either</em> value or pointer receivers<ul>
 <li>But <strong>not a mixture</strong> of both</li>
 <li>Problems with <em>interfaces</em>...</li>
 </ul>
 </li>
+<li>For <code>Vertex</code>, both <code>Abs</code> and <code>Scale</code> should use a pointer receiver!</li>
 </ul></article>
  
 </slide>
@@ -396,10 +405,7 @@ func main() {
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li><code>Vertex</code>: pointer receiver for both <code>Abs</code> and <code>Scale</code></li>
-</ul>
-<pre class="prettyprint" data-lang="go"><code>type Vertex struct {
+      <pre class="prettyprint" data-lang="go"><code>type Vertex struct {
     X, Y float64
 }
 
@@ -418,21 +424,25 @@ func (v *Vertex) Scale(f float64) {
 <slide  >
   
     <hgroup>
-      <h2>Interface</h2>
+      <h2>Interfaces</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>A set of method signatures<ul>
-<li>Methods, not ordinary functions</li>
 <li>A value of interface type can hold any value...</li>
-<li>That implements all those methods (<em>duck typing</em>)</li>
+<li>that implements all those methods</li>
 </ul>
 </li>
 <li>A type implements an interface by implementing its methods<ul>
 <li>No explicit declaration, no <code>implements</code> keyword</li>
-<li>Definition of interface decoupled from implementation</li>
+<li>Definition of an interface decoupled from its implementation</li>
 <li>Different packages, no pre-arrangement</li>
+</ul>
+</li>
+<li>Under the covers, interface value ~ tuple: <code>(value, type)</code><ul>
+<li>Method of an interface value → method of its underlying type</li>
+<li>Interface value holding a <code>nil</code>: itself is non-nil; its methods are callable</li>
 </ul>
 </li>
 </ul></article>
@@ -496,15 +506,15 @@ func main() {
     </hgroup>
     <article >
       <ul>
-<li>Empty interface<ul>
-<li>Specifies zero methods</li>
-<li>May hold values of any type</li>
-</ul>
-</li>
+<li>The interface type that specifies zero methods is known as the empty interface</li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>interface{}
 </code></pre>
 <ul>
+<li>An empty interface may hold values of any type<ul>
+<li>Every type implements at least zero methods</li>
+</ul>
+</li>
 <li>Empty interfaces are used by code that handles values of <em>unknown type</em><ul>
 <li>For example, <code>fmt.Print</code> takes any number of arguments of type <code>interface{}</code></li>
 <li>Used for (<em>unsafe</em>) <em>generic</em> code (<strong>no templates</strong>)</li>
@@ -639,7 +649,6 @@ func main() {
       <ul>
 <li>Go does <em>not</em> have built-in <em>tuples</em></li>
 <li>But functions can return multiple values</li>
-<li>Often used to return value and error</li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>func swap(x, y string) (string, string) {
     return y, x
@@ -1096,35 +1105,6 @@ func main() {
 <slide  >
   
     <hgroup>
-      <h2>Methods vs. functions</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Only methods allow to implement interfaces</li>
-<li>Not ordinary functions</li>
-</ul>
-<pre class="prettyprint" data-lang="go"><code>func Abs(v Vertex) float64 {
-    return math.Sqrt(v.X*v.X + v.Y*v.Y)
-}
-
-func Scale(v *Vertex, f float64) {
-    v.X = v.X * f
-    v.Y = v.Y * f
-}
-
-func main() {
-    v := Vertex{3, 4}
-    Scale(&amp;v, 10)
-    fmt.Println(Abs(v))
-}
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Type assertions</h2>
       <h3></h3>
     </hgroup>
@@ -1191,14 +1171,7 @@ type error interface {
 type Reader interface {
         Read(p []byte) (n int, err error)
 }
-</code></pre>
-<ul>
-<li>Under the covers, interface value ~ tuple: <code>(value, type)</code><ul>
-<li>Method of an interface value → method of its underlying type</li>
-<li>Interface value holding a <code>nil</code>: itself is non-nil; its methods are callable</li>
-</ul>
-</li>
-</ul></article>
+</code></pre></article>
  
 </slide>
 
