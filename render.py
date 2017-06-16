@@ -88,7 +88,7 @@ if __name__ == '__main__':
     while True:
         for filename in os.listdir('mdp'):
             inpath = 'mdp/' + filename
-            outpath = filename[:-3] + '.html'
+            outpath = filename[:-4] + '.html'
             if (not os.path.isfile(outpath) or
                 os.path.getmtime(outpath) < os.path.getmtime(inpath)):
                 process_slides(inpath, outpath)
