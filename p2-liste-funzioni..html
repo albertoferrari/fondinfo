@@ -1,0 +1,841 @@
+<!--
+Google IO 2012 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahe <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Liste e funzioni</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/tomamic.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+<slide class="title-slide segue nobackground">
+  <aside class="gdbar"><img src="images/logo.png"></aside>
+  <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+  <h1 data-config-title><!-- populated from slide_config.json --></h1>
+  <figure><img src="images/fun/shopping-list.jpg"></figure>
+  <hgroup>
+    <h2>Introduzione alla programmazione</h2>
+    <p>Michele Tomaiuolo<br>Ingegneria dell'Informazione, UniPR</p>
+  </hgroup>
+</slide>
+
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lista</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/month-list.svg">
+        
+      </figure><ul>
+<li>Sequenza di elementi, <em>di solito</em> dello stesso <strong>tipo</strong><ul>
+<li>L'intera lista può essere assegnata ad una variabile, così diamo un <strong>nome</strong> alla lista</li>
+</ul>
+</li>
+<li>I singoli elementi sono <strong>numerati</strong><ul>
+<li>Gli indici partono da 0!</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>to_buy = ["spam", "eggs", "beans"]
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>rainfall_data = [13, 24, 18, 15]
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>months = ["Jan", "Feb", "Mar",
+          "Apr", "May", "Jun", 
+          "Jul", "Aug", "Sep", 
+          "Oct", "Nov", "Dec"]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Accesso agli elementi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/wile-coyote.png">
+        
+      </figure><ul>
+<li><strong>Attenzione ad usare indici validi!</strong><ul>
+<li><em>Lunghezza</em> attuale di una lista <code>x</code>: <code>len(x)</code></li>
+<li>Elementi <em>numerati</em> da <code>0</code> a <code>len(x)-1</code></li>
+<li>Indici <em>negativi</em> contano dalla fine</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>n = len(months)            # 12
+months[3]                  # "Apr"
+months[-2]                 # "Nov", same as n - 2
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>to_buy = ["spam", "eggs", "beans"]
+
+to_buy[1] = "ketchup"      # replace an element
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Appartenenza, inserimento, rimozione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>to_buy = ["spam", "eggs", "beans"]
+
+"eggs" in to_buy           # True, to_buy contains "eggs"
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>to_buy.append("bacon")     # add an element to the end
+to_buy.pop()               # remove (and return) last element
+
+to_buy.insert(1, "bacon")  # other elements shift
+removed = to_buy.pop(1)    # remove (and return) element at index
+
+to_buy.remove("eggs")      # remove an element by value
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Slice: porzioni di lista</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>spring = months[2:5]       # ["Mar", "Apr", "May"]
+quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
+quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
+whole_year = months[:]     # Copy the whole list
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>list1 = ["spam", "eggs", "beans"]
+list2 = ["sausage", "mushrooms"]
+to_buy = list1 + list2     # List concatenation
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>so_boring = [1, 2] * 3     # List repetition:
+                           # [1, 2, 1, 2, 1, 2]
+results_by_month = [0] * 12
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Uguaglianza e identità</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>a = [3, 4, 5]
+b = a[:]       # b = [3, 4, 5] -- a new list!
+b == a         # True, they contain the same values
+b is a         # False, they are two objects in memory
+               # (try and modify one of them...) 
+c = a
+c is a         # True, same object in memory 
+               # (try and modify one of them...)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Stringhe e liste</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>Stringa</strong>: sequenza <em>immutabile</em> di caratteri</li>
+<li><strong><code>join</code></strong> e <strong><code>split</code></strong>: da lista a stringa e viceversa</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>txt = "Monty Python's Flying Circus"
+txt[0]    # 'M'
+txt[1]    # 'o'
+txt[-1]   # 's'
+txt[6:12] # "Python"
+txt[-6:]  # "Circus"
+
+days = ["tue", "thu", "sat"]
+txt = "|".join(days)  # "tue|thu|sat"
+
+days = "mon|wed|fri".split("|")
+# ["mon", "wed", "fri"]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Tupla</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Sequenza <strong>immutabile</strong> di valori, anche di <em>tipo diverso</em></li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code># Tuple packing
+pt = 5, 6, "red"
+pt[0]  # 5
+pt[1]  # 6
+pt[2]  # "red"
+
+# multiple assignments, from a tuple
+x, y, colour = pt  # sequence unpacking
+a, b = 3, 4
+a, b = b, a
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Cicli su liste: for</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+
+print("Your shopping list contains:")
+
+for product in shopping_list:
+    print(product)
+</code></pre>
+<ul>
+<li>Ad ogni iterazione, a <code>product</code> è assegnato un diverso elemento della lista <code>shopping_list</code></li>
+<li>Si può usare un ciclo <code>for</code> su qualsiasi sequenza, anche su una <em>stringa</em></li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Intervalli di valori: range</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/algo/sum10.svg">
+        
+      </figure><ul>
+<li><strong><code>range</code></strong>: intervallo di valori aperto a destra<ul>
+<li>Estremo inferiore <em>incluso</em></li>
+<li>Estremo superiore <em>escluso</em></li>
+<li>Iterabile con un ciclo <code>for</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code># Add up numbers from 1 to 10
+
+total = 0
+for i in range(1, 11):
+    total += i
+
+# total = 0;  i = 1
+# while i &lt; 11:
+#     total += i;  i += 1
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Sequenza di quadrati</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/red-squares.png">
+        
+      </figure><pre class="prettyprint" data-lang="python"><code>from game2d import *
+
+canvas = canvas_init((300, 300))
+
+for i in range(5):
+    x = i * 40
+    y = x
+    red = i * 60
+    draw_rect(canvas, (red, 0, 0), (x, y, 140, 140))
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Cicli e annidamento</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/tables.png">
+        
+      </figure><pre class="prettyprint" data-lang="python"><code>MAX = 12
+y = int(input("Insert a value: "))
+for x in range(1, MAX + 1):
+    print(x * y, end = " ")
+    # inserts a space, instead of a newline
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>MAX = 12
+for y in range(1, MAX + 1):
+    for x in range(1, MAX + 1):
+        val = x * y
+        print(val, end = " ")
+    print()
+</code></pre>
+<p>Per fare in modo che ciascun valore richieda almeno 3 caratteri:
+<br>
+<code>val = "{:3}".format(x * y)</code></p></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Funzioni</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Definizione di funzioni</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/function.png">
+        
+      </figure><ul>
+<li>
+<p>Operatore, applicato a operandi, per ottenere un risultato</p>
+<ul>
+<li><strong><code>def</code></strong> per definire una funzione</li>
+<li><strong><code>return</code></strong> per terminare e restituire un risultato</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>def hypotenuse(a, b):
+    c = (a ** 2 + b ** 2) ** 0.5
+    return c
+
+def limit_values(values, max_val):
+    # procedure: process data, no direct result
+    for i in range(len(values)):
+        if values[i] &gt; max_val:
+            values[i] = max_val
+
+    # the pythonic way: for i, val in enumerate(values): ...
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Chiamata di funzioni</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong><code>def</code></strong> definisce una funzione, ma non la esegue!</li>
+<li>Bisogna <em>chiamarla</em></li>
+<li>Ogni funzione, quando eseguita, crea un nuovo <em>spazio di nomi</em><ul>
+<li>Parametri e variabili hanno <strong>ambito locale</strong></li>
+<li>Non visibili nel resto del programma</li>
+<li>Anche nomi uguali, definiti in ambiti diversi, restano distinti</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>side1 = float(input('1st side? '))
+side2 = float(input('2nd side? '))
+side3 = hypotenuse(side1, side2)
+print('3rd side:', side3)
+
+data = [5, 4, 2]
+limit_values(data, 4)
+print(data)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Parametri di funzioni</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>Parametri formali</strong>: nomi usati nella <em>definizione</em></li>
+<li><strong>Parametri effettivi</strong>: oggetti passati alla funz.</li>
+<li>Parametri passati &ldquo;<em>per oggetto</em>&rdquo;<ul>
+<li>Variabili all'esterno: non vengono modificate</li>
+<li>Liste e oggetti passati ad una funz.: modifiche <em>permanenti</em></li>
+</ul>
+</li>
+<li>Si possono restituire più valori, come <em>tupla</em><ul>
+<li><code>return 7, 5, 'black'</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>def inc(a):
+    a += 1
+    print(a)  # just for debug
+x = 10
+inc(x)
+print(x)      # just for debug
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Funzione main</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>A volte si preferisce creare una funzione principale<ul>
+<li>In questo modo si limitano le variabili globali</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code># def hypotenuse ...
+
+def main():
+    side1 = float(input("1st side? "))
+    side2 = float(input("2nd side? "))
+    side3 = hypotenuse(side1, side2)
+    print("3rd side:", side3)
+
+main()
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Modulo main</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Nome del modulo in esecuzione: <code>__name__</code><ul>
+<li>É il nome del file, senza estensione</li>
+<li>Modulo che avvia l'app ha nome speciale <code>"__main__"</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code># def hypotenuse ...
+
+def main():
+    side1 = float(input("1st side? "))
+    side2 = float(input("2nd side? "))
+    side3 = hypotenuse(side1, side2)
+    print("3rd side:", side3)
+
+if __name__ == "__main__":
+    main()
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Documentazione di funzioni</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>Annotazioni</strong>: utili per documentare il tipo di param. e valore di ritorno (ma non c'è verifica!)</li>
+<li><strong>Docstring</strong>: descrizione testuale di una funzione</li>
+<li><strong><code>help</code></strong>: funzione per visualizzare la documentazione</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>def hypotenuse(cathetus1: float, cathetus2: float) -&gt; float:
+    '''
+    Return the hypotenuse of a right triangle,
+    given both its legs (catheti).
+    '''
+    return (cathetus1 ** 2 + cathetus2 ** 2) ** 0.5
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Effetti collaterali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Modifica di oggetti passati come parametri o variabili globali, operazioni di lettura/scrittura...</li>
+<li>Annullano la <strong>trasparenza referenziale</strong><ul>
+<li>Impossibile semplificare, sostituendo una chiamata a funzione col suo valore di ritorno (es. presenti operazioni di I/O)</li>
+</ul>
+</li>
+<li>Rendono la funzione <strong>non idempotente</strong><ul>
+<li>Chiamata più volte, con gli stessi parametri, restituisce risultati diversi</li>
+</ul>
+</li>
+<li>→ Difficile fare verifiche matematiche<ul>
+<li><code>z = f(sqrt(2), sqrt(2))</code></li>
+<li><code>s = sqrt(2)</code> <br> <code>z = f(s, s)</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Funzioni non idempotenti</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Esempio di semplificazione<ul>
+<li><code>p = rq(x) + rq(y) * (rq(x) – rq(x))</code></li>
+<li><code>p = rq(x) + rq(y) * (0)</code></li>
+<li><code>p = rq(x) + 0</code></li>
+<li><code>p = rq(x)</code></li>
+</ul>
+</li>
+<li>Ma se <code>rq</code> ha effetti collaterali, non si può!</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>base_value = 0  # global variable
+
+def rq(x: int) -&gt; int:
+    global base_value
+    base_value += 1
+    return x + base_value
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Animazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>from game2d import *
+
+def update():
+    global x
+    canvas_fill(canvas, (255, 255, 255))  # Draw background        
+    image_blit(canvas, image, (x, 50))    # Draw foreground
+    x = (x + 5) % 320                     # Update ball's position
+
+canvas = canvas_init((320, 240))
+image = image_load("ball.png")
+x = 50
+
+set_interval(update, 1000 // 30)    # Call update 30 times/second
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Eventi della tastiera</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>from game2d import *
+
+def keydown(event: DOMEvent):
+    print("Key down: ", event.key, event.code)
+
+def keyup(event: DOMEvent):
+    print("Key up: ", event.key, event.code)
+
+doc.onkeydown = keydown
+doc.onkeyup = keyup
+</code></pre>
+<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent</a></p></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercizi</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.1 Conteggio cifre</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/numbers.jpg">
+        
+      </figure><ul>
+<li>Chiedere una riga di testo all'utente</li>
+<li>Contare il numero complessivo di cifre presenti (da <code>'0'</code> a <code>'9'</code>)</li>
+<li>Valutare anche la somma di tutte le singole cifre trovate</li>
+</ul>
+<blockquote></blockquote>
+<p>Usare un ciclo <code>for</code> sulla stringa (sequenza di caratteri)</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.2 Array, precalcolo</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/sin-cos.png">
+        
+      </figure><ul>
+<li>Riempire una lista con i valori di <code>sin(x)</code><ul>
+<li>360 elementi, indice <code>x</code> tra 0 e 359</li>
+</ul>
+</li>
+<li>Poi, ciclicamente...<ul>
+<li>Chiedere un angolo all'utente</li>
+<li>Visualizzare il corrispondente valore precalcolato</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>from math import pi, sin
+</code></pre>
+<p><code>sin</code> opera su radianti: calcolare <code>sin(x * pi / 180)</code>, anzichè <code>sin(x)</code></p>
+<p>Creare una lista vuota, e poi aggiungere un valore alla volta con <code>append</code></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.3 Area di un'ellisse</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/ellipse.svg">
+        
+      </figure><ul>
+<li>Definire una <em>funzione</em> <code>ellipse_area</code> che:<ul>
+<li>Riceve come <em>parametri</em> i semiassi di una ellisse: <code>a</code>, <code>b</code></li>
+<li>Restituisce come risultato l'area dell'ellisse: <code>area = pi * a * b</code></li>
+</ul>
+</li>
+<li>Definire una <em>funzione</em> <code>main</code> che:<ul>
+<li>Chiede all'utente due valori</li>
+<li>Invoca la funzione <code>ellipse_area</code> con questi parametri</li>
+<li>Stampa il risultato ottenuto</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.4 Cerchi concentrici</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/red-circles.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente il numero di cerchi da disegnare</li>
+<li>Disegnare i cerchi con raggio decrescente, ma tutti con lo stesso centro</li>
+<li>Far variare il colore dei cerchi<ul>
+<li>Dal rosso del livello più esterno</li>
+<li>Fino al nero del livello più interno</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Cominciare a disegnare un grosso cerchio rosso</p>
+<p>Poi, inserire l'operazione di disegno un ciclo, togliendo ad ogni passo <code>10</code> (p.es.) al raggio e al livello di rosso</p>
+<p>Infine, determinare automaticamente, prima del ciclo, le variazioni migliori per raggio e colore</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.5 Movimento orizzontale</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/street-fighter.jpg">
+        
+      </figure><ul>
+<li>Mostrare una pallina che si muove in orizzontale</li>
+<li>La pallina rimbalza sui bordi<ul>
+<li>Memorizzare in una variabile <code>dx</code> lo spostamento orizzontale da effettuare ad ogni ciclo</li>
+<li>Cambiare segno a <code>dx</code> quando <code>x &lt; 0</code> oppure <code>x + w &gt; screen_width</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.6 Movimento a serpentina</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/science-of-spaceships.jpg">
+        
+      </figure><ul>
+<li>Mostrare una pallina che si muove a serpentina</li>
+<li>Partire dall'esercizio precedente<ul>
+<li>Al momento del rimbalzo, imporre un spostamento verticale</li>
+<li>Fare in modo che, in ogni frame, lo spostamento sia solo orizzontale, o solo verticale, ma <em>non</em> diagonale</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.7 Griglia di colori (*)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/color-grid.png"><img src="images/oop/raster-tile.png">
+        
+      </figure><ul>
+<li>Chidere all'utente dei valori per <code>rows</code> e <code>cols</code></li>
+<li>Mostrare una griglia di rettangoli di dimensione <code>rows×cols</code></li>
+<li>Partire da un rettangolo nero in alto a sinistra</li>
+<li>In orizzontale, aumentare gradatamente la componente di blu</li>
+<li>In verticale, aumentare gradatamente la componente di verde</li>
+</ul>
+<blockquote></blockquote>
+<p>Cominciare a creare una griglia di riquadri tutti neri, con due cicli <code>for</code> annidati</p>
+<p>Lasciare tra i riquadri un piccolo margine</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.8 Serpentina (*)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/winding-path.png">
+        
+      </figure><ul>
+<li>Chidere all'utente dei valori per <code>rows</code> e <code>cols</code></li>
+<li>Mostrare una griglia di rettangoli di dimensione <code>rows×cols</code></li>
+<li>Partire da un rettangolo nero in alto a sinistra</li>
+<li>Aumentare gradatamente la componente di blu, lungo un percorso a serpentina</li>
+</ul>
+<blockquote></blockquote>
+<p>Per iniziare, seguire un più semplice percorso "a macchina da scrivere"</p>
+<p>Poi invertire il verso delle righe con indice dispari</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.9 Spirale (*)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/spiral-circles.png">
+        
+      </figure><ul>
+<li>Disegnare una sequenza di cerchi (<code>n</code> scelto dall'utente) lungo una spirale</li>
+<li>Alla prima implementazione, procedere su un percorso circolare di raggio <code>r</code>, attorno al punto <code>(xc, yc)</code></li>
+<li>Poi, su una spirale, aumentando passo a passo anche <code>r</code></li>
+<li>Infine, disegnare lungo il percorso dei cerchi sempre più grandi e di colore diverso</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>xc, yc, r, angle = 320, 240, 40, 0.0
+for i in range(8):
+    y = yc + int(r * math.sin(angle))
+    x = xc + int(r * math.cos(angle))
+    pygame.draw.circle(screen, (0, 0, 0), (x, y), 10)
+    angle += math.pi / 4
+</code></pre></article>
+ 
+</slide>
+
+
+<slide class="thank-you-slide segue nobackground">
+  <aside class="gdbar right"><img src="images/logo.png"></aside>
+  <article class="flexbox vleft auto-fadein">
+    <h2>&lt;Domande?&gt;</h2>
+  </article>
+  <p class="auto-fadein" data-config-contact>
+    Michele Tomaiuolo
+    <br>
+    Palazzina 1, int. 5708
+    <br>
+    Ingegneria dell'Informazione, UniPR
+    <br>
+    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+  </p>
+</slide>
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>

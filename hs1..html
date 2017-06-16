@@ -1,0 +1,1875 @@
+<!--
+Google IO 2012 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahe <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Haskell</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/tomamic.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+<slide class="title-slide segue nobackground">
+  <aside class="gdbar"><img src="images/logo.png"></aside>
+  <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+  <h1 data-config-title><!-- populated from slide_config.json --></h1>
+  <figure><img src="images/fun/haskell-logo.png"></figure>
+  <hgroup>
+    <h2>Functional programming</h2>
+    <p>Michele Tomaiuolo<br>Ingegneria dell'Informazione, UniPR</p>
+  </hgroup>
+</slide>
+
+
+<slide  >
+  
+    <hgroup>
+      <h2>Why learning a new language</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/rbfuller.jpg">
+        
+      </figure><ul>
+<li>Because it makes easier to perform some tasks</li>
+<li>To land a (better) job</li>
+<li>To work with some other software / in some environment</li>
+<li>To learn a new way of thinking</li>
+</ul>
+<blockquote>
+<p>A language that does not affect the way you think about programming, is not worth knowing. <em>(Alan Perlis, 1966 Turing Award)</em></p>
+<p>If you want to teach people a new way of thinking, don't bother trying to teach them. Instead, give them a tool, the use of which will lead to new ways of thinking. <em>(Buckminster Fuller, Architect 1970 gold medal AIA)</em></p>
+</blockquote></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Functional paradigm</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/function.png">
+        
+      </figure><ul>
+<li>Program execution: evaluation of <em>mathematical functions</em></li>
+<li>No <em>side effects</em>: easier to verify correctness</li>
+<li><em>Declarative</em> style: what the result is, vs. how to calculate it</li>
+<li><em>Immutable</em> variables and values: fewer inter-dependences</li>
+<li>Optimizable: fit for <em>parallel programming</em></li>
+<li><em>Expression</em>-oriented: everything is an expression, producing a value</li>
+<li>Functions are values, too: used as parameters and results of other, <em>higher-order</em>, functions</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Side effects</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/dognap.png">
+        
+      </figure><ul>
+<li>Modifications of objects passed as parameters or global variables, I/O operations...</li>
+<li>Nullify <strong>referential trasparency</strong><ul>
+<li>Impossible to simplify, sustituting a call to f. with its return value (ex. if I/O ops are present)</li>
+</ul>
+</li>
+<li>Make f. <strong>non-idempotent</strong><ul>
+<li>Called repeatedly, with the same params, returns different results</li>
+</ul>
+</li>
+<li>→ Mathematical proofs are difficult<ul>
+<li><code>z = f(sqrt(2), sqrt(2))</code></li>
+<li><code>s = sqrt(2)</code> <br> <code>z = f(s, s)</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Non-idempotent functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Example of simplification<ul>
+<li><code>p = rq(x) + rq(y) * (rq(x) – rq(x))</code></li>
+<li><code>p = rq(x) + rq(y) * (0)</code></li>
+<li><code>p = rq(x) + 0</code></li>
+<li><code>p = rq(x)</code></li>
+</ul>
+</li>
+<li>But if <code>rq</code> has side effects, you can't!</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>base_value = 0  # global variable
+
+def rq(x: int) -&gt; int:
+    global base_value
+    base_value += 1
+    return x + base_value
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Haskell</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/haskell-xkcd.png">
+        
+      </figure><ul>
+<li>Pure functional language named after Haskell Curry<ul>
+<li>Mathematical logics, 1900-1982</li>
+</ul>
+</li>
+<li>Compiled to native code, no virtual machine<ul>
+<li>Concise, declarative, efficient</li>
+</ul>
+</li>
+<li>Static typing<ul>
+<li>Type variables, typeclasses, type constaints</li>
+</ul>
+</li>
+<li>Lazy evaluation</li>
+<li>Pattern matching</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="large-image" >
+  
+    <hgroup>
+      <h2>The Top 30 (IEEE Spectrum, 2016)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/dev/languages-spectrum-2016.png" /></p></article>
+ 
+</slide>
+
+<slide class="large-image" >
+  
+    <hgroup>
+      <h2>Weekend programming</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/dev/so-weekend.png" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Interactive shell</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/learn-haskell.png">
+        
+      </figure><ul>
+<li>Install the “<em>Glasgow Haskell Compiler</em>”<ul>
+<li><code>sudo apt install ghc</code></li>
+</ul>
+</li>
+<li>REPL: Read-Eval-Print Loop<ul>
+<li><code>ghci</code></li>
+</ul>
+</li>
+<li>Expressions and operators<ul>
+<li><code>+, -, *, /, ^, **</code></li>
+<li><code>&amp;&amp;, ||, not</code></li>
+<li><code>==, /=, &lt;, &lt;=, &gt;, &gt;=</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; 2 ^ 3
+8
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://learnyouahaskell.com/">http://learnyouahaskell.com/</a></p>
+<p><a href="http://www.haskell.org/">http://www.haskell.org/</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Prefix and infix calls</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Function calling: prefix notation<ul>
+<li>F. name and params separated by blanks</li>
+<li>No parens</li>
+</ul>
+</li>
+<li>Infix notation<ul>
+<li>Surround f. name with ticks (`)</li>
+<li>Operator (f. named with symbols)</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; div 5 3
+1
+Prelude&gt; 5 `div` 3
+1
+Prelude&gt; 5 `rem` 3
+2
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Defining functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/fx.png">
+        
+      </figure><pre class="prettyprint" data-lang="haskell"><code>doubleMe x = x + x
+
+doubleUs x y = doubleMe x + doubleMe y
+</code></pre>
+<ul>
+<li>Save the previous code in a file: <code>baby.hs</code></li>
+<li>In GHCi enter: <code>:l baby</code></li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :l baby
+Prelude&gt; doubleMe 5
+10
+Prelude&gt; doubleUs 4 3
+14
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Variables</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>A function without params is a constant<ul>
+<li>I.e., an <em>immutable</em> variable</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>greetings = "Hi, there!"
+k = 11
+k = k + 1    -- error!
+</code></pre>
+<ul>
+<li>Use <strong><code>let</code></strong> to define functions directly in GHCi<ul>
+<li>Doing <code>let a = 1</code> inside GHCi is the equivalent of...</li>
+<li>writing <code>a = 1</code> in a script and then loading it</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let doubleMe x = x + x
+Prelude&gt; doubleMe 5
+10
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lists</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/shopping-list.jpg">
+        
+      </figure><ul>
+<li>Much like shopping lists in the real world, lists in Haskell are very useful</li>
+<li>Lists are denoted by square brackets and the values in the lists are separated by commas</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let lostNumbers = [12,99,37]
+Prelude&gt; lostNumbers
+[12,99,37]
+</code></pre>
+<p><img alt="" src="images/fun/linked-list.svg" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Homogeneous lists</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>In Haskell, lists are a homogenous data structure<ul>
+<li>They store several elements of the same type</li>
+<li>We can have a list of integers or a list of characters but we can't have a list that has a few integers and then a few characters</li>
+<li><code>[1,2,'a',3,'b','c',4]  -- error!</code></li>
+</ul>
+</li>
+<li>Strings are just lists of characters<ul>
+<li><code>"hello"</code> is just syntactic sugar for <code>['h','e','l','l','o']</code></li>
+<li>Because strings are lists, we can use list functions on them, which is really handy</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>The character type is denoted as a character between single quotes</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>List concatenation</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>A common task is putting two lists together</li>
+<li>This is done by using the <code>++</code> operator</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [1,2,3,4] ++ [9,10,11,12]
+[1,2,3,4,9,10,11,12]
+Prelude&gt; [1,2,3] ++ [4]
+[1,2,3,4]
+Prelude&gt; "hello" ++ " " ++ "world"
+"hello world"
+Prelude&gt; ['w','o'] ++ ['o','t']
+"woot"
+</code></pre>
+<blockquote></blockquote>
+<p>Even if you're adding an element to the end of a list with <code>++</code>, you have to surround it with square brackets so it becomes a list</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Prepending an element</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Watch out when repeatedly using the <code>++</code> operator on long strings<ul>
+<li>When you put together two lists, internally, Haskell has to walk through (and duplicate) the whole list on the left side of <code>++</code></li>
+</ul>
+</li>
+<li>However, putting something at the beginning of a list using the <code>:</code> operator (also called the <em>cons</em> operator) is instantaneous<ul>
+<li><code>:</code> takes a value and a list, whereas <code>++</code> takes two lists</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; 'A':" SMALL CAT"
+"A SMALL CAT"
+Prelude&gt; 5:[1,2,3,4,5]
+[5,1,2,3,4,5]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>More on lists</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>[1,2,3]</code> is actually just syntactic sugar for <code>1:2:3:[]</code><ul>
+<li><code>[]</code> is an empty list; if we prepend <code>3</code> to it, it becomes <code>[3]</code>; if we prepend <code>2</code> to that, it becomes <code>[2,3]</code>, and so on</li>
+</ul>
+</li>
+<li>Note: <code>[], [[]] and[[],[],[]]</code> are all different things<ul>
+<li>The first one is an empty list</li>
+<li>The seconds one is a list that contains one empty list</li>
+<li>The third one is a list that contains three empty lists</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Get an element</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>If you want to get an element out of a list by index, use <code>!!</code></li>
+<li>The indices start at <code>0</code></li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; "Steve Buscemi" !! 6
+'B'
+Prelude&gt; [9.4,33.2,96.2,11.2,23.25] !! 1
+33.2
+</code></pre>
+<ul>
+<li>But if you try to get the sixth element from a list that only has four elements, you'll get an error so be careful!</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lists of lists</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let b = [[1,2,3,4],[5,3,3,3],[1,2,2,3,4],[1,2,3]]
+Prelude&gt; b
+[[1,2,3,4],[5,3,3,3],[1,2,2,3,4],[1,2,3]]
+Prelude&gt; b ++ [[1,1,1,1]]
+[[1,2,3,4],[5,3,3,3],[1,2,2,3,4],[1,2,3],[1,1,1,1]]
+Prelude&gt; [6,6,6]:b
+[[6,6,6],[1,2,3,4],[5,3,3,3],[1,2,2,3,4],[1,2,3]]
+Prelude&gt; b !! 2
+[1,2,2,3,4]
+</code></pre>
+<ul>
+<li>The lists within a list can be of different lengths but they can't be of different types</li>
+<li>Just like you can't have a list that has some characters and some numbers, you can't have a list that has some lists of characters and some lists of numbers</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>List comparison</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Lists can be compared if the stuff they contain can be compared</li>
+<li>When using <code>&lt;, &lt;=, &gt;, &gt;=</code> to compare lists, they are compared in <em>lexicographical</em> order<ul>
+<li>First the heads are compared</li>
+<li>If they are equal then the second elements are compared, etc.</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [3,2,1] &gt; [2,1,0]
+True
+Prelude&gt; [3,2,1] &gt; [2,10,100]
+True
+Prelude&gt; [3,4,2] &gt; [3,4]
+True
+Prelude&gt; [3,4,2] == [3,4,2]
+True
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>List monster</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/list-monster.png">
+        
+      </figure><ul>
+<li>If we think of a list as a monster, here's what's what</li>
+<li><code>head</code> takes a list and returns its head<ul>
+<li>The head of a list is basically its first element.</li>
+</ul>
+</li>
+<li><code>tail</code> takes a list and returns its tail<ul>
+<li>In other words, it chops off a list's head.</li>
+</ul>
+</li>
+<li><code>last</code> takes a list and returns its last element</li>
+<li><code>init</code> takes a list and returns everything except its last element</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>List errors</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; head [5,4,3,2,1]
+5
+Prelude&gt; tail [5,4,3,2,1]
+[4,3,2,1]
+Prelude&gt; last [5,4,3,2,1]
+1
+Prelude&gt; init [5,4,3,2,1]
+[5,4,3,2]
+Prelude&gt; head []
+*** Exception: Prelude.head: empty list
+</code></pre>
+<ul>
+<li>When using <code>head, tail, last, init</code>, be careful not to use them on empty lists</li>
+<li>This error cannot be caught at compile time</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Size and reverse</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>length</code> takes a list and returns its length, obviously</li>
+<li><code>null</code> checks if a list is empty; if it is, it returns <code>True</code>, otherwise it returns <code>False</code></li>
+<li><code>reverse</code> reverses a list</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; length [5,4,3,2,1]
+5
+Prelude&gt; null [1,2,3]
+False
+Prelude&gt; null []
+True
+Prelude&gt; reverse [5,4,3,2,1]
+[1,2,3,4,5]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Taking from a list</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>take</code> takes number and a list</li>
+<li>It extracts that many elements from the beginning of the list</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; take 3 [5,4,3,2,1]
+[5,4,3]
+Prelude&gt; take 1 [3,9,3]
+[3]
+Prelude&gt; take 5 [1,2]
+[1,2]
+Prelude&gt; take 0 [6,6,6]
+[]
+</code></pre>
+<ul>
+<li>See how if we try to take more elements than there are in the list, it just returns the list</li>
+<li>If we try to take 0 elements, we get an empty list</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Dropping from a list</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>drop</code> works in a similar way, only it drops the number of elements from the beginning of a list</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; drop 3 [8,4,2,1,5,6]
+[1,5,6]
+Prelude&gt; drop 0 [1,2,3,4]
+[1,2,3,4]
+Prelude&gt; drop 100 [1,2,3,4]
+[]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Membership</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>elem</code> takes a thing and a list of things and tells us if that thing is an element of the list<ul>
+<li>It's usually called as an infix function because it's easier to read that way</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; 4 `elem` [3,4,5,6]
+True
+Prelude&gt; 10 `elem` [3,4,5,6]
+False
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Aggregate functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>sum</code> takes a list of numbers and returns their sum</li>
+<li><code>product</code> takes a list of numbers and returns their product</li>
+<li><code>maximum</code> takes a list of stuff (that can be put in some kind of order) and returns the biggest element</li>
+<li><code>minimum</code> returns the smallest</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; sum [5,2,1,6,3,2,5,7]
+31
+Prelude&gt; product [6,2,1,2]
+24
+Prelude&gt; minimum [8,4,2,1,5,6]
+1
+Prelude&gt; maximum [1,9,2,3,4]
+9
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ranges</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Ranges are a way of making lists that are arithmetic sequences of elements that can be enumerated<ul>
+<li>Integers, characters, ...</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [1..10]
+[1,2,3,4,5,6,7,8,9,10]
+Prelude&gt; ['a'..'z']
+"abcdefghijklmnopqrstuvwxyz"
+Prelude&gt; ['K'..'Z']
+"KLMNOPQRSTUVWXYZ"
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ranges with step</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>You can also specify a step<ul>
+<li>Separate the first two elements with a comma</li>
+<li>Then specify what the upper limit is</li>
+<li>Works only for arithmetic sequences</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [2,4..20]  -- Even numbers between 1 and 20
+[2,4,6,8,10,12,14,16,18,20]
+Prelude&gt; [3,6..20]  -- Every third number between 1 and 20
+[3,6,9,12,15,18]
+Prelude&gt; [5,4..1]   -- Negative step: you can't just do `[5..1]`
+[5,4,3,2,1]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Unbounded ranges</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>By not specifying an upper limit in a range, you create an infinite list<ul>
+<li>Haskell is <em>lazy</em>, it won't try to evaluate the infinite list immediately...</li>
+<li>Otherwise it would never finish</li>
+<li>It'll wait to see what you want to get out of that infinite list</li>
+<li>If you just try to display the result, it will go on forever so you have to slice it off somewhere</li>
+</ul>
+</li>
+<li>Ex.: get the first 24 multiples of 13<ul>
+<li><code>[13,26..24*13]</code></li>
+<li><code>take 24 [13,26..]</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>List repetitions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>cycle</code> takes a list and cycles it into an infinite list</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; take 10 (cycle [1,2,3])
+[1,2,3,1,2,3,1,2,3,1]
+Prelude&gt; take 12 (cycle "LOL ")
+"LOL LOL LOL "
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>More list repetitions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>repeat</code> takes an element and produces an infinite list of just that element<ul>
+<li>It's like cycling a list with only one element</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; take 10 (repeat 5)
+[5,5,5,5,5,5,5,5,5,5]
+</code></pre>
+<ul>
+<li>Although it's simpler to just use the <code>replicate</code> function if you want some number of the same element in a list</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; replicate 3 10
+[10,10,10]
+</code></pre></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Python's corner</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Python ranges</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><em>List slice</em>, to get some sublist</li>
+<li><em>Range</em>, to get some sequence of integers<ul>
+<li>Min val is included</li>
+<li>Max val is excluded</li>
+<li>Optional step</li>
+</ul>
+</li>
+<li>Pyhton ranges are <em>lazy</em>, too</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; range(5, 15, 2)
+range(5, 15, 2)
+&gt;&gt;&gt; for v in range(5, 15, 2): print(v, end=' ')
+
+5 7 9 11 13
+&gt;&gt;&gt; list(range(5, 15, 2))
+[5, 7, 9, 11, 13]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Python iterators</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>class Fib:
+    '''iterator that yields Fibonacci numbers'''
+
+    def __init__(self, max):
+        self._max = max
+
+    def __iter__(self):
+        self._a = 1
+        self._b = 1
+        return self
+
+    def __next__(self):
+        fib = self._a
+        if fib &gt; self._max:
+            raise StopIteration
+        self._a, self._b = self._b, self._a + self._b
+        return fib
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Using an iterator</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; f = Fib(13)
+&gt;&gt;&gt; f
+&lt;__main__.Fib object at 0x7fc31dbbdbe0&gt;
+&gt;&gt;&gt; for v in f: print(v, end=' ')
+
+1 1 2 3 5 8 13 
+&gt;&gt;&gt; list(f)
+[1, 1, 2, 3, 5, 8, 13]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Python generators</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>def fib(max):
+    '''generator that yields Fibonacci numbers'''
+
+    a, b = 1, 1
+    while a &lt;= max:
+        yield(a)
+        a, b = b, a + b
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; f = fib(13)
+&gt;&gt;&gt; f
+&lt;generator object fib at 0x7fc31db9b308&gt;
+&gt;&gt;&gt; list(f)
+[1, 1, 2, 3, 5, 8, 13]
+&gt;&gt;&gt; f.__iter__
+&lt;method-wrapper '__iter__' of generator object at 0x7fc31db9b308&gt;
+&gt;&gt;&gt; f.__next__
+&lt;method-wrapper '__next__' of generator object at 0x7fc31db9b308&gt;
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Unbounded sequences</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>def fib2():
+    '''generator that yields Fibonacci numbers'''
+
+    a, b = 1, 1
+    while True:
+        yield(a)
+        a, b = b, a + b
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; f = fib2()
+&gt;&gt;&gt; f
+&lt;generator object fib2 at 0x7f5946caf4c0&gt;
+&gt;&gt;&gt; from itertools import islice
+&gt;&gt;&gt; islice(f, 7)
+&lt;itertools.islice object at 0x7f594a2f7ea8&gt;
+&gt;&gt;&gt; list(islice(f, 7))
+[1, 1, 2, 3, 5, 8, 13]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Infinite iterators</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Much more, in the <code>itertools</code> module<ul>
+<li>See: <a href="https://docs.python.org/3/library/itertools.html">https://docs.python.org/3/library/itertools.html</a></li>
+</ul>
+</li>
+<li><code>count(start, [step])</code><ul>
+<li><code>count(10, 2) --&gt; 10 12 14 ...</code></li>
+</ul>
+</li>
+<li><code>cycle(p)</code><ul>
+<li><code>cycle('ABC') --&gt; A B C A B C ...</code></li>
+</ul>
+</li>
+<li><code>repeat(elem [,n])</code><ul>
+<li><code>repeat(10) --&gt; 10 10 10 ...</code></li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>See also: <a href="https://docs.python.org/3/library/functools.html">https://docs.python.org/3/library/functools.html</a></p>
+<p>See also: <a href="https://docs.python.org/3/library/operator.html">https://docs.python.org/3/library/operator.html</a></p></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>List comprehensions</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>List comprehensions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>In mathematics, set comprehensions are normally used for building more specific sets out of general sets<ul>
+<li>Ex.: set of first ten even natural numbers</li>
+<li><code>S = {2·x | x ∈ N, x ≤ 10}</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [x*2 | x &lt;- [1..10]]
+[2,4,6,8,10,12,14,16,18,20]
+</code></pre>
+<ul>
+<li>In Haskell, list comprehensions are very similar to set comprehensions<ul>
+<li>The part before the pipe is called the <em>output function</em></li>
+<li><code>x</code> is the <em>variable</em></li>
+<li><code>[1..10]</code> is the <em>input list</em></li>
+<li>For every element in <code>[1..10]</code> (which we have bound to <code>x</code>), we get that element, only doubled</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Filtered comprehensions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Now let's add a condition (or a <em>predicate</em>) to that comprehension<ul>
+<li>Weeding out lists by predicates is also called <em>filtering</em></li>
+</ul>
+</li>
+<li>Ex.: all numbers from 50 to 100 whose remainder when divided with the number 7 is 3</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [x | x &lt;- [50..100], x `mod` 7 == 3]
+[52,59,66,73,80,87,94]
+</code></pre>
+<ul>
+<li><em>Python</em> also has comprehensions</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; [x for x in range(50, 101) if  x % 7 == 3]
+[52, 59, 66, 73, 80, 87, 94]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Examples of comprehensions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let boomBangs xs = [if x &lt; 10 then "BOOM!"
+                      else "BANG!" | x &lt;- xs, odd x]
+Prelude&gt; boomBangs [7..13]
+["BOOM!","BOOM!","BANG!","BANG!"]
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; let removeNonUppercase st = [c | c &lt;- st,
+                                c `elem` ['A'..'Z']]
+Prelude&gt; removeNonUppercase "IdontLIKEFROGS"
+"ILIKEFROGS"
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>More comprehensions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>We can include several predicates</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [x | x &lt;- [10..20], x /= 13, x /= 15, x /= 19]
+[10,11,12,14,16,17,18,20]
+</code></pre>
+<ul>
+<li>We can also draw from several lists<ul>
+<li>Produce all <em>combinations</em> of the input lists</li>
+<li>Then join them by the output function</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; [x*y | x &lt;- [2,5,10], y &lt;- [8,10,11]]
+[16,20,22,40,50,55,80,100,110]
+</code></pre>
+<ul>
+<li>In <em>Python</em> too</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; [x * y for x in (2, 5, 10) for y in (8, 10, 11)]
+[16, 20, 22, 40, 50, 55, 80, 100, 110]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Tuples</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Tuples are a way to store several values into a single value<ul>
+<li>They are denoted with parentheses and their components are separated by commas</li>
+</ul>
+</li>
+<li>A list of numbers is... a list of numbers<ul>
+<li>That's its type</li>
+<li>It can have only one number in it or an infinite amount of numbers</li>
+</ul>
+</li>
+<li>A tuple is different<ul>
+<li>You know exactly how many values you want to combine and their own type</li>
+<li>A tuple can combine several types: values don't have to be homogenous</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Functions on tuples</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Tuples can be compared with each other if they have the same size and their components can be compared</li>
+<li>The type of a tuple depends on how many components it has and the types of the components<ul>
+<li>Each different size of tuple is its own type</li>
+<li>You can't write a general function to append an element to a generic tuple</li>
+</ul>
+</li>
+<li>Two useful functions that operate on pairs (<em>and only pairs!</em>):<ul>
+<li><code>fst</code> takes a pair and returns its first component</li>
+<li><code>snd</code> takes a pair and returns its second component</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; fst (8,11)
+8
+Prelude&gt; snd ("Wow", False)
+False
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Zipping</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/zip.jpg">
+        
+      </figure><ul>
+<li><code>zip</code> takes two lists and returns one list, by joining the matching elements into pairs<ul>
+<li>The 1st element goes with the 1st, 2nd with 2nd, etc.</li>
+<li>The two lists can contain different types</li>
+<li>Ex.: to traverse two lists simultaneously</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; zip [1,2,3,4,5] [5,5,5,5,5]
+[(1,5),(2,5),(3,5),(4,5),(5,5)]
+Prelude&gt; zip [1 .. 5] ["one", "two", "three", "four", "five"]
+[(1,"one"),(2,"two"),(3,"three"),(4,"four"),(5,"five")]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Zipping infinite lists</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>If a list is longer than the other, it gets <em>cut off</em></li>
+<li>Haskell is <em>lazy</em>: zip finite lists with infinite lists</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; zip [1..] ["apple", "orange", "cherry", "mango"]
+[(1,"apple"),(2,"orange"),(3,"cherry"),(4,"mango")]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Zipping in Python</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Python's <code>zip</code> is <em>lazy</em>, too</li>
+<li>It can work on infinite sequences</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; list(zip([0, 1, 2, 3], ['A', 'B', 'C', 'D']))
+[(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
+&gt;&gt;&gt; list(zip(count(0), "ABCD"))
+[(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
+&gt;&gt;&gt; list(enumerate("ABCD"))
+[(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
+&gt;&gt;&gt; for i, v in enumerate([17, 21, 19]): print(i, v)
+... 
+0 17
+1 21
+2 19
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ex.: Pythagoras</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Which right triangle...<ul>
+<li>that has integers for all sides...</li>
+<li>and all sides equal to or smaller than 10...</li>
+<li>has a perimeter of 24?</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Types and typeclasses</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Types</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><em>Static type system</em>: type of every expression known at compile time → Safe and efficient code</li>
+<li><em>Type inference</em>: if we write a number, we don't have to tell Haskell it's a number</li>
+<li>However, understanding the type system is very important.<ul>
+<li><code>:t</code> command tells us the type of an expression</li>
+<li><code>::</code> is read as “<em>has type of</em>”</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t 'a'
+'a' :: Char
+Prelude&gt; :t 4 == 5
+4 == 5 :: Bool
+Prelude&gt; :t "HELLO!"
+"HELLO!" :: [Char]
+Prelude&gt; :t (True, 'a')
+(True, 'a') :: (Bool, Char)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Types of functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Functions are expressions<ul>
+<li>So they also have types and you can use <code>:t</code> on them</li>
+</ul>
+</li>
+<li>We can give functions an explicit type declaration</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>removeNonUppercase :: [Char] -&gt; [Char]
+removeNonUppercase st = [ c | c &lt;- st, c `elem` ['A'..'Z']]
+</code></pre>
+<ul>
+<li><code>removeNonUppercase</code> has a type of <code>[Char] -&gt; [Char]</code><ul>
+<li>It takes one string as a parameter and returns another as a result</li>
+<li>In this case, the compiler can infer by itself that it's a function from a string to a string!</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Functions with several parameters</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>The <em>parameters</em> are all separated with <code>-&gt;</code></li>
+<li>The <em>return type</em> is the last item</li>
+<li>There's no special distinction between the parameters and the return type</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>addThree :: Int -&gt; Int -&gt; Int -&gt; Int
+addThree x y z = x + y + z
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Integer numbers</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>Integer</code> stands for (unbounded) integer</li>
+<li><code>Int</code> stands for (bounded) integer -- It's more efficient</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>factorial :: Integer -&gt; Integer
+factorial n = product [1..n]
+
+Prelude&gt; factorial 50
+30414093201713378043612608166064768844377641568960512000000000000
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Real numbers</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>Float</code> is a real floating point with single precision</li>
+<li><code>Double</code> is a real floating point with double precision</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>circumference :: Float -&gt; Float
+circumference r = 2 * pi * r
+
+circumference' :: Double -&gt; Double
+circumference' r = 2 * pi * r
+
+Prelude&gt; circumference 4.0
+25.132742
+Prelude&gt; circumference' 4.0
+25.132741228718345
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>More types</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>Bool</code> is a boolean type, with only two possible values: <code>True</code> and <code>False</code></li>
+<li><code>Char</code> represents a character (denoted by single quotes)</li>
+<li><code>String</code> is an alias for a list of characters (denoted by double quotes)</li>
+<li><code>Tuples</code> are types, which depend on their length as well as the types of their components</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Type variables</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>What is the type of the <code>head</code> function?</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t head
+head :: [a] -&gt; a
+</code></pre>
+<ul>
+<li>Types are written in capital case, so <code>a</code> isn't exactly a type</li>
+<li>It's actually a <em>type variable</em><ul>
+<li>It can be of any type, much like <em>generics</em> in other languages</li>
+</ul>
+</li>
+<li>Functions that have type variables are called <em>polymorphic</em><ul>
+<li>Compile-time polymorphism</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Multiple type variables</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>What is the type of the <code>fst</code> function?</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t fst
+fst :: (a, b) -&gt; a
+</code></pre>
+<ul>
+<li><code>fst</code> takes a tuple which contains two types, and returns an element of the same type as first component</li>
+<li>Note: <code>a</code> and <code>b</code> are different type variables, but they don't have to be different types</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Class constraint</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>What's the type signature of the <code>==</code> function?</li>
+<li>The equality function takes any two values that are of the same type and returns a <code>Bool</code></li>
+<li>Everything before the <code>=&gt;</code> symbol is called a <em>class constraint</em><ul>
+<li>The type of those two values must be a member of <code>Eq</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t (==)
+(==) :: (Eq a) =&gt; a -&gt; a -&gt; Bool
+</code></pre>
+<ul>
+<li>Note: the equality operator, <code>==</code>, is a function<ul>
+<li>So are <code>+, *, -, /</code> and pretty much all operators</li>
+<li>A f. named only with special chars is infix by default</li>
+<li>Handle an op. as a normal f.: surround it in parentheses</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Typeclasses</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>A <em>typeclass</em> is a sort of interface that defines some behavior<ul>
+<li>A <em>type</em> is a part of a typeclass, if it supports and implements the behavior the typeclass describes</li>
+<li>Kind of as Java interfaces, with different aim (...)</li>
+</ul>
+</li>
+<li>The <strong><code>Eq</code></strong> typeclass provides an interface for testing for equality<ul>
+<li>Its member types implement op.s <code>==</code> and/or <code>/=</code></li>
+<li>Most standard types are part of the <code>Eq</code> typeclass</li>
+</ul>
+</li>
+<li>The <code>elem</code> f. has a type of <code>(Eq a) =&gt; a -&gt; [a] -&gt; Bool</code><ul>
+<li>In fact, it uses <code>==</code> over a list to check whether some value is in it</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ord typeclass</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong><code>Ord</code></strong> is for types that have an ordering<ul>
+<li>Member types implement comparing f.s (<code>&gt;, &lt;, &gt;=, &lt;=</code>) and/or <code>compare</code></li>
+<li>A member of <code>Ord</code> must first be member of <code>Eq</code></li>
+<li>All types so far are part of <code>Ord</code> (except for f.s)</li>
+</ul>
+</li>
+<li>The <code>compare</code> f. takes two <code>Ord</code> members of the same type<ul>
+<li>It returns an <code>Ordering</code>: a type that can be <code>GT, LT, EQ</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; :t (&gt;)
+(&gt;) :: (Ord a) =&gt; a -&gt; a -&gt; Bool
+Prelude&gt; "Abrakadabra" `compare` "Zebra"
+LT
+Prelude&gt; 5 `compare` 3
+GT
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Show typeclass</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong><code>Show</code></strong> is for types that can be represented as strings<ul>
+<li>All types so far are part of <code>Show</code> (except for f.s)</li>
+<li>Member types implement the <code>show</code> f.</li>
+</ul>
+</li>
+<li><code>show</code> takes a value (member of <code>Show</code>)<ul>
+<li>Returns its <em>string</em> representation</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; show 3
+"3"
+Prelude&gt; show 5.334
+"5.334"
+Prelude&gt; show True
+"True"
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Read typeclass</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong><code>Read</code></strong> is for types that can be extracted from strings<ul>
+<li>All types so far are part of <code>Read</code> (except for f.s)</li>
+<li>Its member types implement the <code>read</code> f.</li>
+</ul>
+</li>
+<li><code>read</code> takes a <em>string</em> and returns a member of <code>Read</code></li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; read "True" || False
+True
+Prelude&gt; read "8.2" + 3.8
+12.0
+Prelude&gt; read "5" - 2
+3
+Prelude&gt; read "[1,2,3,4]" ++ [3]
+[1,2,3,4,3]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Type annotations</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Explicitly saying what the type of an expression should be<ul>
+<li>Add <code>::</code> at the end of the expression and then specify a type</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; read "5" :: Int
+5
+Prelude&gt; read "5" :: Float
+5.0
+Prelude&gt; (read "5" :: Float) * 4
+20.0
+Prelude&gt; read "[1,2,3,4]" :: [Int]
+[1,2,3,4]
+Prelude&gt; read "(3, 'a')" :: (Int, Char)
+(3, 'a')
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Enum typeclass</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong><code>Enum</code></strong> members are sequentially ordered types, which can be enumerated<ul>
+<li>Its types define <code>succ</code> and <code>pred</code> f.s</li>
+<li>They can be used in list ranges</li>
+<li>Types include: <code>Bool, Char, Ordering, Int, Integer...</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; ['a'..'e']
+"abcde"
+Prelude&gt; [LT .. GT]
+[LT,EQ,GT]
+Prelude&gt; [3 .. 5]
+[3,4,5]
+Prelude&gt; succ 'B'
+'C'
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Other num classes</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong><code>Bounded</code></strong> members have upper and lower bounds<ul>
+<li>Its types define <code>maxBound</code> and <code>minBound</code> f.s</li>
+<li>Types: <code>Int, Char, Bool...</code></li>
+</ul>
+</li>
+<li><strong><code>Num</code></strong> is a numeric typeclass<ul>
+<li>Its types define <code>+, -, *</code> etc.</li>
+<li>They must also be in <code>Show</code> and <code>Eq</code></li>
+<li>Types: <code>Int, Integer, Float, Double</code></li>
+</ul>
+</li>
+<li><strong><code>Integral</code></strong> typeclass: <code>Int</code> and <code>Integer</code> types</li>
+<li><strong><code>Floating</code></strong> typeclass: <code>Float</code> and <code>Double</code> types</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Pattern matching</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Pattern matching</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Specify patterns to which some data should conform, and...</li>
+<li>Deconstruct the data according to those patterns</li>
+<li>Define separate function bodies for different patterns<ul>
+<li>Simple and readable code</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>lucky :: (Integral a) =&gt; a -&gt; String
+lucky 7 = "LUCKY NUMBER SEVEN!"
+lucky x = "Sorry, you're out of luck, pal!"
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Factorial</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Define a factorial function <em>recursively</em>, the way it is usually defined in mathematics<ul>
+<li>The factorial of <code>0</code> is <code>1</code></li>
+<li>The factorial of any positive integer is that integer multiplied by the factorial of its predecessor</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>factorial :: (Integral a) =&gt; a -&gt; a
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+</code></pre>
+<ul>
+<li>Checked from top to bottom<ul>
+<li>Specify the most specific patterns first and then the more general ones later</li>
+<li>Pattern matching can also fail</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Matching on tuples</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Function that takes two vectors and adds them together<ul>
+<li>Vectors in a 2D space, in the form of pairs</li>
+<li>Add their x components, and then their y components</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>addVectors :: (Num a) =&gt; (a, a) -&gt; (a, a) -&gt; (a, a)
+addVectors a b = (fst a + fst b, snd a + snd b)
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>addVectors :: (Num a) =&gt; (a, a) -&gt; (a, a) -&gt; (a, a)
+addVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Extracting from triples</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>first :: (a, b, c) -&gt; a
+first (x, _, _) = x
+
+second :: (a, b, c) -&gt; b
+second (_, y, _) = y
+
+third :: (a, b, c) -&gt; c
+third (_, _, z) = z
+</code></pre>
+<ul>
+<li>We really don't care what a part is, so we just write a <code>_</code></li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Matching on lists</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>The <code>x:xs</code> pattern is used a lot, especially with recursive f.s</li>
+<li>Bind the first 3 elements to variables and the rest of the list to another variable: <code>x:y:z:zs</code><ul>
+<li>It will only match against lists with 3 elements or more</li>
+</ul>
+</li>
+<li>Ex.: f. that tells us about first elements of a list</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>tell :: (Show a) =&gt; [a] -&gt; String
+tell [] = "The list is empty"
+tell (x:[]) = "The list has one element: " ++ show x
+tell (x:y:[]) = "The list has two elements: " ++ show x ++ ", " ++ show y
+tell (x:y:_) = "This long list starts with: " ++ show x ++ ", " ++ show y
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Length and sum of a list</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>length' :: (Num b) =&gt; [a] -&gt; b
+length' [] = 0
+length' (_:xs) = 1 + length' xs
+</code></pre>
+<pre class="prettyprint" data-lang="haskell"><code>sum' :: (Num a) =&gt; [a] -&gt; a
+sum' [] = 0
+sum' (x:xs) = x + sum' xs
+</code></pre>
+<ul>
+<li>First we defined the the edge condition</li>
+<li>Then in the second pattern we take the list apart by splitting it into a head and a tail</li>
+</ul>
+<blockquote></blockquote>
+<p>Let's see what happens if we call length' on "ham"... In the end we have 1 + (1 + (1 + 0)).</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Patterns and whole values</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Break something up according to a pattern, binding it to names, but still keep a reference to the whole thing<ul>
+<li>Put a name and an <code>@</code> in front of a pattern</li>
+<li>Ex. <code>xs@(x:y:ys)</code> to get the whole list via <code>xs</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>capital :: String -&gt; String
+capital "" = "Empty string, whoops!"
+capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
+</code></pre>
+<blockquote></blockquote>
+<p>Note: you can't use ++ in patterns, like <code>xs ++ ys</code>. What would be in the first and what would be in the second list?</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Guards</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/guards.png">
+        
+      </figure><ul>
+<li>Like an <code>if</code> statement, but more readable</li>
+<li>They play really nicely with patterns</li>
+<li>The <code>where</code> clause define names, across guards</li>
+<li>Ex.: a simple function that berates you differently depending on your “body mass index”</li>
+</ul>
+<pre class="prettyprint" data-lang="haskell"><code>bmiTell :: Float -&gt; Float -&gt; String
+bmiTell weight height
+    | bmi &lt;= 18.5 = "Underweight, you emo, you!"
+    | bmi &lt;= 25.0 = "Normal. Pffft, I bet you're ugly!"
+    | bmi &lt;= 30.0 = "Fat! Lose some weight, fatty!"
+    | otherwise   = "A whale, congratulations!"
+    where bmi = weight / (height ** 2)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Local definitions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="haskell"><code>heron a b c =
+    sqrt (s * (s - a) * (s - b) * (s - c))
+    where s = (a + b + c) / 2
+
+heron2 a b c =
+    let s = (a + b + c) / 2
+    in sqrt (s * (s - a) * (s - b) * (s - c))
+</code></pre>
+<ul>
+<li><code>let</code> bindings <em>are expressions</em> themselves</li>
+<li><code>where</code> bindings are just syntactic constructs for f. definition<ul>
+<li><code>where</code> bindings can be used across <code>guards</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+
+<slide class="thank-you-slide segue nobackground">
+  <aside class="gdbar right"><img src="images/logo.png"></aside>
+  <article class="flexbox vleft auto-fadein">
+    <h2>&lt;Domande?&gt;</h2>
+  </article>
+  <p class="auto-fadein" data-config-contact>
+    Michele Tomaiuolo
+    <br>
+    Palazzina 1, int. 5708
+    <br>
+    Ingegneria dell'Informazione, UniPR
+    <br>
+    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+  </p>
+</slide>
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>
