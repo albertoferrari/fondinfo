@@ -195,13 +195,13 @@ code: python
 
     from game2d import *
 
-    canvas = canvas_init((300, 300))
+    canvas_init((300, 300))
 
     for i in range(5):
         x = i * 40
         y = x
         red = i * 60
-        draw_rect(canvas, (red, 0, 0), (x, y, 140, 140))
+        draw_rect((red, 0, 0), (x, y, 140, 140))
 
 ---
 
@@ -401,11 +401,11 @@ code: python
 
     def update():
         global x
-        canvas_fill(canvas, (255, 255, 255))  # Draw background        
-        image_blit(canvas, image, (x, 50))    # Draw foreground
+        canvas_fill((255, 255, 255))  # Draw background        
+        image_blit(image, (x, 50))    # Draw foreground
         x = (x + 5) % 320                     # Update ball's position
 
-    canvas = canvas_init((320, 240))
+    canvas_init((320, 240))
     image = image_load("ball.png")
     x = 50
 

@@ -11,6 +11,7 @@ Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
 - [Organizzazione dello stage](stage-2017-logistica.html)
 - [Esercizi di programmazione](esercizi-stage.html)
 - [Opinione degli studenti](https://goo.gl/forms/vPxZkqdhgWMLDRch1)
+- [Progetti consegnati / delivered projects](http://sowide.unipr.it/sites/default/files/files/2017-stage-projects.zip)
 
 ----
 
