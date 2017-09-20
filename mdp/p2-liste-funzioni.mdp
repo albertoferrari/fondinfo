@@ -322,7 +322,7 @@ code: python
     
 ---
 
-title: Modulo main
+title: Modulo main (++)
 
 - Nome del modulo in esecuzione: `__name__`
     - É il nome del file, senza estensione
@@ -419,14 +419,13 @@ code: python
 
     from game2d import *
 
-    def keydown(event: DOMEvent):
-        print("Key down: ", event.key, event.code)
+    def keydown(code: str):
+        print("Key pressed: ", code)
 
-    def keyup(event: DOMEvent):
-        print("Key up: ", event.key, event.code)
+    def keyup(code: str):
+        print("Key released: ", code)
 
-    doc.onkeydown = keydown
-    doc.onkeyup = keyup
+    handle_keyboard(keydown, keyup)
 
 <https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent>
 

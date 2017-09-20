@@ -447,7 +447,7 @@ main()
 <slide  >
   
     <hgroup>
-      <h2>Modulo main</h2>
+      <h2>Modulo main (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -580,14 +580,13 @@ set_interval(update, 1000 // 30)    # Call update 30 times/second
     <article >
       <pre class="prettyprint" data-lang="python"><code>from game2d import *
 
-def keydown(event: DOMEvent):
-    print("Key down: ", event.key, event.code)
+def keydown(code: str):
+    print("Key pressed: ", code)
 
-def keyup(event: DOMEvent):
-    print("Key up: ", event.key, event.code)
+def keyup(code: str):
+    print("Key released: ", code)
 
-doc.onkeydown = keydown
-doc.onkeyup = keyup
+handle_keyboard(keydown, keyup)
 </code></pre>
 <p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent</a></p></article>
  

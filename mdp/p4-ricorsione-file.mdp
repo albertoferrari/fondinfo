@@ -229,31 +229,13 @@ spostare ancora gli altri N-1 dischi.
 
 ---
 
-title: Esercizio - Spirale
-figure: images/misc/spiral.png
-
-- Scrivere una funzione per riempire di numeri crescenti una matrice quadrata (o rettangolare)
-- Seguire il percorso a spirale suggerito nella figura a fianco
-- Dimensioni della matrice indicate dall'utente a runtime
-
->
-
-Tenere traccia della direzione attuale (∆y, ∆x) <br>
-Avanzare fino al bordo o ad una cella già visitata, <br>
-poi cambiare la direzione in senso orario
-
-Coordinate raster, rotazione oraria di 90°: `(x', y') = (-y, x)` <br>
-In generale: `(x', y') = (x⋅cos(θ) - y⋅sin(θ), x⋅sin(θ) + y⋅cos(θ))` <br>
-
----
-
 title: Sequenze annidate
 class: segue dark
 
 ---
 
 title: List comprehension (++)
-figure: images/misc/lightsaber.png
+figure: images/misc/ninjago-green.jpg
 
 - Modo conciso per creare una lista
 - Ogni elemento: risultato di una operazione su un membro di altro iterabile
@@ -316,7 +298,7 @@ Risultati in lista, solo (!) per visualizzarli
 ---
 
 title: Map (++)
-figure: images/misc/lightsaber.png
+figure: images/misc/ninjago-red.jpg
 
 - Prende come parametri una funzione ed una sequenza
 - *Funzione di ordine superiore*
@@ -575,5 +557,22 @@ figure: images/hist/scytale.png
 
 Usare una lista di liste (con dimensioni predefinite)
 
+---
+
+title: Esercizio - Spirale
+figure: images/misc/spiral.png
+
+- Scrivere una funzione per riempire di numeri crescenti una matrice quadrata (o rettangolare)
+- Seguire il percorso a spirale suggerito nella figura a fianco
+- Dimensioni della matrice indicate dall'utente a runtime
+
+>
+
+Tenere traccia della direzione attuale (∆y, ∆x) <br>
+Avanzare fino al bordo o ad una cella già visitata, <br>
+poi cambiare la direzione in senso orario
+
+Coordinate raster, rotazione oraria di 90°: `(x', y') = (-y, x)` <br>
+In generale: `(x', y') = (x⋅cos(θ) - y⋅sin(θ), x⋅sin(θ) + y⋅cos(θ))` <br>
 
 

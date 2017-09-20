@@ -103,14 +103,14 @@ URL: https://code.google.com/p/io-2012-slides
 <p>Siamo tutti adulti consenzienti. <em>(GvR)</em></p>
 </blockquote>
 <pre class="prettyprint" data-lang="python"><code>class Ball:
-    W, H = 20, 20
-    ARENA_W, ARENA_H = 320, 240
 
     def __init__(self, x: int, y: int):
         self._x = x
         self._y = y
         self._dx = 5
         self._dy = 5
+        self._w = 20
+        self._h = 20
     # ...
 </code></pre></article>
  
@@ -135,11 +135,6 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Permette ai metodi di accedere ai campi</li>
 </ul>
 </li>
-<li>Costanti definite direttamente nella <em>classe</em><ul>
-<li>Per usarle, precedute dal nome della classe e “<code>.</code>”</li>
-<li>Caratteristiche della classe, non di una singola istanza</li>
-</ul>
-</li>
 </ul>
 <pre class="prettyprint" data-lang="python"><code>ball = Ball(40, 80)  # Allocation and initialization
 </code></pre></article>
@@ -156,18 +151,20 @@ URL: https://code.google.com/p/io-2012-slides
       <ul>
 <li>Espongono <em>servizi</em> ad altri oggetti</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>class Ball:
+<pre class="prettyprint" data-lang="python"><code>ARENA_W, ARENA_H = 320, 240
+
+class Ball:
     # ...
     def move(self):
-        if not (0 &lt;= self._x + self._dx &lt;= Ball.ARENA_W - Ball.W):
+        if not (0 &lt;= self._x + self._dx &lt;= ARENA_W - self._w):
             self._dx = -self._dx
-        if not (0 &lt;= self._y + self._dy &lt;= Ball.ARENA_H - Ball.H):
+        if not (0 &lt;= self._y + self._dy &lt;= ARENA_H - self._h):
             self._dy = -self._dy
         self._x += self._dx
         self._y += self._dy
 
     def rect(self) -&gt; (int, int, int, int):
-        return self._x, self._y, Ball.W, Ball.H
+        return self._x, self._y, self._w, self._h
 </code></pre></article>
  
 </slide>
@@ -227,7 +224,7 @@ Ball.move(b1)
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="python"><code>from game2d import *
-from p4_ball import Ball
+from p4_ball import *
 
 def update():
     canvas_fill((255, 255, 255))  # BG
@@ -238,7 +235,7 @@ def update():
 
 b1 = Ball(40, 80)
 b2 = Ball(80, 40)
-canvas_init((Ball.ARENA_W, Ball.ARENA_H))
+canvas_init((ARENA_W, ARENA_H))
 set_interval(update, 1000 // 30)  # Millis
 </code></pre></article>
  
@@ -252,7 +249,7 @@ set_interval(update, 1000 // 30)  # Millis
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="python"><code>from game2d import *
-from p4_ball import Ball
+from p4_ball import *
 
 def update():
     canvas_fill((255, 255, 255))  # BG
@@ -261,7 +258,7 @@ def update():
         draw_rect((127, 127, 127), b.rect())  # FG
 
 balls = [Ball(40, 80), Ball(80, 40), Ball(120, 120)]
-canvas_init((Ball.ARENA_W, Ball.ARENA_H))
+canvas_init((ARENA_W, ARENA_H))
 set_interval(update, 1000 // 30)  # Millis
 </code></pre></article>
  
@@ -296,84 +293,6 @@ set_interval(update, 1000 // 30)  # Millis
 arena.add(Ball(40, 80)); arena.add(Ball(80, 40)) # ...
 arena.move_all()
 </code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Proprietà (++)</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Permettono un accesso controllato allo stato</li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code>class Ball:
-
-    @property  # a getter for the pos property
-    def pos(self) -&gt; (int, int):
-        return self._x, self._y
-
-    # @pos.setter  # if you also really need a setter
-    # def pos(self, val: (int, int)):
-    #     self._x, self._y = val
-</code></pre>
-<pre class="prettyprint" data-lang="python"><code>ball = Ball(40, 80)
-print('ball @', ball.pos)
-# ball.pos = (60, 20)   # with the setter, you could change the pos
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Ciclo di vita di un oggetto (++)</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/dev/garbage-truck.jpg">
-        
-      </figure><ul>
-<li>Creazione di un oggetto: allocata memoria per tenere lo stato dell’oggetto</li>
-<li>In Python: variabile = riferimento ad un oggetto<ul>
-<li><em>Oggetti</em>: <em>allocazione dinamica</em>, in memoria <em>heap</em></li>
-<li><em>Variabili</em>: <em>allocazione automatica</em>, in memoria <em>stack</em></li>
-</ul>
-</li>
-<li>Oggetto non più associato a nessuna variabile: necessario liberare memoria</li>
-<li><strong>Garbage collection</strong>: gestione automatica della restituzione di memoria</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Garbage collection (++)</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Vantaggi<ul>
-<li>Non è possibile dimenticare di liberare la memoria (<em>memory leak</em>)</li>
-<li>Non è possibile liberare della memoria che dovrà essere utilizzata in seguito (<em>dangling pointer</em>)</li>
-</ul>
-</li>
-<li>Svantaggi<ul>
-<li>Il garbage collector decide autonomamente quando liberare la memoria</li>
-<li>Liberare e compattare la memoria richiede del calcolo</li>
-</ul>
-</li>
-<li>Diversi algoritmi<ul>
-<li><em>Reference counting</em>: idea di base, ma cicli…</li>
-<li><em>Mark &amp; sweep</em>: parte da riferimenti locali/globali, marca oggetti raggiungibili</li>
-<li><em>Generational garbage collection</em>: controlla spesso oggetti recenti</li>
-</ul>
-</li>
-</ul></article>
  
 </slide>
 
@@ -454,13 +373,16 @@ print('ball @', ball.pos)
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="python"><code>class Arena:  # ...
-    def __init__(self):
+    def __init__(self, w, h):
+        self._w, self._h = w, h
         self._actors = []
     def add(self, a: Actor):
         self._actors.append(a)
     def move_all(self):
         for a in self._actors:
             a.move()
+    def size(self):
+        return self._w, self._h
 </code></pre>
 <ul>
 <li>Codice dipendente dalle classi più astratte, più in alto nella gerarchia<ul>
@@ -519,7 +441,30 @@ arena.move_all()
     def move(self):
         dx = random.choice([-5, 0, 5])
         dy = random.choice([-5, 0, 5])
-        arena_w, arena_h = self._arena.size()
+        self._x = (self._x + dx) % ARENA_W
+        self._y = (self._y + dy) % ARENA_H
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Attori e arena</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>class Ghost(Actor):
+
+    def init(self, arena, x, y):
+        self._x, self._y = x, y
+        self._arena = arena  # save a ref to the arena
+        arena.add(self)      # register yourself into the arena
+
+    def move(self):
+        dx = random.choice([-5, 0, 5])
+        dy = random.choice([-5, 0, 5])
+        arena_w, arena_h = self._arena.size()  # self._arena!
         self._x = (self._x + dx) % arena_w
         self._y = (self._y + dy) % arena_h
 </code></pre></article>
@@ -554,12 +499,12 @@ def update():
     canvas_fill((255, 255, 255))  # Background
     for a in arena.actors():
         x, y, w, h = a.rect();  xs, ys = a.symbol()
-        # Foreground; cut an area from a larger image__init__
+        # Foreground; cut an area from a larger image
         image_blit(sprites, (x, y), area=(xs, ys, w, h))
 
 arena = Arena(320, 240)
 Ball(arena, 40, 80);  Ball(arena, 80, 40);  Ghost(arena, 120, 80)
-turtle = Turtle(arena, 80, 80)
+turtle = Turtle(arena, 80, 80)  # each actor knows the arena
 canvas_init(arena.size())
 sprites = image_load("sprites.png")
 set_interval(update, 1000 // 30)  # Millis
@@ -648,6 +593,84 @@ handle_keyboard(keydown, keyup)
 <li>Controlla se l'oggetto <code>obj</code> è istanza della classe <code>cls</code></li>
 <li>... o di una sua sottoclasse</li>
 <li>Restituisce un <code>bool</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Proprietà (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Permettono un accesso controllato allo stato</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>class Ball:
+
+    @property  # a getter for the pos property
+    def pos(self) -&gt; (int, int):
+        return self._x, self._y
+
+    # @pos.setter  # if you also really need a setter
+    # def pos(self, val: (int, int)):
+    #     self._x, self._y = val
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>ball = Ball(40, 80)
+print('ball @', ball.pos)
+# ball.pos = (60, 20)   # with the setter, you could change the pos
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ciclo di vita di un oggetto (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/dev/garbage-truck.jpg">
+        
+      </figure><ul>
+<li>Creazione di un oggetto: allocata memoria per tenere lo stato dell’oggetto</li>
+<li>In Python: variabile = riferimento ad un oggetto<ul>
+<li><em>Oggetti</em>: <em>allocazione dinamica</em>, in memoria <em>heap</em></li>
+<li><em>Variabili</em>: <em>allocazione automatica</em>, in memoria <em>stack</em></li>
+</ul>
+</li>
+<li>Oggetto non più associato a nessuna variabile: necessario liberare memoria</li>
+<li><strong>Garbage collection</strong>: gestione automatica della restituzione di memoria</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Garbage collection (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Vantaggi<ul>
+<li>Non è possibile dimenticare di liberare la memoria (<em>memory leak</em>)</li>
+<li>Non è possibile liberare della memoria che dovrà essere utilizzata in seguito (<em>dangling pointer</em>)</li>
+</ul>
+</li>
+<li>Svantaggi<ul>
+<li>Decide autonomamente quando liberare la memoria</li>
+<li>Liberare e compattare la memoria richiede del calcolo</li>
+</ul>
+</li>
+<li>Diversi algoritmi<ul>
+<li><em>Reference counting</em>: idea di base, ma cicli…</li>
+<li><em>Mark &amp; sweep</em>: parte da riferimenti locali/globali, marca oggetti raggiungibili</li>
+<li><em>Generational garbage collection</em>: controlla spesso oggetti recenti</li>
 </ul>
 </li>
 </ul></article>
