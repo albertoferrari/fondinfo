@@ -2,7 +2,7 @@ title: Fondinfo
 description: Programming lab @ DII, UniPR
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-architect
+theme: jekyll-theme-tactile
 
 gems:
   - jekyll-mentions
