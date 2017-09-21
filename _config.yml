@@ -2,7 +2,7 @@ title: Fondinfo
 description: Programming lab @ DII, UniPR
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-tactile
+theme: jekyll-theme-architect
 
 github:
   zip_url: https://github.com/tomamic/fondinfo/archive/master.zip
