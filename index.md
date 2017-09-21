@@ -1,20 +1,3 @@
-## Stage estivo di programmazione
-
-**Space Invaders in Python**
-
-Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
-
-- [Locandina in PDF](stage-2017.pdf)
-- [Presentazione dello stage](stage-2017.html)
-- [Modulo richiesta di iscrizione](stage-2017-iscrizione.rtf)
-- [Modulo liberatoria per minori](stage-2017-liberatoria.rtf)
-- [Organizzazione dello stage](stage-2017-logistica.html)
-- [Esercizi di programmazione](esercizi-stage.html)
-- [Opinione degli studenti](https://goo.gl/forms/vPxZkqdhgWMLDRch1)
-- [Progetti consegnati / delivered projects](http://sowide.unipr.it/sites/default/files/files/2017-stage-projects.zip)
-
-----
-
 ## Insegnamento per Ingegneria dell'Informazione
 
 - [Presentazione del corso](intro.html)
@@ -79,6 +62,23 @@ Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
 - [Basi di dati](x5-database.html)
 - [Gui con Tkinter](x6-tkinter.html)
 - [Python su Android](x7-android.html)
+
+----
+
+## Stage estivo di programmazione
+
+**Space Invaders in Python**
+
+Stage formativo per studenti delle scuole superiori, 12-16 giugno 2017
+
+- [Locandina in PDF](stage-2017.pdf)
+- [Presentazione dello stage](stage-2017.html)
+- [Modulo richiesta di iscrizione](stage-2017-iscrizione.rtf)
+- [Modulo liberatoria per minori](stage-2017-liberatoria.rtf)
+- [Organizzazione dello stage](stage-2017-logistica.html)
+- [Esercizi di programmazione](esercizi-stage.html)
+- [Opinione degli studenti](https://goo.gl/forms/vPxZkqdhgWMLDRch1)
+- [Progetti consegnati / delivered projects](http://sowide.unipr.it/sites/default/files/files/2017-stage-projects.zip)
 
 ----
 
