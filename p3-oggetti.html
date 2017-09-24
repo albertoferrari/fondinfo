@@ -223,20 +223,20 @@ Ball.move(b1)
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>from game2d import *
-from p4_ball import *
+      <pre class="prettyprint" data-lang="python"><code>import game2d
+from p4_ball import Ball
 
 def update():
-    canvas_fill((255, 255, 255))  # BG
+    game2d.canvas_fill((255, 255, 255))  # BG
     b1.move()
     b2.move()
-    draw_rect((127, 127, 127), b1.rect())  # FG
-    draw_rect((127, 127, 127), b2.rect())  # FG
+    game2d.draw_rect((127, 127, 127), b1.rect())  # FG
+    game2d.draw_rect((127, 127, 127), b2.rect())  # FG
 
 b1 = Ball(40, 80)
 b2 = Ball(80, 40)
-canvas_init((ARENA_W, ARENA_H))
-set_interval(update, 1000 // 30)  # Millis
+game2d.canvas_init((ARENA_W, ARENA_H))
+game2d.set_interval(update, 1000 // 30)  # Millis
 </code></pre></article>
  
 </slide>
@@ -248,18 +248,18 @@ set_interval(update, 1000 // 30)  # Millis
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>from game2d import *
-from p4_ball import *
+      <pre class="prettyprint" data-lang="python"><code>import game2d
+from p4_ball import Ball
 
 def update():
-    canvas_fill((255, 255, 255))  # BG
+    game2d.canvas_fill((255, 255, 255))  # BG
     for b in balls:
         b.move()
-        draw_rect((127, 127, 127), b.rect())  # FG
+        game2d.draw_rect((127, 127, 127), b.rect())  # FG
 
 balls = [Ball(40, 80), Ball(80, 40), Ball(120, 120)]
-canvas_init((ARENA_W, ARENA_H))
-set_interval(update, 1000 // 30)  # Millis
+game2d.canvas_init((ARENA_W, ARENA_H))
+game2d.set_interval(update, 1000 // 30)  # Millis
 </code></pre></article>
  
 </slide>
