@@ -320,23 +320,23 @@ figure: images/oop/bounce.png
 
 code: python
 
-    from game2d import *
+    import game2d
     from bounce import Arena, Ball, Ghost, Turtle
 
     def update():
         arena.move_all()  # Game logic
-        canvas_fill((255, 255, 255))  # Background
+        game2d.canvas_fill((255, 255, 255))  # Background
         for a in arena.actors():
             x, y, w, h = a.rect();  xs, ys = a.symbol()
             # Foreground; cut an area from a larger image
-            image_blit(sprites, (x, y), area=(xs, ys, w, h))
+            game2d.image_blit(sprites, (x, y), area=(xs, ys, w, h))
 
     arena = Arena(320, 240)
     Ball(arena, 40, 80);  Ball(arena, 80, 40);  Ghost(arena, 120, 80)
     turtle = Turtle(arena, 80, 80)  # each actor knows the arena
-    canvas_init(arena.size())
-    sprites = image_load("sprites.png")
-    set_interval(update, 1000 // 30)  # Millis
+    game2d.canvas_init(arena.size())
+    sprites = game2d.image_load("sprites.png")
+    game2d.set_interval(update, 1000 // 30)  # Millis
 
 ---
 
@@ -359,7 +359,7 @@ code: python
     def keyup(code):
         turtle.stay()
 
-    handle_keyboard(keydown, keyup)
+    game2d.handle_keyboard(keydown, keyup)
 
 ---
 

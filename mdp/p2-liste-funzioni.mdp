@@ -193,15 +193,15 @@ figure: images/misc/red-squares.png
 
 code: python
 
-    from game2d import *
+    import game2d
 
-    canvas_init((300, 300))
+    game2d.canvas_init((300, 300))
 
     for i in range(5):
         x = i * 40
         y = x
         red = i * 60
-        draw_rect((red, 0, 0), (x, y, 140, 140))
+        game2d.draw_rect((red, 0, 0), (x, y, 140, 140))
 
 ---
 
@@ -397,19 +397,19 @@ title: Animazione
 
 code: python
 
-    from game2d import *
+    import game2d
 
     def update():
         global x
-        canvas_fill((255, 255, 255))  # Draw background        
-        image_blit(image, (x, 50))    # Draw foreground
+        game2d.canvas_fill((255, 255, 255))   # Draw background        
+        game2d.image_blit(image, (x, 50))     # Draw foreground
         x = (x + 5) % 320                     # Update ball's position
 
-    canvas_init((320, 240))
-    image = image_load("ball.png")
+    game2d.canvas_init((320, 240))
+    image = game2d.image_load("ball.png")
     x = 50
 
-    set_interval(update, 1000 // 30)    # Call update 30 times/second
+    game2d.set_interval(update, 1000 // 30)    # Call update 30 times/second
 
 ---
 
@@ -417,7 +417,7 @@ title: Eventi della tastiera
 
 code: python
 
-    from game2d import *
+    import game2d
 
     def keydown(code: str):
         print("Key pressed: ", code)
@@ -425,7 +425,7 @@ code: python
     def keyup(code: str):
         print("Key released: ", code)
 
-    handle_keyboard(keydown, keyup)
+    game2d.handle_keyboard(keydown, keyup)
 
 <https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent>
 
