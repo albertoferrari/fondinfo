@@ -317,7 +317,7 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <p><img alt="" src="images/algo/python-cases.jpg" /></p>
 <ul>
-<li>Web, analisi di dati, scripting, insegnamento, giochi, hardware, multipiattaforma...</li>
+<li>Web, data analysis, scripting, teaching, games, hardware, multiplatform...</li>
 </ul></article>
  
 </slide>
@@ -335,15 +335,10 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Operazioni aritmetiche e logiche, confronti</li>
 </ul>
 </li>
-<li>Una <strong>variabile</strong> serve per conservare un risultato</li>
 </ul>
 <pre class="prettyprint" data-lang="python"><code>3 + 4   # 7 - The result has to be handled...
 4 == 5  # False - Do not confuse with assignment!
 2 &lt; 3 or not True  # True
-</code></pre>
-<pre class="prettyprint" data-lang="python"><code>a = 5  # Assignment
-b = 2
-a = a + b
 </code></pre></article>
  
 </slide>
@@ -359,7 +354,6 @@ a = a + b
 <li><strong><code>int</code></strong> o <strong><code>float</code></strong>, per numeri interi o reali<ul>
 <li>Operazioni di base: <code>+, -, *, /</code></li>
 <li>Divisione intera, resto, potenza: <code>//, %, **</code></li>
-<li>Assegnamento: <code>=, +=, -=, ...</code></li>
 <li>Confronti: <code>&lt;, &lt;=, &gt;, &gt;=, ==, !=</code></li>
 </ul>
 </li>
@@ -372,6 +366,59 @@ a = a + b
 <pre class="prettyprint" data-lang="python"><code>-2 // 3    # -1 (floored integer division)
 -2 % 3     # 1 (reminder is always positive)
 2 ** 1000  # no limits (but memory)
+</code></pre></article>
+ 
+</slide>
+
+<slide class="large-figure" >
+  
+    <hgroup>
+      <h2>Assegnamento</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/algo/assign.png">
+        
+      </figure><ul>
+<li>Una <strong>variabile</strong> serve per conservare un risultato</li>
+<li>Assegnamento, operatore <code>=</code><ul>
+<li>Alla sinistra una variabile</li>
+<li>Alla destra un valore</li>
+</ul>
+</li>
+<li><em>Non confondere</em> con confronto di uguaglianza <code>==</code></li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>radius = 2.2  # Assignment
+pi = 3.14
+area = pi * (radius ** 2)  # ~ 15.2
+radius = radius + 1
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Variabile</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/algo/var-label.svg">
+        
+      </figure><ul>
+<li><strong>Nome</strong> (etichetta) associato ad un certo <strong>valore</strong> (oggetto)<ul>
+<li>Oggetto assegnato a più variabili: non viene copiato, ma riceve più etichette</li>
+<li>Il <strong>tipo</strong> dipende dal valore attualmente assegnato</li>
+<li>Una var. non dev'essere <em>dichiarata</em>, ma dev'essere <em>inizializzata</em></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>x = 100
+DELTA = 5          # Constants: UPPER_CASE
+x = x + DELTA      # Variables: lower_case
+next_position = x  # Use explicative names!
 </code></pre></article>
  
 </slide>
@@ -463,32 +510,6 @@ c = int(input("Insert 3rd val: "))
 total = a + b + c
 
 print("The sum is", total)
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Variabile</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/algo/var-label.svg">
-        
-      </figure><ul>
-<li><strong>Nome</strong> (etichetta) associato ad un certo <strong>valore</strong> (oggetto)<ul>
-<li>Oggetto assegnato a più variabili: non viene copiato, ma riceve più etichette</li>
-<li>Il <strong>tipo</strong> dipende dal valore attualmente assegnato</li>
-<li>Una var. non dev'essere <em>dichiarata</em>, ma dev'essere <em>inizializzata</em></li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code>x = 100
-DELTA = 5          # Constants: UPPER_CASE
-x = x + DELTA      # Variables: lower_case
-next_position = x  # Use explicative names!
 </code></pre></article>
  
 </slide>

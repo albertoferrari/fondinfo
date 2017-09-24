@@ -163,7 +163,7 @@ title: Applicazioni in Python
 
 ![](images/algo/python-cases.jpg)
 
-- Web, analisi di dati, scripting, insegnamento, giochi, hardware, multipiattaforma...
+- Web, data analysis, scripting, teaching, games, hardware, multiplatform...
 
 ---
 
@@ -172,19 +172,12 @@ title: Tipi di dati
 - Un **tipo di dato** specifica un insieme di *valori* e le *operazioni* ammesse
     - `int, float, bool, str`
     - Operazioni aritmetiche e logiche, confronti
-- Una **variabile** serve per conservare un risultato
 
 code: python
 
     3 + 4   # 7 - The result has to be handled...
     4 == 5  # False - Do not confuse with assignment!
     2 < 3 or not True  # True
-
-code: python
-
-    a = 5  # Assignment
-    b = 2
-    a = a + b
 
 ---
 
@@ -193,7 +186,6 @@ title: Valori numerici e booleani
 - **`int`** o **`float`**, per numeri interi o reali
     - Operazioni di base: `+, -, *, /`
     - Divisione intera, resto, potenza: `//, %, **`
-    - Assegnamento: `=, +=, -=, ...`
     - Confronti: `<, <=, >, >=, ==, !=`
 -  **`bool`**, per valori booleani: `True, False`
     - Operazioni consentite: `and, or, not`
@@ -204,6 +196,42 @@ code: python
     -2 // 3    # -1 (floored integer division)
     -2 % 3     # 1 (reminder is always positive)
     2 ** 1000  # no limits (but memory)
+
+---
+
+title: Assegnamento
+figure: images/algo/assign.png
+class: large-figure
+
+- Una **variabile** serve per conservare un risultato
+- Assegnamento, operatore `=`
+    - Alla sinistra una variabile
+    - Alla destra un valore
+- *Non confondere* con confronto di uguaglianza `==`
+
+code: python
+
+    radius = 2.2  # Assignment
+    pi = 3.14
+    area = pi * (radius ** 2)  # ~ 15.2
+    radius = radius + 1
+
+---
+
+title: Variabile
+figure: images/algo/var-label.svg
+
+- **Nome** (etichetta) associato ad un certo **valore** (oggetto)
+    - Oggetto assegnato a più variabili: non viene copiato, ma riceve più etichette
+    - Il **tipo** dipende dal valore attualmente assegnato
+    - Una var. non dev'essere *dichiarata*, ma dev'essere *inizializzata*
+
+code: python
+
+    x = 100
+    DELTA = 5          # Constants: UPPER_CASE
+    x = x + DELTA      # Variables: lower_case
+    next_position = x  # Use explicative names!
 
 ---
 
@@ -265,23 +293,6 @@ code: python
     total = a + b + c
 
     print("The sum is", total)
-
----
-
-title: Variabile
-figure: images/algo/var-label.svg
-
-- **Nome** (etichetta) associato ad un certo **valore** (oggetto)
-    - Oggetto assegnato a più variabili: non viene copiato, ma riceve più etichette
-    - Il **tipo** dipende dal valore attualmente assegnato
-    - Una var. non dev'essere *dichiarata*, ma dev'essere *inizializzata*
-
-code: python
-
-    x = 100
-    DELTA = 5          # Constants: UPPER_CASE
-    x = x + DELTA      # Variables: lower_case
-    next_position = x  # Use explicative names!
 
 ---
 

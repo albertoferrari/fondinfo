@@ -62,6 +62,21 @@ title: Istruzioni per i laboratori
 
 ---
 
+title: Tutor e assistenza
+
+- Materiale di studio
+    - *Libri* di testo e slide del corso
+    - *Esercizi risolti* degli anni precedenti
+    - <http://tomamic.github.io/fondinfo/>
+- Durante le esercitazioni, assistenza di vari *tutor*
+- A lezione
+    - *Esempi* prima delle esercitazioni
+    - *Soluzioni* di esercizi delle settimane precedenti
+- Ogni mercoledì, *ricevimento* aperto a tutti, 12:30-14:30
+    - Palazzina A della sede scientifica (~ biblioteca)
+
+---
+
 title: Esame
 figure: images/misc/quiz.png
 
@@ -81,21 +96,22 @@ figure: images/misc/quiz.png
 title: Testi di riferimento
 figure: images/misc/books.png
 
-- *Fondamenti di informatica e lab.* (A.A. 2014-2015). McGraw-Hill custom publishing. ISBN 978-13-082-4813-4 (~25€, 250pp., nelle [librerie universitarie](http://www.informagiovanionline.it/emiliaromagna/parma/tempo-libero/godersi-larte-e-la-cultura/libri-in-rete/librerie-scolastiche-e-universitarie-parma) )
-- A.B. Downey et al.: *How to Think Like a Computer Scientist*: Learning with Python 3, 3rd Edition - <http://openbookproject.net/thinkcs/>
-- M. Beri: *Python*, Apogeo Pocket, 2010, 978-8850329151 (~8€)
-- C. S. Horstmann: *Fondamenti di C++*, McGraw-Hill Education, 2003, 978-8838661051 (~43€, 768pp.)
+- *Fondamenti di informatica e lab.*. McGraw-Hill 2014. ISBN 978-13-082-4813-4 (~25€, 250pp., nelle [librerie universitarie](http://www.informagiovanionline.it/emiliaromagna/parma/tempo-libero/godersi-larte-e-la-cultura/libri-in-rete/librerie-scolastiche-e-universitarie-parma) )
+- A.B. Downey: *Think Python* 2e - <https://github.com/AllenDowney/ThinkPythonItalian>
+- A.B. Downey: *How to Think Like a Computer Scientist C++ Version* - <http://greenteapress.com/thinkcpp/>
+- M. Beri: *Python*, Apogeo Pocket 2010, 978-8850329151 (~8€)
 
 ---
 
 title: Altri testi e video
 
-- M. Dawson: *Python Programming for the Absolute Beginner*, Course Technology, 2010, 978-1435455009 (~21€, 450pp.)
-- K. A. Lambert: *Programmazione in Python*, Apogeo, 2012, 978-8838786990 (~29€, 384pp.)
-- MIT: *Introduction to CS and Programming* - Video delle lezioni, Pyhton 2 - <http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/> <br/> <br/>
-- M. Dawson: *Beginning C++ Through Game Programming*, 4th Edition, Course Technology, 2014, 978-1305109919 (~36€, 390pp.)
-- A. Lorenzi, V. Moriggia: *Programmazione ad oggetti e linguaggio C++*, Atlas, 2004, 978-8826811956 - Testo per le superiori (~12€, 380pp.)
-- S.B. Lippman, J. Lajoie, B.E. Moo: *C++ Primer*, Addison Wesley, 2012, 978-0321714114 (~36€, 940pp.)
+- C. S. Horstmann: *Fondamenti di C++*, McGraw-Hill 2003, 978-8838661051 (~43€, 768pp.)
+- S.B. Lippman, J. Lajoie, B.E. Moo: *C++ Primer* 5e, Addison Wesley 2012, 978-0321714114 (~36€, 940pp.)
+- M. Dawson: *Python Programming for the Absolute Beginner* 3e, Course Tech. 2010, 978-1435455009 (~25€, 450pp.)
+- M. Dawson: *Beginning C++ Through Game Programming* 4e, Course Tech. 2014, 978-1305109919 (~28€, 390pp.)
+- A. Lorenzi, V. Moriggia: *Programmazione ad oggetti e linguaggio C++*, Atlas 2004, 978-8826811956 (~12€, 380pp.)
+    - Oppure altro testo per le superiori
+- MIT: *Intro to CS and Programming in Python* - [Video delle lezioni](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/lecture-videos/index.htm)
 
 ---
 
@@ -106,10 +122,9 @@ figure: images/misc/python.png images/misc/cpp-logo.jpg
 - **Python 3**, *battery included*: <http://python.org/>
     - Brython: <http://brython.info/>
     - PyGame: <http://pygame.org/>
-    - PySide: <http://wiki.qt.io/PySide>
 - **C++11**: <http://isocpp.org/>
     - Documentazione: <br> <http://cplusplus.com/reference/> <br> <http://cppreference.com/>
-    - Librerie Qt ed ambiente di sviluppo <br> <http://qt.io/> <br>
+    - Ambiente di sviluppo e librerie Qt: <http://qt.io/> <br>
       Windows: ver. 5.x *con MinGW* <br>
       Ubuntu: "qtcreator" da Software Center <br>
       Mac: installare prima il pacchetto "xcode"
@@ -118,6 +133,23 @@ figure: images/misc/python.png images/misc/cpp-logo.jpg
 
 title: Esempi di progetti
 class: segue dark
+
+---
+
+title: Super Mario
+figure: images/misc/super-mario.jpg
+
+- *Mario*: guidato dal giocatore
+    - Si muove e salta sulle piattaforme
+    - Cade secondo gravità, fuori dalle piattaforme
+    - Ma non accelera oltre una velocità limite
+    - Muore se cade in fondo allo schermo
+- *Muri e piattaforme*
+    - Mario ci atterra dall'alto
+    - Non si possono attraversare in nessuna direzione
+- *Avversari*
+    - Si muovono sulle piattaforme come Mario, ma scelgono casualmente la direzione
+    - Uccidono Mario se lo urtano, ma muoiono se Mario ci salta sopra
 
 ---
 
