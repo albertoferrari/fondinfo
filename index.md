@@ -1,8 +1,8 @@
 ## Insegnamento per Ingegneria dell'Informazione
 
 - [Presentazione del corso](intro.html)
-- [Notizie aggiornate](http://elly.dii.unipr.it/2016/mod/forum/view.php?id=184)
-- [Forum di discussione](http://elly.dii.unipr.it/2016/mod/forum/view.php?id=185)
+- [Notizie aggiornate](http://elly.dia.unipr.it/2017/mod/forum/view.php?id=808)
+- [Forum di discussione](http://elly.dia.unipr.it/2017/mod/forum/view.php?id=809)
 - [Registrazione per l'accesso ai lab](http://www.cedi.unipr.it/gestioneaccounts)
 
 ----
