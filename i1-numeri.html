@@ -164,8 +164,8 @@ URL: https://code.google.com/p/io-2012-slides
       </figure><ul>
 <li>Base 2; c: <code>0-1</code></li>
 <li>Informazione digitale nei calcolatori rappresentata con una sequenza di 0 e 1<ul>
-<li>Leibniz, ~1700</li>
-<li>Konrad Zuse, ~1940</li>
+<li>Sistema ideato da Leibniz, ~1700</li>
+<li>Calcolatore progr. Zuse, ~1940</li>
 </ul>
 </li>
 <li>Ogni elemento di una sequenza binaria viene detto <em>bit</em></li>
@@ -183,7 +183,7 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <ul>
 <li>(1) Dividere il numero decimale per 2</li>
-<li>(2) Assegnare il resto come valore del bit <em>(loop)</em></li>
+<li>(2) Il resto è il valore del nuovo bit, a sinistra <em>(loop)</em></li>
 <li>Ossia continuare a dividere per 2 il quoziente, finché non si annulla</li>
 <li>Es.: <code>35<sub>10</sub> = 00100011<sub>2</sub></code></li>
 </ul>
@@ -777,17 +777,38 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>IEEE 754</h2>
+      <h2>IEEE 754 single & double</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li><code>-118.625 = -1110110.101<sub>2</sub> = -1.110110101<sub>2</sub> × 2<sup>6</sup></code></li>
-<li>All’esponente, su 8 bit, bisogna sommare <code>127</code> (<code>=2<sup>8 − 1</sup> − 1</code>)</li>
+<li>Precisione singola: 32 bit<ul>
+<li>1 x segno, 8 x esponente, 23 x frazione</li>
+</ul>
+</li>
+<li>Precisione doppia: 64 bit<ul>
+<li>1 x segno, 11 x esponente, 52 x frazione</li>
+</ul>
+</li>
 </ul>
 <p><img alt="" src="images/repr/ieee754-32-ex.svg" />
-<img alt="" src="images/repr/ieee754-32.svg" />
 <img alt="" src="images/repr/ieee754-64.svg" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>IEEE 754 half-precision</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Rappresentazione usata nelle GPU, per velocizzare i calcoli</li>
+<li><code>-118.625 = -1110110.101<sub>2</sub> = -1.110110101<sub>2</sub> × 2<sup>6</sup></code></li>
+<li>All’esponente, su 5 bit, bisogna sommare <code>15</code> (<code>=2<sup>(5 − 1)</sup> − 1</code>)</li>
+</ul>
+<p><img alt="" src="images/repr/ieee754-16-ex.svg" /></p></article>
  
 </slide>
 
@@ -892,67 +913,18 @@ URL: https://code.google.com/p/io-2012-slides
  
 </slide>
 
-<slide  >
-  
-    <hgroup>
-      <h2>Espressione booleana</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/repr/hair-logic.svg">
-        
-      </figure><ul>
-<li>Algebra di Boole: basata su un insieme di operatori</li>
-<li>Possono essere combinati in espressioni</li>
-<li>Altra forma di definizione di funzioni booleane</li>
-<li>Es. <code>F<sub>2</sub>(A, B, C) = A·B + C</code></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Operatore</th>
-<th>Simbolo</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>And</td>
-<td>· (∧)</td>
-</tr>
-<tr>
-<td>Or</td>
-<td>+ (∨)</td>
-</tr>
-<tr>
-<td>Not</td>
-<td>¬</td>
-</tr>
-<tr>
-<td>Xor</td>
-<td>⊕</td>
-</tr>
-<tr>
-<td>Nand</td>
-<td>↑</td>
-</tr>
-<tr>
-<td>Nor</td>
-<td>↓</td>
-</tr>
-</tbody>
-</table></article>
- 
-</slide>
-
 <slide class="large-table" >
   
     <hgroup>
-      <h2>Operatori principali</h2>
+      <h2>Operatori di base</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <table>
+      <ul>
+<li>Algebra di Boole: basata su un insieme di operatori</li>
+<li>Semplici funzioni, specificate con tabelle di verità</li>
+</ul>
+<table>
 <thead>
 <tr>
 <th>A</th>
@@ -1018,6 +990,58 @@ URL: https://code.google.com/p/io-2012-slides
 <tr>
 <td>1</td>
 <td>0</td>
+</tr>
+</tbody>
+</table></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Espressione booleana</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/repr/hair-logic.svg">
+        
+      </figure><ul>
+<li>Operatori possono essere combinati in espressioni</li>
+<li>Altra forma di definizione di funzioni booleane</li>
+<li>Es. <code>F<sub>2</sub>(A, B, C) = A·B + C</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Operatore</th>
+<th>Simbolo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>And</td>
+<td>· (∧)</td>
+</tr>
+<tr>
+<td>Or</td>
+<td>+ (∨)</td>
+</tr>
+<tr>
+<td>Not</td>
+<td>¬</td>
+</tr>
+<tr>
+<td>Xor</td>
+<td>⊕</td>
+</tr>
+<tr>
+<td>Nand</td>
+<td>↑</td>
+</tr>
+<tr>
+<td>Nor</td>
+<td>↓</td>
 </tr>
 </tbody>
 </table></article>

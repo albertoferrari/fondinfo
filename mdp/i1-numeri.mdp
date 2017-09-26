@@ -69,8 +69,8 @@ figure: images/repr/sum-binary.jpg
 
 - Base 2; c: `0-1`
 - Informazione digitale nei calcolatori rappresentata con una sequenza di 0 e 1
-    - Leibniz, ~1700
-    - Konrad Zuse, ~1940
+    - Sistema ideato da Leibniz, ~1700
+    - Calcolatore progr. Zuse, ~1940
 - Ogni elemento di una sequenza binaria viene detto *bit*
 - Una sequenza di 8 bit viene detta *byte*
 
@@ -80,7 +80,7 @@ title: Codifica decimale → binaria
 class: large-table
 
 - (1) Dividere il numero decimale per 2
-- (2) Assegnare il resto come valore del bit *(loop)*
+- (2) Il resto è il valore del nuovo bit, a sinistra *(loop)*
 - Ossia continuare a dividere per 2 il quoziente, finché non si annulla
 - Es.: `35~~10~~ = 00100011~~2~~`
 
@@ -326,14 +326,26 @@ class: large-image
 
 ---
 
-title: IEEE 754
+title: IEEE 754 single & double
 
-- `-118.625 = -1110110.101~~2~~ = -1.110110101~~2~~ × 2^^6^^`
-- All’esponente, su 8 bit, bisogna sommare `127` (`=2^^8 − 1^^ − 1`)
+- Precisione singola: 32 bit
+    - 1 x segno, 8 x esponente, 23 x frazione
+- Precisione doppia: 64 bit
+    - 1 x segno, 11 x esponente, 52 x frazione
 
 ![](images/repr/ieee754-32-ex.svg)
-![](images/repr/ieee754-32.svg)
 ![](images/repr/ieee754-64.svg)
+
+---
+
+title: IEEE 754 half-precision
+
+- Rappresentazione usata nelle GPU, per velocizzare i calcoli
+- `-118.625 = -1110110.101~~2~~ = -1.110110101~~2~~ × 2^^6^^`
+- All’esponente, su 5 bit, bisogna sommare `15` (`=2^^(5 − 1)^^ − 1`)
+
+![](images/repr/ieee754-16-ex.svg)
+
 
 ---
 
@@ -371,26 +383,11 @@ class: large-table
 
 ---
 
-title: Espressione booleana
-figure: images/repr/hair-logic.svg
+title: Operatori di base
+class: large-table
 
 - Algebra di Boole: basata su un insieme di operatori
-- Possono essere combinati in espressioni
-- Altra forma di definizione di funzioni booleane
-- Es. `F~~2~~(A, B, C) = A·B + C`
-
-Operatore | Simbolo
-----------|--------
-And       | · (∧)
-Or        | + (∨)
-Not       | ¬
-Xor       | ⊕
-Nand      | ↑
-Nor       | ↓
----
-
-title: Operatori principali
-class: large-table
+- Semplici funzioni, specificate con tabelle di verità
 
 A | B | A·B | A+B | A⊕B | A↑B | A↓B
 --|---|-----|-----|-----|-----|----
@@ -403,6 +400,24 @@ A | ¬A
 --|---
 0 | 1
 1 | 0
+
+---
+
+title: Espressione booleana
+figure: images/repr/hair-logic.svg
+
+- Operatori possono essere combinati in espressioni
+- Altra forma di definizione di funzioni booleane
+- Es. `F~~2~~(A, B, C) = A·B + C`
+
+Operatore | Simbolo
+----------|--------
+And       | · (∧)
+Or        | + (∨)
+Not       | ¬
+Xor       | ⊕
+Nand      | ↑
+Nor       | ↓
 
 ---
 
