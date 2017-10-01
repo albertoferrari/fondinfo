@@ -175,9 +175,14 @@ title: Tipi di dati
 
 code: python
 
-    3 + 4   # 7 - The result has to be handled...
-    4 == 5  # False - Do not confuse with assignment!
-    2 < 3 or not True  # True
+    >>> 3 + 4
+    7
+    >>> 3 / 4
+    0.75
+    >>> 4 == 5  # Do not confuse with assignment!
+    False
+    >>> 2 < 3 or not True
+    True
 
 ---
 
@@ -193,9 +198,12 @@ title: Valori numerici e booleani
 
 code: python
 
-    -2 // 3    # -1 (floored integer division)
-    -2 % 3     # 1 (reminder is always positive)
-    2 ** 1000  # no limits (but memory)
+    >>> -2 // 3    # floored integer division
+    -1
+    >>> -2 % 3     # reminder is always positive
+    1
+    >>> 2 ** 1000  # no limits (but memory)
+    107150[...]069376
 
 ---
 
@@ -211,10 +219,12 @@ class: large-figure
 
 code: python
 
-    radius = 2.2  # Assignment
-    pi = 3.14
-    area = pi * (radius ** 2)  # ~ 15.2
-    radius = radius + 1
+    >>> pi = 3.14  # Assignment
+    >>> radius = 2.2
+    >>> area = pi * (radius ** 2)
+    >>> area
+    15.1976
+    >>> radius = radius + 1  # guess radius... and area!
 
 ---
 
@@ -228,10 +238,10 @@ figure: images/algo/var-label.svg
 
 code: python
 
-    x = 100
-    DELTA = 5          # Constants: UPPER_CASE
-    x = x + DELTA      # Variables: lower_case
-    next_position = x  # Use explicative names!
+    >>> x = 100
+    >>> DELTA = 5          # Constants: UPPER_CASE
+    >>> x = x + DELTA      # Variables: lower_case
+    >>> next_position = x  # Use explicative names!
 
 ---
 
@@ -241,18 +251,14 @@ title: Stringhe di testo
 - Primi 128 codici *Unicode* == *ASCII*
     - A capo: `'\n'` (10, o 13-10... ma conversione automatica)
     - Tabulazione: `'\t'` (9)
-- Confronto tra stringhe, in ordine *lessicografico*
-    - `<, <=, >, >=, ==, !=`
 
 code: python
 
-    str1 = "Monty Python's "
-    str2 = 'Flying Circus'
-    result = str1 + str2
-    
-    'first' < 'second'  # True (but... 'Second' <  'first')
-    chr(90)             # 'Z'
-    ord('Z')            # 90
+    >>> str1 = "Monty Python's "
+    >>> str2 = 'Flying Circus'
+    >>> result = str1 + str2
+    >>> result
+    "Monty Python's Flying Circus"
 
 ---
 
@@ -260,6 +266,24 @@ title: Tabella ASCII
 class: large-image
 
 ![](images/repr/ascii.png)
+
+---
+
+title: Confronto tra stringhe
+
+- Confronto tra stringhe, in ordine *lessicografico*
+    - `<, <=, >, >=, ==, !=`
+
+code: python
+
+    >>> 'first' < 'second'
+    True
+    >>> 'Second' <  'first'
+    True
+    >>> chr(90)
+    'Z'
+    >>> ord('Z')
+    90
 
 ---
 
@@ -709,7 +733,7 @@ figure: images/misc/monster.png
 
 - Il giocatore si muove su una scacchiera di 5x5 celle, partendo da un angolo
     - Le righe e le colonne sono numerate da 0 a 4
-- Un tesoro ed un mostro sono nascosti due posizioni casuali, all'inizio del gioco
+- Un tesoro ed un mostro sono nascosti in due posizioni casuali, all'inizio del gioco
 - Ad ogni turno, il giocatore:
     - Sceglie una direzione verso cui spostarsi (alto, basso, sinistra, destra)
     - Se capita sulla cella del tesoro, ha vinto

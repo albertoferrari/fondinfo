@@ -336,9 +336,14 @@ URL: https://code.google.com/p/io-2012-slides
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>3 + 4   # 7 - The result has to be handled...
-4 == 5  # False - Do not confuse with assignment!
-2 &lt; 3 or not True  # True
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; 3 + 4
+7
+&gt;&gt;&gt; 3 / 4
+0.75
+&gt;&gt;&gt; 4 == 5  # Do not confuse with assignment!
+False
+&gt;&gt;&gt; 2 &lt; 3 or not True
+True
 </code></pre></article>
  
 </slide>
@@ -363,9 +368,12 @@ URL: https://code.google.com/p/io-2012-slides
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>-2 // 3    # -1 (floored integer division)
--2 % 3     # 1 (reminder is always positive)
-2 ** 1000  # no limits (but memory)
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; -2 // 3    # floored integer division
+-1
+&gt;&gt;&gt; -2 % 3     # reminder is always positive
+1
+&gt;&gt;&gt; 2 ** 1000  # no limits (but memory)
+107150[...]069376
 </code></pre></article>
  
 </slide>
@@ -389,10 +397,12 @@ URL: https://code.google.com/p/io-2012-slides
 </li>
 <li><em>Non confondere</em> con confronto di uguaglianza <code>==</code></li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>radius = 2.2  # Assignment
-pi = 3.14
-area = pi * (radius ** 2)  # ~ 15.2
-radius = radius + 1
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; pi = 3.14  # Assignment
+&gt;&gt;&gt; radius = 2.2
+&gt;&gt;&gt; area = pi * (radius ** 2)
+&gt;&gt;&gt; area
+15.1976
+&gt;&gt;&gt; radius = radius + 1  # guess radius... and area!
 </code></pre></article>
  
 </slide>
@@ -415,10 +425,10 @@ radius = radius + 1
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>x = 100
-DELTA = 5          # Constants: UPPER_CASE
-x = x + DELTA      # Variables: lower_case
-next_position = x  # Use explicative names!
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; x = 100
+&gt;&gt;&gt; DELTA = 5          # Constants: UPPER_CASE
+&gt;&gt;&gt; x = x + DELTA      # Variables: lower_case
+&gt;&gt;&gt; next_position = x  # Use explicative names!
 </code></pre></article>
  
 </slide>
@@ -437,18 +447,12 @@ next_position = x  # Use explicative names!
 <li>Tabulazione: <code>'\t'</code> (9)</li>
 </ul>
 </li>
-<li>Confronto tra stringhe, in ordine <em>lessicografico</em><ul>
-<li><code>&lt;, &lt;=, &gt;, &gt;=, ==, !=</code></li>
 </ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code>str1 = "Monty Python's "
-str2 = 'Flying Circus'
-result = str1 + str2
-
-'first' &lt; 'second'  # True (but... 'Second' &lt;  'first')
-chr(90)             # 'Z'
-ord('Z')            # 90
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; str1 = "Monty Python's "
+&gt;&gt;&gt; str2 = 'Flying Circus'
+&gt;&gt;&gt; result = str1 + str2
+&gt;&gt;&gt; result
+"Monty Python's Flying Circus"
 </code></pre></article>
  
 </slide>
@@ -461,6 +465,31 @@ ord('Z')            # 90
     </hgroup>
     <article >
       <p><img alt="" src="images/repr/ascii.png" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Confronto tra stringhe</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Confronto tra stringhe, in ordine <em>lessicografico</em><ul>
+<li><code>&lt;, &lt;=, &gt;, &gt;=, ==, !=</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; 'first' &lt; 'second'
+True
+&gt;&gt;&gt; 'Second' &lt;  'first'
+True
+&gt;&gt;&gt; chr(90)
+'Z'
+&gt;&gt;&gt; ord('Z')
+90
+</code></pre></article>
  
 </slide>
 
@@ -1083,7 +1112,7 @@ Anno 3: 114.12€ ...
 <li>Le righe e le colonne sono numerate da 0 a 4</li>
 </ul>
 </li>
-<li>Un tesoro ed un mostro sono nascosti due posizioni casuali, all'inizio del gioco</li>
+<li>Un tesoro ed un mostro sono nascosti in due posizioni casuali, all'inizio del gioco</li>
 <li>Ad ogni turno, il giocatore:<ul>
 <li>Sceglie una direzione verso cui spostarsi (alto, basso, sinistra, destra)</li>
 <li>Se capita sulla cella del tesoro, ha vinto</li>

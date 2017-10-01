@@ -223,7 +223,7 @@ figure: images/repr/4bits-sign.png
 
 - Rappresentazione alternativa, *diversa da modulo e segno!*
 - Numero negativo, ottenuto dal suo opposto positivo
-    - Complemento il numero <br> (cambio gli 1 con 0 e viceversa)
+    - Complemento il numero <br> (gli 1 diventano 0 e viceversa)
     - Sommo 1
 - Anche così, il primo bit indica il segno
     - 0 positivo, 1 negativo 
