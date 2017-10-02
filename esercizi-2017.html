@@ -1,0 +1,258 @@
+<!--
+Google IO 2012 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahe <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Esercizi 2017</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/tomamic.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+<slide class="title-slide segue nobackground">
+  <aside class="gdbar"><img src="images/logo.png"></aside>
+  <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+  <h1 data-config-title><!-- populated from slide_config.json --></h1>
+  <figure><img src="images/misc/geek-girl.jpg"></figure>
+  <hgroup>
+    <h2>Introduzione alla programmazione</h2>
+    <p>Michele Tomaiuolo<br>Ingegneria dell'Informazione, UniPR</p>
+  </hgroup>
+</slide>
+
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 1</h2>
+      <h3>2017-10-02</h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.1 Hello, user!</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/handshake.png">
+        
+      </figure><ul>
+<li>Compilare ed eseguire il programma “<code>Hello world</code>”</li>
+<li>In una versione successiva del programma...</li>
+<li>Chiedere il nome all'utente e aggiungere tale nome al messaggio di saluto</li>
+<li>Se il nome dell'utente è “<code>admin</code>”, mostrare inoltre il messaggio speciale “<code>At your command</code>”</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.2 Anni bisestili</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Chiedere all'utente di inserire un anno</li>
+<li>Dire se è bisestile oppure no</li>
+<li>Ripetere tutto ciclicamente, finchè l'utente non inserisce il valore <code>0</code></li>
+</ul>
+<blockquote></blockquote>
+<p>Un anno è bisestile se il suo numero è divisibile per 4, con l'eccezione degli anni secolari (quelli divisibili per 100) che non sono divisibili per 400</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.3 Cerchi casuali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/random-circles.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente un numero <code>n</code></li>
+<li>Disegnare <code>n</code> cerchi<ul>
+<li>Tutti con raggio di 50 pixel</li>
+<li>Ciascuno in posizione casuale</li>
+<li>Ciascuno con un colore casuale</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Cominciare a disegnare un solo cerchio grigio, in posizione casuale</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.4 Cerchi concentrici graduali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/red-circles.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente il numero di cerchi da disegnare</li>
+<li>Disegnare i cerchi con raggio gradualmente decrescente, ma tutti con lo stesso centro</li>
+<li>Far variare il colore dei cerchi<ul>
+<li>Dal rosso del livello più esterno</li>
+<li>Fino al nero del livello più interno</li>
+</ul>
+</li>
+<li>Prima del ciclo, determinare di quanto cambiare raggio e colore ad ogni passo</li>
+</ul>
+<blockquote></blockquote>
+<p>Per iniziare, inserire l'operazione di disegno un ciclo, togliendo ad ogni passo <code>10</code> (p.es.) al raggio e al livello di rosso</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.5 Cerchi concentrici casuali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Disegnare un cerchio di raggio 200 e colore casuale</li>
+<li>Disegnare dei cerchi concentrici, via via più piccoli</li>
+<li>Per ognuno, scegliere casualmente raggio e colore</li>
+<li>Fermarsi quando il raggio diventa più piccolo di 10</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.6 Carattere Unicode</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/characters.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente un numero</li>
+<li>Visualizzare il carattere Unicode corrispondente</li>
+<li>Ripetere le operazioni in un ciclo, finchè l'utente non inserisce il valore <code>0</code></li>
+</ul>
+<blockquote></blockquote>
+<p>Usare la funzione <code>chr</code> per convertire un codice nel char corrispondente</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.7 Tabella ASCII</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Visualizzare la tabella dei codici ASCII</li>
+<li>Un carattere per ogni riga<ul>
+<li>All'inizio della riga: il carattere</li>
+<li>Di fianco: il codice ASCII</li>
+</ul>
+</li>
+<li>Limitare l'intervallo tra 32 a 126 (due costanti)</li>
+</ul>
+<blockquote></blockquote>
+<p>Non c'è input dell'utente</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.8 Massimo e minimo</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/data-sequence.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente, attraverso un ciclo, una sequenza di numeri naturali<ul>
+<li>La sequenza termina quando si legge un valore negativo (non valido)</li>
+</ul>
+</li>
+<li>Visualizzare il valore massimo e quello minimo tra i numeri inseriti</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.9 Skyscrapers</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/histogram.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente, attraverso un ciclo, una sequenza di numeri naturali<ul>
+<li>La sequenza termina quando si legge un valore negativo (non valido)</li>
+</ul>
+</li>
+<li>Quante volte è cambiato il massimo?<ul>
+<li>Per ogni valore inserito, controllare se è il massimo osservato</li>
+</ul>
+</li>
+<li>Al termine, scrivere il risultato</li>
+</ul>
+<blockquote></blockquote>
+<p>Da sinistra a destra, quanti “tetti” si vedono? (Nell'esempio: 6)</p></article>
+ 
+</slide>
+
+
+<slide class="thank-you-slide segue nobackground">
+  <aside class="gdbar right"><img src="images/logo.png"></aside>
+  <article class="flexbox vleft auto-fadein">
+    <h2>&lt;Domande?&gt;</h2>
+  </article>
+  <p class="auto-fadein" data-config-contact>
+    Michele Tomaiuolo
+    <br>
+    Palazzina 1, int. 5708
+    <br>
+    Ingegneria dell'Informazione, UniPR
+    <br>
+    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+  </p>
+</slide>
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>

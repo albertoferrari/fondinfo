@@ -1,0 +1,125 @@
+title: Esercizi 2017
+subtitle: Introduzione alla programmazione
+figure: images/misc/geek-girl.jpg
+
+---
+
+title: Esercitazione 1
+subtitle: 2017-10-02
+class: segue dark
+
+---
+
+title: 1.1 Hello, user!
+figure: images/misc/handshake.png
+
+- Compilare ed eseguire il programma “`Hello world`”
+- In una versione successiva del programma...
+- Chiedere il nome all'utente e aggiungere tale nome al messaggio di saluto
+- Se il nome dell'utente è “`admin`”, mostrare inoltre il messaggio speciale “`At your command`”
+
+---
+
+title: 1.2 Anni bisestili
+
+- Chiedere all'utente di inserire un anno
+- Dire se è bisestile oppure no
+- Ripetere tutto ciclicamente, finchè l'utente non inserisce il valore `0`
+
+>
+
+Un anno è bisestile se il suo numero è divisibile per 4, con l'eccezione degli anni secolari (quelli divisibili per 100) che non sono divisibili per 400
+
+---
+
+title: 1.3 Cerchi casuali
+figure: images/misc/random-circles.png
+
+- Chiedere all'utente un numero `n`
+- Disegnare `n` cerchi
+    - Tutti con raggio di 50 pixel
+    - Ciascuno in posizione casuale
+    - Ciascuno con un colore casuale
+
+>
+
+Cominciare a disegnare un solo cerchio grigio, in posizione casuale
+
+---
+
+title: 1.4 Cerchi concentrici graduali
+figure: images/misc/red-circles.png
+
+- Chiedere all'utente il numero di cerchi da disegnare
+- Disegnare i cerchi con raggio gradualmente decrescente, ma tutti con lo stesso centro
+- Far variare il colore dei cerchi
+	  - Dal rosso del livello più esterno
+	  - Fino al nero del livello più interno
+- Prima del ciclo, determinare di quanto cambiare raggio e colore ad ogni passo
+
+>
+
+Per iniziare, inserire l'operazione di disegno un ciclo, togliendo ad ogni passo `10` (p.es.) al raggio e al livello di rosso
+
+
+---
+
+title: 1.5 Cerchi concentrici casuali
+
+- Disegnare un cerchio di raggio 200 e colore casuale
+- Disegnare dei cerchi concentrici, via via più piccoli
+- Per ognuno, scegliere casualmente raggio e colore
+- Fermarsi quando il raggio diventa più piccolo di 10
+
+---
+
+title: 1.6 Carattere Unicode
+figure: images/misc/characters.png
+
+- Chiedere all'utente un numero
+- Visualizzare il carattere Unicode corrispondente
+- Ripetere le operazioni in un ciclo, finchè l'utente non inserisce il valore `0`
+
+>
+
+Usare la funzione `chr` per convertire un codice nel char corrispondente
+
+---
+
+title: 1.7 Tabella ASCII
+
+- Visualizzare la tabella dei codici ASCII
+- Un carattere per ogni riga
+    - All'inizio della riga: il carattere
+    - Di fianco: il codice ASCII
+- Limitare l'intervallo tra 32 a 126 (due costanti)
+
+>
+
+Non c'è input dell'utente
+
+---
+
+title: 1.8 Massimo e minimo
+figure: images/misc/data-sequence.png
+
+- Chiedere all'utente, attraverso un ciclo, una sequenza di numeri naturali
+    - La sequenza termina quando si legge un valore negativo (non valido)
+- Visualizzare il valore massimo e quello minimo tra i numeri inseriti
+
+---
+
+title: 1.9 Skyscrapers
+figure: images/misc/histogram.png
+
+- Chiedere all'utente, attraverso un ciclo, una sequenza di numeri naturali
+    - La sequenza termina quando si legge un valore negativo (non valido)
+- Quante volte è cambiato il massimo?
+    - Per ogni valore inserito, controllare se è il massimo osservato
+- Al termine, scrivere il risultato
+
+>
+
+Da sinistra a destra, quanti “tetti” si vedono? (Nell'esempio: 6)
+
+
