@@ -35,6 +35,7 @@
 
 ## Esercizi di programmazione
 
+- [Esercitazioni in lab 2017](esercizi-2017.html)
 - [Esercitazioni in lab 2016](esercizi-2016.html)
 - [Esercitazioni in lab 2015](esercizi-2015.html)
 - [Esercitazioni in lab 2014](esercizi-2014.html)
