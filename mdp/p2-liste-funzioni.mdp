@@ -206,11 +206,11 @@ code: python
 ---
 
 title: Cicli e annidamento
-figure: images/misc/tables.png
+figure: images/fun/multiplication-table.jpg
 
 code: python
 
-    MAX = 12
+    MAX = 10
     y = int(input("Insert a value: "))
     for x in range(1, MAX + 1):
         print(x * y, end = " ")
@@ -218,7 +218,7 @@ code: python
     
 code: python
 
-    MAX = 12
+    MAX = 10
     for y in range(1, MAX + 1):
         for x in range(1, MAX + 1):
             val = x * y
@@ -391,6 +391,10 @@ code: python
         base_value += 1
         return x + base_value
 
+>
+
+Se `x, y = 3, 4`, ad esempio, i due risultati sono `-2` e `4`
+
 ---
 
 title: Animazione
@@ -401,15 +405,15 @@ code: python
 
     def update():
         global x
-        game2d.canvas_fill((255, 255, 255))   # Draw background        
-        game2d.image_blit(image, (x, 50))     # Draw foreground
-        x = (x + 5) % 320                     # Update ball's position
+        game2d.canvas_fill((255, 255, 255))  # Draw background        
+        game2d.image_blit(image, (x, 50))    # Draw foreground
+        x = (x + 5) % 320                    # Update ball's position
 
     game2d.canvas_init((320, 240))
     image = game2d.image_load("ball.png")
     x = 50
 
-    game2d.set_interval(update, 1000 // 30)    # Call update 30 times/second
+    game2d.set_interval(update, 1000 // 30)   # Call update 30 times/second
 
 ---
 
@@ -427,7 +431,7 @@ code: python
 
     game2d.handle_keyboard(keydown, keyup)
 
-<https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent>
+<https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
 
 ---
 

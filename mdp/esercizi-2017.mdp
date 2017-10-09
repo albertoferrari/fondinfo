@@ -122,4 +122,140 @@ figure: images/misc/histogram.png
 
 Da sinistra a destra, quanti “tetti” si vedono? (Nell'esempio: 6)
 
+---
+
+title: Esercitazione 2
+subtitle: 2017-10-09
+class: segue dark
+
+---
+
+title: 2.1 Percentuale di cifre
+figure: images/misc/numbers.jpg
+
+- Chiedere una riga di testo all'utente
+- Mostrare la percentuale di cifre presenti
+
+>
+
+Usare un ciclo `for` sulla stringa
+
+---
+
+title: 2.2 Lista di valori
+figure: images/misc/data-sequence.png
+
+- Chiedere all'utente una sequenza in numeri naturali
+- La sequenza termina quando l'utente inserisce un valore negativo
+- Quanti valori sono maggiori dell'ultimo valido inserito?
+
+---
+
+title: 2.3 Funzione, densità
+figure: images/misc/snow-ball.png
+
+- Definire una funzione `sphere_density` per il calcolo della densità di una sfera
+    - Parametri: raggio in metri e massa in Kg
+    - Risultato: densità (tutti valori `float`)
+- Invocare la funzione dalla shell interattiva
+- Aggiungere poi al programma una funzione `main`
+    - *Procedura, senza parametri e senza risultato*
+    - Chiedere all'utente due valori (chiamando `input`)
+    - Poi chiamare `sphere_density` con questi parametri
+    - Infine mostrare all'utente il risultato (chiamando `print`)
+
+>
+
+Formule utili: V = (4/3)πR^^3^^ ; ρ = m / V
+
+---
+
+title: 2.4 Conteggio di singole cifre
+figure: images/misc/numbers.jpg
+
+- Chiedere una riga di testo all'utente
+- Contare separatamente le occorrenze di ciascuna cifra (da `'0'` a `'9'`)
+
+>
+
+Creare una lista (array) di 10 elementi, inizialmente tutti posti a `0`
+
+Ciascun elemento è il contatore per una certa cifra
+
+Attenzione alla distinzione tra il tipo `str` ed il tipo `int`!
+
+---
+
+title: 2.5 Skyscrapers, da destra
+figure: images/misc/histogram.png
+
+- Chiedere all'utente una sequenza in numeri naturali
+- La sequenza termina quando l'utente inserisce un valore negativo
+- Quante volte cambia il massimo, osservando la sequenza al contrario?
+
+>
+
+Da destra a sinistra, quanti “tetti” si vedono? (Nell'esempio: 5)
+
+La funzione `reversed` restituisce una sequenza rovesciata
+
+---
+
+title: 2.6 Griglia di colori
+figure: images/misc/color-grid.png images/oop/raster-tile.png
+
+- Chidere all'utente dei valori per `rows` e `cols`
+- Mostrare una griglia di rettangoli di dimensione `rows×cols`
+- Partire da un rettangolo nero in alto a sinistra
+- In orizzontale, aumentare gradatamente la componente di blu
+- In verticale, aumentare gradatamente la componente di verde
+
+>
+
+Cominciare a creare una griglia di riquadri tutti neri, con due cicli `for` annidati
+
+Lasciare tra i riquadri un piccolo margine
+
+---
+
+title: 2.7 Conteggio lettere iniziali uguali
+
+- Scrivere una funzione `len_common_prefix`
+    - Paramteri: `a` e `b`, stringhe da confrontare
+    - Risultato: numero di lettere iniziali uguali tra `a` e `b`
+- Scrivere una funzione `main`
+    - Chiedere all'utente due stringhe di testo, `s1` e `s2`
+    - Invocare `len_common_prefix` sulle due stringhe
+    - Mostrare all'utente il risultato
+
+---
+
+title: 2.8 Movimento diagonale
+figure: images/oop/border.png
+
+- Partire dall'esempio del rettangolo in moto orizzontale
+    - Spostamento costante denominato `dx`
+- Fare in modo che il movimento sia in diagonale
+    - Ad ogni turno, aggiungere ad una variabile `y`...
+    - Una quantità costante `dy`
+- Quando la pallina raggiunge il bordo destro, non lo supera
+    - La `x` rimane fissa al valore massimo
+    - La `y` può ancora cambiare
+- Quando la pallina raggiunge il bordo inferiore, non lo supera
+    - La `y` rimane al valore massimo
+    - La `x` può ancora cambiare
+
+---
+
+title: 2.9 Controllo da tastiera
+figure: images/oop/border.png
+
+- Riprendere l'esercizio 2.8
+- Controllare la pressione dei tasti freccia
+    - Impostare il solo segno di `dx`, se premuta una freccia orizzontale
+    - Impostare il solo segno di `dy`, se premuta una freccia verticale
+    - Nella funzione di gestione tasti, non modificare nè `x`, nè `y`
+- Lontano dai bordi, il movimento rimane sempre in una delle quattro *direzioni diagonali*
+    - Quando la pallina raggiunge uno dei bordi, non lo supera
+    - Ma continua a muoversi sul bordo, fino all'angolo
 

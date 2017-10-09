@@ -208,6 +208,7 @@ code: Binary
 ---
 
 title: Numeri interi
+figure: images/repr/4bits-sign.png
 
 - Occorre rappresentare anche i numeri negativi
     - Necessario riservare un bit per il segno

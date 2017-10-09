@@ -294,15 +294,15 @@ for i in range(5):
     </hgroup>
     <article >
       <figure>
-        <img src="images/misc/tables.png">
+        <img src="images/fun/multiplication-table.jpg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>MAX = 12
+      </figure><pre class="prettyprint" data-lang="python"><code>MAX = 10
 y = int(input("Insert a value: "))
 for x in range(1, MAX + 1):
     print(x * y, end = " ")
     # inserts a space, instead of a newline
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>MAX = 12
+<pre class="prettyprint" data-lang="python"><code>MAX = 10
 for y in range(1, MAX + 1):
     for x in range(1, MAX + 1):
         val = x * y
@@ -543,7 +543,9 @@ def rq(x: int) -&gt; int:
     global base_value
     base_value += 1
     return x + base_value
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p>Se <code>x, y = 3, 4</code>, ad esempio, i due risultati sono <code>-2</code> e <code>4</code></p></article>
  
 </slide>
 
@@ -558,15 +560,15 @@ def rq(x: int) -&gt; int:
 
 def update():
     global x
-    game2d.canvas_fill((255, 255, 255))   # Draw background        
-    game2d.image_blit(image, (x, 50))     # Draw foreground
-    x = (x + 5) % 320                     # Update ball's position
+    game2d.canvas_fill((255, 255, 255))  # Draw background        
+    game2d.image_blit(image, (x, 50))    # Draw foreground
+    x = (x + 5) % 320                    # Update ball's position
 
 game2d.canvas_init((320, 240))
 image = game2d.image_load("ball.png")
 x = 50
 
-game2d.set_interval(update, 1000 // 30)    # Call update 30 times/second
+game2d.set_interval(update, 1000 // 30)   # Call update 30 times/second
 </code></pre></article>
  
 </slide>
@@ -588,7 +590,7 @@ def keyup(code: str):
 
 game2d.handle_keyboard(keydown, keyup)
 </code></pre>
-<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent</a></p></article>
+<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code</a></p></article>
  
 </slide>
 

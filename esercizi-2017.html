@@ -233,6 +233,232 @@ URL: https://code.google.com/p/io-2012-slides
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 2</h2>
+      <h3>2017-10-09</h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.1 Percentuale di cifre</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/numbers.jpg">
+        
+      </figure><ul>
+<li>Chiedere una riga di testo all'utente</li>
+<li>Mostrare la percentuale di cifre presenti</li>
+</ul>
+<blockquote></blockquote>
+<p>Usare un ciclo <code>for</code> sulla stringa</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.2 Lista di valori</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/data-sequence.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente una sequenza in numeri naturali</li>
+<li>La sequenza termina quando l'utente inserisce un valore negativo</li>
+<li>Quanti valori sono maggiori dell'ultimo valido inserito?</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.3 Funzione, densità</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/snow-ball.png">
+        
+      </figure><ul>
+<li>Definire una funzione <code>sphere_density</code> per il calcolo della densità di una sfera<ul>
+<li>Parametri: raggio in metri e massa in Kg</li>
+<li>Risultato: densità (tutti valori <code>float</code>)</li>
+</ul>
+</li>
+<li>Invocare la funzione dalla shell interattiva</li>
+<li>Aggiungere poi al programma una funzione <code>main</code><ul>
+<li><em>Procedura, senza parametri e senza risultato</em></li>
+<li>Chiedere all'utente due valori (chiamando <code>input</code>)</li>
+<li>Poi chiamare <code>sphere_density</code> con questi parametri</li>
+<li>Infine mostrare all'utente il risultato (chiamando <code>print</code>)</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Formule utili: V = (4/3)πR<sup>3</sup> ; ρ = m / V</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.4 Conteggio di singole cifre</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/numbers.jpg">
+        
+      </figure><ul>
+<li>Chiedere una riga di testo all'utente</li>
+<li>Contare separatamente le occorrenze di ciascuna cifra (da <code>'0'</code> a <code>'9'</code>)</li>
+</ul>
+<blockquote></blockquote>
+<p>Creare una lista (array) di 10 elementi, inizialmente tutti posti a <code>0</code></p>
+<p>Ciascun elemento è il contatore per una certa cifra</p>
+<p>Attenzione alla distinzione tra il tipo <code>str</code> ed il tipo <code>int</code>!</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.5 Skyscrapers, da destra</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/histogram.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente una sequenza in numeri naturali</li>
+<li>La sequenza termina quando l'utente inserisce un valore negativo</li>
+<li>Quante volte cambia il massimo, osservando la sequenza al contrario?</li>
+</ul>
+<blockquote></blockquote>
+<p>Da destra a sinistra, quanti “tetti” si vedono? (Nell'esempio: 5)</p>
+<p>La funzione <code>reversed</code> restituisce una sequenza rovesciata</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.6 Griglia di colori</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/color-grid.png"><img src="images/oop/raster-tile.png">
+        
+      </figure><ul>
+<li>Chidere all'utente dei valori per <code>rows</code> e <code>cols</code></li>
+<li>Mostrare una griglia di rettangoli di dimensione <code>rows×cols</code></li>
+<li>Partire da un rettangolo nero in alto a sinistra</li>
+<li>In orizzontale, aumentare gradatamente la componente di blu</li>
+<li>In verticale, aumentare gradatamente la componente di verde</li>
+</ul>
+<blockquote></blockquote>
+<p>Cominciare a creare una griglia di riquadri tutti neri, con due cicli <code>for</code> annidati</p>
+<p>Lasciare tra i riquadri un piccolo margine</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.7 Conteggio lettere iniziali uguali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Scrivere una funzione <code>len_common_prefix</code><ul>
+<li>Paramteri: <code>a</code> e <code>b</code>, stringhe da confrontare</li>
+<li>Risultato: numero di lettere iniziali uguali tra <code>a</code> e <code>b</code></li>
+</ul>
+</li>
+<li>Scrivere una funzione <code>main</code><ul>
+<li>Chiedere all'utente due stringhe di testo, <code>s1</code> e <code>s2</code></li>
+<li>Invocare <code>len_common_prefix</code> sulle due stringhe</li>
+<li>Mostrare all'utente il risultato</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.8 Movimento diagonale</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/border.png">
+        
+      </figure><ul>
+<li>Partire dall'esempio del rettangolo in moto orizzontale<ul>
+<li>Spostamento costante denominato <code>dx</code></li>
+</ul>
+</li>
+<li>Fare in modo che il movimento sia in diagonale<ul>
+<li>Ad ogni turno, aggiungere ad una variabile <code>y</code>...</li>
+<li>Una quantità costante <code>dy</code></li>
+</ul>
+</li>
+<li>Quando la pallina raggiunge il bordo destro, non lo supera<ul>
+<li>La <code>x</code> rimane fissa al valore massimo</li>
+<li>La <code>y</code> può ancora cambiare</li>
+</ul>
+</li>
+<li>Quando la pallina raggiunge il bordo inferiore, non lo supera<ul>
+<li>La <code>y</code> rimane al valore massimo</li>
+<li>La <code>x</code> può ancora cambiare</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.9 Controllo da tastiera</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/border.png">
+        
+      </figure><ul>
+<li>Riprendere l'esercizio 2.8</li>
+<li>Controllare la pressione dei tasti freccia<ul>
+<li>Impostare il solo segno di <code>dx</code>, se premuta una freccia orizzontale</li>
+<li>Impostare il solo segno di <code>dy</code>, se premuta una freccia verticale</li>
+<li>Nella funzione di gestione tasti, non modificare nè <code>x</code>, nè <code>y</code></li>
+</ul>
+</li>
+<li>Lontano dai bordi, il movimento rimane sempre in una delle quattro <em>direzioni diagonali</em><ul>
+<li>Quando la pallina raggiunge uno dei bordi, non lo supera</li>
+<li>Ma continua a muoversi sul bordo, fino all'angolo</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
 
 <slide class="thank-you-slide segue nobackground">
   <aside class="gdbar right"><img src="images/logo.png"></aside>
