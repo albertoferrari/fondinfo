@@ -93,7 +93,7 @@ title: Applicazione
 
 code: python
 
-    from p4_ball import Ball  # Ball is defined in p4_ball.py
+    from p3_ball import Ball  # Ball is defined in p3_ball.py
 
     # Create two objects, instances of the Ball class
     b1 = Ball(40, 80)
@@ -135,7 +135,7 @@ title: Animazione di due palline
 code: python
 
     import game2d
-    from p4_ball import Ball
+    from p3_ball import Ball
 
     def update():
         game2d.canvas_fill((255, 255, 255))  # BG
@@ -156,7 +156,7 @@ title: Animazione lista di palline
 code: python
 
     import game2d
-    from p4_ball import Ball
+    from p3_ball import Ball
 
     def update():
         game2d.canvas_fill((255, 255, 255))  # BG
