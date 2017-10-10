@@ -617,7 +617,7 @@ centralWidget()-&gt;setLayout(layout);
       <figure>
         <img src="images/qt/fifteen-puzzle.jpg">
         
-      </figure><pre class="prettyprint" data-lang="C++"><code>class Game {
+      </figure><pre class="prettyprint" data-lang="C++"><code>class BoardGame {
 public:
     virtual void play_at(int x, int y) = 0;
     virtual int cols() = 0;
@@ -640,16 +640,16 @@ public:
       <figure>
         <img src="images/qt/puzzle.png">
         
-      </figure><pre class="prettyprint" data-lang="C++"><code>class GameGui : public QWidget {
+      </figure><pre class="prettyprint" data-lang="C++"><code>class BoardGameGui : public QWidget {
     Q_OBJECT
 public:
-    GameGui(Game* game);
+    BoardGameGui(BoardGame* game);
 private:
     void handle_click(int x, int y);
     void update_button(int x, int y);
     void update_all_buttons();
 
-    Game* game_;
+    BoardGame* game_;
     int cols_, rows_;
 };
 </code></pre></article>
@@ -663,7 +663,7 @@ private:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="C++"><code>GameGui::GameGui(Game* game) {
+      <pre class="prettyprint" data-lang="C++"><code>BoardGameGui::GameGui(BoardGame* game) {
     cols_ = game-&gt;cols(); rows_ = game-&gt;rows();
     game_ = game;
     auto grid = new QGridLayout; setLayout(grid);
@@ -692,13 +692,13 @@ private:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="C++"><code>void GameGui::update_button(int x, int y) {
+      <pre class="prettyprint" data-lang="C++"><code>void BoardGameGui::update_button(int x, int y) {
     auto val = game_-&gt;get_val(x, y);
     auto b = layout()-&gt;itemAt(y * cols_ + x)-&gt;widget();
     dynamic_cast&lt;QPushButton*&gt;(b)-&gt;setText(val.c_str());
 }
 
-void GameGui::update_all_buttons() {
+void BoardGameGui::update_all_buttons() {
     for (auto y = 0; y &lt; rows_; y++) {
         for (auto x = 0; x &lt; cols_; x++) {
             update_button(x, y);
@@ -719,7 +719,7 @@ void GameGui::update_all_buttons() {
       <figure>
         <img src="images/qt/puzzle-solved.png">
         
-      </figure><pre class="prettyprint" data-lang="C++"><code>void GameGui::handle_click(int x, int y) {
+      </figure><pre class="prettyprint" data-lang="C++"><code>void BoardGameGui::handle_click(int x, int y) {
     game_-&gt;play_at(x, y);
     update_all_buttons();  // ...
 
@@ -754,8 +754,8 @@ void GameGui::update_all_buttons() {
       <figure>
         <img src="images/qt/puzzle.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>class GameGui(QWidget):
-    def __init__(self, game: Game):
+      </figure><pre class="prettyprint" data-lang="python"><code>class BoardGameGui(QWidget):
+    def __init__(self, game: BoardGame):
         QWidget.__init__(self)
         self._game = game
         self._cols, self._rows = game.size()
@@ -779,7 +779,7 @@ void GameGui::update_all_buttons() {
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>class GameGui(QWidget):
+      <pre class="prettyprint" data-lang="python"><code>class BoardGameGui(QWidget):
     # ...
     def update_button(self, x: int, y: int):
         val = self._game.get_val(x, y)
@@ -804,7 +804,7 @@ void GameGui::update_all_buttons() {
       <figure>
         <img src="images/qt/puzzle-solved.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>class GameGui(QWidget):
+      </figure><pre class="prettyprint" data-lang="python"><code>class BoardGameGui(QWidget):
     # ...
     def handle_click(self, x: int, y: int):
         self._game.play_at(x, y)

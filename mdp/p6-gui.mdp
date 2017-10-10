@@ -397,7 +397,7 @@ figure: images/qt/fifteen-puzzle.jpg
 
 code: C++
 
-    class Game {
+    class BoardGame {
     public:
         virtual void play_at(int x, int y) = 0;
         virtual int cols() = 0;
@@ -414,16 +414,16 @@ figure: images/qt/puzzle.png
 
 code: C++
 
-    class GameGui : public QWidget {
+    class BoardGameGui : public QWidget {
         Q_OBJECT
     public:
-        GameGui(Game* game);
+        BoardGameGui(BoardGame* game);
     private:
         void handle_click(int x, int y);
         void update_button(int x, int y);
         void update_all_buttons();
 
-        Game* game_;
+        BoardGame* game_;
         int cols_, rows_;
     };
 
@@ -433,7 +433,7 @@ title: Fifteen – Costruzione gui
 
 code: C++
 
-    GameGui::GameGui(Game* game) {
+    BoardGameGui::GameGui(BoardGame* game) {
         cols_ = game->cols(); rows_ = game->rows();
         game_ = game;
         auto grid = new QGridLayout; setLayout(grid);
@@ -457,13 +457,13 @@ title: Fifteen – Aggiornamento bottoni
 
 code: C++
 
-    void GameGui::update_button(int x, int y) {
+    void BoardGameGui::update_button(int x, int y) {
         auto val = game_->get_val(x, y);
         auto b = layout()->itemAt(y * cols_ + x)->widget();
         dynamic_cast<QPushButton*>(b)->setText(val.c_str());
     }
 
-    void GameGui::update_all_buttons() {
+    void BoardGameGui::update_all_buttons() {
         for (auto y = 0; y < rows_; y++) {
             for (auto x = 0; x < cols_; x++) {
                 update_button(x, y);
@@ -478,7 +478,7 @@ figure: images/qt/puzzle-solved.png
 
 code: C++
 
-    void GameGui::handle_click(int x, int y) {
+    void BoardGameGui::handle_click(int x, int y) {
         game_->play_at(x, y);
         update_all_buttons();  // ...
 
@@ -502,8 +502,8 @@ figure: images/qt/puzzle.png
 
 code: python
 
-    class GameGui(QWidget):
-        def __init__(self, game: Game):
+    class BoardGameGui(QWidget):
+        def __init__(self, game: BoardGame):
             QWidget.__init__(self)
             self._game = game
             self._cols, self._rows = game.size()
@@ -523,7 +523,7 @@ title: Pyside – Aggiornamento bottoni
 
 code: python
 
-    class GameGui(QWidget):
+    class BoardGameGui(QWidget):
         # ...
         def update_button(self, x: int, y: int):
             val = self._game.get_val(x, y)
@@ -542,7 +542,7 @@ figure: images/qt/puzzle-solved.png
 
 code: python
 
-    class GameGui(QWidget):
+    class BoardGameGui(QWidget):
         # ...
         def handle_click(self, x: int, y: int):
             self._game.play_at(x, y)

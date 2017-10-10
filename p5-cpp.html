@@ -849,7 +849,7 @@ void Widget::paintEvent(QPaintEvent* event) {
       <figure>
         <img src="images/qt/fifteen-puzzle.jpg">
         
-      </figure><pre class="prettyprint" data-lang="C++"><code>class Game {
+      </figure><pre class="prettyprint" data-lang="C++"><code>class BoardGame {
 public:
     virtual void play_at(int x, int y) = 0;
     virtual int cols() = 0;
@@ -872,15 +872,15 @@ public:
       <figure>
         <img src="images/qt/puzzle.png">
         
-      </figure><pre class="prettyprint" data-lang="C++"><code>class GameGui : public QWidget {
+      </figure><pre class="prettyprint" data-lang="C++"><code>class BoardGameGui : public QWidget {
     Q_OBJECT
 public:
-    GameGui(Game* game);
+    BoardGameGui(BoardGame* game);
     void handle_click(int x, int y);
     void update_button(int x, int y);
     void update_all_buttons();
 private:
-    Game* game_;
+    BoardGame* game_;
     int cols_, rows_;
 };
 </code></pre></article>

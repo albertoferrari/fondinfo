@@ -670,7 +670,7 @@ figure: images/qt/fifteen-puzzle.jpg
 
 code: C++
 
-    class Game {
+    class BoardGame {
     public:
         virtual void play_at(int x, int y) = 0;
         virtual int cols() = 0;
@@ -687,15 +687,15 @@ figure: images/qt/puzzle.png
 
 code: C++
 
-    class GameGui : public QWidget {
+    class BoardGameGui : public QWidget {
         Q_OBJECT
     public:
-        GameGui(Game* game);
+        BoardGameGui(BoardGame* game);
         void handle_click(int x, int y);
         void update_button(int x, int y);
         void update_all_buttons();
     private:
-        Game* game_;
+        BoardGame* game_;
         int cols_, rows_;
     };
 
