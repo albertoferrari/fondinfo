@@ -296,7 +296,7 @@ code: python
 
     class Ghost(Actor):
     
-        def init(self, arena, x, y):
+        def __init__(self, arena, x, y):
             self._x, self._y = x, y
             self._arena = arena  # save a ref to the arena
             arena.add(self)      # register yourself into the arena
