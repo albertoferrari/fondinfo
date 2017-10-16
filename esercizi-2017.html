@@ -459,6 +459,263 @@ URL: https://code.google.com/p/io-2012-slides
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 3</h2>
+      <h3>2017-10-16 *</h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.1 Animazione di una pallina</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/street-fighter.jpg">
+        
+      </figure><ul>
+<li>Partire dalla classe <code>Ball</code> vista a lezione</li>
+<li>Eseguire l'animazione<ul>
+<li>Per ogni frame, chiamare il metodo <code>move</code> della pallina</li>
+<li>Rappresentare un rettangolo o un cerchio nella posizione aggiornata della pallina</li>
+</ul>
+</li>
+<li>Modificare però il metodo <code>move</code><ul>
+<li>La pallina si sposta sempre di pochi pixel verso destra</li>
+<li>La pallina non si sposta verticalmente</li>
+<li>Se esce dal bordo destro, ricompare al bordo sinistro e viceversa</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.2 Ellisse</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/ellipse.svg">
+        
+      </figure><ul>
+<li>Classe che modella un'ellisse</li>
+<li>Campi privati (parametri del costruttore)<ul>
+<li>Semiassi: <code>a, b</code></li>
+</ul>
+</li>
+<li>Metodi pubblici per ottenere...<ul>
+<li>Area: <code>π*a*b</code></li>
+<li>Distanza focale: <code>2*√(a<sup>2</sup> - b<sup>2</sup>)</code></li>
+</ul>
+</li>
+<li>Nel corpo principale del programma...<ul>
+<li>Creare un oggetto con dati forniti dall'utente</li>
+<li>Visualizzare area e distanza focale dell'ellisse</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Opzionalmente, nell'inizializzazione: se <code>a &lt; b</code>, scambiarne i valori</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.3 Maiuscole tra asterischi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/troll-key.png">
+        
+      </figure><ul>
+<li>Scrivere una funzione che:<ul>
+<li>Riceve in input una stringa di testo</li>
+<li>Produce in output la stesso testo, ma...</li>
+<li>Trasforma in maiuscolo tutto il testo compreso tra asterischi</li>
+</ul>
+</li>
+<li>Es. “<code>I want *this text* to be uppercase</code>” <br>
+  → “<code>I want THIS TEXT to be uppercase</code>”</li>
+<li>Da una funzione <em>main</em>, applicare la funzione su una stringa inserita dall'utente</li>
+</ul>
+<blockquote></blockquote>
+<p>Segnare in un <code>bool</code> se si è incontrato un asterisco iniziale, ma non ancora un asterisco finale</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.4 Combinazioni di simboli</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/bike-lock.png">
+        
+      </figure><ul>
+<li>Scrivere una funzione per generare tutte le combinazioni di lunghezza 3<ul>
+<li>Parametri: <code>str</code> contenente l'insieme dei simboli validi (presenti su ogni ruota)</li>
+<li>Risultato: lista di <code>str</code> (combinazioni)</li>
+</ul>
+</li>
+<li>Possibile approccio<ul>
+<li>Usare 3 cicli <code>for</code> annidati</li>
+<li>Ogni <code>for</code> scorre tutto l'insieme di simboli</li>
+<li>Una combinazione è una <code>str</code>, ottenuta concatenando i 3 simboli correnti</li>
+</ul>
+</li>
+<li>Per test, fornire in input le vocali <code>"AEIOU"</code>, per ottenere:<ul>
+<li><code>["AAA", "AAE", "AAI", "AAO", "AAU", "AEA", "AEE", "AEI", "AEO", "AEU", "AIA", ...</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.5 Oscillazione sinusoidale</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/sin-cos.png">
+        
+      </figure><ul>
+<li>Partire dalla classe dell'esercizio 3.1<ul>
+<li>Memorizzare la ordinata iniziale <code>y0</code></li>
+</ul>
+</li>
+<li>Modificare il metodo <code>move</code><ul>
+<li>L'ordinata oscilla sinusoidalmente attorno ad <code>y0</code></li>
+<li>Sommare ad <code>y0</code> un valore proporzionale a <code>sin(k * x)</code></li>
+</ul>
+</li>
+<li>Visualizzare l'animazione di due palline</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.6 Palline colorate</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Aggiungere ai dati della pallina (es. 3.5) anche un colore<ul>
+<li>Generare una tupla <code>RGB</code> casuale, nell'inizializzatore</li>
+</ul>
+</li>
+<li>Aggiungere un corrispondente metodo <em>getter</em><ul>
+<li>Per ottenere dall'esterno il colore della pallina</li>
+<li>Restituire il colore come una tupla (tripla RGB)</li>
+</ul>
+</li>
+<li>Creare diverse palline ed inserirle in una lista</li>
+<li>Rappresentare graficamente il movimento di tutte le palline<ul>
+<li>Per ogni frame, in un ciclo <code>for</code>, chiamare il metodo <code>move</code> di ogni pallina</li>
+<li>Rappresentare un rettangolo o un cerchio colorato nella posizione aggiornata di ogni pallina</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.7 Rimbalzi con gravità</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/bouncing-ball.jpg">
+        
+      </figure><ul>
+<li>Ripartire dalla classe <code>Ball</code> originale (esempio visto a lezione)</li>
+<li>Nel metodo <code>move</code>, aggiungere l'effetto della gravità<ul>
+<li>Accelerazione: aggiungere un piccolo valore costante alla velocità verticale</li>
+<li><code>g = 0.4</code></li>
+<li><code>dy += g</code></li>
+<li>Quando si tocca il fondo, cambiare il segno di <code>dy</code></li>
+</ul>
+</li>
+<li>Mostrare l'animazione di una lista di palline, tutte con l'effetto della gravità</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.8 Controllo da tastiera</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/arrow-keys.jpg"><img src="images/oop/wasd-keys.jpg">
+        
+      </figure><ul>
+<li>Aggiungere alla classe dell'es. 3.7 dei metodi di comando<ul>
+<li><code>go_left</code>, <code>go_right</code>, <code>stay</code></li>
+<li>In questi metodi, modificare solo <code>dx</code></li>
+<li>Spostamento avviene sempre in <code>move</code></li>
+</ul>
+</li>
+<li>Mantenere il movimento verticale con gravità e rimbalzo</li>
+<li>Mostrare l'animazione di una sola pallina</li>
+<li>Controllare eventi della tastiera<ul>
+<li>Definire funzioni <code>keydown</code> e <code>keyup</code></li>
+<li>Chiamare il metodo corrispondente al tasto premuto</li>
+</ul>
+</li>
+<li>Con tasti diversi, comandare poi una seconda pallina</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.9 Jumper</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/jumper.png">
+        
+      </figure><ul>
+<li>Modificare la classe dell'es. 3.7<ul>
+<li>Mantenere i comandi orizzontali e la gravità</li>
+<li>Eliminare però il rimbalzo</li>
+<li>Quando arriva sul fondo dello schermo, si ferma lì</li>
+</ul>
+</li>
+<li>Aggiungere alla classe un metodo per saltare<ul>
+<li><code>jump</code>, imposta <code>dy</code> ad un certo valore, negativo</li>
+<li>Poi agirà di nuovo la gravità</li>
+<li>Si può saltare solo dal fondo dello schermo</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
 
 <slide class="thank-you-slide segue nobackground">
   <aside class="gdbar right"><img src="images/logo.png"></aside>

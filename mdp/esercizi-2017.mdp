@@ -259,3 +259,144 @@ figure: images/oop/border.png
     - Quando la pallina raggiunge uno dei bordi, non lo supera
     - Ma continua a muoversi sul bordo, fino all'angolo
 
+---
+
+title: Esercitazione 3
+subtitle: 2017-10-16 *
+class: segue dark
+
+---
+
+title: 3.1 Animazione di una pallina
+figure: images/misc/street-fighter.jpg
+
+- Partire dalla classe `Ball` vista a lezione
+- Eseguire l'animazione
+    - Per ogni frame, chiamare il metodo `move` della pallina
+    - Rappresentare un rettangolo o un cerchio nella posizione aggiornata della pallina
+- Modificare però il metodo `move`
+    - La pallina si sposta sempre di pochi pixel verso destra
+    - La pallina non si sposta verticalmente
+    - Se esce dal bordo destro, ricompare al bordo sinistro e viceversa
+
+---
+
+title: 3.2 Ellisse
+figure: images/misc/ellipse.svg
+
+- Classe che modella un'ellisse
+- Campi privati (parametri del costruttore)
+    - Semiassi: `a, b`
+- Metodi pubblici per ottenere...
+    - Area: `π*a*b`
+    - Distanza focale: `2*√(a^^2^^ - b^^2^^)`
+- Nel corpo principale del programma...
+    - Creare un oggetto con dati forniti dall'utente
+    - Visualizzare area e distanza focale dell'ellisse
+    
+>
+
+Opzionalmente, nell'inizializzazione: se `a < b`, scambiarne i valori
+
+---
+
+title: 3.3 Maiuscole tra asterischi
+figure: images/misc/troll-key.png
+
+- Scrivere una funzione che:
+    - Riceve in input una stringa di testo
+    - Produce in output la stesso testo, ma...
+    - Trasforma in maiuscolo tutto il testo compreso tra asterischi
+- Es. “`I want *this text* to be uppercase`” <br>
+  → “`I want THIS TEXT to be uppercase`”
+- Da una funzione *main*, applicare la funzione su una stringa inserita dall'utente
+
+>
+
+Segnare in un `bool` se si è incontrato un asterisco iniziale, ma non ancora un asterisco finale
+
+---
+
+title: 3.4 Combinazioni di simboli
+figure: images/fun/bike-lock.png
+
+- Scrivere una funzione per generare tutte le combinazioni di lunghezza 3
+    - Parametri: `str` contenente l'insieme dei simboli validi (presenti su ogni ruota)
+    - Risultato: lista di `str` (combinazioni)
+- Possibile approccio
+    - Usare 3 cicli `for` annidati
+    - Ogni `for` scorre tutto l'insieme di simboli
+    - Una combinazione è una `str`, ottenuta concatenando i 3 simboli correnti
+- Per test, fornire in input le vocali `"AEIOU"`, per ottenere:
+    - `["AAA", "AAE", "AAI", "AAO", "AAU", "AEA", "AEE", "AEI", "AEO", "AEU", "AIA", ...`
+
+---
+
+title: 3.5 Oscillazione sinusoidale
+figure: images/misc/sin-cos.png
+
+- Partire dalla classe dell'esercizio 3.1
+    - Memorizzare la ordinata iniziale `y0`
+- Modificare il metodo `move`
+    - L'ordinata oscilla sinusoidalmente attorno ad `y0`
+    - Sommare ad `y0` un valore proporzionale a `sin(k * x)`
+- Visualizzare l'animazione di due palline
+
+---
+
+title: 3.6 Palline colorate
+
+- Aggiungere ai dati della pallina (es. 3.5) anche un colore
+    - Generare una tupla `RGB` casuale, nell'inizializzatore
+- Aggiungere un corrispondente metodo *getter*
+    - Per ottenere dall'esterno il colore della pallina
+    - Restituire il colore come una tupla (tripla RGB)
+- Creare diverse palline ed inserirle in una lista
+- Rappresentare graficamente il movimento di tutte le palline
+    - Per ogni frame, in un ciclo `for`, chiamare il metodo `move` di ogni pallina
+    - Rappresentare un rettangolo o un cerchio colorato nella posizione aggiornata di ogni pallina
+
+---
+
+title: 3.7 Rimbalzi con gravità
+figure: images/misc/bouncing-ball.jpg
+
+- Ripartire dalla classe `Ball` originale (esempio visto a lezione)
+- Nel metodo `move`, aggiungere l'effetto della gravità
+    - Accelerazione: aggiungere un piccolo valore costante alla velocità verticale
+    - `g = 0.4`
+    - `dy += g`
+    - Quando si tocca il fondo, cambiare il segno di `dy`
+- Mostrare l'animazione di una lista di palline, tutte con l'effetto della gravità
+
+---
+
+title: 3.8 Controllo da tastiera
+figure: images/oop/arrow-keys.jpg images/oop/wasd-keys.jpg
+
+- Aggiungere alla classe dell'es. 3.7 dei metodi di comando
+    - `go_left`, `go_right`, `stay`
+    - In questi metodi, modificare solo `dx`
+    - Spostamento avviene sempre in `move`
+- Mantenere il movimento verticale con gravità e rimbalzo
+- Mostrare l'animazione di una sola pallina
+- Controllare eventi della tastiera
+    - Definire funzioni `keydown` e `keyup`
+    - Chiamare il metodo corrispondente al tasto premuto
+- Con tasti diversi, comandare poi una seconda pallina
+
+---
+
+title: 3.9 Jumper
+figure: images/oop/jumper.png
+
+- Modificare la classe dell'es. 3.7
+    - Mantenere i comandi orizzontali e la gravità
+    - Eliminare però il rimbalzo
+    - Quando arriva sul fondo dello schermo, si ferma lì
+- Aggiungere alla classe un metodo per saltare
+    - `jump`, imposta `dy` ad un certo valore, negativo
+    - Poi agirà di nuovo la gravità
+    - Si può saltare solo dal fondo dello schermo
+
+
