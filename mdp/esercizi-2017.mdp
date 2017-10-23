@@ -461,7 +461,7 @@ figure: images/fun/bike-lock.png
     - Parametro: `str` contenente i possibili simboli
     - Risultato: una lista di stringhe
 - Algoritmo:
-    - Una sola ruota: ogni elemento è una stringa di lunghezza 1
+    - Zero ruote: l'unica combinazione è la stringa vuota: `['']`
     - Altrimenti: per ogni elemento della prima ruota...
     - Concatenarlo con tutte le combinazioni sulle ruote rimanenti (ricorsione)
 
@@ -506,5 +506,4 @@ figure: images/misc/donkey-kong.png
     - Può camminare sulle piattaforme
     - Può saltare, se è su una piattaforma
 - Mario cade quando esce dalla piattaforma
-
 
