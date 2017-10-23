@@ -399,4 +399,112 @@ figure: images/oop/jumper.png
     - Poi agirà di nuovo la gravità
     - Si può saltare solo dal fondo dello schermo
 
+---
+
+title: Esercitazione 4
+subtitle: 2017-10-23
+class: segue dark
+
+---
+
+title: 4.1 Massimo Comun Divisore
+figure: images/hist/euclid.jpg
+
+- Leggere due numeri
+- Calcolare in una funzione il loro Massimo Comun Divisore
+- Euclide
+    - *gcd(a, b) = a, se b = 0*
+    - *gcd(a, b) = gcd(b, a mod b), altrimenti*
+- Visualizzare il risultato della funzione
+
+>
+
+Saranno accettate esclusivamente le soluzioni ricorsive
+
+---
+
+title: 4.2 Arena con gravità
+figure: images/misc/bouncing-ball.jpg
+
+- Partire dall'esempio `bounce`
+- Inserire in gioco solo delle palline
+- Aggiungere alle palline l'effetto della gravità
+    - Come nell'es. 3.6
+- Quando due palline si *urtano*, ciascuna cambia solo il segno di `dx`
+- *Miglioramento*: non considerare urti ripetuti
+    - Dopo un urto, per ~10 turni non considerarne altri
+    - Creare un campo per contare le chiamate a `move`
+
+---
+
+title: 4.3 Triangolo di Sierpiski
+figure: images/misc/sierpinski-triangle.png
+
+- Scrivere una funzione ricorsiva per disegnare un triangolo di Sierpinski
+- Partire da un riquadro nero
+    - All'inizio il riquadro nero può corrispondere con la finestra
+    - Ma in generale ragionare su coordinate passate come parametri: `x`, `y`, `w`, `h`
+- Riempire di bianco il quarto in alto a destra
+- Ripetere il procedimento per ciascuno dei 3 riquadri rimasti neri
+
+>
+
+Saranno accettate esclusivamente le soluzioni ricorsive
+
+---
+
+title: 4.4 Combinazioni
+figure: images/fun/bike-lock.png
+
+- Generare tutte le combinazioni di simboli
+    - Parametro: numero di ruote
+    - Parametro: `str` contenente i possibili simboli
+    - Risultato: una lista di stringhe
+- Algoritmo:
+    - Una sola ruota: ogni elemento è una stringa di lunghezza 1
+    - Altrimenti: per ogni elemento della prima ruota...
+    - Concatenarlo con tutte le combinazioni sulle ruote rimanenti (ricorsione)
+
+>
+
+Saranno accettate esclusivamente le soluzioni ricorsive
+
+---
+
+title: 4.5 Donkey Kong: Mario
+figure: images/misc/donkey-kong.png
+
+- Partire dall'esempio `bounce`
+- Rendere `Jumper` (es. 3.9) una sottoclasse di `Actor`
+- Istanziare un oggetto `Arena`
+- Inserire in gioco solo una istanza di `Jumper`
+- Permettere all'utente di comandarne i movimenti ed i salti
+
+>
+
+<http://www.commodore.ca/arcade/donkeykong.swf>
+
+---
+
+title: 4.6 Donkey Kong: piattaforme
+figure: images/misc/donkey-kong.png
+
+- Partire dall'esercizio 4.5
+- Creare `Platform` come sottoclasse di `Actor`
+    - Personaggio immobile nel gioco
+- In caso di collisione tra Mario (`Jumper`) ed una piattaforma
+    - Posizionare Mario esattamente sopra alla piattaforma
+- *Miglioramento*: collisione valida solo se...
+    - Il punto in mezzo ai piedi di Mario è dentro la piattaforma
+
+---
+
+title: 4.7 Donkey Kong: salti
+figure: images/misc/donkey-kong.png
+
+- Segnare in un campo se Mario è su una piattaforma
+    - Può camminare sulle piattaforme
+    - Può saltare, se è su una piattaforma
+- Mario cade quando esce dalla piattaforma
+
 

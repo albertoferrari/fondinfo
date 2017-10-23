@@ -716,6 +716,193 @@ URL: https://code.google.com/p/io-2012-slides
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 4</h2>
+      <h3>2017-10-23</h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.1 Massimo Comun Divisore</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/hist/euclid.jpg">
+        
+      </figure><ul>
+<li>Leggere due numeri</li>
+<li>Calcolare in una funzione il loro Massimo Comun Divisore</li>
+<li>Euclide<ul>
+<li><em>gcd(a, b) = a, se b = 0</em></li>
+<li><em>gcd(a, b) = gcd(b, a mod b), altrimenti</em></li>
+</ul>
+</li>
+<li>Visualizzare il risultato della funzione</li>
+</ul>
+<blockquote></blockquote>
+<p>Saranno accettate esclusivamente le soluzioni ricorsive</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.2 Arena con gravità</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/bouncing-ball.jpg">
+        
+      </figure><ul>
+<li>Partire dall'esempio <code>bounce</code></li>
+<li>Inserire in gioco solo delle palline</li>
+<li>Aggiungere alle palline l'effetto della gravità<ul>
+<li>Come nell'es. 3.6</li>
+</ul>
+</li>
+<li>Quando due palline si <em>urtano</em>, ciascuna cambia solo il segno di <code>dx</code></li>
+<li><em>Miglioramento</em>: non considerare urti ripetuti<ul>
+<li>Dopo un urto, per ~10 turni non considerarne altri</li>
+<li>Creare un campo per contare le chiamate a <code>move</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.3 Triangolo di Sierpiski</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/sierpinski-triangle.png">
+        
+      </figure><ul>
+<li>Scrivere una funzione ricorsiva per disegnare un triangolo di Sierpinski</li>
+<li>Partire da un riquadro nero<ul>
+<li>All'inizio il riquadro nero può corrispondere con la finestra</li>
+<li>Ma in generale ragionare su coordinate passate come parametri: <code>x</code>, <code>y</code>, <code>w</code>, <code>h</code></li>
+</ul>
+</li>
+<li>Riempire di bianco il quarto in alto a destra</li>
+<li>Ripetere il procedimento per ciascuno dei 3 riquadri rimasti neri</li>
+</ul>
+<blockquote></blockquote>
+<p>Saranno accettate esclusivamente le soluzioni ricorsive</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.4 Combinazioni</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/bike-lock.png">
+        
+      </figure><ul>
+<li>Generare tutte le combinazioni di simboli<ul>
+<li>Parametro: numero di ruote</li>
+<li>Parametro: <code>str</code> contenente i possibili simboli</li>
+<li>Risultato: una lista di stringhe</li>
+</ul>
+</li>
+<li>Algoritmo:<ul>
+<li>Una sola ruota: ogni elemento è una stringa di lunghezza 1</li>
+<li>Altrimenti: per ogni elemento della prima ruota...</li>
+<li>Concatenarlo con tutte le combinazioni sulle ruote rimanenti (ricorsione)</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Saranno accettate esclusivamente le soluzioni ricorsive</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.5 Donkey Kong: Mario</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/donkey-kong.png">
+        
+      </figure><ul>
+<li>Partire dall'esempio <code>bounce</code></li>
+<li>Rendere <code>Jumper</code> (es. 3.9) una sottoclasse di <code>Actor</code></li>
+<li>Istanziare un oggetto <code>Arena</code></li>
+<li>Inserire in gioco solo una istanza di <code>Jumper</code></li>
+<li>Permettere all'utente di comandarne i movimenti ed i salti</li>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.commodore.ca/arcade/donkeykong.swf">http://www.commodore.ca/arcade/donkeykong.swf</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.6 Donkey Kong: piattaforme</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/donkey-kong.png">
+        
+      </figure><ul>
+<li>Partire dall'esercizio 4.5</li>
+<li>Creare <code>Platform</code> come sottoclasse di <code>Actor</code><ul>
+<li>Personaggio immobile nel gioco</li>
+</ul>
+</li>
+<li>In caso di collisione tra Mario (<code>Jumper</code>) ed una piattaforma<ul>
+<li>Posizionare Mario esattamente sopra alla piattaforma</li>
+</ul>
+</li>
+<li><em>Miglioramento</em>: collisione valida solo se...<ul>
+<li>Il punto in mezzo ai piedi di Mario è dentro la piattaforma</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.7 Donkey Kong: salti</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/donkey-kong.png">
+        
+      </figure><ul>
+<li>Segnare in un campo se Mario è su una piattaforma<ul>
+<li>Può camminare sulle piattaforme</li>
+<li>Può saltare, se è su una piattaforma</li>
+</ul>
+</li>
+<li>Mario cade quando esce dalla piattaforma</li>
+</ul></article>
+ 
+</slide>
+
 
 <slide class="thank-you-slide segue nobackground">
   <aside class="gdbar right"><img src="images/logo.png"></aside>
