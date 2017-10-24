@@ -518,7 +518,7 @@ code: python
           
 ---
 
-title: Es.: Memory
+title: Esercizio - Memory
 figure: images/misc/memory.png
 
 - Allocare una lista, di dimensione `rows×cols`
@@ -540,7 +540,7 @@ Per cominciare, inserire nella lista valori numerici crescenti, anzichè lettere
 
 ---
 
-title: Es.: Scitala spartana
+title: Esercizio - Scitala spartana
 figure: images/hist/scytale.png
 
 - Leggere un intero file di testo
