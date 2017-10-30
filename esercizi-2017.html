@@ -384,7 +384,7 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <ul>
 <li>Scrivere una funzione <code>len_common_prefix</code><ul>
-<li>Paramteri: <code>a</code> e <code>b</code>, stringhe da confrontare</li>
+<li>Parametri: <code>a</code> e <code>b</code>, stringhe da confrontare</li>
 <li>Risultato: numero di lettere iniziali uguali tra <code>a</code> e <code>b</code></li>
 </ul>
 </li>
@@ -765,7 +765,7 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Partire dall'esempio <code>bounce</code></li>
 <li>Inserire in gioco solo delle palline</li>
 <li>Aggiungere alle palline l'effetto della gravità<ul>
-<li>Come nell'es. 3.6</li>
+<li>Come nell'es. 3.7</li>
 </ul>
 </li>
 <li>Quando due palline si <em>urtano</em>, ciascuna cambia solo il segno di <code>dx</code></li>
@@ -781,7 +781,7 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>4.3 Triangolo di Sierpiski</h2>
+      <h2>4.3 Triangolo di Sierpinski</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -899,6 +899,198 @@ URL: https://code.google.com/p/io-2012-slides
 </ul>
 </li>
 <li>Mario cade quando esce dalla piattaforma</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 5</h2>
+      <h3>2017-10-30</h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.1 Trascrizione da file</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Leggere riga per riga un <em>file</em> di testo</li>
+<li>Per ogni riga, trascrivere a <em>console</em> solo il testo compreso tra parentesi angolari (<code>&lt;</code> e <code>&gt;</code>)</li>
+<li>Se ci sono più parti da trascrivere, separarle con una barra verticale</li>
+</ul>
+<pre class="prettyprint" data-lang="Input"><code>Python is a &lt;multi-paradigm&gt; &lt;programming language&gt;.
+It is intended to be a highly readable language.
+Its philosophy is summarized by &lt;The Zen of Python&gt;.
+</code></pre>
+<pre class="prettyprint" data-lang="Ouput"><code>multi-paradigm|programming language
+
+The Zen of Python
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.2 Funzione di smooth</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/neighborhood4.png">
+        
+      </figure><ul>
+<li>Scrivere una funzione <code>smooth</code><ul>
+<li>Parametro: matrice iniziale, di float</li>
+<li>Risultato: nuova matrice con <em>smooth</em></li>
+<li>Matrici rappresentate come liste di liste</li>
+</ul>
+</li>
+<li><strong>Smooth</strong>: per ogni cella in matrice iniziale<ul>
+<li>Il risultato è la <em>media</em> dell'intorno</li>
+<li>5 valori: cella stessa e 4 adiacenti</li>
+</ul>
+</li>
+<li>Attenzione alle celle esterne<ul>
+<li>Sommare e contare solo i valori disponibili</li>
+<li>4 valori ai bordi, 3 valori agli angoli</li>
+</ul>
+</li>
+<li>Verificare la funzione con alcune matrici di test</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.3 Comma Separated Values</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Leggere una matrice di float da un file testuale <em>CSV</em><ul>
+<li>Valori riportati riga per riga e separati da una virgola</li>
+</ul>
+</li>
+<li>Memorizzare i dati in una matrice<ul>
+<li>Una riga della matrice per ogni riga del file</li>
+</ul>
+</li>
+<li>Riscrivere in un altro file <em>CSV</em> il risultato di <code>smooth</code> (es. 5.2) sulla matrice</li>
+</ul>
+<pre class="prettyprint" data-lang="Input"><code>5.00,7.00,2.00,11.00
+1.00,3.00,12.00,9.00
+4.00,6.00,10.00,8.00
+</code></pre>
+<pre class="prettyprint" data-lang="Output"><code>4.33,4.25,8.00,7.33
+3.25,5.80,7.20,10.00
+3.67,5.75,9.00,9.00
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.4 Profondità albero</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/sample-file-system.png">
+        
+      </figure><ul>
+<li>Partire dall'esempio del file system (es. 4.5 del 2014)</li>
+<li>Aggiungere a tutti i <em>nodi</em> un metodo <code>depth</code>, che riporta la profondità della struttura</li>
+<li>Astratto nella classe base</li>
+<li>Per un <em>documento</em>: 0</li>
+<li>Per una <em>cartella</em>: 1 + profondità massima dei sottonodi</li>
+<li>Rispetto alla struttura raffigurata a fianco<ul>
+<li>Calcolare la profondità della cartella radice (chiamare il metodo <code>depth</code>)</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.5 Skyscrapers in matrice</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/skyscrapers.jpg">
+        
+      </figure><ul>
+<li>Leggere matrice di numeri da file CSV</li>
+<li>Per ogni riga, contare quante volte cambia il massimo<ul>
+<li>Da sinistra verso destra</li>
+<li>Da destra verso sinistra</li>
+</ul>
+</li>
+<li>Per ogni colonna, contare quante volte cambia il massimo<ul>
+<li>Dall'alto verso il basso</li>
+<li>Dal basso verso l'alto</li>
+</ul>
+</li>
+<li>Mostrare all'utente i risultati</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.6 Donkey Kong: scale</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/donkey-kong.png">
+        
+      </figure><ul>
+<li>Inserire in gioco personaggi immobili, per piattaforme e scale<ul>
+<li>Non occorre disegnarli, sono nell'immagine di sfondo</li>
+</ul>
+</li>
+<li>Gestire tutte le scale come complete, senza considerare quelle interrotte</li>
+<li>Mario può arrampicarsi sulle scale quando è in collisione<ul>
+<li>Centro dei piedi dentro al rettangolo della scala</li>
+<li>Rettangolo della scala più grande dell'immagine, per arrivare sopra alla piattaforma</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.7 Donkey Kong: caduta barili</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/donkey-kong.png">
+        
+      </figure><ul>
+<li>I barili sono generati casualmente in alto</li>
+<li>Si muovono in orizzontale sulle piattaforme</li>
+<li>Fuori dalle piattaforme, cadono</li>
+<li>Se arrivano ai lati dello schermo, rimbalzano</li>
+<li>Se si scontrano con Mario, lo uccidono</li>
+<li>Se incontrano una scala, casualmente possono decidere di scendere</li>
+<li>Quando arrivano in basso, escono dal gioco</li>
 </ul></article>
  
 </slide>

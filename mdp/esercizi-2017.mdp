@@ -221,7 +221,7 @@ Lasciare tra i riquadri un piccolo margine
 title: 2.7 Conteggio lettere iniziali uguali
 
 - Scrivere una funzione `len_common_prefix`
-    - Paramteri: `a` e `b`, stringhe da confrontare
+    - Parametri: `a` e `b`, stringhe da confrontare
     - Risultato: numero di lettere iniziali uguali tra `a` e `b`
 - Scrivere una funzione `main`
     - Chiedere all'utente due stringhe di testo, `s1` e `s2`
@@ -429,7 +429,7 @@ figure: images/misc/bouncing-ball.jpg
 - Partire dall'esempio `bounce`
 - Inserire in gioco solo delle palline
 - Aggiungere alle palline l'effetto della gravità
-    - Come nell'es. 3.6
+    - Come nell'es. 3.7
 - Quando due palline si *urtano*, ciascuna cambia solo il segno di `dx`
 - *Miglioramento*: non considerare urti ripetuti
     - Dopo un urto, per ~10 turni non considerarne altri
@@ -437,7 +437,7 @@ figure: images/misc/bouncing-ball.jpg
 
 ---
 
-title: 4.3 Triangolo di Sierpiski
+title: 4.3 Triangolo di Sierpinski
 figure: images/misc/sierpinski-triangle.png
 
 - Scrivere una funzione ricorsiva per disegnare un triangolo di Sierpinski
@@ -506,4 +506,122 @@ figure: images/misc/donkey-kong.png
     - Può camminare sulle piattaforme
     - Può saltare, se è su una piattaforma
 - Mario cade quando esce dalla piattaforma
+
+---
+
+title: Esercitazione 5
+subtitle: 2017-10-30
+class: segue dark
+
+---
+
+title: 5.1 Trascrizione da file
+
+- Leggere riga per riga un *file* di testo
+- Per ogni riga, trascrivere a *console* solo il testo compreso tra parentesi angolari (`<` e `>`)
+- Se ci sono più parti da trascrivere, separarle con una barra verticale
+
+code: Input
+
+	Python is a <multi-paradigm> <programming language>.
+	It is intended to be a highly readable language.
+	Its philosophy is summarized by <The Zen of Python>.
+
+code: Ouput
+
+	multi-paradigm|programming language
+
+	The Zen of Python
+
+---
+
+title: 5.2 Funzione di smooth
+figure: images/fun/neighborhood4.png
+
+- Scrivere una funzione `smooth`
+    - Parametro: matrice iniziale, di float
+    - Risultato: nuova matrice con *smooth*
+    - Matrici rappresentate come liste di liste
+- **Smooth**: per ogni cella in matrice iniziale
+    - Il risultato è la *media* dell'intorno
+    - 5 valori: cella stessa e 4 adiacenti
+- Attenzione alle celle esterne
+    - Sommare e contare solo i valori disponibili
+    - 4 valori ai bordi, 3 valori agli angoli
+- Verificare la funzione con alcune matrici di test
+
+---
+
+title: 5.3 Comma Separated Values
+
+- Leggere una matrice di float da un file testuale *CSV*
+    - Valori riportati riga per riga e separati da una virgola
+- Memorizzare i dati in una matrice
+	- Una riga della matrice per ogni riga del file
+- Riscrivere in un altro file *CSV* il risultato di `smooth` (es. 5.2) sulla matrice
+
+code: Input
+
+    5.00,7.00,2.00,11.00
+    1.00,3.00,12.00,9.00
+    4.00,6.00,10.00,8.00
+
+code: Output
+
+    4.33,4.25,8.00,7.33
+    3.25,5.80,7.20,10.00
+    3.67,5.75,9.00,9.00
+
+---
+
+title: 5.4 Profondità albero
+figure: images/misc/sample-file-system.png
+
+- Partire dall'esempio del file system (es. 4.5 del 2014)
+- Aggiungere a tutti i *nodi* un metodo `depth`, che riporta la profondità della struttura
+- Astratto nella classe base
+- Per un *documento*: 0
+- Per una *cartella*: 1 + profondità massima dei sottonodi
+- Rispetto alla struttura raffigurata a fianco
+    - Calcolare la profondità della cartella radice (chiamare il metodo `depth`)
+
+---
+
+title: 5.5 Skyscrapers in matrice
+figure: images/misc/skyscrapers.jpg
+
+- Leggere matrice di numeri da file CSV
+- Per ogni riga, contare quante volte cambia il massimo
+	- Da sinistra verso destra
+	- Da destra verso sinistra
+- Per ogni colonna, contare quante volte cambia il massimo
+	- Dall'alto verso il basso
+	- Dal basso verso l'alto
+- Mostrare all'utente i risultati
+
+---
+
+title: 5.6 Donkey Kong: scale
+figure: images/misc/donkey-kong.png
+
+- Inserire in gioco personaggi immobili, per piattaforme e scale
+    - Non occorre disegnarli, sono nell'immagine di sfondo
+- Gestire tutte le scale come complete, senza considerare quelle interrotte
+- Mario può arrampicarsi sulle scale quando è in collisione
+    - Centro dei piedi dentro al rettangolo della scala
+    - Rettangolo della scala più grande dell'immagine, per arrivare sopra alla piattaforma
+
+---
+
+title: 5.7 Donkey Kong: caduta barili
+figure: images/misc/donkey-kong.png
+
+- I barili sono generati casualmente in alto
+- Si muovono in orizzontale sulle piattaforme
+- Fuori dalle piattaforme, cadono
+- Se arrivano ai lati dello schermo, rimbalzano
+- Se si scontrano con Mario, lo uccidono
+- Se incontrano una scala, casualmente possono decidere di scendere
+- Quando arrivano in basso, escono dal gioco
+
 
