@@ -429,7 +429,7 @@ figure: images/misc/bouncing-ball.jpg
 - Partire dall'esempio `bounce`
 - Inserire in gioco solo delle palline
 - Aggiungere alle palline l'effetto della gravità
-    - Come nell'es. 3.7
+    - Come nell'es. 3.6
 - Quando due palline si *urtano*, ciascuna cambia solo il segno di `dx`
 - *Miglioramento*: non considerare urti ripetuti
     - Dopo un urto, per ~10 turni non considerarne altri
@@ -623,5 +623,125 @@ figure: images/misc/donkey-kong.png
 - Se si scontrano con Mario, lo uccidono
 - Se incontrano una scala, casualmente possono decidere di scendere
 - Quando arrivano in basso, escono dal gioco
+
+---
+
+title: Esercitazione 6
+subtitle: 2017-11-06 *
+class: segue dark
+
+---
+
+title: 6.1 Classe per dati anagrafici
+figure: images/oop/personal-data.png
+
+- Creare una classe `Person`, per i dati anagrafici di una persona
+    - Nome, cognome: testo
+    - Data di nascita: tre numeri
+- Costruttore con tutti i parametri per inizializzare i campi
+- Metodo `age` per calcolare l'età in anni
+    - Data odierna tramite tre parametri: *non è un campo!*
+    - Controllare se è passato il giorno del compleanno
+- Nella funzione `main`
+    - Chiedere all'utente i dati, per istanziare `Person`
+    - Chiedere la data odierna ed invocare `age`
+     
+---
+
+title: 6.2 Rappresentazione in binario
+figure: images/repr/4bits.png
+
+- Funzione per rappresentare un numero positivo `n` con una stringa binaria (senza zeri iniziali)
+	- Parametro `n`: `int`
+	- Risultato: `str`
+- Se `n == 0`: finito
+- Altrimenti
+    - Se `n` dispari, *`last`* (l'ultima cifra) è `'1'`, altrimenti `'0'`
+    - Calcolare *`init`* come rappresentazione di `n // 2` (*ricorsione*)
+    - Risultato: concatenazione *`init + last`*
+
+>
+
+Saranno accettate esclusivamente le soluzioni ricorsive
+
+---
+
+title: 6.3 Smooth 3x3
+figure: images/fun/neighborhood8.png
+
+- Scrivere una diversa funzione `smooth`
+	- Parametri: matrice (come semplice lista) e dimensioni
+	- Risultato: nuova matrice (come semplice lista)
+- In questo caso, l'intorno comprende anche le celle adiacenti in diagonale
+    - Calcolare la media tra 9 valori, attorno alla cella considerata
+    - Attenzione però alle celle sui bordi: sommare e contare solo i valori disponibili
+- Usare una *semplice lista* come pseudo-matrice
+- Caricare dati da un file CSV, salvare risultato in un altro
+
+---
+
+title: 6.4 Classe per Skyscrapers
+figure: images/misc/skyscrapers.jpg
+
+- Campo per la matrice quadrata
+    - Le celle di bordo contengono i vincoli fissi (non ci si gioca)
+- Metodo `play_at`
+    - Parametri: `x`, `y`
+    - Nessun risultato diretto, incrementa di 1 il valore in (`x`, `y`)
+    - Se il valore supera il massimo, torna a 0 (cella vuota)
+- Metodo `get_val`
+    - Parametri: `x`, `y`
+    - Restituisce il valore della cella, come stringa
+- Nel `main`, in un ciclo: chiedere all'utente la mossa da fare e mostrare il gioco aggiornato
+
+---
+
+title: 6.5 Controllo Skyscrapers
+figure: images/misc/skyscrapers.jpg
+
+- Metodo boolean `finished`
+- Controlla la condizione di vittoria
+    - Celle tutte piene
+    - Nessun numero ripetuto in una riga o colonna
+    - Rispetto dei vincoli a margine: numero di tetti visibili, da quella posizione
+
+
+code: matrix
+
+	0 0 0 0 0
+	0 1 2 3 1
+	0 3 1 2 0
+	2 2 3 1 0
+	0 0 0 3 0
+
+>
+
+https://www.brainbashers.com/skyscrapers.asp
+
+---
+
+title: 6.6 Anagrammi in Python
+figure: images/fun/anagram.jpg
+
+- Generare tutti gli anagrammi (permutazioni) di una stringa
+- Risultato, una lista di stringhe
+- Algoritmo:
+    - Stringa vuota: solo se stessa
+    - Altrimenti: per ogni carattere...
+    - Concatenarlo con tutte le permutazioni dei rimanenti caratteri (*ricorsione*)
+
+---
+
+title: 6.7 Donkey Kong: fuoco
+figure: images/misc/donkey-kong.png
+
+- Quando i barili arrivano in basso, possono infuocarsi, o uscire dal gioco
+- *Barili infuocati*
+	- Si muovono in orizzontale, casualmente
+	- Se incontrano una scala, casualmente possono decidere di salire
+- *Scale interrotte*
+    - Mario non può passare
+    - Barili possono scendere
+    - Barili infuocati possono salire
 
 

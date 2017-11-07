@@ -82,7 +82,7 @@ using namespace std;
 int main() {
     string name;
     int age;
-    cout &lt;&lt; "Name, age?" &lt;&lt; endl;
+    cout &lt;&lt; "Name and age?" &lt;&lt; endl;
     cin &gt;&gt; name &gt;&gt; age;
     cout &lt;&lt; "Hello, " &lt;&lt; name &lt;&lt; "." &lt;&lt; endl;
     cout &lt;&lt; "You're " &lt;&lt; age &lt;&lt; " years old." &lt;&lt; endl;
@@ -186,13 +186,6 @@ if (a &lt; b) {
 } else {
     cout &lt;&lt; "The words are equal";
 }
-</code></pre>
-<pre class="prettyprint" data-lang="c++"><code>int choice; cin &gt;&gt; choice;
-switch (choice) {
-    case 1: cout &lt;&lt; "First option"; break;
-    case 2: cout &lt;&lt; "Second option"; break;
-    default: cout &lt;&lt; "Error";
-}
 </code></pre></article>
  
 </slide>
@@ -213,13 +206,6 @@ while (val != 0) {
     tot += val; ++count;
     cout &lt;&lt; "Val (0 to end)? "; cin &gt;&gt; val;
 }
-if (count &gt; 0) cout &lt;&lt; "Avg: " &lt;&lt; tot / float(count);
-</code></pre>
-<pre class="prettyprint" data-lang="c++"><code>int val, tot = 0, count = 0;
-do {
-    cout &lt;&lt; "Val (0 to end)? "; cin &gt;&gt; val;
-    if (val != 0) { tot += val; ++count; }
-} while (val != 0);  // the check is at the end
 if (count &gt; 0) cout &lt;&lt; "Avg: " &lt;&lt; tot / float(count);
 </code></pre></article>
  
@@ -335,35 +321,6 @@ int main() {
 <slide  >
   
     <hgroup>
-      <h2>Parametri per riferimento</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Parametri passati per riferimento sono <em>alias</em><ul>
-<li>Le modifiche riguardano anche le variabili esterne</li>
-<li>Limitarne l'uso!</li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="c++"><code>// pass by reference: external vars can be modified
-void swap(int&amp; m, int&amp; n) {
-    int tmp = m;
-    m = n; n = tmp;
-}
-
-int main() {
-    int a = 5, b = 7;
-    swap(a, b);
-    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; endl;
-}
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Flussi e file</h2>
       <h3></h3>
     </hgroup>
@@ -409,31 +366,6 @@ getline(file1, whole_text, '\0');
 while (getline(file1, line)) {  // for each line in file1...
     cout &lt;&lt; line &lt;&lt; endl;
 }
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Lettura di dati</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="c++"><code>int val;  // or float, string ...
-while (file1 &gt;&gt; val) {
-    cout &lt;&lt; setw(4) &lt;&lt; val &lt;&lt; endl;  // val occupies 4 chars
-}                                    // setw in &lt;iomanip&gt;
-</code></pre>
-<pre class="prettyprint" data-lang="c++"><code>char val;
-file1 &gt;&gt; noskipws;      // otherwise, whitespaces are skipped
-while (file1 &gt;&gt; val) {
-    cout &lt;&lt; val &lt;&lt; endl;
-}
-</code></pre>
-<pre class="prettyprint" data-lang="c++"><code>int n; float r; string w;
-istringstream sstr{"5 7.5 hello"};  // istringstream in &lt;sstream&gt;
-sstr &gt;&gt; n &gt;&gt; r &gt;&gt; w;                // a stream view on a string
 </code></pre></article>
  
 </slide>
@@ -520,6 +452,89 @@ CONFIG += console c++11
 </code></pre>
 <blockquote></blockquote>
 <p>Progetto: <em>Application</em> → <em>Qt Widgets Application</em></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lettura di dati (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="c++"><code>ifstream file1{"input.txt"};
+</code></pre>
+<pre class="prettyprint" data-lang="c++"><code>int val;  // or float, string ...
+while (file1 &gt;&gt; val) {
+    cout &lt;&lt; setw(4) &lt;&lt; val &lt;&lt; endl;  // val occupies 4 chars
+}                                    // setw in &lt;iomanip&gt;
+</code></pre>
+<pre class="prettyprint" data-lang="c++"><code>char val;           // scan each character ...
+file1 &gt;&gt; noskipws;  // ... including whitespaces
+while (file1 &gt;&gt; val) {
+    cout &lt;&lt; val &lt;&lt; endl;
+}
+</code></pre>
+<pre class="prettyprint" data-lang="c++"><code>int n; float r; string w;
+istringstream sstr{"5 7.5 hello"};  // istringstream in &lt;sstream&gt;
+sstr &gt;&gt; n &gt;&gt; r &gt;&gt; w;                // a stream view on a string
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Do-while e switch (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/algo/average.svg">
+        
+      </figure><pre class="prettyprint" data-lang="c++"><code>int val, tot = 0, count = 0;
+do {
+    cout &lt;&lt; "Val (0 to end)? "; cin &gt;&gt; val;
+    if (val != 0) { tot += val; ++count; }
+} while (val != 0);  // the check is at the end
+if (count &gt; 0) cout &lt;&lt; "Avg: " &lt;&lt; tot / float(count);
+</code></pre>
+<pre class="prettyprint" data-lang="c++"><code>int choice; cin &gt;&gt; choice;
+switch (choice) {
+    case 1: cout &lt;&lt; "First option"; break;
+    case 2: cout &lt;&lt; "Second option"; break;
+    default: cout &lt;&lt; "Error";
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Parametri per riferimento (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Parametri passati per riferimento sono <em>alias</em><ul>
+<li>Le modifiche riguardano anche le variabili esterne</li>
+<li>Limitarne l'uso!</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>// pass by reference: external vars can be modified
+void swap(int&amp; m, int&amp; n) {
+    int tmp = m;
+    m = n; n = tmp;
+}
+
+int main() {
+    int a = 5, b = 7;
+    swap(a, b);
+    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; endl;
+}
+</code></pre></article>
  
 </slide>
 

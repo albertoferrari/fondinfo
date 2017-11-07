@@ -765,7 +765,7 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Partire dall'esempio <code>bounce</code></li>
 <li>Inserire in gioco solo delle palline</li>
 <li>Aggiungere alle palline l'effetto della gravità<ul>
-<li>Come nell'es. 3.7</li>
+<li>Come nell'es. 3.6</li>
 </ul>
 </li>
 <li>Quando due palline si <em>urtano</em>, ciascuna cambia solo il segno di <code>dx</code></li>
@@ -1091,6 +1091,214 @@ The Zen of Python
 <li>Se si scontrano con Mario, lo uccidono</li>
 <li>Se incontrano una scala, casualmente possono decidere di scendere</li>
 <li>Quando arrivano in basso, escono dal gioco</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 6</h2>
+      <h3>2017-11-06 *</h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.1 Classe per dati anagrafici</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/personal-data.png">
+        
+      </figure><ul>
+<li>Creare una classe <code>Person</code>, per i dati anagrafici di una persona<ul>
+<li>Nome, cognome: testo</li>
+<li>Data di nascita: tre numeri</li>
+</ul>
+</li>
+<li>Costruttore con tutti i parametri per inizializzare i campi</li>
+<li>Metodo <code>age</code> per calcolare l'età in anni<ul>
+<li>Data odierna tramite tre parametri: <em>non è un campo!</em></li>
+<li>Controllare se è passato il giorno del compleanno</li>
+</ul>
+</li>
+<li>Nella funzione <code>main</code><ul>
+<li>Chiedere all'utente i dati, per istanziare <code>Person</code></li>
+<li>Chiedere la data odierna ed invocare <code>age</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.2 Rappresentazione in binario</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/repr/4bits.png">
+        
+      </figure><ul>
+<li>Funzione per rappresentare un numero positivo <code>n</code> con una stringa binaria (senza zeri iniziali)<ul>
+<li>Parametro <code>n</code>: <code>int</code></li>
+<li>Risultato: <code>str</code></li>
+</ul>
+</li>
+<li>Se <code>n == 0</code>: finito</li>
+<li>Altrimenti<ul>
+<li>Se <code>n</code> dispari, <em><code>last</code></em> (l'ultima cifra) è <code>'1'</code>, altrimenti <code>'0'</code></li>
+<li>Calcolare <em><code>init</code></em> come rappresentazione di <code>n // 2</code> (<em>ricorsione</em>)</li>
+<li>Risultato: concatenazione <em><code>init + last</code></em></li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Saranno accettate esclusivamente le soluzioni ricorsive</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.3 Smooth 3x3</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/neighborhood8.png">
+        
+      </figure><ul>
+<li>Scrivere una diversa funzione <code>smooth</code><ul>
+<li>Parametri: matrice (come semplice lista) e dimensioni</li>
+<li>Risultato: nuova matrice (come semplice lista)</li>
+</ul>
+</li>
+<li>In questo caso, l'intorno comprende anche le celle adiacenti in diagonale<ul>
+<li>Calcolare la media tra 9 valori, attorno alla cella considerata</li>
+<li>Attenzione però alle celle sui bordi: sommare e contare solo i valori disponibili</li>
+</ul>
+</li>
+<li>Usare una <em>semplice lista</em> come pseudo-matrice</li>
+<li>Caricare dati da un file CSV, salvare risultato in un altro</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.4 Classe per Skyscrapers</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/skyscrapers.jpg">
+        
+      </figure><ul>
+<li>Campo per la matrice quadrata<ul>
+<li>Le celle di bordo contengono i vincoli fissi (non ci si gioca)</li>
+</ul>
+</li>
+<li>Metodo <code>play_at</code><ul>
+<li>Parametri: <code>x</code>, <code>y</code></li>
+<li>Nessun risultato diretto, incrementa di 1 il valore in (<code>x</code>, <code>y</code>)</li>
+<li>Se il valore supera il massimo, torna a 0 (cella vuota)</li>
+</ul>
+</li>
+<li>Metodo <code>get_val</code><ul>
+<li>Parametri: <code>x</code>, <code>y</code></li>
+<li>Restituisce il valore della cella, come stringa</li>
+</ul>
+</li>
+<li>Nel <code>main</code>, in un ciclo: chiedere all'utente la mossa da fare e mostrare il gioco aggiornato</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.5 Controllo Skyscrapers</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/skyscrapers.jpg">
+        
+      </figure><ul>
+<li>Metodo boolean <code>finished</code></li>
+<li>Controlla la condizione di vittoria<ul>
+<li>Celle tutte piene</li>
+<li>Nessun numero ripetuto in una riga o colonna</li>
+<li>Rispetto dei vincoli a margine: numero di tetti visibili, da quella posizione</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="matrix"><code>0 0 0 0 0
+0 1 2 3 1
+0 3 1 2 0
+2 2 3 1 0
+0 0 0 3 0
+</code></pre>
+<blockquote></blockquote>
+<p>https://www.brainbashers.com/skyscrapers.asp</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.6 Anagrammi in Python</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/anagram.jpg">
+        
+      </figure><ul>
+<li>Generare tutti gli anagrammi (permutazioni) di una stringa</li>
+<li>Risultato, una lista di stringhe</li>
+<li>Algoritmo:<ul>
+<li>Stringa vuota: solo se stessa</li>
+<li>Altrimenti: per ogni carattere...</li>
+<li>Concatenarlo con tutte le permutazioni dei rimanenti caratteri (<em>ricorsione</em>)</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.7 Donkey Kong: fuoco</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/donkey-kong.png">
+        
+      </figure><ul>
+<li>Quando i barili arrivano in basso, possono infuocarsi, o uscire dal gioco</li>
+<li><em>Barili infuocati</em><ul>
+<li>Si muovono in orizzontale, casualmente</li>
+<li>Se incontrano una scala, casualmente possono decidere di salire</li>
+</ul>
+</li>
+<li><em>Scale interrotte</em><ul>
+<li>Mario non può passare</li>
+<li>Barili possono scendere</li>
+<li>Barili infuocati possono salire</li>
+</ul>
+</li>
 </ul></article>
  
 </slide>

@@ -37,7 +37,7 @@ code: c++
     int main() {
         string name;
         int age;
-        cout << "Name, age?" << endl;
+        cout << "Name and age?" << endl;
         cin >> name >> age;
         cout << "Hello, " << name << "." << endl;
         cout << "You're " << age << " years old." << endl;
@@ -115,15 +115,6 @@ code: c++
         cout << "The words are equal";
     }
 
-code: c++
-
-    int choice; cin >> choice;
-    switch (choice) {
-        case 1: cout << "First option"; break;
-        case 2: cout << "Second option"; break;
-        default: cout << "Error";
-    }
-
 ---
 
 title: Iterazioni
@@ -137,15 +128,6 @@ code: c++
         tot += val; ++count;
         cout << "Val (0 to end)? "; cin >> val;
     }
-    if (count > 0) cout << "Avg: " << tot / float(count);
-
-code: c++
-
-    int val, tot = 0, count = 0;
-    do {
-        cout << "Val (0 to end)? "; cin >> val;
-        if (val != 0) { tot += val; ++count; }
-    } while (val != 0);  // the check is at the end
     if (count > 0) cout << "Avg: " << tot / float(count);
 
 ---
@@ -241,28 +223,6 @@ code: c++
 
 ---
 
-title: Parametri per riferimento
-
-- Parametri passati per riferimento sono *alias*
-    - Le modifiche riguardano anche le variabili esterne
-    - Limitarne l'uso!
-
-code: c++
-
-    // pass by reference: external vars can be modified
-    void swap(int& m, int& n) {
-        int tmp = m;
-        m = n; n = tmp;
-    }
-
-    int main() {
-        int a = 5, b = 7;
-        swap(a, b);
-        cout << a << " " << b << endl;
-    }
-
----
-
 title: Flussi e file
 
 code: c++
@@ -310,32 +270,6 @@ code: c++
     while (getline(file1, line)) {  // for each line in file1...
         cout << line << endl;
     }
-
-
----
-
-title: Lettura di dati
-
-code: c++
-
-    int val;  // or float, string ...
-    while (file1 >> val) {
-        cout << setw(4) << val << endl;  // val occupies 4 chars
-    }                                    // setw in <iomanip>
-
-code: c++
-
-    char val;
-    file1 >> noskipws;      // otherwise, whitespaces are skipped
-    while (file1 >> val) {
-        cout << val << endl;
-    }
-
-code: c++
-
-    int n; float r; string w;
-    istringstream sstr{"5 7.5 hello"};  // istringstream in <sstream>
-    sstr >> n >> r >> w;                // a stream view on a string
 
 ---
 
@@ -412,6 +346,80 @@ code: Project
 >
 
 Progetto: *Application* → *Qt Widgets Application*
+
+---
+
+title: Lettura di dati (++)
+
+code: c++
+
+    ifstream file1{"input.txt"};
+
+code: c++
+
+    int val;  // or float, string ...
+    while (file1 >> val) {
+        cout << setw(4) << val << endl;  // val occupies 4 chars
+    }                                    // setw in <iomanip>
+
+code: c++
+
+    char val;           // scan each character ...
+    file1 >> noskipws;  // ... including whitespaces
+    while (file1 >> val) {
+        cout << val << endl;
+    }
+
+code: c++
+
+    int n; float r; string w;
+    istringstream sstr{"5 7.5 hello"};  // istringstream in <sstream>
+    sstr >> n >> r >> w;                // a stream view on a string
+
+---
+
+title: Do-while e switch (++)
+figure: images/algo/average.svg
+
+code: c++
+
+    int val, tot = 0, count = 0;
+    do {
+        cout << "Val (0 to end)? "; cin >> val;
+        if (val != 0) { tot += val; ++count; }
+    } while (val != 0);  // the check is at the end
+    if (count > 0) cout << "Avg: " << tot / float(count);
+
+code: c++
+
+    int choice; cin >> choice;
+    switch (choice) {
+        case 1: cout << "First option"; break;
+        case 2: cout << "Second option"; break;
+        default: cout << "Error";
+    }
+
+---
+
+title: Parametri per riferimento (++)
+
+- Parametri passati per riferimento sono *alias*
+    - Le modifiche riguardano anche le variabili esterne
+    - Limitarne l'uso!
+
+code: c++
+
+    // pass by reference: external vars can be modified
+    void swap(int& m, int& n) {
+        int tmp = m;
+        m = n; n = tmp;
+    }
+
+    int main() {
+        int a = 5, b = 7;
+        swap(a, b);
+        cout << a << " " << b << endl;
+    }
 
 ---
 
