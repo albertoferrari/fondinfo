@@ -178,7 +178,8 @@ int val = stoi(txt);  // see also `stod`, `stof`...
       <figure>
         <img src="images/algo/words.svg">
         
-      </figure><pre class="prettyprint" data-lang="c++"><code>string a, b; cin &gt;&gt; a &gt;&gt; b;
+      </figure><pre class="prettyprint" data-lang="c++"><code>string a, b;
+cin &gt;&gt; a &gt;&gt; b;
 if (a &lt; b) {
     cout &lt;&lt; "The words are ordered";
 } else if (a &gt; b) {
@@ -201,12 +202,17 @@ if (a &lt; b) {
         <img src="images/algo/average.svg">
         
       </figure><pre class="prettyprint" data-lang="c++"><code>int val, tot = 0, count = 0;
-cout &lt;&lt; "Val (0 to end)? "; cin &gt;&gt; val;
+cout &lt;&lt; "Val (0 to end)? ";
+cin &gt;&gt; val;
 while (val != 0) {
-    tot += val; ++count;
-    cout &lt;&lt; "Val (0 to end)? "; cin &gt;&gt; val;
+    tot += val;
+    ++count;
+    cout &lt;&lt; "Val (0 to end)? ";
+    cin &gt;&gt; val;
 }
-if (count &gt; 0) cout &lt;&lt; "Avg: " &lt;&lt; tot / float(count);
+if (count &gt; 0) {
+    cout &lt;&lt; "Avg: " &lt;&lt; tot / float(count);
+}
 </code></pre></article>
  
 </slide>

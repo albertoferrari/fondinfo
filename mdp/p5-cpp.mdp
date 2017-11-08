@@ -106,7 +106,8 @@ figure: images/algo/words.svg
 
 code: c++
 
-    string a, b; cin >> a >> b;
+    string a, b;
+    cin >> a >> b;
     if (a < b) {
         cout << "The words are ordered";
     } else if (a > b) {
@@ -123,12 +124,17 @@ figure: images/algo/average.svg
 code: c++
 
     int val, tot = 0, count = 0;
-    cout << "Val (0 to end)? "; cin >> val;
+    cout << "Val (0 to end)? ";
+    cin >> val;
     while (val != 0) {
-        tot += val; ++count;
-        cout << "Val (0 to end)? "; cin >> val;
+        tot += val;
+        ++count;
+        cout << "Val (0 to end)? ";
+        cin >> val;
     }
-    if (count > 0) cout << "Avg: " << tot / float(count);
+    if (count > 0) {
+        cout << "Avg: " << tot / float(count);
+    }
 
 ---
 
