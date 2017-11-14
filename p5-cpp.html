@@ -491,21 +491,34 @@ sstr &gt;&gt; n &gt;&gt; r &gt;&gt; w;                // a stream view on a stri
 <slide  >
   
     <hgroup>
-      <h2>Do-while e switch (++)</h2>
+      <h2>Do-while (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <figure>
-        <img src="images/algo/average.svg">
-        
-      </figure><pre class="prettyprint" data-lang="c++"><code>int val, tot = 0, count = 0;
+      <pre class="prettyprint" data-lang="c++"><code>int val, tot = 0, count = 0;
 do {
-    cout &lt;&lt; "Val (0 to end)? "; cin &gt;&gt; val;
-    if (val != 0) { tot += val; ++count; }
+    cout &lt;&lt; "Val (0 to end)? ";
+    cin &gt;&gt; val;
+    if (val != 0) {
+        tot += val;
+        ++count;
+    }
 } while (val != 0);  // the check is at the end
-if (count &gt; 0) cout &lt;&lt; "Avg: " &lt;&lt; tot / float(count);
-</code></pre>
-<pre class="prettyprint" data-lang="c++"><code>int choice; cin &gt;&gt; choice;
+if (count &gt; 0) {
+    cout &lt;&lt; "Avg: " &lt;&lt; tot / float(count);
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Switch (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="c++"><code>int choice; cin &gt;&gt; choice;
 switch (choice) {
     case 1: cout &lt;&lt; "First option"; break;
     case 2: cout &lt;&lt; "Second option"; break;

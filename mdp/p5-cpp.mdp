@@ -384,17 +384,26 @@ code: c++
 
 ---
 
-title: Do-while e switch (++)
-figure: images/algo/average.svg
+title: Do-while (++)
 
 code: c++
 
     int val, tot = 0, count = 0;
     do {
-        cout << "Val (0 to end)? "; cin >> val;
-        if (val != 0) { tot += val; ++count; }
+        cout << "Val (0 to end)? ";
+        cin >> val;
+        if (val != 0) {
+            tot += val;
+            ++count;
+        }
     } while (val != 0);  // the check is at the end
-    if (count > 0) cout << "Avg: " << tot / float(count);
+    if (count > 0) {
+        cout << "Avg: " << tot / float(count);
+    }
+
+---
+
+title: Switch (++)
 
 code: c++
 
