@@ -107,15 +107,102 @@ title: Regex nelle applicazioni
 - Ripetizioni (0+, 1+, 0-1): `goo*al`, `go+al`, `goo?al`
 - Sottoespressione: `(left right )*halt`
 
+---
+
+title: Regex, classi di caratteri
+
+- `[...]` per includere uno qualsiasi dei caratteri in parentesi
+    - Singoli caratteri o intervalli di caratteri adiacenti
+    - `[A-Z]` = qualsiasi lettera maiuscola
+    - `[a-zABC]` = qualsiasi lettera minuscola oppure `A`, `B`, o `C`
+- `[^...]` per escludere uno qualsiasi dei caratteri in parentesi
+    - `[^0-9]` = qualsiasi carattere non numerico
+- Simboli speciali per identificare classi di caratteri
+    - `\d` = numerico, ossia `[0-9]`
+    - `\s` = `[ \t\r\n\f]`
+    - `\w` = `[0-9a-fA-F_]`
+    - `\D` = non numerico, ossia `[^0-9]` (ecc.)
+
+---
+
+title: Regex, caratteri speciali
+
+- `.` per un carattere qualsiasi
+    - `A.B` riconosce la stringa `AoB`, `AwB`, `AOB` ecc.
+- `\` escape, per segnalare sequenze speciali o considerare caratteri speciali come normali
+    - `\?` cerca il `?`
+- `^` corrisponde all'inizio del testo
+- `$` corrisponde alla fine del testo
+- `|` per alternativa tra due espressioni (unione)
+    - `A|B` = carattere `A` o carattere `B`
+- `(...)` per raggruppare sotto-espressioni
+    - `ga(zz|tt)a` trova sia `gazza` che `gatta`
+
+---
+
+title: Regex, ripetizioni
+
+- `{...}` per specificare il numero di ripetizioni
+    - `\d{3,5}` sequenze di almeno tre cifre, al massimo cinque
+- `*` zero o più occorrenze di un’espressione
+    - `(ab)*` riconosce `ab`, `abab`, la stringa vuota, ma non riconosce `abba`
+- `+` una o più occorrenze
+    - `(ab)+` non riconosce la stringa vuota
+- `?` zero o al più una occorrenza (parte opzionale)
+    - `(ab)?` riconosce `ab` ma non `abab`
+
+>
+
+<http://www.zytrax.com/tech/web/regex.htm>
+
+---
+
+title: Regex, esempi
+
+![](images/comp/codice-fiscale.png)
+
+- Codice fiscale: <br> `^[a-z]{6}[0-9]{2}[a-z][0-9]{2}[a-z][0-9]{3}[a-z]$`
+- Dominio: <br> `^[\w\-]+\.(it|com|org|net|eu|mobi)$`
+- E-mail: <br> `^[\w\-\.]+@[\w\-\.]+\.[a-z]+$`
+- File: `^.+\.zip$`
+- Data: `^\d{2}/\d{2}/\d{4}$`
+
+---
+
+title: Regex, validazione form
+
+code: html
+
+    <script>
+    function validate(val) {
+        var expr = /^\d{2}\/\d{2}\/\d{4}$/;
+        if (! expr.test(val)) {
+            window.alert("Wrong date format");
+            return false;
+        }
+        return true;
+    }
+    </script>
+
+    <form>
+        Date (dd/mm/yyyy): <input name="usrdate">
+        <input type="submit" onclick="return validate(usrdate.value)">
+    </form>
+
+---
+
+title: Regex in Python
+
 code: python
 
+    >>> import re
     >>> text = 'Though not quickly, he run the 5th lap steadily.'
     >>> re.findall(r'[a-z]+ly', text)
     ['quickly', 'steadily']
     >>> re.sub(r'([0-9])([a-z]+)', r'\1<sup>\2</sup>', text)
     Though not quickly, he run the 5<sup>th</sup> lap steadily.
 
-<http://docs.python.org/3/library/re.html> - <http://www.zytrax.com/tech/web/regex.htm>
+<http://docs.python.org/3/library/re.html>
 
 ---
 
@@ -232,6 +319,23 @@ title: Linguaggi non contestuali
 
 (*) Nell'es. visto, sostituire (3) con: (3a) `CB → HB`; (3b) `HB → HC`; (3c) `HC → BC`
 
+---
+
+title: Esempio di EBNF
+
+code: EBNF
+
+    V~~T~~ = {"il", "gatto", "topo", "sasso", "mangia", "beve"}
+    P = {
+        frase = soggetto verbo complemento
+        soggetto = articolo nome
+        complemento = articolo nome
+        articolo = "il"
+        nome = "gatto" | "topo" | "sasso"
+        verbo = "mangia" | "beve"
+    }
+
+- *“il gatto mangia il topo”* è una frase del linguaggio
 
 ---
 
@@ -404,13 +508,13 @@ class: large-image
 
 ---
 
-title: The Top 20 (IEEE Spectrum, 2015)
+title: The Top 10 (IEEE Spectrum, 2017)
 
-![](images/dev/languages-spectrum-2015.png)
+![](images/dev/languages-spectrum-2017.jpg)
 
 >
 
-<http://spectrum.ieee.org/static/interactive-the-top-programming-languages-2015>
+<http://spectrum.ieee.org/static/interactive-the-top-programming-languages-2017>
 
 ---
 

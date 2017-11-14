@@ -208,14 +208,158 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Un carattere qualsiasi: <code>defin.tely</code></li>
 <li>Ripetizioni (0+, 1+, 0-1): <code>goo*al</code>, <code>go+al</code>, <code>goo?al</code></li>
 <li>Sottoespressione: <code>(left right )*halt</code></li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Regex, classi di caratteri</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>[...]</code> per includere uno qualsiasi dei caratteri in parentesi<ul>
+<li>Singoli caratteri o intervalli di caratteri adiacenti</li>
+<li><code>[A-Z]</code> = qualsiasi lettera maiuscola</li>
+<li><code>[a-zABC]</code> = qualsiasi lettera minuscola oppure <code>A</code>, <code>B</code>, o <code>C</code></li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; text = 'Though not quickly, he run the 5th lap steadily.'
+</li>
+<li><code>[^...]</code> per escludere uno qualsiasi dei caratteri in parentesi<ul>
+<li><code>[^0-9]</code> = qualsiasi carattere non numerico</li>
+</ul>
+</li>
+<li>Simboli speciali per identificare classi di caratteri<ul>
+<li><code>\d</code> = numerico, ossia <code>[0-9]</code></li>
+<li><code>\s</code> = <code>[ \t\r\n\f]</code></li>
+<li><code>\w</code> = <code>[0-9a-fA-F_]</code></li>
+<li><code>\D</code> = non numerico, ossia <code>[^0-9]</code> (ecc.)</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Regex, caratteri speciali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>.</code> per un carattere qualsiasi<ul>
+<li><code>A.B</code> riconosce la stringa <code>AoB</code>, <code>AwB</code>, <code>AOB</code> ecc.</li>
+</ul>
+</li>
+<li><code>\</code> escape, per segnalare sequenze speciali o considerare caratteri speciali come normali<ul>
+<li><code>\?</code> cerca il <code>?</code></li>
+</ul>
+</li>
+<li><code>^</code> corrisponde all'inizio del testo</li>
+<li><code>$</code> corrisponde alla fine del testo</li>
+<li><code>|</code> per alternativa tra due espressioni (unione)<ul>
+<li><code>A|B</code> = carattere <code>A</code> o carattere <code>B</code></li>
+</ul>
+</li>
+<li><code>(...)</code> per raggruppare sotto-espressioni<ul>
+<li><code>ga(zz|tt)a</code> trova sia <code>gazza</code> che <code>gatta</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Regex, ripetizioni</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><code>{...}</code> per specificare il numero di ripetizioni<ul>
+<li><code>\d{3,5}</code> sequenze di almeno tre cifre, al massimo cinque</li>
+</ul>
+</li>
+<li><code>*</code> zero o più occorrenze di un’espressione<ul>
+<li><code>(ab)*</code> riconosce <code>ab</code>, <code>abab</code>, la stringa vuota, ma non riconosce <code>abba</code></li>
+</ul>
+</li>
+<li><code>+</code> una o più occorrenze<ul>
+<li><code>(ab)+</code> non riconosce la stringa vuota</li>
+</ul>
+</li>
+<li><code>?</code> zero o al più una occorrenza (parte opzionale)<ul>
+<li><code>(ab)?</code> riconosce <code>ab</code> ma non <code>abab</code></li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.zytrax.com/tech/web/regex.htm">http://www.zytrax.com/tech/web/regex.htm</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Regex, esempi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/comp/codice-fiscale.png" /></p>
+<ul>
+<li>Codice fiscale: <br> <code>^[a-z]{6}[0-9]{2}[a-z][0-9]{2}[a-z][0-9]{3}[a-z]$</code></li>
+<li>Dominio: <br> <code>^[\w\-]+\.(it|com|org|net|eu|mobi)$</code></li>
+<li>E-mail: <br> <code>^[\w\-\.]+@[\w\-\.]+\.[a-z]+$</code></li>
+<li>File: <code>^.+\.zip$</code></li>
+<li>Data: <code>^\d{2}/\d{2}/\d{4}$</code></li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Regex, validazione form</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="html"><code>&lt;script&gt;
+function validate(val) {
+    var expr = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (! expr.test(val)) {
+        window.alert("Wrong date format");
+        return false;
+    }
+    return true;
+}
+&lt;/script&gt;
+
+&lt;form&gt;
+    Date (dd/mm/yyyy): &lt;input name="usrdate"&gt;
+    &lt;input type="submit" onclick="return validate(usrdate.value)"&gt;
+&lt;/form&gt;
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Regex in Python</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; import re
+&gt;&gt;&gt; text = 'Though not quickly, he run the 5th lap steadily.'
 &gt;&gt;&gt; re.findall(r'[a-z]+ly', text)
 ['quickly', 'steadily']
 &gt;&gt;&gt; re.sub(r'([0-9])([a-z]+)', r'\1&lt;sup&gt;\2&lt;/sup&gt;', text)
 Though not quickly, he run the 5&lt;sup&gt;th&lt;/sup&gt; lap steadily.
 </code></pre>
-<p><a href="http://docs.python.org/3/library/re.html">http://docs.python.org/3/library/re.html</a> - <a href="http://www.zytrax.com/tech/web/regex.htm">http://www.zytrax.com/tech/web/regex.htm</a></p></article>
+<p><a href="http://docs.python.org/3/library/re.html">http://docs.python.org/3/library/re.html</a></p></article>
  
 </slide>
 
@@ -418,6 +562,29 @@ Though not quickly, he run the 5&lt;sup&gt;th&lt;/sup&gt; lap steadily.
 </ul>
 <blockquote></blockquote>
 <p>(*) Nell'es. visto, sostituire (3) con: (3a) <code>CB → HB</code>; (3b) <code>HB → HC</code>; (3c) <code>HC → BC</code></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Esempio di EBNF</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="EBNF"><code>V<sub>T</sub> = {"il", "gatto", "topo", "sasso", "mangia", "beve"}
+P = {
+    frase = soggetto verbo complemento
+    soggetto = articolo nome
+    complemento = articolo nome
+    articolo = "il"
+    nome = "gatto" | "topo" | "sasso"
+    verbo = "mangia" | "beve"
+}
+</code></pre>
+<ul>
+<li><em>“il gatto mangia il topo”</em> è una frase del linguaggio</li>
+</ul></article>
  
 </slide>
 
@@ -714,13 +881,13 @@ factor = number | "(" expr ")" | "-" term
 <slide  >
   
     <hgroup>
-      <h2>The Top 20 (IEEE Spectrum, 2015)</h2>
+      <h2>The Top 10 (IEEE Spectrum, 2017)</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <p><img alt="" src="images/dev/languages-spectrum-2015.png" /></p>
+      <p><img alt="" src="images/dev/languages-spectrum-2017.jpg" /></p>
 <blockquote></blockquote>
-<p><a href="http://spectrum.ieee.org/static/interactive-the-top-programming-languages-2015">http://spectrum.ieee.org/static/interactive-the-top-programming-languages-2015</a></p></article>
+<p><a href="http://spectrum.ieee.org/static/interactive-the-top-programming-languages-2017">http://spectrum.ieee.org/static/interactive-the-top-programming-languages-2017</a></p></article>
  
 </slide>
 
