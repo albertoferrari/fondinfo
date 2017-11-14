@@ -744,4 +744,35 @@ figure: images/misc/donkey-kong.png
     - Barili possono scendere
     - Barili infuocati possono salire
 
+---
+
+title: Esercitazione 7
+subtitle: 2017-11-13
+class: segue dark
+
+---
+
+title: Basi del C++
+figure: images/misc/cpp-logo.jpg
+
+- Ripetere in C++ questi esercizi, già assegnati in Python
+    - 1.2
+    - 2.1
+    - 2.2
+    - 2.3
+    - 2.4
+    - 1.5
+
+---
+
+title: 7.7 Donkey Kong: fine partita
+figure: images/misc/donkey-kong.png
+
+- Creare una sottoclasse di `Arena` specifica per il gioco di Donkey Kong
+    - Metodo per controllare la vittoria (Mario arriva in cima)
+    - Metodo per controllare la sconfitta (Mario muore)
+    - Creazione dei personaggi iniziali nel metodo `__init__`
+- Lasciare fuori dalla classe del gioco il disegno grafico e la gestione della tastiera
+
+
 

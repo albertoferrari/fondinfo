@@ -198,7 +198,8 @@ title: Asserzioni e contratti
     - Invarianti interne e di controllo del flusso
 - Argomenti di metodi pubblici sbagliati → eccezione
     - `ValueError` o `TypeError`
-    - Di solito, asserzioni usate per debug...
+- Di solito, asserzioni usate per debug, ma disabilitate in produzione
+    - `python -O some_code.py`
 
 ---
 
@@ -246,8 +247,8 @@ class: large-figure
     - Costoso: non è insolito dedicare al testing il 40% del tempo e delle risorse di un progetto
 - **Far emergere** bug in prime fasi dello sviluppo!
     - B. Boehm: se trovare e correggere un problema in fase di specifica dei requisiti costa 1$...
-    - 5$ in progetto, $10 in programmazione,
-    - $20 in unit testing, fino a $200 dopo consegna
+    - 5$ in progetto, 10$ in programmazione,
+    - 20$ in unit testing, fino a 200$ dopo consegna
     - Alcuni bug possono capitare già a causa di specifiche non ben chiare e capite
 
 ---
@@ -257,6 +258,7 @@ title: Prove formali
 - Dimostrazione matematica di un programma: alternativa (~ accademica) al testing
     - Annotazione del programma con asserzioni matematiche: comportamento atteso
     - Proprietà valide per i vari costrutti del programma
+    - Spesso per *linguaggi funzionali* (privi di effetti collaterali)
 - Prova che post-condizioni verificate, se:
     - Precondizioni verificate
     - Programma termina
@@ -478,7 +480,7 @@ code: Python
             self.assertTrue(b.rect() == (295, 215, 20, 20))
 
     if __name__ == '__main__':
-        unittest.main(exit=False)
+        unittest.main()
 
 ---
 
@@ -502,23 +504,6 @@ code: cmd
 
 ---
 
-title: Controllare le eccezioni
-
-- Mestiere del programmatore
-    - Codice che completa correttamente l'esecuzione nei casi normali...
-    - Ma che anche in situazioni eccezionali mostra il comportamento atteso
-- Come verificare che una eccezione attesa sia effettivamente sollevata?
-    - Usare il metodo `assertRaises` direttamente, passando una funzione ed i parametri
-    - Oppure creare un *contesto* con `with`
-- Esempio: `Ball` solleva effettivamente una eccezione attesa?
-    
-code: Python
-
-    def test_out_of_arena(self): 
-        with self.assertRaises(ValueError):
-            b = Ball(-1, -1)
----
-
 title: Test parametrizzati
 
 - Ripetere un test con diversi parametri
@@ -536,14 +521,14 @@ title: Test parametrizzato, semplicistico
 code: Python
 
     class ParamBallTest(unittest.TestCase):
-        TEST_VALUES = ( (40, 80, 45, 85),
-                        (40, 215, 45, 220),
-                        (40, 220, 45, 215),
-                        (295, 80, 300, 85),
-                        (300, 80, 290, 85) )
 
         def test_move(self):
-            for param in ParamBallTest.TEST_VALUES:
+            test_values = ( (40, 80, 45, 85),
+                            (40, 215, 45, 220),
+                            (40, 220, 45, 215),
+                            (295, 80, 300, 85),
+                            (300, 80, 295, 85) )
+            for param in test_values:
                 x0, y0, x1, y1 = param
                 b = Ball(x0, y0)
                 b.move()
@@ -559,10 +544,11 @@ title: Sotto-test, Python 3.4
 code: Python
 
     class ParamBallTest(unittest.TestCase):
-        TEST_VALUES = ()  # same values...
 
         def test_move(self):
-            for param in ParamBallTest.TEST_VALUES:
+            test_values = ()  # same values...
+            
+            for param in test_values:
                 with self.subTest(param=param):
                     x0, y0, x1, y1 = param
                     b = Ball(x0, y0)
@@ -571,7 +557,25 @@ code: Python
 
 ---
 
-title: Fixture
+title: Controllare le eccezioni (++)
+
+- Mestiere del programmatore
+    - Codice che completa correttamente l'esecuzione nei casi normali...
+    - Ma che anche in situazioni eccezionali mostra il comportamento atteso
+- Come verificare che una eccezione attesa sia effettivamente sollevata?
+    - Usare il metodo `assertRaises` direttamente, passando una funzione ed i parametri
+    - Oppure creare un *contesto* con `with`
+- Esempio: `Ball` solleva effettivamente una eccezione attesa?
+    
+code: Python
+
+    def test_out_of_arena(self): 
+        with self.assertRaises(ValueError):
+            b = Ball(-1, -1)
+
+---
+
+title: Fixture (++)
 
 - Due o più test operano su insiemi di oggetti uguali o simili
     - Questa configurazione iniziale comune si definisce *fixture*
@@ -585,7 +589,7 @@ title: Fixture
 
 ---
 
-title: Esempio di fixture
+title: Esempio di fixture (++)
 
 - Numerosi metodi di test che operano su stessi dati iniziali
     - Esempio, una combinazione di palline in posizioni predefinite
@@ -602,7 +606,7 @@ code: Python
 
 ---
 
-title: Test suite
+title: Test suite (++)
 
 - Meccanismo per *raggruppare* logicamente dei test ed *eseguirli assieme*
 - La classe `TestSuite` rappresenta una test suite

@@ -376,7 +376,10 @@ URL: https://code.google.com/p/io-2012-slides
 </li>
 <li>Argomenti di metodi pubblici sbagliati → eccezione<ul>
 <li><code>ValueError</code> o <code>TypeError</code></li>
-<li>Di solito, asserzioni usate per debug...</li>
+</ul>
+</li>
+<li>Di solito, asserzioni usate per debug, ma disabilitate in produzione<ul>
+<li><code>python -O some_code.py</code></li>
 </ul>
 </li>
 </ul></article>
@@ -455,8 +458,8 @@ URL: https://code.google.com/p/io-2012-slides
 </li>
 <li><strong>Far emergere</strong> bug in prime fasi dello sviluppo!<ul>
 <li>B. Boehm: se trovare e correggere un problema in fase di specifica dei requisiti costa 1$...</li>
-<li>5$ in progetto, $10 in programmazione,</li>
-<li>$20 in unit testing, fino a $200 dopo consegna</li>
+<li>5$ in progetto, 10$ in programmazione,</li>
+<li>20$ in unit testing, fino a 200$ dopo consegna</li>
 <li>Alcuni bug possono capitare già a causa di specifiche non ben chiare e capite</li>
 </ul>
 </li>
@@ -475,6 +478,7 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Dimostrazione matematica di un programma: alternativa (~ accademica) al testing<ul>
 <li>Annotazione del programma con asserzioni matematiche: comportamento atteso</li>
 <li>Proprietà valide per i vari costrutti del programma</li>
+<li>Spesso per <em>linguaggi funzionali</em> (privi di effetti collaterali)</li>
 </ul>
 </li>
 <li>Prova che post-condizioni verificate, se:<ul>
@@ -849,7 +853,7 @@ class SimpleBallTest(unittest.TestCase):
         self.assertTrue(b.rect() == (295, 215, 20, 20))
 
 if __name__ == '__main__':
-    unittest.main(exit=False)
+    unittest.main()
 </code></pre></article>
  
 </slide>
@@ -887,33 +891,6 @@ python -m unittest discover
 <slide  >
   
     <hgroup>
-      <h2>Controllare le eccezioni</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Mestiere del programmatore<ul>
-<li>Codice che completa correttamente l'esecuzione nei casi normali...</li>
-<li>Ma che anche in situazioni eccezionali mostra il comportamento atteso</li>
-</ul>
-</li>
-<li>Come verificare che una eccezione attesa sia effettivamente sollevata?<ul>
-<li>Usare il metodo <code>assertRaises</code> direttamente, passando una funzione ed i parametri</li>
-<li>Oppure creare un <em>contesto</em> con <code>with</code></li>
-</ul>
-</li>
-<li>Esempio: <code>Ball</code> solleva effettivamente una eccezione attesa?</li>
-</ul>
-<pre class="prettyprint" data-lang="Python"><code>def test_out_of_arena(self): 
-    with self.assertRaises(ValueError):
-        b = Ball(-1, -1)
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Test parametrizzati</h2>
       <h3></h3>
     </hgroup>
@@ -942,14 +919,14 @@ python -m unittest discover
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="Python"><code>class ParamBallTest(unittest.TestCase):
-    TEST_VALUES = ( (40, 80, 45, 85),
-                    (40, 215, 45, 220),
-                    (40, 220, 45, 215),
-                    (295, 80, 300, 85),
-                    (300, 80, 290, 85) )
 
     def test_move(self):
-        for param in ParamBallTest.TEST_VALUES:
+        test_values = ( (40, 80, 45, 85),
+                        (40, 215, 45, 220),
+                        (40, 220, 45, 215),
+                        (295, 80, 300, 85),
+                        (300, 80, 295, 85) )
+        for param in test_values:
             x0, y0, x1, y1 = param
             b = Ball(x0, y0)
             b.move()
@@ -969,10 +946,11 @@ python -m unittest discover
 <li>Eseguiti tutti i sottotest, anche se uno fallisce</li>
 </ul>
 <pre class="prettyprint" data-lang="Python"><code>class ParamBallTest(unittest.TestCase):
-    TEST_VALUES = ()  # same values...
 
     def test_move(self):
-        for param in ParamBallTest.TEST_VALUES:
+        test_values = ()  # same values...
+
+        for param in test_values:
             with self.subTest(param=param):
                 x0, y0, x1, y1 = param
                 b = Ball(x0, y0)
@@ -985,7 +963,34 @@ python -m unittest discover
 <slide  >
   
     <hgroup>
-      <h2>Fixture</h2>
+      <h2>Controllare le eccezioni (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Mestiere del programmatore<ul>
+<li>Codice che completa correttamente l'esecuzione nei casi normali...</li>
+<li>Ma che anche in situazioni eccezionali mostra il comportamento atteso</li>
+</ul>
+</li>
+<li>Come verificare che una eccezione attesa sia effettivamente sollevata?<ul>
+<li>Usare il metodo <code>assertRaises</code> direttamente, passando una funzione ed i parametri</li>
+<li>Oppure creare un <em>contesto</em> con <code>with</code></li>
+</ul>
+</li>
+<li>Esempio: <code>Ball</code> solleva effettivamente una eccezione attesa?</li>
+</ul>
+<pre class="prettyprint" data-lang="Python"><code>def test_out_of_arena(self): 
+    with self.assertRaises(ValueError):
+        b = Ball(-1, -1)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Fixture (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1012,7 +1017,7 @@ python -m unittest discover
 <slide  >
   
     <hgroup>
-      <h2>Esempio di fixture</h2>
+      <h2>Esempio di fixture (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1035,7 +1040,7 @@ python -m unittest discover
 <slide  >
   
     <hgroup>
-      <h2>Test suite</h2>
+      <h2>Test suite (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
