@@ -5,12 +5,13 @@ figure: images/comp/attack.jpg
 ---
 
 title: Linguaggi formali
+figure: images/comp/tangible.jpg
 
 - Presenti in tutte le applicazioni
     - Linguaggi di programmazione
     - Linguaggi di marcatura (es. HTML, Latex)
     - Interazione uomo macchina (es. Google, Zork)
-- Fondamentali nel software di sistema
+- Fondamentali in sw di sistema
     - Compilatori
     - Interpreti …
 - Paradigmatici nella teoria
