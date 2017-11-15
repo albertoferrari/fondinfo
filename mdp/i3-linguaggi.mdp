@@ -98,6 +98,12 @@ Esempio, con `Σ = {a, b}`: <br> `a • (a + b)* • b`
 
 ---
 
+title: Save the day with regex
+
+![](images/comp/regex-xkcd.png)
+
+---
+
 title: Regex nelle applicazioni
 
 - Concatenazione di caratteri: `goal`
@@ -106,6 +112,8 @@ title: Regex nelle applicazioni
 - Un carattere qualsiasi: `defin.tely`
 - Ripetizioni (0+, 1+, 0-1): `goo*al`, `go+al`, `goo?al`
 - Sottoespressione: `(left right )*halt`
+
+![](images/comp/perl-problems.png)
 
 ---
 
