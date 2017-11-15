@@ -155,9 +155,26 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Unione: <code>L<sub>1</sub> ∪ L<sub>2</sub> = {x ∈ Σ* : x ∈ L<sub>1</sub> ∨ x ∈ L<sub>2</sub>}</code></li>
 <li>Intersezione: <code>L<sub>1</sub> ∩ L<sub>2</sub> = {x ∈ Σ* : x ∈ L<sub>1</sub> ∧ x ∈ L<sub>2</sub>}</code></li>
 <li>Complementazione: <code>̅L<sub>1</sub> = {x ∈ Σ* : x ∉ L<sub>1</sub>}</code></li>
-<li>Concatenazione o prodotto: <code>L<sub>1</sub> • L<sub>2</sub> = {x ∈ Σ* : x = x<sub>1</sub> • x<sub>2</sub>, x<sub>1</sub> ∈ L<sub>1</sub>, x<sub>2</sub> ∈ L<sub>2</sub>}</code></li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Concatenazione di linguaggi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Concatenazione o prodotto:<ul>
+<li><code>L<sub>1</sub>•L<sub>2</sub> = {x ∈ Σ* : x = x<sub>1</sub>•x<sub>2</sub>, x<sub>1</sub> ∈ L<sub>1</sub>, x<sub>2</sub> ∈ L<sub>2</sub>}</code></li>
+<li>Es. <code>L<sub>1</sub> = {ab, bb}; L<sub>2</sub> = {aa, ab};</code> <br> <code>L<sub>1</sub> • L<sub>2</sub> = {abaa, abab, bbaa, bbab}</code></li>
+</ul>
+</li>
 <li>Potenza: <code>L<sup>n</sup> = L • L<sup>n-1</sup>, n≥1; L<sup>0</sup> = {ε}</code> per convenzione<ul>
 <li>Concatenazione di‌ <code>n</code> stringhe qualsiasi di <code>L</code></li>
+<li>Es. <code>L = {ab, bb}; L<sup>2</sup> = {abab, abbb, bbab, bbab}</code></li>
 </ul>
 </li>
 <li>Stella di Kleene: <code>L* = ∪ L<sup>n</sup>, n = 0..∞</code><ul>
