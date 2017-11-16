@@ -81,7 +81,7 @@ title: Concatenazione di linguaggi
     - Es. `L~~1~~ = {ab, bb}; L~~2~~ = {aa, ab};` <br> `L~~1~~ • L~~2~~ = {abaa, abab, bbaa, bbab}`
 - Potenza: `L^^n^^ = L • L^^n-1^^, n≥1; L^^0^^ = {ε}` per convenzione
     - Concatenazione di‌ `n` stringhe qualsiasi di `L`
-    - Es. `L = {ab, bb}; L^^2^^ = {abab, abbb, bbab, bbab}`
+    - Es. `L = {ab, bb}; L^^2^^ = {abab, abbb, bbab, bbbb}`
 - Stella di Kleene: `L* = ∪ L^^n^^, n = 0..∞`
     - Concatenazione arbitraria di‌ stringhe di `L`
 
@@ -138,7 +138,7 @@ title: Regex, classi di caratteri
 - Simboli speciali per identificare classi di caratteri
     - `\d` = numerico, ossia `[0-9]`
     - `\s` = `[ \t\r\n\f]`
-    - `\w` = `[0-9a-fA-F_]`
+    - `\w` = `[0-9a-zA-Z_]`
     - `\D` = non numerico, ossia `[^0-9]` (ecc.)
 
 ---
