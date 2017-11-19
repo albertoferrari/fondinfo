@@ -308,7 +308,7 @@ figure: images/comp/hierarchy.svg
 - *Tipo 2*: grammatiche **non contestuali** (CF)
     - `A → γ`
 - *Tipo 3*: grammatiche **regolari** (REG)
-    - `A → aB` oppure `A → b`
+    - `A → aB` oppure `A → b` oppure `A → ε`
     - Coincide con classe dei linguaggi definiti da *regex*
 
 >
@@ -357,35 +357,10 @@ code: EBNF
 
 ---
 
-title: Linguaggi LL(1)
+title: Espressioni infisse e prefisse
 
-- Sottoclasse dei linguaggi CF
-- Ogni produzione relativa a stesso non-terminale (a sx)... <br> genera come primo simbolo un terminale diverso
-    - No prefissi comuni, no ricorsione sinistra
-- **Recursive descent parser**: analisi sintattica molto semplice ed efficiente
-    - Basta “spiare” il simbolo di input successivo, per capire con certezza quale produzione applicare
-- *Polish prefix notation*
-    - Es.: `* + 1 2 - 3 2` ⇒ (in forma infissa) `(1 + 2) * (3 - 2)`
-
-code: ebnf
-
-    expr = number | "+" expr expr | "-" expr expr | "*" expr expr | "/" expr expr
-    number = digit {digit}
-    digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
-
----
-
-title: Espressioni infisse
-
-- Grammatica equiv. LL(1), ma senza precedenza tra operatori
-- Provare a generare `2 + 3 * 3`
-
-code: ebnf
-
-    expr = term {( "+" | "-" | "*" | "/" ) term}
-    term = number | "(" expr ")" | "-" term
-
-- Grammatica equiv. LL(1), con precedenza tra operatori
+- *Notazione infissa*, con precedenza tra operatori
+    - Es.: `2 + 3 * 3`
 
 code: ebnf
 
@@ -393,9 +368,30 @@ code: ebnf
     term = factor {( "*" | "/" ) factor}
     factor = number | "(" expr ")" | "-" term
 
+- *Notazione prefissa, o polacca*
+    - Es.: `* + 1 2 - 3 2` <br> ⇒ In forma infissa: `(1 + 2) * (3 - 2)`
+
+code: ebnf
+
+    expr = number | "+" expr expr | "-" expr expr |
+                    "*" expr expr | "/" expr expr
+    number = digit {digit}
+    digit = "0" | "1" | "2" | "3" | "4" |
+            "5" | "6" | "7" | "8" | "9"
+
 ---
 
-title: Pumping lemma REG
+title: Linguaggi LL(1) (++)
+
+- Sottoclasse dei linguaggi CF
+- Ogni produzione relativa a stesso non-terminale (a sx)... <br> genera come primo simbolo un terminale diverso
+    - No prefissi comuni, no ricorsione sinistra
+- **Recursive descent parser**: analisi sintattica molto semplice ed efficiente
+    - Basta “spiare” il simbolo di input successivo, per capire con certezza quale produzione applicare
+
+---
+
+title: Pumping lemma REG (++)
 figure: images/comp/pumping-lemma-3.svg
 
 - Formalmente, `∀ L` regolare...
@@ -410,11 +406,11 @@ figure: images/comp/pumping-lemma-3.svg
 
 >
 
-Esempio con `G~~1~~`: <br> `S → b | aA; A → aS`
+Esempio con `G~~1~~`: `S → b | aA; A → aS`
 
 ---
 
-title: Pumping lemma CF
+title: Pumping lemma CF (++)
 figure: images/comp/pumping-lemma-2.svg
 
 - Formalmente, `∀ L` non contestuale...
@@ -428,7 +424,7 @@ figure: images/comp/pumping-lemma-2.svg
 
 ---
 
-title: Corollari dei due pumping lemma
+title: Corollari dei due lemmi (++)
 
 - ⇒ `L = {a^^n^^b^^n^^ : n ≥ 0}` non è REG
     * Si prende `a^^m^^b^^m^^, con m > k ⇒ |uv| < m`, sono tutte `a`…
@@ -625,14 +621,14 @@ title: Collegamento
 ---
 
 title: Caricamento
+figure: images/dev/relocation.png
 
-- Il **loader** carica in memoria un programma rilocabile
-    - Risolti tutti gli indirizzi relativi (variabili, salti ecc.)
-    - Caricati eventuali programmi di supporto
-- **Rilocazione statica**: indirizzi logici trasformati in  indirizzi assoluti
-- **Rilocazione  dinamica**: indirizzi logici mantenuti nel programma in esecuzione
-    - Programma compilato: indirizzamento relativo
-    - Tramite *registro base*: locazione in memoria del codice, dei dati e dello stack (reg. CS, DS e SS su x86)
+- Il **loader** carica in memoria un programma
+    - Risolve indirizzi logici (variabili, salti ecc.)
+    - Carica eventuali programmi di supporto (DLL ecc.)
+- **Rilocazione statica**: indirizzi logici trasformati in indirizzi assoluti
+- **Rilocazione dinamica**: indirizzi logici mantenuti, relativi alla posizione del programma in memoria
+    - *Registri base* della CPU (reg. CS, DS e SS su x86): <br> locazione base di codice, dati e stack
     - *Memory Management Unit* in S.O.
 
 ---
@@ -642,27 +638,57 @@ title: Codice gestito
 - Compilazione in **codice intermedio**
     - Bytecode (Java), Common Intermediate Lang. (.NET), …
     - Python: compilato per una macchina virtuale (file .pyc), ma in modo trasparente
-- Esecuzione su una **macchina virtuale**, che gestisce la memoria (garbage collection)
+- Esecuzione su una **macchina virtuale**
     - Java Virtual Machine, Common Language Runtime, …
-    - Spesso compilazione “al volo” (*Just In Time*) in codice nativo
-- **Garbage collection**
-    - Restituzione automatica della memoria
-    - Per oggetti/dati che non servono più
-    - Possibile anche per codice nativo: linguaggio *Go*, *“smart pointers”* in C++, estensioni…
+    - Emulazione di un certo elaboratore
+    - ⇒ Indipendenza da piattaforma fisica
+    - Compilazione “al volo” (*Just In Time*) in codice nativo
+    - Gestione memoria con *garbage collection*
 
 ---
 
-title: Garbage collection
+title: Sistemi di garbage collection
 figure: images/dev/garbage-truck.jpg
 
-- Vantaggi
-    - Non è possibile dimenticare di liberare la memoria (*memory leak*)
-    - Non è possibile liberare della memoria che dovrà essere utilizzata in seguito (*dangling pointer*)
-- Svantaggi
-    - Decide autonomamente quando liberare la memoria
-    - Liberare e compattare mem. richiede del calcolo
+- Restituzione automatica della memoria
+    - Per oggetti/dati che non servono più
+- Possibile anche per codice nativo
+    - Linguaggio *Go*
+    - Estensioni e *“smart pointers”* in C++
 - Diversi algoritmi
     - *Reference counting*: idea di base, ma cicli…
     - *Mark & sweep*: parte da riferimenti locali/globali, marca oggetti raggiungibili
     - *Generational garbage collection*: controlla spesso oggetti recenti
+
+---
+
+title: Uso della garbage collection
+
+- Vantaggi
+    - Si libera sistematicamente la memoria (*memory leak*)
+    - Non si rimuovono dati ancora utili (*dangling pointer*)
+    - Dati rilocati per *compattare* la memoria
+- Svantaggi
+    - Maggiore occupazione del *processore* (~1.3x)
+    - Maggiore occupazione di *memoria* (~2x)
+    - GC decide autonomamente *quando* operare (problema per *real time*)
+
+>
+
+<https://golang.org/src/runtime/mgc.go>
+
+<https://golang.org/s/go15gcpacing>
+
+---
+
+class: break
+
+- Grammatica equiv. LL(1), ma senza precedenza tra operatori
+- Provare a generare `2 + 3 * 3`
+
+code: ebnf
+
+    expr = term {( "+" | "-" | "*" | "/" ) term}
+    term = number | "(" expr ")" | "-" term
+
 

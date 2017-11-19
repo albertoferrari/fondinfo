@@ -9,16 +9,19 @@ figure: images/comp/executor.svg
 class: large-figure
 
 - **Automa**: *macchina astratta*
-- Riceve dall'esterno i dati ed una descrizione dell'algoritmo richiesto
-- Interpreta un linguaggio, detto linguaggio macchina dell'automa
-- Vincolo su numero di componenti, finito
-- Vincolo su alfabeti di ingresso e di uscita, composti da un numero finito di simboli
+- Realizza un certo algoritmo, secondo un *modello di calcolo*
+- Algoritmo definito nel “linguaggio macchina” dell'automa
+- Riceve ed elabora dei dati di ingresso
+- Vincoli di finitezza
+    - Numero finito di componenti
+    - Cardinalità finita degli alfabeti I/O
 
 ---
 
 title: Riconoscimento di linguaggi
 
-- Data una stringa `x`, stabilire se essa appartiene ad `L` (problema dell'*appartenenza*, o *membership*)
+- Problema dell'*appartenenza*, o *membership*
+    - Data una stringa `x`, stabilire se essa appartiene ad `L`
 - L. tipo 3: riconosciuti da *macchine a stati finiti (FSM)*
     - Es.: `{a^^n^^b : n≥0}`, gen. da `S → aS | b`
 - L. tipo 2: *automi a pila non deterministici (NPDA)*
@@ -117,12 +120,18 @@ q~~1~~ | {}       | {}
 title: Equivalenza FSM / NFSM
 
 - Per ogni stato / ingresso, definiti più stati successivi
-- Non-determinismo: calcolo = albero di computazioni autonome, anziché traiettoria in uno spazio di stati
-- Nel casi di FSM, non-determinismo non aggiunge potere computazionale
-    - FSM / NFSM: formalismi equivalenti
+- *Non-determinismo*
+    - Calcolo = albero di computazioni autonome
+    - Anziché traiettoria in uno spazio di stati
+- Nel caso di FSM, non-determinismo non aggiunge potere computazionale
+- FSM / NFSM: formalismi *equivalenti*
     - FSM è un caso particolare di NFSM
     - Viceversa, ogni elemento di `P(Q)` di NFSM diventa uno stato di FSM
     - `P(Q)` contiene `2^^|Q|^^` elementi
+
+>
+
+<http://www.cs.odu.edu/~toida/nerzic/390teched/regular/fa/nfa-2-dfa.html>
 
 ---
 
@@ -196,7 +205,7 @@ class: segue dark
 ---
 
 title: Macchina di Turing (TM)
-figure: images/comp/tm.png
+figure: images/hist/turing.jpg
 
 - Automa con testina di scrittura/lettura su nastro bidirezionale “illimitato”
 - Ad ogni passo:
@@ -211,6 +220,7 @@ figure: images/comp/tm.png
 ---
 
 title: TM deterministica
+figure: images/comp/tm.png
 
 - `M = <Σ, Q, q~~0~~, F, δ>`
 - `Σ = {σ~~1~~, ..., σ~~n~~, ␢}`: alfabeto di input (+ *blank*)
@@ -225,14 +235,17 @@ title: TM deterministica
 title: TM non deterministica (NTM)
 
 - `M = <Σ, Q, q~~0~~, F, δ~~N~~>`
-- `δ~~N~~: Q x Σ → P(Q x Σ x {d, s, i})`: funzione di transizione
-    - Determina le configurazioni successive (nuovo stato, simbolo scritto, spostamento della testina)
-- Grado di non-determinismo: massimo numero di figli di un nodo dell'albero di computazione
+- `δ~~N~~: Q x Σ → P(Q x Σ x {d, s, i})`: f. di transizione
+    - Determina le configurazioni successive
+    - Nuovo stato, simbolo scritto, spostamento testina
+- *Grado di non-determinismo* `n`
+    - Max transizioni alternative
+    - Max figli di un nodo in albero di computazione
 - NTM: **stessa potenza computazionale di TM**
-    - Data NTM, `M`, con grado di non-determinismo `n`...
-    - `∃ M'`, una equivalente MT, in grado di simulare `M`
-- Ma (finora…) NTM **più efficiente**
-    - `k` passi di `M` richiedono `k'` (`∝ kn^^k^^` , asintot.) passi di `M'`
+    - Data `M` NTM, ∃ `M'` TM equivalente (`M'` simula `M`)
+- Ma NTM **più efficiente** (finora…)
+    - `k` passi di `M` ⇒ `k'` passi di `M'`, `k' ∝ kn^^k^^`
+    - `M'` richiede tempo esponenzialmente maggiore
 
 ---
 
@@ -265,10 +278,10 @@ class: segue dark
 
 ---
 
-title: Calcolabilità
+title: Tesi di Church-Turing
 
-- **Tesi di Church-Turing**: problema intuitivamente calcolabile → esiste TM in grado di calcolarlo
-    - TM: formalismo non meno potente di ogni altro modello di calcolo proposto finora
+- ∀ problema “intuitivamente” calcolabile, ∃ TM per calcolarlo
+    - TM: finora *modello di calcolo più potente*
     - Funzioni ricorsive, lambda-calcolo, macchine a registri…
 - Ma esistono **problemi irrisolvibili** (nel caso generale)
     - Attenzione: non si dice niente sulla singola istanza!
@@ -302,7 +315,7 @@ title: Problema della terminazione
     - Indefinito, altrimenti (ossia `G` cicla all'infinito, se `h = 1`)
 - Ma è assurdo:
     - `g(D~~G~~)` è indefinita, se `g(D~~G~~) = 0` (definita)
-    - `g(D~~G~~) = 0` (definita) se `g(D~~G~~)` è indefinita
+    - `g(D~~G~~) = 0` (definita), se `g(D~~G~~)` è indefinita
 
 >
 
@@ -342,27 +355,38 @@ figure: images/sys/hal-9000.jpg
 - Macchina programmabile
     - Memorizza ed elabora automaticamente...
     - Attraverso istruzioni di un programma...
-    - Informazioni in formato digitale (I/O)
+    - Dati in formato digitale (I/O)
 - Diversi modello di calcolo
-    - Definizione di operazioni elementari e concetto stesso di algoritmo
-    - Definizione di problema risolvibile / irrisolvibile (calcolabilità): dipende dal modello di calcolo
-- Macchina di Turing
-    - Modello teorico (A. Turing, 1936)
-    - Tesi di Church-Turing: problema intuitivamente calcolabile → esiste TM in grado di calcolarlo
+    - Diverse definizioni di operazioni elementari e concetto stesso di algoritmo
+    - Diverse definizioni di problema risolvibile / irrisolvibile (calcolabilità)
 
 ---
 
 title: Macchina di von Neumann
-figure: images/sys/bus.svg images/hist/eniac.jpg
+figure: images/hist/von-neumann.jpg images/sys/bus.svg
 
-- 1941, Z3 (Berlino)
-    - A relais, programma su nastro esterno
+- Calcolatore con dati e programma in memoria centrale
+- Realizzazione del modello teorico UTM (Turing, 1936)
+- 1945, JvN: “*Draft di report per EDVAC*”
+- 1949, EDVAC (Princeton) 
+    - Successore di ENIAC
+    - Progetto di Eckert & Mauchly, consulenza di JvN
+
+---
+
+title: Primi calcolatori
+figure: images/hist/zuse.jpg images/hist/eniac.jpg
+
+- 1941, Z3 (Berlino, K. Zuse)
+    - Primo calcolatore programmabile
+    - Base binaria, programma su nastro
+    - Sistema a *relè*, memoria scarsa
 - 1946, ENIAC (Philadelphia)
-    - Balistica, meteorologia, reazioni nucleari
-    - Programmazione con cavi
-- 1948, Manchester "baby"
-    - Programma in memoria
-- 1951, sistema IAS (Princeton)
+    - Balistica, meteo, reazioni nucleari
+    - Base decimale, programmaz. con cavi
+- 1948, Manchester “baby”
+    - Dati e programmi in memoria centrale
+- 1951, sistema IAS (Princeton, JvN)
     - Dati e programmi in memoria centrale
 
 ---

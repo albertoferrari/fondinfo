@@ -551,7 +551,7 @@ Though not quickly, he run the 5&lt;sup&gt;th&lt;/sup&gt; lap steadily.
 </ul>
 </li>
 <li><em>Tipo 3</em>: grammatiche <strong>regolari</strong> (REG)<ul>
-<li><code>A → aB</code> oppure <code>A → b</code></li>
+<li><code>A → aB</code> oppure <code>A → b</code> oppure <code>A → ε</code></li>
 <li>Coincide con classe dei linguaggi definiti da <em>regex</em></li>
 </ul>
 </li>
@@ -623,7 +623,39 @@ P = {
 <slide  >
   
     <hgroup>
-      <h2>Linguaggi LL(1)</h2>
+      <h2>Espressioni infisse e prefisse</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><em>Notazione infissa</em>, con precedenza tra operatori<ul>
+<li>Es.: <code>2 + 3 * 3</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="ebnf"><code>expr = term {( "+" | "-" ) term}
+term = factor {( "*" | "/" ) factor}
+factor = number | "(" expr ")" | "-" term
+</code></pre>
+<ul>
+<li><em>Notazione prefissa, o polacca</em><ul>
+<li>Es.: <code>* + 1 2 - 3 2</code> <br> ⇒ In forma infissa: <code>(1 + 2) * (3 - 2)</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="ebnf"><code>expr = number | "+" expr expr | "-" expr expr |
+                "*" expr expr | "/" expr expr
+number = digit {digit}
+digit = "0" | "1" | "2" | "3" | "4" |
+        "5" | "6" | "7" | "8" | "9"
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Linguaggi LL(1) (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -637,46 +669,14 @@ P = {
 <li>Basta “spiare” il simbolo di input successivo, per capire con certezza quale produzione applicare</li>
 </ul>
 </li>
-<li><em>Polish prefix notation</em><ul>
-<li>Es.: <code>* + 1 2 - 3 2</code> ⇒ (in forma infissa) <code>(1 + 2) * (3 - 2)</code></li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="ebnf"><code>expr = number | "+" expr expr | "-" expr expr | "*" expr expr | "/" expr expr
-number = digit {digit}
-digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
-</code></pre></article>
+</ul></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>Espressioni infisse</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Grammatica equiv. LL(1), ma senza precedenza tra operatori</li>
-<li>Provare a generare <code>2 + 3 * 3</code></li>
-</ul>
-<pre class="prettyprint" data-lang="ebnf"><code>expr = term {( "+" | "-" | "*" | "/" ) term}
-term = number | "(" expr ")" | "-" term
-</code></pre>
-<ul>
-<li>Grammatica equiv. LL(1), con precedenza tra operatori</li>
-</ul>
-<pre class="prettyprint" data-lang="ebnf"><code>expr = term {( "+" | "-" ) term}
-term = factor {( "*" | "/" ) factor}
-factor = number | "(" expr ")" | "-" term
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Pumping lemma REG</h2>
+      <h2>Pumping lemma REG (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -701,14 +701,14 @@ factor = number | "(" expr ")" | "-" term
 </li>
 </ul>
 <blockquote></blockquote>
-<p>Esempio con <code>G<sub>1</sub></code>: <br> <code>S → b | aA; A → aS</code></p></article>
+<p>Esempio con <code>G<sub>1</sub></code>: <code>S → b | aA; A → aS</code></p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>Pumping lemma CF</h2>
+      <h2>Pumping lemma CF (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -735,7 +735,7 @@ factor = number | "(" expr ")" | "-" term
 <slide  >
   
     <hgroup>
-      <h2>Corollari dei due pumping lemma</h2>
+      <h2>Corollari dei due lemmi (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1085,16 +1085,18 @@ return a
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li>Il <strong>loader</strong> carica in memoria un programma rilocabile<ul>
-<li>Risolti tutti gli indirizzi relativi (variabili, salti ecc.)</li>
-<li>Caricati eventuali programmi di supporto</li>
+      <figure>
+        <img src="images/dev/relocation.png">
+        
+      </figure><ul>
+<li>Il <strong>loader</strong> carica in memoria un programma<ul>
+<li>Risolve indirizzi logici (variabili, salti ecc.)</li>
+<li>Carica eventuali programmi di supporto (DLL ecc.)</li>
 </ul>
 </li>
-<li><strong>Rilocazione statica</strong>: indirizzi logici trasformati in  indirizzi assoluti</li>
-<li><strong>Rilocazione  dinamica</strong>: indirizzi logici mantenuti nel programma in esecuzione<ul>
-<li>Programma compilato: indirizzamento relativo</li>
-<li>Tramite <em>registro base</em>: locazione in memoria del codice, dei dati e dello stack (reg. CS, DS e SS su x86)</li>
+<li><strong>Rilocazione statica</strong>: indirizzi logici trasformati in indirizzi assoluti</li>
+<li><strong>Rilocazione dinamica</strong>: indirizzi logici mantenuti, relativi alla posizione del programma in memoria<ul>
+<li><em>Registri base</em> della CPU (reg. CS, DS e SS su x86): <br> locazione base di codice, dati e stack</li>
 <li><em>Memory Management Unit</em> in S.O.</li>
 </ul>
 </li>
@@ -1115,15 +1117,12 @@ return a
 <li>Python: compilato per una macchina virtuale (file .pyc), ma in modo trasparente</li>
 </ul>
 </li>
-<li>Esecuzione su una <strong>macchina virtuale</strong>, che gestisce la memoria (garbage collection)<ul>
+<li>Esecuzione su una <strong>macchina virtuale</strong><ul>
 <li>Java Virtual Machine, Common Language Runtime, …</li>
-<li>Spesso compilazione “al volo” (<em>Just In Time</em>) in codice nativo</li>
-</ul>
-</li>
-<li><strong>Garbage collection</strong><ul>
-<li>Restituzione automatica della memoria</li>
-<li>Per oggetti/dati che non servono più</li>
-<li>Possibile anche per codice nativo: linguaggio <em>Go</em>, <em>“smart pointers”</em> in C++, estensioni…</li>
+<li>Emulazione di un certo elaboratore</li>
+<li>⇒ Indipendenza da piattaforma fisica</li>
+<li>Compilazione “al volo” (<em>Just In Time</em>) in codice nativo</li>
+<li>Gestione memoria con <em>garbage collection</em></li>
 </ul>
 </li>
 </ul></article>
@@ -1133,7 +1132,7 @@ return a
 <slide  >
   
     <hgroup>
-      <h2>Garbage collection</h2>
+      <h2>Sistemi di garbage collection</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1141,14 +1140,13 @@ return a
         <img src="images/dev/garbage-truck.jpg">
         
       </figure><ul>
-<li>Vantaggi<ul>
-<li>Non è possibile dimenticare di liberare la memoria (<em>memory leak</em>)</li>
-<li>Non è possibile liberare della memoria che dovrà essere utilizzata in seguito (<em>dangling pointer</em>)</li>
+<li>Restituzione automatica della memoria<ul>
+<li>Per oggetti/dati che non servono più</li>
 </ul>
 </li>
-<li>Svantaggi<ul>
-<li>Decide autonomamente quando liberare la memoria</li>
-<li>Liberare e compattare mem. richiede del calcolo</li>
+<li>Possibile anche per codice nativo<ul>
+<li>Linguaggio <em>Go</em></li>
+<li>Estensioni e <em>“smart pointers”</em> in C++</li>
 </ul>
 </li>
 <li>Diversi algoritmi<ul>
@@ -1158,6 +1156,33 @@ return a
 </ul>
 </li>
 </ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Uso della garbage collection</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Vantaggi<ul>
+<li>Si libera sistematicamente la memoria (<em>memory leak</em>)</li>
+<li>Non si rimuovono dati ancora utili (<em>dangling pointer</em>)</li>
+<li>Dati rilocati per <em>compattare</em> la memoria</li>
+</ul>
+</li>
+<li>Svantaggi<ul>
+<li>Maggiore occupazione del <em>processore</em> (~1.3x)</li>
+<li>Maggiore occupazione di <em>memoria</em> (~2x)</li>
+<li>GC decide autonomamente <em>quando</em> operare (problema per <em>real time</em>)</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p><a href="https://golang.org/src/runtime/mgc.go">https://golang.org/src/runtime/mgc.go</a></p>
+<p><a href="https://golang.org/s/go15gcpacing">https://golang.org/s/go15gcpacing</a></p></article>
  
 </slide>
 
@@ -1174,7 +1199,7 @@ return a
     <br>
     Ingegneria dell'Informazione, UniPR
     <br>
-    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+    <a href="http://sowide.unipr.it/tomamic">sowide.unipr.it/tomamic</a>
   </p>
 </slide>
 

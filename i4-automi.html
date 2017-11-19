@@ -47,10 +47,14 @@ URL: https://code.google.com/p/io-2012-slides
         
       </figure><ul>
 <li><strong>Automa</strong>: <em>macchina astratta</em></li>
-<li>Riceve dall'esterno i dati ed una descrizione dell'algoritmo richiesto</li>
-<li>Interpreta un linguaggio, detto linguaggio macchina dell'automa</li>
-<li>Vincolo su numero di componenti, finito</li>
-<li>Vincolo su alfabeti di ingresso e di uscita, composti da un numero finito di simboli</li>
+<li>Realizza un certo algoritmo, secondo un <em>modello di calcolo</em></li>
+<li>Algoritmo definito nel “linguaggio macchina” dell'automa</li>
+<li>Riceve ed elabora dei dati di ingresso</li>
+<li>Vincoli di finitezza<ul>
+<li>Numero finito di componenti</li>
+<li>Cardinalità finita degli alfabeti I/O</li>
+</ul>
+</li>
 </ul></article>
  
 </slide>
@@ -63,7 +67,10 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article >
       <ul>
-<li>Data una stringa <code>x</code>, stabilire se essa appartiene ad <code>L</code> (problema dell'<em>appartenenza</em>, o <em>membership</em>)</li>
+<li>Problema dell'<em>appartenenza</em>, o <em>membership</em><ul>
+<li>Data una stringa <code>x</code>, stabilire se essa appartiene ad <code>L</code></li>
+</ul>
+</li>
 <li>L. tipo 3: riconosciuti da <em>macchine a stati finiti (FSM)</em><ul>
 <li>Es.: <code>{a<sup>n</sup>b : n≥0}</code>, gen. da <code>S → aS | b</code></li>
 </ul>
@@ -289,15 +296,21 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <ul>
 <li>Per ogni stato / ingresso, definiti più stati successivi</li>
-<li>Non-determinismo: calcolo = albero di computazioni autonome, anziché traiettoria in uno spazio di stati</li>
-<li>Nel casi di FSM, non-determinismo non aggiunge potere computazionale<ul>
-<li>FSM / NFSM: formalismi equivalenti</li>
+<li><em>Non-determinismo</em><ul>
+<li>Calcolo = albero di computazioni autonome</li>
+<li>Anziché traiettoria in uno spazio di stati</li>
+</ul>
+</li>
+<li>Nel caso di FSM, non-determinismo non aggiunge potere computazionale</li>
+<li>FSM / NFSM: formalismi <em>equivalenti</em><ul>
 <li>FSM è un caso particolare di NFSM</li>
 <li>Viceversa, ogni elemento di <code>P(Q)</code> di NFSM diventa uno stato di FSM</li>
 <li><code>P(Q)</code> contiene <code>2<sup>|Q|</sup></code> elementi</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.cs.odu.edu/~toida/nerzic/390teched/regular/fa/nfa-2-dfa.html">http://www.cs.odu.edu/~toida/nerzic/390teched/regular/fa/nfa-2-dfa.html</a></p></article>
  
 </slide>
 
@@ -465,7 +478,7 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article >
       <figure>
-        <img src="images/comp/tm.png">
+        <img src="images/hist/turing.jpg">
         
       </figure><ul>
 <li>Automa con testina di scrittura/lettura su nastro bidirezionale “illimitato”</li>
@@ -492,7 +505,10 @@ URL: https://code.google.com/p/io-2012-slides
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
+      <figure>
+        <img src="images/comp/tm.png">
+        
+      </figure><ul>
 <li><code>M = &lt;Σ, Q, q<sub>0</sub>, F, δ&gt;</code></li>
 <li><code>Σ = {σ<sub>1</sub>, ..., σ<sub>n</sub>, ␢}</code>: alfabeto di input (+ <em>blank</em>)</li>
 <li><code>Q = {q<sub>0</sub>, ..., q<sub>m</sub>}</code>: insieme finito non vuoto di stati</li>
@@ -515,18 +531,23 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <ul>
 <li><code>M = &lt;Σ, Q, q<sub>0</sub>, F, δ<sub>N</sub>&gt;</code></li>
-<li><code>δ<sub>N</sub>: Q x Σ → P(Q x Σ x {d, s, i})</code>: funzione di transizione<ul>
-<li>Determina le configurazioni successive (nuovo stato, simbolo scritto, spostamento della testina)</li>
+<li><code>δ<sub>N</sub>: Q x Σ → P(Q x Σ x {d, s, i})</code>: f. di transizione<ul>
+<li>Determina le configurazioni successive</li>
+<li>Nuovo stato, simbolo scritto, spostamento testina</li>
 </ul>
 </li>
-<li>Grado di non-determinismo: massimo numero di figli di un nodo dell'albero di computazione</li>
+<li><em>Grado di non-determinismo</em> <code>n</code><ul>
+<li>Max transizioni alternative</li>
+<li>Max figli di un nodo in albero di computazione</li>
+</ul>
+</li>
 <li>NTM: <strong>stessa potenza computazionale di TM</strong><ul>
-<li>Data NTM, <code>M</code>, con grado di non-determinismo <code>n</code>...</li>
-<li><code>∃ M'</code>, una equivalente MT, in grado di simulare <code>M</code></li>
+<li>Data <code>M</code> NTM, ∃ <code>M'</code> TM equivalente (<code>M'</code> simula <code>M</code>)</li>
 </ul>
 </li>
-<li>Ma (finora…) NTM <strong>più efficiente</strong><ul>
-<li><code>k</code> passi di <code>M</code> richiedono <code>k'</code> (<code>∝ kn<sup>k</sup></code> , asintot.) passi di <code>M'</code></li>
+<li>Ma NTM <strong>più efficiente</strong> (finora…)<ul>
+<li><code>k</code> passi di <code>M</code> ⇒ <code>k'</code> passi di <code>M'</code>, <code>k' ∝ kn<sup>k</sup></code></li>
+<li><code>M'</code> richiede tempo esponenzialmente maggiore</li>
 </ul>
 </li>
 </ul></article>
@@ -591,13 +612,13 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Calcolabilità</h2>
+      <h2>Tesi di Church-Turing</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li><strong>Tesi di Church-Turing</strong>: problema intuitivamente calcolabile → esiste TM in grado di calcolarlo<ul>
-<li>TM: formalismo non meno potente di ogni altro modello di calcolo proposto finora</li>
+<li>∀ problema “intuitivamente” calcolabile, ∃ TM per calcolarlo<ul>
+<li>TM: finora <em>modello di calcolo più potente</em></li>
 <li>Funzioni ricorsive, lambda-calcolo, macchine a registri…</li>
 </ul>
 </li>
@@ -661,7 +682,7 @@ URL: https://code.google.com/p/io-2012-slides
 </li>
 <li>Ma è assurdo:<ul>
 <li><code>g(D<sub>G</sub>)</code> è indefinita, se <code>g(D<sub>G</sub>) = 0</code> (definita)</li>
-<li><code>g(D<sub>G</sub>) = 0</code> (definita) se <code>g(D<sub>G</sub>)</code> è indefinita</li>
+<li><code>g(D<sub>G</sub>) = 0</code> (definita), se <code>g(D<sub>G</sub>)</code> è indefinita</li>
 </ul>
 </li>
 </ul>
@@ -723,17 +744,12 @@ g('paradox.py')
 <li>Macchina programmabile<ul>
 <li>Memorizza ed elabora automaticamente...</li>
 <li>Attraverso istruzioni di un programma...</li>
-<li>Informazioni in formato digitale (I/O)</li>
+<li>Dati in formato digitale (I/O)</li>
 </ul>
 </li>
 <li>Diversi modello di calcolo<ul>
-<li>Definizione di operazioni elementari e concetto stesso di algoritmo</li>
-<li>Definizione di problema risolvibile / irrisolvibile (calcolabilità): dipende dal modello di calcolo</li>
-</ul>
-</li>
-<li>Macchina di Turing<ul>
-<li>Modello teorico (A. Turing, 1936)</li>
-<li>Tesi di Church-Turing: problema intuitivamente calcolabile → esiste TM in grado di calcolarlo</li>
+<li>Diverse definizioni di operazioni elementari e concetto stesso di algoritmo</li>
+<li>Diverse definizioni di problema risolvibile / irrisolvibile (calcolabilità)</li>
 </ul>
 </li>
 </ul></article>
@@ -748,23 +764,48 @@ g('paradox.py')
     </hgroup>
     <article >
       <figure>
-        <img src="images/sys/bus.svg"><img src="images/hist/eniac.jpg">
+        <img src="images/hist/von-neumann.jpg"><img src="images/sys/bus.svg">
         
       </figure><ul>
-<li>1941, Z3 (Berlino)<ul>
-<li>A relais, programma su nastro esterno</li>
+<li>Calcolatore con dati e programma in memoria centrale</li>
+<li>Realizzazione del modello teorico UTM (Turing, 1936)</li>
+<li>1945, JvN: “<em>Draft di report per EDVAC</em>”</li>
+<li>1949, EDVAC (Princeton) <ul>
+<li>Successore di ENIAC</li>
+<li>Progetto di Eckert &amp; Mauchly, consulenza di JvN</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Primi calcolatori</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/hist/zuse.jpg"><img src="images/hist/eniac.jpg">
+        
+      </figure><ul>
+<li>1941, Z3 (Berlino, K. Zuse)<ul>
+<li>Primo calcolatore programmabile</li>
+<li>Base binaria, programma su nastro</li>
+<li>Sistema a <em>relè</em>, memoria scarsa</li>
 </ul>
 </li>
 <li>1946, ENIAC (Philadelphia)<ul>
-<li>Balistica, meteorologia, reazioni nucleari</li>
-<li>Programmazione con cavi</li>
+<li>Balistica, meteo, reazioni nucleari</li>
+<li>Base decimale, programmaz. con cavi</li>
 </ul>
 </li>
-<li>1948, Manchester "baby"<ul>
-<li>Programma in memoria</li>
+<li>1948, Manchester “baby”<ul>
+<li>Dati e programmi in memoria centrale</li>
 </ul>
 </li>
-<li>1951, sistema IAS (Princeton)<ul>
+<li>1951, sistema IAS (Princeton, JvN)<ul>
 <li>Dati e programmi in memoria centrale</li>
 </ul>
 </li>
@@ -992,7 +1033,7 @@ g('paradox.py')
     <br>
     Ingegneria dell'Informazione, UniPR
     <br>
-    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+    <a href="http://sowide.unipr.it/tomamic">sowide.unipr.it/tomamic</a>
   </p>
 </slide>
 
