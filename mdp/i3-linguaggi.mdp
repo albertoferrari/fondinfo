@@ -308,7 +308,7 @@ figure: images/comp/hierarchy.svg
 - *Tipo 2*: grammatiche **non contestuali** (CF)
     - `A → γ`
 - *Tipo 3*: grammatiche **regolari** (REG)
-    - `A → aB` oppure `A → b` oppure `A → ε`
+    - `A → aB`, oppure `A → b`, oppure `A → ε`
     - Coincide con classe dei linguaggi definiti da *regex*
 
 >
