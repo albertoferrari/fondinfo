@@ -774,5 +774,57 @@ figure: images/misc/donkey-kong.png
     - Creazione dei personaggi iniziali nel metodo `__init__`
 - Lasciare fuori dalla classe del gioco il disegno grafico e la gestione della tastiera
 
+---
+
+title: Esercitazione 8
+subtitle: 2017-11-20
+class: segue dark
+
+---
+
+title: Oggetti in C++
+figure: images/misc/cpp-logo.jpg
+
+- Ripetere in C++ questi esercizi, già assegnati in Python
+    - 2.5
+    - 3.2
+    - 4.1
+    - 5.3
+    - 5.5
+
+code: C++
+
+    std::reverse(begin(v), end(v));  // reverse the vector v
+
+---
+
+title: 8.6 Skyscrapers in C++
+figure: images/misc/skyscrapers.jpg
+
+- Creare una classe `Skyscrapers`
+    - Matrice predefinita, in un campo
+- `play_at(x, y)`
+    - Ad ogni chiamata, incrementare il valore nella cella
+    - Quando il valore arriva al massimo, poi torna a 0 (cella vuota)
+- `get_val()`
+    - Restituisce il contenuto di una cella, come testo
+- `finished()`
+    - Controlla la soluzione del gioco
+- Istanziare un oggetto partita, I/O con console
+
+---
+
+title: 8.7 Donkey Kong: “bella copia”
+figure: images/misc/fair-copy.png
+
+- **Codice leggibile**
+    - *Costanti*, anzichè numeri “*magici*” sparsi nel codice
+    - *Nomi esplicativi* e semplici
+    - *Regole di stile*: `variable_name`, `function_name`, `ClassName`, `CONSTANT_NAME`
+    - *Commenti*, quando utili: *function annotation*, *docstring*
+- **Codice ben organizzato**
+    - *No copia&incolla* del codice: funzioni parametrizzate e/o cicli
+    - *Programmazione strutturata*: preferibilmente `return` a fine funzione, cicli senza `break`
+    - *OOP*: *incapsulamento*, *ereditarietà*, *polimorfismo*
 
 
