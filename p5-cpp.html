@@ -715,7 +715,7 @@ int main() {
 %include "ball.h"
 </code></pre>
 <pre class="prettyprint" data-lang="cmd"><code>swig -python -c++ ball.i
-g++ -fPIC -c ball.cpp ball_wrap.cxx -I/usr/include/python3.4/ -std=c++11
+g++ -fPIC -c ball.cpp ball_wrap.cxx -I/usr/include/python3.6m/ -std=c++11
 g++ -shared ball.o ball_wrap.o -o _ball.so
 </code></pre>
 <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from ball import Ball
@@ -1117,7 +1117,7 @@ int i = max&lt;int&gt;(4, 6);            # inferred from parameters
     <br>
     Ingegneria dell'Informazione, UniPR
     <br>
-    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+    <a href="http://sowide.unipr.it/tomamic">sowide.unipr.it/tomamic</a>
   </p>
 </slide>
 

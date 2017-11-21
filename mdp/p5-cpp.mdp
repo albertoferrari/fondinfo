@@ -561,7 +561,7 @@ code: file: ball.i
 code: cmd
 
     swig -python -c++ ball.i
-    g++ -fPIC -c ball.cpp ball_wrap.cxx -I/usr/include/python3.4/ -std=c++11
+    g++ -fPIC -c ball.cpp ball_wrap.cxx -I/usr/include/python3.6m/ -std=c++11
     g++ -shared ball.o ball_wrap.o -o _ball.so
 
 code: python

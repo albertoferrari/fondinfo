@@ -232,22 +232,22 @@ class Notepad(Tk):
 <slide  >
   
     <hgroup>
-      <h2>FifteenGui – Costruttore</h2>
+      <h2>BoardGameGui – Costruttore</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="Python"><code>class FifteenGui(Tk):
-    def __init__(self, puzzle: FifteenPuzzle):
-        super().__init__()
-        self._puzzle = puzzle
-        self._cols = puzzle.cols()
-        self._rows = puzzle.rows()
+      <pre class="prettyprint" data-lang="Python"><code>class BoardGameGui(Tk):
+    def __init__(self, game: BoardGame):
+        Tk.__init__(self)
+        self._game = game
+        self._cols, self._rows = game.cols(), game.rows()
+
         for y in range(self._rows):
             for x in range(self._cols):
-                b = Button(self, command=lambda x=x, y=y:
-                           self.handle_click(x, y))
+                b = Button(self, width=1, height=1, font=('', 16))
+                b['command']=lambda x=x, y=y: self.handle_click(x, y)
                 b.grid(column=x, row=y)
-        self.update_buttons()
+        self.update_all_buttons()
     # ...
 </code></pre></article>
  
@@ -256,26 +256,24 @@ class Notepad(Tk):
 <slide  >
   
     <hgroup>
-      <h2>FifteenGui – Click</h2>
+      <h2>BoardGameGui – Click</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="Python"><code>class FifteenGui(Tk):
+      <pre class="prettyprint" data-lang="Python"><code>class BoardGameGui(Tk):
     # ...
     def handle_click(self, x: int, y: int):
-        self._puzzle.move_position(x, y)
-        self.update_buttons()
-        if self._puzzle.is_finished():
-            messagebox.showinfo('Congrats', 'Puzzle solved')
+        self._game.play_at(x, y)
+        self.update_all_buttons()
+        if self._game.finished():
+            messagebox.showinfo('Game finished', self._game.message())
             self.destroy()
 
-    def update_buttons(self):
+    def update_all_buttons(self):
         for y in range(self._rows):
             for x in range(self._cols):
-                val = str(self._puzzle.get(x, y))
-                # Get the button on the grid @ (x, y)
-                b = self.grid_slaves(column=x, row=y)[0]
-                b['text'] = val
+                b = self.grid_slaves(row=y, column=x)[0]
+                b['text'] = self._game.get_val(x, y)
 </code></pre></article>
  
 </slide>
@@ -293,7 +291,7 @@ class Notepad(Tk):
     <br>
     Ingegneria dell'Informazione, UniPR
     <br>
-    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+    <a href="http://sowide.unipr.it/tomamic">sowide.unipr.it/tomamic</a>
   </p>
 </slide>
 
