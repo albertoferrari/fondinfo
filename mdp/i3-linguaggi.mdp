@@ -328,6 +328,7 @@ title: Linguaggi non contestuali
     - Es.: `{a^^n^^b^^n^^ : n≥1}` gen. da `S → aSb | ab` (CF)
     - Ma non: `{a^^n^^b^^n^^c^^n^^ : n≥1}` (CS) (*)
 - **Linguaggi di programmazione** comuni: grammatiche CF
+    - Parentesi bilanciate: `S → SS | (S) | ε` (CF)
 - Definizione con notazione Extended **Backus-Naur Form** (EBNF)
     - `{...}`: parte ripetibile (0+), `[...]`: parte opzionale, 
     - `(...)`: raggruppamento, `|`: scelta
