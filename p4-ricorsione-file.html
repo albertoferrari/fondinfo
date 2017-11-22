@@ -265,10 +265,9 @@ def fibonacci(n: int) -&gt; int:
         print('|')
 
 def under_attack(board: list, x: int, y: int) -&gt; bool:
-    for i in range(y):  # for all rows above y
-        d = y - i
+    for d in range(1, y + 1):  # for all rows above y
         # directions: ↖↑↗ (no queens below)
-        if board[i] in (x - d, x, x + d):
+        if board[y - d] in (x - d, x, x + d):
             return True
     return False
 </code></pre>
@@ -815,7 +814,7 @@ In generale: <code>(x', y') = (x⋅cos(θ) - y⋅sin(θ), x⋅sin(θ) + y⋅cos(
     <br>
     Ingegneria dell'Informazione, UniPR
     <br>
-    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+    <a href="http://sowide.unipr.it/tomamic">sowide.unipr.it/tomamic</a>
   </p>
 </slide>
 
