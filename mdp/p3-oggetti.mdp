@@ -51,6 +51,7 @@ code: python
 ---
 
 title: Costruzione oggetti
+figure: images/oop/bob-builder.jpg
 
 - **`__init__`**: metodo *inizializzatore*
     - Eseguito automaticamente alla creazione di un oggetto
