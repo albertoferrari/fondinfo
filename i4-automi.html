@@ -517,7 +517,7 @@ URL: https://code.google.com/p/io-2012-slides
 <li><code>q0 ∈ Q</code>: stato iniziale</li>
 <li><code>F ⊆ Q</code>: insieme di stati finali</li>
 <li><code>δ: Q x Σ → Q x Σ x {d, s, i}</code>: f. di transizione<ul>
-<li>Determina lo stato successivo, il simbolo successivo, lo spostamento della testina</li>
+<li>Determina la configurazione successiva: stato, simbolo scritto su nastro, spostamento della testina</li>
 </ul>
 </li>
 </ul></article>
@@ -534,8 +534,7 @@ URL: https://code.google.com/p/io-2012-slides
       <ul>
 <li><code>M = &lt;Σ, Q, q<sub>0</sub>, F, δ<sub>N</sub>&gt;</code></li>
 <li><code>δ<sub>N</sub>: Q x Σ → P(Q x Σ x {d, s, i})</code>: f. di transizione<ul>
-<li>Determina le configurazioni successive</li>
-<li>Nuovo stato, simbolo scritto, spostamento testina</li>
+<li>Determina una o più configurazioni successive</li>
 </ul>
 </li>
 <li><em>Grado di non-determinismo</em> <code>n</code><ul>
