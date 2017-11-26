@@ -487,14 +487,16 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Legge un simbolo dal nastro</li>
 </ul>
 </li>
-<li>In base alla funzione di transizione (deterministica):<ul>
+<li>In base alla f. di transizione (deterministica):<ul>
 <li>Scrive un simbolo sul nastro</li>
 <li>Sposta la testina di una posizione</li>
 <li>Cambia lo stato</li>
 </ul>
 </li>
 <li>Può simulare ogni altro modello di calcolo noto!</li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p>A. Turing (1937). On Computable Numbers, with an Application to the Entscheidungsproblem. <em>Proceedings of the London Mathematical Society</em>, s2-42 (1): 230–265.</p></article>
  
 </slide>
 
@@ -510,11 +512,11 @@ URL: https://code.google.com/p/io-2012-slides
         
       </figure><ul>
 <li><code>M = &lt;Σ, Q, q<sub>0</sub>, F, δ&gt;</code></li>
-<li><code>Σ = {σ<sub>1</sub>, ..., σ<sub>n</sub>, ␢}</code>: alfabeto di input (+ <em>blank</em>)</li>
-<li><code>Q = {q<sub>0</sub>, ..., q<sub>m</sub>}</code>: insieme finito non vuoto di stati</li>
+<li><code>Σ = {σ<sub>1</sub>, ..., σ<sub>n</sub>, ␢}</code>: alfabeto del nastro (con <em>blank</em>)</li>
+<li><code>Q = {q<sub>0</sub>, ..., q<sub>m</sub>}</code>: insieme finito di stati</li>
 <li><code>q0 ∈ Q</code>: stato iniziale</li>
 <li><code>F ⊆ Q</code>: insieme di stati finali</li>
-<li><code>δ: Q x Σ → Q x Σ x {d, s, i}</code>: funzione di transizione<ul>
+<li><code>δ: Q x Σ → Q x Σ x {d, s, i}</code>: f. di transizione<ul>
 <li>Determina lo stato successivo, il simbolo successivo, lo spostamento della testina</li>
 </ul>
 </li>
@@ -616,10 +618,13 @@ URL: https://code.google.com/p/io-2012-slides
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li>∀ problema “intuitivamente” calcolabile, ∃ TM per calcolarlo<ul>
+      <figure>
+        <img src="images/hist/church.jpg">
+        
+      </figure><ul>
+<li>∀ problema “effettivamente” calcolabile, ∃ TM per calcolarlo<ul>
 <li>TM: finora <em>modello di calcolo più potente</em></li>
-<li>Funzioni ricorsive, lambda-calcolo, macchine a registri…</li>
+<li>Assieme a funzioni ricorsive, lambda-calcolo, macchine a registri…</li>
 </ul>
 </li>
 <li>Ma esistono <strong>problemi irrisolvibili</strong> (nel caso generale)<ul>

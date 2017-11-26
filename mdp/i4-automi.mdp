@@ -211,11 +211,15 @@ figure: images/hist/turing.jpg
 - Ad ogni passo:
     - Si trova in un certo stato
     - Legge un simbolo dal nastro
-- In base alla funzione di transizione (deterministica):
+- In base alla f. di transizione (deterministica):
     - Scrive un simbolo sul nastro
     - Sposta la testina di una posizione
     - Cambia lo stato
 - Può simulare ogni altro modello di calcolo noto!
+
+>
+
+A. Turing (1937). On Computable Numbers, with an Application to the Entscheidungsproblem. *Proceedings of the London Mathematical Society*, s2-42 (1): 230–265.
 
 ---
 
@@ -223,11 +227,11 @@ title: TM deterministica
 figure: images/comp/tm.png
 
 - `M = <Σ, Q, q~~0~~, F, δ>`
-- `Σ = {σ~~1~~, ..., σ~~n~~, ␢}`: alfabeto di input (+ *blank*)
-- `Q = {q~~0~~, ..., q~~m~~}`: insieme finito non vuoto di stati
+- `Σ = {σ~~1~~, ..., σ~~n~~, ␢}`: alfabeto del nastro (con *blank*)
+- `Q = {q~~0~~, ..., q~~m~~}`: insieme finito di stati
 - `q0 ∈ Q`: stato iniziale
 - `F ⊆ Q`: insieme di stati finali
-- `δ: Q x Σ → Q x Σ x {d, s, i}`: funzione di transizione
+- `δ: Q x Σ → Q x Σ x {d, s, i}`: f. di transizione
     - Determina lo stato successivo, il simbolo successivo, lo spostamento della testina
 
 ---
@@ -279,10 +283,11 @@ class: segue dark
 ---
 
 title: Tesi di Church-Turing
+figure: images/hist/church.jpg
 
-- ∀ problema “intuitivamente” calcolabile, ∃ TM per calcolarlo
+- ∀ problema “effettivamente” calcolabile, ∃ TM per calcolarlo
     - TM: finora *modello di calcolo più potente*
-    - Funzioni ricorsive, lambda-calcolo, macchine a registri…
+    - Assieme a funzioni ricorsive, lambda-calcolo, macchine a registri…
 - Ma esistono **problemi irrisolvibili** (nel caso generale)
     - Attenzione: non si dice niente sulla singola istanza!
 - *Teorema di incompletezza di Gödel*
