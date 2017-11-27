@@ -782,7 +782,7 @@ class: segue dark
 
 ---
 
-title: Oggetti in C++
+title: Esercizi in C++
 figure: images/misc/cpp-logo.jpg
 
 - Ripetere in C++ questi esercizi, già assegnati in Python
@@ -826,5 +826,82 @@ figure: images/misc/fair-copy.png
     - *No copia&incolla* del codice: funzioni parametrizzate e/o cicli
     - *Programmazione strutturata*: preferibilmente `return` a fine funzione, cicli senza `break`
     - *OOP*: *incapsulamento*, *ereditarietà*, *polimorfismo*
+
+---
+
+title: Esercitazione 9
+subtitle: 2017-11-27
+class: segue dark
+
+---
+
+title: Esercizi in C++
+figure: images/misc/cpp-logo.jpg
+
+- Ripetere in C++ questi esercizi, già assegnati in Python
+    - 4.4
+    - 6.1
+    - 6.3
+    - 6.6
+
+>
+
+`string part = text.substr(pos, len);`
+
+---
+
+title: 9.5 Notazione polacca, in C++
+
+- Scrivere una funzione che valuti una espressione prefissa:
+    - `"+ 2 7"` *(=9)*
+    - `"+ * 3 4 abs * 5 -3"` *(=27)*
+- Scrivere una seconda funzione che trasformi l'espressione prefissa nell'abituale notazione infissa:
+    - `"(3 * 4 + abs(5 * -3))"`
+- Supporre che i “token” siano tutti separati da spazio
+
+code: C++
+
+    string to_infix(vector<string>& tokens);
+    float evaluate(vector<string>& tokens);
+
+code: EBNF
+
+    expr = number | "+" expr expr | "-" expr expr |
+           "*" expr expr | "/" expr expr | "abs" expr
+
+>
+
+Usare la ricorsione -- Simile ad es. 5.7 del 2011, su Github
+
+
+---
+
+title: 9.6 Skyscrapers: GUI
+figure: images/misc/recycle.png
+
+- Caricare la partita da file (CSV)
+    - Costruttore con parametro `filename`
+    - Le righe del file determinano le dimensioni della matrice (quadrata)
+- Permettere all'utente di giocare tramite *console*
+    - Utilizzare l'astrazione `BoardGame`
+    - Mantenere le operazioni di I/O fuori dalla classe del gioco
+- Aggiungere una *interfaccia grafica* al progetto
+    - Fornita una gui che sfrutta l'astrazione `BoardGame`
+    - Usare `swig` per generare un modulo Python, oppure...
+    - Inserire la classe nel progetto C++ con gui Qt
+
+---
+
+title: 9.7 Salvare capra e cavoli, in Python
+figure: images/fun/capra-cavoli.png
+
+- Risolvere con il *backtracking*
+    - <https://it.wikipedia.org/wiki/Salvare_capra_e_cavoli>
+- Stato del gioco: 4 bool, inizialmente *false*
+    - Ciascun personaggio (contadino, cavolo, capra, lupo) ha uno stato booleano
+    - È sulla sponda di arrivo, o no?
+- Ad ogni mossa, cambia il primo bool (*il contadino attraversa*)
+    - Anche un altro bool può cambiare, se ha lo stesso valore del primo (*un personaggio si può spostare, se sta assieme al contadino*)
+    - Scartare gli stati del gioco vietati o già valutati
 
 

@@ -1372,7 +1372,7 @@ The Zen of Python
 <slide  >
   
     <hgroup>
-      <h2>Oggetti in C++</h2>
+      <h2>Esercizi in C++</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1449,6 +1449,130 @@ The Zen of Python
 <li><em>No copia&amp;incolla</em> del codice: funzioni parametrizzate e/o cicli</li>
 <li><em>Programmazione strutturata</em>: preferibilmente <code>return</code> a fine funzione, cicli senza <code>break</code></li>
 <li><em>OOP</em>: <em>incapsulamento</em>, <em>ereditarietà</em>, <em>polimorfismo</em></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 9</h2>
+      <h3>2017-11-27</h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Esercizi in C++</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/cpp-logo.jpg">
+        
+      </figure><ul>
+<li>Ripetere in C++ questi esercizi, già assegnati in Python<ul>
+<li>4.4</li>
+<li>6.1</li>
+<li>6.3</li>
+<li>6.6</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p><code>string part = text.substr(pos, len);</code></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>9.5 Notazione polacca, in C++</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Scrivere una funzione che valuti una espressione prefissa:<ul>
+<li><code>"+ 2 7"</code> <em>(=9)</em></li>
+<li><code>"+ * 3 4 abs * 5 -3"</code> <em>(=27)</em></li>
+</ul>
+</li>
+<li>Scrivere una seconda funzione che trasformi l'espressione prefissa nell'abituale notazione infissa:<ul>
+<li><code>"(3 * 4 + abs(5 * -3))"</code></li>
+</ul>
+</li>
+<li>Supporre che i “token” siano tutti separati da spazio</li>
+</ul>
+<pre class="prettyprint" data-lang="C++"><code>string to_infix(vector&lt;string&gt;&amp; tokens);
+float evaluate(vector&lt;string&gt;&amp; tokens);
+</code></pre>
+<pre class="prettyprint" data-lang="EBNF"><code>expr = number | "+" expr expr | "-" expr expr |
+       "*" expr expr | "/" expr expr | "abs" expr
+</code></pre>
+<blockquote></blockquote>
+<p>Usare la ricorsione -- Simile ad es. 5.7 del 2011, su Github</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>9.6 Skyscrapers: GUI</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/recycle.png">
+        
+      </figure><ul>
+<li>Caricare la partita da file (CSV)<ul>
+<li>Costruttore con parametro <code>filename</code></li>
+<li>Le righe del file determinano le dimensioni della matrice (quadrata)</li>
+</ul>
+</li>
+<li>Permettere all'utente di giocare tramite <em>console</em><ul>
+<li>Utilizzare l'astrazione <code>BoardGame</code></li>
+<li>Mantenere le operazioni di I/O fuori dalla classe del gioco</li>
+</ul>
+</li>
+<li>Aggiungere una <em>interfaccia grafica</em> al progetto<ul>
+<li>Fornita una gui che sfrutta l'astrazione <code>BoardGame</code></li>
+<li>Usare <code>swig</code> per generare un modulo Python, oppure...</li>
+<li>Inserire la classe nel progetto C++ con gui Qt</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>9.7 Salvare capra e cavoli, in Python</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/capra-cavoli.png">
+        
+      </figure><ul>
+<li>Risolvere con il <em>backtracking</em><ul>
+<li><a href="https://it.wikipedia.org/wiki/Salvare_capra_e_cavoli">https://it.wikipedia.org/wiki/Salvare_capra_e_cavoli</a></li>
+</ul>
+</li>
+<li>Stato del gioco: 4 bool, inizialmente <em>false</em><ul>
+<li>Ciascun personaggio (contadino, cavolo, capra, lupo) ha uno stato booleano</li>
+<li>È sulla sponda di arrivo, o no?</li>
+</ul>
+</li>
+<li>Ad ogni mossa, cambia il primo bool (<em>il contadino attraversa</em>)<ul>
+<li>Anche un altro bool può cambiare, se ha lo stesso valore del primo (<em>un personaggio si può spostare, se sta assieme al contadino</em>)</li>
+<li>Scartare gli stati del gioco vietati o già valutati</li>
 </ul>
 </li>
 </ul></article>
