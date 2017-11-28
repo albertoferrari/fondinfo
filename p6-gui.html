@@ -637,15 +637,11 @@ public:
       <h3></h3>
     </hgroup>
     <article >
-      <figure>
-        <img src="images/qt/puzzle.png">
-        
-      </figure><pre class="prettyprint" data-lang="C++"><code>class BoardGameGui : public QWidget {
+      <pre class="prettyprint" data-lang="C++"><code>class BoardGameGui : public QWidget {
     Q_OBJECT
 public:
     BoardGameGui(BoardGame* g);
-    void update_all_buttons();
-
+    void update_buttons();        
 private:
     BoardGame* game;
 };
@@ -660,7 +656,10 @@ private:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="C++"><code>BoardGameGui::BoardGameGui(BoardGame* g) {
+      <figure>
+        <img src="images/qt/puzzle.png">
+        
+      </figure><pre class="prettyprint" data-lang="C++"><code>BoardGameGui::BoardGameGui(BoardGame* g) {
     game = g;
     auto grid = new QGridLayout;
     setLayout(grid);
@@ -670,11 +669,11 @@ private:
             grid-&gt;addWidget(b, y, x);
             connect(b, &amp;QPushButton::clicked, [=]{
                 game_-&gt;play_at(x, y);  // lambda function ...
-                update_all_buttons();  // closure captures this, x, y
+                update_buttons();  // closure captures this, x, y
             });
         }
     }
-    update_all_buttons();
+    update_buttons();
 }
 </code></pre></article>
  
@@ -690,14 +689,13 @@ private:
       <figure>
         <img src="images/qt/puzzle-solved.png">
         
-      </figure><pre class="prettyprint" data-lang="C++"><code>void BoardGameGui::update_all_buttons()
-{
-    for (auto y = 0; y &lt; game-&gt;rows(); y++) {
-        for (auto x = 0; x &lt; game-&gt;cols(); x++) {
-            auto val = game-&gt;get_val(x, y);
+      </figure><pre class="prettyprint" data-lang="C++"><code>void BoardGameGui::update_buttons() {
+    for (auto y = 0; y &lt; game-&gt;rows(); ++y) {
+        for (auto x = 0; x &lt; game-&gt;cols(); ++x) {
+            auto val = game-&gt;get_val(x, y).c_str();
             auto i = y * game-&gt;cols() + x;
             auto b = layout()-&gt;itemAt(i)-&gt;widget();
-            b-&gt;setProperty("text", val.c_str());
+            b-&gt;setProperty("text", val);
         }
     }
     if (game-&gt;finished()) {
@@ -708,16 +706,6 @@ private:
 }
 </code></pre></article>
  
-</slide>
-
-<slide class="segue dark" >
-  
-    <aside class="gdbar"><img src="images/logo.png"></aside>
-    <hgroup class="auto-fadein">
-      <h2>PyQt5</h2>
-      <h3></h3>
-    </hgroup>
-  
 </slide>
 
 <slide  >
@@ -740,12 +728,10 @@ private:
                 b = QPushButton()
                 self.layout().addWidget(b, y, x)
                 b.clicked.connect(lambda state, x=x, y=y:
-                    self.handle_click(x, y))
-        self.update_all_buttons()
+                                  (self._game.play_at(x, y),
+                                   self.update_buttons()))
+        self.update_buttons()
 
-    def handle_click(self, x: int, y: int):
-        self._game.play_at(x, y)
-        self.update_all_buttons()
     # ...
 </code></pre></article>
  
@@ -763,7 +749,8 @@ private:
         
       </figure><pre class="prettyprint" data-lang="python"><code>class BoardGameGui(QWidget):
     # ...
-    def update_all_buttons(self):
+
+    def update_buttons(self):
         for y in range(self._game.rows()):
             for x in range(self._game.cols()):
                 val = self._game.get_val(x, y)

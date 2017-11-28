@@ -410,7 +410,6 @@ code: C++
 ---
 
 title: Fifteen – Gui generica
-figure: images/qt/puzzle.png
 
 code: C++
 
@@ -418,8 +417,7 @@ code: C++
         Q_OBJECT
     public:
         BoardGameGui(BoardGame* g);
-        void update_all_buttons();
-        
+        void update_buttons();        
     private:
         BoardGame* game;
     };
@@ -427,6 +425,7 @@ code: C++
 ---
 
 title: Fifteen – Costruzione gui
+figure: images/qt/puzzle.png
 
 code: C++
 
@@ -440,11 +439,11 @@ code: C++
                 grid->addWidget(b, y, x);
                 connect(b, &QPushButton::clicked, [=]{
                     game_->play_at(x, y);  // lambda function ...
-                    update_all_buttons();  // closure captures this, x, y
+                    update_buttons();  // closure captures this, x, y
                 });
             }
         }
-        update_all_buttons();
+        update_buttons();
     }
 
 ---
@@ -454,14 +453,13 @@ figure: images/qt/puzzle-solved.png
 
 code: C++
 
-    void BoardGameGui::update_all_buttons()
-    {
-        for (auto y = 0; y < game->rows(); y++) {
-            for (auto x = 0; x < game->cols(); x++) {
-                auto val = game->get_val(x, y);
+    void BoardGameGui::update_buttons() {
+        for (auto y = 0; y < game->rows(); ++y) {
+            for (auto x = 0; x < game->cols(); ++x) {
+                auto val = game->get_val(x, y).c_str();
                 auto i = y * game->cols() + x;
                 auto b = layout()->itemAt(i)->widget();
-                b->setProperty("text", val.c_str());
+                b->setProperty("text", val);
             }
         }
         if (game->finished()) {
@@ -470,11 +468,6 @@ code: C++
             window()->close();
         }
     }
-
----
-
-title: PyQt5
-class: segue dark
 
 ---
 
@@ -493,12 +486,10 @@ code: python
                     b = QPushButton()
                     self.layout().addWidget(b, y, x)
                     b.clicked.connect(lambda state, x=x, y=y:
-                        self.handle_click(x, y))
-            self.update_all_buttons()
+                                      (self._game.play_at(x, y),
+                                       self.update_buttons()))
+            self.update_buttons()
 
-        def handle_click(self, x: int, y: int):
-            self._game.play_at(x, y)
-            self.update_all_buttons()
         # ...
 
 ---
@@ -510,7 +501,8 @@ code: python
 
     class BoardGameGui(QWidget):
         # ...
-        def update_all_buttons(self):
+        
+        def update_buttons(self):
             for y in range(self._game.rows()):
                 for x in range(self._game.cols()):
                     val = self._game.get_val(x, y)
