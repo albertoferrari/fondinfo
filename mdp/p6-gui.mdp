@@ -211,7 +211,7 @@ code: C++
 
     auto main_layout = new QHBoxLayout;
     main_layout->addWidget(text_edit);
-    main_layout->addLayout(button_layout);
+    main_layout->addLayout(button_layout);  // <-- compose layouts
     setLayout(main_layout);
 
 ---
@@ -226,11 +226,9 @@ title: Definire gli slot
 code: C++
 
     class Notepad : public QWidget {
-        // add support for signals and slots...
-        Q_OBJECT
     public:
         Notepad();
-        // slots, to connect with signals
+        // like slots, to connect with signals
         void open();
         void save();
         void exit();
@@ -265,7 +263,7 @@ figure: images/qt/abstract-connections.png
     - Un oggetto emette un *segnale*, ma non sa quali *slot* lo ricevono
     - Molti segnali ad un singolo slot, un segnale a molti slot
 - **Type safe**
-    - La *firma* del segnale (numero e tipo di parametri) deve corrispondere a quella degli  slot collegati
+    - *Firma* di segnale e slot collegati deve corrispondere (per numero e tipo di parametri)
     - Se la firma di uno slot è più corta, trascura degli argomenti che riceve
     - Compilatore rileva errori
 - **Estensione alla sintassi C++**
@@ -279,12 +277,12 @@ code: C++
 
     void Notepad::open() {
         // choose the input file
-        auto filename = QFileDialog::getOpenFileName(this);
+        auto filename = QFileDialog::getOpenFileName(this).toStdString();
         if (filename != "") {
-            ifstream in{filename.toStdString()};
-            if (in.good()) {
+            ifstream fin{filename};
+            if (fin) {
                 // read the whole text
-                string content; getline(in, content, '\0');
+                string content; getline(fin, content, '\0');
                 text_edit->setText(content.c_str());
             } else {
                 QMessageBox::critical(this, tr("Error"),
@@ -301,13 +299,13 @@ code: C++
 
     void Notepad::save() {
         // choose the output file
-        auto filename = QFileDialog::getSaveFileName(this);
+        auto filename = QFileDialog::getSaveFileName(this).toStdString();
         if (filename != "") {
-            ofstream out{filename.toStdString()};
-            if (out.good()) {
+            ofstream fout{filename};
+            if (fout) {
                 // write the whole text
-                auto text = text_edit->toPlainText();
-                out << text.toStdString();
+                auto text = text_edit->toPlainText().toStdString();
+                fout << text;
             } else {
                 QMessageBox::critical(this, tr("Error"),
                                       tr("Could not save file"));
@@ -362,18 +360,17 @@ code: C++
 code: C++
 
     NotepadWindow::NotepadWindow() {
-        auto notepad = new Notepad; setCentralWidget(notepad);
-
-        auto menu = menuBar()->addMenu(tr("&File"));  // QMenu*
-        auto open_act = menu->addAction(tr("&Open"));  // QAction*
-        auto save_act = menu->addAction(tr("&Save"));
+        auto notepad = new Notepad;
+        setCentralWidget(notepad);
+        QMenu* menu = menuBar()->addMenu(tr("&File"));
+        QAction* open = menu->addAction(tr("&Open"));
+        QAction* save = menu->addAction(tr("&Save"));
         menu->addSeparator();
-        auto exit_act = menu->addAction(tr("E&xit"));
-        // auto tools = addToolBar(tr("&File")); tools->addAction(open_act); ...
-
-        connect(open_act, &QAction::triggered, notepad, &Notepad::open);
-        connect(save_act, &QAction::triggered, notepad, &Notepad::save);
-        connect(exit_act, &QAction::triggered, notepad, &Notepad::exit);
+        QAction* exit = menu->addAction(tr("E&xit"));
+        // auto tools = addToolBar(tr("&File")); tools->addAction(open); ...
+        connect(open, &QAction::triggered, notepad, &Notepad::open);
+        connect(save, &QAction::triggered, notepad, &Notepad::save);
+        connect(exit, &QAction::triggered, notepad, &Notepad::exit);
     }
 
 ---
@@ -392,7 +389,7 @@ figure: images/qt/calculator.png
 
 ---
 
-title: Fifteen – Gioco astratto
+title: BoardGame astratto
 figure: images/qt/fifteen-puzzle.jpg
 
 code: C++
@@ -407,24 +404,18 @@ code: C++
         virtual std::string message() = 0;
     };
 
----
-
-title: Fifteen – Gui generica
-
 code: C++
 
     class BoardGameGui : public QWidget {
-        Q_OBJECT
+        BoardGame* game;
     public:
         BoardGameGui(BoardGame* g);
         void update_buttons();        
-    private:
-        BoardGame* game;
     };
 
 ---
 
-title: Fifteen – Costruzione gui
+title: BoardGame – Gui generica
 figure: images/qt/puzzle.png
 
 code: C++
@@ -448,7 +439,7 @@ code: C++
 
 ---
 
-title: Fifteen – Aggiornamento bottoni
+title: BoardGame – Aggiornamento bottoni
 figure: images/qt/puzzle-solved.png
 
 code: C++

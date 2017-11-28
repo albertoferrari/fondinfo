@@ -359,7 +359,7 @@ button_layout-&gt;addStretch();
 
 auto main_layout = new QHBoxLayout;
 main_layout-&gt;addWidget(text_edit);
-main_layout-&gt;addLayout(button_layout);
+main_layout-&gt;addLayout(button_layout);  // &lt;-- compose layouts
 setLayout(main_layout);
 </code></pre></article>
  
@@ -383,11 +383,9 @@ setLayout(main_layout);
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="C++"><code>class Notepad : public QWidget {
-    // add support for signals and slots...
-    Q_OBJECT
 public:
     Notepad();
-    // slots, to connect with signals
+    // like slots, to connect with signals
     void open();
     void save();
     void exit();
@@ -436,7 +434,7 @@ private:
 </ul>
 </li>
 <li><strong>Type safe</strong><ul>
-<li>La <em>firma</em> del segnale (numero e tipo di parametri) deve corrispondere a quella degli  slot collegati</li>
+<li><em>Firma</em> di segnale e slot collegati deve corrispondere (per numero e tipo di parametri)</li>
 <li>Se la firma di uno slot è più corta, trascura degli argomenti che riceve</li>
 <li>Compilatore rileva errori</li>
 </ul>
@@ -458,12 +456,12 @@ private:
     <article >
       <pre class="prettyprint" data-lang="C++"><code>void Notepad::open() {
     // choose the input file
-    auto filename = QFileDialog::getOpenFileName(this);
+    auto filename = QFileDialog::getOpenFileName(this).toStdString();
     if (filename != "") {
-        ifstream in{filename.toStdString()};
-        if (in.good()) {
+        ifstream fin{filename};
+        if (fin) {
             // read the whole text
-            string content; getline(in, content, '\0');
+            string content; getline(fin, content, '\0');
             text_edit-&gt;setText(content.c_str());
         } else {
             QMessageBox::critical(this, tr("Error"),
@@ -484,13 +482,13 @@ private:
     <article >
       <pre class="prettyprint" data-lang="C++"><code>void Notepad::save() {
     // choose the output file
-    auto filename = QFileDialog::getSaveFileName(this);
+    auto filename = QFileDialog::getSaveFileName(this).toStdString();
     if (filename != "") {
-        ofstream out{filename.toStdString()};
-        if (out.good()) {
+        ofstream fout{filename};
+        if (fout) {
             // write the whole text
-            auto text = text_edit-&gt;toPlainText();
-            out &lt;&lt; text.toStdString();
+            auto text = text_edit-&gt;toPlainText().toStdString();
+            fout &lt;&lt; text;
         } else {
             QMessageBox::critical(this, tr("Error"),
                                   tr("Could not save file"));
@@ -562,18 +560,17 @@ centralWidget()-&gt;setLayout(layout);
       </figure><pre class="prettyprint" data-lang="C++"><code>class NotepadWindow: public QMainWindow // ...
 </code></pre>
 <pre class="prettyprint" data-lang="C++"><code>NotepadWindow::NotepadWindow() {
-    auto notepad = new Notepad; setCentralWidget(notepad);
-
-    auto menu = menuBar()-&gt;addMenu(tr("&amp;File"));  // QMenu*
-    auto open_act = menu-&gt;addAction(tr("&amp;Open"));  // QAction*
-    auto save_act = menu-&gt;addAction(tr("&amp;Save"));
+    auto notepad = new Notepad;
+    setCentralWidget(notepad);
+    QMenu* menu = menuBar()-&gt;addMenu(tr("&amp;File"));
+    QAction* open = menu-&gt;addAction(tr("&amp;Open"));
+    QAction* save = menu-&gt;addAction(tr("&amp;Save"));
     menu-&gt;addSeparator();
-    auto exit_act = menu-&gt;addAction(tr("E&amp;xit"));
-    // auto tools = addToolBar(tr("&amp;File")); tools-&gt;addAction(open_act); ...
-
-    connect(open_act, &amp;QAction::triggered, notepad, &amp;Notepad::open);
-    connect(save_act, &amp;QAction::triggered, notepad, &amp;Notepad::save);
-    connect(exit_act, &amp;QAction::triggered, notepad, &amp;Notepad::exit);
+    QAction* exit = menu-&gt;addAction(tr("E&amp;xit"));
+    // auto tools = addToolBar(tr("&amp;File")); tools-&gt;addAction(open); ...
+    connect(open, &amp;QAction::triggered, notepad, &amp;Notepad::open);
+    connect(save, &amp;QAction::triggered, notepad, &amp;Notepad::save);
+    connect(exit, &amp;QAction::triggered, notepad, &amp;Notepad::exit);
 }
 </code></pre></article>
  
@@ -610,7 +607,7 @@ centralWidget()-&gt;setLayout(layout);
 <slide  >
   
     <hgroup>
-      <h2>Fifteen – Gioco astratto</h2>
+      <h2>BoardGame astratto</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -626,24 +623,12 @@ public:
     virtual bool finished() = 0;
     virtual std::string message() = 0;
 };
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Fifteen – Gui generica</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="C++"><code>class BoardGameGui : public QWidget {
-    Q_OBJECT
+</code></pre>
+<pre class="prettyprint" data-lang="C++"><code>class BoardGameGui : public QWidget {
+    BoardGame* game;
 public:
     BoardGameGui(BoardGame* g);
     void update_buttons();        
-private:
-    BoardGame* game;
 };
 </code></pre></article>
  
@@ -652,7 +637,7 @@ private:
 <slide  >
   
     <hgroup>
-      <h2>Fifteen – Costruzione gui</h2>
+      <h2>BoardGame – Gui generica</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -682,7 +667,7 @@ private:
 <slide  >
   
     <hgroup>
-      <h2>Fifteen – Aggiornamento bottoni</h2>
+      <h2>BoardGame – Aggiornamento bottoni</h2>
       <h3></h3>
     </hgroup>
     <article >
