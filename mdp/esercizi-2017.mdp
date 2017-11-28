@@ -755,13 +755,16 @@ class: segue dark
 title: Basi del C++
 figure: images/misc/cpp-logo.jpg
 
-- Ripetere in C++ questi esercizi, già assegnati in Python
-    - 1.2
-    - 2.1
-    - 2.2
-    - 2.3
-    - 2.4
-    - 1.5
+- 1.2
+- 2.1
+- 2.2
+- 2.3
+- 2.4
+- 1.5
+
+>
+
+Esercizi già assegnati in Python, da ripetere in C++
 
 ---
 
@@ -785,16 +788,19 @@ class: segue dark
 title: Esercizi in C++
 figure: images/misc/cpp-logo.jpg
 
-- Ripetere in C++ questi esercizi, già assegnati in Python
-    - 2.5
-    - 3.2
-    - 4.1
-    - 5.3
-    - 5.5
+- 2.5
+- 3.2
+- 4.1
+- 5.3
+- 5.5
 
 code: C++
 
     std::reverse(begin(v), end(v));  // reverse the vector v
+
+>
+
+Esercizi già assegnati in Python, da ripetere in C++
 
 ---
 
@@ -838,15 +844,18 @@ class: segue dark
 title: Esercizi in C++
 figure: images/misc/cpp-logo.jpg
 
-- Ripetere in C++ questi esercizi, già assegnati in Python
-    - 4.4
-    - 6.1
-    - 6.3
-    - 6.6
+- 4.4
+- 6.1
+- 6.3
+- 6.6
+
+code: c++
+
+    string part = text.substr(pos, len);
 
 >
 
-`string part = text.substr(pos, len);`
+Esercizi già assegnati in Python, da ripetere in C++
 
 ---
 
@@ -872,7 +881,6 @@ code: EBNF
 >
 
 Usare la ricorsione -- Simile ad es. 5.7 del 2011, su Github
-
 
 ---
 
