@@ -11,7 +11,7 @@ title: Caratteristiche di Qt
     - Sviluppo *visuale* o *dichiarativo* di gui
     - Personalizzazione aspetto delle app con *CSS*
 - **Sviluppo libero e multipiattaforma**
-    - *Qt Project*: codice open source (Nokia → Digia)
+    - *Qt Project*: codice open source
     - *Qt Creator*: ambiente integrato di sviluppo
 - **App portabili e avanzate**: buone prestazioni con poche risorse
     - Sistemi desktop: Windows, MacOS, Linux …
@@ -23,9 +23,9 @@ title: Caratteristiche di Qt
 title: Libreria modulare
 
 - Qt Core: classi base, stringhe ecc.
-- **Qt GUI**: supporto grafica 2D
+- **Qt Gui**: supporto grafica 2D
     - Integraz. OpenGL, anti-aliasing, trasparenza, trasformaz. vettoriali
-- **Qt Widgets**: insieme di *widget* evoluti
+- **Qt Widgets**: bottoni e componenti grafici evoluti
     - Usabilità, esperienza più soddisfacente per utente
 - Qt Multimedia, Qt Multimedia Widgets
 - Qt Network
@@ -417,14 +417,11 @@ code: C++
     class BoardGameGui : public QWidget {
         Q_OBJECT
     public:
-        BoardGameGui(BoardGame* game);
-    private:
-        void handle_click(int x, int y);
-        void update_button(int x, int y);
+        BoardGameGui(BoardGame* g);
         void update_all_buttons();
-
-        BoardGame* game_;
-        int cols_, rows_;
+        
+    private:
+        BoardGame* game;
     };
 
 ---
@@ -433,124 +430,95 @@ title: Fifteen – Costruzione gui
 
 code: C++
 
-    BoardGameGui::GameGui(BoardGame* game) {
-        cols_ = game->cols(); rows_ = game->rows();
-        game_ = game;
-        auto grid = new QGridLayout; setLayout(grid);
-        for (auto y = 0; y < rows_; ++y) {
-            for (auto x = 0; x < cols_; ++x) {
+    BoardGameGui::BoardGameGui(BoardGame* g) {
+        game = g;
+        auto grid = new QGridLayout;
+        setLayout(grid);
+        for (auto y = 0; y < game->rows(); y++) {
+            for (auto x = 0; x < game->cols(); x++) {
                 auto b = new QPushButton; 
                 grid->addWidget(b, y, x);
-                connect(b, &QPushButton::clicked,
-                        [=]{ handle_click(x, y); });
+                connect(b, &QPushButton::clicked, [=]{
+                    game_->play_at(x, y);  // lambda function ...
+                    update_all_buttons();  // closure captures this, x, y
+                });
             }
         }
         update_all_buttons();
     }
 
-- *Funzioni lambda*: anonime, annidate (*Church*, 1936)
-- *Closure*: cattura di valori dal contesto; `this`, `x`, `y`
-
 ---
 
 title: Fifteen – Aggiornamento bottoni
-
-code: C++
-
-    void BoardGameGui::update_button(int x, int y) {
-        auto val = game_->get_val(x, y);
-        auto b = layout()->itemAt(y * cols_ + x)->widget();
-        dynamic_cast<QPushButton*>(b)->setText(val.c_str());
-    }
-
-    void BoardGameGui::update_all_buttons() {
-        for (auto y = 0; y < rows_; y++) {
-            for (auto x = 0; x < cols_; x++) {
-                update_button(x, y);
-            }
-        }
-    }
-
----
-
-title: Fifteen – Gestione click
 figure: images/qt/puzzle-solved.png
 
 code: C++
 
-    void BoardGameGui::handle_click(int x, int y) {
-        game_->play_at(x, y);
-        update_all_buttons();  // ...
-
-        if (game_->finished()) {
-            QMessageBox::information(this,
-                                     tr("Game finished"),
-                                     tr(game_->message().c_str()));
+    void BoardGameGui::update_all_buttons()
+    {
+        for (auto y = 0; y < game->rows(); y++) {
+            for (auto x = 0; x < game->cols(); x++) {
+                auto val = game->get_val(x, y);
+                auto i = y * game->cols() + x;
+                auto b = layout()->itemAt(i)->widget();
+                b->setProperty("text", val.c_str());
+            }
+        }
+        if (game->finished()) {
+            auto msg = game->message().c_str();
+            QMessageBox::information(this, tr("Game finished"), tr(msg));
             window()->close();
         }
     }
 
 ---
 
-title: Pyside
+title: PyQt5
 class: segue dark
 
 ---
 
-title: Pyside – Costruzione gui
+title: PyQt5 – Costruzione gui
 figure: images/qt/puzzle.png
 
 code: python
 
     class BoardGameGui(QWidget):
-        def __init__(self, game: BoardGame):
+        def __init__(self, g: BoardGame):
             QWidget.__init__(self)
-            self._game = game
-            self._cols, self._rows = game.cols(), game.rows()
+            self._game = g
             self.setLayout(QGridLayout())
-            for y in range(self._rows):
-                for x in range(self._cols):
+            for y in range(g.rows()):
+                for x in range(g.cols()):
                     b = QPushButton()
                     self.layout().addWidget(b, y, x)
-                    b.clicked.connect(lambda x=x, y=y:
+                    b.clicked.connect(lambda state, x=x, y=y:
                         self.handle_click(x, y))
+            self.update_all_buttons()
+
+        def handle_click(self, x: int, y: int):
+            self._game.play_at(x, y)
             self.update_all_buttons()
         # ...
 
 ---
 
-title: Pyside – Aggiornamento bottoni
-
-code: python
-
-    class BoardGameGui(QWidget):
-        # ...
-        def update_button(self, x: int, y: int):
-            val = self._game.get_val(x, y)
-            b = self.layout().itemAt(y * self._cols + x).widget()
-            b.setText(val)
-
-        def update_all_buttons(self):
-            for y in range(self._rows):
-                for x in range(self._cols):
-                    self.update_button(x, y)
-                    
----
-
-title: Pyside – Gestione click
+title: PyQt5 – Aggiornamento bottoni
 figure: images/qt/puzzle-solved.png
 
 code: python
 
     class BoardGameGui(QWidget):
         # ...
-        def handle_click(self, x: int, y: int):
-            self._game.play_at(x, y)
-            self.update_all_buttons()
-            
+        def update_all_buttons(self):
+            for y in range(self._game.rows()):
+                for x in range(self._game.cols()):
+                    val = self._game.get_val(x, y)
+                    i = y * self._game.cols() + x
+                    b = self.layout().itemAt(i).widget()
+                    b.setText(val)
             if self._game.finished():
-                QMessageBox.information(self, 
-                                        self.tr('Game finished'),
+                QMessageBox.information(self, self.tr('Game finished'),
                                         self.tr(self._game.message()))
                 self.window().close()
 
