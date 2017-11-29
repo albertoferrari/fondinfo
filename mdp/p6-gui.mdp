@@ -429,8 +429,8 @@ code: C++
                 auto b = new QPushButton; 
                 grid->addWidget(b, y, x);
                 connect(b, &QPushButton::clicked, [=]{
-                    game_->play_at(x, y);  // lambda function ...
-                    update_buttons();  // closure captures this, x, y
+                    game->play_at(x, y);  // lambda function ...
+                    update_buttons();     // closure captures this, x, y
                 });
             }
         }

@@ -653,8 +653,8 @@ public:
             auto b = new QPushButton; 
             grid-&gt;addWidget(b, y, x);
             connect(b, &amp;QPushButton::clicked, [=]{
-                game_-&gt;play_at(x, y);  // lambda function ...
-                update_buttons();  // closure captures this, x, y
+                game-&gt;play_at(x, y);  // lambda function ...
+                update_buttons();     // closure captures this, x, y
             });
         }
     }
