@@ -882,6 +882,7 @@ code: EBNF
 
 Usare la ricorsione -- Simile ad es. 5.7 del 2011, su Github
 
+
 ---
 
 title: 9.6 Skyscrapers: GUI
@@ -911,5 +912,59 @@ figure: images/fun/capra-cavoli.png
 - Ad ogni mossa, cambia il primo bool (*il contadino attraversa*)
     - Anche un altro bool può cambiare, se ha lo stesso valore del primo (*un personaggio si può spostare, se sta assieme al contadino*)
     - Scartare gli stati del gioco vietati o già valutati
+
+---
+
+title: Esercitazione 10
+subtitle: 2017-12-04 *
+class: segue dark
+
+---
+
+title: Esercizi in C++
+figure: images/misc/cpp-logo.jpg
+
+- 3.1 del 2014
+- 3.7 del 2016
+- 3.8 del 2016
+- 3.5 del 2014 -- Usare un `vector<Triangle*>` e ricordarsi `delete`
+- 3.8 del 2013 -- Su Github, in Python
+
+code: C++
+
+    // ex. 3.5 ...
+    delete triangles[i];                  // remove triangle from memory
+    triangles.erase(begin(triangles) + i);  // remove pointer from vector
+
+---
+
+title: 10.6 Finestra principale
+figure: images/qt/mainwindow.png
+
+- Inserire la tabella di gioco in una finestra principale, con un menù
+- Aggiungere al menù voci per caricare o salvare una partita
+- Dopo un caricamento, generare una nuova tabella di gioco (pannello con bottoni)
+- Nella classe del gioco
+    - Costruttore con parametro `filename`, per caricare una partita da file
+    - Metodo `save` con parametro `filename`, per salvare una partita su file
+
+---
+
+title: 10.7 Mossa suggerita (unicità)
+figure: images/misc/skyscrapers.jpg
+
+- Se in una riga o colonna manca un solo valore, inserirlo
+- Se in una riga o colonna un valore ha una sola posizione possibile, inserirlo
+- Attivare il completamento tramite click su una cella di bordo (dove ci possono essere i vincoli)
+
+---
+
+title: 10.8 Mossa suggerita (vincoli)
+figure: images/misc/skyscrapers.jpg
+
+- Vincolo massimo -> inserire i valori in ordine crescente
+- Vincolo 1 -> inserire per primo il valore massimo
+- Attivare il completamento tramite click su una cella di bordo (dove ci possono essere i vincoli)
+- Aggiungere una voce di menù per effettuare *tutte* le mosse ovvie
 
 

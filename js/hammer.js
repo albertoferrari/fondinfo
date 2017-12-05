@@ -42,7 +42,7 @@ function Hammer(element, options, undefined)
 
         var vendors = ['webkit','moz','ms','o',''];
         var css_props = {
-            "userSelect": "none",
+            //"userSelect": "none",
             "touchCallout": "none",
             "userDrag": "none",
             "tapHighlightColor": "rgba(0,0,0,0)"

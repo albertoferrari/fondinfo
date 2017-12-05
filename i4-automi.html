@@ -305,7 +305,7 @@ URL: https://code.google.com/p/io-2012-slides
 <li>FSM / NFSM: formalismi <em>equivalenti</em><ul>
 <li>FSM è un caso particolare di NFSM</li>
 <li>Viceversa, ogni elemento di <code>P(Q)</code> di NFSM diventa uno stato di FSM</li>
-<li><code>P(Q)</code> contiene <code>2<sup>|Q|</sup></code> elementi</li>
+<li><code>P(Q)</code> contiene <code>2<sup>|Q|</sup></code> elementi: FSM può avere num. stati <strong>esponenzialmente maggiore</strong> dell'equivalente NFSM</li>
 </ul>
 </li>
 </ul>
@@ -516,7 +516,7 @@ URL: https://code.google.com/p/io-2012-slides
 <li><code>Q = {q<sub>0</sub>, ..., q<sub>m</sub>}</code>: insieme finito di stati</li>
 <li><code>q0 ∈ Q</code>: stato iniziale</li>
 <li><code>F ⊆ Q</code>: insieme di stati finali</li>
-<li><code>δ: Q x Σ → Q x Σ x {d, s, i}</code>: f. di transizione<ul>
+<li><code>δ: Q x Σ → Q x Σ x {L, R, N}</code>: f. di transizione<ul>
 <li>Determina la configurazione successiva: stato, simbolo scritto su nastro, spostamento della testina</li>
 </ul>
 </li>
@@ -533,7 +533,7 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <ul>
 <li><code>M = &lt;Σ, Q, q<sub>0</sub>, F, δ<sub>N</sub>&gt;</code></li>
-<li><code>δ<sub>N</sub>: Q x Σ → P(Q x Σ x {d, s, i})</code>: f. di transizione<ul>
+<li><code>δ<sub>N</sub>: Q x Σ → P(Q x Σ x {L, R, N})</code>: f. di transizione<ul>
 <li>Determina una o più configurazioni successive</li>
 </ul>
 </li>

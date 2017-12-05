@@ -127,7 +127,7 @@ title: Equivalenza FSM / NFSM
 - FSM / NFSM: formalismi *equivalenti*
     - FSM è un caso particolare di NFSM
     - Viceversa, ogni elemento di `P(Q)` di NFSM diventa uno stato di FSM
-    - `P(Q)` contiene `2^^|Q|^^` elementi
+    - `P(Q)` contiene `2^^|Q|^^` elementi: FSM può avere num. stati **esponenzialmente maggiore** dell'equivalente NFSM
 
 >
 
@@ -231,7 +231,7 @@ figure: images/comp/tm.png
 - `Q = {q~~0~~, ..., q~~m~~}`: insieme finito di stati
 - `q0 ∈ Q`: stato iniziale
 - `F ⊆ Q`: insieme di stati finali
-- `δ: Q x Σ → Q x Σ x {d, s, i}`: f. di transizione
+- `δ: Q x Σ → Q x Σ x {L, R, N}`: f. di transizione
     - Determina la configurazione successiva: stato, simbolo scritto su nastro, spostamento della testina
 
 ---
@@ -239,7 +239,7 @@ figure: images/comp/tm.png
 title: TM non deterministica (NTM)
 
 - `M = <Σ, Q, q~~0~~, F, δ~~N~~>`
-- `δ~~N~~: Q x Σ → P(Q x Σ x {d, s, i})`: f. di transizione
+- `δ~~N~~: Q x Σ → P(Q x Σ x {L, R, N})`: f. di transizione
     - Determina una o più configurazioni successive
 - *Grado di non-determinismo* `n`
     - Max transizioni alternative
