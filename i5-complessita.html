@@ -517,7 +517,8 @@ def bubble_sort(v: list):
 <li>La fusione ha complessità lineare</li>
 <li>Caso peggiore, caso medio: <code>n·log<sub>2</sub>(n)</code></li>
 <li><strong>Spazio</strong>: la fusione richiede altra memoria: <code>n</code><ul>
-<li>Ma si può evitare il costo con spostamenti <em>in place</em></li>
+<li>Si può evitare il costo con spostamenti <em>in place</em>...</li>
+<li>Aumenta però la complessità (necessari più scambi)</li>
 </ul>
 </li>
 <li>Accessi sequenziali, buon uso <em>cache</em></li>
@@ -594,23 +595,21 @@ def bubble_sort(v: list):
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
+      <figure>
+        <img src="images/comp/knapsack.svg">
+        
+      </figure><ul>
 <li>Problemi <strong>P</strong>: ∃ algoritmo <em>deterministico polinomiale</em></li>
 <li><strong>NP</strong>: ∃ algoritmo <em>non-deterministico polinomiale</em><ul>
 <li>Su macchine deterministiche: non noto algoritmo polinomiale per la <strong>ricerca</strong> di una soluzione...</li>
 <li>Ma algoritmo polinomiale per la <strong>verifica</strong> di una soluzione</li>
 </ul>
 </li>
-<li>Esempio: fattorizzazione di grandi numeri<ul>
-<li>Ricerca: quali sono i fattori primi di un numero di <code>n</code> cifre?</li>
-<li>Verifica: è vero che <code>x</code> è divisore di <code>y</code>?</li>
+<li>Esempio NP: <em>Knapsack</em><ul>
+<li>∃ combinazione di elementi che realizza utilità <code>≥V</code>, con peso <code>≤W</code>?</li>
 </ul>
 </li>
-<li><strong>Non è dimostrato che P≠NP, né che P=NP</strong><ul>
-<li>Millenium Prize Problems: 1M$</li>
-<li>Se <em>P=NP</em>, trovare i fattori primi di un numero o verificarli: stessa classe di complessità</li>
-</ul>
-</li>
+<li><em>Linguaggi di classe P, oppure NP</em>: stringa <code>x</code> riconosciuta in tempo polinomiale rispetto a <code>|x|</code> da <em>DTM</em>, oppure <em>NTM</em></li>
 </ul></article>
  
 </slide>
@@ -618,23 +617,25 @@ def bubble_sort(v: list):
 <slide  >
   
     <hgroup>
-      <h2>Complessità dei linguaggi</h2>
+      <h2>Millennium problem</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li><em>Linguaggi di classe P / NP</em>: stringa <code>x</code> riconosciuta in tempo polinomiale rispetto a <code>|x|</code>...<ul>
-<li><em>P</em>: da una macchina di Turing deterministica (<em>DTM</em>)</li>
-<li><em>NP</em>: da una macchina di Turing non-deterministica (<em>NTM</em>)</li>
+      <figure>
+        <img src="images/comp/challenges.jpg">
+        
+      </figure><ul>
 <li>Sappiamo che <em>P ⊆ NP</em> (DTM: caso particolare di NTM)</li>
+<li><strong>Ma non è dimostrato che P≠NP, né che P=NP</strong><ul>
+<li>Millenium Prize Problems: 1M$</li>
+<li>Se <em>P=NP</em>, risolvere un rompicapo o verificarlo: stessa classe di complessità</li>
 </ul>
 </li>
-<li><em>Linguaggi di classe EXP</em>: stringa <code>x</code> riconosciuta in tempo esponenziale rispetto a <code>|x|</code> da una DTM<ul>
-<li>NTM: simulata da DTM in tempo esponenziale</li>
-<li>Quindi <em>NP ⊆ EXP</em></li>
+<li><em>Problemi di classe EXP</em>: risolti in tempo esponenziale da una DTM<ul>
+<li>Sappiamo che <em>NP ⊆ EXP</em> (NTM: simulata da DTM in tempo esponenziale)</li>
+<li><em>P ⊆ NP ⊆ EXP</em></li>
 </ul>
 </li>
-<li><strong>P ⊆ NP ⊆ EXP</strong></li>
 </ul></article>
  
 </slide>
@@ -647,7 +648,7 @@ def bubble_sort(v: list):
     </hgroup>
     <article >
       <figure>
-        <img src="images/comp/classes.svg"><img src="images/comp/knapsack.svg">
+        <img src="images/comp/classes.svg">
         
       </figure><ul>
 <li>Ogni problema NP può essere ricondotto ad un problema <strong>NP-completo</strong> con algoritmo deterministico <em>polinomiale</em><ul>
@@ -655,13 +656,10 @@ def bubble_sort(v: list):
 <li>Oppure, <em>soluzione</em> con algoritmo deterministico polinomiale? ⇒ <em>P=NP</em></li>
 </ul>
 </li>
+<li>Esempio: <em>Knapsack</em></li>
 <li>Esempio: <em>SAT</em><ul>
 <li>Data una formula booleana <em>PdS</em>, è soddisfacibile?</li>
 <li>∃ combinazione di input che dà risultato vero?</li>
-</ul>
-</li>
-<li>Esempio: <em>Knapsack</em><ul>
-<li>∃ combinazione di elementi che realizza utilità <code>≥V</code>, con peso <code>≤W</code>?</li>
 </ul>
 </li>
 </ul></article>
@@ -681,7 +679,7 @@ def bubble_sort(v: list):
     <br>
     Ingegneria dell'Informazione, UniPR
     <br>
-    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+    <a href="http://sowide.unipr.it/tomamic">sowide.unipr.it/tomamic</a>
   </p>
 </slide>
 

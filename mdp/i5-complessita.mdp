@@ -319,7 +319,8 @@ title: Analisi Merge Sort
 - La fusione ha complessità lineare
 - Caso peggiore, caso medio: `n·log~~2~~(n)`
 - **Spazio**: la fusione richiede altra memoria: `n`
-    - Ma si può evitare il costo con spostamenti *in place*
+    - Si può evitare il costo con spostamenti *in place*...
+    - Aumenta però la complessità (necessari più scambi)
 - Accessi sequenziali, buon uso *cache*
 - Integraz. con Insertion Sort (Python, Java7)
 
@@ -358,42 +359,39 @@ figure: images/comp/orders.svg
 ---
 
 title: Problemi P ed NP
+figure: images/comp/knapsack.svg
 
 - Problemi **P**: ∃ algoritmo *deterministico polinomiale*
 - **NP**: ∃ algoritmo *non-deterministico polinomiale*
     - Su macchine deterministiche: non noto algoritmo polinomiale per la **ricerca** di una soluzione...
     - Ma algoritmo polinomiale per la **verifica** di una soluzione
-- Esempio: fattorizzazione di grandi numeri
-    - Ricerca: quali sono i fattori primi di un numero di `n` cifre?
-    - Verifica: è vero che `x` è divisore di `y`?
-- **Non è dimostrato che P≠NP, né che P=NP**
-    - Millenium Prize Problems: 1M$
-    - Se *P=NP*, trovare i fattori primi di un numero o verificarli: stessa classe di complessità
+- Esempio NP: *Knapsack*
+    - ∃ combinazione di elementi che realizza utilità `≥V`, con peso `≤W`?
+- *Linguaggi di classe P, oppure NP*: stringa `x` riconosciuta in tempo polinomiale rispetto a `|x|` da *DTM*, oppure *NTM*
 
 ---
 
-title: Complessità dei linguaggi
+title: Millennium problem
+figure: images/comp/challenges.jpg
 
-- *Linguaggi di classe P / NP*: stringa `x` riconosciuta in tempo polinomiale rispetto a `|x|`...
-    - *P*: da una macchina di Turing deterministica (*DTM*)
-    - *NP*: da una macchina di Turing non-deterministica (*NTM*)
-    - Sappiamo che *P ⊆ NP* (DTM: caso particolare di NTM)
-- *Linguaggi di classe EXP*: stringa `x` riconosciuta in tempo esponenziale rispetto a `|x|` da una DTM
-    - NTM: simulata da DTM in tempo esponenziale
-    - Quindi *NP ⊆ EXP*
-- **P ⊆ NP ⊆ EXP**
+- Sappiamo che *P ⊆ NP* (DTM: caso particolare di NTM)
+- **Ma non è dimostrato che P≠NP, né che P=NP**
+    - Millenium Prize Problems: 1M$
+    - Se *P=NP*, risolvere un rompicapo o verificarlo: stessa classe di complessità
+- *Problemi di classe EXP*: risolti in tempo esponenziale da una DTM
+    - Sappiamo che *NP ⊆ EXP* (NTM: simulata da DTM in tempo esponenziale)
+    - *P ⊆ NP ⊆ EXP*
 
 ---
 
 title: Problemi NP-completi
-figure: images/comp/classes.svg images/comp/knapsack.svg
+figure: images/comp/classes.svg
 
 - Ogni problema NP può essere ricondotto ad un problema **NP-completo** con algoritmo deterministico *polinomiale*
     - *Lower-bound* deterministico esponenziale per uno dei problemi NP-completi? ⇒ *P≠NP*
     - Oppure, *soluzione* con algoritmo deterministico polinomiale? ⇒ *P=NP*
+- Esempio: *Knapsack*
 - Esempio: *SAT*
     - Data una formula booleana *PdS*, è soddisfacibile?
     - ∃ combinazione di input che dà risultato vero?
-- Esempio: *Knapsack*
-    - ∃ combinazione di elementi che realizza utilità `≥V`, con peso `≤W`?
 
