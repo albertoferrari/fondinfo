@@ -115,20 +115,21 @@ window.mainloop()
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="Python"><code>from tkinter import Tk, Text, Button, messagebox
+
 class Notepad(Tk):
     def __init__(self):
         Tk.__init__(self)
         # basic widgets as private fields
         self._text = Text(self)
         self._text.pack()
-        self._quit = Button(self, text='Quit', command=self.exit)
+        self._quit = Button(self, text='Quit', command=self.quit)
         self._quit.pack()
-    def exit(self):
+    def quit(self):
         if messagebox.askokcancel('Quit', 'Are you sure?'):
             self.destroy()
-if __name__ == '__main__':
-    win = Notepad()
-    win.mainloop()
+
+win = Notepad()
+win.mainloop()
 </code></pre></article>
  
 </slide>
@@ -140,21 +141,48 @@ if __name__ == '__main__':
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="Python"><code>from tkinter import Tk, Text, Menu
-
+      <pre class="prettyprint" data-lang="Python"><code>from tkinter import (Tk, Text, Menu,
+                     messagebox, filedialog, END)
 class Notepad(Tk):
     def __init__(self):
         Tk.__init__(self)
         text_edit = Text(self)
         text_edit.pack()
 
-        menu_bar = Menu(self)  # tearoff=0
-        self.config(menu=menu_bar)
-        menu_file = Menu(menu_bar)
-        menu_file.add_command(label='Open')
-        menu_file.add_command(label='Save')
-        menu_file.add_command(label='Exit', command=self.exit)
-        menu_bar.add_cascade(label='File', menu=menu_file)  # ...
+        menu_bar = Menu(self)
+        self['menu'] = menu_bar
+        menu_file = Menu(menu_bar, tearoff=0)
+        menu_bar.add_cascade(label='File', menu=menu_file)
+        menu_file.add_command(label='Open...', command=self.open)
+        menu_file.add_command(label='Save...', command=self.save)
+        menu_file.add_command(label='Quit', command=self.quit)
+    # ...
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Scelta file</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="Python"><code>class Notepad(Tk):
+    # ...
+    def open(self):
+        fn = filedialog.askopenfilename()
+        if fn:
+            with open(fn, mode='r') as f:
+                contents = f.read()
+                self._text_edit.delete(1.0, END)
+                self._text_edit.insert(END, contents)
+    def save(self):
+        fn = filedialog.asksaveasfilename()
+        if fn:
+            with open(fn, mode='w') as f:
+                contents = self._text_edit.get(1.0, END)
+                f.write(contents)
 </code></pre></article>
  
 </slide>
@@ -205,8 +233,8 @@ class Notepad(Tk):
         open_btn.pack()  # side='top'
         save_btn = Button(v_box, text='Save')
         save_btn.pack()
-        exit_btn = Button(v_box, text='Exit')
-        exit_btn.pack()
+        quit_btn = Button(v_box, text='Quit')
+        quit_btn.pack()
 </code></pre></article>
  
 </slide>
@@ -245,7 +273,7 @@ class Notepad(Tk):
         self._game = g
         for y in range(g.rows()):
             for x in range(g.cols()):
-                b = Button(self, width=1, height=1, font=('', 16))
+                b = Button(self)
                 b['command'] = (lambda x=x, y=y:
                                 (self._game.play_at(x, y),
                                  self.update_buttons()))
