@@ -1412,7 +1412,7 @@ The Zen of Python
 <li>Quando il valore arriva al massimo, poi torna a 0 (cella vuota)</li>
 </ul>
 </li>
-<li><code>get_val()</code><ul>
+<li><code>get_val(x, y)</code><ul>
 <li>Restituisce il contenuto di una cella, come testo</li>
 </ul>
 </li>
@@ -1667,6 +1667,115 @@ triangles.erase(begin(triangles) + i);  // remove pointer from vector
 <li>Attivare il completamento tramite click su una cella di bordo (dove ci possono essere i vincoli)</li>
 <li>Aggiungere una voce di menù per effettuare <em>tutte</em> le mosse ovvie</li>
 </ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 11</h2>
+      <h3>2017-12-11</h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>11.1 Vicolo cieco</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/dead-end.jpg">
+        
+      </figure><ul>
+<li>Aggiungere un metodo booleano <code>wrong_marks</code> al puzzle, per verificare una condizione di vicolo cieco<ul>
+<li>Impossibile risolvere il puzzle, senza <em>rimuovere</em> un valore</li>
+<li><em>Attenzione</em>: condizione più stringente di <code>not finished</code></li>
+<li>Almeno una regola violata per <em>presenza</em> di valori sbagliati</li>
+</ul>
+</li>
+<li>Aggiungere una voce di menù per verificare la situazione di vicolo cieco</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>11.2 Ulteriori suggerimenti (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/artificial-intelligence.png">
+        
+      </figure><ul>
+<li>Provare tutte le possibili permutazioni su una riga o colonna<ul>
+<li>Limitarsi alle celle e ad i valori liberi</li>
+<li>Considerare tutti i vincoli e le regole (metodo <code>wrong_marks</code>)</li>
+<li>Una sola soluzione valida, per la riga o colonna? Fissare tutti i valori</li>
+</ul>
+</li>
+<li>Attivare il completamento tramite click su una cella di bordo (dove ci possono essere i vincoli)</li>
+<li>Fare sempre le prove su una copia del gioco</li>
+</ul>
+<pre class="prettyprint" data-lang="C++"><code>auto copy1 = *this; copy1.board_[y][x] = some_val; // ...
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>11.3 Ulteriori suggerimenti (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/artificial-intelligence.png">
+        
+      </figure><ul>
+<li>Provare tutte le possibili permutazioni su una riga o colonna</li>
+<li>Miglioramento: più soluzioni possibili, per la riga o colonna?<ul>
+<li>Se per tutte le soluzioni possibili c'è un valore sempre nella stessa posizione</li>
+<li>Fissare solo quel valore</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>11.4 Soluzione ricorsiva (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/artificial-intelligence.png">
+        
+      </figure><pre class="prettyprint" data-lang="C++"><code>bool Skyscrapers::solve_recursive() {
+    // solve_simple();
+    auto pos = find_first_playable();  // vector of 2 ints
+    auto x = pos[0], y = pos[1];
+    if (x &gt;= 0 &amp;&amp; y &gt;= 0 &amp;&amp; !wrong_marks()) {
+        auto copy = *this;  // save current status
+        for (auto val = 1; val &lt;= max_; ++val) {
+            board_[y][x] = val;
+            if (solve_recursive()) return true;
+            *this = copy;  // backtracking
+        }
+    }
+    return finished();
+}
+</code></pre>
+<blockquote></blockquote>
+<p>Il metodo <code>find_first_playable</code> cerca la prima casella giocabile, non già segnata</p>
+<p>Opzionalmente, <code>solve_simple</code> applica prima tutte (!) le altre strategie di soluzione</p></article>
  
 </slide>
 

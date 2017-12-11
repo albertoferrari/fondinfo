@@ -812,7 +812,7 @@ figure: images/misc/skyscrapers.jpg
 - `play_at(x, y)`
     - Ad ogni chiamata, incrementare il valore nella cella
     - Quando il valore arriva al massimo, poi torna a 0 (cella vuota)
-- `get_val()`
+- `get_val(x, y)`
     - Restituisce il contenuto di una cella, come testo
 - `finished()`
     - Controlla la soluzione del gioco
@@ -966,5 +966,77 @@ figure: images/misc/skyscrapers.jpg
 - Vincolo 1 -> inserire per primo il valore massimo
 - Attivare il completamento tramite click su una cella di bordo (dove ci possono essere i vincoli)
 - Aggiungere una voce di menù per effettuare *tutte* le mosse ovvie
+
+---
+
+title: Esercitazione 11
+subtitle: 2017-12-11
+class: segue dark
+
+---
+
+title: 11.1 Vicolo cieco
+figure: images/misc/dead-end.jpg
+
+- Aggiungere un metodo booleano `wrong_marks` al puzzle, per verificare una condizione di vicolo cieco
+    - Impossibile risolvere il puzzle, senza *rimuovere* un valore
+    - *Attenzione*: condizione più stringente di `not finished`
+    - Almeno una regola violata per *presenza* di valori sbagliati
+- Aggiungere una voce di menù per verificare la situazione di vicolo cieco
+
+---
+
+title: 11.2 Ulteriori suggerimenti (++)
+figure: images/misc/artificial-intelligence.png
+
+- Provare tutte le possibili permutazioni su una riga o colonna
+    - Limitarsi alle celle e ad i valori liberi
+    - Considerare tutti i vincoli e le regole (metodo `wrong_marks`)
+    - Una sola soluzione valida, per la riga o colonna? Fissare tutti i valori
+- Attivare il completamento tramite click su una cella di bordo (dove ci possono essere i vincoli)
+- Fare sempre le prove su una copia del gioco
+
+code: C++
+
+    auto copy1 = *this; copy1.board_[y][x] = some_val; // ...
+
+---
+
+title: 11.3 Ulteriori suggerimenti (++)
+figure: images/misc/artificial-intelligence.png
+
+- Provare tutte le possibili permutazioni su una riga o colonna
+- Miglioramento: più soluzioni possibili, per la riga o colonna?
+    - Se per tutte le soluzioni possibili c'è un valore sempre nella stessa posizione
+    - Fissare solo quel valore
+
+---
+
+title: 11.4 Soluzione ricorsiva (++)
+figure: images/misc/artificial-intelligence.png
+
+code: C++
+
+    bool Skyscrapers::solve_recursive() {
+        // solve_simple();
+        auto pos = find_first_playable();  // vector of 2 ints
+        auto x = pos[0], y = pos[1];
+        if (x >= 0 && y >= 0 && !wrong_marks()) {
+            auto copy = *this;  // save current status
+            for (auto val = 1; val <= max_; ++val) {
+                board_[y][x] = val;
+                if (solve_recursive()) return true;
+                *this = copy;  // backtracking
+            }
+        }
+        return finished();
+    }
+
+>
+
+Il metodo `find_first_playable` cerca la prima casella giocabile, non già segnata
+
+Opzionalmente, `solve_simple` applica prima tutte (!) le altre strategie di soluzione
+
 
 
