@@ -295,7 +295,7 @@ title: Codici di stato
 - 3xx – Redirection (necessarie azioni ulteriori)
     - 301: Perm.; 302: Temp.; 304: Non modificata (→ cache)
 - 4xx – Client Error
-- 400: Richiesta scorretta; 401: Non autorizzato; 404: Non trovato
+    - 400: Richiesta scorretta; 401: Non autorizzato; 404: Non trovato
 - 5xx – Server Error (ma richiesta valida)
 
 ---
