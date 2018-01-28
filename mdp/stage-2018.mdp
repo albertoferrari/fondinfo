@@ -1,5 +1,5 @@
 title: Space Invaders in Python
-subtitle: Stage formativo a Ingegneria Informatica 12-16 giugno 2017
+subtitle: Stage formativo a Ingegneria Informatica 11-15 giugno 2018
 figure: images/misc/space-invaders.png
 
 ---
@@ -26,11 +26,11 @@ class: large-image
 
 Giorno | Argomento
 -------|----------
-Lun 12/6 | Programmazione strutturata in Python
-Mar 13/6 | Oggetti e animazioni grafiche
-Mer 14/6 | Creazione personaggi
-Gio 15/6 | Interazione tra personaggi
-Ven 16/6 | Completamento del gioco
+Lun 11/6 | Programmazione strutturata in Python
+Mar 12/6 | Oggetti e animazioni grafiche
+Mer 13/6 | Creazione personaggi
+Gio 14/6 | Interazione tra personaggi
+Ven 15/6 | Completamento del gioco
 
 ---
 
