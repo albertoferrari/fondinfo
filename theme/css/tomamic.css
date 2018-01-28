@@ -105,7 +105,7 @@ slide td, slide th { padding: 10px; }
 slide.large-table table { max-width: 90%; }
 slide.large-table table td, slide.small table th { padding: 2px; }
 
-slide.title-slide h1 { margin-left: 40%; }
+slide.title-slide h1 { margin-left: 30%; }
 
 @media print {
     body,
