@@ -32,10 +32,15 @@
 }
 .title-slide h1 {
     text-align: right;
-    font-size: 65px;
+    font-size: 60px;
     line-height: 1.4;
     letter-spacing: -3px;
     color: #515151;
+}
+.title-slide hgroup h2 {
+  font-size: 30px;
+  color: darkgrey;
+  font-weight: inherit;
 }
 
 .large-figure figure, .title-slide figure {
