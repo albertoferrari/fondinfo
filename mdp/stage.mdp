@@ -1,4 +1,4 @@
-title: Creare un videogioco in Python
+title: Creare un videogioco in Python o Go
 subtitle: Stage formativo <br> Ingegneria dell'Informazione <br> 11-15 giugno 2018
 figure: images/misc/videogames.png
 
@@ -26,7 +26,7 @@ class: large-image
 
 Giorno | Argomento
 -------|----------
-Lun 11/6 | Programmazione strutturata in Python
+Lun 11/6 | Programmazione strutturata
 Mar 12/6 | Oggetti e animazioni grafiche
 Mer 13/6 | Creazione personaggi
 Gio 14/6 | Interazione tra personaggi
@@ -36,7 +36,7 @@ Ven 15/6 | Completamento del gioco
 
 title: A cosa servirà?
 
-- Realizzazione in *autonomia* di una versione funzionante e *personale* del gioco **Space Invaders**, eseguibile su piattaforme diverse
+- Realizzazione in *autonomia* di una versione funzionante e *personale* del gioco proposto (ad esempio, *Space Invaders*), eseguibile su piattaforme diverse
 - Introduzione alla programmazione e al *problem solving*: concetti base, orientamento a modularità e riuso
 - Panoramica sulle attività di laboratorio dei corsi di base di *Ingegneria Informatica*
 - Sperimentazione diretta con *strumenti* di sviluppo gratuiti, liberi e multi-piattaforma
@@ -60,10 +60,10 @@ title: Come iscriversi?
 title: Strumenti utilizzati
 figure: images/misc/python.png images/misc/devices.png images/misc/raspberry-pi.png
 
-- **Python 3**, *battery included*
+- Linguaggio **Python 3**, *battery included*
     - <http://python.org/>
-- Libreria Pygame
-    - <http://pygame.org/>
+- Linguaggio **Go**
+    - <http://golang.org/>
 - Sviluppo **open-source** e **multi-piattaforma**
     - PC, cellulari e tablet
 - Anche su Raspberry Pi
@@ -74,10 +74,9 @@ figure: images/misc/python.png images/misc/devices.png images/misc/raspberry-pi.
 title: Approfondimento
 figure: images/misc/books.png
 
-- A.B. Downey et al.: *How to Think Like a Computer Scientist: Learning with Python 3*, 3rd Edition - <http://openbookproject.net/thinkcs/>
+- A.B. Downey: *Think Python* 2e - <https://github.com/AllenDowney/ThinkPythonItalian>
 - M. Beri: *Python*, Apogeo Pocket, 2010, 978-8850329151
-- M. Dawson: *Python Programming for the Absolute Beginner*, Course Technology, 2010, 978-1435455009
-- MIT: *Introduction to CS and Programming* - Video delle lezioni, Pyhton 2 - <http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/>
+- MIT: *Intro to CS and Programming in Python* - [Video delle lezioni](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/lecture-videos/index.htm)
 
 ---
 
