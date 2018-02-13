@@ -1,3 +1,17 @@
+## Stage estivo di programmazione
+
+**Creare un videogioco in Python o Go**
+
+Stage formativo per studenti delle scuole superiori, 11-15 giugno 2018
+
+- [Locandina in PDF](http://tomamic.github.io/fondinfo/stage.pdf)
+- [Presentazione dello stage](http://tomamic.github.io/fondinfo/stage.html)
+- [Modulo richiesta di iscrizione](http://tomamic.github.io/fondinfo/stage-iscrizione.docx)
+- [Organizzazione dello stage](http://tomamic.github.io/fondinfo/stage-logistica.html)
+- [Esercizi di programmazione](http://tomamic.github.io/fondinfo/stage-esercizi.html)
+
+----
+
 ## Insegnamento per Ingegneria dell'Informazione
 
 - [Presentazione del corso](http://tomamic.github.io/fondinfo/intro.html)
@@ -62,23 +76,6 @@
 - [Basi di dati](http://tomamic.github.io/fondinfo/x5-database.html)
 - [Gui con Tkinter](http://tomamic.github.io/fondinfo/x6-tkinter.html)
 - [Python su Android](http://tomamic.github.io/fondinfo/x7-android.html)
-
-----
-
-## Stage estivo di programmazione
-
-**Space Invaders in Python**
-
-Stage formativo per studenti delle scuole superiori, 11-15 giugno 2018
-
-- [Locandina in PDF](http://tomamic.github.io/fondinfo/stage-2018.pdf)
-- [Presentazione dello stage](http://tomamic.github.io/fondinfo/stage-2018.html)
-- [Modulo richiesta di iscrizione](http://tomamic.github.io/fondinfo/stage-2018-iscrizione.rtf)
-- [Modulo liberatoria per minori](http://tomamic.github.io/fondinfo/stage-2018-liberatoria.rtf)
-- [Organizzazione dello stage](http://tomamic.github.io/fondinfo/stage-2018-logistica.html)
-- [Esercizi di programmazione](http://tomamic.github.io/fondinfo/esercizi-stage.html)
-- [Opinione degli studenti](https://goo.gl/forms/vPxZkqdhgWMLDRch1)
-- [Progetti consegnati / delivered projects](http://sowide.unipr.it/sites/default/files/files/2017-stage-projects.zip)
 
 ----
 
