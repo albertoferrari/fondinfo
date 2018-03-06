@@ -703,7 +703,7 @@ title: Iterables and iterators
 - **Iterator**: an object that implements `__next__`
     - `__next__` returns the next element of the iterable
     - Raises a `StopIteration` exception when no more elements are available
-- *Simplest case*: iterable implements `next` itself and returns `self` in `__iter__` 
+- *Simplest case*: iterable implements `__next__` itself and returns `self` in `__iter__` 
 
 ---
 
