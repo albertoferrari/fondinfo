@@ -93,6 +93,24 @@ class: large-image
 
 ---
 
+title: Haskell in industry
+
+- <https://wiki.haskell.org/Haskell_in_industry>
+- Declarative, fit for *optimization* algorithms
+    - Finance, assets management
+    - Electronics and hardware design
+    - Activities and process scheduling
+- Lists, for *data analysis* and *processing*
+    - Facebook anti-spam, SQL and XML tools
+    - Image, video, audio, 3D processing
+    - Code analysis and build tools
+- No side effects, *validation* and *parallelism*
+    - Aeronautics, space, defence (arms)
+    - Reliable manufacturing
+    - SW infrastructures, web back-ends
+
+---
+
 title: Interactive shell
 figure: images/fun/learn-haskell.png
 
@@ -355,8 +373,8 @@ code: haskell
 
 title: Size and reverse
 
-- `length` takes a list and returns its length, obviously
-- `null` checks if a list is empty; if it is, it returns `True`, otherwise it returns `False`
+- `length` takes a list and returns its length
+- `null` checks if a list is empty (`True` / `False`)
 - `reverse` reverses a list
 
 code: haskell
@@ -388,14 +406,15 @@ code: haskell
     Prelude> take 0 [6,6,6]
     []
 
-- See how if we try to take more elements than there are in the list, it just returns the list
-- If we try to take 0 elements, we get an empty list
+- Take more elements than there are in the list: it just returns the list
+- Take 0 elements: we get an empty list
 
 ---
 
 title: Dropping from a list
 
-- `drop` works in a similar way, only it drops the number of elements from the beginning of a list
+- `drop` takes number and a list
+- It drops the number of elements from the beginning of the list
 
 code: haskell
 
@@ -518,6 +537,10 @@ code: haskell
 
     Prelude> replicate 3 10
     [10,10,10]
+    Prelude> replicate 3 "LOL "
+    ["LOL ","LOL ","LOL "]
+    Prelude> concat (replicate 3 "LOL ")
+    "LOL LOL LOL "
 
 ---
 
@@ -526,9 +549,112 @@ class: segue dark
 
 ---
 
+title: Python list
+figure: images/fun/month-list.svg
+
+- A sequence of elements, *usually* of the same **type**
+    - The whole list can be assigned to a varible, to have a **name**
+- Single elements are **numbered**, from 0
+      
+code: python
+
+    to_buy = ["spam", "eggs", "beans"]
+    
+code: python
+
+    rainfall_data = [13, 24, 18, 15]
+    
+code: python
+
+    months = ["Jan", "Feb", "Mar",
+              "Apr", "May", "Jun", 
+              "Jul", "Aug", "Sep", 
+              "Oct", "Nov", "Dec"]
+    
+---
+
+title: Access to elements
+figure: images/fun/wile-coyote.png
+
+- **Pay attentio to use a valid index!**
+    - Current *length* of a list `x`: `len(x)`
+    - Elements *numbered* from `0` to `len(x)-1`
+    - *Negative* indices count from the end of the list
+
+code: python
+
+    n = len(months)            # 12
+    months[3]                  # "Apr"
+    months[-2]                 # "Nov", same as n - 2
+
+code: python
+
+    to_buy = ["spam", "eggs", "beans"]
+    
+    to_buy[1] = "ketchup"      # replace an element
+
+---
+
+title: Membership and modification
+
+code: python
+
+    to_buy = ["spam", "eggs", "beans"]
+    
+    "eggs" in to_buy           # True, to_buy contains "eggs"
+
+code: python
+
+    to_buy.append("bacon")     # add an element to the end
+    to_buy.pop()               # remove (and return) last element
+    
+    to_buy.insert(1, "bacon")  # other elements shift
+    removed = to_buy.pop(1)    # remove (and return) element at index
+    
+    to_buy.remove("eggs")      # remove an element by value
+
+---
+
+title: Slice: part of a list
+
+code: python
+
+    spring = months[2:5]       # ["Mar", "Apr", "May"]
+    quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
+    quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
+    whole_year = months[:]     # Copy the whole list
+
+code: python
+
+    list1 = ["spam", "eggs", "beans"]
+    list2 = ["sausage", "mushrooms"]
+    to_buy = list1 + list2     # List concatenation
+
+code: python
+
+    so_boring = [1, 2] * 3     # List repetition:
+                               # [1, 2, 1, 2, 1, 2]
+    results_by_month = [0] * 12
+
+---
+
+title: Equality and identity
+
+code: python
+
+    a = [3, 4, 5]
+    b = a[:]       # b = [3, 4, 5] -- a new list!
+    b == a         # True, they contain the same values
+    b is a         # False, they are two objects in memory
+                   # (try and modify one of them...) 
+    c = a
+    c is a         # True, same object in memory 
+                   # (try and modify one of them...) 
+
+---
+
 title: Python ranges
 
-- *List slice*, to get some sublist
 - *Range*, to get some sequence of integers
     - Min val is included
     - Max val is excluded
@@ -547,7 +673,41 @@ code: python
 
 ---
 
-title: Python iterators
+title: Fibonacci list
+
+code: python
+
+    def fib_list(max):
+        '''fill a list with Fibonacci numbers'''
+        result = []
+
+        a, b = 1, 1
+        while a <= max:
+            result.append[a]
+            a, b = b, a + b
+            
+        return result
+
+
+- Problems
+    - All values are stored in memory
+    - The whole list is generate at once
+    - Some values could be needed much later, or never
+
+---
+
+title: Iterables and iterators
+
+- **Iterable**: an object that implements `__iter__`
+    - `__iter__` returns an *iterator* object
+- **Iterator**: an object that implements `__next__`
+    - `__next__` returns the next element of the iterable
+    - Raises a `StopIteration` exception when no more elements are available
+- *Simplest case*: iterable implements `next` itself and returns `self` in `__iter__` 
+
+---
+
+title: Fibonacci iterator
 
 code: python
 
@@ -584,9 +744,11 @@ code: python
     >>> list(f)
     [1, 1, 2, 3, 5, 8, 13]
 
+- Iterators are lazy, but have much boilerplate code
+
 ---
 
-title: Python generators
+title: Fibonacci generator
 
 code: python
 
@@ -595,7 +757,7 @@ code: python
 
         a, b = 1, 1
         while a <= max:
-            yield(a)
+            yield(a)  # ~ append in fib_list, but lazy
             a, b = b, a + b
 
 code: python
@@ -647,6 +809,7 @@ title: Infinite iterators
     - `cycle('ABC') --> A B C A B C ...`
 - `repeat(elem [,n])`
     - `repeat(10) --> 10 10 10 ...`
+- `islice(iterable, stop)` <br> `islice(iterable, start, stop[, step])`
 
 >
 

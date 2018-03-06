@@ -190,6 +190,37 @@ def rq(x: int) -&gt; int:
 <slide  >
   
     <hgroup>
+      <h2>Haskell in industry</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><a href="https://wiki.haskell.org/Haskell_in_industry">https://wiki.haskell.org/Haskell_in_industry</a></li>
+<li>Declarative, fit for <em>optimization</em> algorithms<ul>
+<li>Finance, assets management</li>
+<li>Electronics and hardware design</li>
+<li>Activities and process scheduling</li>
+</ul>
+</li>
+<li>Lists, for <em>data analysis</em> and <em>processing</em><ul>
+<li>Facebook anti-spam, SQL and XML tools</li>
+<li>Image, video, audio, 3D processing</li>
+<li>Code analysis and build tools</li>
+</ul>
+</li>
+<li>No side effects, <em>validation</em> and <em>parallelism</em><ul>
+<li>Aeronautics, space, defence (arms)</li>
+<li>Reliable manufacturing</li>
+<li>SW infrastructures, web back-ends</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Interactive shell</h2>
       <h3></h3>
     </hgroup>
@@ -560,8 +591,8 @@ Prelude&gt; head []
     </hgroup>
     <article >
       <ul>
-<li><code>length</code> takes a list and returns its length, obviously</li>
-<li><code>null</code> checks if a list is empty; if it is, it returns <code>True</code>, otherwise it returns <code>False</code></li>
+<li><code>length</code> takes a list and returns its length</li>
+<li><code>null</code> checks if a list is empty (<code>True</code> / <code>False</code>)</li>
 <li><code>reverse</code> reverses a list</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; length [5,4,3,2,1]
@@ -597,8 +628,8 @@ Prelude&gt; take 0 [6,6,6]
 []
 </code></pre>
 <ul>
-<li>See how if we try to take more elements than there are in the list, it just returns the list</li>
-<li>If we try to take 0 elements, we get an empty list</li>
+<li>Take more elements than there are in the list: it just returns the list</li>
+<li>Take 0 elements: we get an empty list</li>
 </ul></article>
  
 </slide>
@@ -611,7 +642,8 @@ Prelude&gt; take 0 [6,6,6]
     </hgroup>
     <article >
       <ul>
-<li><code>drop</code> works in a similar way, only it drops the number of elements from the beginning of a list</li>
+<li><code>drop</code> takes number and a list</li>
+<li>It drops the number of elements from the beginning of the list</li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; drop 3 [8,4,2,1,5,6]
 [1,5,6]
@@ -780,6 +812,10 @@ Prelude&gt; take 12 (cycle "LOL ")
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; replicate 3 10
 [10,10,10]
+Prelude&gt; replicate 3 "LOL "
+["LOL ","LOL ","LOL "]
+Prelude&gt; concat (replicate 3 "LOL ")
+"LOL LOL LOL "
 </code></pre></article>
  
 </slide>
@@ -797,12 +833,133 @@ Prelude&gt; take 12 (cycle "LOL ")
 <slide  >
   
     <hgroup>
+      <h2>Python list</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/month-list.svg">
+        
+      </figure><ul>
+<li>A sequence of elements, <em>usually</em> of the same <strong>type</strong><ul>
+<li>The whole list can be assigned to a varible, to have a <strong>name</strong></li>
+</ul>
+</li>
+<li>Single elements are <strong>numbered</strong>, from 0</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>to_buy = ["spam", "eggs", "beans"]
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>rainfall_data = [13, 24, 18, 15]
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>months = ["Jan", "Feb", "Mar",
+          "Apr", "May", "Jun", 
+          "Jul", "Aug", "Sep", 
+          "Oct", "Nov", "Dec"]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Access to elements</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/wile-coyote.png">
+        
+      </figure><ul>
+<li><strong>Pay attentio to use a valid index!</strong><ul>
+<li>Current <em>length</em> of a list <code>x</code>: <code>len(x)</code></li>
+<li>Elements <em>numbered</em> from <code>0</code> to <code>len(x)-1</code></li>
+<li><em>Negative</em> indices count from the end of the list</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>n = len(months)            # 12
+months[3]                  # "Apr"
+months[-2]                 # "Nov", same as n - 2
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>to_buy = ["spam", "eggs", "beans"]
+
+to_buy[1] = "ketchup"      # replace an element
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Membership and modification</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>to_buy = ["spam", "eggs", "beans"]
+
+"eggs" in to_buy           # True, to_buy contains "eggs"
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>to_buy.append("bacon")     # add an element to the end
+to_buy.pop()               # remove (and return) last element
+
+to_buy.insert(1, "bacon")  # other elements shift
+removed = to_buy.pop(1)    # remove (and return) element at index
+
+to_buy.remove("eggs")      # remove an element by value
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Slice: part of a list</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>spring = months[2:5]       # ["Mar", "Apr", "May"]
+quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
+quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
+whole_year = months[:]     # Copy the whole list
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>list1 = ["spam", "eggs", "beans"]
+list2 = ["sausage", "mushrooms"]
+to_buy = list1 + list2     # List concatenation
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>so_boring = [1, 2] * 3     # List repetition:
+                           # [1, 2, 1, 2, 1, 2]
+results_by_month = [0] * 12
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Equality and identity</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>a = [3, 4, 5]
+b = a[:]       # b = [3, 4, 5] -- a new list!
+b == a         # True, they contain the same values
+b is a         # False, they are two objects in memory
+               # (try and modify one of them...) 
+c = a
+c is a         # True, same object in memory 
+               # (try and modify one of them...)
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Python ranges</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li><em>List slice</em>, to get some sublist</li>
 <li><em>Range</em>, to get some sequence of integers<ul>
 <li>Min val is included</li>
 <li>Max val is excluded</li>
@@ -825,7 +982,58 @@ range(5, 15, 2)
 <slide  >
   
     <hgroup>
-      <h2>Python iterators</h2>
+      <h2>Fibonacci list</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>def fib_list(max):
+    '''fill a list with Fibonacci numbers'''
+    result = []
+
+    a, b = 1, 1
+    while a &lt;= max:
+        result.append[a]
+        a, b = b, a + b
+
+    return result
+</code></pre>
+<ul>
+<li>Problems<ul>
+<li>All values are stored in memory</li>
+<li>The whole list is generate at once</li>
+<li>Some values could be needed much later, or never</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Iterables and iterators</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>Iterable</strong>: an object that implements <code>__iter__</code><ul>
+<li><code>__iter__</code> returns an <em>iterator</em> object</li>
+</ul>
+</li>
+<li><strong>Iterator</strong>: an object that implements <code>__next__</code><ul>
+<li><code>__next__</code> returns the next element of the iterable</li>
+<li>Raises a <code>StopIteration</code> exception when no more elements are available</li>
+</ul>
+</li>
+<li><em>Simplest case</em>: iterable implements <code>next</code> itself and returns <code>self</code> in <code>__iter__</code> </li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Fibonacci iterator</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -865,14 +1073,17 @@ range(5, 15, 2)
 1 1 2 3 5 8 13 
 &gt;&gt;&gt; list(f)
 [1, 1, 2, 3, 5, 8, 13]
-</code></pre></article>
+</code></pre>
+<ul>
+<li>Iterators are lazy, but have much boilerplate code</li>
+</ul></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>Python generators</h2>
+      <h2>Fibonacci generator</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -881,7 +1092,7 @@ range(5, 15, 2)
 
     a, b = 1, 1
     while a &lt;= max:
-        yield(a)
+        yield(a)  # ~ append in fib_list, but lazy
         a, b = b, a + b
 </code></pre>
 <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; f = fib(13)
@@ -948,6 +1159,7 @@ range(5, 15, 2)
 <li><code>repeat(10) --&gt; 10 10 10 ...</code></li>
 </ul>
 </li>
+<li><code>islice(iterable, stop)</code> <br> <code>islice(iterable, start, stop[, step])</code></li>
 </ul>
 <blockquote></blockquote>
 <p>See also: <a href="https://docs.python.org/3/library/functools.html">https://docs.python.org/3/library/functools.html</a></p>
