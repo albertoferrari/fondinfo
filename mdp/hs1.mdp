@@ -683,7 +683,7 @@ code: python
 
         a, b = 1, 1
         while a <= max:
-            result.append[a]
+            result.append(a)
             a, b = b, a + b
             
         return result
