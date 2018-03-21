@@ -106,7 +106,7 @@ code: haskell
 
 >
 
-Guard, without an otherwise part: if `n > 0`, the matching falls through to the next pattern
+Guard, without an `otherwise` part: if `n > 0`, the matching falls through to the next pattern
 
 ---
 

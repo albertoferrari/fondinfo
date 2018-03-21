@@ -1116,6 +1116,29 @@ code: haskell
 
 ---
 
+title: Type variables in C++
+
+code: C++
+
+    template <typename T>
+    T max2(T a, T b) {
+        return a < b ? b : a;
+    }
+
+    int main () {
+        int i1 = 19, i2 = 30;
+        cout << "max2(i1, i2): " << max2(i1, i2) << endl;
+
+        double d1 = 10.7, d2 = 23.5;
+        cout << "max2(d1, d2): " << max2(d1, d2) << endl;
+        //cout << "max2(d1, d2): " << max2<int>(d1, d2) << endl;
+
+        string s1 = "Hello", s2 = "World";
+        cout << "max2(s1, s2): " << max2(s1, s2) << endl;
+    }
+
+---
+
 title: Multiple type variables
 
 - What is the type of the `fst` function?
@@ -1145,7 +1168,7 @@ code: haskell
 - Note: the equality operator, `==`, is a function
     - So are `+, *, -, /` and pretty much all operators
     - A f. named only with special chars is infix by default
-    - Handle an op. as a normal f.: surround it in parentheses
+    - Handle an op. as a normal f.: *surround it in parentheses*
 
 ---
 

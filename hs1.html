@@ -1599,6 +1599,33 @@ head :: [a] -&gt; a
 <slide  >
   
     <hgroup>
+      <h2>Type variables in C++</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="C++"><code>template &lt;typename T&gt;
+T max2(T a, T b) {
+    return a &lt; b ? b : a;
+}
+
+int main () {
+    int i1 = 39, i2 = 20;
+    cout &lt;&lt; "max2(i1, i2): " &lt;&lt; max2(i1, i2) &lt;&lt; endl;
+
+    double d1 = 13.5, d2 = 20.7;
+    cout &lt;&lt; "max2(d1, d2): " &lt;&lt; max2(d1, d2) &lt;&lt; endl;
+    //cout &lt;&lt; "max2(d1, d2): " &lt;&lt; max2&lt;int&gt;(d1, d2) &lt;&lt; endl;
+
+    string s1 = "Hello", s2 = "World";
+    cout &lt;&lt; "max2(s1, s2): " &lt;&lt; max2(s1, s2) &lt;&lt; endl;
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Multiple type variables</h2>
       <h3></h3>
     </hgroup>
@@ -1638,7 +1665,7 @@ fst :: (a, b) -&gt; a
 <li>Note: the equality operator, <code>==</code>, is a function<ul>
 <li>So are <code>+, *, -, /</code> and pretty much all operators</li>
 <li>A f. named only with special chars is infix by default</li>
-<li>Handle an op. as a normal f.: surround it in parentheses</li>
+<li>Handle an op. as a normal f.: <em>surround it in parentheses</em></li>
 </ul>
 </li>
 </ul></article>
