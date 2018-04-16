@@ -195,13 +195,15 @@ code: python
 
     import game2d as g2d
 
-    g2d.canvas_init((300, 300))
+    g2d.init_canvas((300, 300))
 
     for i in range(5):
         x = i * 40
         y = x
         red = i * 60
         g2d.draw_rect((red, 0, 0), (x, y, 140, 140))
+
+    g2d.main_loop()
 
 ---
 
@@ -405,15 +407,15 @@ code: python
 
     def update():
         global x
-        g2d.canvas_fill((255, 255, 255))  # Draw background        
-        g2d.image_blit(image, (x, 50))    # Draw foreground
+        g2d.fill_canvas((255, 255, 255))  # Draw background        
+        g2d.draw_image(image, (x, 50))    # Draw foreground
         x = (x + 5) % 320                    # Update ball's position
 
-    g2d.canvas_init((320, 240))
-    image = g2d.image_load("ball.png")
+    g2d.init_canvas((320, 240))
+    image = g2d.load_image("ball.png")
     x = 50
 
-    g2d.set_interval(update, 1000 // 30)   # Call update 30 times/second
+    g2d.main_loop(update, 1000 // 30)   # Call update 30 times/second
 
 ---
 
