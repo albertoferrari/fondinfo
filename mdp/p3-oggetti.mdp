@@ -136,10 +136,10 @@ title: Animazione di due palline
 code: python
 
     import game2d as g2d
-    from p3_ball import Ball
+    from p3_ball import Ball, ARENA_W, ARENA_H
 
     def update():
-        g2d.canvas_fill((255, 255, 255))  # BG
+        g2d.fill_canvas((255, 255, 255))  # BG
         b1.move()
         b2.move()
         g2d.draw_rect((127, 127, 127), b1.rect())  # FG
@@ -147,8 +147,8 @@ code: python
 
     b1 = Ball(40, 80)
     b2 = Ball(80, 40)
-    g2d.canvas_init((ARENA_W, ARENA_H))
-    g2d.set_interval(update, 1000 // 30)  # Millis
+    g2d.init_canvas((ARENA_W, ARENA_H))
+    g2d.main_loop(update, 1000 // 30)  # Millis
 
 ---
 
@@ -157,17 +157,17 @@ title: Animazione lista di palline
 code: python
 
     import game2d as g2d
-    from p3_ball import Ball
+    from p3_ball import Ball, ARENA_W, ARENA_H
 
     def update():
-        g2d.canvas_fill((255, 255, 255))  # BG
+        g2d.fill_canvas((255, 255, 255))  # BG
         for b in balls:
             b.move()
             g2d.draw_rect((127, 127, 127), b.rect())  # FG
 
     balls = [Ball(40, 80), Ball(80, 40), Ball(120, 120)]
-    g2d.canvas_init((ARENA_W, ARENA_H))
-    g2d.set_interval(update, 1000 // 30)  # Millis
+    g2d.init_canvas((ARENA_W, ARENA_H))
+    g2d.main_loop(update, 1000 // 30)  # Millis
 
 ---
 
@@ -322,22 +322,21 @@ figure: images/oop/bounce.png
 code: python
 
     import game2d as g2d
-    from bounce import Arena, Ball, Ghost, Turtle
+    from p3_bounce import Arena, Ball, Ghost, Turtle
 
     def update():
         arena.move_all()  # Game logic
-        g2d.canvas_fill((255, 255, 255))  # Background
+        g2d.fill_canvas((255, 255, 255))  # Background
         for a in arena.actors():
-            x, y, w, h = a.rect();  xs, ys = a.symbol()
             # Foreground; cut an area from a larger image
-            g2d.image_blit(sprites, (x, y), area=(xs, ys, w, h))
+            g2d.draw_image_clip(sprites, a.rect(), a.symbol())
 
     arena = Arena(320, 240)
     Ball(arena, 40, 80);  Ball(arena, 80, 40);  Ghost(arena, 120, 80)
     turtle = Turtle(arena, 80, 80)  # each actor knows the arena
-    g2d.canvas_init(arena.size())
-    sprites = g2d.image_load("sprites.png")
-    g2d.set_interval(update, 1000 // 30)  # Millis
+    g2d.init_canvas(arena.size())
+    sprites = g2d.load_image("sprites.png")
+    g2d.main_loop(update, 1000 // 30)  # Millis
 
 ---
 
