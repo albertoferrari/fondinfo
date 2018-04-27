@@ -1019,18 +1019,19 @@ Node 28 (Node 4 EmptyTree (Node 8 EmptyTree ...
 <pre class="prettyprint" data-lang="haskell"><code>random :: (RandomGen g, Random a) =&gt; g -&gt; (a, g)
 </code></pre>
 <ul>
-<li>
-<p>It takes a random generator and returns a random value and a new random generator</p>
-<ul>
+<li>It takes a random generator</li>
+<li>It returns a random value and a new random generator<ul>
 <li><code>RandomGen</code>: types acting as sources of randomness</li>
 <li><code>Random</code>: types representing random values</li>
 </ul>
 </li>
-<li>
-<p>Why does it also return a new generator as well as a random value?</p>
+<li>Why does it also return a new generator?<ul>
+<li><em>Referential transparency</em>: calling a f. with same params twice, produces same result</li>
+</ul>
 </li>
-<li>Referential transparency: calling a f. with same params twice, produces same result</li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p><code>sudo apt install libghc-random-dev</code></p></article>
  
 </slide>
 
@@ -1304,8 +1305,7 @@ getLine :: IO String
 <li>Then bind its result value to <code>name</code></li>
 </ul>
 </li>
-<li>I/O action ~ <em>box</em> that:<ul>
-<li>Is sent into the real, impure world</li>
+<li>I/O action: ~ <em>box</em> to send into the real, impure world<ul>
 <li>Do something there</li>
 <li>Maybe bring back some data</li>
 </ul>
@@ -1424,6 +1424,36 @@ reverseWords = unwords . map reverse . words
     b &lt;- return "yeah!"    -- hey, just use let!
     print $ a ++ " " ++ b
 </code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Split or join text</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><em>Newline</em> as separator<ul>
+<li><code>lines :: String -&gt; [String]</code></li>
+<li><code>unlines :: [String] -&gt; String</code></li>
+</ul>
+</li>
+<li><em>Spaces</em> as separator<ul>
+<li><code>words :: String -&gt; [String]</code></li>
+<li><code>unwords :: [String] -&gt; String</code></li>
+</ul>
+</li>
+<li>Split or join with a <em>given separator</em><ul>
+<li><code>splitOn :: String -&gt; String -&gt; [String]</code></li>
+<li><code>intercalate :: String -&gt; [String] -&gt; String</code></li>
+<li>In modules <code>Data.List.Split</code> and <code>Data.List</code></li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>sudo apt install libghc-split-dev</p></article>
  
 </slide>
 
@@ -1633,8 +1663,7 @@ shortLinesOnly :: String -&gt; String
 shortLinesOnly input =
     let allLines = lines input
         shortLines = filter (\line -&gt; length line &lt; 10) allLines
-        result = unlines shortLines
-    in  result
+    in  unlines shortLines
 </code></pre>
 <ul>
 <li><code>interact</code>: applies a <code>String -&gt; String</code> f. between stdin and stdout (<em>lazy</em>)</li>
@@ -1661,7 +1690,6 @@ shortLinesOnly input =
 </li>
 </ul>
 <pre class="prettyprint" data-lang="haskell"><code>import System.IO
-import Data.Char
 
 main = do
     withFile "something.txt" ReadMode (\handle -&gt; do
@@ -1681,17 +1709,13 @@ main = do
       <ul>
 <li><strong>simpler</strong> f.s: <code>readFile</code>, <code>writeFile</code>, <code>appendFile</code></li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>import System.IO
+<pre class="prettyprint" data-lang="haskell"><code>import System.IO 
 import Data.Char
 
 main = do
     contents &lt;- readFile "girlfriend.txt"
     writeFile "girlfriendcaps.txt" (map toUpper contents)
-</code></pre>
-<ul>
-<li>F.s to <em>split</em> text: <code>lines</code>, <code>words</code>, <code>splitOn</code></li>
-<li>F.s to <em>join</em> text: <code>unlines</code>, <code>unwords</code>, <code>intercalate</code></li>
-</ul></article>
+</code></pre></article>
  
 </slide>
 
@@ -1761,7 +1785,7 @@ askForNumber gen = do
     <br>
     Ingegneria dell'Informazione, UniPR
     <br>
-    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+    <a href="http://sowide.unipr.it/tomamic">sowide.unipr.it/tomamic</a>
   </p>
 </slide>
 
