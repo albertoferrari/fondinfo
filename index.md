@@ -8,7 +8,7 @@ Stage formativo per studenti delle scuole superiori, 11-15 giugno 2018
 - [Presentazione dello stage](http://tomamic.github.io/fondinfo/stage.html)
 - [Modulo richiesta di iscrizione](http://tomamic.github.io/fondinfo/stage-iscrizione.docx)
 - [Organizzazione dello stage](http://tomamic.github.io/fondinfo/stage-logistica.html)
-- [Autorizzazione soggiorno alberghiero ospite minorenne](http://tomamic.github.io/fondinfo/soggiorno-minore.pdf)
+- [Autorizzazione soggiorno minorenne](http://tomamic.github.io/fondinfo/soggiorno-minore.pdf)
 - [Esercizi di programmazione](http://tomamic.github.io/fondinfo/stage-esercizi.html)
 
 ----
