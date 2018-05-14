@@ -143,10 +143,11 @@ title: Relazioni tra oggetti
 title: Ereditarietà e riuso
 
 - La classe base contiene il codice comune alle classi derivate
-    - L’ereditarietà è una forma di riuso del codice
+    - L’ereditarietà è una forma di *riuso del codice*
     - Si eredita il codice della classe base
-- Ma la classe derivata è strettamente dipendente dalla classe base, ne eredita anche l’interfaccia!
-    - Per il semplice riuso è meglio far ricorso al contenimento
+- Ma la classe derivata è strettamente dipendente dalla classe base
+    - Ne eredita anche l’interfaccia!
+- Per il semplice riuso è meglio far ricorso alla *composizione*
     - Oggetti incapsulati forniscono funzionalità di base
     - Vedi Eckel, *Thinking in C++*: <http://www.mindview.net/Books>
 
@@ -154,45 +155,12 @@ title: Ereditarietà e riuso
 
 title: Ereditarietà protetta e privata
 
-- Ereditarietà protetta: i membri pubblici della classe base sono protetti nella classe derivata quando sono ereditati
-- Ereditarietà privata: nessun membro della classe base può essere referenziato nella classe derivata
+- **Ereditarietà protetta**
+    - I membri pubblici della classe base sono protetti nella classe derivata quando sono ereditati
+- **Ereditarietà privata**
+    - Nessun membro della classe base può essere referenziato nella classe derivata
 - La relazione “*is a*” non è valida
-- Sono raramente usate
-
----
-
-title: Ereditarietà multipla
-
-- Una classe derivata può avere più di una classe base
-- Possono esserci situazioni ambigue
-- Richiede una conoscenza approfondita del linguaggio
-
----
-
-title: Operatori di assegnamento in classi derivate
-
-- Una classe derivata quando sovraccarica l’operatore di assegnamento può fare uso dell’operatore di assegnamento della classe base
-
-code: C++
-
-    Derived& Derived::operator=(const Derived& rtside)
-    {
-        Base::operator=(rtSide);
-        //…
-    }
-
----
-
-title: Costruttori di copia in classi derivate
-
-- Una classe derivata quando sovraccarica il costruttore di copia può fare uso del costruttore di copia della classe base
-
-code: C++
-
-    Derived::Derived(const Derived& obj) : Base(obj), …
-    {
-        // …
-    }
+    - Sono raramente usate
 
 ---
 
@@ -227,7 +195,7 @@ title: Polimorfismo
 
 - Capacità di oggetti appartenenti a classi che derivano da una classe base comune di rispondere in modi diversi alla chiamata di una certa funzione
 - Si implementa tramite le funzioni virtuali
-- Chiamata di una funzione virtuale tramite un puntatore o un riferimento alla classe base:
+- Chiamata di una funzione virtuale tramite un puntatore alla classe base:
     - Il programma sceglie la ridefinizione corretta della funzione
     - Nella classe derivata appropriata
 
@@ -320,6 +288,41 @@ title: Upcasting e downcasting
     - Se il cast riesce (cioè se il tipo dinamico corrisponde al tipo che si vuole ottenere)...
     - Restituisce un puntatore al nuovo tipo
     - Altrimenti restituisce `nullptr`
+
+---
+
+title: Ereditarietà multipla
+
+- Una classe derivata può avere più di una classe base
+- Possono esserci situazioni ambigue
+- Richiede una conoscenza approfondita del linguaggio
+
+---
+
+title: Operatori di assegnamento in classi derivate
+
+- Una classe derivata quando sovraccarica l’operatore di assegnamento può fare uso dell’operatore di assegnamento della classe base
+
+code: C++
+
+    Derived& Derived::operator=(const Derived& rtside)
+    {
+        Base::operator=(rtSide);
+        //…
+    }
+
+---
+
+title: Costruttori di copia in classi derivate
+
+- Una classe derivata quando sovraccarica il costruttore di copia può fare uso del costruttore di copia della classe base
+
+code: C++
+
+    Derived::Derived(const Derived& obj) : Base(obj), …
+    {
+        // …
+    }
 
 ---
 

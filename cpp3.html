@@ -277,12 +277,15 @@ private:
     <article >
       <ul>
 <li>La classe base contiene il codice comune alle classi derivate<ul>
-<li>L’ereditarietà è una forma di riuso del codice</li>
+<li>L’ereditarietà è una forma di <em>riuso del codice</em></li>
 <li>Si eredita il codice della classe base</li>
 </ul>
 </li>
-<li>Ma la classe derivata è strettamente dipendente dalla classe base, ne eredita anche l’interfaccia!<ul>
-<li>Per il semplice riuso è meglio far ricorso al contenimento</li>
+<li>Ma la classe derivata è strettamente dipendente dalla classe base<ul>
+<li>Ne eredita anche l’interfaccia!</li>
+</ul>
+</li>
+<li>Per il semplice riuso è meglio far ricorso alla <em>composizione</em><ul>
 <li>Oggetti incapsulati forniscono funzionalità di base</li>
 <li>Vedi Eckel, <em>Thinking in C++</em>: <a href="http://www.mindview.net/Books">http://www.mindview.net/Books</a></li>
 </ul>
@@ -299,63 +302,19 @@ private:
     </hgroup>
     <article >
       <ul>
-<li>Ereditarietà protetta: i membri pubblici della classe base sono protetti nella classe derivata quando sono ereditati</li>
-<li>Ereditarietà privata: nessun membro della classe base può essere referenziato nella classe derivata</li>
-<li>La relazione “<em>is a</em>” non è valida</li>
+<li><strong>Ereditarietà protetta</strong><ul>
+<li>I membri pubblici della classe base sono protetti nella classe derivata quando sono ereditati</li>
+</ul>
+</li>
+<li><strong>Ereditarietà privata</strong><ul>
+<li>Nessun membro della classe base può essere referenziato nella classe derivata</li>
+</ul>
+</li>
+<li>La relazione “<em>is a</em>” non è valida<ul>
 <li>Sono raramente usate</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Ereditarietà multipla</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Una classe derivata può avere più di una classe base</li>
-<li>Possono esserci situazioni ambigue</li>
-<li>Richiede una conoscenza approfondita del linguaggio</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Operatori di assegnamento in classi derivate</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Una classe derivata quando sovraccarica l’operatore di assegnamento può fare uso dell’operatore di assegnamento della classe base</li>
 </ul>
-<pre class="prettyprint" data-lang="C++"><code>Derived&amp; Derived::operator=(const Derived&amp; rtside)
-{
-    Base::operator=(rtSide);
-    //…
-}
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Costruttori di copia in classi derivate</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Una classe derivata quando sovraccarica il costruttore di copia può fare uso del costruttore di copia della classe base</li>
-</ul>
-<pre class="prettyprint" data-lang="C++"><code>Derived::Derived(const Derived&amp; obj) : Base(obj), …
-{
-    // …
-}
-</code></pre></article>
+</li>
+</ul></article>
  
 </slide>
 
@@ -421,7 +380,7 @@ private:
       <ul>
 <li>Capacità di oggetti appartenenti a classi che derivano da una classe base comune di rispondere in modi diversi alla chiamata di una certa funzione</li>
 <li>Si implementa tramite le funzioni virtuali</li>
-<li>Chiamata di una funzione virtuale tramite un puntatore o un riferimento alla classe base:<ul>
+<li>Chiamata di una funzione virtuale tramite un puntatore alla classe base:<ul>
 <li>Il programma sceglie la ridefinizione corretta della funzione</li>
 <li>Nella classe derivata appropriata</li>
 </ul>
@@ -590,6 +549,58 @@ public:
 </ul>
 </li>
 </ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ereditarietà multipla</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una classe derivata può avere più di una classe base</li>
+<li>Possono esserci situazioni ambigue</li>
+<li>Richiede una conoscenza approfondita del linguaggio</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Operatori di assegnamento in classi derivate</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una classe derivata quando sovraccarica l’operatore di assegnamento può fare uso dell’operatore di assegnamento della classe base</li>
+</ul>
+<pre class="prettyprint" data-lang="C++"><code>Derived&amp; Derived::operator=(const Derived&amp; rtside)
+{
+    Base::operator=(rtSide);
+    //…
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Costruttori di copia in classi derivate</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una classe derivata quando sovraccarica il costruttore di copia può fare uso del costruttore di copia della classe base</li>
+</ul>
+<pre class="prettyprint" data-lang="C++"><code>Derived::Derived(const Derived&amp; obj) : Base(obj), …
+{
+    // …
+}
+</code></pre></article>
  
 </slide>
 
