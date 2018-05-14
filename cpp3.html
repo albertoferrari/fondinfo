@@ -244,6 +244,43 @@ private:
 <slide  >
   
     <hgroup>
+      <h2>Operatori di assegnamento in classi derivate</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una classe derivata quando sovraccarica l’operatore di assegnamento può fare uso dell’operatore di assegnamento della classe base</li>
+</ul>
+<pre class="prettyprint" data-lang="C++"><code>Derived&amp; Derived::operator=(const Derived&amp; rtside)
+{
+    Base::operator=(rtSide);
+    //…
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Costruttori di copia in classi derivate</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una classe derivata quando sovraccarica il costruttore di copia può fare uso del costruttore di copia della classe base</li>
+</ul>
+<pre class="prettyprint" data-lang="C++"><code>Derived::Derived(const Derived&amp; obj) : Base(obj), …
+{
+    // …
+}
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Relazioni tra oggetti</h2>
       <h3></h3>
     </hgroup>
@@ -321,6 +358,73 @@ private:
 <slide  >
   
     <hgroup>
+      <h2>Ereditarietà multipla</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Una classe derivata può avere più di una classe base</li>
+<li>Possono esserci situazioni ambigue</li>
+<li>Richiede una conoscenza approfondita del linguaggio</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>The slicing problem</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Assegnamento di un oggetto di una classe derivata ad una <em>variabile della sua classe base</em><ul>
+<li>Variabili e funzioni membro aggiunte dalla classe derivata vengono perse</li>
+</ul>
+</li>
+<li>Il problema può essere risolto usando:<ul>
+<li><em>Puntatori ad oggetti</em></li>
+<li><em>Funzioni virtuali</em></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Upcasting e downcasting</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Il casting da un tipo discendente a un tipo antenato è detto <strong>upcasting</strong> ed è sicuro</li>
+<li>Il casting da un tipo antenato a un tipo discendente è detto <strong>downcasting</strong> ed è pericoloso</li>
+<li><strong>Dynamic cast</strong> per downcasting sicuro, su <em>puntatori</em><ul>
+<li><code>dynamic_cast &lt; new_type &gt; ( expression )</code></li>
+<li>Se il cast riesce (cioè se il tipo dinamico corrisponde al tipo che si vuole ottenere)...</li>
+<li>Restituisce un puntatore al nuovo tipo</li>
+<li>Altrimenti restituisce <code>nullptr</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Polimorfismo</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Polimorfismo e funzioni virtuali</h2>
       <h3></h3>
     </hgroup>
@@ -379,8 +483,8 @@ private:
     <article >
       <ul>
 <li>Capacità di oggetti appartenenti a classi che derivano da una classe base comune di rispondere in modi diversi alla chiamata di una certa funzione</li>
-<li>Si implementa tramite le funzioni virtuali</li>
-<li>Chiamata di una funzione virtuale tramite un puntatore alla classe base:<ul>
+<li>Si implementa tramite le <strong>funzioni virtuali</strong></li>
+<li>Chiamata di una funzione virtuale tramite un <em>puntatore alla classe base</em><ul>
 <li>Il programma sceglie la ridefinizione corretta della funzione</li>
 <li>Nella classe derivata appropriata</li>
 </ul>
@@ -397,26 +501,11 @@ private:
     </hgroup>
     <article >
       <ul>
-<li>Se una funzione non virtuale è ridefinita in una classe derivata non si ha polimorfismo<ul>
-<li>Se viene chiamata tramite un puntatore alla classe base, è utilizzata la versione della classe base</li>
-<li>Se viene chiamata tramite un puntatore alla classe derivata, è utilizzata la versione della classe derivata</li>
+<li>Se una funzione <strong>non virtuale</strong> è ridefinita in una classe derivata non si ha polimorfismo<ul>
+<li>Se viene chiamata tramite un <em>puntatore alla classe base</em>, è utilizzata la versione della classe base</li>
+<li>Se viene chiamata tramite un <em>puntatore alla classe derivata</em>, è utilizzata la versione della classe derivata</li>
 </ul>
 </li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>The slicing problem</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Assegnamento di un oggetto di una classe derivata a una variabile della sua classe base</li>
-<li>Variabili e funzioni membro aggiunte dalla classe derivata vengono perse</li>
-<li>Il problema può essere risolto usando funzioni virtuali e puntatori</li>
 </ul></article>
  
 </slide>
@@ -453,9 +542,9 @@ private:
     </hgroup>
     <article >
       <ul>
-<li>Se una funzione è virtuale pura la sua definizione non è necessaria</li>
-<li>Una classe con una o più funzioni virtuali pure è detta astratta</li>
-<li>Una classe astratta può essere usata solo come classe base per derivare altre classi, non si possono creare oggetti</li>
+<li>Se una funzione è <em>virtuale pura</em> la sua definizione non è necessaria</li>
+<li>Una classe con una o più funzioni virtuali pure è detta <em>astratta</em></li>
+<li>Una classe astratta può essere usata solo come classe base per derivare altre classi, <em>non si possono istanziare</em> oggetti</li>
 </ul>
 <pre class="prettyprint" data-lang="C++"><code>class Abs {
 public:
@@ -474,27 +563,13 @@ public:
     <article >
       <ul>
 <li>Con l’ereditarietà pubblica si può ereditare:<ul>
-<li>La sola interfaccia (funzioni virtuali pure), oppure...</li>
+<li>La sola interfaccia (funzioni <em>virtuali pure</em>), oppure...</li>
 <li>L’interfaccia più...</li>
-<li>Un’implementazione di default (funzioni virtuali)</li>
-<li>Un’implementazione obbligatoria (funzioni non virtuali)</li>
+<li>Un’implementazione di default (funzioni <em>virtuali</em>)</li>
+<li>Un’implementazione obbligatoria (funzioni <em>non virtuali</em>)</li>
 </ul>
 </li>
 <li>È bene non ridefinire le funzioni ereditate non virtuali</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Distruttori delle classi base</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Se si dealloca un oggetto di una classe derivata attraverso un puntatore alla classe base e la classe base ha un distruttore non virtuale, il risultato è indefinito</li>
-<li>È bene dichiarare virtuali i distruttori delle classi base</li>
 </ul></article>
  
 </slide>
@@ -507,8 +582,16 @@ public:
     </hgroup>
     <article >
       <ul>
-<li>Aumento di generalità: è il runtime a doversi occupare delle specificità, non il programmatore</li>
-<li>Estendibilità: il codice è scritto indipendentemente dai tipi derivati, nuovi tipi possono essere aggiunti senza dover apportare modifiche a quanto già sviluppato</li>
+<li><em>Aumento di generalità</em><ul>
+<li>È il runtime a doversi occupare delle specificità, non il programmatore</li>
+</ul>
+</li>
+<li><em>Estendibilità</em><ul>
+<li>Il codice è scritto indipendentemente dai tipi derivati</li>
+<li>Nuovi tipi possono essere aggiunti...</li>
+<li>Senza dover apportare modifiche a quanto già sviluppato</li>
+</ul>
+</li>
 </ul></article>
  
 </slide>
@@ -523,8 +606,8 @@ public:
       <ul>
 <li>Quando si eredita una funzione virtuale con un parametro di default, è bene non cambiarne il valore</li>
 <li>Motivazione<ul>
-<li>Le funzioni virtuali usano dynamic binding</li>
-<li>I parametri di default usano static binding</li>
+<li>Le funzioni virtuali usano <em>dynamic binding</em></li>
+<li>I parametri di default usano <em>static binding</em></li>
 </ul>
 </li>
 </ul></article>
@@ -534,73 +617,19 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Upcasting e downcasting</h2>
+      <h2>Distruttori delle classi base</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>Il casting da un tipo discendente a un tipo antenato è detto <strong>upcasting</strong> ed è sicuro</li>
-<li>Il casting da un tipo antenato a un tipo discendente è detto <strong>downcasting</strong> ed è pericoloso</li>
-<li><strong>Dynamic cast</strong> per downcasting sicuro, su puntatori<ul>
-<li><code>dynamic_cast &lt; new_type &gt; ( expression )</code></li>
-<li>Se il cast riesce (cioè se il tipo dinamico corrisponde al tipo che si vuole ottenere)...</li>
-<li>Restituisce un puntatore al nuovo tipo</li>
-<li>Altrimenti restituisce <code>nullptr</code></li>
+<li>Se si dealloca un oggetto di una classe derivata...<ul>
+<li>Attraverso un puntatore alla classe base...</li>
+<li>E la classe base ha un distruttore non virtuale</li>
+<li>⇒ Il risultato è indefinito</li>
 </ul>
 </li>
+<li>È bene dichiarare <em>virtuali</em> i distruttori delle classi base</li>
 </ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Ereditarietà multipla</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Una classe derivata può avere più di una classe base</li>
-<li>Possono esserci situazioni ambigue</li>
-<li>Richiede una conoscenza approfondita del linguaggio</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Operatori di assegnamento in classi derivate</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Una classe derivata quando sovraccarica l’operatore di assegnamento può fare uso dell’operatore di assegnamento della classe base</li>
-</ul>
-<pre class="prettyprint" data-lang="C++"><code>Derived&amp; Derived::operator=(const Derived&amp; rtside)
-{
-    Base::operator=(rtSide);
-    //…
-}
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Costruttori di copia in classi derivate</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Una classe derivata quando sovraccarica il costruttore di copia può fare uso del costruttore di copia della classe base</li>
-</ul>
-<pre class="prettyprint" data-lang="C++"><code>Derived::Derived(const Derived&amp; obj) : Base(obj), …
-{
-    // …
-}
-</code></pre></article>
  
 </slide>
 

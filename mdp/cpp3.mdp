@@ -124,6 +124,33 @@ title: Distruttori in classi derivate
 
 ---
 
+title: Operatori di assegnamento in classi derivate
+
+- Una classe derivata quando sovraccarica l’operatore di assegnamento può fare uso dell’operatore di assegnamento della classe base
+
+code: C++
+
+    Derived& Derived::operator=(const Derived& rtside)
+    {
+        Base::operator=(rtSide);
+        //…
+    }
+
+---
+
+title: Costruttori di copia in classi derivate
+
+- Una classe derivata quando sovraccarica il costruttore di copia può fare uso del costruttore di copia della classe base
+
+code: C++
+
+    Derived::Derived(const Derived& obj) : Base(obj), …
+    {
+        // …
+    }
+
+---
+
 title: Relazioni tra oggetti
 
 - Relazione “**is a**”
@@ -164,6 +191,41 @@ title: Ereditarietà protetta e privata
 
 ---
 
+title: Ereditarietà multipla
+
+- Una classe derivata può avere più di una classe base
+- Possono esserci situazioni ambigue
+- Richiede una conoscenza approfondita del linguaggio
+
+---
+
+title: The slicing problem
+
+- Assegnamento di un oggetto di una classe derivata ad una *variabile della sua classe base*
+    - Variabili e funzioni membro aggiunte dalla classe derivata vengono perse
+- Il problema può essere risolto usando:
+    - *Puntatori ad oggetti*
+    - *Funzioni virtuali*
+
+---
+
+title: Upcasting e downcasting
+
+- Il casting da un tipo discendente a un tipo antenato è detto **upcasting** ed è sicuro
+- Il casting da un tipo antenato a un tipo discendente è detto **downcasting** ed è pericoloso
+- **Dynamic cast** per downcasting sicuro, su *puntatori*
+    - `dynamic_cast < new_type > ( expression )`
+    - Se il cast riesce (cioè se il tipo dinamico corrisponde al tipo che si vuole ottenere)...
+    - Restituisce un puntatore al nuovo tipo
+    - Altrimenti restituisce `nullptr`
+
+---
+
+title: Polimorfismo
+class: segue dark
+
+---
+
 title: Polimorfismo e funzioni virtuali
 
 - Polimorfismo e funzioni virtuali sono un meccanismo fondamentale per realizzare sistemi estensibili
@@ -194,8 +256,8 @@ title: Metodi virtuali
 title: Polimorfismo
 
 - Capacità di oggetti appartenenti a classi che derivano da una classe base comune di rispondere in modi diversi alla chiamata di una certa funzione
-- Si implementa tramite le funzioni virtuali
-- Chiamata di una funzione virtuale tramite un puntatore alla classe base:
+- Si implementa tramite le **funzioni virtuali**
+- Chiamata di una funzione virtuale tramite un *puntatore alla classe base*
     - Il programma sceglie la ridefinizione corretta della funzione
     - Nella classe derivata appropriata
 
@@ -203,17 +265,9 @@ title: Polimorfismo
 
 title: Polimorfismo
 
-- Se una funzione non virtuale è ridefinita in una classe derivata non si ha polimorfismo
-    - Se viene chiamata tramite un puntatore alla classe base, è utilizzata la versione della classe base
-    - Se viene chiamata tramite un puntatore alla classe derivata, è utilizzata la versione della classe derivata
-
----
-
-title: The slicing problem
-
-- Assegnamento di un oggetto di una classe derivata a una variabile della sua classe base
-- Variabili e funzioni membro aggiunte dalla classe derivata vengono perse
-- Il problema può essere risolto usando funzioni virtuali e puntatori
+- Se una funzione **non virtuale** è ridefinita in una classe derivata non si ha polimorfismo
+    - Se viene chiamata tramite un *puntatore alla classe base*, è utilizzata la versione della classe base
+    - Se viene chiamata tramite un *puntatore alla classe derivata*, è utilizzata la versione della classe derivata
 
 ---
 
@@ -232,9 +286,9 @@ title: Implementazione delle funzioni virtuali
 
 title: Classi astratte e funzioni virtuali pure
 
-- Se una funzione è virtuale pura la sua definizione non è necessaria
-- Una classe con una o più funzioni virtuali pure è detta astratta
-- Una classe astratta può essere usata solo come classe base per derivare altre classi, non si possono creare oggetti
+- Se una funzione è *virtuale pura* la sua definizione non è necessaria
+- Una classe con una o più funzioni virtuali pure è detta *astratta*
+- Una classe astratta può essere usata solo come classe base per derivare altre classi, *non si possono istanziare* oggetti
 
 code: C++
 
@@ -248,25 +302,22 @@ code: C++
 title: Ereditarietà di interfaccia e di implementazione
 
 - Con l’ereditarietà pubblica si può ereditare:
-    - La sola interfaccia (funzioni virtuali pure), oppure...
+    - La sola interfaccia (funzioni *virtuali pure*), oppure...
     - L’interfaccia più...
-    - Un’implementazione di default (funzioni virtuali)
-    - Un’implementazione obbligatoria (funzioni non virtuali)
+    - Un’implementazione di default (funzioni *virtuali*)
+    - Un’implementazione obbligatoria (funzioni *non virtuali*)
 - È bene non ridefinire le funzioni ereditate non virtuali
-
----
-
-title: Distruttori delle classi base
-
-- Se si dealloca un oggetto di una classe derivata attraverso un puntatore alla classe base e la classe base ha un distruttore non virtuale, il risultato è indefinito
-- È bene dichiarare virtuali i distruttori delle classi base
 
 ---
 
 title: Polimorfismo
 
-- Aumento di generalità: è il runtime a doversi occupare delle specificità, non il programmatore
-- Estendibilità: il codice è scritto indipendentemente dai tipi derivati, nuovi tipi possono essere aggiunti senza dover apportare modifiche a quanto già sviluppato
+- *Aumento di generalità*
+    - È il runtime a doversi occupare delle specificità, non il programmatore
+- *Estendibilità*
+    - Il codice è scritto indipendentemente dai tipi derivati
+    - Nuovi tipi possono essere aggiunti...
+    - Senza dover apportare modifiche a quanto già sviluppato
 
 ---
 
@@ -274,55 +325,18 @@ title: Funzioni virtuali e parametri di default
 
 - Quando si eredita una funzione virtuale con un parametro di default, è bene non cambiarne il valore
 - Motivazione
-    - Le funzioni virtuali usano dynamic binding
-    - I parametri di default usano static binding
+    - Le funzioni virtuali usano *dynamic binding*
+    - I parametri di default usano *static binding*
 
 ---
 
-title: Upcasting e downcasting
+title: Distruttori delle classi base
 
-- Il casting da un tipo discendente a un tipo antenato è detto **upcasting** ed è sicuro
-- Il casting da un tipo antenato a un tipo discendente è detto **downcasting** ed è pericoloso
-- **Dynamic cast** per downcasting sicuro, su puntatori
-    - `dynamic_cast < new_type > ( expression )`
-    - Se il cast riesce (cioè se il tipo dinamico corrisponde al tipo che si vuole ottenere)...
-    - Restituisce un puntatore al nuovo tipo
-    - Altrimenti restituisce `nullptr`
-
----
-
-title: Ereditarietà multipla
-
-- Una classe derivata può avere più di una classe base
-- Possono esserci situazioni ambigue
-- Richiede una conoscenza approfondita del linguaggio
-
----
-
-title: Operatori di assegnamento in classi derivate
-
-- Una classe derivata quando sovraccarica l’operatore di assegnamento può fare uso dell’operatore di assegnamento della classe base
-
-code: C++
-
-    Derived& Derived::operator=(const Derived& rtside)
-    {
-        Base::operator=(rtSide);
-        //…
-    }
-
----
-
-title: Costruttori di copia in classi derivate
-
-- Una classe derivata quando sovraccarica il costruttore di copia può fare uso del costruttore di copia della classe base
-
-code: C++
-
-    Derived::Derived(const Derived& obj) : Base(obj), …
-    {
-        // …
-    }
+- Se si dealloca un oggetto di una classe derivata...
+    - Attraverso un puntatore alla classe base...
+    - E la classe base ha un distruttore non virtuale
+    - ⇒ Il risultato è indefinito
+- È bene dichiarare *virtuali* i distruttori delle classi base
 
 ---
 
