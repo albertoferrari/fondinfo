@@ -164,7 +164,7 @@ title: Costruttore
 - Non può restituire un valore
 - Deve stare nella sezione pubblica della classe
 - Non può essere invocato come le altre funzioni membro
-- Definizione alternativa preferibile: sezione di inizializzazione (vedi)
+- Definizione alternativa preferibile: *lista di inizializzazione* (vedi)
 - Spesso si ha overloading dei costruttori
 
 ---
@@ -197,15 +197,15 @@ title: Costruttore di default
 
 ---
 
-title: Sezione di inizializzazione
+title: Lista di inizializzazione
 
 - Le variabili membro vengono create e inizializzate dal costruttore nell’ordine in cui sono definite nella classe
-- La sezione di inizializzazione è più efficiente per variabili membro di tipo classe
-- Le variabili membro possono essere inizializzate all’interno di una sezione di inizializzazione, mentre costanti, riferimenti e membri di tipo classe devono utilizzare tale costrutto
+- La lista di inizializzazione è più efficiente per variabili membro di tipo classe
+- Le variabili membro possono essere inizializzate all’interno di una lista di inizializzazione, mentre costanti, riferimenti e membri di tipo classe devono utilizzare tale costrutto
 
 ---
 
-title: Sezione di inizializzazione
+title: Lista di inizializzazione (2)
 
 code: C++
 

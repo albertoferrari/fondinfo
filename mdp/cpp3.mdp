@@ -87,7 +87,7 @@ title: Costruttori nelle classi derivate
 
 - I costruttori della classe base non sono ereditati
 - Per inizializzare le variabili ereditate…
-    - Un costruttore della classe derivata può invocare esplicitamente un costruttore della classe base
+    - Un costruttore della classe derivata può invocare esplicitamente un costruttore della classe base, nella *lista di inizializzazione*
     - Altrimenti, viene invocato automaticamente il costruttore di default della classe base
 
 code: C++
