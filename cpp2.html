@@ -38,7 +38,7 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Classi e Oggetti</h2>
+      <h2>Classi e oggetti</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -74,7 +74,7 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Membri Privati e Pubblici</h2>
+      <h2>Membri privati e pubblici</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -89,7 +89,7 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Sezioni Pubblica e Privata</h2>
+      <h2>Sezioni pubblica e privata</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -104,14 +104,14 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Classi: Utilizzo Pratico</h2>
+      <h2>Classi: utilizzo pratico</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>Una volta definita, la classe può essere usata per dichiarare oggetti, array, puntatori e riferimenti</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>Time sunset;
+<pre class="prettyprint" data-lang="C++"><code>Time sunset;
 Time arrayOfTimes[5];
 Time *pointerToTime;
 Time &amp;dinnerTime = sunset;
@@ -140,7 +140,7 @@ Time &amp;dinnerTime = sunset;
 <slide  >
   
     <hgroup>
-      <h2>Interfaccia ed Implementazione</h2>
+      <h2>Interfaccia ed implementazione</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -166,7 +166,7 @@ Time &amp;dinnerTime = sunset;
 <slide  >
   
     <hgroup>
-      <h2>Programmazione Orientata agli Oggetti</h2>
+      <h2>Programmazione orientata agli oggetti</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -181,11 +181,11 @@ Time &amp;dinnerTime = sunset;
 <slide  >
   
     <hgroup>
-      <h2>Classe di Esempio: Interfaccia</h2>
+      <h2>Classe di esempio: interfaccia</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>// prevent multiple inclusions of header file
+      <pre class="prettyprint" data-lang="C++"><code>// prevent multiple inclusions of header file
 #ifndef TIME1_H
 #define TIME1_H
 // Time abstract data type definition
@@ -208,11 +208,11 @@ private:
 <slide  >
   
     <hgroup>
-      <h2>Classe di Esempio: Implementazione</h2>
+      <h2>Classe di esempio: implementazione</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>…
+      <pre class="prettyprint" data-lang="C++"><code>…
 #include "time1.h"
 Time::Time() { hour = minute = second = 0; }
 void Time::setTime( int h, int m, int s ) {
@@ -237,11 +237,11 @@ void Time::printStandard() {
 <slide  >
   
     <hgroup>
-      <h2>Classe di Esempio: Utilizzo</h2>
+      <h2>Classe di esempio: utilizzo</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>…
+      <pre class="prettyprint" data-lang="C++"><code>…
 #include "time1.h"
 int main() {
     Time t1;
@@ -279,7 +279,7 @@ int main() {
 <ul>
 <li>Usata per operazioni di inizializzazione</li>
 <li>Deve avere lo stesso nome della classe</li>
-<li>Non può ritornare un valore</li>
+<li>Non può restituire un valore</li>
 <li>Deve stare nella sezione pubblica della classe</li>
 <li>Non può essere invocato come le altre funzioni membro</li>
 <li>Definizione alternativa preferibile: sezione di inizializzazione (vedi)</li>
@@ -291,7 +291,7 @@ int main() {
 <slide  >
   
     <hgroup>
-      <h2>Costruttore senza Argomenti</h2>
+      <h2>Costruttore senza argomenti</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -307,7 +307,7 @@ int main() {
 <slide  >
   
     <hgroup>
-      <h2>Chiamata Esplicita del Costruttore</h2>
+      <h2>Chiamata esplicita del costruttore</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -328,7 +328,7 @@ int main() {
 <slide  >
   
     <hgroup>
-      <h2>Costruttore di Default</h2>
+      <h2>Costruttore di default</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -344,7 +344,7 @@ int main() {
 <slide  >
   
     <hgroup>
-      <h2>Sezione di Inizializzazione</h2>
+      <h2>Sezione di inizializzazione</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -359,11 +359,11 @@ int main() {
 <slide  >
   
     <hgroup>
-      <h2>Sezione di Inizializzazione</h2>
+      <h2>Sezione di inizializzazione</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>class Increment {
+      <pre class="prettyprint" data-lang="C++"><code>class Increment {
 public:
     Increment(int c = 0, int d = 1);
     void addDelta() { count += delta; }
@@ -385,7 +385,7 @@ Increment::Increment(int c, int d)
 <slide  >
   
     <hgroup>
-      <h2>Variabili Membro di Tipo Classe</h2>
+      <h2>Membri di tipo classe</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -418,7 +418,7 @@ Increment::Increment(int c, int d)
 <slide  >
   
     <hgroup>
-      <h2>Il Modificatore const: 1° Uso</h2>
+      <h2>Modificatore const: 1° uso</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -433,7 +433,7 @@ Increment::Increment(int c, int d)
 <slide  >
   
     <hgroup>
-      <h2>Il Modificatore const: 2° Uso</h2>
+      <h2>Modificatore const: 2° uso</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -448,12 +448,12 @@ Increment::Increment(int c, int d)
 <slide  >
   
     <hgroup>
-      <h2>Reference come Valore di Ritorno</h2>
+      <h2>Reference come valore di ritorno</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>E’ possibile per una funzione membro pubblica ritornare una reference a membri privati della classe</li>
+<li>E’ possibile per una funzione membro pubblica restituire una reference a membri privati della classe</li>
 <li>Per quanto sintatticamente corretta, questa operazione può violare il principio di information hiding</li>
 </ul></article>
  
@@ -462,11 +462,11 @@ Increment::Increment(int c, int d)
 <slide  >
   
     <hgroup>
-      <h2>Reference come Valore di Ritorno (2)</h2>
+      <h2>Reference come valore di ritorno (2)</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>#ifndef TIME4_H
+      <pre class="prettyprint" data-lang="C++"><code>#ifndef TIME4_H
 #define TIME4_H
 class Time {
 public:
@@ -503,7 +503,7 @@ private:
 <slide  >
   
     <hgroup>
-      <h2>Membri static: Variabili</h2>
+      <h2>Membri static: variabili</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -520,7 +520,7 @@ private:
 <slide  >
   
     <hgroup>
-      <h2>Membri static: Funzioni</h2>
+      <h2>Membri static: funzioni</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -583,7 +583,7 @@ private:
 <slide  >
   
     <hgroup>
-      <h2>Overloading di operatori come funzioni membro</h2>
+      <h2>Operatori come funzioni membro</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -637,7 +637,7 @@ private:
 <slide  >
   
     <hgroup>
-      <h2>Overloading di operatori come funzioni non membro</h2>
+      <h2>Operatori come funzioni non membro</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -699,7 +699,7 @@ private:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>#include &lt;iostream&gt;
+      <pre class="prettyprint" data-lang="C++"><code>#include &lt;iostream&gt;
 using std::cout;
 using std::endl;
 class Count {
@@ -722,17 +722,17 @@ void setX( Count &amp;c, int val ) {
 <slide  >
   
     <hgroup>
-      <h2>Returning by const value</h2>
+      <h2>Valore di ritorno const</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>Se una funzione ritorna un oggetto, l’uso di const per il valore ritornato impedisce che l’oggetto possa essere modificato<ul>
+<li>Se una funzione restituisce un oggetto, l’uso di const per il valore restituito impedisce che l’oggetto possa essere modificato<ul>
 <li>Es: (m1+m2).input(); // compiler error</li>
 </ul>
 </li>
-<li>Per le funzioni accessor che ritornano variabili membro di tipo classe è bene usare const per il valore ritornato</li>
-<li>Ritornare valori di tipi predefiniti come const non ha senso</li>
+<li>Per le funzioni accessor che restituiscono variabili membro di tipo classe è bene usare const per il valore restituito</li>
+<li>Restituire valori di tipi predefiniti come const non ha senso</li>
 </ul></article>
  
 </slide>
@@ -777,7 +777,7 @@ void setX( Count &amp;c, int val ) {
 <li>cin &gt;&gt; object; // operator&gt;&gt;(cin, object);</li>
 </ul>
 </li>
-<li>Gli operatori &lt;&lt; e &gt;&gt; ritornano rispettivamente un oggetto ostream e istream</li>
+<li>Gli operatori &lt;&lt; e &gt;&gt; restituiscono rispettivamente un oggetto ostream e istream</li>
 <li>In questo modo, si possono concatenare più chiamate all’operatore stesso<ul>
 <li>cout &lt;&lt; object1 &lt;&lt; object2;</li>
 </ul>
@@ -832,7 +832,7 @@ void setX( Count &amp;c, int val ) {
 <li>Se si fornisce un operatore <code>=</code>...</li>
 <li>Evitare auto-assegnamenti, o rischio memory-leak</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>// Overloaded = operator; avoids self assignment
+<pre class="prettyprint" data-lang="C++"><code>// Overloaded = operator; avoids self assignment
 const String &amp;String::operator=(const String &amp;right) {
     cout &lt;&lt; "operator= called\n";
     if ( &amp;right != this ) { // avoid self assignment
@@ -892,13 +892,13 @@ const String &amp;String::operator=(const String &amp;right) {
     </hgroup>
     <article >
       <ul>
-<li>Operatori ++ e -- predefiniti ritornano…<ul>
+<li>Operatori ++ e -- predefiniti restituiscono…<ul>
 <li>Per riferimento nella forma prefissa</li>
 <li>Per valore nella forma postfissa</li>
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>// Preincrement operator overloaded as a member function.
+<pre class="prettyprint" data-lang="C++"><code>// Preincrement operator overloaded as a member function.
 Date &amp;Date::operator++() {
     helpIncrement(); // The increment is in this utility function
     return *this; // reference return to create an lvalue
@@ -925,7 +925,7 @@ Date Date::operator++(int) {
     <article >
       <ul>
 <li>L’operatore <code>[]</code> deve essere sovraccaricato come membro</li>
-<li>Se si vuole usare il valore ritornato come l-value deve ritornare una reference</li>
+<li>Se si vuole usare il valore restituito come l-value, deve essere una reference</li>
 <li>Il parametro indice può essere di qualsiasi tipo ed è l’argomento della chiamata alla funzione membro</li>
 </ul></article>
  
@@ -980,7 +980,7 @@ Date Date::operator++(int) {
 <slide  >
   
     <hgroup>
-      <h2>Suddivisione del Codice in File</h2>
+      <h2>Suddivisione del codice in file</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1002,7 +1002,7 @@ Date Date::operator++(int) {
 <slide  >
   
     <hgroup>
-      <h2>Regole per Incapsulamento</h2>
+      <h2>Regole per incapsulamento</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1017,7 +1017,7 @@ Date Date::operator++(int) {
 <slide  >
   
     <hgroup>
-      <h2>Compilazione Separata</h2>
+      <h2>Compilazione separata</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1033,7 +1033,7 @@ Date Date::operator++(int) {
 <slide  >
   
     <hgroup>
-      <h2>Compilazione Separata (2)</h2>
+      <h2>Compilazione separata (2)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1078,7 +1078,7 @@ Date Date::operator++(int) {
 <slide  >
   
     <hgroup>
-      <h2>Makefile: Esempio</h2>
+      <h2>Makefile: esempio</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1095,7 +1095,7 @@ g++ -c -W -Wall -pedantic dtime.cpp
 <slide  >
   
     <hgroup>
-      <h2>Vantaggi della Compilazione Separata</h2>
+      <h2>Vantaggi della compilazione separata</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1117,11 +1117,11 @@ g++ -c -W -Wall -pedantic dtime.cpp
 <slide  >
   
     <hgroup>
-      <h2>Esempio: Inclusione Ripetuta</h2>
+      <h2>Esempio: inclusione ripetuta</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>// classA.h
+      <pre class="prettyprint" data-lang="C++"><code>// classA.h
 class A {
 public:
     // ...
@@ -1162,10 +1162,10 @@ implB.cpp
 <li>Un header file può includere altri header file</li>
 <li>Per evitare che il contenuto di un header file venga incluso più volte è necessario racchiudere il codice tra queste due sezioni:</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>#ifndef NOMEHEADER_H
+<pre class="prettyprint" data-lang="C++"><code>#ifndef NOMEHEADER_H
 #define NOMEHEADER_H
 </code></pre>
-<pre class="prettyprint" data-lang="c++"><code>#endif
+<pre class="prettyprint" data-lang="C++"><code>#endif
 </code></pre>
 <ul>
 <li>Come identificatore si usa il nome del file in maiuscolo e con l’underscore al posto del punto</li>
@@ -1177,14 +1177,14 @@ implB.cpp
 <slide  >
   
     <hgroup>
-      <h2>Esempio: Inclusione Ripetuta (2)</h2>
+      <h2>Esempio: inclusione ripetuta (2)</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>classA.h</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>#ifndef CLASSA_H
+<pre class="prettyprint" data-lang="C++"><code>#ifndef CLASSA_H
 #define CLASSA_H
 
 class A
@@ -1196,7 +1196,7 @@ class A
 <ul>
 <li>classB.h</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>#ifndef CLASSB_H
+<pre class="prettyprint" data-lang="C++"><code>#ifndef CLASSB_H
 #define CLASSB_H
 #include “classA.h”
 class B
@@ -1215,7 +1215,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Namespace e Direttiva using</h2>
+      <h2>Namespace e direttiva using</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1223,7 +1223,7 @@ class B
 <li>Un namespace è un insieme di definizioni di nomi (classi, funzioni, …)</li>
 <li>Per creare un namespace</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>namespace Name_Space_Name
+<pre class="prettyprint" data-lang="C++"><code>namespace Name_Space_Name
 { /* Some code */ }
 </code></pre>
 <ul>
@@ -1231,7 +1231,7 @@ class B
 <li>Lo scope della direttiva using va dal punto di occorrenza alla fine del file o del blocco</li>
 <li>Se il codice non è messo esplicitamente in un namespace è nel namespace globale (accessibile ovunque)</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>using namespace Name_Space_Name;
+<pre class="prettyprint" data-lang="C++"><code>using namespace Name_Space_Name;
 </code></pre></article>
  
 </slide>
@@ -1256,7 +1256,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Differenze tra Direttiva e Dichiarazione</h2>
+      <h2>Differenze tra direttiva e dichiarazione</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1274,7 +1274,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Qualificazione dei Nomi</h2>
+      <h2>Qualificazione dei nomi</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1296,7 +1296,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Come Specificare il namespace?</h2>
+      <h2>Come specificare il namespace?</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1312,7 +1312,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Namespace senza Nome</h2>
+      <h2>Namespace senza nome</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1331,7 +1331,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Nascondere le Funzioni Ausiliarie</h2>
+      <h2>Nascondere le funzioni ausiliarie</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1348,7 +1348,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Variabili Dinamiche di Tipo Classe</h2>
+      <h2>Variabili dinamiche di tipo classe</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1368,7 +1368,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Il Puntatore this</h2>
+      <h2>Puntatore this</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1383,7 +1383,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Operatore = di Default</h2>
+      <h2>Operatore = di default</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1399,7 +1399,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Shallow e Deep Copy</h2>
+      <h2>Shallow e deep copy</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1413,13 +1413,13 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Overloading dell’Operatore =</h2>
+      <h2>Overloading operatore =</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>L’operatore = predefinito ritorna il suo operando sinistro per reference (permettendo così assegnamenti in cascata)</li>
-<li>Quando si ridefinisce l’operatore = per una classe si ritorna l’oggetto chiamante per reference (usando il puntatore this)</li>
+<li>L’operatore = predefinito restituisce il suo operando sinistro per reference (permettendo così assegnamenti in cascata)</li>
+<li>Quando si ridefinisce l’operatore = per una classe si restituisce l’oggetto chiamante per reference (usando il puntatore this)</li>
 <li>Fare attenzione al caso dell’auto-assegnamento</li>
 </ul></article>
  
@@ -1445,7 +1445,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Costruttore di Copia</h2>
+      <h2>Costruttore di copia</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1457,7 +1457,7 @@ class B
 </li>
 <li>Viene chiamato automaticamente quando<ul>
 <li>Un oggetto viene dichiarato e inizializzato con un altro oggetto dello stesso tipo</li>
-<li>Una funzione ritorna un valore di tipo classe</li>
+<li>Una funzione restituisce un valore di tipo classe</li>
 <li>Un oggetto viene passato per valore a una funzione</li>
 </ul>
 </li>
@@ -1468,7 +1468,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>Costruttore di Copia di Default</h2>
+      <h2>Costruttore di copia di default</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1483,7 +1483,7 @@ class B
 <slide  >
   
     <hgroup>
-      <h2>The Big Three</h2>
+      <h2>The big three</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1511,7 +1511,7 @@ class B
     <br>
     Ingegneria dell'Informazione, UniPR
     <br>
-    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+    <a href="http://sowide.unipr.it/tomamic">sowide.unipr.it/tomamic</a>
   </p>
 </slide>
 

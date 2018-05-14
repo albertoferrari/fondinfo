@@ -4,7 +4,7 @@ figure: images/misc/cpp-logo.jpg
 
 ---
 
-title: Classi e Oggetti
+title: Classi e oggetti
 
 - Una classe è un tipo che ha variabili membro e funzioni membro
 - Il valore di una variabile di un tipo classe è detto oggetto
@@ -24,7 +24,7 @@ title: Incapsulamento
 
 ---
 
-title: Membri Privati e Pubblici
+title: Membri privati e pubblici
 
 - I membri privati possono essere referenziati solo all’interno delle definizioni delle funzioni membro
 - I membri pubblici possono essere referenziati ovunque
@@ -32,7 +32,7 @@ title: Membri Privati e Pubblici
 
 ---
 
-title: Sezioni Pubblica e Privata
+title: Sezioni pubblica e privata
 
 - Generalmente si definisce una sola sezione pubblica e una sola sezione privata
 - Generalmente la sezione pubblica compare prima (per maggior chiarezza verso chi legge il codice)
@@ -40,11 +40,11 @@ title: Sezioni Pubblica e Privata
 
 ---
 
-title: Classi: Utilizzo Pratico
+title: Classi: utilizzo pratico
 
 - Una volta definita, la classe può essere usata per dichiarare oggetti, array, puntatori e riferimenti
 
-code: c++
+code: C++
 
     Time sunset;
     Time arrayOfTimes[5];
@@ -64,7 +64,7 @@ title: Funzioni accessor e mutator
 
 ---
 
-title: Interfaccia ed Implementazione
+title: Interfaccia ed implementazione
 
 - L’interfaccia di una classe consiste di
     - Dichiarazioni delle funzioni membro pubbliche
@@ -79,7 +79,7 @@ title: Interfaccia ed Implementazione
 
 ---
 
-title: Programmazione Orientata agli Oggetti
+title: Programmazione orientata agli oggetti
 
 - Un programmatore deve poter usare la classe conoscendo solo l’interfaccia
 - Vantaggio: è possibile cambiare l’implementazione senza dover cambiare qualsiasi altro codice che usi la classe
@@ -87,9 +87,9 @@ title: Programmazione Orientata agli Oggetti
 
 ---
 
-title: Classe di Esempio: Interfaccia
+title: Classe di esempio: interfaccia
 
-code: c++
+code: C++
 
     // prevent multiple inclusions of header file
     #ifndef TIME1_H
@@ -110,9 +110,9 @@ code: c++
 
 ---
 
-title: Classe di Esempio: Implementazione
+title: Classe di esempio: implementazione
 
-code: c++
+code: C++
 
     …
     #include "time1.h"
@@ -135,9 +135,9 @@ code: c++
 
 ---
 
-title: Classe di Esempio: Utilizzo
+title: Classe di esempio: utilizzo
 
-code: c++
+code: C++
 
     …
     #include "time1.h"
@@ -161,7 +161,7 @@ title: Costruttore
     È una funzione membro che viene chiamata automaticamente quando viene dichiarato un oggetto della classe
 - Usata per operazioni di inizializzazione
 - Deve avere lo stesso nome della classe
-- Non può ritornare un valore
+- Non può restituire un valore
 - Deve stare nella sezione pubblica della classe
 - Non può essere invocato come le altre funzioni membro
 - Definizione alternativa preferibile: sezione di inizializzazione (vedi)
@@ -169,14 +169,14 @@ title: Costruttore
 
 ---
 
-title: Costruttore senza Argomenti
+title: Costruttore senza argomenti
 
 - Quando si dichiara una variabile di tipo classe e si vuole invocato il costruttore senza argomenti, non si usano le parentesi
     - Esempio: DayOfYear date;
 
 ---
 
-title: Chiamata Esplicita del Costruttore
+title: Chiamata esplicita del costruttore
 
 - Il costruttore può essere chiamato esplicitamente per modificare le variabili membro di un oggetto
 - Crea un oggetto anonimo e lo inizializza con i valori degli argomenti
@@ -188,7 +188,7 @@ title: Chiamata Esplicita del Costruttore
 
 ---
 
-title: Costruttore di Default
+title: Costruttore di default
 
 - Un costruttore senza argomenti è detto costruttore di default
 - Se non definiamo nessun costruttore viene creato un costruttore di default
@@ -197,7 +197,7 @@ title: Costruttore di Default
 
 ---
 
-title: Sezione di Inizializzazione
+title: Sezione di inizializzazione
 
 - Le variabili membro vengono create e inizializzate dal costruttore nell’ordine in cui sono definite nella classe
 - La sezione di inizializzazione è più efficiente per variabili membro di tipo classe
@@ -205,9 +205,9 @@ title: Sezione di Inizializzazione
 
 ---
 
-title: Sezione di Inizializzazione
+title: Sezione di inizializzazione
 
-code: c++
+code: C++
 
     class Increment {
     public:
@@ -227,7 +227,7 @@ code: c++
 
 ---
 
-title: Variabili Membro di Tipo Classe
+title: Membri di tipo classe
 
 - Una classe può avere una variabile membro di tipo classe (ovvio: i programmi sono costruiti da classi!)
 - Notazione speciale per invocare il costruttore della variabile membro nel costruttore della classe più esterna
@@ -246,7 +246,7 @@ title: Distruttori
 
 ---
 
-title: Il Modificatore const: 1° Uso
+title: Modificatore const: 1° uso
 
 - Per un parametro di tipo classe il passaggio call-by-reference è più efficiente del passaggio call-by-value
 - Per i parametri di tipo classe va sempre usato il passaggio call-by-reference
@@ -254,7 +254,7 @@ title: Il Modificatore const: 1° Uso
 
 ---
 
-title: Il Modificatore const: 2° Uso
+title: Modificatore const: 2° uso
 
 - Altro uso di const: per segnalare che una funzione membro non modifica l’oggetto chiamante
 - Va messo sia nella dichiarazione che nella definizione
@@ -262,16 +262,16 @@ title: Il Modificatore const: 2° Uso
 
 ---
 
-title: Reference come Valore di Ritorno
+title: Reference come valore di ritorno
 
-- E’ possibile per una funzione membro pubblica ritornare una reference a membri privati della classe
+- E’ possibile per una funzione membro pubblica restituire una reference a membri privati della classe
 - Per quanto sintatticamente corretta, questa operazione può violare il principio di information hiding
 
 ---
 
-title: Reference come Valore di Ritorno (2)
+title: Reference come valore di ritorno (2)
 
-code: c++
+code: C++
 
     #ifndef TIME4_H
     #define TIME4_H
@@ -299,7 +299,7 @@ title: Funzioni inline
 
 ---
 
-title: Membri static: Variabili
+title: Membri static: variabili
 
 - Una variabile membro static è condivisa da tutti gli oggetti di una classe
 - Usata dagli oggetti della classe per comunicare e coordinarsi
@@ -309,7 +309,7 @@ title: Membri static: Variabili
 
 ---
 
-title: Membri static: Funzioni
+title: Membri static: funzioni
 
 - Una funzione membro static accede solo ai membri static
 - Non può accedere ai dati dell’oggetto chiamante
@@ -343,7 +343,7 @@ title: Overloading di operatori
 
 ---
 
-title: Overloading di operatori come funzioni membro
+title: Operatori come funzioni membro
 
 - Il primo operando è l’oggetto chiamante, quindi:
     - Gli operatori binari hanno un solo parametro
@@ -373,7 +373,7 @@ title: Costruttori e conversione di tipo automatica
 
 ---
 
-title: Overloading di operatori come funzioni non membro
+title: Operatori come funzioni non membro
 
 - È possibile effettuare l’overloading semplicemente dichiarando le funzioni, senza necessità che siano membro della classe
 - Svantaggio: non potendo accedere ai campi privati, hanno necessità di utilizzare accessor
@@ -406,7 +406,7 @@ title: Funzioni friend
 
 title: Funzioni friend: esempio
 
-code: c++
+code: C++
 
     #include <iostream>
     using std::cout;
@@ -427,12 +427,12 @@ code: c++
 
 ---
 
-title: Returning by const value
+title: Valore di ritorno const
 
-- Se una funzione ritorna un oggetto, l’uso di const per il valore ritornato impedisce che l’oggetto possa essere modificato
+- Se una funzione restituisce un oggetto, l’uso di const per il valore restituito impedisce che l’oggetto possa essere modificato
     - Es: (m1+m2).input(); // compiler error
-- Per le funzioni accessor che ritornano variabili membro di tipo classe è bene usare const per il valore ritornato
-- Ritornare valori di tipi predefiniti come const non ha senso
+- Per le funzioni accessor che restituiscono variabili membro di tipo classe è bene usare const per il valore restituito
+- Restituire valori di tipi predefiniti come const non ha senso
 
 
 ---
@@ -454,7 +454,7 @@ title: Operatori << e >>
 
 - Di fatto le chiamate effettuate sono nella forma:
     - cin >> object; // operator>>(cin, object);
-- Gli operatori << e >> ritornano rispettivamente un oggetto ostream e istream
+- Gli operatori << e >> restituiscono rispettivamente un oggetto ostream e istream
 - In questo modo, si possono concatenare più chiamate all’operatore stesso
     - cout << object1 << object2;
 
@@ -484,7 +484,7 @@ title: Auto-assegnamento
 - Se si fornisce un operatore `=`...
 - Evitare auto-assegnamenti, o rischio memory-leak
 
-code: c++
+code: C++
 
     // Overloaded = operator; avoids self assignment
     const String &String::operator=(const String &right) {
@@ -521,11 +521,11 @@ title: Operatori ++ e --
 
 title: Operatori ++ e --
 
-- Operatori ++ e -- predefiniti ritornano…
+- Operatori ++ e -- predefiniti restituiscono…
     - Per riferimento nella forma prefissa
     - Per valore nella forma postfissa
 
-code: c++
+code: C++
 
     // Preincrement operator overloaded as a member function.
     Date &Date::operator++() {
@@ -547,7 +547,7 @@ code: c++
 title: Operatore []
 
 - L’operatore `[]` deve essere sovraccaricato come membro
-- Se si vuole usare il valore ritornato come l-value deve ritornare una reference
+- Se si vuole usare il valore restituito come l-value, deve essere una reference
 - Il parametro indice può essere di qualsiasi tipo ed è l’argomento della chiamata alla funzione membro
 
 ---
@@ -576,7 +576,7 @@ title: Overloading: riassunto
 
 ---
 
-title: Suddivisione del Codice in File
+title: Suddivisione del codice in file
 
 - Separazione tra la classe e i programmi che la usano
     - Riuso: parti separate facilmente riusabili (libreria)
@@ -587,7 +587,7 @@ title: Suddivisione del Codice in File
 
 ---
 
-title: Regole per Incapsulamento
+title: Regole per incapsulamento
 
 - Rendere private tutte le variabili membro
 - Raggruppare definizione della classe, dichiarazioni degli operatori e commenti nel file di interfaccia (header file)
@@ -595,7 +595,7 @@ title: Regole per Incapsulamento
 
 ---
 
-title: Compilazione Separata
+title: Compilazione separata
 
 - Il file che contiene il programma che usa la classe si chiama file di applicazione
 - Sia l’implementazione che l’applicazione devono includere l’header file
@@ -604,7 +604,7 @@ title: Compilazione Separata
 
 ---
 
-title: Compilazione Separata (2)
+title: Compilazione separata (2)
 
 - Sorgenti
     - `dtime.cpp`
@@ -629,7 +629,7 @@ title: Comando make
 
 ---
 
-title: Makefile: Esempio
+title: Makefile: esempio
 
 code: make
 
@@ -642,7 +642,7 @@ code: make
 
 ---
 
-title: Vantaggi della Compilazione Separata
+title: Vantaggi della compilazione separata
 
 - Separando l’interfaccia e l’implementazione della classe dall’applicazione
     - Posso riusare la classe in diversi programmi senza riscriverla
@@ -653,9 +653,9 @@ title: Vantaggi della Compilazione Separata
 
 ---
 
-title: Esempio: Inclusione Ripetuta
+title: Esempio: inclusione ripetuta
 
-code: c++
+code: C++
 
     // classA.h
     class A {
@@ -691,11 +691,12 @@ title: Uso di #ifndef
 - Un header file può includere altri header file
 - Per evitare che il contenuto di un header file venga incluso più volte è necessario racchiudere il codice tra queste due sezioni:
 
-code: c++
+code: C++
 
     #ifndef NOMEHEADER_H
     #define NOMEHEADER_H
-code: c++
+
+code: C++
 
     #endif
 
@@ -704,11 +705,11 @@ code: c++
 
 ---
 
-title: Esempio: Inclusione Ripetuta (2)
+title: Esempio: inclusione ripetuta (2)
 
 - classA.h
 
-code: c++
+code: C++
 
     #ifndef CLASSA_H
     #define CLASSA_H
@@ -721,7 +722,7 @@ code: c++
 
 - classB.h
 
-code: c++
+code: C++
 
     #ifndef CLASSB_H
     #define CLASSB_H
@@ -737,12 +738,12 @@ code: c++
 
 ---
 
-title: Namespace e Direttiva using
+title: Namespace e direttiva using
 
 - Un namespace è un insieme di definizioni di nomi (classi, funzioni, …)
 - Per creare un namespace
 
-code: c++
+code: C++
 
     namespace Name_Space_Name
     { /* Some code */ }
@@ -751,7 +752,7 @@ code: c++
 - Lo scope della direttiva using va dal punto di occorrenza alla fine del file o del blocco
 - Se il codice non è messo esplicitamente in un namespace è nel namespace globale (accessibile ovunque)
 
-code: c++
+code: C++
 
     using namespace Name_Space_Name;
 
@@ -765,7 +766,7 @@ title: Dichiarazione using
 
 ---
 
-title: Differenze tra Direttiva e Dichiarazione
+title: Differenze tra direttiva e dichiarazione
 
 - La direttiva introduce tutti i nomi del namespace, la dichiarazione introduce un solo nome
 - La direttiva introduce i nomi del namespace solo potenzialmente
@@ -774,7 +775,7 @@ title: Differenze tra Direttiva e Dichiarazione
 
 ---
 
-title: Qualificazione dei Nomi
+title: Qualificazione dei nomi
 
 - Se uso una definizione di un nome poche volte, posso qualificare il nome ogni volta che lo uso
     - esempio: std::cin
@@ -785,7 +786,7 @@ title: Qualificazione dei Nomi
 
 ---
 
-title: Come Specificare il namespace?
+title: Come specificare il namespace?
 
 - Evitare l’uso della direttiva using all’inizio del file perché vanifica il meccanismo dei namespace
 - La maggior parte delle volte è preferibile l’uso della dichiarazione using
@@ -794,7 +795,7 @@ title: Come Specificare il namespace?
 
 ---
 
-title: Namespace senza Nome
+title: Namespace senza nome
 
 - Una unità di compilazione è costituita da un file e dagli header file da esso inclusi
 - Ogni unità di compilazione ha un namespace senza nome
@@ -804,7 +805,7 @@ title: Namespace senza Nome
 
 ---
 
-title: Nascondere le Funzioni Ausiliarie
+title: Nascondere le funzioni ausiliarie
 
 - Due modi:
     - Se la funzione accede ai dati dell’oggetto: funzione membro privata
@@ -812,7 +813,7 @@ title: Nascondere le Funzioni Ausiliarie
 
 ---
 
-title: Variabili Dinamiche di Tipo Classe
+title: Variabili dinamiche di tipo classe
 
 - Quando si usa l’operatore new con un tipo classe viene chiamato il costruttore
     - Es: MyClass *classPtr;
@@ -823,7 +824,7 @@ title: Variabili Dinamiche di Tipo Classe
 
 ---
 
-title: Il Puntatore this
+title: Puntatore this
 
 - this è un puntatore predefinito che punta all’oggetto chiamante
 - Non si può cambiare il suo valore
@@ -831,7 +832,7 @@ title: Il Puntatore this
 
 ---
 
-title: Operatore = di Default
+title: Operatore = di default
 
 - Copia i valori dell’oggetto sorgente (r-value) nell’oggetto destinazione (l-value)
 - Se la classe include una variabile membro di tipo puntatore, dopo l’assegnamento il puntatore dell’oggetto destinazione punta alla stessa area di memoria a cui punta il puntatore dell’oggetto sorgente
@@ -840,17 +841,17 @@ title: Operatore = di Default
 
 ---
 
-title: Shallow e Deep Copy
+title: Shallow e deep copy
 
 - La shallow copy (o “copia superficiale”) di A in B si realizza copiando byte a byte i valori presenti in A. In questo modo viene di fatto copiato il solo oggetto, ma non gli oggetti “figli” a cui il “padre” fa riferimento
 - La deep copy si realizza invece copiando anche tutti gli oggetti “figli” facenti parte dell’oggetto “padre”
 
 ---
 
-title: Overloading dell’Operatore =
+title: Overloading operatore =
 
-- L’operatore = predefinito ritorna il suo operando sinistro per reference (permettendo così assegnamenti in cascata)
-- Quando si ridefinisce l’operatore = per una classe si ritorna l’oggetto chiamante per reference (usando il puntatore this)
+- L’operatore = predefinito restituisce il suo operando sinistro per reference (permettendo così assegnamenti in cascata)
+- Quando si ridefinisce l’operatore = per una classe si restituisce l’oggetto chiamante per reference (usando il puntatore this)
 - Fare attenzione al caso dell’auto-assegnamento
 
 ---
@@ -865,19 +866,19 @@ title: Distruttore
 
 ---
 
-title: Costruttore di Copia
+title: Costruttore di copia
 
 - È un costruttore con un parametro dello stesso tipo della classe (const call-by-ref)
     - const: deve semplicemente essere costruita una copia)
     - by reference: altrimenti si creerebbe un ciclo ricorsivo di chiamate!
 - Viene chiamato automaticamente quando
     - Un oggetto viene dichiarato e inizializzato con un altro oggetto dello stesso tipo
-    - Una funzione ritorna un valore di tipo classe
+    - Una funzione restituisce un valore di tipo classe
     - Un oggetto viene passato per valore a una funzione
 
 ---
 
-title: Costruttore di Copia di Default
+title: Costruttore di copia di default
 
 - Se non viene definito viene creato automaticamente
 - Il costruttore di copia di default fa una shallow copy
@@ -885,7 +886,7 @@ title: Costruttore di Copia di Default
 
 ---
 
-title: The Big Three
+title: The big three
 
 - Operatore `=`, distruttore e costruttore di copia vengono creati automaticamente dal compilatore
 - Se la classe usa puntatori e variabili dinamiche devono essere ri-definiti: non farlo è un grave errore logico

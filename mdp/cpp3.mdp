@@ -6,19 +6,20 @@ figure: images/misc/cpp-logo.jpg
 
 title: Ereditarietà
 
-- Una nuova classe (classe derivata) viene creata a partire da una classe esistente (classe base)
-- La classe derivata eredita le variabili membro e le funzioni membro della classe base
-- Eredita interfaccia e implementazione
+- Una nuova classe (*classe derivata*) viene creata a partire da una classe esistente (*classe base*)
+- Eredita interfaccia e implementazione della classe base
+    - Variabili membro (o *campi*)
+    - Funzioni membro (o *metodi*)
 - Può aggiungere variabili membro e funzioni membro
 
 ---
 
 title: Relazione “is a”
 
-- Un oggetto di una classe derivata può essere usato ovunque può essere usato uno della classe base
+- Un oggetto di una classe derivata può essere usato ovunque può essere usato uno della classe base (*Liskov*)
 - Un oggetto di una classe derivata ha più di un tipo
 
-code: c++
+code: C++
 
     class HourlyEmployee : public Employee {
     public:
@@ -33,16 +34,11 @@ code: c++
 
 title: Ridefinizione dei metodi
 
-- Una classe derivata può cambiare la definizione di una funzione membro ereditata (overriding)
-- In questo caso la definizione della classe derivata deve contenere la dichiarazione della funzione membro ereditata
-
----
-
-title: Accesso a un metodo della classe base
-
-- Una classe derivata può ridefinire una funzione della classe base
-    È comunque possibile invocare su un oggetto della classe derivata la versione della funzione data nella classe base
-- Per fare ciò si utilizza l’operatore ::, che in questo caso è obbligatorio, altrimenti la funzione chiamante continuerebbe in realtà a chiamare se stessa generando un loop
+- Una classe derivata può ridefinire un metodo della classe base (*overriding*)
+    - La classe derivata deve contenere la dichiarazione del metodo ereditato
+- È ancora possibile invocare la versione della classe base
+    - In questo caso, è obbligatorio utilizzare l’operatore `::`
+    - Altrimenti il metodo continuerebbe a chiamare se stesso, in *loop*
 
 ---
 
@@ -52,8 +48,8 @@ title: Overriding / overloading
     - Una funzione ridefinita in una *classe derivata* ha lo *stesso numero e tipo di parametri* della funzione della classe base
     - Sostituisce la funzione della classe base
 - **Overloading**
-    - Una funzione sovraccaricata in una classe derivata ha un diverso *numero e/o tipo di parametri* rispetto alla funzione della classe base
-    - La classe derivata ha entrambe le funzioni
+    - Una funzione sovraccaricata ha un diverso *numero e/o tipo di parametri*
+    - La classe ha entrambe le funzioni
     - Stesso meccanismo delle *normali funzioni*
 
 ---
@@ -94,7 +90,7 @@ title: Costruttori nelle classi derivate
     - Un costruttore della classe derivata può invocare esplicitamente un costruttore della classe base
     - Altrimenti, viene invocato automaticamente il costruttore di default della classe base
 
-code: c++
+code: C++
 
     HourlyEmployee::HourlyEmployee(string name, string number,
                                    double wageRate, double hours)
@@ -108,10 +104,10 @@ code: c++
 title: Ordine di chiamata dei costruttori
 
 - La chiamata del costruttore della classe base è la prima azione del costruttore della classe derivata
-- Se A ◅- B ◅- C, quando viene creato un oggetto di classe C…
-    - Prima viene chiamato un costruttore della classe A
-    - Poi un costruttore della classe B
-    - Poi vengono intraprese le rimanenti azioni del costruttore di classe C
+- Se `A ◅- B ◅- C`, quando viene creato un oggetto di classe `C`…
+    - Prima viene chiamato un costruttore della classe `A`
+    - Poi un costruttore della classe `B`
+    - Poi vengono intraprese le rimanenti azioni del costruttore di classe `C`
 
 ---
 
@@ -119,17 +115,17 @@ title: Distruttori in classi derivate
 
 - Quando il distruttore di una classe derivata è invocato, viene invocato automaticamente il distruttore della classe base
 - I distruttori sono chiamati in ordine inverso rispetto ai costruttori
-- Se A ◅- B ◅- C, quando termina lo scope di un oggetto di classe C…
-    - Viene chiamato prima il distruttore della classe C
-    - Poi quello della classe B
-    - Infine quello della classe A
+- Se `A ◅- B ◅- C`, quando termina lo scope di un oggetto di classe `C`…
+    - Viene chiamato prima il distruttore della classe `C`
+    - Poi quello della classe `B`
+    - Infine quello della classe `A`
 
 ---
 
 title: Relazioni tra oggetti
 
 - Relazione “**is a**”
-    - Esempio: a HourlyEmployee is an Employee
+    - Esempio: *a HourlyEmployee is an Employee*
     - Utile soprattutto per polimorfismo
     - Sempre possibile usare un oggetto di una sotto-classe al posto di un oggetto di una classe base
 - Relazione “**has a**”
@@ -150,7 +146,7 @@ title: Ereditarietà e riuso
 - Ma la classe derivata è strettamente dipendente dalla classe base, ne eredita anche l’interfaccia!
     - Per il semplice riuso è meglio far ricorso al contenimento
     - Oggetti incapsulati forniscono funzionalità di base
-    - Vedi Eckel, Thinking in C++: http://www.mindview.net/Books
+    - Vedi Eckel, *Thinking in C++*: <http://www.mindview.net/Books>
 
 ---
 
@@ -158,7 +154,7 @@ title: Ereditarietà protetta e privata
 
 - Ereditarietà protetta: i membri pubblici della classe base sono protetti nella classe derivata quando sono ereditati
 - Ereditarietà privata: nessun membro della classe base può essere referenziato nella classe derivata
-- La relazione “is a” non è valida
+- La relazione “*is a*” non è valida
 - Sono raramente usate
 
 ---
@@ -175,7 +171,7 @@ title: Operatori di assegnamento in classi derivate
 
 - Una classe derivata quando sovraccarica l’operatore di assegnamento può fare uso dell’operatore di assegnamento della classe base
 
-code: c++
+code: C++
 
     Derived& Derived::operator=(const Derived& rtside)
     {
@@ -189,7 +185,7 @@ title: Costruttori di copia in classi derivate
 
 - Una classe derivata quando sovraccarica il costruttore di copia può fare uso del costruttore di copia della classe base
 
-code: c++
+code: C++
 
     Derived::Derived(const Derived& obj) : Base(obj), …
     {
@@ -202,7 +198,7 @@ title: Polimorfismo e funzioni virtuali
 
 - Polimorfismo e funzioni virtuali sono un meccanismo fondamentale per realizzare sistemi estensibili
 - Consentono di trattare gli oggetti di tutte le classi di una gerarchia come se fossero oggetti della classe base
-- Risultato: scrittura di programmi più semplici (meno branching logic), in cui viene favorito il testing ed il mantenimento del codice
+- Risultato: scrittura di programmi più semplici (meno *branching logic*), in cui viene favorito il testing ed il mantenimento del codice
 
 ---
 
@@ -210,17 +206,17 @@ title: Metodi virtuali
 
 - Quando un metodo di una classe base è dichiarato virtuale…
 - Se invocato tramite un puntatore o un riferimento…
-    - Il programma sceglie a tempo di esecuzione la funzione della classe appropriata (late binding o dynamic binding)
+    - Il programma sceglie a tempo di esecuzione la funzione della classe appropriata (*late binding*, o *dynamic binding*)
 - Se invocato su un oggetto…
-    - La risoluzione del riferimento avviene a tempo di compilazione (static binding)
+    - La risoluzione del riferimento avviene a tempo di compilazione (*static binding*)
     - La funzione chiamata è quella della classe dell’oggetto (ottimizzazione)
 
 ---
 
 title: Metodi virtuali
 
-- Per specificare che una funzione è virtuale si include il modificatore virtual nella dichiarazione (non nella definizione)
-- Quando la definizione di una funzione virtuale viene cambiata in una classe derivata si parla di overriding
+- Per specificare che una funzione è virtuale si include il modificatore `virtual` nella dichiarazione (non nella definizione)
+- Quando la definizione di una funzione virtuale viene cambiata in una classe derivata si parla di *overriding*
 - La proprietà di essere una funzione virtuale viene ereditata lungo tutta la gerarchia
 
 ---
@@ -229,7 +225,9 @@ title: Polimorfismo
 
 - Capacità di oggetti appartenenti a classi che derivano da una classe base comune di rispondere in modi diversi alla chiamata di una certa funzione
 - Si implementa tramite le funzioni virtuali
-    - Alla chiamata di una funzione virtuale tramite un puntatore o un riferimento alla classe base, il programma sceglie la ridefinizione corretta della funzione nella classe derivata appropriata
+- Chiamata di una funzione virtuale tramite un puntatore o un riferimento alla classe base:
+    - Il programma sceglie la ridefinizione corretta della funzione
+    - Nella classe derivata appropriata
 
 ---
 
@@ -243,16 +241,9 @@ title: Polimorfismo
 
 title: The slicing problem
 
-- Assegnando un oggetto di una classe derivata a una variabile della sua classe base, le variabili e funzioni membro aggiunte dalla classe derivata vengono perse
+- Assegnamento di un oggetto di una classe derivata a una variabile della sua classe base
+- Variabili e funzioni membro aggiunte dalla classe derivata vengono perse
 - Il problema può essere risolto usando funzioni virtuali e puntatori
-
----
-
-title: Overriding e overloading
-
-- Il meccanismo di overriding è concettualmente molto diverso da quello di overloading, e non deve essere confuso con esso
-- L'overloading consente di definire in una stessa classe più metodi aventi lo stesso nome, ma che differiscano nella signature
-- L'overriding, invece, consente di ridefinire un metodo in una sottoclasse: il metodo originale e quello che lo ridefinisce hanno necessariamente la stessa firma, e solo a tempo di esecuzione si determina quale dei due deve essere eseguito
 
 ---
 
@@ -342,66 +333,66 @@ title: Template
 
 ---
 
-title: Template di Funzioni
+title: Template di funzioni
 
 - I template di funzioni supportano l’astrazione algoritmica: esprimere algoritmi in modo molto generale trascurando dettagli implementativi
-    - Esempio: scambio dei valori di due variabili
+- Esempio: scambio dei valori di due variabili
 
 ---
 
-title: Funzioni Template: Sintassi
+title: Funzioni template: sintassi
 
 - La dichiarazione e la definizione di una funzione template devono essere precedute dal prefisso di template
-    - template<class T>
+    - `template<class T>`
 - Una funzione template corrisponde a un insieme di definizioni di funzione, il compilatore ne produce una per ogni tipo per cui si usa il template
 
 ---
 
-title: Funzioni Template: Sintassi (2)
+title: Funzioni template: sintassi (2)
 
 - È possibile avere template di funzioni con più di un parametro di tipo
-    - template<class T1, class T2>
+    - `template<class T1, class T2>`
 - Generalmente si usano template di funzioni con un solo parametro di tipo
 
 ---
 
-title: Funzioni Template e Compilatori
+title: Funzioni template e compilatori
 
 - Molti compilatori non supportano la compilazione separata e richiedono che la definizione della funzione template sia nello stesso file in cui viene usata, prima della prima invocazione
-    È possibile mettere la definizione della funzione template in un file separato ed includere questo file
+- È possibile mettere la definizione della funzione template in un file separato ed includere questo file
 
 ---
 
-title: Definzione e Uso di Funzioni Template
+title: Definzione e uso di funzioni template
 
-    È buona norma scrivere prima una funzione ordinaria e, solo dopo che la si è verificata, convertirla in un template
+- È buona norma scrivere prima una funzione ordinaria e, solo dopo che la si è verificata, convertirla in un template
 - Una funzione template può essere usata per ogni tipo per cui il codice della funzione ha senso
 
 ---
 
-title: Template di Classi
+title: Template di classi
 
 - La definizione di una classe template deve essere preceduta da
-    - template<class T>
+    - `template<class T>`
 - Le funzioni membro sono template
 - Specificando il tipo è possibile dichiarare oggetti della classe template, usare il nome della classe come tipo di un parametro di una funzione, …
 
 ---
 
-title: Template di Classi (2)
+title: Template di classi (2)
 
 - Spesso le definizioni di classi template hanno restrizioni implicite sui tipi che possono essere sostituti al parametro
 - Molti compilatori non supportano la compilazione separata, occorre includere anche il file di implementazione nel file di applicazione
 
 ---
 
-title: Template ed Ereditarietà
+title: Template ed ereditarietà
 
-    È possibile definire una classe template derivata a partire da una classe base (anche non template)
+- È possibile definire una classe template derivata a partire da una classe base (anche non template)
 
 ---
 
-title: Gestione delle Eccezioni
+title: Gestione delle eccezioni
 
 - C++ fornisce strumenti per gestire situazioni eccezionali
 - Terminologia
@@ -412,7 +403,7 @@ title: Gestione delle Eccezioni
 
 title: Costrutto try-throw-catch
 
-code: c++
+code: C++
 
     try
     {
@@ -458,7 +449,7 @@ title: Blocco catch
 
 ---
 
-title: Classi di Eccezioni
+title: Classi di eccezioni
 
 - Sono classi i cui oggetti contengono l’informazione che si vuole lanciare al blocco catch
 - In questo modo si ottiene un diverso tipo per ogni possibile situazione eccezionale
@@ -466,7 +457,7 @@ title: Classi di Eccezioni
 
 ---
 
-title: Eccezioni Multiple
+title: Eccezioni multiple
 
 - Un blocco try può potenzialmente sollevare più eccezioni di tipi diversi
 - In ogni esecuzione verrà sollevata al massimo una eccezione
@@ -475,15 +466,15 @@ title: Eccezioni Multiple
 
 ---
 
-title: Blocco catch di Default
+title: Blocco catch di default
 
 - Quando in un blocco try viene sollevata un’eccezione, i blocchi catch che seguono sono considerati in ordine, viene eseguito il primo che intercetta quel tipo di eccezione
 - Blocco catch speciale che intercetta ogni tipo di eccezione, da usare come default
-    - catch(…) { cout << “Unexplained exception”;}
+    - `catch(...) { cout << “Unexplained exception”; }`
 
 ---
 
-title: Sollevare un’Eccezione in una Funzione
+title: Sollevare un’eccezione in una funzione
 
 - Spesso è utile ritardare la gestione di un’eccezione
 - Una funzione può sollevare un’eccezione e non intercettarla
@@ -492,7 +483,7 @@ title: Sollevare un’Eccezione in una Funzione
 
 ---
 
-title: Specifica delle Eccezioni
+title: Specifica delle eccezioni
 
 - Elenca le eccezioni che possono essere sollevate da una funzione e non vengono da essa intercettate
 - Deve apparire sia nella dichiarazione che nella definizione della funzione
@@ -500,14 +491,14 @@ title: Specifica delle Eccezioni
 
 ---
 
-title: Specifica delle Eccezioni ed Ereditarietà
+title: Specifica delle eccezioni ed ereditarietà
 
-- Se B->D, un’eccezione di tipo D viene gestita come se fosse di tipo B, anche rispetto alla specifica
+- Se `B->D`, un’eccezione di tipo `D` viene gestita come se fosse di tipo `B`, anche rispetto alla specifica
 - Quando si dà una nuova definizione o si fa overriding di una funzione ereditata, non si possono aggiungere eccezioni alla specifica, ma se ne possono eliminare
 
 ---
 
-title: Quando Sollevare un’Eccezione
+title: Quando sollevare un’eccezione
 
 - Se la funzione è in grado di gestire in modo semplice il caso speciale, non deve sollevare l’eccezione
 - Se invece il modo in cui il caso speciale va gestito dipende da dove la funzione è usata, si delega la gestione al livello superiore (le eccezioni non intercettate risalgono di scope)
@@ -515,9 +506,9 @@ title: Quando Sollevare un’Eccezione
 
 ---
 
-title: Esempio: Allocazione Dinamica
+title: Esempio: allocazione dinamica
 
-code: c++
+code: C++
 
     #include <new>
     using std::bad_alloc;
@@ -534,7 +525,7 @@ code: c++
 
 ---
 
-title: Abuso delle Eccezioni
+title: Abuso delle eccezioni
 
 - La gestione delle eccezioni genera overhead sia temporale che spaziale
 - Le istruzioni throw rendono contorto il flusso di controllo (come le istruzioni di salto)
@@ -542,7 +533,7 @@ title: Abuso delle Eccezioni
 
 ---
 
-title: Vantaggi della Gestione delle Eccezioni
+title: Vantaggi della gestione delle eccezioni
 
 - In un linguaggio che non la supporta si può restituire un codice di errore
     - Occorre controllarlo ogni volta
@@ -556,7 +547,7 @@ title: Vantaggi della Gestione delle Eccezioni
 
 ---
 
-title: Strutture Dati Collegate
+title: Strutture dati collegate
 
 - Sono composte da variabili dinamiche di tipo struct o classe dette nodi
 - I nodi contengono puntatori che puntano ad altri nodi
@@ -564,7 +555,7 @@ title: Strutture Dati Collegate
 
 ---
 
-title: Liste Concatenate
+title: Liste concatenate
 
 - Sono liste di nodi in cui ogni nodo contiene un puntatore che punta al nodo successivo
 - Il primo nodo è detto testa, la lista è referenziata tramite un puntatore alla testa
@@ -572,7 +563,7 @@ title: Liste Concatenate
 
 ---
 
-title: Pile o Stack
+title: Pile o stack
 
 - Una pila (o stack) è una struttura dati che gestisce i dati in modo LIFO
 - Ha due operazioni base:
@@ -594,7 +585,7 @@ title: Classi friend
 
 - Se una classe F è friend di una classe C, tutte le funzioni membro di F sono friend della classe C
 
-code: c++
+code: C++
 
     class F; // forward declaration
     class C
@@ -638,7 +629,7 @@ title: Iteratori
 
 ---
 
-title: Operatori che Operano sugli Iteratori
+title: Operatori per iteratori
 
 - Operatore di incremento ++ (in forma prefissa e postfissa)
     - Fa avanzare l’iteratore all’elemento successivo
@@ -651,7 +642,7 @@ title: Operatori che Operano sugli Iteratori
 
 ---
 
-title: Iteratori e Containers
+title: Iteratori e containers
 
 - Le classi container hanno due funzioni membro che restituiscono iteratori collocati in posizioni speciali
     - begin() restituisce un iteratore che punta al primo elemento
@@ -659,7 +650,7 @@ title: Iteratori e Containers
 
 ---
 
-title: Tipi di Iteratori
+title: Tipi di iteratori
 
 - Gli iteratori sono classificati secondo il tipo di operazioni ad essi applicabili
     - Forward iterators: si può applicare l’operazione ++
@@ -678,7 +669,7 @@ title: Iteratori constant e mutable
 
 ---
 
-title: Reverse Iterators
+title: Reverse iterators
 
 - Se una classe container ha iteratori bidirezionali, per passare gli elementi in ordine inverso si possono usare i reverse iterators
 - La funzione membro rbegin() restituisce un iteratore che punta all’ultimo elemento
@@ -687,7 +678,7 @@ title: Reverse Iterators
 
 ---
 
-title: Sequential Containers
+title: Sequential containers
 
 - Gli elementi sono ordinati in base al modo in cui sono inseriti
     - slist (lista concatenata semplice, non standard)
@@ -697,7 +688,7 @@ title: Sequential Containers
 
 ---
 
-title: Lists (vs vectors)
+title: List (vs. vector)
 
 - Gli elementi non sono contigui in memoria
 - Non forniscono accesso casuale agli elementi
@@ -706,7 +697,7 @@ title: Lists (vs vectors)
 
 ---
 
-title: Container Adapters
+title: Container adapters
 
 - Sono classi template implementate a partire da altre classi
     - stack, queue basate su deque
@@ -716,7 +707,7 @@ title: Container Adapters
 
 ---
 
-title: Associative Containers
+title: Associative containers
 
 - Ogni elemento ha associato un valore detto chiave
 - Gli elementi sono individuati per mezzo della chiave
@@ -748,7 +739,7 @@ title: Map
 
 ---
 
-title: Generic Algorithms
+title: Algoritmi generici
 
 - STL contiene algoritmi generici
 - STL specifica non solo
@@ -770,35 +761,36 @@ title: Miscellanea
 
 ---
 
-title: Pre-condizioni e Post-condizioni
+title: Pre- e post-condizioni
 
     È buona norma includere nella dichiarazione di una funzione un commento che indichi
     - Pre-condizioni: condizioni che devono esistere quando la funzione è chiamata
     - Post-condizioni: condizioni che si verificano dopo che la funzione è eseguita
-    -     Descrizione del valore ritornato o delle modifiche al valore degli argomenti
+    -     Descrizione del valore restituito o delle modifiche al valore degli argomenti
 
 ---
 
-title: Pre-condizioni e Post-condizioni
+title: Esempio di pre- e post-condizioni
 
-- Esempio
-    - void showInterest(double balance, double rate);
-    - //Precondition: balance is a non-negative savings
-    - //account balance, rate is the interest rate expressed
-    - //as a percentage, such as 5 for 5%.
-    - //Postcondition: the amount of interest on the given
-    - //balance at the given rate is shown on the screen.
+code: C++
+
+    void showInterest(double balance, double rate);
+    //Precondition: balance is a non-negative savings
+    //account balance, rate is the interest rate expressed
+    //as a percentage, such as 5 for 5%.
+    //Postcondition: the amount of interest on the given
+    //balance at the given rate is shown on the screen.
 
 ---
 
-title: Programmazione Difensiva
+title: Programmazione difensiva
 
 - Metodologia che punta alla prevenzione dell’errore piuttosto che alla sua correzione
 - Si introducono controlli (detti invarianti) in punti del programma in cui certe condizioni devono sicuramente essere verificate
 
 ---
 
-title: La Macro assert
+title: Macro assert
 
 - Un altro modo per introdurre controlli di errore al fine di documentare e verificare la correttezza dei programmi
 - Valuta un’espressione booleana:
@@ -807,7 +799,7 @@ title: La Macro assert
 
 ---
 
-title: La Macro assert (2)
+title: Macro assert (2)
 
 - Può essere usata per verificare le pre-condizioni
     È definita nella libreria cassert
@@ -832,7 +824,7 @@ title: Deallocazione autom.
 
 title: Lista con smart ptr
 
-code: c++
+code: C++
 
     #include <tr1/memory>
     typedef std::tr1::shared_ptr<Polygon> PolyPtr;
@@ -860,7 +852,7 @@ code: c++
 
 title: Smart ptr all'opera
 
-code: c++
+code: C++
 
     // Create a list and fill it with polygons
     ListPtr list(new ListOfPolygons());

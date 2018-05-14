@@ -43,9 +43,12 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article >
       <ul>
-<li>Una nuova classe (classe derivata) viene creata a partire da una classe esistente (classe base)</li>
-<li>La classe derivata eredita le variabili membro e le funzioni membro della classe base</li>
-<li>Eredita interfaccia e implementazione</li>
+<li>Una nuova classe (<em>classe derivata</em>) viene creata a partire da una classe esistente (<em>classe base</em>)</li>
+<li>Eredita interfaccia e implementazione della classe base<ul>
+<li>Variabili membro (o <em>campi</em>)</li>
+<li>Funzioni membro (o <em>metodi</em>)</li>
+</ul>
+</li>
 <li>Può aggiungere variabili membro e funzioni membro</li>
 </ul></article>
  
@@ -59,10 +62,10 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article >
       <ul>
-<li>Un oggetto di una classe derivata può essere usato ovunque può essere usato uno della classe base</li>
+<li>Un oggetto di una classe derivata può essere usato ovunque può essere usato uno della classe base (<em>Liskov</em>)</li>
 <li>Un oggetto di una classe derivata ha più di un tipo</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>class HourlyEmployee : public Employee {
+<pre class="prettyprint" data-lang="C++"><code>class HourlyEmployee : public Employee {
 public:
     HourlyEmployee(string name, string code,
                    double wageRate, double hours);
@@ -82,23 +85,15 @@ private:
     </hgroup>
     <article >
       <ul>
-<li>Una classe derivata può cambiare la definizione di una funzione membro ereditata (overriding)</li>
-<li>In questo caso la definizione della classe derivata deve contenere la dichiarazione della funzione membro ereditata</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Accesso a un metodo della classe base</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Una classe derivata può ridefinire una funzione della classe base
-    È comunque possibile invocare su un oggetto della classe derivata la versione della funzione data nella classe base</li>
-<li>Per fare ciò si utilizza l’operatore ::, che in questo caso è obbligatorio, altrimenti la funzione chiamante continuerebbe in realtà a chiamare se stessa generando un loop</li>
+<li>Una classe derivata può ridefinire un metodo della classe base (<em>overriding</em>)<ul>
+<li>La classe derivata deve contenere la dichiarazione del metodo ereditato</li>
+</ul>
+</li>
+<li>È ancora possibile invocare la versione della classe base<ul>
+<li>In questo caso, è obbligatorio utilizzare l’operatore <code>::</code></li>
+<li>Altrimenti il metodo continuerebbe a chiamare se stesso, in <em>loop</em></li>
+</ul>
+</li>
 </ul></article>
  
 </slide>
@@ -117,8 +112,8 @@ private:
 </ul>
 </li>
 <li><strong>Overloading</strong><ul>
-<li>Una funzione sovraccaricata in una classe derivata ha un diverso <em>numero e/o tipo di parametri</em> rispetto alla funzione della classe base</li>
-<li>La classe derivata ha entrambe le funzioni</li>
+<li>Una funzione sovraccaricata ha un diverso <em>numero e/o tipo di parametri</em></li>
+<li>La classe ha entrambe le funzioni</li>
 <li>Stesso meccanismo delle <em>normali funzioni</em></li>
 </ul>
 </li>
@@ -195,7 +190,7 @@ private:
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>HourlyEmployee::HourlyEmployee(string name, string number,
+<pre class="prettyprint" data-lang="C++"><code>HourlyEmployee::HourlyEmployee(string name, string number,
                                double wageRate, double hours)
         : Employee(name, number), wageRate(wageRate), hours(hours)
 {
@@ -214,10 +209,10 @@ private:
     <article >
       <ul>
 <li>La chiamata del costruttore della classe base è la prima azione del costruttore della classe derivata</li>
-<li>Se A ◅- B ◅- C, quando viene creato un oggetto di classe C…<ul>
-<li>Prima viene chiamato un costruttore della classe A</li>
-<li>Poi un costruttore della classe B</li>
-<li>Poi vengono intraprese le rimanenti azioni del costruttore di classe C</li>
+<li>Se <code>A ◅- B ◅- C</code>, quando viene creato un oggetto di classe <code>C</code>…<ul>
+<li>Prima viene chiamato un costruttore della classe <code>A</code></li>
+<li>Poi un costruttore della classe <code>B</code></li>
+<li>Poi vengono intraprese le rimanenti azioni del costruttore di classe <code>C</code></li>
 </ul>
 </li>
 </ul></article>
@@ -234,10 +229,10 @@ private:
       <ul>
 <li>Quando il distruttore di una classe derivata è invocato, viene invocato automaticamente il distruttore della classe base</li>
 <li>I distruttori sono chiamati in ordine inverso rispetto ai costruttori</li>
-<li>Se A ◅- B ◅- C, quando termina lo scope di un oggetto di classe C…<ul>
-<li>Viene chiamato prima il distruttore della classe C</li>
-<li>Poi quello della classe B</li>
-<li>Infine quello della classe A</li>
+<li>Se <code>A ◅- B ◅- C</code>, quando termina lo scope di un oggetto di classe <code>C</code>…<ul>
+<li>Viene chiamato prima il distruttore della classe <code>C</code></li>
+<li>Poi quello della classe <code>B</code></li>
+<li>Infine quello della classe <code>A</code></li>
 </ul>
 </li>
 </ul></article>
@@ -253,7 +248,7 @@ private:
     <article >
       <ul>
 <li>Relazione “<strong>is a</strong>”<ul>
-<li>Esempio: a HourlyEmployee is an Employee</li>
+<li>Esempio: <em>a HourlyEmployee is an Employee</em></li>
 <li>Utile soprattutto per polimorfismo</li>
 <li>Sempre possibile usare un oggetto di una sotto-classe al posto di un oggetto di una classe base</li>
 </ul>
@@ -287,7 +282,7 @@ private:
 <li>Ma la classe derivata è strettamente dipendente dalla classe base, ne eredita anche l’interfaccia!<ul>
 <li>Per il semplice riuso è meglio far ricorso al contenimento</li>
 <li>Oggetti incapsulati forniscono funzionalità di base</li>
-<li>Vedi Eckel, Thinking in C++: http://www.mindview.net/Books</li>
+<li>Vedi Eckel, <em>Thinking in C++</em>: <a href="http://www.mindview.net/Books">http://www.mindview.net/Books</a></li>
 </ul>
 </li>
 </ul></article>
@@ -304,7 +299,7 @@ private:
       <ul>
 <li>Ereditarietà protetta: i membri pubblici della classe base sono protetti nella classe derivata quando sono ereditati</li>
 <li>Ereditarietà privata: nessun membro della classe base può essere referenziato nella classe derivata</li>
-<li>La relazione “is a” non è valida</li>
+<li>La relazione “<em>is a</em>” non è valida</li>
 <li>Sono raramente usate</li>
 </ul></article>
  
@@ -335,7 +330,7 @@ private:
       <ul>
 <li>Una classe derivata quando sovraccarica l’operatore di assegnamento può fare uso dell’operatore di assegnamento della classe base</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>Derived&amp; Derived::operator=(const Derived&amp; rtside)
+<pre class="prettyprint" data-lang="C++"><code>Derived&amp; Derived::operator=(const Derived&amp; rtside)
 {
     Base::operator=(rtSide);
     //…
@@ -354,7 +349,7 @@ private:
       <ul>
 <li>Una classe derivata quando sovraccarica il costruttore di copia può fare uso del costruttore di copia della classe base</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>Derived::Derived(const Derived&amp; obj) : Base(obj), …
+<pre class="prettyprint" data-lang="C++"><code>Derived::Derived(const Derived&amp; obj) : Base(obj), …
 {
     // …
 }
@@ -372,7 +367,7 @@ private:
       <ul>
 <li>Polimorfismo e funzioni virtuali sono un meccanismo fondamentale per realizzare sistemi estensibili</li>
 <li>Consentono di trattare gli oggetti di tutte le classi di una gerarchia come se fossero oggetti della classe base</li>
-<li>Risultato: scrittura di programmi più semplici (meno branching logic), in cui viene favorito il testing ed il mantenimento del codice</li>
+<li>Risultato: scrittura di programmi più semplici (meno <em>branching logic</em>), in cui viene favorito il testing ed il mantenimento del codice</li>
 </ul></article>
  
 </slide>
@@ -387,11 +382,11 @@ private:
       <ul>
 <li>Quando un metodo di una classe base è dichiarato virtuale…</li>
 <li>Se invocato tramite un puntatore o un riferimento…<ul>
-<li>Il programma sceglie a tempo di esecuzione la funzione della classe appropriata (late binding o dynamic binding)</li>
+<li>Il programma sceglie a tempo di esecuzione la funzione della classe appropriata (<em>late binding</em>, o <em>dynamic binding</em>)</li>
 </ul>
 </li>
 <li>Se invocato su un oggetto…<ul>
-<li>La risoluzione del riferimento avviene a tempo di compilazione (static binding)</li>
+<li>La risoluzione del riferimento avviene a tempo di compilazione (<em>static binding</em>)</li>
 <li>La funzione chiamata è quella della classe dell’oggetto (ottimizzazione)</li>
 </ul>
 </li>
@@ -407,8 +402,8 @@ private:
     </hgroup>
     <article >
       <ul>
-<li>Per specificare che una funzione è virtuale si include il modificatore virtual nella dichiarazione (non nella definizione)</li>
-<li>Quando la definizione di una funzione virtuale viene cambiata in una classe derivata si parla di overriding</li>
+<li>Per specificare che una funzione è virtuale si include il modificatore <code>virtual</code> nella dichiarazione (non nella definizione)</li>
+<li>Quando la definizione di una funzione virtuale viene cambiata in una classe derivata si parla di <em>overriding</em></li>
 <li>La proprietà di essere una funzione virtuale viene ereditata lungo tutta la gerarchia</li>
 </ul></article>
  
@@ -423,8 +418,10 @@ private:
     <article >
       <ul>
 <li>Capacità di oggetti appartenenti a classi che derivano da una classe base comune di rispondere in modi diversi alla chiamata di una certa funzione</li>
-<li>Si implementa tramite le funzioni virtuali<ul>
-<li>Alla chiamata di una funzione virtuale tramite un puntatore o un riferimento alla classe base, il programma sceglie la ridefinizione corretta della funzione nella classe derivata appropriata</li>
+<li>Si implementa tramite le funzioni virtuali</li>
+<li>Chiamata di una funzione virtuale tramite un puntatore o un riferimento alla classe base:<ul>
+<li>Il programma sceglie la ridefinizione corretta della funzione</li>
+<li>Nella classe derivata appropriata</li>
 </ul>
 </li>
 </ul></article>
@@ -456,23 +453,9 @@ private:
     </hgroup>
     <article >
       <ul>
-<li>Assegnando un oggetto di una classe derivata a una variabile della sua classe base, le variabili e funzioni membro aggiunte dalla classe derivata vengono perse</li>
+<li>Assegnamento di un oggetto di una classe derivata a una variabile della sua classe base</li>
+<li>Variabili e funzioni membro aggiunte dalla classe derivata vengono perse</li>
 <li>Il problema può essere risolto usando funzioni virtuali e puntatori</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Overriding e overloading</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Il meccanismo di overriding è concettualmente molto diverso da quello di overloading, e non deve essere confuso con esso</li>
-<li>L'overloading consente di definire in una stessa classe più metodi aventi lo stesso nome, ma che differiscano nella signature</li>
-<li>L'overriding, invece, consente di ridefinire un metodo in una sottoclasse: il metodo originale e quello che lo ridefinisce hanno necessariamente la stessa firma, e solo a tempo di esecuzione si determina quale dei due deve essere eseguito</li>
 </ul></article>
  
 </slide>
@@ -635,15 +618,13 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Template di Funzioni</h2>
+      <h2>Template di funzioni</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>I template di funzioni supportano l’astrazione algoritmica: esprimere algoritmi in modo molto generale trascurando dettagli implementativi<ul>
+<li>I template di funzioni supportano l’astrazione algoritmica: esprimere algoritmi in modo molto generale trascurando dettagli implementativi</li>
 <li>Esempio: scambio dei valori di due variabili</li>
-</ul>
-</li>
 </ul></article>
  
 </slide>
@@ -651,13 +632,13 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Funzioni Template: Sintassi</h2>
+      <h2>Funzioni template: sintassi</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>La dichiarazione e la definizione di una funzione template devono essere precedute dal prefisso di template<ul>
-<li>template<class T></li>
+<li><code>template&lt;class T&gt;</code></li>
 </ul>
 </li>
 <li>Una funzione template corrisponde a un insieme di definizioni di funzione, il compilatore ne produce una per ogni tipo per cui si usa il template</li>
@@ -668,13 +649,13 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Funzioni Template: Sintassi (2)</h2>
+      <h2>Funzioni template: sintassi (2)</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>È possibile avere template di funzioni con più di un parametro di tipo<ul>
-<li>template<class T1, class T2></li>
+<li><code>template&lt;class T1, class T2&gt;</code></li>
 </ul>
 </li>
 <li>Generalmente si usano template di funzioni con un solo parametro di tipo</li>
@@ -685,13 +666,13 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Funzioni Template e Compilatori</h2>
+      <h2>Funzioni template e compilatori</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>Molti compilatori non supportano la compilazione separata e richiedono che la definizione della funzione template sia nello stesso file in cui viene usata, prima della prima invocazione
-    È possibile mettere la definizione della funzione template in un file separato ed includere questo file</li>
+<li>Molti compilatori non supportano la compilazione separata e richiedono che la definizione della funzione template sia nello stesso file in cui viene usata, prima della prima invocazione</li>
+<li>È possibile mettere la definizione della funzione template in un file separato ed includere questo file</li>
 </ul></article>
  
 </slide>
@@ -699,13 +680,12 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Definzione e Uso di Funzioni Template</h2>
+      <h2>Definzione e uso di funzioni template</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre><code>È buona norma scrivere prima una funzione ordinaria e, solo dopo che la si è verificata, convertirla in un template
-</code></pre>
-<ul>
+      <ul>
+<li>È buona norma scrivere prima una funzione ordinaria e, solo dopo che la si è verificata, convertirla in un template</li>
 <li>Una funzione template può essere usata per ogni tipo per cui il codice della funzione ha senso</li>
 </ul></article>
  
@@ -714,13 +694,13 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Template di Classi</h2>
+      <h2>Template di classi</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>La definizione di una classe template deve essere preceduta da<ul>
-<li>template<class T></li>
+<li><code>template&lt;class T&gt;</code></li>
 </ul>
 </li>
 <li>Le funzioni membro sono template</li>
@@ -732,7 +712,7 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Template di Classi (2)</h2>
+      <h2>Template di classi (2)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -746,19 +726,20 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Template ed Ereditarietà</h2>
+      <h2>Template ed ereditarietà</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre><code>È possibile definire una classe template derivata a partire da una classe base (anche non template)
-</code></pre></article>
+      <ul>
+<li>È possibile definire una classe template derivata a partire da una classe base (anche non template)</li>
+</ul></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>Gestione delle Eccezioni</h2>
+      <h2>Gestione delle eccezioni</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -780,7 +761,7 @@ public:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>try
+      <pre class="prettyprint" data-lang="C++"><code>try
 {
     /* Some statements */
     if (Exceptional_Case) throw exception;
@@ -851,7 +832,7 @@ catch(Type e)
 <slide  >
   
     <hgroup>
-      <h2>Classi di Eccezioni</h2>
+      <h2>Classi di eccezioni</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -866,7 +847,7 @@ catch(Type e)
 <slide  >
   
     <hgroup>
-      <h2>Eccezioni Multiple</h2>
+      <h2>Eccezioni multiple</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -882,14 +863,14 @@ catch(Type e)
 <slide  >
   
     <hgroup>
-      <h2>Blocco catch di Default</h2>
+      <h2>Blocco catch di default</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
 <li>Quando in un blocco try viene sollevata un’eccezione, i blocchi catch che seguono sono considerati in ordine, viene eseguito il primo che intercetta quel tipo di eccezione</li>
 <li>Blocco catch speciale che intercetta ogni tipo di eccezione, da usare come default<ul>
-<li>catch(…) { cout &lt;&lt; “Unexplained exception”;}</li>
+<li><code>catch(...) { cout &lt;&lt; “Unexplained exception”; }</code></li>
 </ul>
 </li>
 </ul></article>
@@ -899,7 +880,7 @@ catch(Type e)
 <slide  >
   
     <hgroup>
-      <h2>Sollevare un’Eccezione in una Funzione</h2>
+      <h2>Sollevare un’eccezione in una funzione</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -915,7 +896,7 @@ catch(Type e)
 <slide  >
   
     <hgroup>
-      <h2>Specifica delle Eccezioni</h2>
+      <h2>Specifica delle eccezioni</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -930,12 +911,12 @@ catch(Type e)
 <slide  >
   
     <hgroup>
-      <h2>Specifica delle Eccezioni ed Ereditarietà</h2>
+      <h2>Specifica delle eccezioni ed ereditarietà</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>Se B-&gt;D, un’eccezione di tipo D viene gestita come se fosse di tipo B, anche rispetto alla specifica</li>
+<li>Se <code>B-&gt;D</code>, un’eccezione di tipo <code>D</code> viene gestita come se fosse di tipo <code>B</code>, anche rispetto alla specifica</li>
 <li>Quando si dà una nuova definizione o si fa overriding di una funzione ereditata, non si possono aggiungere eccezioni alla specifica, ma se ne possono eliminare</li>
 </ul></article>
  
@@ -944,7 +925,7 @@ catch(Type e)
 <slide  >
   
     <hgroup>
-      <h2>Quando Sollevare un’Eccezione</h2>
+      <h2>Quando sollevare un’eccezione</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -959,11 +940,11 @@ catch(Type e)
 <slide  >
   
     <hgroup>
-      <h2>Esempio: Allocazione Dinamica</h2>
+      <h2>Esempio: allocazione dinamica</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>#include &lt;new&gt;
+      <pre class="prettyprint" data-lang="C++"><code>#include &lt;new&gt;
 using std::bad_alloc;
 //…
 try
@@ -982,7 +963,7 @@ catch(bad_alloc)
 <slide  >
   
     <hgroup>
-      <h2>Abuso delle Eccezioni</h2>
+      <h2>Abuso delle eccezioni</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -997,7 +978,7 @@ catch(bad_alloc)
 <slide  >
   
     <hgroup>
-      <h2>Vantaggi della Gestione delle Eccezioni</h2>
+      <h2>Vantaggi della gestione delle eccezioni</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1022,7 +1003,7 @@ catch(bad_alloc)
 <slide  >
   
     <hgroup>
-      <h2>Strutture Dati Collegate</h2>
+      <h2>Strutture dati collegate</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1037,7 +1018,7 @@ catch(bad_alloc)
 <slide  >
   
     <hgroup>
-      <h2>Liste Concatenate</h2>
+      <h2>Liste concatenate</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1052,7 +1033,7 @@ catch(bad_alloc)
 <slide  >
   
     <hgroup>
-      <h2>Pile o Stack</h2>
+      <h2>Pile o stack</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1093,7 +1074,7 @@ catch(bad_alloc)
       <ul>
 <li>Se una classe F è friend di una classe C, tutte le funzioni membro di F sono friend della classe C</li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>class F; // forward declaration
+<pre class="prettyprint" data-lang="C++"><code>class F; // forward declaration
 class C
 {
 public:
@@ -1166,7 +1147,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Operatori che Operano sugli Iteratori</h2>
+      <h2>Operatori per iteratori</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1194,7 +1175,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Iteratori e Containers</h2>
+      <h2>Iteratori e containers</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1211,7 +1192,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Tipi di Iteratori</h2>
+      <h2>Tipi di iteratori</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1248,7 +1229,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Reverse Iterators</h2>
+      <h2>Reverse iterators</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1264,7 +1245,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Sequential Containers</h2>
+      <h2>Sequential containers</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1283,7 +1264,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Lists (vs vectors)</h2>
+      <h2>List (vs. vector)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1299,7 +1280,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Container Adapters</h2>
+      <h2>Container adapters</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1320,7 +1301,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Associative Containers</h2>
+      <h2>Associative containers</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1376,7 +1357,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Generic Algorithms</h2>
+      <h2>Algoritmi generici</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1418,14 +1399,14 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Pre-condizioni e Post-condizioni</h2>
+      <h2>Pre- e post-condizioni</h2>
       <h3></h3>
     </hgroup>
     <article >
       <pre><code>È buona norma includere nella dichiarazione di una funzione un commento che indichi
 - Pre-condizioni: condizioni che devono esistere quando la funzione è chiamata
 - Post-condizioni: condizioni che si verificano dopo che la funzione è eseguita
--     Descrizione del valore ritornato o delle modifiche al valore degli argomenti
+-     Descrizione del valore restituito o delle modifiche al valore degli argomenti
 </code></pre></article>
  
 </slide>
@@ -1433,28 +1414,24 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>Pre-condizioni e Post-condizioni</h2>
+      <h2>Esempio di pre- e post-condizioni</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li>Esempio<ul>
-<li>void showInterest(double balance, double rate);</li>
-<li>//Precondition: balance is a non-negative savings</li>
-<li>//account balance, rate is the interest rate expressed</li>
-<li>//as a percentage, such as 5 for 5%.</li>
-<li>//Postcondition: the amount of interest on the given</li>
-<li>//balance at the given rate is shown on the screen.</li>
-</ul>
-</li>
-</ul></article>
+      <pre class="prettyprint" data-lang="C++"><code>void showInterest(double balance, double rate);
+//Precondition: balance is a non-negative savings
+//account balance, rate is the interest rate expressed
+//as a percentage, such as 5 for 5%.
+//Postcondition: the amount of interest on the given
+//balance at the given rate is shown on the screen.
+</code></pre></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>Programmazione Difensiva</h2>
+      <h2>Programmazione difensiva</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1468,7 +1445,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>La Macro assert</h2>
+      <h2>Macro assert</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1486,7 +1463,7 @@ class F
 <slide  >
   
     <hgroup>
-      <h2>La Macro assert (2)</h2>
+      <h2>Macro assert (2)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1533,7 +1510,7 @@ class F
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>#include &lt;tr1/memory&gt;
+      <pre class="prettyprint" data-lang="C++"><code>#include &lt;tr1/memory&gt;
 typedef std::tr1::shared_ptr&lt;Polygon&gt; PolyPtr;
 
 class ListOfPolygons {
@@ -1565,7 +1542,7 @@ int ListOfPolygons::getSize() { return elements.size(); }
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>// Create a list and fill it with polygons
+      <pre class="prettyprint" data-lang="C++"><code>// Create a list and fill it with polygons
 ListPtr list(new ListOfPolygons());
 list-&gt;addElement(new Rectangle(5, 7));
 list-&gt;addElement(new Square(6));
@@ -1598,7 +1575,7 @@ list = NULL; // No need to do anything else!
     <br>
     Ingegneria dell'Informazione, UniPR
     <br>
-    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+    <a href="http://sowide.unipr.it/tomamic">sowide.unipr.it/tomamic</a>
   </p>
 </slide>
 
