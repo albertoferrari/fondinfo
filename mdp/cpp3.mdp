@@ -67,7 +67,7 @@ title: Qualificatore protected
 
 - Una variabile o funzione membro qualificata come `protected` può essere referenziata nelle funzioni membro di una classe derivata
 - Le variabili membro protette agiscono come se fossero protette in ogni classe derivata
-- Molti ritengono che l’uso di variabili membro protetta comprometta l’incapsulamento
+- Molti ritengono che l’uso di variabili membro protette comprometta l’incapsulamento
     - È quindi buona norma utilizzare `protected` solo quando assolutamente necessario
 
 ---
