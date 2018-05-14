@@ -89,11 +89,13 @@ private:
 <li>La classe derivata deve contenere la dichiarazione del metodo ereditato</li>
 </ul>
 </li>
-<li>È ancora possibile invocare la versione della classe base<ul>
-<li>In questo caso, è obbligatorio utilizzare l’operatore <code>::</code></li>
-<li>Altrimenti il metodo continuerebbe a chiamare se stesso, in <em>loop</em></li>
+<li>È ancora possibile invocare la versione della classe base, utilizzando:<ul>
+<li>Il nome della classe base</li>
+<li>Seguito dall’operatore <code>::</code></li>
+<li>Seguito dal nome del metodo</li>
 </ul>
 </li>
+<li>Altrimenti il metodo continuerebbe a chiamare se stesso, in <em>loop</em></li>
 </ul></article>
  
 </slide>
@@ -212,7 +214,7 @@ private:
 <li>Se <code>A ◅- B ◅- C</code>, quando viene creato un oggetto di classe <code>C</code>…<ul>
 <li>Prima viene chiamato un costruttore della classe <code>A</code></li>
 <li>Poi un costruttore della classe <code>B</code></li>
-<li>Poi vengono intraprese le rimanenti azioni del costruttore di classe <code>C</code></li>
+<li>Infine un costruttore della classe <code>C</code></li>
 </ul>
 </li>
 </ul></article>
@@ -228,7 +230,7 @@ private:
     <article >
       <ul>
 <li>Quando il distruttore di una classe derivata è invocato, viene invocato automaticamente il distruttore della classe base</li>
-<li>I distruttori sono chiamati in ordine inverso rispetto ai costruttori</li>
+<li>I distruttori sono chiamati in <em>ordine inverso</em> rispetto ai costruttori</li>
 <li>Se <code>A ◅- B ◅- C</code>, quando termina lo scope di un oggetto di classe <code>C</code>…<ul>
 <li>Viene chiamato prima il distruttore della classe <code>C</code></li>
 <li>Poi quello della classe <code>B</code></li>

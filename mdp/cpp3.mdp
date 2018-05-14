@@ -36,9 +36,11 @@ title: Ridefinizione dei metodi
 
 - Una classe derivata può ridefinire un metodo della classe base (*overriding*)
     - La classe derivata deve contenere la dichiarazione del metodo ereditato
-- È ancora possibile invocare la versione della classe base
-    - In questo caso, è obbligatorio utilizzare l’operatore `::`
-    - Altrimenti il metodo continuerebbe a chiamare se stesso, in *loop*
+- È ancora possibile invocare la versione della classe base, utilizzando:
+    - Il nome della classe base
+    - Seguito dall’operatore `::`
+    - Seguito dal nome del metodo
+- Altrimenti il metodo continuerebbe a chiamare se stesso, in *loop*
 
 ---
 
@@ -107,14 +109,14 @@ title: Ordine di chiamata dei costruttori
 - Se `A ◅- B ◅- C`, quando viene creato un oggetto di classe `C`…
     - Prima viene chiamato un costruttore della classe `A`
     - Poi un costruttore della classe `B`
-    - Poi vengono intraprese le rimanenti azioni del costruttore di classe `C`
+    - Infine un costruttore della classe `C`
 
 ---
 
 title: Distruttori in classi derivate
 
 - Quando il distruttore di una classe derivata è invocato, viene invocato automaticamente il distruttore della classe base
-- I distruttori sono chiamati in ordine inverso rispetto ai costruttori
+- I distruttori sono chiamati in *ordine inverso* rispetto ai costruttori
 - Se `A ◅- B ◅- C`, quando termina lo scope di un oggetto di classe `C`…
     - Viene chiamato prima il distruttore della classe `C`
     - Poi quello della classe `B`
