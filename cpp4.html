@@ -637,7 +637,7 @@ pc-&gt;c1; // *(pc + dCc1);
 <li>Single inheritance, displacement is <code>0</code></li>
 </ul>
 <pre class="prettyprint" data-lang="C++"><code>D* pd;
-pd-&gt;c1; // *(pd + dDC + dCc1); // *(pd + dDCc1);
+pd-&gt;c1; // *(pd + dDC + dCc1); // *(pd + dDc1);
 pd-&gt;d1; // *(pd + dDd1);
 </code></pre>
 <ul>
@@ -809,8 +809,8 @@ i.c1; // *(&amp;i + IdIC + dCc1); // *(&amp;i + IdIc1);
       <pre class="prettyprint" data-lang="C++"><code>P p; P* pp = &amp;p; Q q; P* ppq = &amp;q; Q* pq = &amp;q;
 pp-&gt;pf();   // pp-&gt;P::pf();   // P::pf(pp);
 ppq-&gt;pf();  // ppq-&gt;P::pf();  // P::pf(ppq);
-pq-&gt;pf();   // pq-&gt;Q::pf();   // Q::qf(pq);
-pq-&gt;qf();   // pq-&gt;Q::qf();   // Q::pf((P*)pq);
+pq-&gt;pf();   // pq-&gt;Q::pf();   // Q::pf((P*)pq);
+pq-&gt;qf();   // pq-&gt;Q::qf();   // Q::qf(pq);
 </code></pre>
 <ul>
 <li>For non-virtual function calls, member function to call is statically determined, at compile time</li>
@@ -904,7 +904,7 @@ ps-&gt;pvf();        // one of the above; calls S::pvf()
     <br>
     Ingegneria dell'Informazione, UniPR
     <br>
-    <a href="http://www.ce.unipr.it/people/tomamic">www.ce.unipr.it/people/tomamic</a>
+    <a href="http://sowide.unipr.it/tomamic">sowide.unipr.it/tomamic</a>
   </p>
 </slide>
 

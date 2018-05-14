@@ -446,7 +446,7 @@ code: C++
 code: C++
 
     D* pd;
-    pd->c1; // *(pd + dDC + dCc1); // *(pd + dDCc1);
+    pd->c1; // *(pd + dDC + dCc1); // *(pd + dDc1);
     pd->d1; // *(pd + dDd1);
 
 - Multiple inheritance, constant displacement to a given base
@@ -572,8 +572,8 @@ code: C++
     P p; P* pp = &p; Q q; P* ppq = &q; Q* pq = &q;
     pp->pf();   // pp->P::pf();   // P::pf(pp);
     ppq->pf();  // ppq->P::pf();  // P::pf(ppq);
-    pq->pf();   // pq->Q::pf();   // Q::qf(pq);
-    pq->qf();   // pq->Q::qf();   // Q::pf((P*)pq);
+    pq->pf();   // pq->Q::pf();   // Q::pf((P*)pq);
+    pq->qf();   // pq->Q::qf();   // Q::qf(pq);
 
 - For non-virtual function calls, member function to call is statically determined, at compile time
 - By type of pointer expression at left of `->` operator
