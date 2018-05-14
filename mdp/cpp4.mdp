@@ -588,7 +588,7 @@ code: C++
 
     pp->pvf(); // pp->P::pvf(); // P::pvf(pp);
     ppq->pvf(); // ppq->Q::pvf(); // Q::pvf((Q*)ppq);
-    pq->pvf(); // pq->Q::pvf(); // Q::pvf((P*)pq);
+    pq->pvf(); // pq->Q::pvf(); // Q::pvf(pq);
 
 - For virtual function calls, member function to call is determined at run-time
 - Appropriate to actual instance addressed by pointer

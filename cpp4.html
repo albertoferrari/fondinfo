@@ -830,7 +830,7 @@ pq-&gt;qf();   // pq-&gt;Q::qf();   // Q::qf(pq);
     <article >
       <pre class="prettyprint" data-lang="C++"><code>pp-&gt;pvf(); // pp-&gt;P::pvf(); // P::pvf(pp);
 ppq-&gt;pvf(); // ppq-&gt;Q::pvf(); // Q::pvf((Q*)ppq);
-pq-&gt;pvf(); // pq-&gt;Q::pvf(); // Q::pvf((P*)pq);
+pq-&gt;pvf(); // pq-&gt;Q::pvf(); // Q::pvf(pq);
 </code></pre>
 <ul>
 <li>For virtual function calls, member function to call is determined at run-time</li>
