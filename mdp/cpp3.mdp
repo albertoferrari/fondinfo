@@ -40,6 +40,7 @@ title: Ridefinizione dei metodi
     - Il nome della classe base
     - Seguito dall’operatore `::`
     - Seguito dal nome del metodo
+    - `obj_ptr->BaseClass::method_name();`
 - Altrimenti il metodo continuerebbe a chiamare se stesso, in *loop*
 
 ---
