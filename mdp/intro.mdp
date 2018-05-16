@@ -120,15 +120,162 @@ figure: images/misc/python.png images/misc/cpp-logo.jpg
 
 - Strumenti open source, multi-piattaforma
 - **Python 3**, *battery included*: <http://python.org/>
-    - Brython: <http://brython.info/>
     - PyGame: <http://pygame.org/>
+    - Brython: <http://brython.info/>
 - **C++11**: <http://isocpp.org/>
     - Documentazione: <br> <http://cplusplus.com/reference/> <br> <http://cppreference.com/>
-    - Ambiente di sviluppo e librerie Qt: <http://qt.io/> <br>
-      Windows: ver. 5.x *con MinGW* <br>
-      Ubuntu: "qtcreator" da Software Center <br>
-      Mac: installare prima il pacchetto "xcode"
+    - Ambiente di sviluppo: <http://www.codeblocks.org/>
+- **Go**: <http://golang.org/>
     
+---
+
+title: Problem solving
+figure: images/misc/problem-solving-cycle.svg
+class: large-figure
+
+- George Polya (1945). “_How to solve it_”
+    - Soluzione di problemi matematici: processo raramente lineare <br>&nbsp;
+- **(1) See.** Capire il problema
+    - Quali sono i dati, quali le incognite?
+    - Quali sono le condizioni? Sono soddisfacibili, ridondanti, contraddittorie?
+    - Figure, notazione
+
+> Make things as simple as possible, but not simpler. *(A. Einstein)*
+
+> For every complex problem there is an answer that is clear, simple, and wrong. *(H.L. Mencken)*
+
+---
+
+title: Dal problema alla soluzione, e ritorno
+
+- **(2) Plan.** Elaborare un piano
+    - Mettere in relazione dati e incognite
+    - Riduzione, analogia, divide et impera, composizione, astrazione...
+    - *Computational thinking*
+    - Cominciare a risolvere un problema *più semplice* (vincoli rilassati)
+- **(3) Do.** Eseguire il piano
+    - Controllare ogni passo. È corretto?
+- **(4) Check.** Controllare la soluzione
+    - Corretta? Ottenibile in altro modo?
+    - Risultato, o metodo, utilizzabile per altri problemi?
+
+> If you can't solve a problem... <br> then there is an easier problem you can solve: find it. *(G. Polya)*
+
+---
+
+title: Elementi di un algoritmo
+figure: images/algo/recipe.png
+figcaption: Una ricetta di cucina è un esempio di algoritmo
+
+- *Algoritmo*: procedimento che risolve un determinato problema attraverso un numero finito di passi elementari (al-Khwarizmi, ~800)
+- **Dati**: iniziali (istanza problema), intermedi, finali (soluzione)
+- **Passi** elementari: azioni atomiche non scomponibili in azioni più semplici
+- **Processo**, o anche esecuzione: sequenza ordinata di passi
+- *Proprietà*: finitezza, non ambiguità, realizzabilità, efficienza...
+
+> Computer science is no more about computers than astronomy is about telescopes. *(E. Dijkstra...)*
+
+---
+
+title: Ricerca in uno schedario
+figure: images/algo/catalogue.png
+
+- Es. in biblioteca: cercare la scheda di un certo libro
+    - **(1)** *Finchè* restano delle schede da esaminare: si prende la prima scheda non ancora controllata
+    - **(2)** *Se* autore e titolo sono quelli cercati: scheda trovata, ricerca conclusa!
+    - **(3)** (Altrimenti...) <br> *Si ripete* il controllo (1), passando alla scheda successiva
+    - **(4)** Esaurite le schede, il libro non è nella biblioteca!
+
+---
+
+title: Cercare più velocemente
+
+- Su schedario *ordinato* si può fare più in fretta
+    - **(1)** *Finchè* restano delle schede da esaminare: si prende tra loro la scheda centrale
+    - **(2)** *Se* autore e titolo sono quelli cercati: scheda trovata, ricerca conclusa!
+    - **(3)** *Altrimenti, se* autore e titolo vengono dopo quelli cercati: si scartano subito tutte le schede successive
+    - **(4)** *Altrimenti, infine*: si scartano le schede precedenti
+    - **(5)** *Si ripete* la ricerca sull'insieme dimezzato (1)
+    - **(6)** Esaurite le schede, il libro non è nella biblioteca!
+
+---
+
+title: Complessità e calcolabilità
+
+- **Complessità**: classificare algoritmi (e problemi)
+    - **Trattabili**: costo accettabile, “polinomiale”
+    - **Non trattabili**: costo “esponenziale”
+- **Calcolabilità**: distinguere i problemi **non risolvibili**
+    - Es. Valore di verità di `P`: *Questa frase è falsa*
+    - Incompletezza Gödel; indecidibilità *terminazione*
+    - ∀ formalizzazione della matematica che assiomatizza ℕ <br> → ∃ proposizione né dimostrabile né confutabile
+
+---
+
+title: Diagramma di flusso
+figure: images/algo/origami.png
+figcaption:Anche un origami è un esempio di algoritmo
+
+- *Flow-chart*: Rappresentazione grafica di algoritmi
+    - Più efficace e meno ambigua di una descrizione a parole
+- Due tipi di entità:
+    - Nodi
+    - Archi
+- È un *grafo orientato*
+    - Passi di un algoritmo e loro sequenza
+
+
+---
+
+title: Tipi di nodi
+figure: images/algo/spaghetti-flowchart.png
+
+![](images/algo/nodes.svg)
+
+- Istruzioni di I/O: es. leggere dati da tastiera o mostrarli a schermo
+- Operazioni aritmetico-logiche
+- Controllo del flusso di esecuzione
+
+---
+
+title: Programmazione strutturata
+figure: images/algo/spaghetti-code.png
+
+- Strutture di controllo:
+    - **Sequenza**
+    - **Selezione**
+    - **Iterazione**
+
+> Qualunque algoritmo può essere implementato utilizzando queste tre sole strutture *(Teorema di Böhm-Jacopini, 1966)*
+
+> Goto statement considered harmful *(Dijkstra, 1968)*
+
+---
+
+title: Strutture di controllo
+
+![](images/algo/structures.svg)
+
+- Esempi quotidiani di `if` e `while`:
+    - “*Se non c'è il lievito, usare due cucchiaini di bicarbonato*”
+    - “*Battere gli albumi finché non montano*”
+
+---
+
+title: Blockly
+class: large-image
+
+![](images/algo/blockly.png)
+
+>
+
+<http://blockly-games.appspot.com/maze>
+
+---
+
+title: Linguaggio Python
+class: segue dark
+
 ---
 
 title: Esempi di progetti

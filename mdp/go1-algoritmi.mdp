@@ -1,4 +1,4 @@
-title: Algoritmi in Python 3
+title: Algoritmi in Go
 subtitle: Introduzione alla programmazione
 figure: images/algo/rubik-cube.png
 
@@ -10,51 +10,90 @@ title: Python!
 
 ---
 
-title: Applicazioni in Python
+title: Less is exponentially more
 
-![](images/algo/python-cases.jpg)
+- Made in ~2007 at Google, starting roughly from C
+    - By the Unix pioneers Rob *Pike* and Ken *Thompson*, together with Robert Griesemer
+    - Book: “The Go Programming Language” by Brian W. *Kernighan*, Alan Donovan
+- Very few, orthogonal concepts
+    - No exceptions, no template, no inheritance
+    - Interfaces and duck typing
+    - Type inference
+    - Garbage collection, but native (no VM)
+    - Communicating sequential processes
 
-- Web, data analysis, scripting, teaching, games, hardware, multiplatform...
+>
+
+After a talk of 35 new features of C++11, and at pauses for compiling C++...
+<https://commandcenter.blogspot.it/2012/06/less-is-exponentially-more.html>
+
+---
+
+title: Hello, Gopher
+
+- Program starts at function `main` in package `main`
+- A package *exports* only names starting with a **capital letter**
+
+code: go
+
+    package main
+
+    import "fmt"
+
+    func main() {
+        fmt.Println("Hello, Gopher")
+    }
+
+code: shell
+
+    go run hello.go
 
 ---
 
 title: Tipi di dati
 
 - Un **tipo di dato** specifica un insieme di *valori* e le *operazioni* ammesse
-    - `int, float, bool, str`
+    - `int, float64, bool, string`
     - Operazioni aritmetiche e logiche, confronti
 
-code: python
+code: go
 
-    >>> 3 + 4
-    7
-    >>> 3 / 4
-    0.75
-    >>> 4 == 5  # Do not confuse with assignment!
-    False
-    >>> 2 < 3 or not True
-    True
+    fmt.Println(3 / 2)    // 1, truncated
+    fmt.Println(3 % 2)    // 1, reminder
+    fmt.Println(3.0 / 2)  // 1.5
+    fmt.Println(4 == 5)   // false, do not confuse with assignment!
+    fmt.Println(2 < 3 || ! true)  // true
 
 ---
 
 title: Valori numerici e booleani
 
-- **`int`** o **`float`**, per numeri interi o reali
-    - Operazioni di base: `+, -, *, /`
-    - Divisione intera, resto, potenza: `//, %, **`
+- **`int`** o **`float64`**, per numeri interi o reali
+    - Operazioni di base: `+, -, *, /, %`
+    - Divisione tra interi dà risultato intero
     - Confronti: `<, <=, >, >=, ==, !=`
--  **`bool`**, per valori booleani: `True, False`
-    - Operazioni consentite: `and, or, not`
+-  **`bool`**, per valori booleani: `true, false`
+    - Operazioni consentite: `&&, ||, !`
     - I confronti danno un risultato booleano
 
-code: python
+---
 
-    >>> -2 // 3    # floored integer division
-    -1
-    >>> -2 % 3     # reminder is always positive
-    1
-    >>> 2 ** 1000  # no limits (but memory)
-    107150[...]069376
+title: Variables
+
+- Variables can be created with `var` (or `const`...)
+    - If initial value, type can be omitted (**type inference**)
+    - If no initial value, their *zero value* is assigned
+- Variables can also be created with `:=`
+
+code: go
+
+    func main() {
+        var i, j int = 1, 2
+        k := 3
+        c, python, java := true, false, "no!"
+
+        fmt.Println(i, j, k, c, python, java)
+    }
 
 ---
 
@@ -68,48 +107,41 @@ class: large-figure
     - Alla destra un valore
 - *Non confondere* con confronto di uguaglianza `==`
 
-code: python
+code: go
 
-    >>> pi = 3.14  # Assignment
-    >>> radius = 2.2
-    >>> area = pi * (radius ** 2)
-    >>> area
-    15.1976
-    >>> radius = radius + 1  # guess radius... and area!
+    pi := 3.14  // definition and initialization
+    radius := 2.2
+    area := pi * (radius * radius)
+    fmt.Println(area)    // 15.1976
+    radius = radius + 1  // guess radius
+    fmt.Println(area)    // ... and area!
 
 ---
 
 title: Variabile
-figure: images/algo/var-label.svg
+figure: images/algo/my-shoes.png
 
-- **Nome** (etichetta) associato ad un certo **valore** (oggetto)
-    - Oggetto assegnato a più variabili: non viene copiato, ma riceve più etichette
-    - Il **tipo** dipende dal valore attualmente assegnato
-    - Una var. non dev'essere *dichiarata*, ma dev'essere *inizializzata*
-
-code: python
-
-    >>> x = 100
-    >>> DELTA = 5          # Constants: UPPER_CASE
-    >>> x = x + DELTA      # Variables: lower_case
-    >>> next_position = x  # Use explicative names!
+- Le comuni variabili sono *contenitori* di dati
+- Occorrono **dichiarazioni** di tipo
+    - Valore iniziale `0`, quando non specificato
+- Possibile *type inference* (`:=`)
+    - *Tipo* inferito dal valore di inizializzazione
 
 ---
 
 title: Stringhe di testo
 
-- **`str`** per sequenze di caratteri *Unicode*
+- **`string`** per sequenze di caratteri *Unicode*
 - Primi 128 codici *Unicode* == *ASCII*
     - A capo: `'\n'` (10, o 13-10... ma conversione automatica)
     - Tabulazione: `'\t'` (9)
 
-code: python
+code: go
 
-    >>> str1 = "Monty Python's "
-    >>> str2 = 'Flying Circus'
-    >>> result = str1 + str2
-    >>> result
-    "Monty Python's Flying Circus"
+    str1 := "Monty Python's "
+    str2 := 'Flying Circus'
+    result := str1 + str2
+    fmt.Println(result)  // "Monty Python's Flying Circus"
 
 ---
 
@@ -125,49 +157,43 @@ title: Confronto tra stringhe
 - Confronto tra stringhe, in ordine *lessicografico*
     - `<, <=, >, >=, ==, !=`
 
-code: python
+code: go
 
-    >>> 'first' < 'second'
-    True
-    >>> 'Second' <  'first'
-    True
-    >>> chr(90)
-    'Z'
-    >>> ord('Z')
-    90
+    "first" < "second"  // true
+    "Second" < "first"  // true
+    rune(90)            // 'Z'
+    int('Z')            // 90
 
 ---
 
 title: Leggere e scrivere
 figure: images/algo/hello-user.svg
 
-- **`input`** legge una riga di testo, inserita dall'utente, in una *variabile*
+- **`Prompt`**, nel browser, legge una riga di testo, inserita dall'utente, in una *variabile*
     - Prima mostra un messaggio
-- **`print`** scrive una serie di valori su una riga
+- **`fmt.Println`** scrive una serie di valori su una riga
     - Tra i valori (parametri) viene inserito uno spazio
 
-code: python
+code: go
 
-    user = input("What's your name? ")
-
-    print("Hello,", user)
+    user := Prompt("What's your name?")
+    
+    fmt.Println("Hello,", user)
 
 ---
 
 title: Somma di tre numeri
 figure: images/algo/sum3.svg
 
-code: python
+code: go
 
-    # File sum3.py - to run: python3 sum3.py
+    a := ParseInt(Prompt("Insert 1st val: "))
+    b := ParseInt(Prompt("Insert 2nd val: "))
+    c := ParseInt(Prompt("Insert 3rd val: "))
 
-    a = int(input("Insert 1st val: "))
-    b = int(input("Insert 2nd val: "))
-    c = int(input("Insert 3rd val: "))
+    total := a + b + c
 
-    total = a + b + c
-
-    print("The sum is", total)
+    fmt.Println("The sum is", total)
 
 ---
 
@@ -178,20 +204,17 @@ class: segue dark
 
 title: Selezione: if
 
-- **Indentazione** del corpo di `if` o `else`
-    - Richiesta per sintassi, non opzionale!
+- Corpo di `if` o `else` tra graffe
+    - *Indentazione* per migliore leggibilità
 
-> Readability counts *(The Zen of Python)*
+code: go
 
-code: python
+    age := ParseInt(Prompt("Age?"))
 
-    # File tooyoung.py - to run: python3 tooyoung.py
-
-    age = int(input("Age? "))
-
-    if age < 14:
-        print("You're too young for driving a scooter...")
-        print("But not for learning Python!")
+    if age < 14 {
+        fmt.Println("You're too young for driving a scooter...")
+        fmt.Println("But not for learning Go!")
+    }
 
 - Clausola `else`: opzionale
     - Eseguita sse la condizione non è verificata
@@ -201,42 +224,42 @@ code: python
 title: Valore assoluto
 figure: images/algo/abs.svg
 
-code: python
+code: go
 
-    x = int(input("insert a value: "))
+    x = ParseInt(Prompt("insert a value:"))
 
-    if x >= 0:
+    if x >= 0 {
         y = x
-        print(x, "is positive")
-    else:
+        fmt.Println(x, "is positive")
+    } else {
         y = -x
-        print(x, "is negative")
-
-    print("abs =", y)
+        fmt.Println(x, "is negative")
+    }
+    fmt.Println("abs =", y)
 
 - Corpo di `if` o `else`: qualsiasi istruzione
-- Anche altri blocchi `if` o `while` annidati!
+- Anche altri blocchi `if` o `for` annidati!
 
 ---
 
 title: Calcolo dell'età
 
-code: python
+code: go
 
-    birth_year = int(input("Birth year? "))
-    birth_month = int(input("Birth month? "))
-    birth_day = int(input("Birth day? "))
-    current_year = int(input("Current year? "))
-    current_month = int(input("Current month? "))
-    current_day = int(input("Current day? "))
+    birthYear = ParseInt(Prompt("Birth year? "))
+    birthMonth = ParseInt(Prompt("Birth month? "))
+    birthDay = ParseInt(Prompt("Birth day? "))
+    currentYear = ParseInt(Prompt("Current year? "))
+    currentMonth = ParseInt(Prompt("Current month? "))
+    currentDay = ParseInt(Prompt("Current day? "))
 
-    if (current_month > birth_month
-        or (current_month == birth_month and current_day >= birth_day)):
-        age = current_year - birth_year
+    if (currentMonth > birthMonth
+        or (currentMonth == birthMonth and currentDay >= birthDay)):
+        age = currentYear - birthYear
     else:
-        age = current_year - birth_year - 1
+        age = currentYear - birthYear - 1
 
-    print("Your age is", age)
+    fmt.Println("Your age is", age)
 
 >
 

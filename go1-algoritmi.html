@@ -9,7 +9,7 @@ URL: https://code.google.com/p/io-2012-slides
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Algoritmi in Python 3</title>
+  <title>Algoritmi in Go</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -49,14 +49,52 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Applicazioni in Python</h2>
+      <h2>Less is exponentially more</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <p><img alt="" src="images/algo/python-cases.jpg" /></p>
-<ul>
-<li>Web, data analysis, scripting, teaching, games, hardware, multiplatform...</li>
-</ul></article>
+      <ul>
+<li>Made in ~2007 at Google, starting roughly from C<ul>
+<li>By the Unix pioneers Rob <em>Pike</em> and Ken <em>Thompson</em>, together with Robert Griesemer</li>
+<li>Book: “The Go Programming Language” by Brian W. <em>Kernighan</em>, Alan Donovan</li>
+</ul>
+</li>
+<li>Very few, orthogonal concepts<ul>
+<li>No exceptions, no template, no inheritance</li>
+<li>Interfaces and duck typing</li>
+<li>Type inference</li>
+<li>Garbage collection, but native (no VM)</li>
+<li>Communicating sequential processes</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>After a talk of 35 new features of C++11, and at pauses for compiling C++...
+<a href="https://commandcenter.blogspot.it/2012/06/less-is-exponentially-more.html">https://commandcenter.blogspot.it/2012/06/less-is-exponentially-more.html</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Hello, Gopher</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Program starts at function <code>main</code> in package <code>main</code></li>
+<li>A package <em>exports</em> only names starting with a <strong>capital letter</strong></li>
+</ul>
+<pre class="prettyprint" data-lang="go"><code>package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, Gopher")
+}
+</code></pre>
+<pre class="prettyprint" data-lang="shell"><code>go run hello.go
+</code></pre></article>
  
 </slide>
 
@@ -69,19 +107,16 @@ URL: https://code.google.com/p/io-2012-slides
     <article >
       <ul>
 <li>Un <strong>tipo di dato</strong> specifica un insieme di <em>valori</em> e le <em>operazioni</em> ammesse<ul>
-<li><code>int, float, bool, str</code></li>
+<li><code>int, float64, bool, string</code></li>
 <li>Operazioni aritmetiche e logiche, confronti</li>
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; 3 + 4
-7
-&gt;&gt;&gt; 3 / 4
-0.75
-&gt;&gt;&gt; 4 == 5  # Do not confuse with assignment!
-False
-&gt;&gt;&gt; 2 &lt; 3 or not True
-True
+<pre class="prettyprint" data-lang="go"><code>fmt.Println(3 / 2)    // 1, truncated
+fmt.Println(3 % 2)    // 1, reminder
+fmt.Println(3.0 / 2)  // 1.5
+fmt.Println(4 == 5)   // false, do not confuse with assignment!
+fmt.Println(2 &lt; 3 || ! true)  // true
 </code></pre></article>
  
 </slide>
@@ -94,24 +129,43 @@ True
     </hgroup>
     <article >
       <ul>
-<li><strong><code>int</code></strong> o <strong><code>float</code></strong>, per numeri interi o reali<ul>
-<li>Operazioni di base: <code>+, -, *, /</code></li>
-<li>Divisione intera, resto, potenza: <code>//, %, **</code></li>
+<li><strong><code>int</code></strong> o <strong><code>float64</code></strong>, per numeri interi o reali<ul>
+<li>Operazioni di base: <code>+, -, *, /, %</code></li>
+<li>Divisione tra interi dà risultato intero</li>
 <li>Confronti: <code>&lt;, &lt;=, &gt;, &gt;=, ==, !=</code></li>
 </ul>
 </li>
-<li><strong><code>bool</code></strong>, per valori booleani: <code>True, False</code><ul>
-<li>Operazioni consentite: <code>and, or, not</code></li>
+<li><strong><code>bool</code></strong>, per valori booleani: <code>true, false</code><ul>
+<li>Operazioni consentite: <code>&amp;&amp;, ||, !</code></li>
 <li>I confronti danno un risultato booleano</li>
 </ul>
 </li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Variables</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Variables can be created with <code>var</code> (or <code>const</code>...)<ul>
+<li>If initial value, type can be omitted (<strong>type inference</strong>)</li>
+<li>If no initial value, their <em>zero value</em> is assigned</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; -2 // 3    # floored integer division
--1
-&gt;&gt;&gt; -2 % 3     # reminder is always positive
-1
-&gt;&gt;&gt; 2 ** 1000  # no limits (but memory)
-107150[...]069376
+</li>
+<li>Variables can also be created with <code>:=</code></li>
+</ul>
+<pre class="prettyprint" data-lang="go"><code>func main() {
+    var i, j int = 1, 2
+    k := 3
+    c, python, java := true, false, "no!"
+
+    fmt.Println(i, j, k, c, python, java)
+}
 </code></pre></article>
  
 </slide>
@@ -135,12 +189,12 @@ True
 </li>
 <li><em>Non confondere</em> con confronto di uguaglianza <code>==</code></li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; pi = 3.14  # Assignment
-&gt;&gt;&gt; radius = 2.2
-&gt;&gt;&gt; area = pi * (radius ** 2)
-&gt;&gt;&gt; area
-15.1976
-&gt;&gt;&gt; radius = radius + 1  # guess radius... and area!
+<pre class="prettyprint" data-lang="go"><code>pi := 3.14  // definition and initialization
+radius := 2.2
+area := pi * (radius * radius)
+fmt.Println(area)    // 15.1976
+radius = radius + 1  // guess radius
+fmt.Println(area)    // ... and area!
 </code></pre></article>
  
 </slide>
@@ -153,21 +207,19 @@ True
     </hgroup>
     <article >
       <figure>
-        <img src="images/algo/var-label.svg">
+        <img src="images/algo/my-shoes.png">
         
       </figure><ul>
-<li><strong>Nome</strong> (etichetta) associato ad un certo <strong>valore</strong> (oggetto)<ul>
-<li>Oggetto assegnato a più variabili: non viene copiato, ma riceve più etichette</li>
-<li>Il <strong>tipo</strong> dipende dal valore attualmente assegnato</li>
-<li>Una var. non dev'essere <em>dichiarata</em>, ma dev'essere <em>inizializzata</em></li>
+<li>Le comuni variabili sono <em>contenitori</em> di dati</li>
+<li>Occorrono <strong>dichiarazioni</strong> di tipo<ul>
+<li>Valore iniziale <code>0</code>, quando non specificato</li>
 </ul>
 </li>
+<li>Possibile <em>type inference</em> (<code>:=</code>)<ul>
+<li><em>Tipo</em> inferito dal valore di inizializzazione</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; x = 100
-&gt;&gt;&gt; DELTA = 5          # Constants: UPPER_CASE
-&gt;&gt;&gt; x = x + DELTA      # Variables: lower_case
-&gt;&gt;&gt; next_position = x  # Use explicative names!
-</code></pre></article>
+</li>
+</ul></article>
  
 </slide>
 
@@ -179,18 +231,17 @@ True
     </hgroup>
     <article >
       <ul>
-<li><strong><code>str</code></strong> per sequenze di caratteri <em>Unicode</em></li>
+<li><strong><code>string</code></strong> per sequenze di caratteri <em>Unicode</em></li>
 <li>Primi 128 codici <em>Unicode</em> == <em>ASCII</em><ul>
 <li>A capo: <code>'\n'</code> (10, o 13-10... ma conversione automatica)</li>
 <li>Tabulazione: <code>'\t'</code> (9)</li>
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; str1 = "Monty Python's "
-&gt;&gt;&gt; str2 = 'Flying Circus'
-&gt;&gt;&gt; result = str1 + str2
-&gt;&gt;&gt; result
-"Monty Python's Flying Circus"
+<pre class="prettyprint" data-lang="go"><code>str1 := "Monty Python's "
+str2 := 'Flying Circus'
+result := str1 + str2
+fmt.Println(result)  // "Monty Python's Flying Circus"
 </code></pre></article>
  
 </slide>
@@ -219,14 +270,10 @@ True
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; 'first' &lt; 'second'
-True
-&gt;&gt;&gt; 'Second' &lt;  'first'
-True
-&gt;&gt;&gt; chr(90)
-'Z'
-&gt;&gt;&gt; ord('Z')
-90
+<pre class="prettyprint" data-lang="go"><code>"first" &lt; "second"  // true
+"Second" &lt; "first"  // true
+rune(90)            // 'Z'
+int('Z')            // 90
 </code></pre></article>
  
 </slide>
@@ -242,18 +289,18 @@ True
         <img src="images/algo/hello-user.svg">
         
       </figure><ul>
-<li><strong><code>input</code></strong> legge una riga di testo, inserita dall'utente, in una <em>variabile</em><ul>
+<li><strong><code>Prompt</code></strong>, nel browser, legge una riga di testo, inserita dall'utente, in una <em>variabile</em><ul>
 <li>Prima mostra un messaggio</li>
 </ul>
 </li>
-<li><strong><code>print</code></strong> scrive una serie di valori su una riga<ul>
+<li><strong><code>fmt.Println</code></strong> scrive una serie di valori su una riga<ul>
 <li>Tra i valori (parametri) viene inserito uno spazio</li>
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>user = input("What's your name? ")
+<pre class="prettyprint" data-lang="go"><code>user := Prompt("What's your name?")
 
-print("Hello,", user)
+fmt.Println("Hello,", user)
 </code></pre></article>
  
 </slide>
@@ -268,15 +315,13 @@ print("Hello,", user)
       <figure>
         <img src="images/algo/sum3.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code># File sum3.py - to run: python3 sum3.py
+      </figure><pre class="prettyprint" data-lang="go"><code>a := ParseInt(Prompt("Insert 1st val: "))
+b := ParseInt(Prompt("Insert 2nd val: "))
+c := ParseInt(Prompt("Insert 3rd val: "))
 
-a = int(input("Insert 1st val: "))
-b = int(input("Insert 2nd val: "))
-c = int(input("Insert 3rd val: "))
+total := a + b + c
 
-total = a + b + c
-
-print("The sum is", total)
+fmt.Println("The sum is", total)
 </code></pre></article>
  
 </slide>
@@ -299,21 +344,17 @@ print("The sum is", total)
     </hgroup>
     <article >
       <ul>
-<li><strong>Indentazione</strong> del corpo di <code>if</code> o <code>else</code><ul>
-<li>Richiesta per sintassi, non opzionale!</li>
+<li>Corpo di <code>if</code> o <code>else</code> tra graffe<ul>
+<li><em>Indentazione</em> per migliore leggibilità</li>
 </ul>
 </li>
 </ul>
-<blockquote>
-<p>Readability counts <em>(The Zen of Python)</em></p>
-</blockquote>
-<pre class="prettyprint" data-lang="python"><code># File tooyoung.py - to run: python3 tooyoung.py
+<pre class="prettyprint" data-lang="go"><code>age := ParseInt(Prompt("Age?"))
 
-age = int(input("Age? "))
-
-if age &lt; 14:
-    print("You're too young for driving a scooter...")
-    print("But not for learning Python!")
+if age &lt; 14 {
+    fmt.Println("You're too young for driving a scooter...")
+    fmt.Println("But not for learning Go!")
+}
 </code></pre>
 <ul>
 <li>Clausola <code>else</code>: opzionale<ul>
@@ -334,20 +375,20 @@ if age &lt; 14:
       <figure>
         <img src="images/algo/abs.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>x = int(input("insert a value: "))
+      </figure><pre class="prettyprint" data-lang="go"><code>x = ParseInt(Prompt("insert a value:"))
 
-if x &gt;= 0:
+if x &gt;= 0 {
     y = x
-    print(x, "is positive")
-else:
+    fmt.Println(x, "is positive")
+} else {
     y = -x
-    print(x, "is negative")
-
-print("abs =", y)
+    fmt.Println(x, "is negative")
+}
+fmt.Println("abs =", y)
 </code></pre>
 <ul>
 <li>Corpo di <code>if</code> o <code>else</code>: qualsiasi istruzione</li>
-<li>Anche altri blocchi <code>if</code> o <code>while</code> annidati!</li>
+<li>Anche altri blocchi <code>if</code> o <code>for</code> annidati!</li>
 </ul></article>
  
 </slide>
@@ -359,20 +400,20 @@ print("abs =", y)
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>birth_year = int(input("Birth year? "))
-birth_month = int(input("Birth month? "))
-birth_day = int(input("Birth day? "))
-current_year = int(input("Current year? "))
-current_month = int(input("Current month? "))
-current_day = int(input("Current day? "))
+      <pre class="prettyprint" data-lang="go"><code>birthYear = ParseInt(Prompt("Birth year? "))
+birthMonth = ParseInt(Prompt("Birth month? "))
+birthDay = ParseInt(Prompt("Birth day? "))
+currentYear = ParseInt(Prompt("Current year? "))
+currentMonth = ParseInt(Prompt("Current month? "))
+currentDay = ParseInt(Prompt("Current day? "))
 
-if (current_month &gt; birth_month
-    or (current_month == birth_month and current_day &gt;= birth_day)):
-    age = current_year - birth_year
+if (currentMonth &gt; birthMonth
+    or (currentMonth == birthMonth and currentDay &gt;= birthDay)):
+    age = currentYear - birthYear
 else:
-    age = current_year - birth_year - 1
+    age = currentYear - birthYear - 1
 
-print("Your age is", age)
+fmt.Println("Your age is", age)
 </code></pre>
 <blockquote></blockquote>
 <p>Espressione booleana composta con <strong><code>and</code></strong> e <strong><code>or</code></strong></p></article>
