@@ -446,7 +446,7 @@ code: C++
 code: C++
 
     D* pd;
-    pd->c1; // *(pd + dDC + dCc1); // *(pd + dDc1);
+    pd->c1; // *(pd + dDC + dCc1); // *(pd + dCc1);
     pd->d1; // *(pd + dDd1);
 
 - Multiple inheritance, constant displacement to a given base
