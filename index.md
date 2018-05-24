@@ -88,5 +88,5 @@ Stage formativo per studenti delle scuole superiori, 11-15 giugno 2018
 - [C++: basics](http://tomamic.github.io/fondinfo/cpp1.html)
 - [C++: classes](http://tomamic.github.io/fondinfo/cpp2.html)
 - [C++: inheritance](http://tomamic.github.io/fondinfo/cpp3.html)
-- [Go: basics](http://tomamic.github.io/fondinfo/go1.html)
+- [Go: basics](http://tomamic.github.io/fondinfo/golang.html)
 - [More](http://sowide.ce.unipr.it/teaching/linguaggi)
