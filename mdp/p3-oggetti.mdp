@@ -85,7 +85,7 @@ code: python
             self._x += self._dx
             self._y += self._dy
 
-        def rect(self) -> (int, int, int, int):
+        def position(self) -> (int, int, int, int):
             return self._x, self._y, self._w, self._h
 
 ---
@@ -99,14 +99,12 @@ code: python
     # Create two objects, instances of the Ball class
     b1 = Ball(40, 80)
     b2 = Ball(80, 40)
-    print('Ball 1 @', b1.rect())
-    print('Ball 2 @', b2.rect())
 
-    while input() != 'x':
+    for i in range(25):
+        print('Ball 1 @', b1.position())
+        print('Ball 2 @', b2.position())
         b1.move()
         b2.move()
-        print('Ball 1 @', b1.rect())
-        print('Ball 2 @', b2.rect())
 
 ---
 
@@ -142,8 +140,8 @@ code: python
         g2d.fill_canvas((255, 255, 255))  # BG
         b1.move()
         b2.move()
-        g2d.draw_rect((127, 127, 127), b1.rect())  # FG
-        g2d.draw_rect((127, 127, 127), b2.rect())  # FG
+        g2d.draw_rect((127, 127, 127), b1.position())  # FG
+        g2d.draw_rect((127, 127, 127), b2.position())  # FG
 
     b1 = Ball(40, 80)
     b2 = Ball(80, 40)
@@ -163,7 +161,7 @@ code: python
         g2d.fill_canvas((255, 255, 255))  # BG
         for b in balls:
             b.move()
-            g2d.draw_rect((127, 127, 127), b.rect())  # FG
+            g2d.draw_rect((127, 127, 127), b.position())  # FG
 
     balls = [Ball(40, 80), Ball(80, 40), Ball(120, 120)]
     g2d.init_canvas((ARENA_W, ARENA_H))
@@ -329,7 +327,7 @@ code: python
         g2d.fill_canvas((255, 255, 255))  # Background
         for a in arena.actors():
             # Foreground; cut an area from a larger image
-            g2d.draw_image_clip(sprites, a.rect(), a.symbol())
+            g2d.draw_image_clip(sprites, a.position(), a.symbol())
 
     arena = Arena(320, 240)
     Ball(arena, 40, 80);  Ball(arena, 80, 40);  Ghost(arena, 120, 80)
@@ -385,7 +383,7 @@ code: python
         # ...
         def collide(self, other):
             if not isinstance(other, Ghost):
-                x, y, w, h = other.rect()
+                x, y, w, h = other.position()
                 if x < self._x:
                     self._dx = self.SPEED
                 else:
@@ -560,7 +558,7 @@ code: python
         arena.move_all()             # Game logic
         screen.fill((255, 255, 255)) # Background
         for a in arena.actors():
-            x, y, w, h = a.rect()
+            x, y, w, h = a.position()
             img = images[type(a)]
             screen.blit(img, (x, y)) # Foreground [...]
 
@@ -606,4 +604,65 @@ code: python
     pick_up_sound = pygame.mixer.Sound('pickup.wav')
     pick_up_sound.play()  # play(-1) to loop, then stop()
 
+---
+
+title: Esercizi
+class: segue dark
+
+---
+
+title: 3.1 Ellisse
+figure: images/misc/ellipse.svg
+
+- Classe che modella un'ellisse
+- Campi privati (parametri del costruttore)
+    - Semiassi: `a, b`
+- Metodi pubblici per ottenere...
+    - Area: `π⋅a⋅b`
+    - Distanza focale: `2⋅√|a^^2^^ - b^^2^^|`
+- Nel corpo principale del programma...
+    - Creare un oggetto con dati forniti dall'utente
+    - Visualizzare area e distanza focale dell'ellisse
+
+---
+
+title: 3.2 Animazione di una pallina
+figure: images/misc/street-fighter.jpg
+
+- Partire dalla classe `Ball` vista a lezione
+- Eseguire l'animazione
+    - Per ogni frame, chiamare il metodo `move` della pallina
+    - Rappresentare un rettangolo o un cerchio nella posizione aggiornata della pallina
+- Modificare però il metodo `move`
+    - La pallina si sposta sempre di pochi pixel in orizzontale
+    - La pallina non si sposta verticalmente
+    - Se esce dal bordo destro, ricompare al bordo sinistro e viceversa
+
+---
+
+title: 3.3 Classe degli invasori spaziali
+figure: images/misc/invaders-path.jpg
+
+- Creare una classe `Invader`, che contenga i dati ed il comportamento dell'alieno
+    - Campi privati: `x`, `y`, `dx`
+    - Metodo `move` per avanzare
+    - Metodo `position` per ottenere la posizione attuale
+- Istanziare un oggetto `Invader` e farlo muovere sullo schermo
+    - Chiamare il metodo `move` ad ogni ciclo
+    - Visualizzare un rettangolo nella posizione corrispondente
+
+>
+
+Definire nella classe delle opportune costanti
+
+---
+
+title: 3.4 Lista di invasori
+figure: images/misc/invaders-path.jpg
+
+- Riusare la classe `Invader` (es. 3.3)
+- Creare inizialmente una lista di alieni, con posizioni di partenza diverse
+    - Memorizzare la posizione di partenza di ciascun alieno in opportuni campi privati
+    - Lasciare a ciascun alieno uno spazio orizzontale di movimento di 150 pixel, a destra della posizione di partenza
+- Farli avanzare tutti ad ogni ciclo, chiamando il metodo `move` di ciascuno di essi
 

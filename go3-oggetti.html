@@ -602,6 +602,123 @@ func main() {
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercizi</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.1 Ellisse</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/ellipse.svg">
+        
+      </figure><ul>
+<li>Classe che modella un'ellisse</li>
+<li>Campi privati (parametri del costruttore)<ul>
+<li>Semiassi: <code>a, b</code></li>
+</ul>
+</li>
+<li>Metodi pubblici per ottenere...<ul>
+<li>Area: <code>π⋅a⋅b</code></li>
+<li>Distanza focale: <code>2⋅√|a<sup>2</sup> - b<sup>2</sup>|</code></li>
+</ul>
+</li>
+<li>Nel corpo principale del programma...<ul>
+<li>Creare un oggetto con dati forniti dall'utente</li>
+<li>Visualizzare area e distanza focale dell'ellisse</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.2 Animazione di una pallina</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/street-fighter.jpg">
+        
+      </figure><ul>
+<li>Partire dalla classe <code>Ball</code> vista a lezione</li>
+<li>Eseguire l'animazione<ul>
+<li>Per ogni frame, chiamare il metodo <code>Move</code> della pallina</li>
+<li>Rappresentare un rettangolo o un cerchio nella posizione aggiornata della pallina</li>
+</ul>
+</li>
+<li>Modificare però il metodo <code>Move</code><ul>
+<li>La pallina si sposta sempre di pochi pixel in orizzontale</li>
+<li>La pallina non si sposta verticalmente</li>
+<li>Se esce dal bordo destro, ricompare al bordo sinistro e viceversa</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.3 Classe degli invasori spaziali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/invaders-path.jpg">
+        
+      </figure><ul>
+<li>Creare una classe <code>Invader</code>, che contenga i dati ed il comportamento dell'alieno<ul>
+<li>Campi privati: <code>x</code>, <code>y</code>, <code>dx</code></li>
+<li>Metodo <code>Move</code> per avanzare</li>
+<li>Metodo <code>Position</code> per ottenere la posizione attuale</li>
+</ul>
+</li>
+<li>Istanziare un oggetto <code>Invader</code> e farlo muovere sullo schermo<ul>
+<li>Chiamare il metodo <code>Move</code> ad ogni ciclo</li>
+<li>Visualizzare un rettangolo nella posizione corrispondente</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Definire nella classe delle opportune costanti</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.4 Lista di invasori</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/invaders-path.jpg">
+        
+      </figure><ul>
+<li>Riusare la classe <code>Invader</code> (es. 3.3)</li>
+<li>Creare inizialmente una lista di alieni, con posizioni di partenza diverse<ul>
+<li>Memorizzare la posizione di partenza di ciascun alieno in opportuni campi privati</li>
+<li>Lasciare a ciascun alieno uno spazio orizzontale di movimento di 150 pixel, a destra della posizione di partenza</li>
+</ul>
+</li>
+<li>Farli avanzare tutti ad ogni ciclo, chiamando il metodo <code>Move</code> di ciascuno di essi</li>
+</ul></article>
+ 
+</slide>
+
 
 <slide class="thank-you-slide segue nobackground">
   <aside class="gdbar right"><img src="images/logo.png"></aside>

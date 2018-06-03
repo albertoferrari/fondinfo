@@ -398,3 +398,65 @@ code: python
     - Converte l'oggetto `other` come istanza di `Ghost`
     - Restituisce un riferimento a `Ghost` ed un `bool`
 
+---
+
+title: Esercizi
+class: segue dark
+
+---
+
+title: 3.1 Ellisse
+figure: images/misc/ellipse.svg
+
+- Classe che modella un'ellisse
+- Campi privati (parametri del costruttore)
+    - Semiassi: `a, b`
+- Metodi pubblici per ottenere...
+    - Area: `π⋅a⋅b`
+    - Distanza focale: `2⋅√|a^^2^^ - b^^2^^|`
+- Nel corpo principale del programma...
+    - Creare un oggetto con dati forniti dall'utente
+    - Visualizzare area e distanza focale dell'ellisse
+
+---
+
+title: 3.2 Animazione di una pallina
+figure: images/misc/street-fighter.jpg
+
+- Partire dalla classe `Ball` vista a lezione
+- Eseguire l'animazione
+    - Per ogni frame, chiamare il metodo `Move` della pallina
+    - Rappresentare un rettangolo o un cerchio nella posizione aggiornata della pallina
+- Modificare però il metodo `Move`
+    - La pallina si sposta sempre di pochi pixel in orizzontale
+    - La pallina non si sposta verticalmente
+    - Se esce dal bordo destro, ricompare al bordo sinistro e viceversa
+
+---
+
+title: 3.3 Classe degli invasori spaziali
+figure: images/misc/invaders-path.jpg
+
+- Creare una classe `Invader`, che contenga i dati ed il comportamento dell'alieno
+    - Campi privati: `x`, `y`, `dx`
+    - Metodo `Move` per avanzare
+    - Metodo `Position` per ottenere la posizione attuale
+- Istanziare un oggetto `Invader` e farlo muovere sullo schermo
+    - Chiamare il metodo `Move` ad ogni ciclo
+    - Visualizzare un rettangolo nella posizione corrispondente
+
+>
+
+Definire nella classe delle opportune costanti
+
+---
+
+title: 3.4 Lista di invasori
+figure: images/misc/invaders-path.jpg
+
+- Riusare la classe `Invader` (es. 3.3)
+- Creare inizialmente una lista di alieni, con posizioni di partenza diverse
+    - Memorizzare la posizione di partenza di ciascun alieno in opportuni campi privati
+    - Lasciare a ciascun alieno uno spazio orizzontale di movimento di 150 pixel, a destra della posizione di partenza
+- Farli avanzare tutti ad ogni ciclo, chiamando il metodo `Move` di ciascuno di essi
+

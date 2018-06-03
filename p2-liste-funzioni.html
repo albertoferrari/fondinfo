@@ -637,20 +637,19 @@ g2d.handle_keyboard(keydown, keyup)
         <img src="images/misc/sin-cos.png">
         
       </figure><ul>
-<li>Riempire una lista con i valori di <code>sin(x)</code><ul>
+<li>Riempire una lista con i valori di <code>sin</code><ul>
 <li>360 elementi, indice <code>x</code> tra 0 e 359</li>
 </ul>
 </li>
 <li>Poi, ciclicamente...<ul>
 <li>Chiedere un angolo all'utente</li>
-<li>Visualizzare il corrispondente valore precalcolato</li>
+<li>Visualizzare il corrispondente valore precalcolato del seno</li>
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>from math import pi, sin
-</code></pre>
-<p><code>sin</code> opera su radianti: calcolare <code>sin(x * pi / 180)</code>, anzichè <code>sin(x)</code></p>
-<p>Creare una lista vuota, e poi aggiungere un valore alla volta con <code>append</code></p></article>
+<blockquote></blockquote>
+<p><code>math.Sin</code> opera su radianti</p>
+<p>Calcolare <code>math.sin(x * math.pi / 180)</code>, anzichè <code>math.sin(x)</code></p></article>
  
 </slide>
 
@@ -667,7 +666,7 @@ g2d.handle_keyboard(keydown, keyup)
       </figure><ul>
 <li>Definire una <em>funzione</em> <code>ellipse_area</code> che:<ul>
 <li>Riceve come <em>parametri</em> i semiassi di una ellisse: <code>a</code>, <code>b</code></li>
-<li>Restituisce come risultato l'area dell'ellisse: <code>area = pi * a * b</code></li>
+<li>Restituisce come risultato l'area dell'ellisse: <code>π⋅a⋅b</code></li>
 </ul>
 </li>
 <li>Definire una <em>funzione</em> <code>main</code> che:<ul>
@@ -804,17 +803,19 @@ g2d.handle_keyboard(keydown, keyup)
         <img src="images/misc/spiral-circles.png">
         
       </figure><ul>
-<li>Disegnare una sequenza di cerchi (<code>n</code> scelto dall'utente) lungo una spirale</li>
-<li>Alla prima implementazione, procedere su un percorso circolare di raggio <code>r</code>, attorno al punto <code>(xc, yc)</code></li>
-<li>Poi, su una spirale, aumentando passo a passo anche <code>r</code></li>
-<li>Infine, disegnare lungo il percorso dei cerchi sempre più grandi e di colore diverso</li>
+<li>Mostrare l'animazione di un cerchio lungo una spirale</li>
+<li>Ruotare attorno ad un centro <code>(xc, yc)</code></li>
+<li>Amentare dist. <code>r</code> dal centro ad ogni passo</li>
+<li>Disegnare un cerchio sempre più grande</li>
+<li>Dopo <code>n</code> passi, ricominciare daccapo</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>xc, yc, r, angle = 320, 240, 40, 0.0
-for i in range(8):
-    y = yc + int(r * math.sin(angle))
-    x = xc + int(r * math.cos(angle))
-    pygame.draw.circle(screen, (0, 0, 0), (x, y), 10)
-    angle += math.pi / 4
+<pre class="prettyprint" data-lang="go"><code>xc, yc, r, angle := 320, 240, 40.0, 0.0
+func update() {
+    x := xc + int(r*math.Cos(angle))
+    y := yc + int(r*math.Sin(angle))  // ...
+    DrawCircle(Color{0, 0, 0}, Point{x, y}, 10)
+    angle += math.Pi / 16
+}
 </code></pre></article>
  
 </slide>

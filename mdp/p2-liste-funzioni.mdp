@@ -458,19 +458,17 @@ Usare un ciclo `for` sulla stringa (sequenza di caratteri)
 title: 2.2 Array, precalcolo
 figure: images/misc/sin-cos.png
 
-- Riempire una lista con i valori di `sin(x)`
+- Riempire una lista con i valori di `sin`
     - 360 elementi, indice `x` tra 0 e 359
 - Poi, ciclicamente...
 	- Chiedere un angolo all'utente
-	- Visualizzare il corrispondente valore precalcolato
+	- Visualizzare il corrispondente valore precalcolato del seno
 
-code: python
+>
 
-    from math import pi, sin
+`math.Sin` opera su radianti
 
-`sin` opera su radianti: calcolare `sin(x * pi / 180)`, anzichè `sin(x)`
-
-Creare una lista vuota, e poi aggiungere un valore alla volta con `append`
+Calcolare `math.sin(x * math.pi / 180)`, anzichè `math.sin(x)`
 
 ---
 
@@ -479,7 +477,7 @@ figure: images/misc/ellipse.svg
 
 - Definire una *funzione* `ellipse_area` che:
     - Riceve come *parametri* i semiassi di una ellisse: `a`, `b`
-    - Restituisce come risultato l'area dell'ellisse: `area = pi * a * b`
+    - Restituisce come risultato l'area dell'ellisse: `π⋅a⋅b`
 - Definire una *funzione* `main` che:
     - Chiede all'utente due valori
     - Invoca la funzione `ellipse_area` con questi parametri
@@ -562,18 +560,19 @@ Poi invertire il verso delle righe con indice dispari
 title: 2.9 Spirale (*)
 figure: images/misc/spiral-circles.png
 
-- Disegnare una sequenza di cerchi (`n` scelto dall'utente) lungo una spirale
-- Alla prima implementazione, procedere su un percorso circolare di raggio `r`, attorno al punto `(xc, yc)`
-- Poi, su una spirale, aumentando passo a passo anche `r`
-- Infine, disegnare lungo il percorso dei cerchi sempre più grandi e di colore diverso
+- Mostrare l'animazione di un cerchio lungo una spirale
+- Ruotare attorno ad un centro `(xc, yc)`
+- Amentare dist. `r` dal centro ad ogni passo
+- Disegnare un cerchio sempre più grande
+- Dopo `n` passi, ricominciare daccapo
 
-code: python
+code: go
 
-    xc, yc, r, angle = 320, 240, 40, 0.0
-    for i in range(8):
-        y = yc + int(r * math.sin(angle))
-        x = xc + int(r * math.cos(angle))
-        pygame.draw.circle(screen, (0, 0, 0), (x, y), 10)
-        angle += math.pi / 4
-
+    xc, yc, r, angle := 320, 240, 40.0, 0.0
+    func update() {
+        x := xc + int(r*math.Cos(angle))
+        y := yc + int(r*math.Sin(angle))  // ...
+        DrawCircle(Color{0, 0, 0}, Point{x, y}, 10)
+        angle += math.Pi / 16
+    }
 

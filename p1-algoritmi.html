@@ -675,9 +675,8 @@ g2d.main_loop()
 <li>Mostrare il valore dell'area e della circonferenza</li>
 <li>Se <code>r</code> è negativo, però, mostrare un messaggio d'errore</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>from math import pi
-# `pi` is a constant defined in the `math` module
-</code></pre></article>
+<blockquote></blockquote>
+<p>Convertire l'input in <code>float</code></p></article>
  
 </slide>
 
@@ -763,7 +762,7 @@ Altrimenti ...</p></article>
         <img src="images/misc/bingo-balls.png">
         
       </figure><ul>
-<li>Generare un intero “segreto” a caso tra 1 e 90</li>
+<li>Generare all'inizio del programma un numero “segreto” a caso tra 1 e 90</li>
 <li>Chiedere ripetutamente all'utente di immettere un numero, finché non indovina quello generato</li>
 <li>Ad ogni tentativo, dire se il numero immesso è maggiore o minore del numero segreto</li>
 </ul></article>
@@ -791,34 +790,14 @@ Anno 2: 109.20€
 Anno 3: 114.12€ ...
 </code></pre>
 <blockquote></blockquote>
-<p>Incolonnamento: <code>txt = '{:6.2f}'.format(val)</code> <br>
-<code>txt</code> ha lunghezza ≥ 6, con 2 cifre decimali</p></article>
+<p>Non preoccuparsi della formattazione in colonna</p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>1.7 Conteggio cifre (*)</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/finger-counting.png">
-        
-      </figure><ul>
-<li>Leggere un numero intero positivo</li>
-<li>Determinare di quante cifre è composto</li>
-</ul>
-<blockquote></blockquote>
-<p>Quante volte riusciamo a dividerlo per 10, prima che si annulli?</p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>1.8 Resistenze, ciclo (*)</h2>
+      <h2>1.7 Resistenze, ciclo (*)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -834,6 +813,25 @@ Anno 3: 114.12€ ...
 <p>Formule utili:</p>
 <p>R<sub>s</sub> = ∑ R<sub>i</sub></p>
 <p>1/R<sub>p</sub> = ∑ (1/R<sub>i</sub>)</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.8 Orologio classico (*)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/classical-watch.jpg">
+        
+      </figure><ul>
+<li>Disegnare 12 tacche a raggiera, come in un orologio classico</li>
+<li>Miglioramento: disegnare anche le tacche dei minuti, più piccole</li>
+</ul>
+<blockquote></blockquote>
+<p>Usare <code>math.sin</code> e <code>math.cos</code> per determinare le posizioni in cui disegnare</p></article>
  
 </slide>
 

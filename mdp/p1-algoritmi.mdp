@@ -468,10 +468,9 @@ figure: images/misc/greek-pi.png
 - Mostrare il valore dell'area e della circonferenza
 - Se `r` è negativo, però, mostrare un messaggio d'errore
 
-code: python
+>
 
-    from math import pi
-    # `pi` is a constant defined in the `math` module
+Convertire l'input in `float`
 
 ---
 
@@ -525,7 +524,7 @@ Soluzione finale: determinare automaticamente, prima del ciclo, le variazioni mi
 title: 1.5 Numero segreto
 figure: images/misc/bingo-balls.png
 
-- Generare un intero “segreto” a caso tra 1 e 90
+- Generare all'inizio del programma un numero “segreto” a caso tra 1 e 90
 - Chiedere ripetutamente all'utente di immettere un numero, finché non indovina quello generato
 - Ad ogni tentativo, dire se il numero immesso è maggiore o minore del numero segreto
 
@@ -547,24 +546,11 @@ code: output
 
 >
 
-Incolonnamento: `txt = '{:6.2f}'.format(val)` <br>
-`txt` ha lunghezza ≥ 6, con 2 cifre decimali
+Non preoccuparsi della formattazione in colonna
 
 ---
 
-title: 1.7 Conteggio cifre (*)
-figure: images/misc/finger-counting.png
-
-- Leggere un numero intero positivo
-- Determinare di quante cifre è composto
-
->
-
-Quante volte riusciamo a dividerlo per 10, prima che si annulli?
-
----
-
-title: 1.8 Resistenze, ciclo (*)
+title: 1.7 Resistenze, ciclo (*)
 figure: images/misc/resistors.png
 
 - Leggere, attraverso un ciclo, una sequenza di valori di resistenze elettriche
@@ -578,6 +564,18 @@ Formule utili:
 R~~s~~ = ∑ R~~i~~
 
 1/R~~p~~ = ∑ (1/R~~i~~)
+
+---
+
+title: 1.8 Orologio classico (*)
+figure: images/misc/classical-watch.jpg
+
+- Disegnare 12 tacche a raggiera, come in un orologio classico
+- Miglioramento: disegnare anche le tacche dei minuti, più piccole
+
+>
+
+Usare `math.sin` e `math.cos` per determinare le posizioni in cui disegnare
 
 ---
 

@@ -364,11 +364,11 @@ Usare un ciclo `for` sulla stringa (sequenza di caratteri)
 title: 2.2 Array, precalcolo
 figure: images/misc/sin-cos.png
 
-- Riempire una lista con i valori di `math.Sin(x)`
+- Riempire una lista con i valori di `sin`
     - 360 elementi, indice `x` tra 0 e 359
 - Poi, ciclicamente...
 	- Chiedere un angolo all'utente
-	- Visualizzare il corrispondente valore precalcolato
+	- Visualizzare il corrispondente valore precalcolato del seno
 
 >
 
@@ -383,7 +383,7 @@ figure: images/misc/ellipse.svg
 
 - Definire una *funzione* `EllipseArea` che:
     - Riceve come *parametri* i semiassi di una ellisse: `a`, `b`
-    - Restituisce come risultato l'area dell'ellisse: `Pi * a * b`
+    - Restituisce come risultato l'area dell'ellisse: `π⋅a⋅b`
 - Definire una *funzione* `main` che:
     - Chiede all'utente due valori
     - Invoca la funzione `EllipseArea` con questi parametri
@@ -416,7 +416,7 @@ figure: images/misc/street-fighter.jpg
 - Mostrare una pallina che si muove in orizzontale
 - La pallina rimbalza sui bordi
     - Memorizzare in una variabile `dx` lo spostamento orizzontale da effettuare ad ogni ciclo
-    - Cambiare segno a `dx` quando `x < 0` oppure `x + w > screen_width`
+    - Cambiare segno a `dx` quando `x < 0` oppure `x + w > screenWidth`
 
 ---
 
