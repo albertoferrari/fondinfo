@@ -4,35 +4,29 @@ figure: images/algo/rubik-cube.png
 
 ---
 
-title: Python!
-
-![](images/algo/antigravity.png)
-
----
-
 title: Less is exponentially more
 
-- Made in ~2007 at Google, starting roughly from C
-    - By the Unix pioneers Rob *Pike* and Ken *Thompson*, together with Robert Griesemer
-    - Book: “The Go Programming Language” by Brian W. *Kernighan*, Alan Donovan
-- Very few, orthogonal concepts
-    - No exceptions, no template, no inheritance
-    - Interfaces and duck typing
-    - Type inference
-    - Garbage collection, but native (no VM)
-    - Communicating sequential processes
+- Progetto avviato nel ~2007 presso Google, partendo dal C
+    - Pionieri di Unix: Rob *Pike* e Ken *Thompson*, con Robert Griesemer
+    - Libro: “The Go Programming Language” by Brian W. *Kernighan*, Alan Donovan
+- Pochi concetti, tra loro ortogonali
+    - Senza *eccezioni*, né *template*, né *ereditarietà*
+    - *Interfacce* e *duck typing*, *Type inference*
+    - *Garbage collection*, ma codice *nativo* (senza macchina virtuale)
+    - *Communicating sequential processes*
 
 >
 
-After a talk of 35 new features of C++11, and at pauses for compiling C++...
+Dopo una presentazione di 35 nuove caratteristiche del C++11, durante le pause per compilare codice C++...
 <https://commandcenter.blogspot.it/2012/06/less-is-exponentially-more.html>
 
 ---
 
-title: Hello, Gopher
+title: Hello, World!
+figure: images/algo/helloworld.png
 
-- Program starts at function `main` in package `main`
-- A package *exports* only names starting with a **capital letter**
+- Il programma parte dalla funzione **`main`** nel modulo `main`
+- Modulo **`fmt`** per operazioni di I/O
 
 code: go
 
@@ -41,12 +35,30 @@ code: go
     import "fmt"
 
     func main() {
-        fmt.Println("Hello, Gopher")
+        fmt.Println("Hello, World!")
     }
 
 code: shell
 
     go run hello.go
+
+---
+
+title: Hello, browser!
+
+- Modulo speciale **`g2d`**
+    - Supporto per browser
+    - Disegno su canvas
+
+code: go
+
+    package main
+
+    import "g2d"
+
+    func main() {
+        g2d.Println("Hello, browser!")
+    }
 
 ---
 
@@ -58,11 +70,17 @@ title: Tipi di dati
 
 code: go
 
-    fmt.Println(3 / 2)    // 1, truncated
-    fmt.Println(3 % 2)    // 1, reminder
-    fmt.Println(3.0 / 2)  // 1.5
-    fmt.Println(4 == 5)   // false, do not confuse with assignment!
-    fmt.Println(2 < 3 || ! true)  // true
+    package main
+
+    import . "g2d"  // to skip the prefix
+
+    func main() {
+        Println(3.0 / 2)  // 1.5
+        Println(3 / 2)    // 1, truncated
+        Println(3 % 2)    // 1, reminder
+        Println(4 == 5)   // false, do not confuse with assignment!
+        Println(2 < 3 || ! true)  // true
+    }
 
 ---
 
@@ -78,70 +96,63 @@ title: Valori numerici e booleani
 
 ---
 
-title: Variables
-
-- Variables can be created with `var` (or `const`...)
-    - If initial value, type can be omitted (**type inference**)
-    - If no initial value, their *zero value* is assigned
-- Variables can also be created with `:=`
-
-code: go
-
-    func main() {
-        var i, j int = 1, 2
-        k := 3
-        c, python, java := true, false, "no!"
-
-        fmt.Println(i, j, k, c, python, java)
-    }
-
----
-
-title: Assegnamento
-figure: images/algo/assign.png
-class: large-figure
-
-- Una **variabile** serve per conservare un risultato
-- Assegnamento, operatore `=`
-    - Alla sinistra una variabile
-    - Alla destra un valore
-- *Non confondere* con confronto di uguaglianza `==`
-
-code: go
-
-    pi := 3.14  // definition and initialization
-    radius := 2.2
-    area := pi * (radius * radius)
-    fmt.Println(area)    // 15.1976
-    radius = radius + 1  // guess radius
-    fmt.Println(area)    // ... and area!
-
----
-
 title: Variabile
 figure: images/algo/my-shoes.png
 
 - Le comuni variabili sono *contenitori* di dati
 - Occorrono **dichiarazioni** di tipo
-    - Valore iniziale `0`, quando non specificato
+    - Valore iniziale `0` o `""`, quando non specificato
 - Possibile *type inference* (`:=`)
     - *Tipo* inferito dal valore di inizializzazione
+
+code: go
+
+    var i, j int = 1, 2
+    k := 3.2
+    ans, txt := true, "no!"
+
+    Println(i, j, k, ans, txt)
+
+---
+
+title: Riassegnamento
+figure: images/algo/assign.png
+class: large-figure
+
+- Riassegnamento, operatore `=`
+    - Alla sinistra una variabile *già definita*
+    - Alla destra un valore
+- *Non confondere* con confronto di uguaglianza `==`
+
+code: go
+
+    pi := 3.14       // definition and initialization
+    radius := 2.2
+    area := pi * (radius * radius)
+    Println(area)    // 15.1976
+    radius = radius + 1
+    Println(radius)  // guess radius now
+    Println(area)    // ... and area!
 
 ---
 
 title: Stringhe di testo
 
 - **`string`** per sequenze di caratteri *Unicode*
+- Ogni carattere è di tipo `rune` (`int32`)
 - Primi 128 codici *Unicode* == *ASCII*
-    - A capo: `'\n'` (10, o 13-10... ma conversione automatica)
-    - Tabulazione: `'\t'` (9)
+- Confronto, in ordine *lessicografico*
 
 code: go
 
-    str1 := "Monty Python's "
-    str2 := 'Flying Circus'
+    str1 := "Hello,"
+    str2 := " 🌐"
     result := str1 + str2
-    fmt.Println(result)  // "Monty Python's Flying Circus"
+    Println(result)              // "Hello, 🌐"
+
+    Println("first" < "second")  // true
+    Println("Second" < "first")  // true
+    Println('🌐' == 127760)      // true
 
 ---
 
@@ -152,38 +163,27 @@ class: large-image
 
 ---
 
-title: Confronto tra stringhe
-
-- Confronto tra stringhe, in ordine *lessicografico*
-    - `<, <=, >, >=, ==, !=`
-
-code: go
-
-    "first" < "second"  // true
-    "Second" < "first"  // true
-    rune(90)            // 'Z'
-    int('Z')            // 90
-
----
-
 title: Leggere e scrivere
 figure: images/algo/hello-user.svg
 
-- **`Prompt`**, nel browser, legge una riga di testo, inserita dall'utente, in una *variabile*
-    - Prima mostra un messaggio
-- **`fmt.Println`** scrive una serie di valori su una riga
-    - Tra i valori (parametri) viene inserito uno spazio
+- **`g2d.Prompt`** chiede un testo all'utente
+    - Mostra un messaggio
+    - Poi blocca il programma in attesa
 
 code: go
 
-    user := Prompt("What's your name?")
-    
-    fmt.Println("Hello,", user)
+    user := Prompt("What's your name? ")
+    Println("Hello, ", user)
 
 ---
 
 title: Somma di tre numeri
 figure: images/algo/sum3.svg
+
+- `g2d.ParseInt`
+    - Conversione da `string` a `int`
+- `g2d.ParseFloat64`
+    - Conversione da `string` a `float64`
 
 code: go
 
@@ -192,8 +192,7 @@ code: go
     c := ParseInt(Prompt("Insert 3rd val: "))
 
     total := a + b + c
-
-    fmt.Println("The sum is", total)
+    Println("The sum is ", total)
 
 ---
 
@@ -206,18 +205,17 @@ title: Selezione: if
 
 - Corpo di `if` o `else` tra graffe
     - *Indentazione* per migliore leggibilità
+- Clausola `else`: opzionale
+    - Eseguita sse la condizione non è verificata
 
 code: go
 
     age := ParseInt(Prompt("Age?"))
 
     if age < 14 {
-        fmt.Println("You're too young for driving a scooter...")
-        fmt.Println("But not for learning Go!")
+        Println("You're too young for driving a scooter...")
+        Println("But not for learning Go!")
     }
-
-- Clausola `else`: opzionale
-    - Eseguita sse la condizione non è verificata
 
 ---
 
@@ -226,16 +224,16 @@ figure: images/algo/abs.svg
 
 code: go
 
-    x = ParseInt(Prompt("insert a value:"))
+    x := ParseInt(Prompt("insert a value:"))
+    y := x
 
     if x >= 0 {
-        y = x
-        fmt.Println(x, "is positive")
+        Println(x, " is positive")
     } else {
         y = -x
-        fmt.Println(x, "is negative")
+        Println(x, " is negative")
     }
-    fmt.Println("abs =", y)
+    Println("abs = ", y)
 
 - Corpo di `if` o `else`: qualsiasi istruzione
 - Anche altri blocchi `if` o `for` annidati!
@@ -246,20 +244,20 @@ title: Calcolo dell'età
 
 code: go
 
-    birthYear = ParseInt(Prompt("Birth year? "))
-    birthMonth = ParseInt(Prompt("Birth month? "))
-    birthDay = ParseInt(Prompt("Birth day? "))
-    currentYear = ParseInt(Prompt("Current year? "))
-    currentMonth = ParseInt(Prompt("Current month? "))
-    currentDay = ParseInt(Prompt("Current day? "))
+    birthYear := ParseInt(Prompt("Birth year? "))
+    birthMonth := ParseInt(Prompt("Birth month? "))
+    birthDay := ParseInt(Prompt("Birth day? "))
+    currentYear := ParseInt(Prompt("Current year? "))
+    currentMonth := ParseInt(Prompt("Current month? "))
+    currentDay := ParseInt(Prompt("Current day? "))
 
-    if (currentMonth > birthMonth
-        or (currentMonth == birthMonth and currentDay >= birthDay)):
-        age = currentYear - birthYear
-    else:
-        age = currentYear - birthYear - 1
+    age := currentYear - birthYear
+    if currentMonth < birthMonth
+        || (currentMonth == birthMonth && currentDay < birthDay) {
+        age = age - 1
+    }
 
-    fmt.Println("Your age is", age)
+    Println("Your age is ", age)
 
 >
 
@@ -270,66 +268,63 @@ Espressione booleana composta con **`and`** e **`or`**
 title: Confronto tra parole
 figure: images/algo/words.svg
 
-code: python
+code: go
 
-    a = input("First word? ")
-    b = input("Second word? ")
+    a := Prompt("First word? ")
+    b := Prompt("Second word? ")
 
-    if a < b:
-        print("The words are ordered")
-    elif a > b:
-        print("The words are inverted")
-    else:
-        print("The words are equal")
-
-- **`elif`**: clausola `else` che contiene un altro `if`
-- No `switch`, no `do-while`
-
-> There should be one -- and preferably only one -- obvious way to do it *(ZoP)*
-
+    if a < b {
+        Println("The words are ordered")
+    } else if a > b {
+        Println("The words are inverted")
+    } else {
+        Println("The words are equal")
+    }
 
 ---
 
 title: Operazioni aritmetiche
 figure: images/algo/calc.svg
 
-code: python
+code: go
 
-    a = float(input())
-    b = float(input())
-    op = input()
+    a := ParseFloat(Prompt("a? "))
+    b := ParseFloat(Prompt("b? "))
+    op := Prompt("op? ")
 
-    if op == '+':
-        print(a + b)
-    elif op == '-':
-        print(a - b)
-    elif op == '*':
-        print(a * b)
-    elif op == '/' and b != 0:
-        print(a / b)
-    else:
-        print("Operation not allowed")
+    if op == "+" {
+        Println(a + b)
+    } else if op == "-" {
+        Println(a - b)
+    } else if op == "*" {
+        Println(a * b)
+    } else if op == "/" && b != 0 {
+        Println(a / b)
+    } else {
+        Println("Operation not allowed")
+    }
 
 ---
 
-title: Iterazione: while
+title: Iterazione: for
 figure: images/algo/sum1n.svg
 
-- Condizione booleana di *permanenza* nel ciclo
-- Controllo *preliminare*, possibile che il corpo non sia mai eseguito
+- Condizione di *permanenza* nel ciclo
+- Controllo *preliminare*
+- Possibile che il corpo non sia mai eseguito
 
-code: python
+code: go
 
-    # Sum of the numbers from 1 to n
-    total = 0
-    count = 1
-    n = int(input("n? "))
+    // Sum of the numbers from 1 to n
+    total := 0
+    count := 1
+    n := ParseInt(Prompt("n? "))
 
-    while count <= n:
+    for count <= n {
         total = total + count
         count = count + 1
-
-    print("The sum is", total)
+    }
+    Println("The sum is", total)
 
 <http://it.wikipedia.org/wiki/Gauss#Biografia>
 
@@ -338,144 +333,126 @@ code: python
 title: Somma di N valori dell'utente
 figure: images/algo/sumn.svg
 
-code: python
+code: go
 
-    n = int(input("How many values? "))
-    total = 0
-    i = 0
+    n := ParseInt(Prompt("How many values? "))
+    total := 0
+    i := 0
 
-    while i < n:
-        val = int(input("Val? "))
+    for i < n {
+        val := ParseInt(Prompt("Val? "))
         
-        total += val  # total = total + val
-        i += 1        # i = i + 1
-
-    print("The sum is", total)
+        total += val  // total = total + val
+        i += 1        // i = i + 1
+    }
+    Println("The sum is", total)
 
 ---
 
 title: Ciclo con sentinella
 figure: images/algo/average.svg
 
-code: python
+code: go
 
-    total = 0
-    count = 0
-
-    val = int(input("Val? (0 to finish) "))
-    
-    while val != 0:
+    total, count := 0, 0
+    val := ParseInt(Prompt("Val? (0 to finish) "))
+    for val != 0 {
         total += val
         count += 1
-        val = int(input("Val? (0 to finish) "))
+        val = ParseInt(Prompt("Val? (0 to finish) "))
+    }
+    if count != 0 {
+        Println("The average is",
+                float64(total) / float64(count))
+    }
 
-    if count != 0:
-        print("The average is", total / count)
+- Usare `int(x)` e `float64(x)`...
+- Per convertire un numero nel tipo giusto
 
 ---
 
 title: Quadrato perfetto
 figure: images/algo/perfect-square.svg
 
-code: python
+code: go
 
-    n = 0
-    while n <= 0:
-        n = int(input("Positive val? "))
-
-    ans = 1
-    while ans * ans < n:
+    for n <= 0 {
+        n = ParseInt(Prompt("Positive val? "))
+    }
+    ans := 1
+    for ans * ans < n {
         ans += 1
-
-    if ans * ans == n:
-        print("Square root:", ans)
-    else:
-        print("Not a perfect square")
-
+    }
+    if ans * ans == n {
+        Println("Square root:", ans)
+    } else {
+        Println("Not a perfect square")
+    }
+    
 ---
 
 title: Moduli
 
-- *Python Standard Library*: <http://docs.python.org/3/library/>
+code: go
 
-code: python
+    package main
 
-    import math
-    y = math.sin(math.pi / 4)
-    print(y)
+    import (
+        "g2d"
+        "math"
+    )
 
-code: python
+    func main() {
+        y := math.Sin(math.Pi / 4)
+        g2d.Println(y)
 
-    from math import sin, pi
-    print(sin(pi / 4))
-
-code: python
-
-    from random import randint
-    die1 = randint(1, 6)  # like rolling a die
-    die2 = randint(1, 6)  # like rolling a die
-    print(die1, die2)
-
->
-
-Tutti gli `import` all'inizio dello script, per evidenziare le dipendenze
+        die1 := g2d.RandInt(1, 6)  // like rolling a die
+        die2 := g2d.RandInt(1, 6)  // like rolling a die
+        g2d.Println(die1, die2)
+    }
 
 ---
 
-title: Tupla
+title: Strutture per grafica
 
-- Sequenza **immutabile** di valori, anche di *tipo diverso*
-- Spesso tra parentesi, per separarla da altri valori
-- Utili anche per grafica:
-    - *Color*: `(red, green, blue)` <br> Ogni componente nel range `0..255`<br>
-    - *Point*: `(x, y)`<br>
-    - *Size*: `(width, height)`<br>
-    - *Rect*: `(left, top, width, height)`
+- Strutture definite nel modulo `g2d`
+- Esportati da modulo solo nomi con la prima lettera **maiuscola**
+- <https://golang.org/pkg/>
 
-code: python
 
-    center = (150, 100)
-    color = (10, 10, 200)  # ~ blue
-    size = (640, 480)
-    rectangle = (150, 100, 200, 200)  # square
+code: go
 
----
+    type Point struct{ X, Y int }
+    type Size struct{ W, H int }
+    type Rect struct{ X, Y, W, H int }
+    type Color struct{ R, G, B int }
 
-title: Brython
-figure: images/misc/brython.png
-figcaption: → brython.info
+code: go
 
-- *Transpiler*: converte codice Python in JavaScript
-    - Sia traduttore che codice generato girano nel *browser*
-- Useremo un modulo *ad-hoc*: `game2d`
-    - Genera html e lancia web-server locale
-    - Definisce funzioni di disegno
-
->
-
-Servono i file `brython_dist.js` e `game2d.py`, in `examples`: <br>
-<https://github.com/tomamic/fondinfo/archive/master.zip>
+    center := Point{150, 100}
+    myBlue := Color{10, 10, 200}  // each component in 0..255
+    windowSize := Size{640, 480}
+    rectangle := Rect{150, 100, 200, 200}  // square
 
 ---
 
 title: Disegno nel browser
 figure: images/oop/raster-coord.png
 
-code: python
+code: go
 
-    import game2d as g2d
+    // Create canvas, width=600, height=400
+    InitCanvas(Size{600, 400})
+
+    // Yellow rectangle, left=100, top=150, w=250, h=200
+    // red=255 (max), green=255 (max), blue=0 (min)
+    DrawRect(Color{255, 255, 0}, Rect{100, 150, 250, 200})
     
-    # Create canvas, width=600, height=400
-    g2d.init_canvas((600, 400))
-
-    # Yellow rectangle, left=100, top=150, w=250, h=200
-    # red=255 (max), green=255 (max), blue=0 (min)
-    g2d.draw_rect((255, 255, 0), (100, 150, 250, 200))
+    // Green diagonal
+    DrawLine(Color{0, 255, 0}, Point{100, 150}, Point{350, 350})
     
-    # Blue circle, center=(100, 150), radius=20
-    g2d.draw_circle((0, 0, 255), (100, 150), 20)
-
-    g2d.main_loop()
+    // Blue circle, center=(100, 150), radius=20
+    DrawCircle(Color{0, 0, 255}, Point{100, 150}, 20)
 
 ---
 
@@ -491,10 +468,9 @@ figure: images/misc/greek-pi.png
 - Mostrare il valore dell'area e della circonferenza
 - Se `r` è negativo, però, mostrare un messaggio d'errore
 
-code: python
+>
 
-    from math import pi
-    # `pi` is a constant defined in the `math` module
+Usare `ParseFloat64` sull'input
 
 ---
 
@@ -570,20 +546,7 @@ code: output
 
 >
 
-Incolonnamento: `txt = '{:6.2f}'.format(val)` <br>
-`txt` ha lunghezza ≥ 6, con 2 cifre decimali
-
----
-
-title: 1.7 Conteggio cifre (*)
-figure: images/misc/finger-counting.png
-
-- Leggere un numero intero positivo
-- Determinare di quante cifre è composto
-
->
-
-Quante volte riusciamo a dividerlo per 10, prima che si annulli?
+Non preoccuparsi della formattazione in colonna
 
 ---
 
@@ -601,6 +564,18 @@ Formule utili:
 R~~s~~ = ∑ R~~i~~
 
 1/R~~p~~ = ∑ (1/R~~i~~)
+
+---
+
+title: 1.8 Orologio classico (*)
+figure: images/misc/classical-watch.jpg
+
+- Disegnare 12 tacche a raggiera, come in un orologio classico
+- Miglioramento: disegnare anche le tacche dei minuti, più piccole
+
+>
+
+Usare `math.Sin` e `math.Cos` per determinare le posizioni in cui disegnare
 
 ---
 

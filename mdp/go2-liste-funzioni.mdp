@@ -4,233 +4,221 @@ figure: images/fun/shopping-list.jpg
 
 ---
 
-title: Lista
-figure: images/fun/month-list.svg
+title: Slice
+figure: images/fun/shopping-list.jpg
 
-- Sequenza di elementi, *di solito* dello stesso **tipo**
-    - L'intera lista può essere assegnata ad una variabile, così diamo un **nome** alla lista
+- Sequenza di elementi, dello stesso **tipo**
+    - L'intera lista (*slice*) può essere assegnata ad una variabile, così diamo un **nome** alla lista
 - I singoli elementi sono **numerati**
     - Gli indici partono da 0!
       
-code: python
+code: go
 
-    to_buy = ["spam", "eggs", "beans"]
+    toBuy := []string{"spam", "eggs", "beans"}
     
-code: python
+code: go
 
-    rainfall_data = [13, 24, 18, 15]
+    rainfallData := []int{13, 24, 18, 15}
     
-code: python
+code: go
 
-    months = ["Jan", "Feb", "Mar",
-              "Apr", "May", "Jun", 
-              "Jul", "Aug", "Sep", 
-              "Oct", "Nov", "Dec"]
-    
+    resultsByMonth := make([]int, 12)  // 12 times 0
+
 ---
 
 title: Accesso agli elementi
 figure: images/fun/wile-coyote.png
 
 - **Attenzione ad usare indici validi!**
-    - *Lunghezza* attuale di una lista `x`: `len(x)`
-    - Elementi *numerati* da `0` a `len(x)-1`
-    - Indici *negativi* contano dalla fine
+    - *Lunghezza* attuale di una lista `s`: `len(s)`
+    - Elementi *numerati* da `0` a `len(s)-1`
 
-code: python
+code: go
 
-    n = len(months)            # 12
-    months[3]                  # "Apr"
-    months[-2]                 # "Nov", same as n - 2
+    toBuy := []string{"spam", "eggs", "beans", "bacon"}    
+    n := len(toBuy)        // 4
 
-code: python
+    Println(toBuy[0])      // "spam"
+    Println(toBuy[1])      // "eggs"
+    Println(toBuy[n-1])    // "bacon"
 
-    to_buy = ["spam", "eggs", "beans"]
-    
-    to_buy[1] = "ketchup"      # replace an element
-
----
-
-title: Appartenenza, inserimento, rimozione
-
-code: python
-
-    to_buy = ["spam", "eggs", "beans"]
-    
-    "eggs" in to_buy           # True, to_buy contains "eggs"
-
-code: python
-
-    to_buy.append("bacon")     # add an element to the end
-    to_buy.pop()               # remove (and return) last element
-    
-    to_buy.insert(1, "bacon")  # other elements shift
-    removed = to_buy.pop(1)    # remove (and return) element at index
-    
-    to_buy.remove("eggs")      # remove an element by value
+    toBuy[1] = "ketchup"   // replace a value
+    Println(toBuy[1])      // "ketchup"
 
 ---
 
-title: Slice: porzioni di lista
+title: Porzioni di lista
+figure: images/fun/month-list.svg
 
-code: python
+- Selezione degli elementi tra...
+    - il primo indice (*compreso*)...
+    - ed il secondo indice (*escluso*)
 
-    spring = months[2:5]       # ["Mar", "Apr", "May"]
-    quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
-    quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
-    whole_year = months[:]     # Copy the whole list
+code: go
 
-code: python
+    months := []string{"Jan", "Feb", "Mar",
+                       "Apr", "May", "Jun", 
+                       "Jul", "Aug", "Sep", 
+                       "Oct", "Nov", "Dec"}    
 
-    list1 = ["spam", "eggs", "beans"]
-    list2 = ["sausage", "mushrooms"]
-    to_buy = list1 + list2     # List concatenation
-
-code: python
-
-    so_boring = [1, 2] * 3     # List repetition:
-                               # [1, 2, 1, 2, 1, 2]
-    results_by_month = [0] * 12
+    spring := months[2:5]       // [Mar Apr May]
+    quart1 := months[:3]        // [Jan Feb Mar]
+    quart4 := months[9:]        // [Oct Nov Dec]
+    wholeYear := months[:]      // The whole list
 
 ---
 
-title: Uguaglianza e identità
+title: Concatenazione, rimozione
 
-code: python
+code: go
 
-    a = [3, 4, 5]
-    b = a[:]       # b = [3, 4, 5] -- a new list!
-    b == a         # True, they contain the same values
-    b is a         # False, they are two objects in memory
-                   # (try and modify one of them...) 
-    c = a
-    c is a         # True, same object in memory 
-                   # (try and modify one of them...) 
+    toBuy := []string{"spam", "eggs", "beans"}
+    Println(toBuy)
+
+    toBuy = append(toBuy, "bacon")          // add to the end
+    Println(toBuy)
+
+    moreStuff := []string{"sausage", "mushrooms"}
+    toBuy = append(toBuy, moreStuff...)     // concatenation
+    Println(toBuy)
+
+    toBuy = append(toBuy[:2], toBuy[3:]...)  // remove val @ 2
+    Println(toBuy)
+
+>
+
+<https://github.com/golang/go/wiki/SliceTricks>
 
 ---
 
 title: Stringhe e liste
 
-- **Stringa**: sequenza *immutabile* di caratteri
-- **`join`** e **`split`**: da lista a stringa e viceversa
+- **`Join`** e **`Split`**, da lista a stringa e viceversa
+    - Nel package *`strings`*
 
-code: python
+code: go
 
-    txt = "Monty Python's Flying Circus"
-    txt[0]    # 'M'
-    txt[1]    # 'o'
-    txt[-1]   # 's'
-    txt[6:12] # "Python"
-    txt[-6:]  # "Circus"
+    someDays := []string{"tue", "thu", "sat"}
+    someTxt := strings.Join(someDays, "|")
+    // a single string: "tue|thu|sat"
 
-    days = ["tue", "thu", "sat"]
-    txt = "|".join(days)  # "tue|thu|sat"
+    otherTxt := "mon|wed|fri|sun"
+    otherDays := strings.Split(otherTxt, "|")
+    // a list of strings: {"mon", "wed", "fri", "sun"}
 
-    days = "mon|wed|fri".split("|")
-    # ["mon", "wed", "fri"]
-    
----
-
-title: Tupla
-
-- Sequenza **immutabile** di valori, anche di *tipo diverso*
-
-code: python
-
-    # Tuple packing
-    pt = 5, 6, "red"
-    pt[0]  # 5
-    pt[1]  # 6
-    pt[2]  # "red"
-
-    # multiple assignments, from a tuple
-    x, y, colour = pt  # sequence unpacking
-    a, b = 3, 4
-    a, b = b, a
-    
 ---
 
 title: Cicli su liste: for
 
-code: python
+code: go
 
-    shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+    shoppingList := []string{"spam", "eggs", "bacon", "ketchup"}
         
-    print("Your shopping list contains:")
+    Println("Your shopping list contains:")
 
-    for product in shopping_list:
-        print(product)
-    
-- Ad ogni iterazione, a `product` è assegnato un diverso elemento della lista `shopping_list`
-- Si può usare un ciclo `for` su qualsiasi sequenza, anche su una *stringa*
+    for index, value := range shoppingList {
+        Println(index, value)
+    }
+
+- Ad ogni iterazione, a `value` è assegnato un diverso elemento della lista `shoppingList`
+- `index` e/o `value` possono essere omessi (sostituiti con `_`)
 
 ---
 
-title: Intervalli di valori: range
+title: Cicli su stringhe: for
+
+- Si può usare un ciclo `for` su qualsiasi sequenza
+- Anche su *stringa*: sequenza *immutabile* di caratteri (UTF-8)
+
+code: go
+
+    for index, value := range "Hello, 🌐!" {
+        Println(index, value)
+    }
+
+    for _, x := range "Hello, 🌐!" {
+        fmt.Printf("%c  ", x)  // in package fmt
+        fmt.Printf("%d\n", x)  // https://golang.org/pkg/fmt/
+    }
+
+---
+
+title: Cicli su intervalli
 figure: images/algo/sum10.svg
 
-- **`range`**: intervallo di valori aperto a destra
-    - Estremo inferiore *incluso*
-    - Estremo superiore *escluso*
-    - Iterabile con un ciclo `for`
+code: go
 
-code: python
-
-    # Add up numbers from 1 to 10
+    // Add up numbers from 1 to 10
        
-    total = 0
-    for i in range(1, 11):
+    total := 0
+    for i := 1; i < 11; i++ {
         total += i
-
-    # total = 0;  i = 1
-    # while i < 11:
-    #     total += i;  i += 1
+    }
+    
+    // total := 0
+    // i := 1
+    // for i < 11 {
+    //     total = total + i
+    //     i = i + 1
+    // }
     
 ---
 
 title: Sequenza di quadrati
 figure: images/misc/red-squares.png
 
-code: python
+code: go
 
-    import game2d as g2d
+    InitCanvas(Size{300, 300})
 
-    g2d.init_canvas((300, 300))
+    for i := 0; i < 5; i++ {
+        x := i * 40
+        y := x
+        red := i * 60
+        DrawRect(Color{red, 0, 0}, Rect{x, y, 140, 140})
+    }
 
-    for i in range(5):
-        x = i * 40
-        y = x
-        red = i * 60
-        g2d.draw_rect((red, 0, 0), (x, y, 140, 140))
+---
 
-    g2d.main_loop()
+title: Formattazione di stampa
+
+- `fmt.Printf`, in package `fmt`
+    - Primo parametro: stringa di formato
+    - Segnaposto (`%`) per incorporare i parametri successivi
+    - Usare `\n` per andare a capo
+
+code: go
+
+    fmt.Printf("%2d", 3)     // " 3", int, width 2
+    fmt.Printf("%6.2f", 7.3) // "  7.30", float, width 6, precision 2
+    fmt.Printf("%d", '🌐')   // "127760", code
+    fmt.Printf("%c", '🌐')   // "🌐", char
+    fmt.Printf("%s", "hi!")   // "hi!", string
 
 ---
 
 title: Cicli e annidamento
 figure: images/fun/multiplication-table.jpg
 
-code: python
+code: go
 
-    MAX = 10
-    y = int(input("Insert a value: "))
-    for x in range(1, MAX + 1):
-        print(x * y, end = " ")
-        # inserts a space, instead of a newline
+    max := 10
+    y := ParseInt(Prompt("Insert a value: "))
+    for x := 1; x <= max; x++ {
+        Println(x * y)
+        // fmt.Printf("%4d", x * y)
+    }
+
+code: go
+
+    max := 10
+    for y := 1; y <= max; y++ {
+        for x := 1; x <= max; x++ {
+            fmt.Printf("%4d", x * y)
+        }
+        Println()
+    }
     
-code: python
-
-    MAX = 10
-    for y in range(1, MAX + 1):
-        for x in range(1, MAX + 1):
-            val = x * y
-            print(val, end = " ")
-        print()
-    
-Per fare in modo che ciascun valore richieda almeno 3 caratteri:
-<br>
-`val = "{:3}".format(x * y)`
-
 ---
 
 title: Funzioni
@@ -242,124 +230,40 @@ title: Definizione di funzioni
 figure: images/fun/function.png
 
 - Operatore, applicato a operandi, per ottenere un risultato
+    - **`func`** per definire una funzione
+    - **`return`** per terminare la funzione e restituire un risultato
+- Esecuzione di una f.: nuovo *spazio di nomi*
+    - Param. e var. hanno **ambito locale**
+    - Non visibili nel resto del programma
+    - Nomi uguali, definiti altrove, restano distinti
 
-    - **`def`** per definire una funzione
-    - **`return`** per terminare e restituire un risultato
+code: go
 
-code: python
-
-    def hypotenuse(a, b):
-        c = (a ** 2 + b ** 2) ** 0.5
+    func Hypotenuse(a, b float64) float64 {
+        c := math.Sqrt(a * a + b * b)
         return c
-
-    def limit_values(values, max_val):
-        # procedure: process data, no direct result
-        for i in range(len(values)):
-            if values[i] > max_val:
-                values[i] = max_val
-
-        # the pythonic way: for i, val in enumerate(values): ...
+    }
 
 ---
 
 title: Chiamata di funzioni
 
-- **`def`** definisce una funzione, ma non la esegue!
+- **`func`** definisce una funzione, ma non la esegue!
 - Bisogna *chiamarla*
-- Ogni funzione, quando eseguita, crea un nuovo *spazio di nomi*
-    - Parametri e variabili hanno **ambito locale**
-    - Non visibili nel resto del programma
-    - Anche nomi uguali, definiti in ambiti diversi, restano distinti
-    
-code: python
-
-    side1 = float(input('1st side? '))
-    side2 = float(input('2nd side? '))
-    side3 = hypotenuse(side1, side2)
-    print('3rd side:', side3)
-
-    data = [5, 4, 2]
-    limit_values(data, 4)
-    print(data)
-
----
-
-title: Parametri di funzioni
-
-- **Parametri formali**: nomi usati nella *definizione*
-- **Parametri effettivi**: oggetti passati alla funz.
-- Parametri passati &ldquo;*per oggetto*&rdquo;
+    - **Parametri formali**: nomi usati nella *definizione*
+    - **Parametri effettivi**: oggetti passati alla funz.
+- Parametri passati “*per valore*”
     - Variabili all'esterno: non vengono modificate
-    - Liste e oggetti passati ad una funz.: modifiche *permanenti*
-- Si possono restituire più valori, come *tupla*
-    - `return 7, 5, 'black'`
-
-code: python
-
-    def inc(a):
-        a += 1
-        print(a)  # just for debug
-    x = 10
-    inc(x)
-    print(x)      # just for debug
-
----
-
-title: Funzione main
-
-- A volte si preferisce creare una funzione principale
-    - In questo modo si limitano le variabili globali
-
-code: python
-  
-    # def hypotenuse ...
-
-    def main():
-        side1 = float(input("1st side? "))
-        side2 = float(input("2nd side? "))
-        side3 = hypotenuse(side1, side2)
-        print("3rd side:", side3)
-
-    main()
     
----
+code: go
 
-title: Modulo main (++)
-
-- Nome del modulo in esecuzione: `__name__`
-    - É il nome del file, senza estensione
-    - Modulo che avvia l'app ha nome speciale `"__main__"`
-
-code: python
-  
-    # def hypotenuse ...
-
-    def main():
-        side1 = float(input("1st side? "))
-        side2 = float(input("2nd side? "))
-        side3 = hypotenuse(side1, side2)
-        print("3rd side:", side3)
-
-    if __name__ == "__main__":
-        main()
+    func main() {
+        side1 := ParseFloat(Prompt("1st side? "))
+        side2 := ParseFloat(Prompt("2st side? "))
+        side3 := Hypotenuse(side1, side2)
+        Println("3rd side: ", side3)
+    }
     
----
-
-title: Documentazione di funzioni
-
-- **Annotazioni**: utili per documentare il tipo di param. e valore di ritorno (ma non c'è verifica!)
-- **Docstring**: descrizione testuale di una funzione
-- **`help`**: funzione per visualizzare la documentazione
-
-code: python
-
-    def hypotenuse(cathetus1: float, cathetus2: float) -> float:
-        '''
-        Return the hypotenuse of a right triangle,
-        given both its legs (catheti).
-        '''
-        return (cathetus1 ** 2 + cathetus2 ** 2) ** 0.5
-
 ---
 
 title: Effetti collaterali
@@ -370,28 +274,28 @@ title: Effetti collaterali
 - Rendono la funzione **non idempotente**
     - Chiamata più volte, con gli stessi parametri, restituisce risultati diversi
 - → Difficile fare verifiche matematiche
-    - `z = f(sqrt(2), sqrt(2))`
-    - `s = sqrt(2)` <br> `z = f(s, s)`
+    - `z := f(Sqrt(2), Sqrt(2))`
+    - `s := Sqrt(2)` <br> `z := f(s, s)`
 
 ---
 
 title: Funzioni non idempotenti
 
 - Esempio di semplificazione
-    - `p = rq(x) + rq(y) * (rq(x) – rq(x))`
-    - `p = rq(x) + rq(y) * (0)`
-    - `p = rq(x) + 0`
-    - `p = rq(x)`
+    - `p := rq(x) + rq(y) * (rq(x) – rq(x))`
+    - `p := rq(x) + rq(y) * (0)`
+    - `p := rq(x) + 0`
+    - `p := rq(x)`
 - Ma se `rq` ha effetti collaterali, non si può!
 
-code: python
+code: go
 
-    base_value = 0  # global variable
+    var baseValue = 0  // global variable
 
-    def rq(x: int) -> int:
-        global base_value
-        base_value += 1
-        return x + base_value
+    func rq(x int) -> int {
+        baseValue++
+        return x + baseValue
+    }
 
 >
 
@@ -401,37 +305,39 @@ Se `x, y = 3, 4`, ad esempio, i due risultati sono `-2` e `4`
 
 title: Animazione
 
-code: python
+code: go
 
-    import game2d as g2d
+    var image = LoadImage("ball.png")
+    var x = 50
 
-    def update():
-        global x
-        g2d.fill_canvas((255, 255, 255))  # Draw background        
-        g2d.draw_image(image, (x, 50))    # Draw foreground
-        x = (x + 5) % 320                    # Update ball's position
+    func update() {
+        FillCanvas(Color{255, 255, 255})  // Draw background        
+        DrawImage(image, Point{x, 50})    // Draw foreground
+        x = (x + 5) % 320                 // Update ball's position
+    }
 
-    g2d.init_canvas((320, 240))
-    image = g2d.load_image("ball.png")
-    x = 50
-
-    g2d.main_loop(update, 1000 // 30)   # Call update 30 times/second
+    func main() {
+        InitCanvas(Size{320, 240})
+        MainLoop(update, 1000 / 30)    // Call update 30 times/second
+    }
 
 ---
 
 title: Eventi della tastiera
 
-code: python
+code: go
 
-    import game2d as g2d
+    func keydown(code string) {
+        Println("Key pressed: ", code)
+    }
+    func keyup(code string) {
+        Println("Key released: ", code)
+    }
+    func main() {
+        HandleKeyboard(keydown, keyup)
+    }
 
-    def keydown(code: str):
-        print("Key pressed: ", code)
-
-    def keyup(code: str):
-        print("Key released: ", code)
-
-    g2d.handle_keyboard(keydown, keyup)
+>
 
 <https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
 
@@ -458,31 +364,29 @@ Usare un ciclo `for` sulla stringa (sequenza di caratteri)
 title: 2.2 Array, precalcolo
 figure: images/misc/sin-cos.png
 
-- Riempire una lista con i valori di `sin(x)`
+- Riempire una lista con i valori di `math.Sin(x)`
     - 360 elementi, indice `x` tra 0 e 359
 - Poi, ciclicamente...
 	- Chiedere un angolo all'utente
 	- Visualizzare il corrispondente valore precalcolato
 
-code: python
+>
 
-    from math import pi, sin
+`math.Sin` opera su radianti
 
-`sin` opera su radianti: calcolare `sin(x * pi / 180)`, anzichè `sin(x)`
-
-Creare una lista vuota, e poi aggiungere un valore alla volta con `append`
+Calcolare `math.Sin(x * math.Pi / 180)`, anzichè `math.Sin(x)`
 
 ---
 
 title: 2.3 Area di un'ellisse
 figure: images/misc/ellipse.svg
 
-- Definire una *funzione* `ellipse_area` che:
+- Definire una *funzione* `EllipseArea` che:
     - Riceve come *parametri* i semiassi di una ellisse: `a`, `b`
-    - Restituisce come risultato l'area dell'ellisse: `area = pi * a * b`
+    - Restituisce come risultato l'area dell'ellisse: `Pi * a * b`
 - Definire una *funzione* `main` che:
     - Chiede all'utente due valori
-    - Invoca la funzione `ellipse_area` con questi parametri
+    - Invoca la funzione `EllipseArea` con questi parametri
     - Stampa il risultato ottenuto
 
 ---
@@ -562,18 +466,19 @@ Poi invertire il verso delle righe con indice dispari
 title: 2.9 Spirale (*)
 figure: images/misc/spiral-circles.png
 
-- Disegnare una sequenza di cerchi (`n` scelto dall'utente) lungo una spirale
-- Alla prima implementazione, procedere su un percorso circolare di raggio `r`, attorno al punto `(xc, yc)`
-- Poi, su una spirale, aumentando passo a passo anche `r`
-- Infine, disegnare lungo il percorso dei cerchi sempre più grandi e di colore diverso
+- Mostrare l'animazione di un cerchio lungo una spirale
+- Ruotare attorno ad un centro `(xc, yc)`
+- Amentare dist. `r` dal centro ad ogni passo
+- Disegnare un cerchio sempre più grande
+- Dopo `n` passi, ricominciare daccapo
 
-code: python
+code: go
 
-    xc, yc, r, angle = 320, 240, 40, 0.0
-    for i in range(8):
-        y = yc + int(r * math.sin(angle))
-        x = xc + int(r * math.cos(angle))
-        pygame.draw.circle(screen, (0, 0, 0), (x, y), 10)
-        angle += math.pi / 4
-
+    xc, yc, r, angle := 320, 240, 40.0, 0.0
+    func update() {
+        x := xc + int(r*math.Cos(angle))
+        y := yc + int(r*math.Sin(angle))  // ...
+        DrawCircle(Color{0, 0, 0}, Point{x, y}, 10)
+        angle += math.Pi / 16
+    }
 

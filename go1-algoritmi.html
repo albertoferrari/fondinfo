@@ -38,38 +38,26 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Python!</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <p><img alt="" src="images/algo/antigravity.png" /></p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Less is exponentially more</h2>
       <h3></h3>
     </hgroup>
     <article >
       <ul>
-<li>Made in ~2007 at Google, starting roughly from C<ul>
-<li>By the Unix pioneers Rob <em>Pike</em> and Ken <em>Thompson</em>, together with Robert Griesemer</li>
-<li>Book: “The Go Programming Language” by Brian W. <em>Kernighan</em>, Alan Donovan</li>
+<li>Progetto avviato nel ~2007 presso Google, partendo dal C<ul>
+<li>Pionieri di Unix: Rob <em>Pike</em> e Ken <em>Thompson</em>, con Robert Griesemer</li>
+<li>Libro: “The Go Programming Language” by Brian W. <em>Kernighan</em>, Alan Donovan</li>
 </ul>
 </li>
-<li>Very few, orthogonal concepts<ul>
-<li>No exceptions, no template, no inheritance</li>
-<li>Interfaces and duck typing</li>
-<li>Type inference</li>
-<li>Garbage collection, but native (no VM)</li>
-<li>Communicating sequential processes</li>
+<li>Pochi concetti, tra loro ortogonali<ul>
+<li>Senza <em>eccezioni</em>, né <em>template</em>, né <em>ereditarietà</em></li>
+<li><em>Interfacce</em> e <em>duck typing</em>, <em>Type inference</em></li>
+<li><em>Garbage collection</em>, ma codice <em>nativo</em> (senza macchina virtuale)</li>
+<li><em>Communicating sequential processes</em></li>
 </ul>
 </li>
 </ul>
 <blockquote></blockquote>
-<p>After a talk of 35 new features of C++11, and at pauses for compiling C++...
+<p>Dopo una presentazione di 35 nuove caratteristiche del C++11, durante le pause per compilare codice C++...
 <a href="https://commandcenter.blogspot.it/2012/06/less-is-exponentially-more.html">https://commandcenter.blogspot.it/2012/06/less-is-exponentially-more.html</a></p></article>
  
 </slide>
@@ -77,23 +65,51 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Hello, Gopher</h2>
+      <h2>Hello, World!</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li>Program starts at function <code>main</code> in package <code>main</code></li>
-<li>A package <em>exports</em> only names starting with a <strong>capital letter</strong></li>
+      <figure>
+        <img src="images/algo/helloworld.png">
+        
+      </figure><ul>
+<li>Il programma parte dalla funzione <strong><code>main</code></strong> nel modulo <code>main</code></li>
+<li>Modulo <strong><code>fmt</code></strong> per operazioni di I/O</li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>package main
 
 import "fmt"
 
 func main() {
-    fmt.Println("Hello, Gopher")
+    fmt.Println("Hello, World!")
 }
 </code></pre>
 <pre class="prettyprint" data-lang="shell"><code>go run hello.go
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Hello, browser!</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Modulo speciale <strong><code>g2d</code></strong><ul>
+<li>Supporto per browser</li>
+<li>Disegno su canvas</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="go"><code>package main
+
+import "g2d"
+
+func main() {
+    g2d.Println("Hello, browser!")
+}
 </code></pre></article>
  
 </slide>
@@ -112,11 +128,17 @@ func main() {
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="go"><code>fmt.Println(3 / 2)    // 1, truncated
-fmt.Println(3 % 2)    // 1, reminder
-fmt.Println(3.0 / 2)  // 1.5
-fmt.Println(4 == 5)   // false, do not confuse with assignment!
-fmt.Println(2 &lt; 3 || ! true)  // true
+<pre class="prettyprint" data-lang="go"><code>package main
+
+import . "g2d"  // to skip the prefix
+
+func main() {
+    Println(3.0 / 2)  // 1.5
+    Println(3 / 2)    // 1, truncated
+    Println(3 % 2)    // 1, reminder
+    Println(4 == 5)   // false, do not confuse with assignment!
+    Println(2 &lt; 3 || ! true)  // true
+}
 </code></pre></article>
  
 </slide>
@@ -147,61 +169,6 @@ fmt.Println(2 &lt; 3 || ! true)  // true
 <slide  >
   
     <hgroup>
-      <h2>Variables</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Variables can be created with <code>var</code> (or <code>const</code>...)<ul>
-<li>If initial value, type can be omitted (<strong>type inference</strong>)</li>
-<li>If no initial value, their <em>zero value</em> is assigned</li>
-</ul>
-</li>
-<li>Variables can also be created with <code>:=</code></li>
-</ul>
-<pre class="prettyprint" data-lang="go"><code>func main() {
-    var i, j int = 1, 2
-    k := 3
-    c, python, java := true, false, "no!"
-
-    fmt.Println(i, j, k, c, python, java)
-}
-</code></pre></article>
- 
-</slide>
-
-<slide class="large-figure" >
-  
-    <hgroup>
-      <h2>Assegnamento</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/algo/assign.png">
-        
-      </figure><ul>
-<li>Una <strong>variabile</strong> serve per conservare un risultato</li>
-<li>Assegnamento, operatore <code>=</code><ul>
-<li>Alla sinistra una variabile</li>
-<li>Alla destra un valore</li>
-</ul>
-</li>
-<li><em>Non confondere</em> con confronto di uguaglianza <code>==</code></li>
-</ul>
-<pre class="prettyprint" data-lang="go"><code>pi := 3.14  // definition and initialization
-radius := 2.2
-area := pi * (radius * radius)
-fmt.Println(area)    // 15.1976
-radius = radius + 1  // guess radius
-fmt.Println(area)    // ... and area!
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Variabile</h2>
       <h3></h3>
     </hgroup>
@@ -212,14 +179,49 @@ fmt.Println(area)    // ... and area!
       </figure><ul>
 <li>Le comuni variabili sono <em>contenitori</em> di dati</li>
 <li>Occorrono <strong>dichiarazioni</strong> di tipo<ul>
-<li>Valore iniziale <code>0</code>, quando non specificato</li>
+<li>Valore iniziale <code>0</code> o <code>""</code>, quando non specificato</li>
 </ul>
 </li>
 <li>Possibile <em>type inference</em> (<code>:=</code>)<ul>
 <li><em>Tipo</em> inferito dal valore di inizializzazione</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<pre class="prettyprint" data-lang="go"><code>var i, j int = 1, 2
+k := 3.2
+ans, txt := true, "no!"
+
+Println(i, j, k, ans, txt)
+</code></pre></article>
+ 
+</slide>
+
+<slide class="large-figure" >
+  
+    <hgroup>
+      <h2>Riassegnamento</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/algo/assign.png">
+        
+      </figure><ul>
+<li>Riassegnamento, operatore <code>=</code><ul>
+<li>Alla sinistra una variabile <em>già definita</em></li>
+<li>Alla destra un valore</li>
+</ul>
+</li>
+<li><em>Non confondere</em> con confronto di uguaglianza <code>==</code></li>
+</ul>
+<pre class="prettyprint" data-lang="go"><code>pi := 3.14       // definition and initialization
+radius := 2.2
+area := pi * (radius * radius)
+Println(area)    // 15.1976
+radius = radius + 1
+Println(radius)  // guess radius now
+Println(area)    // ... and area!
+</code></pre></article>
  
 </slide>
 
@@ -232,16 +234,18 @@ fmt.Println(area)    // ... and area!
     <article >
       <ul>
 <li><strong><code>string</code></strong> per sequenze di caratteri <em>Unicode</em></li>
-<li>Primi 128 codici <em>Unicode</em> == <em>ASCII</em><ul>
-<li>A capo: <code>'\n'</code> (10, o 13-10... ma conversione automatica)</li>
-<li>Tabulazione: <code>'\t'</code> (9)</li>
+<li>Ogni carattere è di tipo <code>rune</code> (<code>int32</code>)</li>
+<li>Primi 128 codici <em>Unicode</em> == <em>ASCII</em></li>
+<li>Confronto, in ordine <em>lessicografico</em></li>
 </ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="go"><code>str1 := "Monty Python's "
-str2 := 'Flying Circus'
+<pre class="prettyprint" data-lang="go"><code>str1 := "Hello,"
+str2 := " 🌐"
 result := str1 + str2
-fmt.Println(result)  // "Monty Python's Flying Circus"
+Println(result)              // "Hello, 🌐"
+
+Println("first" &lt; "second")  // true
+Println("Second" &lt; "first")  // true
+Println('🌐' == 127760)      // true
 </code></pre></article>
  
 </slide>
@@ -260,27 +264,6 @@ fmt.Println(result)  // "Monty Python's Flying Circus"
 <slide  >
   
     <hgroup>
-      <h2>Confronto tra stringhe</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Confronto tra stringhe, in ordine <em>lessicografico</em><ul>
-<li><code>&lt;, &lt;=, &gt;, &gt;=, ==, !=</code></li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="go"><code>"first" &lt; "second"  // true
-"Second" &lt; "first"  // true
-rune(90)            // 'Z'
-int('Z')            // 90
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Leggere e scrivere</h2>
       <h3></h3>
     </hgroup>
@@ -289,18 +272,14 @@ int('Z')            // 90
         <img src="images/algo/hello-user.svg">
         
       </figure><ul>
-<li><strong><code>Prompt</code></strong>, nel browser, legge una riga di testo, inserita dall'utente, in una <em>variabile</em><ul>
-<li>Prima mostra un messaggio</li>
-</ul>
-</li>
-<li><strong><code>fmt.Println</code></strong> scrive una serie di valori su una riga<ul>
-<li>Tra i valori (parametri) viene inserito uno spazio</li>
+<li><strong><code>g2d.Prompt</code></strong> chiede un testo all'utente<ul>
+<li>Mostra un messaggio</li>
+<li>Poi blocca il programma in attesa</li>
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="go"><code>user := Prompt("What's your name?")
-
-fmt.Println("Hello,", user)
+<pre class="prettyprint" data-lang="go"><code>user := Prompt("What's your name? ")
+Println("Hello, ", user)
 </code></pre></article>
  
 </slide>
@@ -315,13 +294,22 @@ fmt.Println("Hello,", user)
       <figure>
         <img src="images/algo/sum3.svg">
         
-      </figure><pre class="prettyprint" data-lang="go"><code>a := ParseInt(Prompt("Insert 1st val: "))
+      </figure><ul>
+<li><code>g2d.ParseInt</code><ul>
+<li>Conversione da <code>string</code> a <code>int</code></li>
+</ul>
+</li>
+<li><code>g2d.ParseFloat64</code><ul>
+<li>Conversione da <code>string</code> a <code>float64</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="go"><code>a := ParseInt(Prompt("Insert 1st val: "))
 b := ParseInt(Prompt("Insert 2nd val: "))
 c := ParseInt(Prompt("Insert 3rd val: "))
 
 total := a + b + c
-
-fmt.Println("The sum is", total)
+Println("The sum is ", total)
 </code></pre></article>
  
 </slide>
@@ -348,20 +336,18 @@ fmt.Println("The sum is", total)
 <li><em>Indentazione</em> per migliore leggibilità</li>
 </ul>
 </li>
-</ul>
-<pre class="prettyprint" data-lang="go"><code>age := ParseInt(Prompt("Age?"))
-
-if age &lt; 14 {
-    fmt.Println("You're too young for driving a scooter...")
-    fmt.Println("But not for learning Go!")
-}
-</code></pre>
-<ul>
 <li>Clausola <code>else</code>: opzionale<ul>
 <li>Eseguita sse la condizione non è verificata</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<pre class="prettyprint" data-lang="go"><code>age := ParseInt(Prompt("Age?"))
+
+if age &lt; 14 {
+    Println("You're too young for driving a scooter...")
+    Println("But not for learning Go!")
+}
+</code></pre></article>
  
 </slide>
 
@@ -375,16 +361,16 @@ if age &lt; 14 {
       <figure>
         <img src="images/algo/abs.svg">
         
-      </figure><pre class="prettyprint" data-lang="go"><code>x = ParseInt(Prompt("insert a value:"))
+      </figure><pre class="prettyprint" data-lang="go"><code>x := ParseInt(Prompt("insert a value:"))
+y := x
 
 if x &gt;= 0 {
-    y = x
-    fmt.Println(x, "is positive")
+    Println(x, " is positive")
 } else {
     y = -x
-    fmt.Println(x, "is negative")
+    Println(x, " is negative")
 }
-fmt.Println("abs =", y)
+Println("abs = ", y)
 </code></pre>
 <ul>
 <li>Corpo di <code>if</code> o <code>else</code>: qualsiasi istruzione</li>
@@ -400,20 +386,20 @@ fmt.Println("abs =", y)
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="go"><code>birthYear = ParseInt(Prompt("Birth year? "))
-birthMonth = ParseInt(Prompt("Birth month? "))
-birthDay = ParseInt(Prompt("Birth day? "))
-currentYear = ParseInt(Prompt("Current year? "))
-currentMonth = ParseInt(Prompt("Current month? "))
-currentDay = ParseInt(Prompt("Current day? "))
+      <pre class="prettyprint" data-lang="go"><code>birthYear := ParseInt(Prompt("Birth year? "))
+birthMonth := ParseInt(Prompt("Birth month? "))
+birthDay := ParseInt(Prompt("Birth day? "))
+currentYear := ParseInt(Prompt("Current year? "))
+currentMonth := ParseInt(Prompt("Current month? "))
+currentDay := ParseInt(Prompt("Current day? "))
 
-if (currentMonth &gt; birthMonth
-    or (currentMonth == birthMonth and currentDay &gt;= birthDay)):
-    age = currentYear - birthYear
-else:
-    age = currentYear - birthYear - 1
+age := currentYear - birthYear
+if currentMonth &lt; birthMonth
+    || (currentMonth == birthMonth &amp;&amp; currentDay &lt; birthDay) {
+    age = age - 1
+}
 
-fmt.Println("Your age is", age)
+Println("Your age is ", age)
 </code></pre>
 <blockquote></blockquote>
 <p>Espressione booleana composta con <strong><code>and</code></strong> e <strong><code>or</code></strong></p></article>
@@ -430,23 +416,17 @@ fmt.Println("Your age is", age)
       <figure>
         <img src="images/algo/words.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>a = input("First word? ")
-b = input("Second word? ")
+      </figure><pre class="prettyprint" data-lang="go"><code>a := Prompt("First word? ")
+b := Prompt("Second word? ")
 
-if a &lt; b:
-    print("The words are ordered")
-elif a &gt; b:
-    print("The words are inverted")
-else:
-    print("The words are equal")
-</code></pre>
-<ul>
-<li><strong><code>elif</code></strong>: clausola <code>else</code> che contiene un altro <code>if</code></li>
-<li>No <code>switch</code>, no <code>do-while</code></li>
-</ul>
-<blockquote>
-<p>There should be one -- and preferably only one -- obvious way to do it <em>(ZoP)</em></p>
-</blockquote></article>
+if a &lt; b {
+    Println("The words are ordered")
+} else if a &gt; b {
+    Println("The words are inverted")
+} else {
+    Println("The words are equal")
+}
+</code></pre></article>
  
 </slide>
 
@@ -460,20 +440,21 @@ else:
       <figure>
         <img src="images/algo/calc.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>a = float(input())
-b = float(input())
-op = input()
+      </figure><pre class="prettyprint" data-lang="go"><code>a := ParseFloat(Prompt("a? "))
+b := ParseFloat(Prompt("b? "))
+op := Prompt("op? ")
 
-if op == '+':
-    print(a + b)
-elif op == '-':
-    print(a - b)
-elif op == '*':
-    print(a * b)
-elif op == '/' and b != 0:
-    print(a / b)
-else:
-    print("Operation not allowed")
+if op == "+" {
+    Println(a + b)
+} else if op == "-" {
+    Println(a - b)
+} else if op == "*" {
+    Println(a * b)
+} else if op == "/" &amp;&amp; b != 0 {
+    Println(a / b)
+} else {
+    Println("Operation not allowed")
+}
 </code></pre></article>
  
 </slide>
@@ -481,7 +462,7 @@ else:
 <slide  >
   
     <hgroup>
-      <h2>Iterazione: while</h2>
+      <h2>Iterazione: for</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -489,19 +470,20 @@ else:
         <img src="images/algo/sum1n.svg">
         
       </figure><ul>
-<li>Condizione booleana di <em>permanenza</em> nel ciclo</li>
-<li>Controllo <em>preliminare</em>, possibile che il corpo non sia mai eseguito</li>
+<li>Condizione di <em>permanenza</em> nel ciclo</li>
+<li>Controllo <em>preliminare</em></li>
+<li>Possibile che il corpo non sia mai eseguito</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code># Sum of the numbers from 1 to n
-total = 0
-count = 1
-n = int(input("n? "))
+<pre class="prettyprint" data-lang="go"><code>// Sum of the numbers from 1 to n
+total := 0
+count := 1
+n := ParseInt(Prompt("n? "))
 
-while count &lt;= n:
+for count &lt;= n {
     total = total + count
     count = count + 1
-
-print("The sum is", total)
+}
+Println("The sum is", total)
 </code></pre>
 <p><a href="http://it.wikipedia.org/wiki/Gauss#Biografia">http://it.wikipedia.org/wiki/Gauss#Biografia</a></p></article>
  
@@ -517,17 +499,17 @@ print("The sum is", total)
       <figure>
         <img src="images/algo/sumn.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>n = int(input("How many values? "))
-total = 0
-i = 0
+      </figure><pre class="prettyprint" data-lang="go"><code>n := ParseInt(Prompt("How many values? "))
+total := 0
+i := 0
 
-while i &lt; n:
-    val = int(input("Val? "))
+for i &lt; n {
+    val := ParseInt(Prompt("Val? "))
 
-    total += val  # total = total + val
-    i += 1        # i = i + 1
-
-print("The sum is", total)
+    total += val  // total = total + val
+    i += 1        // i = i + 1
+}
+Println("The sum is", total)
 </code></pre></article>
  
 </slide>
@@ -542,19 +524,22 @@ print("The sum is", total)
       <figure>
         <img src="images/algo/average.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>total = 0
-count = 0
-
-val = int(input("Val? (0 to finish) "))
-
-while val != 0:
+      </figure><pre class="prettyprint" data-lang="go"><code>total, count := 0, 0
+val := ParseInt(Prompt("Val? (0 to finish) "))
+for val != 0 {
     total += val
     count += 1
-    val = int(input("Val? (0 to finish) "))
-
-if count != 0:
-    print("The average is", total / count)
-</code></pre></article>
+    val = ParseInt(Prompt("Val? (0 to finish) "))
+}
+if count != 0 {
+    Println("The average is",
+            float64(total) / float64(count))
+}
+</code></pre>
+<ul>
+<li>Usare <code>int(x)</code> e <code>float64(x)</code>...</li>
+<li>Per convertire un numero nel tipo giusto</li>
+</ul></article>
  
 </slide>
 
@@ -568,18 +553,18 @@ if count != 0:
       <figure>
         <img src="images/algo/perfect-square.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>n = 0
-while n &lt;= 0:
-    n = int(input("Positive val? "))
-
-ans = 1
-while ans * ans &lt; n:
+      </figure><pre class="prettyprint" data-lang="go"><code>for n &lt;= 0 {
+    n = ParseInt(Prompt("Positive val? "))
+}
+ans := 1
+for ans * ans &lt; n {
     ans += 1
-
-if ans * ans == n:
-    print("Square root:", ans)
-else:
-    print("Not a perfect square")
+}
+if ans * ans == n {
+    Println("Square root:", ans)
+} else {
+    Println("Not a perfect square")
+}
 </code></pre></article>
  
 </slide>
@@ -591,48 +576,21 @@ else:
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li><em>Python Standard Library</em>: <a href="http://docs.python.org/3/library/">http://docs.python.org/3/library/</a></li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code>import math
-y = math.sin(math.pi / 4)
-print(y)
-</code></pre>
-<pre class="prettyprint" data-lang="python"><code>from math import sin, pi
-print(sin(pi / 4))
-</code></pre>
-<pre class="prettyprint" data-lang="python"><code>from random import randint
-die1 = randint(1, 6)  # like rolling a die
-die2 = randint(1, 6)  # like rolling a die
-print(die1, die2)
-</code></pre>
-<blockquote></blockquote>
-<p>Tutti gli <code>import</code> all'inizio dello script, per evidenziare le dipendenze</p></article>
- 
-</slide>
+      <pre class="prettyprint" data-lang="go"><code>package main
 
-<slide  >
-  
-    <hgroup>
-      <h2>Tupla</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Sequenza <strong>immutabile</strong> di valori, anche di <em>tipo diverso</em></li>
-<li>Spesso tra parentesi, per separarla da altri valori</li>
-<li>Utili anche per grafica:<ul>
-<li><em>Color</em>: <code>(red, green, blue)</code> <br> Ogni componente nel range <code>0..255</code><br></li>
-<li><em>Point</em>: <code>(x, y)</code><br></li>
-<li><em>Size</em>: <code>(width, height)</code><br></li>
-<li><em>Rect</em>: <code>(left, top, width, height)</code></li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code>center = (150, 100)
-color = (10, 10, 200)  # ~ blue
-size = (640, 480)
-rectangle = (150, 100, 200, 200)  # square
+import (
+    "g2d"
+    "math"
+)
+
+func main() {
+    y := math.Sin(math.Pi / 4)
+    g2d.Println(y)
+
+    die1 := g2d.RandInt(1, 6)  // like rolling a die
+    die2 := g2d.RandInt(1, 6)  // like rolling a die
+    g2d.Println(die1, die2)
+}
 </code></pre></article>
  
 </slide>
@@ -640,27 +598,25 @@ rectangle = (150, 100, 200, 200)  # square
 <slide  >
   
     <hgroup>
-      <h2>Brython</h2>
+      <h2>Strutture per grafica</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <figure>
-        <img src="images/misc/brython.png">
-        <figcaption>→ brython.info</figcaption>
-      </figure><ul>
-<li><em>Transpiler</em>: converte codice Python in JavaScript<ul>
-<li>Sia traduttore che codice generato girano nel <em>browser</em></li>
+      <ul>
+<li>Strutture definite nel modulo <code>g2d</code></li>
+<li>Esportati da modulo solo nomi con la prima lettera <strong>maiuscola</strong></li>
+<li><a href="https://golang.org/pkg/">https://golang.org/pkg/</a></li>
 </ul>
-</li>
-<li>Useremo un modulo <em>ad-hoc</em>: <code>game2d</code><ul>
-<li>Genera html e lancia web-server locale</li>
-<li>Definisce funzioni di disegno</li>
-</ul>
-</li>
-</ul>
-<blockquote></blockquote>
-<p>Servono i file <code>brython_dist.js</code> e <code>game2d.py</code>, in <code>examples</code>: <br>
-<a href="https://github.com/tomamic/fondinfo/archive/master.zip">https://github.com/tomamic/fondinfo/archive/master.zip</a></p></article>
+<pre class="prettyprint" data-lang="go"><code>type Point struct{ X, Y int }
+type Size struct{ W, H int }
+type Rect struct{ X, Y, W, H int }
+type Color struct{ R, G, B int }
+</code></pre>
+<pre class="prettyprint" data-lang="go"><code>center := Point{150, 100}
+myBlue := Color{10, 10, 200}  // each component in 0..255
+windowSize := Size{640, 480}
+rectangle := Rect{150, 100, 200, 200}  // square
+</code></pre></article>
  
 </slide>
 
@@ -674,19 +630,18 @@ rectangle = (150, 100, 200, 200)  # square
       <figure>
         <img src="images/oop/raster-coord.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>import game2d as g2d
+      </figure><pre class="prettyprint" data-lang="go"><code>// Create canvas, width=600, height=400
+InitCanvas(Size{600, 400})
 
-# Create canvas, width=600, height=400
-g2d.init_canvas((600, 400))
+// Yellow rectangle, left=100, top=150, w=250, h=200
+// red=255 (max), green=255 (max), blue=0 (min)
+DrawRect(Color{255, 255, 0}, Rect{100, 150, 250, 200})
 
-# Yellow rectangle, left=100, top=150, w=250, h=200
-# red=255 (max), green=255 (max), blue=0 (min)
-g2d.draw_rect((255, 255, 0), (100, 150, 250, 200))
+// Green diagonal
+DrawLine(Color{0, 255, 0}, Point{100, 150}, Point{350, 350})
 
-# Blue circle, center=(100, 150), radius=20
-g2d.draw_circle((0, 0, 255), (100, 150), 20)
-
-g2d.main_loop()
+// Blue circle, center=(100, 150), radius=20
+DrawCircle(Color{0, 0, 255}, Point{100, 150}, 20)
 </code></pre></article>
  
 </slide>
@@ -716,9 +671,8 @@ g2d.main_loop()
 <li>Mostrare il valore dell'area e della circonferenza</li>
 <li>Se <code>r</code> è negativo, però, mostrare un messaggio d'errore</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>from math import pi
-# `pi` is a constant defined in the `math` module
-</code></pre></article>
+<blockquote></blockquote>
+<p>Usare <code>ParseFloat64</code> sull'input</p></article>
  
 </slide>
 
@@ -832,27 +786,7 @@ Anno 2: 109.20€
 Anno 3: 114.12€ ...
 </code></pre>
 <blockquote></blockquote>
-<p>Incolonnamento: <code>txt = '{:6.2f}'.format(val)</code> <br>
-<code>txt</code> ha lunghezza ≥ 6, con 2 cifre decimali</p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>1.7 Conteggio cifre (*)</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/finger-counting.png">
-        
-      </figure><ul>
-<li>Leggere un numero intero positivo</li>
-<li>Determinare di quante cifre è composto</li>
-</ul>
-<blockquote></blockquote>
-<p>Quante volte riusciamo a dividerlo per 10, prima che si annulli?</p></article>
+<p>Non preoccuparsi della formattazione in colonna</p></article>
  
 </slide>
 
@@ -875,6 +809,25 @@ Anno 3: 114.12€ ...
 <p>Formule utili:</p>
 <p>R<sub>s</sub> = ∑ R<sub>i</sub></p>
 <p>1/R<sub>p</sub> = ∑ (1/R<sub>i</sub>)</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1.8 Orologio classico (*)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/classical-watch.jpg">
+        
+      </figure><ul>
+<li>Disegnare 12 tacche a raggiera, come in un orologio classico</li>
+<li>Miglioramento: disegnare anche le tacche dei minuti, più piccole</li>
+</ul>
+<blockquote></blockquote>
+<p>Usare <code>math.Sin</code> e <code>math.Cos</code> per determinare le posizioni in cui disegnare</p></article>
  
 </slide>
 

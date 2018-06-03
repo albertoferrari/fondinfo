@@ -1,6 +1,29 @@
 title: Oggetti e grafica
 subtitle: Introduzione alla programmazione
-figure: images/oop/modules.png images/oop/pygame-logo.png
+figure: images/oop/modules.png
+
+---
+
+title: Puntatori
+figure: images/oop/pointer.png
+
+- Ogni dato in memoria ha un indirizzo
+- Variabile puntatore per memorizzarlo
+- *Referenziazione*: `&` per indirizzo di un dato
+- *Dereferenziazione*: `*` per accesso a dato puntato
+
+code: go
+
+    var i int8 = 56  // a byte
+    var p *int8      // a ptr to some byte (uninitialized)
+    p = &i           // now p points to i
+    *p = *p + 1      // i++
+    Println(*p, i)
+    p = nil          // ptr to nothing
+
+>
+
+Come in *C*, ma *senza* “aritmetica”
 
 ---
 
@@ -30,174 +53,154 @@ title: Definizione della classe
 figure: images/oop/ball-object.svg images/oop/ball-uml.svg
 figcaption: Class diagram UML
 
-- **Incapsulamento** dei dati: *convenzione* sui nomi
-    - Prefisso `_` per i nomi dei *campi privati*
-
-> Siamo tutti adulti consenzienti. *(GvR)*
+- **Incapsulamento** dei dati
+    - Campi in minuscolo: visibilità limitata al modulo
+    - Funzione costruttore in maiuscolo: esportata
       
-code: python
+code: go
 
-    class Ball:
+    type Ball struct {
+	    x, y    int
+	    w, h    int
+	    dx, dy  int
+    }
 
-        def __init__(self, x: int, y: int):
-            self._x = x
-            self._y = y
-            self._dx = 5
-            self._dy = 5
-            self._w = 20
-            self._h = 20
-        # ...
+    func NewBall(x, y int) *Ball {
+        b := &Ball{x, y, 20, 20, 5, 5}
+        return b
+    }
 
 ---
 
 title: Costruzione oggetti
 figure: images/oop/bob-builder.jpg
 
-- **`__init__`**: metodo *inizializzatore*
-    - Eseguito automaticamente alla creazione di un oggetto
+- **`NewBall`**: funzione *costruttore*
+    - Invocata per creare un oggetto
     - *Instantiation is initialization*
-- **`self`**: primo parametro di tutti i metodi
-    - Non bisogna passare un valore esplicito
-    - Assegnato l'oggetto di cui si chiama il metodo
-    - Permette ai metodi di accedere ai campi
+    - Restituisce un puntatore all'oggetto
 
-code: python
+code: go
 
-    ball = Ball(40, 80)  # Allocation and initialization
+    ball := NewBall(40, 80)  // Allocation and initialization
 
 ---
 
 title: Metodi
 
 - Espongono *servizi* ad altri oggetti
+- Bisogna indicare l'*oggetto ricevitore*, come puntatore
 
-code: python
+code: go
 
-    ARENA_W, ARENA_H = 320, 240
+    var ArenaW, ArenaH = 160, 120
 
-    class Ball:
-        # ...
-        def move(self):
-            if not (0 <= self._x + self._dx <= ARENA_W - self._w):
-                self._dx = -self._dx
-            if not (0 <= self._y + self._dy <= ARENA_H - self._h):
-                self._dy = -self._dy
-            self._x += self._dx
-            self._y += self._dy
-
-        def rect(self) -> (int, int, int, int):
-            return self._x, self._y, self._w, self._h
+    func (b *Ball) Move() {
+	    if !(0 <= b.x+b.dx && b.x+b.dx <= ArenaW-b.w) {
+		    b.dx = -b.dx
+	    }
+	    if !(0 <= b.y+b.dy && b.y+b.dy <= ArenaH-b.h) {
+		    b.dy = -b.dy
+	    }
+	    b.x += b.dx
+	    b.y += b.dy
+    }
 
 ---
 
 title: Applicazione
 
-code: python
+code: go
 
-    from p3_ball import Ball  # Ball is defined in p3_ball.py
+    func (b *Ball) Position() Rect {
+        return Rect{b.x, b.y, b.w, b.h}
+    }
 
-    # Create two objects, instances of the Ball class
-    b1 = Ball(40, 80)
-    b2 = Ball(80, 40)
-    print('Ball 1 @', b1.rect())
-    print('Ball 2 @', b2.rect())
+    func main() {
+        // Create two objects, instances of the Ball class
+        b1 := NewBall(40, 80)
+        b2 := NewBall(80, 40)
 
-    while input() != 'x':
-        b1.move()
-        b2.move()
-        print('Ball 1 @', b1.rect())
-        print('Ball 2 @', b2.rect())
-
----
-
-title: Il primo parametro, self
-
-- Il primo parametro di ogni metodo si chiama `self` (per convenzione)
-- L'oggetto, di cui viene invocato il metodo, viene assegnato come valore di `self`
-- In Python, una chiamata a metodo è interpretata così:
-
-code: python
-
-    b1 = Ball(40, 80)
-    b1.move()
-    
-code: python
-
-    b1 = Ball(40, 80)  # also, automatically call
-                       # Ball.__init__(b1, 40, 80)
-    Ball.move(b1)
-
-**Nota.** Meglio usare la prima notazione, che evidenzia l'*oggetto* anzichè la classe!
+        for i := 0; i < 25; i++ {
+            Println("Ball 1 @", b1.Position())
+            Println("Ball 2 @", b2.Position())
+            b1.Move()
+            b2.Move()
+        }
+    }
 
 ---
 
 title: Animazione di due palline
 
-code: python
+code: go
 
-    import game2d as g2d
-    from p3_ball import Ball, ARENA_W, ARENA_H
-
-    def update():
-        g2d.fill_canvas((255, 255, 255))  # BG
-        b1.move()
-        b2.move()
-        g2d.draw_rect((127, 127, 127), b1.rect())  # FG
-        g2d.draw_rect((127, 127, 127), b2.rect())  # FG
-
-    b1 = Ball(40, 80)
-    b2 = Ball(80, 40)
-    g2d.init_canvas((ARENA_W, ARENA_H))
-    g2d.main_loop(update, 1000 // 30)  # Millis
+    var b1 = NewBall(40, 80)
+    var b2 = NewBall(80, 40)
+    
+    func update() {
+        FillCanvas(Color{255, 255, 255})  // BG
+        b1.Move()
+        b2.Move()
+        DrawPosition(Color{200, 100, 100}, b1.Position())  // FG
+        DrawPosition(Color{100, 100, 200}, b2.Position())  // FG
+    }
+    
+    func main() {
+        InitCanvas(Size{ArenaW, ArenaH})
+        MainLoop(update, 1000 / 30)
+    }
 
 ---
 
 title: Animazione lista di palline
 
-code: python
+code: go
 
-    import game2d as g2d
-    from p3_ball import Ball, ARENA_W, ARENA_H
+    var balls = []*Ball{NewBall(40, 80), NewBall(80, 40)}
 
-    def update():
-        g2d.fill_canvas((255, 255, 255))  # BG
-        for b in balls:
-            b.move()
-            g2d.draw_rect((127, 127, 127), b.rect())  # FG
+    func update() {
+	    FillCanvas(Color{255, 255, 255}) // BG
+	    for _, b := range balls {
+		    b.Move()
+		    DrawPosition(Color{100, 100, 100}, b.Position()) // FG
+	    }
+    }
 
-    balls = [Ball(40, 80), Ball(80, 40), Ball(120, 120)]
-    g2d.init_canvas((ARENA_W, ARENA_H))
-    g2d.main_loop(update, 1000 // 30)  # Millis
+    func main() {
+	    InitCanvas(Size{ArenaW, ArenaH})
+	    MainLoop(update, 1000/30) // Millis
+    }
 
 ---
 
 title: Composizione
 figure: images/oop/ball-arena.svg
 
-- Associazione di tipo **has-a**, **part-of** tra oggetti
-    - Una *arena* può *contenere* diverse *palline*
+- Associazione **has-a**, **part-of** tra oggetti
+    - Una arena *contiene* diverse palline
 
 code: python
 
-    class BallArena:  # ...
-        def __init__(self):
-            self._balls = []
-        def add(self, b: Ball):
-            self._balls.append(b)
-        def move_all(self):
-            for b in self._balls:
-                b.move()
-
-code: python
-
-    arena = BallArena()
-    arena.add(Ball(40, 80)); arena.add(Ball(80, 40)) # ...
-    arena.move_all()
+    type BallArena struct { balls []*Ball }
+    func (a *BallArena) Add(b *Ball) {
+        a.balls = append(a.balls, b)
+    }
+    func (a *BallArena) MoveAll() {
+        for i, b := range a.balls {
+            b.Move(); Println("Ball", i, b.Position())
+        }
+    }
+    func main() {
+        var arena = &BallArena{}
+        arena.Add(NewBall(40, 80)); arena.Add(NewBall(80, 40))
+        arena.MoveAll() // ...
+    }
 
 ---
 
-title: Livelli di astrazione
-class: segue dark backdrop
+title: Interfacce
+class: segue dark
 
 ---
 
@@ -217,20 +220,20 @@ figure: images/oop/inheritance.png
 
 ---
 
-title: Livelli di astrazione
+title: Interfacce
 figure: images/oop/actors.svg
 
-- `Actor`: *classe base*
+- `Actor`: *interfaccia*
     - Dichiara un metodo `move` ecc.
-- Vari attori: *classi derivate*
-    - Ereditano caratteristiche di `Actor`
+- Vari attori: *classi implementazione*
+    - Implementano caratteristiche di `Actor`
     - Definiscono comportamenti specifici
 
-code: python
+code: go
 
-    class Actor:
-        def move(self):
-            raise NotImplementedError("Abstract method")
+    type Actor interface {
+        Move()
+    }
 
 ---
 
@@ -238,17 +241,15 @@ title: Generalizzazione e riuso
 
 code: python
 
-    class Arena:  # ...
-        def __init__(self, w, h):
-            self._w, self._h = w, h
-            self._actors = []
-        def add(self, a: Actor):
-            self._actors.append(a)
-        def move_all(self):
-            for a in self._actors:
-                a.move()
-        def size(self):
-            return self._w, self._h
+    type Arena struct { actors []*Actor }
+    func (a *Arena) Add(c *Actor) {
+        a.actors = append(a.actors, c)
+    }
+    func (a *Arena) MoveAll() {
+        for i, c := range a.actors {
+            c.Move(); Println("Ball", i, c.Position())
+        }
+    }
 
 - Codice dipendente dalle classi più astratte, più in alto nella gerarchia
     - `Arena` riutilizzabile creando nuove classi derivate di `Actor`
@@ -260,54 +261,58 @@ figure: images/oop/actor.svg
 
 code: python
 
-    arena.add(Ball(40, 80))
-    arena.add(Ghost(120, 40)) # ...
-    arena.move_all()
+    arena.Add(NewBall(40, 80))
+    arena.Add(NewGhost(120, 40)) // ...
+    arena.MoveAll()
 
 - Principio di **sostituzione** di Liskov
-    - Si può sempre usare un oggetto di una *classe derivata*, al posto di uno della *classe base*
+    - Si può sempre usare un oggetto di una *classe implementazione*, al posto di uno della *interfaccia*
 - Relazione *has-a* tra un oggetto `Arena` e gli oggetti `Actor` che contiene
-- Relazione *is-a* tra classi derivate (`Ball` e `Ghost`) e classe base (`Actor`)
+- Relazione *is-a* tra classi implementazione (`Ball` e `Ghost`) e interfaccia (`Actor`)
 
 ---
 
 title: Ereditarietà e polimorfismo
 
-- **Classe derivata**
-    - Eredita le caratteristiche della classe base
+- **Classe implementazione**
+    - Implementa le caratteristiche della interfaccia
     - Può definire nuove caratteristiche specifiche
 - **Metodo polimorfo**
-    - Ridefinito nelle classi derivate
+    - Definito in modo diverso nelle classi implementazione
     - Attori diversi possono muoversi in modo diverso
 
-code: python
+code: go
 
-    class Ghost(Actor):  # ...
-        def move(self):
-            dx = random.choice([-5, 0, 5])
-            dy = random.choice([-5, 0, 5])
-            self._x = (self._x + dx) % ARENA_W
-            self._y = (self._y + dy) % ARENA_H
+    type Ghost struct { x, y int }  // ...
+    func (g *Ghost) Move() {
+        dx := 5 * RandInt(-1, 1)
+        dy := 5 * RandInt(-1, 1)
+        g.x = (g.x + dx + ArenaW) % ArenaW
+        g.y = (g.y + dy + ArenaH) % ArenaH
+    }
 
 ---
 
 title: Attori e arena
 
-code: python
+code: go
 
-    class Ghost(Actor):
-    
-        def __init__(self, arena, x, y):
-            self._x, self._y = x, y
-            self._arena = arena  # save a ref to the arena
-            arena.add(self)      # register yourself into the arena
-            
-        def move(self):
-            dx = random.choice([-5, 0, 5])
-            dy = random.choice([-5, 0, 5])
-            arena_w, arena_h = self._arena.size()  # self._arena!
-            self._x = (self._x + dx) % arena_w
-            self._y = (self._y + dy) % arena_h
+    type Ghost struct {
+        arena *Arena
+        x, y  int
+    }
+    func NewGhost(arena *Arena, x, y int) *Ghost {
+        g := &Ghost{arena, x, y}  // save a ref to the arena
+        arena.Add(g)              // register yourself into the arena
+        return g
+    }
+    func (g *Ghost) Move() {
+        dx := 5 * RandInt(-1, 1)
+        dy := 5 * RandInt(-1, 1)
+        as := g.arena.Size()      // ref to arena
+        g.x = (g.x + dx + as.W) % as.W
+        g.y = (g.y + dy + as.H) % as.H
+    }
 
 ---
 
@@ -317,27 +322,26 @@ class: segue dark
 ---
 
 title:  Rimbalzi nel browser
-figure: images/oop/bounce.png
 
-code: python
+code: go
 
-    import game2d as g2d
-    from p3_bounce import Arena, Ball, Ghost, Turtle
-
-    def update():
-        arena.move_all()  # Game logic
-        g2d.fill_canvas((255, 255, 255))  # Background
-        for a in arena.actors():
-            # Foreground; cut an area from a larger image
-            g2d.draw_image_clip(sprites, a.rect(), a.symbol())
-
-    arena = Arena(320, 240)
-    Ball(arena, 40, 80);  Ball(arena, 80, 40);  Ghost(arena, 120, 80)
-    turtle = Turtle(arena, 80, 80)  # each actor knows the arena
-    g2d.init_canvas(arena.size())
-    sprites = g2d.load_image("sprites.png")
-    g2d.main_loop(update, 1000 // 30)  # Millis
-
+    var sprites = LoadImage("sprites.png")
+    var arena = NewArena(320, 240)
+    var turtle = NewTurtle(arena, 80, 80)  // actor knows the arena
+    func update() {
+        arena.MoveAll()  // Game logic
+        FillCanvas(Color{255, 255, 255})
+        for _, a in arena.Actors() {
+            // Cut an area from a larger image
+            DrawImageClip(sprites, a.Position(), a.Symbol())
+        }
+    }
+    func main() {
+        NewGhost(arena, 120, 80); NewBall(arena, 40, 80) // ...
+        InitCanvas(arena.Size())
+        MainLoop(update, 1000 / 30)
+    }
+    
 ---
 
 title:  Controllo da tastiera
@@ -345,21 +349,19 @@ figure: images/oop/bounce.png
 
 code: python
 
-    def keydown(code):
-        # print(code)
-        if code == "ArrowUp":
-            turtle.go_up()
-        elif code == "ArrowDown":
-            turtle.go_down()
-        elif code == "ArrowLeft":
-            turtle.go_left()
-        elif code == "ArrowRight":
-            turtle.go_right()
-
-    def keyup(code):
-        turtle.stay()
-
-    g2d.handle_keyboard(keydown, keyup)
+    func keydown(code) {
+        if code == "ArrowUp" { turtle.GoUp() }
+        else if code == "ArrowDown" { turtle.GoDown() }
+        else if code == "ArrowLeft" { turtle.GoLeft() }
+        else if code == "ArrowRight" { turtle.GoRight() }
+    }
+    func keyup(code) {
+        turtle.Stay()
+    }
+    func main() {
+        // ...
+        HandleKeyboard(keydown, keyup)
+    }
 
 ---
 
@@ -381,229 +383,18 @@ title: Urti delle palline
 
 code: python
 
-    class Ball(Actor):
-        # ...
-        def collide(self, other):
-            if not isinstance(other, Ghost):
-                x, y, w, h = other.rect()
-                if x < self._x:
-                    self._dx = self.SPEED
-                else:
-                    self._dx = -self.SPEED
-                # ... same for y
+    func (b *Ball) Collide(other Actor) {
+	    _, ok := other.(*Ghost)
+	    if !ok {
+		    op := other.Position()
+		    if op.X < b.x { b.dx = b.speed }
+		    else { b.dx = -b.speed }
+		    if op.Y < b.y { b.dy = b.speed } 
+		    else { b.dy = -b.speed }
+	    }
+    }
 
-- `isinstance(obj, cls)`
-    - Controlla se l'oggetto `obj` è istanza della classe `cls`
-    - ... o di una sua sottoclasse
-    - Restituisce un `bool`
-
----
-
-title: Proprietà (++)
-
-- Permettono un accesso controllato allo stato
-
-code: python
-
-    class Ball:
-
-        @property  # a getter for the pos property
-        def pos(self) -> (int, int):
-            return self._x, self._y
-
-        # @pos.setter  # if you also really need a setter
-        # def pos(self, val: (int, int)):
-        #     self._x, self._y = val
-
-code: python
-
-    ball = Ball(40, 80)
-    print('ball @', ball.pos)
-    # ball.pos = (60, 20)   # with the setter, you could change the pos
-
----
-
-title: Ciclo di vita di un oggetto (++)
-figure: images/dev/garbage-truck.jpg
-
-- Creazione di un oggetto: allocata memoria per tenere lo stato dell’oggetto
-- In Python: variabile = riferimento ad un oggetto
-    - *Oggetti*: *allocazione dinamica*, in memoria *heap*
-    - *Variabili*: *allocazione automatica*, in memoria *stack*
-- Oggetto non più associato a nessuna variabile: necessario liberare memoria
-- **Garbage collection**: gestione automatica della restituzione di memoria
-
----
-
-title: Garbage collection (++)
-
-- Vantaggi
-    - Non è possibile dimenticare di liberare la memoria (*memory leak*)
-    - Non è possibile liberare della memoria che dovrà essere utilizzata in seguito (*dangling pointer*)
-- Svantaggi
-    - Decide autonomamente quando liberare la memoria
-    - Liberare e compattare la memoria richiede del calcolo
-- Diversi algoritmi
-    - *Reference counting*: idea di base, ma cicli…
-    - *Mark & sweep*: parte da riferimenti locali/globali, marca oggetti raggiungibili
-    - *Generational garbage collection*: controlla spesso oggetti recenti
-
----
-
-title: PyGame
-class: segue dark
-
----
-
-title: Grafica con PyGame (++)
-figure: images/oop/pygame-logo.png images/oop/pygame-loop.png
-
-- Libreria per giochi 2D
-- Grafica e suoni
-- Su *SDL* - Simple DirectMedia Layer
-- Semplice e veloce
-- Open-source
-- Multi-piattaforma
-
->
-
-[pygame.org](http://www.pygame.org/)
-
----
-
-title:  Disegno con PyGame (++)
-figure: images/oop/pygame-logo.png images/oop/raster-coord.png
-figcaption: → pygame.org/docs
-
-code: python
-
-    import pygame
-    pygame.init()                     # Prepare pygame
-    screen = pygame.display.set_mode((640, 480)) # (w, h)
-    screen.fill((255, 255, 255))      # BG (Red, Green Blue)
-
-    # Yellow rectangle, left=50, top=75, w=90, h=50
-    pygame.draw.rect(screen, (255, 255, 0), (50, 75, 90, 50))
-
-    # Blue circle, center=(300, 50), radius=20
-    pygame.draw.circle(screen, (0, 0, 255), (300, 50), 20)
-
-    pygame.display.flip()             # Update the screen
-    while pygame.event.wait().type != pygame.QUIT:
-        pass
-    pygame.quit()
-
----
-
-title: Animazione con PyGame (++)
-
-code: python
-
-    import pygame
-    pygame.init()                     # Prepare pygame
-    screen = pygame.display.set_mode((320, 240))
-    clock = pygame.time.Clock()       # To set game speed
-    image = pygame.image.load('ball.png')
-
-    x = 50; playing = True
-    while playing:
-        for e in pygame.event.get():  # Handle events: mouse, keyb etc.
-            if e.type == pygame.QUIT: playing = False
-        screen.fill((255, 255, 255))  # Draw background        
-        screen.blit(image, (x, 50))   # Draw foreground
-        x = (x + 5) % 320             # Update ball's position
-        pygame.display.flip()         # Surface ready, show it!
-        clock.tick(30)                # Wait 1/30 seconds
-    pygame.quit()                     # Close the window
-
----
-
-title: Ciclo di animazione (++)
-
-code: python
-
-    import pygame
-    pygame.init()                     # Prepare pygame
-    screen = pygame.display.set_mode((320, 240))
-    clock = pygame.time.Clock()       # To set game speed
-    image = pygame.image.load('ball.png')
-
-    x = 50; playing = True
-    while playing:
-        for e in pygame.event.get():  # Handle events: mouse, keyb etc.
-            if e.type == pygame.QUIT: playing = False
-        screen.fill((255, 255, 255))  # Draw background        
-        screen.blit(image, (x, 50))   # Draw foreground
-        x = (x + 5) % 320             # Update ball's position
-        pygame.display.flip()         # Surface ready, show it!
-        clock.tick(30)                # Wait 1/30 seconds
-    pygame.quit()                     # Close the window
-
----
-
-title:  Rimbalzi in PyGame (++)
-figure: images/oop/bounce.png
-
-code: python
-
-    arena = Arena(320, 240)
-    Ball(arena, 40, 80); Ball(arena, 80, 40); 
-    Ghost(arena, 120, 80) # ...
-    # a map from an actor type to an image
-    images = {Ball: pygame.image.load('ball.png'),
-              Ghost: pygame.image.load('ghost.png')}
-    screen = pygame.display.set_mode(arena.size())
-    playing = True
-    while playing:
-        # Handle events here!
-
-        arena.move_all()             # Game logic
-        screen.fill((255, 255, 255)) # Background
-        for a in arena.actors():
-            x, y, w, h = a.rect()
-            img = images[type(a)]
-            screen.blit(img, (x, y)) # Foreground [...]
-
----
-
-title:  Tastiera e mouse (++)
-
-code: python
-
-    from pygame.locals import (KEYDOWN, KEYUP, K_RIGHT, K_d,
-        MOUSEBUTTONDOWN, MOUSEBUTTONUP, MOUSEMOTION)
-    # ...
-    for e in pygame.event.get():
-        # print(e)
-        if e.type == KEYDOWN and e.key in (K_RIGHT, K_d):
-            print('Right arrow (or D) pressed')
-        elif e.type == KEYUP and e.key in (K_RIGHT, K_d):
-            print('Right arrow (or D) released')
-        elif e.type == MOUSEBUTTONDOWN and e.button == 1:
-            print('Left mouse button pressed')
-        elif e.type == MOUSEBUTTONUP and e.button == 1:
-            print('Left mouse button released')
-        elif e.type == MOUSEMOTION:
-            print 'Mouse at (%d, %d)' % e.pos
-
----
-
-title: Testo e suoni (++)
-
-code: python
-
-    # Red (anti-aliased) text, centered, rotated 30° ccw
-    font = pygame.font.SysFont('arial', 48)
-    surface = font.render('Game over!', True, (255, 0, 0))
-    surface = pygame.transform.rotate(surface, 30)
-    x = (screen.get_width() - surface.get_width()) // 2
-    y = (screen.get_height() - surface.get_height()) // 2
-    screen.blit(surface, (x, y))  # surface ~ image
-
-code: python
-
-    # Some sound
-    pick_up_sound = pygame.mixer.Sound('pickup.wav')
-    pick_up_sound.play()  # play(-1) to loop, then stop()
-
+- *Downcast*: `other.(*Ghost)`
+    - Converte l'oggetto `other` come istanza di `Ghost`
+    - Restituisce un riferimento a `Ghost` ed un `bool`
 
