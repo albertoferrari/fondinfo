@@ -9,6 +9,12 @@ Stage formativo per studenti delle scuole superiori, 11-15 giugno 2018
 - [Modulo richiesta di iscrizione](http://tomamic.github.io/fondinfo/stage-iscrizione.docx)
 - [Organizzazione dello stage](http://tomamic.github.io/fondinfo/stage-logistica.html)
 - [Autorizzazione soggiorno minorenne](http://tomamic.github.io/fondinfo/soggiorno-minore.pdf)
+- Python: [Lez.1](http://tomamic.github.io/fondinfo/p1-algoritmi.html)
+[Lez.2](http://tomamic.github.io/fondinfo/p2-liste-funzioni.html)
+[Lez.3](http://tomamic.github.io/fondinfo/p3-oggetti.html)
+- Go: [Lez.1](http://tomamic.github.io/fondinfo/go1-algoritmi.html)
+[Lez.2](http://tomamic.github.io/fondinfo/go2-liste-funzioni.html)
+[Lez.3](http://tomamic.github.io/fondinfo/go3-oggetti.html)
 - [Esercizi di programmazione](http://tomamic.github.io/fondinfo/stage-esercizi.html)
 
 ----
