@@ -433,7 +433,7 @@ figure: images/misc/science-of-spaceships.jpg
 title: 2.7 Griglia di colori (*)
 figure: images/misc/color-grid.png images/oop/raster-tile.png
 
-- Chidere all'utente dei valori per `rows` e `cols`
+- Chiedere all'utente dei valori per `rows` e `cols`
 - Mostrare una griglia di rettangoli di dimensione `rows×cols`
 - Partire da un rettangolo nero in alto a sinistra
 - In orizzontale, aumentare gradatamente la componente di blu
@@ -447,38 +447,24 @@ Lasciare tra i riquadri un piccolo margine
 
 ---
 
-title: 2.8 Serpentina (*)
-figure: images/misc/winding-path.png
+title: 2.8 Istogramma con barre orizzontali
+figure: images/misc/histogram-rot.png
 
-- Chidere all'utente dei valori per `rows` e `cols`
-- Mostrare una griglia di rettangoli di dimensione `rows×cols`
-- Partire da un rettangolo nero in alto a sinistra
-- Aumentare gradatamente la componente di blu, lungo un percorso a serpentina
-
->
-
-Per iniziare, seguire un più semplice percorso “a macchina da scrivere”
-
-Poi invertire il verso delle righe con indice dispari
-
+- Chiedere all'utente una lista di valori positivi
+    - La lista termina quando l'utente inserisce il valore `0`
+- Mostrare un istogramma
+    - Larghezza di ciascuna barra proporzionale al valore corrispondente
+    - La barra più lunga occupa tutto lo spazio disponibile
+    
 ---
 
 title: 2.9 Spirale (*)
 figure: images/misc/spiral-circles.png
 
-- Mostrare l'animazione di un cerchio lungo una spirale
-- Ruotare attorno ad un centro `(xc, yc)`
+- Mostrare l'*animazione* di un cerchio lungo una spirale
+- Ruotare attorno ad un centro fisso `(xc, yc)`
 - Amentare dist. `r` dal centro ad ogni passo
+- Cancellare lo sfondo ad ogni passo
 - Disegnare un cerchio sempre più grande
 - Dopo `n` passi, ricominciare daccapo
-
-code: go
-
-    xc, yc, r, angle := 320, 240, 40.0, 0.0
-    func update() {
-        x := xc + int(r*math.Cos(angle))
-        y := yc + int(r*math.Sin(angle))  // ...
-        DrawCircle(Color{0, 0, 0}, Point{x, y}, 10)
-        angle += math.Pi / 16
-    }
 

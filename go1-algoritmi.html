@@ -299,14 +299,14 @@ Println("Hello, ", user)
 <li>Conversione da <code>string</code> a <code>int</code></li>
 </ul>
 </li>
-<li><code>g2d.ParseFloat64</code><ul>
+<li><code>g2d.ParseFloat</code><ul>
 <li>Conversione da <code>string</code> a <code>float64</code></li>
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="go"><code>a := ParseInt(Prompt("Insert 1st val: "))
-b := ParseInt(Prompt("Insert 2nd val: "))
-c := ParseInt(Prompt("Insert 3rd val: "))
+<pre class="prettyprint" data-lang="go"><code>a := ParseFloat(Prompt("Insert 1st val: "))
+b := ParseFloat(Prompt("Insert 2nd val: "))
+c := ParseFloat(Prompt("Insert 3rd val: "))
 
 total := a + b + c
 Println("The sum is ", total)
@@ -670,9 +670,7 @@ DrawCircle(Color{0, 0, 255}, Point{100, 150}, 20)
 <li>Chiedere all'utente il valore del raggio <code>r</code> di un cerchio</li>
 <li>Mostrare il valore dell'area e della circonferenza</li>
 <li>Se <code>r</code> è negativo, però, mostrare un messaggio d'errore</li>
-</ul>
-<blockquote></blockquote>
-<p>Usare <code>ParseFloat64</code> sull'input</p></article>
+</ul></article>
  
 </slide>
 

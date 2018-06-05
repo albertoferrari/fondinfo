@@ -666,3 +666,4 @@ figure: images/misc/invaders-path.jpg
     - Lasciare a ciascun alieno uno spazio orizzontale di movimento di 150 pixel, a destra della posizione di partenza
 - Farli avanzare tutti ad ogni ciclo, chiamando il metodo `move` di ciascuno di essi
 
+

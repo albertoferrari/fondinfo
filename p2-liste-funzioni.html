@@ -758,7 +758,7 @@ g2d.handle_keyboard(keydown, keyup)
         <img src="images/misc/color-grid.png"><img src="images/oop/raster-tile.png">
         
       </figure><ul>
-<li>Chidere all'utente dei valori per <code>rows</code> e <code>cols</code></li>
+<li>Chiedere all'utente dei valori per <code>rows</code> e <code>cols</code></li>
 <li>Mostrare una griglia di rettangoli di dimensione <code>rows×cols</code></li>
 <li>Partire da un rettangolo nero in alto a sinistra</li>
 <li>In orizzontale, aumentare gradatamente la componente di blu</li>
@@ -773,22 +773,24 @@ g2d.handle_keyboard(keydown, keyup)
 <slide  >
   
     <hgroup>
-      <h2>2.8 Serpentina (*)</h2>
+      <h2>2.8 Istogramma con barre orizzontali</h2>
       <h3></h3>
     </hgroup>
     <article >
       <figure>
-        <img src="images/misc/winding-path.png">
+        <img src="images/misc/histogram-rot.png">
         
       </figure><ul>
-<li>Chidere all'utente dei valori per <code>rows</code> e <code>cols</code></li>
-<li>Mostrare una griglia di rettangoli di dimensione <code>rows×cols</code></li>
-<li>Partire da un rettangolo nero in alto a sinistra</li>
-<li>Aumentare gradatamente la componente di blu, lungo un percorso a serpentina</li>
+<li>Chiedere all'utente una lista di valori positivi<ul>
+<li>La lista termina quando l'utente inserisce il valore <code>0</code></li>
 </ul>
-<blockquote></blockquote>
-<p>Per iniziare, seguire un più semplice percorso “a macchina da scrivere”</p>
-<p>Poi invertire il verso delle righe con indice dispari</p></article>
+</li>
+<li>Mostrare un istogramma<ul>
+<li>Larghezza di ciascuna barra proporzionale al valore corrispondente</li>
+<li>La barra più lunga occupa tutto lo spazio disponibile</li>
+</ul>
+</li>
+</ul></article>
  
 </slide>
 
@@ -803,20 +805,13 @@ g2d.handle_keyboard(keydown, keyup)
         <img src="images/misc/spiral-circles.png">
         
       </figure><ul>
-<li>Mostrare l'animazione di un cerchio lungo una spirale</li>
-<li>Ruotare attorno ad un centro <code>(xc, yc)</code></li>
+<li>Mostrare l'<em>animazione</em> di un cerchio lungo una spirale</li>
+<li>Ruotare attorno ad un centro fisso <code>(xc, yc)</code></li>
 <li>Amentare dist. <code>r</code> dal centro ad ogni passo</li>
+<li>Cancellare lo sfondo ad ogni passo</li>
 <li>Disegnare un cerchio sempre più grande</li>
 <li>Dopo <code>n</code> passi, ricominciare daccapo</li>
-</ul>
-<pre class="prettyprint" data-lang="go"><code>xc, yc, r, angle := 320, 240, 40.0, 0.0
-func update() {
-    x := xc + int(r*math.Cos(angle))
-    y := yc + int(r*math.Sin(angle))  // ...
-    DrawCircle(Color{0, 0, 0}, Point{x, y}, 10)
-    angle += math.Pi / 16
-}
-</code></pre></article>
+</ul></article>
  
 </slide>
 

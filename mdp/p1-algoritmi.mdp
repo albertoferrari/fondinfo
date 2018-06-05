@@ -161,9 +161,9 @@ code: python
 
     # File sum3.py - to run: python3 sum3.py
 
-    a = int(input("Insert 1st val: "))
-    b = int(input("Insert 2nd val: "))
-    c = int(input("Insert 3rd val: "))
+    a = float(input("Insert 1st val: "))
+    b = float(input("Insert 2nd val: "))
+    c = float(input("Insert 3rd val: "))
 
     total = a + b + c
 
@@ -467,10 +467,6 @@ figure: images/misc/greek-pi.png
 - Chiedere all'utente il valore del raggio `r` di un cerchio
 - Mostrare il valore dell'area e della circonferenza
 - Se `r` è negativo, però, mostrare un messaggio d'errore
-
->
-
-Convertire l'input in `float`
 
 ---
 
