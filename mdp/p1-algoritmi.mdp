@@ -451,7 +451,7 @@ code: python
     g2d.draw_rect((255, 255, 0), (150, 100, 250, 200))
 
     # Green diagonal
-    g2d.draw_line((0, 255, 0), (150, 100), (400, 300))
+    g2d.draw_line((0, 255, 0), (150, 300), (400, 100))
     
     # Blue circle, center=(400, 300), radius=20
     g2d.draw_circle((0, 0, 255), (400, 300), 20)
