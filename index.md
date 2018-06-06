@@ -16,7 +16,7 @@ Stage formativo per studenti delle scuole superiori, 11-15 giugno 2018
 - Go: [Lez.1](http://tomamic.github.io/fondinfo/go1-algoritmi.html),
 [Lez.2](http://tomamic.github.io/fondinfo/go2-liste-funzioni.html),
 [Lez.3](http://tomamic.github.io/fondinfo/go3-oggetti.html),
-[Playground](http://www.ce.unipr.it/playground/)
+[Playground](http://www.ce.unipr.it/gopherjs/)
 
 ----
 
