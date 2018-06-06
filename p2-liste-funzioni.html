@@ -400,7 +400,7 @@ print(data)
       <ul>
 <li><strong>Parametri formali</strong>: nomi usati nella <em>definizione</em></li>
 <li><strong>Parametri effettivi</strong>: oggetti passati alla funz.</li>
-<li>Parametri passati &ldquo;<em>per oggetto</em>&rdquo;<ul>
+<li>Parametri passati “<em>per oggetto</em>”;<ul>
 <li>Variabili all'esterno: non vengono modificate</li>
 <li>Liste e oggetti passati ad una funz.: modifiche <em>permanenti</em></li>
 </ul>
@@ -417,6 +417,73 @@ x = 10
 inc(x)
 print(x)      # just for debug
 </code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Documentazione di funzioni</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>Annotazioni</strong>: utili per documentare il tipo di param. e valore di ritorno (ma non c'è verifica!)</li>
+<li><strong>Docstring</strong>: descrizione testuale di una funzione</li>
+<li><strong><code>help</code></strong>: funzione per visualizzare la documentazione</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>def hypotenuse(cathetus1: float, cathetus2: float) -&gt; float:
+    '''
+    Return the hypotenuse of a right triangle,
+    given both its legs (catheti).
+    '''
+    return (cathetus1 ** 2 + cathetus2 ** 2) ** 0.5
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Animazione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>import game2d as g2d
+
+def update():
+    global x
+    g2d.fill_canvas((255, 255, 255))  # Draw background        
+    g2d.draw_image(image, (x, 50))    # Draw foreground
+    x = (x + 5) % 320                    # Update ball's position
+
+g2d.init_canvas((320, 240))
+image = g2d.load_image("ball.png")
+x = 50
+
+g2d.main_loop(update, 1000 // 30)   # Call update 30 times/second
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Eventi della tastiera</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>import game2d as g2d
+
+def keydown(code: str):
+    print("Key pressed: ", code)
+
+def keyup(code: str):
+    print("Key released: ", code)
+
+g2d.handle_keyboard(keydown, keyup)
+</code></pre>
+<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code</a></p></article>
  
 </slide>
 
@@ -477,29 +544,7 @@ if __name__ == "__main__":
 <slide  >
   
     <hgroup>
-      <h2>Documentazione di funzioni</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li><strong>Annotazioni</strong>: utili per documentare il tipo di param. e valore di ritorno (ma non c'è verifica!)</li>
-<li><strong>Docstring</strong>: descrizione testuale di una funzione</li>
-<li><strong><code>help</code></strong>: funzione per visualizzare la documentazione</li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code>def hypotenuse(cathetus1: float, cathetus2: float) -&gt; float:
-    '''
-    Return the hypotenuse of a right triangle,
-    given both its legs (catheti).
-    '''
-    return (cathetus1 ** 2 + cathetus2 ** 2) ** 0.5
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Effetti collaterali</h2>
+      <h2>Effetti collaterali (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -525,7 +570,7 @@ if __name__ == "__main__":
 <slide  >
   
     <hgroup>
-      <h2>Funzioni non idempotenti</h2>
+      <h2>Funzioni non idempotenti (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -548,51 +593,6 @@ def rq(x: int) -&gt; int:
 </code></pre>
 <blockquote></blockquote>
 <p>Se <code>x, y = 3, 4</code>, ad esempio, i due risultati sono <code>-2</code> e <code>4</code></p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Animazione</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="python"><code>import game2d as g2d
-
-def update():
-    global x
-    g2d.fill_canvas((255, 255, 255))  # Draw background        
-    g2d.draw_image(image, (x, 50))    # Draw foreground
-    x = (x + 5) % 320                    # Update ball's position
-
-g2d.init_canvas((320, 240))
-image = g2d.load_image("ball.png")
-x = 50
-
-g2d.main_loop(update, 1000 // 30)   # Call update 30 times/second
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Eventi della tastiera</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="python"><code>import game2d as g2d
-
-def keydown(code: str):
-    print("Key pressed: ", code)
-
-def keyup(code: str):
-    print("Key released: ", code)
-
-g2d.handle_keyboard(keydown, keyup)
-</code></pre>
-<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code</a></p></article>
  
 </slide>
 

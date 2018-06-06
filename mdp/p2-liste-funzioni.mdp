@@ -288,7 +288,7 @@ title: Parametri di funzioni
 
 - **Parametri formali**: nomi usati nella *definizione*
 - **Parametri effettivi**: oggetti passati alla funz.
-- Parametri passati &ldquo;*per oggetto*&rdquo;
+- Parametri passati “*per oggetto*”;
     - Variabili all'esterno: non vengono modificate
     - Liste e oggetti passati ad una funz.: modifiche *permanenti*
 - Si possono restituire più valori, come *tupla*
@@ -302,6 +302,61 @@ code: python
     x = 10
     inc(x)
     print(x)      # just for debug
+
+---
+
+title: Documentazione di funzioni
+
+- **Annotazioni**: utili per documentare il tipo di param. e valore di ritorno (ma non c'è verifica!)
+- **Docstring**: descrizione testuale di una funzione
+- **`help`**: funzione per visualizzare la documentazione
+
+code: python
+
+    def hypotenuse(cathetus1: float, cathetus2: float) -> float:
+        '''
+        Return the hypotenuse of a right triangle,
+        given both its legs (catheti).
+        '''
+        return (cathetus1 ** 2 + cathetus2 ** 2) ** 0.5
+
+---
+
+title: Animazione
+
+code: python
+
+    import game2d as g2d
+
+    def update():
+        global x
+        g2d.fill_canvas((255, 255, 255))  # Draw background        
+        g2d.draw_image(image, (x, 50))    # Draw foreground
+        x = (x + 5) % 320                    # Update ball's position
+
+    g2d.init_canvas((320, 240))
+    image = g2d.load_image("ball.png")
+    x = 50
+
+    g2d.main_loop(update, 1000 // 30)   # Call update 30 times/second
+
+---
+
+title: Eventi della tastiera
+
+code: python
+
+    import game2d as g2d
+
+    def keydown(code: str):
+        print("Key pressed: ", code)
+
+    def keyup(code: str):
+        print("Key released: ", code)
+
+    g2d.handle_keyboard(keydown, keyup)
+
+<https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
 
 ---
 
@@ -345,24 +400,7 @@ code: python
     
 ---
 
-title: Documentazione di funzioni
-
-- **Annotazioni**: utili per documentare il tipo di param. e valore di ritorno (ma non c'è verifica!)
-- **Docstring**: descrizione testuale di una funzione
-- **`help`**: funzione per visualizzare la documentazione
-
-code: python
-
-    def hypotenuse(cathetus1: float, cathetus2: float) -> float:
-        '''
-        Return the hypotenuse of a right triangle,
-        given both its legs (catheti).
-        '''
-        return (cathetus1 ** 2 + cathetus2 ** 2) ** 0.5
-
----
-
-title: Effetti collaterali
+title: Effetti collaterali (++)
 
 - Modifica di oggetti passati come parametri o variabili globali, operazioni di lettura/scrittura...
 - Annullano la **trasparenza referenziale**
@@ -375,7 +413,7 @@ title: Effetti collaterali
 
 ---
 
-title: Funzioni non idempotenti
+title: Funzioni non idempotenti (++)
 
 - Esempio di semplificazione
     - `p = rq(x) + rq(y) * (rq(x) – rq(x))`
@@ -396,44 +434,6 @@ code: python
 >
 
 Se `x, y = 3, 4`, ad esempio, i due risultati sono `-2` e `4`
-
----
-
-title: Animazione
-
-code: python
-
-    import game2d as g2d
-
-    def update():
-        global x
-        g2d.fill_canvas((255, 255, 255))  # Draw background        
-        g2d.draw_image(image, (x, 50))    # Draw foreground
-        x = (x + 5) % 320                    # Update ball's position
-
-    g2d.init_canvas((320, 240))
-    image = g2d.load_image("ball.png")
-    x = 50
-
-    g2d.main_loop(update, 1000 // 30)   # Call update 30 times/second
-
----
-
-title: Eventi della tastiera
-
-code: python
-
-    import game2d as g2d
-
-    def keydown(code: str):
-        print("Key pressed: ", code)
-
-    def keyup(code: str):
-        print("Key released: ", code)
-
-    g2d.handle_keyboard(keydown, keyup)
-
-<https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
 
 ---
 

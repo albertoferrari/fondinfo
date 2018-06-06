@@ -219,7 +219,7 @@ code: python
 
 ---
 
-title: Calcolo dell'età
+title: Calcolo dell'età (++)
 
 code: python
 
@@ -351,7 +351,7 @@ code: python
 
 ---
 
-title: Quadrato perfetto
+title: Quadrato perfetto (++)
 figure: images/algo/perfect-square.svg
 
 code: python
@@ -448,6 +448,9 @@ code: python
     # Yellow rectangle, left=100, top=150, w=250, h=200
     # red=255 (max), green=255 (max), blue=0 (min)
     g2d.draw_rect((255, 255, 0), (100, 150, 250, 200))
+
+    # Green diagonal
+    g2d.draw_line((0, 255, 0), (100, 150), (350, 350))
     
     # Blue circle, center=(100, 150), radius=20
     g2d.draw_circle((0, 0, 255), (100, 150), 20)
