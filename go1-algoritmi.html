@@ -272,9 +272,10 @@ Println('🌐' == 127760)      // true
         <img src="images/algo/hello-user.svg">
         
       </figure><ul>
-<li><strong><code>g2d.Prompt</code></strong> chiede un testo all'utente<ul>
+<li><strong><code>g2d.Prompt</code></strong> chiede un <em>testo</em> all'utente<ul>
 <li>Mostra un messaggio</li>
 <li>Poi blocca il programma in attesa</li>
+<li>Risultato sempre di tipo <code>string</code></li>
 </ul>
 </li>
 </ul>
@@ -361,10 +362,11 @@ if age &lt; 14 {
       <figure>
         <img src="images/algo/abs.svg">
         
-      </figure><pre class="prettyprint" data-lang="go"><code>x := ParseInt(Prompt("insert a value:"))
-y := x
+      </figure><pre class="prettyprint" data-lang="go"><code>x := ParseFloat(Prompt("insert a value:"))
+y := 0.0
 
 if x &gt;= 0 {
+    y = x
     Println(x, " is positive")
 } else {
     y = -x
@@ -382,7 +384,7 @@ Println("abs = ", y)
 <slide  >
   
     <hgroup>
-      <h2>Calcolo dell'età</h2>
+      <h2>Calcolo dell'età (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -483,8 +485,9 @@ for count &lt;= n {
     total = total + count
     count = count + 1
 }
-Println("The sum is", total)
+Println("The sum is ", total)
 </code></pre>
+<blockquote></blockquote>
 <p><a href="http://it.wikipedia.org/wiki/Gauss#Biografia">http://it.wikipedia.org/wiki/Gauss#Biografia</a></p></article>
  
 </slide>
@@ -509,7 +512,7 @@ for i &lt; n {
     total += val  // total = total + val
     i += 1        // i = i + 1
 }
-Println("The sum is", total)
+Println("The sum is ", total)
 </code></pre></article>
  
 </slide>
@@ -532,7 +535,7 @@ for val != 0 {
     val = ParseInt(Prompt("Val? (0 to finish) "))
 }
 if count != 0 {
-    Println("The average is",
+    Println("The average is ",
             float64(total) / float64(count))
 }
 </code></pre>
@@ -546,7 +549,7 @@ if count != 0 {
 <slide  >
   
     <hgroup>
-      <h2>Quadrato perfetto</h2>
+      <h2>Quadrato perfetto (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -584,14 +587,16 @@ import (
 )
 
 func main() {
-    y := math.Sin(math.Pi / 4)
+    y := math.Sin(math.Pi / 4.0)
     g2d.Println(y)
 
     die1 := g2d.RandInt(1, 6)  // like rolling a die
     die2 := g2d.RandInt(1, 6)  // like rolling a die
     g2d.Println(die1, die2)
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="https://golang.org/pkg/">https://golang.org/pkg/</a></p></article>
  
 </slide>
 
@@ -605,7 +610,6 @@ func main() {
       <ul>
 <li>Strutture definite nel modulo <code>g2d</code></li>
 <li>Esportati da modulo solo nomi con la prima lettera <strong>maiuscola</strong></li>
-<li><a href="https://golang.org/pkg/">https://golang.org/pkg/</a></li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>type Point struct{ X, Y int }
 type Size struct{ W, H int }
@@ -635,13 +639,16 @@ InitCanvas(Size{600, 400})
 
 // Yellow rectangle, left=100, top=150, w=250, h=200
 // red=255 (max), green=255 (max), blue=0 (min)
-DrawRect(Color{255, 255, 0}, Rect{100, 150, 250, 200})
+DrawRect(Color{255, 255, 0}, Rect{150, 100, 250, 200})
 
 // Green diagonal
-DrawLine(Color{0, 255, 0}, Point{100, 150}, Point{350, 350})
+DrawLine(Color{0, 255, 0}, Point{150, 100}, Point{400, 300})
 
-// Blue circle, center=(100, 150), radius=20
-DrawCircle(Color{0, 0, 255}, Point{100, 150}, 20)
+// Blue circle, center=(350, 350), radius=20
+DrawCircle(Color{0, 0, 255}, Point{400, 300}, 20)
+
+// Red text, pos=(100, 150), size=40
+DrawText("Hello", Color{255, 0, 0}, Point{150, 100}, 40)
 </code></pre></article>
  
 </slide>

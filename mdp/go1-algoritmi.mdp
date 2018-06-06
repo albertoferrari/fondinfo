@@ -166,9 +166,10 @@ class: large-image
 title: Leggere e scrivere
 figure: images/algo/hello-user.svg
 
-- **`g2d.Prompt`** chiede un testo all'utente
+- **`g2d.Prompt`** chiede un *testo* all'utente
     - Mostra un messaggio
     - Poi blocca il programma in attesa
+    - Risultato sempre di tipo `string`
 
 code: go
 
@@ -224,10 +225,11 @@ figure: images/algo/abs.svg
 
 code: go
 
-    x := ParseInt(Prompt("insert a value:"))
-    y := x
+    x := ParseFloat(Prompt("insert a value:"))
+    y := 0.0
 
     if x >= 0 {
+        y = x
         Println(x, " is positive")
     } else {
         y = -x
@@ -240,7 +242,7 @@ code: go
 
 ---
 
-title: Calcolo dell'età
+title: Calcolo dell'età (++)
 
 code: go
 
@@ -324,7 +326,9 @@ code: go
         total = total + count
         count = count + 1
     }
-    Println("The sum is", total)
+    Println("The sum is ", total)
+
+>
 
 <http://it.wikipedia.org/wiki/Gauss#Biografia>
 
@@ -345,7 +349,7 @@ code: go
         total += val  // total = total + val
         i += 1        // i = i + 1
     }
-    Println("The sum is", total)
+    Println("The sum is ", total)
 
 ---
 
@@ -362,7 +366,7 @@ code: go
         val = ParseInt(Prompt("Val? (0 to finish) "))
     }
     if count != 0 {
-        Println("The average is",
+        Println("The average is ",
                 float64(total) / float64(count))
     }
 
@@ -371,7 +375,7 @@ code: go
 
 ---
 
-title: Quadrato perfetto
+title: Quadrato perfetto (++)
 figure: images/algo/perfect-square.svg
 
 code: go
@@ -403,7 +407,7 @@ code: go
     )
 
     func main() {
-        y := math.Sin(math.Pi / 4)
+        y := math.Sin(math.Pi / 4.0)
         g2d.Println(y)
 
         die1 := g2d.RandInt(1, 6)  // like rolling a die
@@ -411,13 +415,16 @@ code: go
         g2d.Println(die1, die2)
     }
 
+>
+
+<https://golang.org/pkg/>
+
 ---
 
 title: Strutture per grafica
 
 - Strutture definite nel modulo `g2d`
 - Esportati da modulo solo nomi con la prima lettera **maiuscola**
-- <https://golang.org/pkg/>
 
 
 code: go
@@ -446,14 +453,17 @@ code: go
 
     // Yellow rectangle, left=100, top=150, w=250, h=200
     // red=255 (max), green=255 (max), blue=0 (min)
-    DrawRect(Color{255, 255, 0}, Rect{100, 150, 250, 200})
+    DrawRect(Color{255, 255, 0}, Rect{150, 100, 250, 200})
     
     // Green diagonal
-    DrawLine(Color{0, 255, 0}, Point{100, 150}, Point{350, 350})
-    
-    // Blue circle, center=(100, 150), radius=20
-    DrawCircle(Color{0, 0, 255}, Point{100, 150}, 20)
+    DrawLine(Color{0, 255, 0}, Point{150, 100}, Point{400, 300})
 
+    // Blue circle, center=(350, 350), radius=20
+    DrawCircle(Color{0, 0, 255}, Point{400, 300}, 20)
+    
+    // Red text, pos=(100, 150), size=40
+    DrawText("Hello", Color{255, 0, 0}, Point{150, 100}, 40)
+    
 ---
 
 title: Esercizi
