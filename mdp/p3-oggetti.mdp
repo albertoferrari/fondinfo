@@ -204,7 +204,7 @@ code: python
 ---
 
 title: Livelli di astrazione
-class: segue dark backdrop
+class: segue dark
 
 ---
 
@@ -214,13 +214,17 @@ figure: images/oop/inheritance.png
 - Relazione **is-a** tra classi
     - Specializzazione, sotto-insieme
 - Es. classificazioni in biologia
-    - I *vertebrati* sono una sottoclasse degli *animali*
-    - I *mammiferi* sono una sottoclasse dei *vertebrati*
-    - I *felini* sono una sottoclasse dei *mammiferi*
-    - I *gatti* sono una sottoclasse dei *felini*
+    - *Vertebrati* sottoclasse di *animali*
+    - *Mammiferi* sottoclasse di *vertebrati*
+    - *Felini* sottoclasse di *mammiferi*
+    - *Gatti* sottoclasse di *felini*
 - Ogni sottoclasse...
     - Eredita le caratteristiche della classe base
     - Ma introduce delle specializzazioni
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_animals.py>
 
 ---
 
@@ -238,10 +242,6 @@ code: python
     class Actor:
         def move(self):
             raise NotImplementedError("Abstract method")
-
->
-
-<http://www.ce.unipr.it/brython/?p3_animals.py>
 
 ---
 
@@ -357,10 +357,6 @@ code: python
     sprites = g2d.load_image("sprites.png")
     g2d.main_loop(update, 1000 // 30)  # Millis
 
->
-
-<http://www.ce.unipr.it/brython/?p3_bounce_anim.py>
-
 ---
 
 title:  Controllo da tastiera
@@ -383,6 +379,10 @@ code: python
         turtle.stay()
 
     g2d.handle_keyboard(keydown, keyup)
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_bounce_anim.py>
 
 ---
 

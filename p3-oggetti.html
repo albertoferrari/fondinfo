@@ -301,7 +301,7 @@ arena.move_all()
  
 </slide>
 
-<slide class="segue dark backdrop" >
+<slide class="segue dark" >
   
     <aside class="gdbar"><img src="images/logo.png"></aside>
     <hgroup class="auto-fadein">
@@ -327,10 +327,10 @@ arena.move_all()
 </ul>
 </li>
 <li>Es. classificazioni in biologia<ul>
-<li>I <em>vertebrati</em> sono una sottoclasse degli <em>animali</em></li>
-<li>I <em>mammiferi</em> sono una sottoclasse dei <em>vertebrati</em></li>
-<li>I <em>felini</em> sono una sottoclasse dei <em>mammiferi</em></li>
-<li>I <em>gatti</em> sono una sottoclasse dei <em>felini</em></li>
+<li><em>Vertebrati</em> sottoclasse di <em>animali</em></li>
+<li><em>Mammiferi</em> sottoclasse di <em>vertebrati</em></li>
+<li><em>Felini</em> sottoclasse di <em>mammiferi</em></li>
+<li><em>Gatti</em> sottoclasse di <em>felini</em></li>
 </ul>
 </li>
 <li>Ogni sottoclasse...<ul>
@@ -338,7 +338,9 @@ arena.move_all()
 <li>Ma introduce delle specializzazioni</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p3_animals.py">http://www.ce.unipr.it/brython/?p3_animals.py</a></p></article>
  
 </slide>
 
@@ -366,9 +368,7 @@ arena.move_all()
 <pre class="prettyprint" data-lang="python"><code>class Actor:
     def move(self):
         raise NotImplementedError("Abstract method")
-</code></pre>
-<blockquote></blockquote>
-<p><a href="http://www.ce.unipr.it/brython/?p3_animals.py">http://www.ce.unipr.it/brython/?p3_animals.py</a></p></article>
+</code></pre></article>
  
 </slide>
 
@@ -518,9 +518,7 @@ turtle = Turtle(arena, 80, 80)  # each actor knows the arena
 g2d.init_canvas(arena.size())
 sprites = g2d.load_image("sprites.png")
 g2d.main_loop(update, 1000 // 30)  # Millis
-</code></pre>
-<blockquote></blockquote>
-<p><a href="http://www.ce.unipr.it/brython/?p3_bounce_anim.py">http://www.ce.unipr.it/brython/?p3_bounce_anim.py</a></p></article>
+</code></pre></article>
  
 </slide>
 
@@ -549,7 +547,9 @@ def keyup(code):
     turtle.stay()
 
 g2d.handle_keyboard(keydown, keyup)
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p3_bounce_anim.py">http://www.ce.unipr.it/brython/?p3_bounce_anim.py</a></p></article>
  
 </slide>
 
