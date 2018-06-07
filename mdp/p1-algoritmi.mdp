@@ -445,7 +445,7 @@ figure: images/oop/raster-coord.png
 
 code: python
 
-    import game2d as g2d
+    import g2d
     
     # Create canvas, width=600, height=400
     g2d.init_canvas((600, 400))
@@ -467,7 +467,7 @@ figure: images/oop/raster-coord.png
 
 code: python
 
-    import game2d as g2d
+    import g2d
     
     g2d.init_canvas((600, 400))
     

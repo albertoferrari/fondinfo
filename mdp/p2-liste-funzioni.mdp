@@ -193,7 +193,7 @@ figure: images/misc/red-squares.png
 
 code: python
 
-    import game2d as g2d
+    import g2d
 
     g2d.init_canvas((300, 300))
 
@@ -362,7 +362,7 @@ title: Animazione
 
 code: python
 
-    import game2d as g2d
+    import g2d
 
     def update():
         global x
@@ -382,7 +382,7 @@ title: Eventi della tastiera
 
 code: python
 
-    import game2d as g2d
+    import g2d
 
     def keydown(code: str):
         print("Key pressed: ", code)
