@@ -106,6 +106,10 @@ code: python
         b1.move()
         b2.move()
 
+>
+
+<http://www.ce.unipr.it/brython/?p3_ball.py>
+
 ---
 
 title: Il primo parametro, self
@@ -166,6 +170,11 @@ code: python
     balls = [Ball(40, 80), Ball(80, 40), Ball(120, 120)]
     g2d.init_canvas((ARENA_W, ARENA_H))
     g2d.main_loop(update, 1000 // 30)  # Millis
+
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_ball_anim.py>
 
 ---
 
@@ -230,6 +239,10 @@ code: python
         def move(self):
             raise NotImplementedError("Abstract method")
 
+>
+
+<http://www.ce.unipr.it/brython/?p3_animals.py>
+
 ---
 
 title: Generalizzazione e riuso
@@ -266,6 +279,10 @@ code: python
     - Si può sempre usare un oggetto di una *classe derivata*, al posto di uno della *classe base*
 - Relazione *has-a* tra un oggetto `Arena` e gli oggetti `Actor` che contiene
 - Relazione *is-a* tra classi derivate (`Ball` e `Ghost`) e classe base (`Actor`)
+
+>
+
+<http://www.ce.unipr.it/brython/?actor.py>
 
 ---
 
@@ -307,6 +324,10 @@ code: python
             self._x = (self._x + dx) % arena_w
             self._y = (self._y + dy) % arena_h
 
+>
+
+<http://www.ce.unipr.it/brython/?p3_bounce.py>
+
 ---
 
 title: Animazione dei personaggi
@@ -335,6 +356,10 @@ code: python
     g2d.init_canvas(arena.size())
     sprites = g2d.load_image("sprites.png")
     g2d.main_loop(update, 1000 // 30)  # Millis
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_bounce_anim.py>
 
 ---
 

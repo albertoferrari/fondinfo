@@ -540,7 +540,9 @@ if ans * ans == n:
     print("Square root:", ans)
 else:
     print("Not a perfect square")
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p1_perfect_square.py">http://www.ce.unipr.it/brython/?p1_perfect_square.py</a></p></article>
  
 </slide>
 
@@ -643,17 +645,40 @@ g2d.init_canvas((600, 400))
 # red=255 (max), green=255 (max), blue=0 (min)
 g2d.draw_rect((255, 255, 0), (150, 100, 250, 200))
 
-# Green diagonal
-g2d.draw_line((0, 255, 0), (150, 300), (400, 100))
-
 # Blue circle, center=(400, 300), radius=20
 g2d.draw_circle((0, 0, 255), (400, 300), 20)
 
-# Red text, pos=(150, 100), size=40
+# Handle window events
+g2d.main_loop()
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Linee e testi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/raster-coord.png">
+        
+      </figure><pre class="prettyprint" data-lang="python"><code>import game2d as g2d
+
+g2d.init_canvas((600, 400))
+
+# Green line from (150, 300) to (400, 100)
+g2d.draw_line((0, 255, 0), (150, 300), (400, 100))
+
+# Red text, left=150, top=100, size=40
 g2d.draw_text("Hello", (255, 0, 0), (150, 100), 40)
 
 g2d.main_loop()
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p1_draw.py">http://www.ce.unipr.it/brython/?p1_draw.py</a></p>
+<p><a href="http://www.ce.unipr.it/brython/?p1_red_squares.py">http://www.ce.unipr.it/brython/?p1_red_squares.py</a></p></article>
  
 </slide>
 

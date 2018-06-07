@@ -231,6 +231,10 @@ Per fare in modo che ciascun valore richieda almeno 3 caratteri:
 <br>
 `val = "{:3}".format(x * y)`
 
+>
+
+<http://www.ce.unipr.it/brython/?p2_tables.py>
+
 ---
 
 title: Funzioni
@@ -252,24 +256,16 @@ code: python
         c = (a ** 2 + b ** 2) ** 0.5
         return c
 
-    def limit_values(values, max_val):
-        # procedure: process data, no direct result
-        for i in range(len(values)):
-            if values[i] > max_val:
-                values[i] = max_val
-
-        # the pythonic way: for i, val in enumerate(values): ...
-
 ---
 
 title: Chiamata di funzioni
 
 - **`def`** definisce una funzione, ma non la esegue!
 - Bisogna *chiamarla*
-- Ogni funzione, quando eseguita, crea un nuovo *spazio di nomi*
+- Funzione, quando eseguita, crea nuovo *spazio di nomi*
     - Parametri e variabili hanno **ambito locale**
     - Non visibili nel resto del programma
-    - Anche nomi uguali, definiti in ambiti diversi, restano distinti
+    - Nomi uguali, definiti in ambiti diversi, restano distinti
     
 code: python
 
@@ -278,10 +274,29 @@ code: python
     side3 = hypotenuse(side1, side2)
     print('3rd side:', side3)
 
-    data = [5, 4, 2]
-    limit_values(data, 4)
-    print(data)
+---
 
+title: Funzione main
+
+- A volte si preferisce creare una funzione principale
+    - In questo modo si limitano le variabili globali
+
+code: python
+  
+    # def hypotenuse ...
+
+    def main():
+        side1 = float(input("1st side? "))
+        side2 = float(input("2nd side? "))
+        side3 = hypotenuse(side1, side2)
+        print("3rd side:", side3)
+
+    main()
+
+>
+
+<http://www.ce.unipr.it/brython/?p2_hypotenuse.py>
+    
 ---
 
 title: Parametri di funzioni
@@ -303,6 +318,27 @@ code: python
     inc(x)
     print(x)      # just for debug
 
+---
+
+title: Procedure
+
+code: python
+
+    def limit_values(values, max_val):
+        # procedure: process data, no direct result
+        for i in range(len(values)):
+            if values[i] > max_val:
+                values[i] = max_val
+
+        # the pythonic way: for i, val in enumerate(values): ...
+
+    def main ():
+        data = [5, 4, 2]
+        limit_values(data, 4)
+        print(data)
+
+    main()
+    
 ---
 
 title: Documentazione di funzioni
@@ -358,24 +394,9 @@ code: python
 
 <https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
 
----
+>
 
-title: Funzione main
-
-- A volte si preferisce creare una funzione principale
-    - In questo modo si limitano le variabili globali
-
-code: python
-  
-    # def hypotenuse ...
-
-    def main():
-        side1 = float(input("1st side? "))
-        side2 = float(input("2nd side? "))
-        side3 = hypotenuse(side1, side2)
-        print("3rd side:", side3)
-
-    main()
+<http://www.ce.unipr.it/brython/?p2_anim.py>
     
 ---
 
@@ -395,6 +416,7 @@ code: python
         side3 = hypotenuse(side1, side2)
         print("3rd side:", side3)
 
+    # if this module is imported, main is not executed
     if __name__ == "__main__":
         main()
     

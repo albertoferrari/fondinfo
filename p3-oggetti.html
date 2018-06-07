@@ -190,7 +190,9 @@ for i in range(25):
     print('Ball 2 @', b2.position())
     b1.move()
     b2.move()
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p3_ball.py">http://www.ce.unipr.it/brython/?p3_ball.py</a></p></article>
  
 </slide>
 
@@ -261,7 +263,9 @@ def update():
 balls = [Ball(40, 80), Ball(80, 40), Ball(120, 120)]
 g2d.init_canvas((ARENA_W, ARENA_H))
 g2d.main_loop(update, 1000 // 30)  # Millis
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p3_ball_anim.py">http://www.ce.unipr.it/brython/?p3_ball_anim.py</a></p></article>
  
 </slide>
 
@@ -362,7 +366,9 @@ arena.move_all()
 <pre class="prettyprint" data-lang="python"><code>class Actor:
     def move(self):
         raise NotImplementedError("Abstract method")
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p3_animals.py">http://www.ce.unipr.it/brython/?p3_animals.py</a></p></article>
  
 </slide>
 
@@ -415,7 +421,9 @@ arena.move_all()
 </li>
 <li>Relazione <em>has-a</em> tra un oggetto <code>Arena</code> e gli oggetti <code>Actor</code> che contiene</li>
 <li>Relazione <em>is-a</em> tra classi derivate (<code>Ball</code> e <code>Ghost</code>) e classe base (<code>Actor</code>)</li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?actor.py">http://www.ce.unipr.it/brython/?actor.py</a></p></article>
  
 </slide>
 
@@ -468,7 +476,9 @@ arena.move_all()
         arena_w, arena_h = self._arena.size()  # self._arena!
         self._x = (self._x + dx) % arena_w
         self._y = (self._y + dy) % arena_h
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p3_bounce.py">http://www.ce.unipr.it/brython/?p3_bounce.py</a></p></article>
  
 </slide>
 
@@ -508,7 +518,9 @@ turtle = Turtle(arena, 80, 80)  # each actor knows the arena
 g2d.init_canvas(arena.size())
 sprites = g2d.load_image("sprites.png")
 g2d.main_loop(update, 1000 // 30)  # Millis
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p3_bounce_anim.py">http://www.ce.unipr.it/brython/?p3_bounce_anim.py</a></p></article>
  
 </slide>
 

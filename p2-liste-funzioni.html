@@ -313,7 +313,9 @@ for y in range(1, MAX + 1):
 </code></pre>
 <p>Per fare in modo che ciascun valore richieda almeno 3 caratteri:
 <br>
-<code>val = "{:3}".format(x * y)</code></p></article>
+<code>val = "{:3}".format(x * y)</code></p>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p2_tables.py">http://www.ce.unipr.it/brython/?p2_tables.py</a></p></article>
  
 </slide>
 
@@ -349,14 +351,6 @@ for y in range(1, MAX + 1):
 <pre class="prettyprint" data-lang="python"><code>def hypotenuse(a, b):
     c = (a ** 2 + b ** 2) ** 0.5
     return c
-
-def limit_values(values, max_val):
-    # procedure: process data, no direct result
-    for i in range(len(values)):
-        if values[i] &gt; max_val:
-            values[i] = max_val
-
-    # the pythonic way: for i, val in enumerate(values): ...
 </code></pre></article>
  
 </slide>
@@ -371,10 +365,10 @@ def limit_values(values, max_val):
       <ul>
 <li><strong><code>def</code></strong> definisce una funzione, ma non la esegue!</li>
 <li>Bisogna <em>chiamarla</em></li>
-<li>Ogni funzione, quando eseguita, crea un nuovo <em>spazio di nomi</em><ul>
+<li>Funzione, quando eseguita, crea nuovo <em>spazio di nomi</em><ul>
 <li>Parametri e variabili hanno <strong>ambito locale</strong></li>
 <li>Non visibili nel resto del programma</li>
-<li>Anche nomi uguali, definiti in ambiti diversi, restano distinti</li>
+<li>Nomi uguali, definiti in ambiti diversi, restano distinti</li>
 </ul>
 </li>
 </ul>
@@ -382,11 +376,35 @@ def limit_values(values, max_val):
 side2 = float(input('2nd side? '))
 side3 = hypotenuse(side1, side2)
 print('3rd side:', side3)
-
-data = [5, 4, 2]
-limit_values(data, 4)
-print(data)
 </code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Funzione main</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>A volte si preferisce creare una funzione principale<ul>
+<li>In questo modo si limitano le variabili globali</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code># def hypotenuse ...
+
+def main():
+    side1 = float(input("1st side? "))
+    side2 = float(input("2nd side? "))
+    side3 = hypotenuse(side1, side2)
+    print("3rd side:", side3)
+
+main()
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p2_hypotenuse.py">http://www.ce.unipr.it/brython/?p2_hypotenuse.py</a></p></article>
  
 </slide>
 
@@ -416,6 +434,31 @@ print(data)
 x = 10
 inc(x)
 print(x)      # just for debug
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Procedure</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>def limit_values(values, max_val):
+    # procedure: process data, no direct result
+    for i in range(len(values)):
+        if values[i] &gt; max_val:
+            values[i] = max_val
+
+    # the pythonic way: for i, val in enumerate(values): ...
+
+def main ():
+    data = [5, 4, 2]
+    limit_values(data, 4)
+    print(data)
+
+main()
 </code></pre></article>
  
 </slide>
@@ -483,33 +526,9 @@ def keyup(code: str):
 
 g2d.handle_keyboard(keydown, keyup)
 </code></pre>
-<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code</a></p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Funzione main</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>A volte si preferisce creare una funzione principale<ul>
-<li>In questo modo si limitano le variabili globali</li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code># def hypotenuse ...
-
-def main():
-    side1 = float(input("1st side? "))
-    side2 = float(input("2nd side? "))
-    side3 = hypotenuse(side1, side2)
-    print("3rd side:", side3)
-
-main()
-</code></pre></article>
+<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code</a></p>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p2_anim.py">http://www.ce.unipr.it/brython/?p2_anim.py</a></p></article>
  
 </slide>
 
@@ -535,6 +554,7 @@ def main():
     side3 = hypotenuse(side1, side2)
     print("3rd side:", side3)
 
+# if this module is imported, main is not executed
 if __name__ == "__main__":
     main()
 </code></pre></article>
