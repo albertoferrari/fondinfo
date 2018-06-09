@@ -292,7 +292,7 @@ code: go
 
     var baseValue = 0  // global variable
 
-    func rq(x int) -> int {
+    func rq(x int) int {
         baseValue++
         return x + baseValue
     }

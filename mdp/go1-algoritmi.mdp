@@ -393,6 +393,10 @@ code: go
         Println("Not a perfect square")
     }
     
+>
+
+<http://www.ce.unipr.it/gopherjs/?p1_draw.go>
+
 ---
 
 title: Moduli
@@ -448,22 +452,49 @@ figure: images/oop/raster-coord.png
 
 code: go
 
-    // Create canvas, width=600, height=400
-    InitCanvas(Size{600, 400})
+    package main
 
-    // Yellow rectangle, left=100, top=150, w=250, h=200
-    // red=255 (max), green=255 (max), blue=0 (min)
-    DrawRect(Color{255, 255, 0}, Rect{150, 100, 250, 200})
-    
-    // Green diagonal
-    DrawLine(Color{0, 255, 0}, Point{150, 300}, Point{400, 100})
+    import . "g2d"
 
-    // Blue circle, center=(350, 350), radius=20
-    DrawCircle(Color{0, 0, 255}, Point{400, 300}, 20)
+    func main() {
+        // Create canvas, width=600, height=400
+        InitCanvas(Size{600, 400})
+
+        // Yellow rectangle, left=150, top=100, w=250, h=200
+        // red=255 (max), green=255 (max), blue=0 (min)
+        DrawRect(Color{255, 255, 0}, Rect{150, 100, 250, 200})
+        
+        // Blue circle, center=(400, 400), radius=20
+        DrawCircle(Color{0, 0, 255}, Point{400, 300}, 20)
+    }
     
-    // Red text, pos=(100, 150), size=40
-    DrawText("Hello", Color{255, 0, 0}, Point{150, 100}, 40)
+---
+
+title: Linee e testi
+figure: images/oop/raster-coord.png
+
+code: go
+
+    package main
+
+    import . "g2d"
+
+    func main() {
+        InitCanvas(Size{600, 400})
+
+        // Green line from (150, 300) to (400, 100)
+        DrawLine(Color{0, 255, 0}, Point{150, 300}, Point{400, 100})
+
+        // Red text, left=150, top=100, size=40
+        DrawText("Hello", Color{255, 0, 0}, Point{150, 100}, 40)
+    }
     
+>
+
+<http://www.ce.unipr.it/gopherjs/?p1_draw.go>
+
+<http://www.ce.unipr.it/gopherjs/?p1_red_squares.go>
+
 ---
 
 title: Esercizi

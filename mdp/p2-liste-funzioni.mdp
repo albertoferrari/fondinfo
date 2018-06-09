@@ -291,7 +291,7 @@ code: python
         side3 = hypotenuse(side1, side2)
         print("3rd side:", side3)
 
-    main()
+    main()  ## remove, if importing the module elsewhere
 
 >
 
@@ -404,17 +404,17 @@ title: Modulo main (++)
 
 - Nome del modulo in esecuzione: `__name__`
     - É il nome del file, senza estensione
-    - Modulo che avvia l'app ha nome speciale `"__main__"`
+- Il modulo di avvio dell'app ha nome speciale
+    - In *CPython*, nome `"__main__"`
+    - In *Brython* nome `"script..."`; il “trucco” non funziona
 
 code: python
   
     # def hypotenuse ...
-
     def main():
         side1 = float(input("1st side? "))
         side2 = float(input("2nd side? "))
-        side3 = hypotenuse(side1, side2)
-        print("3rd side:", side3)
+        print("3rd side:", hypotenuse(side1, side2))
 
     # if this module is imported, main is not executed
     if __name__ == "__main__":

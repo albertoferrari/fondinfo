@@ -401,7 +401,7 @@ def main():
     side3 = hypotenuse(side1, side2)
     print("3rd side:", side3)
 
-main()
+main()  ## remove, if importing the module elsewhere
 </code></pre>
 <blockquote></blockquote>
 <p><a href="http://www.ce.unipr.it/brython/?p2_hypotenuse.py">http://www.ce.unipr.it/brython/?p2_hypotenuse.py</a></p></article>
@@ -542,17 +542,19 @@ g2d.handle_keyboard(keydown, keyup)
       <ul>
 <li>Nome del modulo in esecuzione: <code>__name__</code><ul>
 <li>É il nome del file, senza estensione</li>
-<li>Modulo che avvia l'app ha nome speciale <code>"__main__"</code></li>
+</ul>
+</li>
+<li>Il modulo di avvio dell'app ha nome speciale<ul>
+<li>In <em>CPython</em>, nome <code>"__main__"</code></li>
+<li>In <em>Brython</em> nome <code>"script..."</code>; il “trucco” non funziona</li>
 </ul>
 </li>
 </ul>
 <pre class="prettyprint" data-lang="python"><code># def hypotenuse ...
-
 def main():
     side1 = float(input("1st side? "))
     side2 = float(input("2nd side? "))
-    side3 = hypotenuse(side1, side2)
-    print("3rd side:", side3)
+    print("3rd side:", hypotenuse(side1, side2))
 
 # if this module is imported, main is not executed
 if __name__ == "__main__":
