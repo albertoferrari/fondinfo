@@ -199,6 +199,192 @@ URL: https://code.google.com/p/io-2012-slides
  
 </slide>
 
+<slide class="large-figure" >
+  
+    <hgroup>
+      <h2>Problem solving</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/problem-solving-cycle.svg">
+        
+      </figure><ul>
+<li>George Polya (1945). “<em>How to solve it</em>”<ul>
+<li>Soluzione di problemi matematici: processo raramente lineare <br>&nbsp;</li>
+</ul>
+</li>
+<li><strong>(1) See.</strong> Capire il problema<ul>
+<li>Quali sono i dati, quali le incognite?</li>
+<li>Quali sono le condizioni? Sono soddisfacibili, ridondanti, contraddittorie?</li>
+<li>Figure, notazione</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Make things as simple as possible, but not simpler. <em>(A. Einstein)</em></p>
+<p>For every complex problem there is an answer that is clear, simple, and wrong. <em>(H.L. Mencken)</em></p>
+</blockquote></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Dal problema alla soluzione, e ritorno</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li><strong>(2) Plan.</strong> Elaborare un piano<ul>
+<li>Mettere in relazione dati e incognite</li>
+<li>Riduzione, analogia, divide et impera, composizione, astrazione...</li>
+<li><em>Computational thinking</em></li>
+<li>Cominciare a risolvere un problema <em>più semplice</em> (vincoli rilassati)</li>
+</ul>
+</li>
+<li><strong>(3) Do.</strong> Eseguire il piano<ul>
+<li>Controllare ogni passo. È corretto?</li>
+</ul>
+</li>
+<li><strong>(4) Check.</strong> Controllare la soluzione<ul>
+<li>Corretta? Ottenibile in altro modo?</li>
+<li>Risultato, o metodo, utilizzabile per altri problemi?</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>If you can't solve a problem... <br> then there is an easier problem you can solve: find it. <em>(G. Polya)</em></p>
+</blockquote></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Elementi di un algoritmo</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/algo/recipe.png">
+        <figcaption>Una ricetta di cucina è un esempio di algoritmo</figcaption>
+      </figure><ul>
+<li><em>Algoritmo</em>: procedimento che risolve un determinato problema attraverso un numero finito di passi elementari (al-Khwarizmi, ~800)</li>
+<li><strong>Dati</strong>: iniziali (istanza problema), intermedi, finali (soluzione)</li>
+<li><strong>Passi</strong> elementari: azioni atomiche non scomponibili in azioni più semplici</li>
+<li><strong>Processo</strong>, o anche esecuzione: sequenza ordinata di passi</li>
+<li><em>Proprietà</em>: finitezza, non ambiguità, realizzabilità, efficienza...</li>
+</ul>
+<blockquote>
+<p>Computer science is no more about computers than astronomy is about telescopes. <em>(E. Dijkstra...)</em></p>
+</blockquote></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Diagramma di flusso</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/algo/origami.png">
+        <figcaption>Anche un origami è un esempio di algoritmo</figcaption>
+      </figure><ul>
+<li><em>Flow-chart</em>: Rappresentazione grafica di algoritmi<ul>
+<li>Più efficace e meno ambigua di una descrizione a parole</li>
+</ul>
+</li>
+<li>Due tipi di entità:<ul>
+<li>Nodi</li>
+<li>Archi</li>
+</ul>
+</li>
+<li>È un <em>grafo orientato</em><ul>
+<li>Passi di un algoritmo e loro sequenza</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Tipi di nodi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/algo/spaghetti-flowchart.png">
+        
+      </figure><p><img alt="" src="images/algo/nodes.svg" /></p>
+<ul>
+<li>Istruzioni di I/O: es. leggere dati da tastiera o mostrarli a schermo</li>
+<li>Operazioni aritmetico-logiche</li>
+<li>Controllo del flusso di esecuzione</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Programmazione strutturata</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/algo/spaghetti-code.png">
+        
+      </figure><ul>
+<li>Strutture di controllo:<ul>
+<li><strong>Sequenza</strong></li>
+<li><strong>Selezione</strong></li>
+<li><strong>Iterazione</strong></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Qualunque algoritmo può essere implementato utilizzando queste tre sole strutture <em>(Teorema di Böhm-Jacopini, 1966)</em></p>
+<p>Goto statement considered harmful <em>(Dijkstra, 1968)</em></p>
+</blockquote></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Strutture di controllo</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/algo/structures.svg" /></p>
+<ul>
+<li>Esempi quotidiani di <code>if</code> e <code>while</code>:<ul>
+<li>“<em>Se non c'è il lievito, usare due cucchiaini di bicarbonato</em>”</li>
+<li>“<em>Battere gli albumi finché non montano</em>”</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="large-image" >
+  
+    <hgroup>
+      <h2>Blockly</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p><img alt="" src="images/algo/blockly.png" /></p>
+<blockquote></blockquote>
+<p><a href="http://blockly-games.appspot.com/maze">http://blockly-games.appspot.com/maze</a></p></article>
+ 
+</slide>
+
 <slide class="segue dark" >
   
     <aside class="gdbar"><img src="images/logo.png"></aside>

@@ -82,6 +82,114 @@ figure: images/misc/books.png
  
 ---
 
+title: Problem solving
+figure: images/misc/problem-solving-cycle.svg
+class: large-figure
+
+- George Polya (1945). “_How to solve it_”
+    - Soluzione di problemi matematici: processo raramente lineare <br>&nbsp;
+- **(1) See.** Capire il problema
+    - Quali sono i dati, quali le incognite?
+    - Quali sono le condizioni? Sono soddisfacibili, ridondanti, contraddittorie?
+    - Figure, notazione
+
+> Make things as simple as possible, but not simpler. *(A. Einstein)*
+
+> For every complex problem there is an answer that is clear, simple, and wrong. *(H.L. Mencken)*
+
+---
+
+title: Dal problema alla soluzione, e ritorno
+
+- **(2) Plan.** Elaborare un piano
+    - Mettere in relazione dati e incognite
+    - Riduzione, analogia, divide et impera, composizione, astrazione...
+    - *Computational thinking*
+    - Cominciare a risolvere un problema *più semplice* (vincoli rilassati)
+- **(3) Do.** Eseguire il piano
+    - Controllare ogni passo. È corretto?
+- **(4) Check.** Controllare la soluzione
+    - Corretta? Ottenibile in altro modo?
+    - Risultato, o metodo, utilizzabile per altri problemi?
+
+> If you can't solve a problem... <br> then there is an easier problem you can solve: find it. *(G. Polya)*
+
+---
+
+title: Elementi di un algoritmo
+figure: images/algo/recipe.png
+figcaption: Una ricetta di cucina è un esempio di algoritmo
+
+- *Algoritmo*: procedimento che risolve un determinato problema attraverso un numero finito di passi elementari (al-Khwarizmi, ~800)
+- **Dati**: iniziali (istanza problema), intermedi, finali (soluzione)
+- **Passi** elementari: azioni atomiche non scomponibili in azioni più semplici
+- **Processo**, o anche esecuzione: sequenza ordinata di passi
+- *Proprietà*: finitezza, non ambiguità, realizzabilità, efficienza...
+
+> Computer science is no more about computers than astronomy is about telescopes. *(E. Dijkstra...)*
+
+---
+
+title: Diagramma di flusso
+figure: images/algo/origami.png
+figcaption:Anche un origami è un esempio di algoritmo
+
+- *Flow-chart*: Rappresentazione grafica di algoritmi
+    - Più efficace e meno ambigua di una descrizione a parole
+- Due tipi di entità:
+    - Nodi
+    - Archi
+- È un *grafo orientato*
+    - Passi di un algoritmo e loro sequenza
+
+---
+
+title: Tipi di nodi
+figure: images/algo/spaghetti-flowchart.png
+
+![](images/algo/nodes.svg)
+
+- Istruzioni di I/O: es. leggere dati da tastiera o mostrarli a schermo
+- Operazioni aritmetico-logiche
+- Controllo del flusso di esecuzione
+
+---
+
+title: Programmazione strutturata
+figure: images/algo/spaghetti-code.png
+
+- Strutture di controllo:
+    - **Sequenza**
+    - **Selezione**
+    - **Iterazione**
+
+> Qualunque algoritmo può essere implementato utilizzando queste tre sole strutture *(Teorema di Böhm-Jacopini, 1966)*
+
+> Goto statement considered harmful *(Dijkstra, 1968)*
+
+---
+
+title: Strutture di controllo
+
+![](images/algo/structures.svg)
+
+- Esempi quotidiani di `if` e `while`:
+    - “*Se non c'è il lievito, usare due cucchiaini di bicarbonato*”
+    - “*Battere gli albumi finché non montano*”
+
+---
+
+title: Blockly
+class: large-image
+
+![](images/algo/blockly.png)
+
+>
+
+<http://blockly-games.appspot.com/maze>
+
+---
+
 title: Esempi di progetti
 class: segue dark
 
