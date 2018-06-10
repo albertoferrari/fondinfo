@@ -26,9 +26,9 @@ class: large-image
 
 Giorno | Argomento
 -------|----------
-Lun 11/6 | Programmazione strutturata
-Mar 12/6 | Oggetti e animazioni grafiche
-Mer 13/6 | Creazione personaggi
+Lun 11/6 | Algoritmi e disegno grafico
+Mar 12/6 | Liste, funzioni e animazioni
+Mer 13/6 | Oggetti e personaggi del gioco
 Gio 14/6 | Interazione tra personaggi
 Ven 15/6 | Completamento del gioco
 
@@ -78,7 +78,8 @@ figure: images/misc/books.png
 - M. Beri: *Python*, Apogeo Pocket, 2010, 978-8850329151
 - MIT: *Intro to CS and Programming in Python* - [Video delle lezioni](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/lecture-videos/index.htm)
 - Go: *Documentazione e tour* - <https://golang.org/doc/>
-
+- A.A. Donovan e B.W. Kernighan: *The Go Programming Language*, Addison-Wesley, 2015, 978-0134190440
+ 
 ---
 
 title: Esempi di progetti

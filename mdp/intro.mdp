@@ -112,6 +112,7 @@ title: Altri testi e video
 - A. Lorenzi, V. Moriggia: *Programmazione ad oggetti e linguaggio C++*, Atlas 2004, 978-8826811956 (~12€, 380pp.)
     - Oppure altro testo per le superiori
 - MIT: *Intro to CS and Programming in Python* - [Video delle lezioni](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/lecture-videos/index.htm)
+- A.A. Donovan e B.W. Kernighan: *The Go Programming Language*, Addison-Wesley, 2015, 978-0134190440
 
 ---
 
@@ -270,11 +271,6 @@ class: large-image
 >
 
 <http://blockly-games.appspot.com/maze>
-
----
-
-title: Linguaggio Python
-class: segue dark
 
 ---
 
