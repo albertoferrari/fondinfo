@@ -233,8 +233,8 @@ func update() {
     FillCanvas(Color{255, 255, 255})  // BG
     b1.Move()
     b2.Move()
-    DrawPosition(Color{200, 100, 100}, b1.Position())  // FG
-    DrawPosition(Color{100, 100, 200}, b2.Position())  // FG
+    DrawRect(Color{200, 100, 100}, b1.Position())  // FG
+    DrawRect(Color{100, 100, 200}, b2.Position())  // FG
 }
 
 func main() {
@@ -258,7 +258,7 @@ func update() {
     FillCanvas(Color{255, 255, 255}) // BG
     for _, b := range balls {
         b.Move()
-        DrawPosition(Color{100, 100, 100}, b.Position()) // FG
+        DrawRect(Color{100, 100, 100}, b.Position()) // FG
     }
 }
 
@@ -341,7 +341,9 @@ func main() {
 <li>Ma introduce delle specializzazioni</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/gopherjs/?p3_animals.go">http://www.ce.unipr.it/gopherjs/?p3_animals.go</a></p></article>
  
 </slide>
 
@@ -386,7 +388,7 @@ func (a *Arena) Add(c *Actor) {
 }
 func (a *Arena) MoveAll() {
     for i, c := range a.actors {
-        c.Move(); Println("Ball", i, c.Position())
+        c.Move(); Println("Actor", i, c.Position())
     }
 }
 </code></pre>
@@ -409,7 +411,7 @@ func (a *Arena) MoveAll() {
       <figure>
         <img src="images/oop/actor.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>arena.Add(NewBall(40, 80))
+      </figure><pre class="prettyprint" data-lang="go"><code>arena.Add(NewBall(40, 80))
 arena.Add(NewGhost(120, 40)) // ...
 arena.MoveAll()
 </code></pre>
@@ -420,7 +422,9 @@ arena.MoveAll()
 </li>
 <li>Relazione <em>has-a</em> tra un oggetto <code>Arena</code> e gli oggetti <code>Actor</code> che contiene</li>
 <li>Relazione <em>is-a</em> tra classi implementazione (<code>Ball</code> e <code>Ghost</code>) e interfaccia (<code>Actor</code>)</li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/gopherjs/?g2d.go">http://www.ce.unipr.it/gopherjs/?g2d.go</a></p></article>
  
 </slide>
 
@@ -471,13 +475,14 @@ func NewGhost(arena *Arena, x, y int) *Ghost {
     return g
 }
 func (g *Ghost) Move() {
-    dx := 5 * RandInt(-1, 1)
-    dy := 5 * RandInt(-1, 1)
+    dx, dy := 5 * RandInt(-1, 1), 5 * RandInt(-1, 1)
     as := g.arena.Size()      // ref to arena
     g.x = (g.x + dx + as.W) % as.W
     g.y = (g.y + dy + as.H) % as.H
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/gopherjs/?p3_bounce.go">http://www.ce.unipr.it/gopherjs/?p3_bounce.go</a></p></article>
  
 </slide>
 
@@ -541,7 +546,9 @@ func main() {
     // ...
     HandleKeyboard(keydown, keyup)
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/gopherjs/?p3_bounce.go">http://www.ce.unipr.it/gopherjs/?p3_bounce.go</a></p></article>
  
 </slide>
 

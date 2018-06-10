@@ -142,8 +142,8 @@ code: go
         FillCanvas(Color{255, 255, 255})  // BG
         b1.Move()
         b2.Move()
-        DrawPosition(Color{200, 100, 100}, b1.Position())  // FG
-        DrawPosition(Color{100, 100, 200}, b2.Position())  // FG
+        DrawRect(Color{200, 100, 100}, b1.Position())  // FG
+        DrawRect(Color{100, 100, 200}, b2.Position())  // FG
     }
     
     func main() {
@@ -163,7 +163,7 @@ code: go
 	    FillCanvas(Color{255, 255, 255}) // BG
 	    for _, b := range balls {
 		    b.Move()
-		    DrawPosition(Color{100, 100, 100}, b.Position()) // FG
+		    DrawRect(Color{100, 100, 100}, b.Position()) // FG
 	    }
     }
 
@@ -218,6 +218,10 @@ figure: images/oop/inheritance.png
     - Eredita le caratteristiche della classe base
     - Ma introduce delle specializzazioni
 
+>
+
+<http://www.ce.unipr.it/gopherjs/?p3_animals.go>
+
 ---
 
 title: Interfacce
@@ -247,7 +251,7 @@ code: python
     }
     func (a *Arena) MoveAll() {
         for i, c := range a.actors {
-            c.Move(); Println("Ball", i, c.Position())
+            c.Move(); Println("Actor", i, c.Position())
         }
     }
 
@@ -259,7 +263,7 @@ code: python
 title: Sostituzione
 figure: images/oop/actor.svg
 
-code: python
+code: go
 
     arena.Add(NewBall(40, 80))
     arena.Add(NewGhost(120, 40)) // ...
@@ -269,6 +273,10 @@ code: python
     - Si può sempre usare un oggetto di una *classe implementazione*, al posto di uno della *interfaccia*
 - Relazione *has-a* tra un oggetto `Arena` e gli oggetti `Actor` che contiene
 - Relazione *is-a* tra classi implementazione (`Ball` e `Ghost`) e interfaccia (`Actor`)
+
+>
+
+<http://www.ce.unipr.it/gopherjs/?g2d.go>
 
 ---
 
@@ -307,12 +315,15 @@ code: go
         return g
     }
     func (g *Ghost) Move() {
-        dx := 5 * RandInt(-1, 1)
-        dy := 5 * RandInt(-1, 1)
+        dx, dy := 5 * RandInt(-1, 1), 5 * RandInt(-1, 1)
         as := g.arena.Size()      // ref to arena
         g.x = (g.x + dx + as.W) % as.W
         g.y = (g.y + dy + as.H) % as.H
     }
+
+>
+
+<http://www.ce.unipr.it/gopherjs/?p3_bounce.go>
 
 ---
 
@@ -362,6 +373,10 @@ code: python
         // ...
         HandleKeyboard(keydown, keyup)
     }
+
+>
+
+<http://www.ce.unipr.it/gopherjs/?p3_bounce.go>
 
 ---
 
