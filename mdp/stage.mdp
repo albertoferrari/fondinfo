@@ -331,5 +331,28 @@ figure: images/misc/slitherlink.png
 
 <https://www.brainbashers.com/slitherlinkhelp.asp>
 
+---
+
+title: Donkey Kong
+figure: images/misc/donkey-kong.png
+
+- Maro può camminare sulle piattaforme
+- Può saltare, se è su una piattaforma
+- Deve evitare i barili
+- Cade quando esce dalla piattaforma
+
+---
+
+title: Sudoku Skyscrapers
+figure: images/misc/skyscrapers.jpg
+
+- Celle tutte piene
+- Nessun numero ripetuto in una riga o colonna
+- Rispetto dei vincoli a margine
+    - Numero di tetti visibili, da quella posizione
+
+>
+
+<https://www.brainbashers.com/skyscrapers.asp>
 
 
