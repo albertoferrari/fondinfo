@@ -202,11 +202,9 @@ func (b *Ball) Move() {
       <pre class="prettyprint" data-lang="go"><code>func (b *Ball) Position() Rect {
     return Rect{b.x, b.y, b.w, b.h}
 }
-
 func main() {
-    // Create two objects, instances of the Ball class
-    b1 := NewBall(40, 80)
-    b2 := NewBall(80, 40)
+    b1 := NewBall(40, 80)  // Create two objects,
+    b2 := NewBall(80, 40)  // instances of the Ball class
 
     for i := 0; i &lt; 25; i++ {
         Println("Ball 1 @", b1.Position())
@@ -215,7 +213,9 @@ func main() {
         b2.Move()
     }
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/gopherjs/?p3_ball.go">http://www.ce.unipr.it/gopherjs/?p3_ball.go</a></p></article>
  
 </slide>
 
@@ -261,12 +261,13 @@ func update() {
         DrawRect(Color{100, 100, 100}, b.Position()) // FG
     }
 }
-
 func main() {
     InitCanvas(Size{ArenaW, ArenaH})
     MainLoop(update, 1000/30) // Millis
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/gopherjs/?p3_ball.go">http://www.ce.unipr.it/gopherjs/?p3_ball.go</a></p></article>
  
 </slide>
 
@@ -286,7 +287,7 @@ func main() {
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>type BallArena struct { balls []*Ball }
+<pre class="prettyprint" data-lang="go"><code>type BallArena struct { balls []*Ball }
 func (a *BallArena) Add(b *Ball) {
     a.balls = append(a.balls, b)
 }
@@ -330,10 +331,10 @@ func main() {
 </ul>
 </li>
 <li>Es. classificazioni in biologia<ul>
-<li>I <em>vertebrati</em> sono una sottoclasse degli <em>animali</em></li>
-<li>I <em>mammiferi</em> sono una sottoclasse dei <em>vertebrati</em></li>
-<li>I <em>felini</em> sono una sottoclasse dei <em>mammiferi</em></li>
-<li>I <em>gatti</em> sono una sottoclasse dei <em>felini</em></li>
+<li><em>Vertebrati</em> sottoclasse degli <em>animali</em></li>
+<li><em>Mammiferi</em> sottoclasse dei <em>vertebrati</em></li>
+<li><em>Felini</em> sottoclasse dei <em>mammiferi</em></li>
+<li><em>Gatti</em> sottoclasse dei <em>felini</em></li>
 </ul>
 </li>
 <li>Ogni sottoclasse...<ul>
@@ -341,6 +342,7 @@ func main() {
 <li>Ma introduce delle specializzazioni</li>
 </ul>
 </li>
+<li>In <strong>Go</strong> non c'è <em>ereditarietà</em>, ma <strong>interfacce</strong> </li>
 </ul>
 <blockquote></blockquote>
 <p><a href="http://www.ce.unipr.it/gopherjs/?p3_animals.go">http://www.ce.unipr.it/gopherjs/?p3_animals.go</a></p></article>
@@ -382,7 +384,7 @@ func main() {
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>type Arena struct { actors []*Actor }
+      <pre class="prettyprint" data-lang="go"><code>type Arena struct { actors []*Actor }
 func (a *Arena) Add(c *Actor) {
     a.actors = append(a.actors, c)
 }

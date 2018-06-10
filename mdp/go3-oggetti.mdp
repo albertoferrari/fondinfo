@@ -115,11 +115,9 @@ code: go
     func (b *Ball) Position() Rect {
         return Rect{b.x, b.y, b.w, b.h}
     }
-
     func main() {
-        // Create two objects, instances of the Ball class
-        b1 := NewBall(40, 80)
-        b2 := NewBall(80, 40)
+        b1 := NewBall(40, 80)  // Create two objects,
+        b2 := NewBall(80, 40)  // instances of the Ball class
 
         for i := 0; i < 25; i++ {
             Println("Ball 1 @", b1.Position())
@@ -128,6 +126,10 @@ code: go
             b2.Move()
         }
     }
+
+>
+
+<http://www.ce.unipr.it/gopherjs/?p3_ball.go>
 
 ---
 
@@ -166,11 +168,14 @@ code: go
 		    DrawRect(Color{100, 100, 100}, b.Position()) // FG
 	    }
     }
-
     func main() {
 	    InitCanvas(Size{ArenaW, ArenaH})
 	    MainLoop(update, 1000/30) // Millis
     }
+
+>
+
+<http://www.ce.unipr.it/gopherjs/?p3_ball.go>
 
 ---
 
@@ -180,7 +185,7 @@ figure: images/oop/ball-arena.svg
 - Associazione **has-a**, **part-of** tra oggetti
     - Una arena *contiene* diverse palline
 
-code: python
+code: go
 
     type BallArena struct { balls []*Ball }
     func (a *BallArena) Add(b *Ball) {
@@ -210,13 +215,14 @@ figure: images/oop/inheritance.png
 - Relazione **is-a** tra classi
     - Specializzazione, sotto-insieme
 - Es. classificazioni in biologia
-    - I *vertebrati* sono una sottoclasse degli *animali*
-    - I *mammiferi* sono una sottoclasse dei *vertebrati*
-    - I *felini* sono una sottoclasse dei *mammiferi*
-    - I *gatti* sono una sottoclasse dei *felini*
+    - *Vertebrati* sottoclasse degli *animali*
+    - *Mammiferi* sottoclasse dei *vertebrati*
+    - *Felini* sottoclasse dei *mammiferi*
+    - *Gatti* sottoclasse dei *felini*
 - Ogni sottoclasse...
     - Eredita le caratteristiche della classe base
     - Ma introduce delle specializzazioni
+- In **Go** non c'è *ereditarietà*, ma **interfacce** 
 
 >
 
@@ -243,7 +249,7 @@ code: go
 
 title: Generalizzazione e riuso
 
-code: python
+code: go
 
     type Arena struct { actors []*Actor }
     func (a *Arena) Add(c *Actor) {
