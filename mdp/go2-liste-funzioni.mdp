@@ -116,9 +116,12 @@ code: go
         
     Println("Your shopping list contains:")
 
-    for index, value := range shoppingList {
-        Println(index, value)
+    for _, value := range shoppingList {
+        fmt.Println(value)
     }
+    // for index, value := range shoppingList {
+    //    fmt.Println(index, value)
+    // }
 
 - Ad ogni iterazione, a `value` è assegnato un diverso elemento della lista `shoppingList`
 - `index` e/o `value` possono essere omessi (sostituiti con `_`)
@@ -133,7 +136,7 @@ title: Cicli su stringhe: for
 code: go
 
     for index, value := range "Hello, 🌐!" {
-        Println(index, value)
+        fmt.Println(index, value)
     }
 
     for _, x := range "Hello, 🌐!" {

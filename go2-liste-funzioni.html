@@ -184,9 +184,12 @@ otherDays := strings.Split(otherTxt, "|")
 
 Println("Your shopping list contains:")
 
-for index, value := range shoppingList {
-    Println(index, value)
+for _, value := range shoppingList {
+    fmt.Println(value)
 }
+// for index, value := range shoppingList {
+//    fmt.Println(index, value)
+// }
 </code></pre>
 <ul>
 <li>Ad ogni iterazione, a <code>value</code> è assegnato un diverso elemento della lista <code>shoppingList</code></li>
@@ -207,7 +210,7 @@ for index, value := range shoppingList {
 <li>Anche su <em>stringa</em>: sequenza <em>immutabile</em> di caratteri (UTF-8)</li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>for index, value := range "Hello, 🌐!" {
-    Println(index, value)
+    fmt.Println(index, value)
 }
 
 for _, x := range "Hello, 🌐!" {
