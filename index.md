@@ -46,8 +46,8 @@ Stage formativo per studenti delle scuole superiori, 11-15 giugno 2018
 ## Introduzione alla programmazione
 
 - [Algoritmi in Python 3](http://tomamic.github.io/fondinfo/p1-algoritmi.html)
-- [Liste e funzioni](http://tomamic.github.io/fondinfo/p2-liste-funzioni.html)
-- [Oggetti](http://tomamic.github.io/fondinfo/p3-oggetti.html)
+- [Oggetti](http://tomamic.github.io/fondinfo/p2-oggetti.html)
+- [Composizione](http://tomamic.github.io/fondinfo/p3-composizione.html)
 - [Ricorsione e file](http://tomamic.github.io/fondinfo/p4-ricorsione-file.html)
 - [Linguaggio C++11](http://tomamic.github.io/fondinfo/p5-cpp.html)
 - [Interfacce grafiche in Qt](http://tomamic.github.io/fondinfo/p6-gui.html)

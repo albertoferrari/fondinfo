@@ -1,6 +1,164 @@
 title: Gui con Tkinter
 subtitle: Introduzione alla programmazione
-figure: images/oop/tk-logo.svg
+figure: images/oop/tk-logo.svg images/misk/pygame.png
+
+---
+
+title: PyGame
+class: segue dark
+
+---
+
+title: Grafica con PyGame (++)
+figure: images/oop/pygame-logo.png images/oop/pygame-loop.png
+
+- Libreria per giochi 2D
+- Grafica e suoni
+- Su *SDL* - Simple DirectMedia Layer
+- Semplice e veloce
+- Open-source
+- Multi-piattaforma
+
+>
+
+[pygame.org](http://www.pygame.org/)
+
+---
+
+title:  Disegno con PyGame (++)
+figure: images/oop/pygame-logo.png images/oop/raster-coord.png
+figcaption: → pygame.org/docs
+
+code: python
+
+    import pygame
+    pygame.init()                     # Prepare pygame
+    screen = pygame.display.set_mode((640, 480)) # (w, h)
+    screen.fill((255, 255, 255))      # BG (Red, Green Blue)
+
+    # Yellow rectangle, left=50, top=75, w=90, h=50
+    pygame.draw.rect(screen, (255, 255, 0), (50, 75, 90, 50))
+
+    # Blue circle, center=(300, 50), radius=20
+    pygame.draw.circle(screen, (0, 0, 255), (300, 50), 20)
+
+    pygame.display.flip()             # Update the screen
+    while pygame.event.wait().type != pygame.QUIT:
+        pass
+    pygame.quit()
+
+---
+
+title: Animazione con PyGame (++)
+
+code: python
+
+    import pygame
+    pygame.init()                     # Prepare pygame
+    screen = pygame.display.set_mode((320, 240))
+    clock = pygame.time.Clock()       # To set game speed
+    image = pygame.image.load('ball.png')
+
+    x = 50; playing = True
+    while playing:
+        for e in pygame.event.get():  # Handle events: mouse, keyb etc.
+            if e.type == pygame.QUIT: playing = False
+        screen.fill((255, 255, 255))  # Draw background        
+        screen.blit(image, (x, 50))   # Draw foreground
+        x = (x + 5) % 320             # Update ball's position
+        pygame.display.flip()         # Surface ready, show it!
+        clock.tick(30)                # Wait 1/30 seconds
+    pygame.quit()                     # Close the window
+
+---
+
+title: Ciclo di animazione (++)
+
+code: python
+
+    import pygame
+    pygame.init()                     # Prepare pygame
+    screen = pygame.display.set_mode((320, 240))
+    clock = pygame.time.Clock()       # To set game speed
+    image = pygame.image.load('ball.png')
+
+    x = 50; playing = True
+    while playing:
+        for e in pygame.event.get():  # Handle events: mouse, keyb etc.
+            if e.type == pygame.QUIT: playing = False
+        screen.fill((255, 255, 255))  # Draw background        
+        screen.blit(image, (x, 50))   # Draw foreground
+        x = (x + 5) % 320             # Update ball's position
+        pygame.display.flip()         # Surface ready, show it!
+        clock.tick(30)                # Wait 1/30 seconds
+    pygame.quit()                     # Close the window
+
+---
+
+title:  Rimbalzi in PyGame (++)
+figure: images/oop/bounce.png
+
+code: python
+
+    arena = Arena(320, 240)
+    Ball(arena, 40, 80); Ball(arena, 80, 40); 
+    Ghost(arena, 120, 80) # ...
+    # a map from an actor type to an image
+    images = {Ball: pygame.image.load('ball.png'),
+              Ghost: pygame.image.load('ghost.png')}
+    screen = pygame.display.set_mode(arena.size())
+    playing = True
+    while playing:
+        # Handle events here!
+
+        arena.move_all()             # Game logic
+        screen.fill((255, 255, 255)) # Background
+        for a in arena.actors():
+            x, y, w, h = a.position()
+            img = images[type(a)]
+            screen.blit(img, (x, y)) # Foreground [...]
+
+---
+
+title:  Tastiera e mouse (++)
+
+code: python
+
+    from pygame.locals import (KEYDOWN, KEYUP, K_RIGHT, K_d,
+        MOUSEBUTTONDOWN, MOUSEBUTTONUP, MOUSEMOTION)
+    # ...
+    for e in pygame.event.get():
+        # print(e)
+        if e.type == KEYDOWN and e.key in (K_RIGHT, K_d):
+            print('Right arrow (or D) pressed')
+        elif e.type == KEYUP and e.key in (K_RIGHT, K_d):
+            print('Right arrow (or D) released')
+        elif e.type == MOUSEBUTTONDOWN and e.button == 1:
+            print('Left mouse button pressed')
+        elif e.type == MOUSEBUTTONUP and e.button == 1:
+            print('Left mouse button released')
+        elif e.type == MOUSEMOTION:
+            print 'Mouse at (%d, %d)' % e.pos
+
+---
+
+title: Testo e suoni (++)
+
+code: python
+
+    # Red (anti-aliased) text, centered, rotated 30° ccw
+    font = pygame.font.SysFont('arial', 48)
+    surface = font.render('Game over!', True, (255, 0, 0))
+    surface = pygame.transform.rotate(surface, 30)
+    x = (screen.get_width() - surface.get_width()) // 2
+    y = (screen.get_height() - surface.get_height()) // 2
+    screen.blit(surface, (x, y))  # surface ~ image
+
+code: python
+
+    # Some sound
+    pick_up_sound = pygame.mixer.Sound('pickup.wav')
+    pick_up_sound.play()  # play(-1) to loop, then stop()
 
 ---
 

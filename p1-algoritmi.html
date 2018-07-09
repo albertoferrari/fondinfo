@@ -614,14 +614,14 @@ rectangle = (150, 100, 200, 200)  # square
 <li>Sia traduttore che codice generato girano nel <em>browser</em></li>
 </ul>
 </li>
-<li>Useremo un modulo <em>ad-hoc</em>: <code>game2d</code><ul>
+<li>Useremo un modulo <em>ad-hoc</em>: <code>g2d</code><ul>
 <li>Genera html e lancia web-server locale</li>
 <li>Definisce funzioni di disegno</li>
 </ul>
 </li>
 </ul>
 <blockquote></blockquote>
-<p>Servono i file <code>brython_dist.js</code> e <code>game2d.py</code>, in <code>examples</code>: <br>
+<p>Per l'esecuzione locale, copiare nella carella di lavoro il file <code>g2d.py</code>, da <code>examples</code>: <br>
 <a href="https://github.com/tomamic/fondinfo/archive/master.zip">https://github.com/tomamic/fondinfo/archive/master.zip</a></p></article>
  
 </slide>
@@ -679,6 +679,62 @@ g2d.main_loop()
 <blockquote></blockquote>
 <p><a href="http://www.ce.unipr.it/brython/?p1_draw.py">http://www.ce.unipr.it/brython/?p1_draw.py</a></p>
 <p><a href="http://www.ce.unipr.it/brython/?p1_red_squares.py">http://www.ce.unipr.it/brython/?p1_red_squares.py</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Intervalli di valori: range</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/algo/sum10.svg">
+        
+      </figure><ul>
+<li><strong><code>range</code></strong>: intervallo di valori aperto a destra<ul>
+<li>Estremo inferiore <em>incluso</em></li>
+<li>Estremo superiore <em>escluso</em></li>
+<li>Iterabile con un ciclo <code>for</code></li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code># Add up numbers from 1 to 10
+
+total = 0
+for i in range(1, 11):
+    total += i
+
+# total = 0;  i = 1
+# while i &lt; 11:
+#     total += i;  i += 1
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Sequenza di quadrati</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/red-squares.png">
+        
+      </figure><pre class="prettyprint" data-lang="python"><code>import g2d
+
+g2d.init_canvas((300, 300))
+
+for i in range(5):  ## range(0, 5)
+    x = i * 40
+    y = x
+    red = i * 60
+    g2d.draw_rect((red, 0, 0), (x, y, 140, 140))
+
+g2d.main_loop()
+</code></pre></article>
  
 </slide>
 

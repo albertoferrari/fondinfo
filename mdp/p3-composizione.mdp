@@ -1,0 +1,598 @@
+title: Liste e composizione
+subtitle: Introduzione alla programmazione
+figure: images/oop/modules.png
+
+---
+
+title: Lista
+figure: images/fun/month-list.svg
+
+- Sequenza di elementi, *di solito* dello stesso **tipo**
+    - L'intera lista può essere assegnata ad una variabile, così diamo un **nome** alla lista
+- I singoli elementi sono **numerati**
+    - Gli indici partono da 0!
+      
+code: python
+
+    to_buy = ["spam", "eggs", "beans"]
+    
+code: python
+
+    rainfall_data = [13, 24, 18, 15]
+    
+code: python
+
+    months = ["Jan", "Feb", "Mar",
+              "Apr", "May", "Jun", 
+              "Jul", "Aug", "Sep", 
+              "Oct", "Nov", "Dec"]
+    
+---
+
+title: Accesso agli elementi
+figure: images/fun/wile-coyote.png
+
+- **Attenzione ad usare indici validi!**
+    - *Lunghezza* attuale di una lista `x`: `len(x)`
+    - Elementi *numerati* da `0` a `len(x)-1`
+    - Indici *negativi* contano dalla fine
+
+code: python
+
+    n = len(months)            # 12
+    months[3]                  # "Apr"
+    months[-2]                 # "Nov", same as n - 2
+
+code: python
+
+    to_buy = ["spam", "eggs", "beans"]
+    
+    to_buy[1] = "ketchup"      # replace an element
+
+---
+
+title: Appartenenza, inserimento, rimozione
+figure: images/fun/shopping-list.jpg
+
+code: python
+
+    to_buy = ["spam", "eggs", "beans"]
+    
+    "eggs" in to_buy           # True, to_buy contains "eggs"
+
+code: python
+
+    to_buy.append("bacon")     # add an element to the end
+    to_buy.pop()               # remove (and return) last element
+    
+    to_buy.insert(1, "bacon")  # other elements shift
+    removed = to_buy.pop(1)    # remove (and return) element at index
+    
+    to_buy.remove("eggs")      # remove an element by value
+
+---
+
+title: Slice: porzioni di lista
+
+code: python
+
+    spring = months[2:5]       # ["Mar", "Apr", "May"]
+    quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
+    quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
+    whole_year = months[:]     # Copy the whole list
+
+code: python
+
+    list1 = ["spam", "eggs", "beans"]
+    list2 = ["sausage", "mushrooms"]
+    to_buy = list1 + list2     # List concatenation
+
+code: python
+
+    so_boring = [1, 2] * 3     # List repetition:
+                               # [1, 2, 1, 2, 1, 2]
+    results_by_month = [0] * 12
+
+---
+
+title: Uguaglianza e identità
+
+code: python
+
+    a = [3, 4, 5]
+    b = a[:]       # b = [3, 4, 5] -- a new list!
+    b == a         # True, they contain the same values
+    b is a         # False, they are two objects in memory
+                   # (try and modify one of them...) 
+    c = a
+    c is a         # True, same object in memory 
+                   # (try and modify one of them...) 
+
+---
+
+title: Stringhe e liste
+
+- **Stringa**: sequenza *immutabile* di caratteri
+- **`join`** e **`split`**: da lista a stringa e viceversa
+
+code: python
+
+    txt = "Monty Python's Flying Circus"
+    txt[0]    # 'M'
+    txt[1]    # 'o'
+    txt[-1]   # 's'
+    txt[6:12] # "Python"
+    txt[-6:]  # "Circus"
+
+    days = ["tue", "thu", "sat"]
+    txt = "|".join(days)  # "tue|thu|sat"
+
+    days = "mon|wed|fri".split("|")
+    # ["mon", "wed", "fri"]
+    
+---
+
+title: Tupla
+
+- Sequenza **immutabile** di valori, anche di *tipo diverso*
+
+code: python
+
+    # Tuple packing
+    pt = 5, 6, "red"
+    pt[0]  # 5
+    pt[1]  # 6
+    pt[2]  # "red"
+
+    # multiple assignments, from a tuple
+    x, y, colour = pt  # sequence unpacking
+    a, b = 3, 4
+    a, b = b, a
+    
+---
+
+title: Cicli su liste: for
+
+code: python
+
+    shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+        
+    print("Your shopping list contains:")
+
+    for product in shopping_list:
+        print(product)
+    
+- Ad ogni iterazione, a `product` è assegnato un diverso elemento della lista `shopping_list`
+- Si può usare un ciclo `for` su qualsiasi sequenza, anche su una *stringa*
+
+---
+
+title: Funzioni su liste
+
+code: python
+
+    def limit_values(values, max_val):
+        # procedure: process data, no direct result
+        for i in range(len(values)):
+            if values[i] > max_val:
+                values[i] = max_val
+
+        # the pythonic way: for i, val in enumerate(values): ...
+
+    def main ():
+        data = [5, 4, 2]
+        limit_values(data, 4)
+        print(data)
+
+    main()
+    
+---
+
+title: Composizione
+class: segue dark
+
+---
+
+title: Lista di palline
+
+code: python
+
+    import g2d
+    from p3_ball import Ball, ARENA_W, ARENA_H
+
+    def update():
+        g2d.fill_canvas((255, 255, 255))  # BG
+        for b in balls:
+            b.move()
+            g2d.draw_rect((127, 127, 127), b.position())  # FG
+
+    balls = [Ball(40, 80), Ball(80, 40), Ball(120, 120)]
+    g2d.init_canvas((ARENA_W, ARENA_H))
+    g2d.main_loop(update, 1000 // 30)  # Millis
+
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_ball_anim.py>
+
+---
+
+title: Composizione
+figure: images/oop/ball-arena.svg
+
+- Associazione di tipo **has-a**, **part-of** tra oggetti
+    - Una *arena* può *contenere* diverse *palline*
+
+code: python
+
+    class BallArena:  # ...
+        def __init__(self):
+            self._balls = []
+        def add(self, b: Ball):
+            self._balls.append(b)
+        def move_all(self):
+            for b in self._balls:
+                b.move()
+
+code: python
+
+    arena = BallArena()
+    arena.add(Ball(40, 80)); arena.add(Ball(80, 40)) # ...
+    arena.move_all()
+
+---
+
+title: Relazione is-a
+figure: images/oop/inheritance.png
+
+- **Classificazione**, es. in biologia
+    - *Vertebrati* sottoclasse di *animali*
+    - *Mammiferi* sottoclasse di *vertebrati*
+    - *Felini* sottoclasse di *mammiferi*
+    - *Gatti* sottoclasse di *felini*
+- Relazione **is-a** tra classi: ogni sottoclasse...
+    - Eredita le caratteristiche della classe base
+    - Ma introduce delle specializzazioni
+- Noi definiremo una *classe base* come **interfaccia astratta**
+    - Tutti gli animali fanno un verso (*interfaccia*)
+    - Ogni animale fa un verso diverso (*polimorfismo*)
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_animals.py>
+
+---
+
+title: Interfacce astratte
+figure: images/oop/actors.svg
+
+- `Actor`: *interfaccia astratta*
+    - Dichiara un metodo `move`, senza implementarlo
+- Vari attori: *classi concrete*
+    - Realizzano i metodi di `Actor`, definendo i comportamenti specifici
+    - Possono definire ulteriori metodi
+
+code: python
+
+    class Actor:
+        def move(self):
+            raise NotImplementedError("Abstract method")
+
+---
+
+title: Generalizzazione e riuso
+
+code: python
+
+    class Arena:  # ...
+        def __init__(self, w, h):
+            self._w, self._h = w, h
+            self._actors = []
+        def add(self, a: Actor):
+            self._actors.append(a)
+        def move_all(self):
+            for a in self._actors:
+                a.move()
+        def size(self):
+            return self._w, self._h
+
+- Codice dipendente solo da *interfacce astratte*
+    - `Arena` riutilizzabile creando nuove *classi concrete*, che implementano `Actor`
+
+---
+
+title: Sostituzione
+figure: images/oop/actor.svg
+
+code: python
+
+    arena.add(Ball(40, 80))
+    arena.add(Ghost(120, 40)) # ...
+    arena.move_all()
+
+- Principio di **sostituzione** di Liskov
+    - Si può sempre usare un oggetto di una *classe derivata*, al posto di uno della *classe base*
+- Relazione *has-a* tra un oggetto `Arena` e gli oggetti `Actor` che contiene
+- Relazione *is-a* tra classi concrete (`Ball` e `Ghost`) e interfaccia (`Actor`)
+
+>
+
+<http://www.ce.unipr.it/brython/?actor.py>
+
+---
+
+title: Polimorfismo
+
+- **Metodo polimorfo**
+    - Dichiarato in una *interfaccia astratta*
+    - Implementato in forme diverse nelle *classi concrete*
+    - Attori diversi possono muoversi in modo diverso
+
+code: python
+
+    class Ghost(Actor):  # ...
+        def move(self):
+            dx = random.choice([-5, 0, 5])
+            dy = random.choice([-5, 0, 5])
+            self._x = (self._x + dx) % ARENA_W
+            self._y = (self._y + dy) % ARENA_H
+
+---
+
+title: Attori e arena
+
+code: python
+
+    class Ghost(Actor):
+    
+        def __init__(self, arena, x, y):
+            self._x, self._y = x, y
+            self._arena = arena  # save a ref to the arena
+            arena.add(self)      # register yourself into the arena
+            
+        def move(self):
+            dx = random.choice([-5, 0, 5])
+            dy = random.choice([-5, 0, 5])
+            arena_w, arena_h = self._arena.size()  # self._arena!
+            self._x = (self._x + dx) % arena_w
+            self._y = (self._y + dy) % arena_h
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_bounce.py>
+
+---
+
+title: Animazione dei personaggi
+class: segue dark
+
+---
+
+title:  Rimbalzi nel browser
+figure: images/oop/bounce.png
+
+code: python
+
+    import g2d
+    from p3_bounce import Arena, Ball, Ghost, Turtle
+
+    def update():
+        arena.move_all()  # Game logic
+        g2d.fill_canvas((255, 255, 255))  # Background
+        for a in arena.actors():
+            # Foreground; cut an area from a larger image
+            g2d.draw_image_clip(sprites, a.position(), a.symbol())
+
+    arena = Arena(320, 240)
+    Ball(arena, 40, 80);  Ball(arena, 80, 40);  Ghost(arena, 120, 80)
+    turtle = Turtle(arena, 80, 80)  # each actor knows the arena
+    g2d.init_canvas(arena.size())
+    sprites = g2d.load_image("sprites.png")
+    g2d.main_loop(update, 1000 // 30)  # Millis
+
+---
+
+title:  Controllo da tastiera
+figure: images/oop/bounce.png
+
+code: python
+
+    def keydown(code):
+        # print(code)
+        if code == "ArrowUp":
+            turtle.go_up()
+        elif code == "ArrowDown":
+            turtle.go_down()
+        elif code == "ArrowLeft":
+            turtle.go_left()
+        elif code == "ArrowRight":
+            turtle.go_right()
+
+    def keyup(code):
+        turtle.stay()
+
+    g2d.handle_keyboard(keydown, keyup)
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_bounce_anim.py>
+
+---
+
+title: Collisioni
+figure: images/oop/collision.svg images/oop/reflection.png
+
+- Molti algoritmi di *collision detection*
+    - Casi semplici: intersezione di rettangoli
+- In caso di collisione, `Arena`...
+    - Invoca il metodo `collide` di entrambi gli oggetti
+    - Collisione tra personaggio `self` e personaggio `other` (secondo parametro)
+- Possibili errori nel calcolo del rimbalzo
+    - Di solito accettabili
+    - Altrimenti, applicare correzioni
+    
+---
+
+title: Urti delle palline
+
+code: python
+
+    class Ball(Actor):
+        # ...
+        def collide(self, other):
+            if not isinstance(other, Ghost):
+                x, y, w, h = other.position()
+                if x < self._x:
+                    self._dx = self.SPEED
+                else:
+                    self._dx = -self.SPEED
+                # ... same for y
+
+- `isinstance(obj, cls)`
+    - Controlla se l'oggetto `obj` è istanza della classe `cls`
+    - ... o di una sua sottoclasse
+    - Restituisce un `bool`
+
+---
+
+title: Proprietà (++)
+
+- Permettono un accesso controllato allo stato
+
+code: python
+
+    class Ball:
+
+        @property  # a getter for the pos property
+        def pos(self) -> (int, int):
+            return self._x, self._y
+
+        # @pos.setter  # if you also really need a setter
+        # def pos(self, val: (int, int)):
+        #     self._x, self._y = val
+
+code: python
+
+    ball = Ball(40, 80)
+    print('ball @', ball.pos)
+    # ball.pos = (60, 20)   # with the setter, you could change the pos
+
+---
+
+title: Ciclo di vita di un oggetto (++)
+figure: images/dev/garbage-truck.jpg
+
+- Creazione di un oggetto: allocata memoria per tenere lo stato dell’oggetto
+- In Python: variabile = riferimento ad un oggetto
+    - *Oggetti*: *allocazione dinamica*, in memoria *heap*
+    - *Variabili*: *allocazione automatica*, in memoria *stack*
+- Oggetto non più associato a nessuna variabile: necessario liberare memoria
+- **Garbage collection**: gestione automatica della restituzione di memoria
+
+---
+
+title: Garbage collection (++)
+
+- Vantaggi
+    - Non è possibile dimenticare di liberare la memoria (*memory leak*)
+    - Non è possibile liberare della memoria che dovrà essere utilizzata in seguito (*dangling pointer*)
+- Svantaggi
+    - Decide autonomamente quando liberare la memoria
+    - Liberare e compattare la memoria richiede del calcolo
+- Diversi algoritmi
+    - *Reference counting*: idea di base, ma cicli…
+    - *Mark & sweep*: parte da riferimenti locali/globali, marca oggetti raggiungibili
+    - *Generational garbage collection*: controlla spesso oggetti recenti
+
+---
+
+title: Esercizi
+class: segue dark
+
+---
+
+title: 3.1 Conteggio cifre
+figure: images/misc/numbers.jpg
+
+- Chiedere una riga di testo all'utente
+- Contare il numero complessivo di cifre presenti (da `'0'` a `'9'`)
+- Valutare anche la somma di tutte le singole cifre trovate
+
+>
+
+Usare un ciclo `for` sulla stringa (sequenza di caratteri)
+
+---
+
+title: 3.2 Array, precalcolo
+figure: images/misc/sin-cos.png
+
+- Riempire una lista con i valori di `sin`
+    - 360 elementi, indice `x` tra 0 e 359
+- Poi, ciclicamente...
+	- Chiedere un angolo all'utente
+	- Visualizzare il corrispondente valore precalcolato del seno
+
+>
+
+`math.Sin` opera su radianti
+
+Calcolare `math.sin(x * math.pi / 180)`, anzichè `math.sin(x)`
+
+---
+
+title: 3.3 Istogramma con barre orizzontali
+figure: images/misc/histogram-rot.png
+
+- Chiedere all'utente una lista di valori positivi
+    - La lista termina quando l'utente inserisce il valore `0`
+- Mostrare un istogramma
+    - Larghezza di ciascuna barra proporzionale al valore corrispondente
+    - La barra più lunga occupa tutto lo spazio disponibile
+    
+---
+
+title: 3.4 Spirale
+figure: images/misc/spiral-circles.png
+
+- Mostrare l'*animazione* di un cerchio lungo una spirale
+- Ruotare attorno ad un centro fisso `(xc, yc)`
+- Amentare dist. `r` dal centro ad ogni passo
+- Cancellare lo sfondo ad ogni passo
+- Disegnare un cerchio sempre più grande
+- Dopo `n` passi, ricominciare daccapo
+
+---
+
+title: 3.5 Spirale
+figure: images/misc/spiral-circles.png
+
+- Mostrare l'*animazione* di un cerchio lungo una spirale
+- Realizzare una classe per gestire dati e comportamento del cerchio
+- Implementare il movimento in un metodo `move()` 
+- Campi: `xc`, `yc`, `i`
+    - `i` conta i passi; se accede il limite, torna a 0
+    
+---
+
+title: 3.6 Lista di alieni
+figure: images/misc/invaders-path.jpg
+
+- Riusare la classe `Alien` (es. 2.8)
+- Creare inizialmente una lista di alieni, con posizioni di partenza diverse
+    - Memorizzare la posizione di partenza di ciascun alieno in opportuni campi privati
+    - Lasciare a ciascun alieno uno spazio orizzontale di movimento di 150 pixel, a destra della posizione di partenza
+- Farli avanzare tutti ad ogni ciclo, chiamando il metodo `move` di ciascuno di essi
+
+---
+
+title: 3.7 Alieni nell'arena
+figure: images/misc/invaders-path.jpg
+
+- Riusare la classe `Invader` (es. 3.6)
+- Renderla una implementazione concreta di `Actor`
+    - Aggiungere i metodi `symbol` e `collide`, anche solo vuoti
+- Aggiungere gli alieni all'arena
+    - Nel metodo `__init__` chiamare `arena.add`
+    - Poi, in `update` chiamare `arena.move_all`
+

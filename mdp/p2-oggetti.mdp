@@ -1,0 +1,544 @@
+title: Funzioni e oggetti
+subtitle: Introduzione alla programmazione
+figure: images/fun/function.png
+
+---
+
+title: Definizione di funzioni
+figure: images/fun/function.png
+
+- *Operatore*, applicato a *operandi*, per ottenere un *risultato*
+    - **`def`** per definire una funzione
+    - **`return`** per terminare e restituire un risultato
+
+code: python
+
+    def hypotenuse(a, b):
+        c = (a ** 2 + b ** 2) ** 0.5
+        return c
+
+---
+
+title: Chiamata di funzioni
+
+- **`def`** definisce una funzione, ma non la esegue!
+- Bisogna *chiamarla*
+- Funzione, quando eseguita, crea nuovo *spazio di nomi*
+    - Parametri e variabili hanno **ambito locale**
+    - Non visibili nel resto del programma
+    - Nomi uguali, definiti in ambiti diversi, restano distinti
+    
+code: python
+
+    side1 = float(input('1st side? '))
+    side2 = float(input('2nd side? '))
+    side3 = hypotenuse(side1, side2)
+    print('3rd side:', side3)
+
+---
+
+title: Funzione main
+
+- A volte si preferisce creare una *funzione principale*
+    - In questo modo si limitano le **variabili globali**
+
+code: python
+  
+    # def hypotenuse ...
+
+    def main():
+        side1 = float(input("1st side? "))
+        side2 = float(input("2nd side? "))
+        side3 = hypotenuse(side1, side2)
+        print("3rd side:", side3)
+
+    main()  ## remove, if importing the module elsewhere
+
+>
+
+<http://www.ce.unipr.it/brython/?p2_hypotenuse.py>
+    
+---
+
+title: Parametri di funzioni
+
+- **Parametri formali**: nomi usati nella *definizione*
+- **Parametri effettivi**: oggetti passati alla funz.
+- Parametri passati “*per oggetto*”;
+    - Variabili all'esterno: non vengono modificate
+    - Liste e oggetti passati ad una funz.: modifiche *permanenti*
+- Si possono restituire più valori, come *tupla*
+    - `return 7, 5, 'black'`
+
+code: python
+
+    def inc(a):
+        a += 1
+        print(a)  # just for debug
+    x = 10
+    inc(x)
+    print(x)      # just for debug
+
+---
+
+title: Documentazione di funzioni
+
+- **Annotazioni**: utili per documentare il tipo di param. e valore di ritorno (ma non c'è verifica!)
+- **Docstring**: descrizione testuale di una funzione
+- **`help`**: funzione per visualizzare la documentazione
+
+code: python
+
+    def hypotenuse(cathetus1: float, cathetus2: float) -> float:
+        '''
+        Return the hypotenuse of a right triangle,
+        given both its legs (catheti).
+        '''
+        return (cathetus1 ** 2 + cathetus2 ** 2) ** 0.5
+
+---
+
+title: Cicli e annidamento
+figure: images/fun/multiplication-table.jpg
+
+code: python
+
+    MAX = 10
+    y = int(input("Insert a value: "))
+    for x in range(1, MAX + 1):
+        print(x * y, end = " ")
+        # inserts a space, instead of a newline
+    
+code: python
+
+    MAX = 10
+    for y in range(1, MAX + 1):
+        for x in range(1, MAX + 1):
+            val = x * y
+            print(val, end = " ")
+        print()
+    
+Per fare in modo che ciascun valore richieda almeno 3 caratteri:
+<br>
+`val = "{:3}".format(x * y)`
+
+>
+
+<http://www.ce.unipr.it/brython/?p2_tables.py>
+
+---
+
+title: Procedure
+figure: images/fun/multiplication-table.jpg
+
+- *Procedura*: funzione senza `return`, solo I/O ed effetti collaterali
+	- Può essere riutilizzata (*astrazione*)
+    - Riduce i livelli di annidamento
+
+code: python
+
+    def print_raw(y: int, last: int):
+        for x in range(1, last + 1):
+            val = "{:3}".format(x * y)
+            print(val, end=" ")
+        print()
+    
+    def print_table(last: int):
+        for y in range(1, last + 1):
+            print_raw(last)
+
+    def main():
+        print_table(10)
+
+---
+
+title: Animazione
+
+code: python
+
+    import g2d
+
+    def update():
+        global x
+        g2d.fill_canvas((255, 255, 255))  # Draw background        
+        g2d.draw_image(image, (x, 50))    # Draw foreground
+        x = (x + 5) % 320                    # Update ball's position
+
+    g2d.init_canvas((320, 240))
+    image = g2d.load_image("ball.png")
+    x = 50
+
+    g2d.main_loop(update, 1000 // 30)   # Call update 30 times/second
+
+---
+
+title: Eventi della tastiera
+
+code: python
+
+    import g2d
+
+    def keydown(code: str):
+        print("Key pressed: ", code)
+
+    def keyup(code: str):
+        print("Key released: ", code)
+
+    g2d.handle_keyboard(keydown, keyup)
+
+<https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
+
+>
+
+<http://www.ce.unipr.it/brython/?p2_anim.py>
+    
+---
+
+title: Modulo main (++)
+
+- Nome del modulo in esecuzione: `__name__`
+    - É il nome del file, senza estensione
+- Il modulo di avvio dell'app ha nome speciale
+    - In *CPython*, nome `"__main__"`
+    - In *Brython* nome `"script..."`; il “trucco” non funziona
+
+code: python
+  
+    # def hypotenuse ...
+    def main():
+        side1 = float(input("1st side? "))
+        side2 = float(input("2nd side? "))
+        print("3rd side:", hypotenuse(side1, side2))
+
+    # if this module is imported, main is not executed
+    if __name__ == "__main__":
+        main()
+    
+---
+
+title: Effetti collaterali (++)
+
+- Modifica di oggetti passati come parametri o variabili globali, operazioni di lettura/scrittura...
+- Annullano la **trasparenza referenziale**
+    - Impossibile semplificare, sostituendo una chiamata a funzione col suo valore di ritorno (es. presenti operazioni di I/O)
+- Rendono la funzione **non idempotente**
+    - Chiamata più volte, con gli stessi parametri, restituisce risultati diversi
+- → Difficile fare verifiche matematiche
+    - `z = f(sqrt(2), sqrt(2))`
+    - `s = sqrt(2)` <br> `z = f(s, s)`
+
+---
+
+title: Funzioni non idempotenti (++)
+
+- Esempio di semplificazione
+    - `p = rq(x) + rq(y) * (rq(x) – rq(x))`
+    - `p = rq(x) + rq(y) * (0)`
+    - `p = rq(x) + 0`
+    - `p = rq(x)`
+- Ma se `rq` ha effetti collaterali, non si può!
+
+code: python
+
+    base_value = 0  # global variable
+
+    def rq(x: int) -> int:
+        global base_value
+        base_value += 1
+        return x + base_value
+
+>
+
+Se `x, y = 3, 4`, ad esempio, i due risultati sono `-2` e `4`
+
+---
+
+title: Oggetti
+class: segue dark
+
+---
+
+title: Oggetto
+figure: images/oop/basic-object.svg
+
+- Rappresenta un *oggetto fisico* o un *concetto* del dominio
+- Memorizza il suo **stato** interno in *campi privati*
+    - *Incapsulamento (black box)*
+- Offre un insieme di **servizi**, come *metodi pubblici*
+    - Realizza un *tipo di dato astratto (ADT)*
+
+---
+
+title: Classi ed oggetti
+figure: images/oop/cookie-cutter.png
+
+- Ogni *oggetto* ha una **classe** di origine
+    - La classe dà la stessa forma iniziale (campi e metodi) a tutti i suoi oggetti
+- Ma ogni *oggetto* ha la sua **identità** 
+    - Stato e locazione in memoria distinti da quelli di altri oggetti
+    - Sia instanze di classi diverse che della stessa classe
+
+---
+
+title: Definizione della classe
+figure: images/oop/ball-object.svg images/oop/ball-uml.svg
+figcaption: Class diagram UML
+
+- **Incapsulamento** dei dati: *convenzione* sui nomi
+    - Prefisso `_` per i nomi dei *campi privati*
+
+> Siamo tutti adulti consenzienti. *(GvR)*
+      
+code: python
+
+    class Ball:
+
+        def __init__(self, x: int, y: int):
+            self._x = x
+            self._y = y
+            self._dx = 5
+            self._dy = 5
+            self._w = 20
+            self._h = 20
+        # ...
+
+---
+
+title: Costruzione oggetti
+figure: images/oop/bob-builder.jpg
+
+- **`__init__`**: metodo *inizializzatore*
+    - Eseguito automaticamente alla creazione di un oggetto
+    - *Instantiation is initialization*
+- **`self`**: primo parametro di tutti i metodi
+    - Non bisogna passare un valore esplicito
+    - Assegnato l'oggetto di cui si chiama il metodo
+    - Permette ai metodi di accedere ai campi
+
+code: python
+
+    ball = Ball(40, 80)  # Allocation and initialization
+
+---
+
+title: Metodi
+
+- Espongono *servizi* ad altri oggetti
+
+code: python
+
+    ARENA_W, ARENA_H = 320, 240
+
+    class Ball:
+        # ...
+        def move(self):
+            if not (0 <= self._x + self._dx <= ARENA_W - self._w):
+                self._dx = -self._dx
+            if not (0 <= self._y + self._dy <= ARENA_H - self._h):
+                self._dy = -self._dy
+            self._x += self._dx
+            self._y += self._dy
+
+        def position(self) -> (int, int, int, int):
+            return self._x, self._y, self._w, self._h
+
+---
+
+title: Applicazione
+
+code: python
+
+    from p3_ball import Ball  # Ball is defined in p3_ball.py
+
+    # Create two objects, instances of the Ball class
+    b1 = Ball(40, 80)
+    b2 = Ball(80, 40)
+
+    for i in range(25):
+        print('Ball 1 @', b1.position())
+        print('Ball 2 @', b2.position())
+        b1.move()
+        b2.move()
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_ball.py>
+
+---
+
+title: Il primo parametro, self
+
+- Il primo parametro di ogni metodo si chiama `self` (per convenzione)
+- L'oggetto, di cui viene invocato il metodo, viene assegnato come valore di `self`
+- In Python, una chiamata a metodo è interpretata così:
+
+code: python
+
+    b1 = Ball(40, 80)
+    b1.move()
+    
+code: python
+
+    b1 = Ball(40, 80)  # also, automatically call
+                       # Ball.__init__(b1, 40, 80)
+    Ball.move(b1)
+
+**Nota.** Meglio usare la prima notazione, che evidenzia l'*oggetto* anzichè la classe!
+
+---
+
+title: Animazione di due palline
+
+code: python
+
+    import g2d
+    from p3_ball import Ball, ARENA_W, ARENA_H
+
+    def update():
+        g2d.fill_canvas((255, 255, 255))  # BG
+        b1.move()
+        b2.move()
+        g2d.draw_rect((127, 127, 127), b1.position())  # FG
+        g2d.draw_rect((127, 127, 127), b2.position())  # FG
+
+    b1 = Ball(40, 80)
+    b2 = Ball(80, 40)
+    g2d.init_canvas((ARENA_W, ARENA_H))
+    g2d.main_loop(update, 1000 // 30)  # Millis
+
+---
+
+title: Variabili locali, parametri, campi
+
+- *Campi*: memorizzano i dati caratteristici di una istanza
+    - Ogni pallina ha la sua posizione `(x, y)` e la sua direzione `(dx, dy)`
+- *Parametri*: passano altri valori ad un metodo
+    - Se alcuni dati necessari non sono nei campi
+- *Variabili locali*: memorizzano risultati parziali
+    - Generati durante l'elaborazione del metodo
+    - Nomi cancellati dopo l'uscita dal metodo
+- *Variabili globali*: definite fuori da tutte le funzioni
+    - Usare sono se strettamente necessario
+    - Meglio avere qualche parametro in più, per le funzioni
+
+---
+
+title: Esercizi
+class: segue dark
+
+---
+
+title: 2.1 Area di un'ellisse
+figure: images/misc/ellipse.svg
+
+- Definire una *funzione* `ellipse_area` che:
+    - Riceve come *parametri* i semiassi di una ellisse: `a`, `b`
+    - Restituisce come risultato l'area dell'ellisse: `π⋅a⋅b`
+- Definire una *funzione* `main` che:
+    - Chiede all'utente due valori
+    - Invoca la funzione `ellipse_area` con questi parametri
+    - Stampa il risultato ottenuto
+
+---
+
+title: 2.2 Cerchi concentrici
+figure: images/misc/red-circles.png
+
+- Chiedere all'utente il numero di cerchi da disegnare
+- Disegnare i cerchi con raggio decrescente, ma tutti con lo stesso centro
+- Far variare il colore dei cerchi
+	  - Dal rosso del livello più esterno
+	  - Fino al nero del livello più interno
+
+>
+
+Cominciare a disegnare un grosso cerchio rosso
+
+Poi, inserire l'operazione di disegno un ciclo, togliendo ad ogni passo `10` (p.es.) al raggio e al livello di rosso
+
+Infine, determinare automaticamente, prima del ciclo, le variazioni migliori per raggio e colore
+
+---
+
+title: 2.3 Griglia di colori (*)
+figure: images/misc/color-grid.png images/oop/raster-tile.png
+
+- Chiedere all'utente dei valori per `rows` e `cols`
+- Mostrare una griglia di rettangoli di dimensione `rows×cols`
+- Partire da un rettangolo nero in alto a sinistra
+- In orizzontale, aumentare gradatamente la componente di blu
+- In verticale, aumentare gradatamente la componente di verde
+
+>
+
+Cominciare a creare una griglia di riquadri tutti neri, con due cicli `for` annidati
+
+Lasciare tra i riquadri un piccolo margine
+
+---
+
+title: 2.4 Movimento orizzontale
+figure: images/misc/street-fighter.jpg
+
+- Mostrare una pallina che si muove in orizzontale
+- La pallina rimbalza sui bordi
+    - Memorizzare in una variabile `dx` lo spostamento orizzontale da effettuare ad ogni ciclo
+    - Cambiare segno a `dx` quando `x < 0` oppure `x + w > screen_width`
+
+---
+
+title: 2.5 Movimento a serpentina
+figure: images/misc/science-of-spaceships.jpg
+
+- Mostrare una pallina che si muove a serpentina
+- Partire dall'esercizio precedente
+    - Al momento del rimbalzo, imporre un spostamento verticale
+    - Fare in modo che, in ogni frame, lo spostamento sia solo orizzontale, o solo verticale, ma *non* diagonale
+
+---
+
+title: 2.6 Ellisse
+figure: images/misc/ellipse.svg
+
+- Classe che modella un'ellisse
+- Campi privati (parametri del costruttore)
+    - Semiassi: `a, b`
+- Metodi pubblici per ottenere...
+    - Area: `π⋅a⋅b`
+    - Distanza focale: `2⋅√|a^^2^^ - b^^2^^|`
+- Nel corpo principale del programma...
+    - Creare un oggetto con dati forniti dall'utente
+    - Visualizzare area e distanza focale dell'ellisse
+
+---
+
+title: 2.7 Animazione di una pallina
+figure: images/misc/street-fighter.jpg
+
+- Partire dalla classe `Ball` vista a lezione
+- Eseguire l'animazione
+    - Per ogni frame, chiamare il metodo `move` della pallina
+    - Rappresentare un rettangolo o un cerchio nella posizione aggiornata della pallina
+- Modificare però il metodo `move`
+    - La pallina si sposta sempre di pochi pixel in orizzontale
+    - La pallina non si sposta verticalmente
+    - Se esce dal bordo destro, ricompare al bordo sinistro e viceversa
+
+---
+
+title: 2.8 Classe degli alieni
+figure: images/misc/invaders-path.jpg
+
+- Creare una classe `Alien`, che contenga i dati ed il comportamento dell'alieno
+    - Campi privati: `x`, `y`, `dx`
+    - Metodo `move` per avanzare
+    - Metodo `position` per ottenere la posizione attuale
+- Istanziare un oggetto `Alien` e farlo muovere sullo schermo
+    - Chiamare il metodo `move` ad ogni ciclo
+    - Visualizzare un rettangolo nella posizione corrispondente
+
+>
+
+Definire nella classe delle opportune costanti
+
+

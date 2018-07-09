@@ -27,13 +27,208 @@ URL: https://code.google.com/p/io-2012-slides
   <aside class="gdbar"><img src="images/logo.png"></aside>
   <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
   <h1 data-config-title><!-- populated from slide_config.json --></h1>
-  <figure><img src="images/oop/tk-logo.svg"></figure>
+  <figure><img src="images/oop/tk-logo.svg"><img src="images/misk/pygame.png"></figure>
   <hgroup>
     <h2>Introduzione alla programmazione</h2>
     <p>Michele Tomaiuolo<br>Ingegneria dell'Informazione, UniPR</p>
   </hgroup>
 </slide>
 
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>PyGame</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Grafica con PyGame (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/pygame-logo.png"><img src="images/oop/pygame-loop.png">
+        
+      </figure><ul>
+<li>Libreria per giochi 2D</li>
+<li>Grafica e suoni</li>
+<li>Su <em>SDL</em> - Simple DirectMedia Layer</li>
+<li>Semplice e veloce</li>
+<li>Open-source</li>
+<li>Multi-piattaforma</li>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.pygame.org/">pygame.org</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Disegno con PyGame (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/pygame-logo.png"><img src="images/oop/raster-coord.png">
+        <figcaption>→ pygame.org/docs</figcaption>
+      </figure><pre class="prettyprint" data-lang="python"><code>import pygame
+pygame.init()                     # Prepare pygame
+screen = pygame.display.set_mode((640, 480)) # (w, h)
+screen.fill((255, 255, 255))      # BG (Red, Green Blue)
+
+# Yellow rectangle, left=50, top=75, w=90, h=50
+pygame.draw.rect(screen, (255, 255, 0), (50, 75, 90, 50))
+
+# Blue circle, center=(300, 50), radius=20
+pygame.draw.circle(screen, (0, 0, 255), (300, 50), 20)
+
+pygame.display.flip()             # Update the screen
+while pygame.event.wait().type != pygame.QUIT:
+    pass
+pygame.quit()
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Animazione con PyGame (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>import pygame
+pygame.init()                     # Prepare pygame
+screen = pygame.display.set_mode((320, 240))
+clock = pygame.time.Clock()       # To set game speed
+image = pygame.image.load('ball.png')
+
+x = 50; playing = True
+while playing:
+    for e in pygame.event.get():  # Handle events: mouse, keyb etc.
+        if e.type == pygame.QUIT: playing = False
+    screen.fill((255, 255, 255))  # Draw background        
+    screen.blit(image, (x, 50))   # Draw foreground
+    x = (x + 5) % 320             # Update ball's position
+    pygame.display.flip()         # Surface ready, show it!
+    clock.tick(30)                # Wait 1/30 seconds
+pygame.quit()                     # Close the window
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ciclo di animazione (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>import pygame
+pygame.init()                     # Prepare pygame
+screen = pygame.display.set_mode((320, 240))
+clock = pygame.time.Clock()       # To set game speed
+image = pygame.image.load('ball.png')
+
+x = 50; playing = True
+while playing:
+    for e in pygame.event.get():  # Handle events: mouse, keyb etc.
+        if e.type == pygame.QUIT: playing = False
+    screen.fill((255, 255, 255))  # Draw background        
+    screen.blit(image, (x, 50))   # Draw foreground
+    x = (x + 5) % 320             # Update ball's position
+    pygame.display.flip()         # Surface ready, show it!
+    clock.tick(30)                # Wait 1/30 seconds
+pygame.quit()                     # Close the window
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Rimbalzi in PyGame (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/bounce.png">
+        
+      </figure><pre class="prettyprint" data-lang="python"><code>arena = Arena(320, 240)
+Ball(arena, 40, 80); Ball(arena, 80, 40); 
+Ghost(arena, 120, 80) # ...
+# a map from an actor type to an image
+images = {Ball: pygame.image.load('ball.png'),
+          Ghost: pygame.image.load('ghost.png')}
+screen = pygame.display.set_mode(arena.size())
+playing = True
+while playing:
+    # Handle events here!
+
+    arena.move_all()             # Game logic
+    screen.fill((255, 255, 255)) # Background
+    for a in arena.actors():
+        x, y, w, h = a.position()
+        img = images[type(a)]
+        screen.blit(img, (x, y)) # Foreground [...]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Tastiera e mouse (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>from pygame.locals import (KEYDOWN, KEYUP, K_RIGHT, K_d,
+    MOUSEBUTTONDOWN, MOUSEBUTTONUP, MOUSEMOTION)
+# ...
+for e in pygame.event.get():
+    # print(e)
+    if e.type == KEYDOWN and e.key in (K_RIGHT, K_d):
+        print('Right arrow (or D) pressed')
+    elif e.type == KEYUP and e.key in (K_RIGHT, K_d):
+        print('Right arrow (or D) released')
+    elif e.type == MOUSEBUTTONDOWN and e.button == 1:
+        print('Left mouse button pressed')
+    elif e.type == MOUSEBUTTONUP and e.button == 1:
+        print('Left mouse button released')
+    elif e.type == MOUSEMOTION:
+        print 'Mouse at (%d, %d)' % e.pos
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Testo e suoni (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code># Red (anti-aliased) text, centered, rotated 30° ccw
+font = pygame.font.SysFont('arial', 48)
+surface = font.render('Game over!', True, (255, 0, 0))
+surface = pygame.transform.rotate(surface, 30)
+x = (screen.get_width() - surface.get_width()) // 2
+y = (screen.get_height() - surface.get_height()) // 2
+screen.blit(surface, (x, y))  # surface ~ image
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code># Some sound
+pick_up_sound = pygame.mixer.Sound('pickup.wav')
+pick_up_sound.play()  # play(-1) to loop, then stop()
+</code></pre></article>
+ 
+</slide>
 
 <slide  >
   

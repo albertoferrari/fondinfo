@@ -429,13 +429,13 @@ figcaption: → brython.info
 
 - *Transpiler*: converte codice Python in JavaScript
     - Sia traduttore che codice generato girano nel *browser*
-- Useremo un modulo *ad-hoc*: `game2d`
+- Useremo un modulo *ad-hoc*: `g2d`
     - Genera html e lancia web-server locale
     - Definisce funzioni di disegno
 
 >
 
-Servono i file `brython_dist.js` e `game2d.py`, in `examples`: <br>
+Per l'esecuzione locale, copiare nella carella di lavoro il file `g2d.py`, da `examples`: <br>
 <https://github.com/tomamic/fondinfo/archive/master.zip>
 
 ---
@@ -484,6 +484,47 @@ code: python
 <http://www.ce.unipr.it/brython/?p1_draw.py>
 
 <http://www.ce.unipr.it/brython/?p1_red_squares.py>
+
+---
+
+title: Intervalli di valori: range
+figure: images/algo/sum10.svg
+
+- **`range`**: intervallo di valori aperto a destra
+    - Estremo inferiore *incluso*
+    - Estremo superiore *escluso*
+    - Iterabile con un ciclo `for`
+
+code: python
+
+    # Add up numbers from 1 to 10
+       
+    total = 0
+    for i in range(1, 11):
+        total += i
+
+    # total = 0;  i = 1
+    # while i < 11:
+    #     total += i;  i += 1
+    
+---
+
+title: Sequenza di quadrati
+figure: images/misc/red-squares.png
+
+code: python
+
+    import g2d
+
+    g2d.init_canvas((300, 300))
+
+    for i in range(5):  ## range(0, 5)
+        x = i * 40
+        y = x
+        red = i * 60
+        g2d.draw_rect((red, 0, 0), (x, y, 140, 140))
+
+    g2d.main_loop()
 
 ---
 
