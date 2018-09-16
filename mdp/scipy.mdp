@@ -1,0 +1,896 @@
+title: Python for data analysis
+subtitle: NumPy, Pandas, PyPlotLib
+figure: images/oop/modules.png
+
+---
+
+title: Lista
+figure: images/fun/month-list.svg
+
+- Sequenza di elementi, *di solito* dello stesso **tipo**
+    - L'intera lista può essere assegnata ad una variabile, così diamo un **nome** alla lista
+- I singoli elementi sono **numerati**
+    - Gli indici partono da 0!
+
+code: python
+
+    to_buy = ["spam", "eggs", "beans"]
+
+code: python
+
+    rainfall_data = [13, 24, 18, 15]
+
+code: python
+
+    months = ["Jan", "Feb", "Mar",
+              "Apr", "May", "Jun",
+              "Jul", "Aug", "Sep",
+              "Oct", "Nov", "Dec"]
+
+---
+
+title: Accesso agli elementi
+figure: images/fun/wile-coyote.png
+
+- **Attenzione ad usare indici validi!**
+    - *Lunghezza* attuale di una lista `x`: `len(x)`
+    - Elementi *numerati* da `0` a `len(x)-1`
+    - Indici *negativi* contano dalla fine
+
+code: python
+
+    n = len(months)            # 12
+    months[3]                  # "Apr"
+    months[-2]                 # "Nov", same as n - 2
+
+code: python
+
+    to_buy = ["spam", "eggs", "beans"]
+
+    to_buy[1] = "ketchup"      # replace an element
+
+---
+
+title: Appartenenza, inserimento, rimozione
+figure: images/fun/shopping-list.jpg
+
+code: python
+
+    to_buy = ["spam", "eggs", "beans"]
+
+    "eggs" in to_buy           # True, to_buy contains "eggs"
+
+code: python
+
+    to_buy.append("bacon")     # add an element to the end
+    to_buy.pop()               # remove (and return) last element
+
+    to_buy.insert(1, "bacon")  # other elements shift
+    removed = to_buy.pop(1)    # remove (and return) element at index
+    # del to_buy[1]            # only remove element at index
+
+    to_buy.remove("eggs")      # remove an element by value
+
+---
+
+title: Slice: porzioni di lista
+
+code: python
+
+    spring = months[2:5]       # ["Mar", "Apr", "May"]
+    quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
+    quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
+    but_spring = months[:]     # Copy the whole list
+    del but_spring[2:5]        # Remove spring months
+
+code: python
+
+    list1 = ["spam", "eggs", "beans"]
+    list2 = ["sausage", "mushrooms"]
+    to_buy = list1 + list2     # List concatenation
+
+code: python
+
+    so_boring = [1, 2] * 3     # List repetition:
+                               # [1, 2, 1, 2, 1, 2]
+    results_by_month = [0] * 12
+
+---
+
+title: Uguaglianza e identità
+
+code: python
+
+    a = [3, 4, 5]
+    b = a[:]       # b = [3, 4, 5] -- a new list!
+    b == a         # True, they contain the same values
+    b is a         # False, they are two objects in memory
+                   # (try and modify one of them...)
+    c = a
+    c is a         # True, same object in memory
+                   # (try and modify one of them...)
+
+---
+
+title: Stringhe e liste
+
+- **Stringa**: sequenza *immutabile* di caratteri
+- **`join`** e **`split`**: da lista a stringa e viceversa
+
+code: python
+
+    txt = "Monty Python's Flying Circus"
+    txt[0]    # 'M'
+    txt[1]    # 'o'
+    txt[-1]   # 's'
+    txt[6:12] # "Python"
+    txt[-6:]  # "Circus"
+
+    days = ["tue", "thu", "sat"]
+    txt = "|".join(days)  # "tue|thu|sat"
+
+    days = "mon|wed|fri".split("|")
+    # ["mon", "wed", "fri"]
+
+---
+
+title: Tupla
+
+- Sequenza **immutabile** di valori, anche di *tipo diverso*
+
+code: python
+
+    # Tuple packing
+    pt = 5, 6, "red"
+    pt[0]  # 5
+    pt[1]  # 6
+    pt[2]  # "red"
+
+    # multiple assignments, from a tuple
+    x, y, colour = pt  # sequence unpacking
+    a, b = 3, 4
+    a, b = b, a
+
+---
+
+title: Cicli su liste: for
+
+code: python
+
+    shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+
+    print("Your shopping list contains:")
+
+    for product in shopping_list:
+        print(product)
+
+- Ad ogni iterazione, a `product` è assegnato un diverso elemento della lista `shopping_list`
+- Si può usare un ciclo `for` su qualsiasi sequenza, anche su una *stringa*
+
+---
+
+title: Funzioni su liste
+
+code: python
+
+    def limit_values(values, max_val):
+        # procedure: process data, no direct result
+        for i in range(len(values)):
+            if values[i] > max_val:
+                values[i] = max_val
+
+        # the pythonic way: for i, val in enumerate(values): ...
+
+    def main ():
+        data = [5, 4, 2]
+        limit_values(data, 4)
+        print(data)
+
+    main()
+
+---
+
+title: List comprehension
+figure: images/misc/ninjago-green.jpg
+
+- Modo conciso per creare una lista
+- Ogni elemento: risultato di una operazione su un membro di altro iterabile
+- Condizione sugli elementi, opzionale
+
+code: python
+
+    squares = [x ** 2 for x in range(12)]
+    # squares = []
+    # for x in range(12):
+    #    squares.append(x ** 2)
+
+code: python
+
+    even_nums = [str(x) for x in range(12) if (x % 2) == 0]
+
+---
+
+title: Enumerate
+figure: images/repr/child-fingers.png
+
+- Accoppia ciascun valore di una sequenza ad un indice crescente
+- Genera una sequenza di tuple (coppie)
+- Spesso si usa nei cicli `for`, quando serve sia il valore che l'indice
+
+code: python
+
+    >>> shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+    >>> list(enumerate(shopping_list))
+    [(0, "spam"), (1, "eggs"), (2, "bacon"), (3, "ketchup")]
+
+code: python
+
+    shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+    for i, val in enumerate(shopping_list):
+        print(i, val)
+
+Risultati in lista, solo (!) per visualizzarli <br>
+Altrimenti, Python non genera immediatamente i risultati (*lazy*)
+
+---
+
+title: Zip
+figure: images/fun/zip.jpg
+
+- Accoppia gli elementi di due sequenze
+- Genera una sequenza di tuple (coppie)
+- Il risultato ha la lunghezza della sequenza più breve
+
+code: python
+
+    >>> shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+    >>> quantities = ["100 g", "6 pc", "200 g", "1 bottle", "too much"]
+    >>> list(zip(shopping_list, quantities))
+    [("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
+    ("ketchup", "1 bottle")]
+
+Risultati in lista, solo (!) per visualizzarli
+
+---
+
+title: Map
+figure: images/fun/legomap.png
+
+- Prende come parametri una funzione ed una sequenza
+- *Funzione di ordine superiore*
+- Applica la funzione a ciascuno dei valori
+- Restituisce la sequenza di risultati
+
+code: python
+
+    >>> from math import sqrt
+    >>> values = [0, 1, 2, 3, 4]
+    >>> list(map(sqrt, values))
+    [0.0, 1.0, 1.4142, 1.7320, 2.0]
+
+code: python
+
+    >>> from math import sqrt
+    >>> list(map(sqrt, range(5)))
+    [0.0, 1.0, 1.4142, 1.7320, 2.0]
+
+Risultati in lista, solo (!) per visualizzarli
+
+---
+
+title: Dizionario
+figure: images/fun/dictionary.png
+
+- A volte chiamato *mappa* o *array associativo*
+- Insieme non ordinato di coppie chiave / valore
+    - Le chiavi sono *uniche*: come nelle liste fanno da *indice* per accedere al valore corrispondente
+    - Ma possono essere `int` o **`str`** (o altro tipo immutabile)
+
+code: python
+
+    >>> tel = {"john": 4098, "terry": 4139}
+    >>> tel["john"]
+    4098
+    >>> tel["graham"] = 4127
+    >>> tel
+    {"graham": 4127, "terry": 4139, "john": 4098}
+
+Provare anche `list(tel)` e `list(tel.items())`
+
+---
+
+title: Liste multidimensionali
+- Liste di liste di ...
+    - Accesso agli elementi: due o più indici (o *dimensioni*)
+    - Se bidimensionali, denominate *matrici*
+
+code: python
+
+    a = [['A', 'B', 'C', 'D'],
+         ['E', 'F', 'G', 'H'],
+         ['I', 'L', 'M', 'N']]          # 2D
+
+    b = ['A', 'B', 'C', 'D',
+         'E', 'F', 'G', 'H',
+         'I', 'L', 'M', 'N']            # 1D
+
+    i = y * cols + x                    # 2D -> 1D
+
+    y = i // cols
+    x = i % cols                        # 1D -> 2D
+
+---
+
+title: Somma colonne: matrice
+
+code: python
+
+    matrix = [[2, 4, 3, 8],
+              [9, 3, 2, 7],
+              [5, 6, 9, 1]]
+    rows = len(matrix)
+    cols = len(matrix[0])
+
+    for x in range(cols):
+        total = 0
+        for y in range(rows):
+            val = matrix[y][x]
+            total += val
+        print("Col #", x, "sums to", total)
+
+---
+
+title: Lista come pseudo-matrice
+
+code: python
+
+    matrix = [2, 4, 3, 8,
+              9, 3, 2, 7,
+              5, 6, 9, 1]
+    rows = 3  # Cannot be guessed from matrix alone
+    cols = len(matrix) // rows
+
+    for x in range(cols):
+        total = 0
+        for y in range(rows):
+            val = matrix[y * cols + x]   # 2D -> 1D
+            total += val
+        print("Col #", x, "sums to", total)
+
+---
+
+title: Matrici di dimensioni note
+
+code: python
+
+    matrix = [[' ' for x in range(cols)] for y in range(rows)]
+    # all elements are inited as ' ' -- your need may vary
+
+code: python
+
+    matrix = []
+    for y in range(rows):
+        new_row = []
+        for x in range(cols):
+            new_row.append(' ')
+        matrix.append(new_row)
+
+---
+
+title: Flussi di dati
+figure: images/fun/magnetic-tape.png
+
+- **Stream**: astrazione per flussi di informazione
+    - Lettura o scrittura di informazioni su *qualunque* dispositivo I/O (*file, ma non solo*)
+- **File di testo**
+    - Varie codifiche (*UTF-8* o altro)
+    - Conversioni automatiche, es. `"\n"` → `"\r\n"`
+- **File binari**
+    - I/O preciso byte a byte, senza nessuna conversione
+    - Qualsiasi file... anche di testo!
+
+---
+
+title: Scrittura su file
+
+- Funzione `open` per accedere ad un file (di testo)
+    - Modalità scrittura o lettura: `"w"`, o `"r"`
+- Scrittura su file: funzione `print`, o metodo `write`
+- Blocco `with`: chiude il file al termine delle operazioni (anche in caso di errore)
+
+code: python
+
+    with open("some_file.txt", "w") as f1:
+        f1.write("First line\n")   # explicit newline
+        f1.write("Second line\n")  # continue writing here...
+
+    with open("other_file.txt", "w") as f2:
+        for x in range(10):
+            print(x, x ** 2, file=f2)
+
+---
+
+title: Lettura da file
+
+code: python
+
+    with open("some_file.txt", "r") as f1:
+        first_line = f1.readline()
+        second_line = f1.readline()
+        # both strings contain '\n' at the end
+        # at end of file, an empty string is read
+
+    with open("other_file.txt", "r") as f2:
+        whole_text = f2.read()
+        # do stg with whole_text
+
+    with open("last_file.txt", "r") as f3:
+        for line in f3:
+            # line contains '\n' at the end
+            # strip() removes withespaces at both ends
+            print(line.strip(), ':', len(line))
+
+---
+
+title: I/O su stringhe e console
+
+- Stringhe come stream: `io.StringIO`
+- Console come stream: `sys.stdin`, `sys.stdout`, `sys.stderr`
+
+code: python
+
+    import io, sys
+
+    with io.StringIO() as output:
+        output.write("First line.\n")
+        print("Second line.", file=output)
+        # Retrieve stream contents, i.e. "First line.\nSecond line.\n"
+        contents = output.getvalue()
+        sys.stdout.write(contents)
+
+code: python
+
+    for line in sys.stdin:  # CTRL-D (Lin) or CTRL-Z (Win) to end the input
+        print(len(line))    # notice '\n' at the end
+
+---
+
+title: Errori da file
+figure: images/fun/garbled-tape.png
+
+- **Eccezioni**: per gestire separatamente i casi inattesi
+    - Errore all'interno di `try`: esecuzione interrotta subito
+    - Eseguito il blocco `except` che gestisce il tipo di errore verificatosi (possibile avere diversi blocchi `except`)
+    - Il blocco `with` assicura la chiusura del file
+
+code: python
+
+    try:
+        with open("other_file.txt", "r") as f:
+            whole_text = f.read()
+            # do stg with whole_text
+    except IOError as err:
+        print("Oh, my!")
+
+---
+
+title: Liste in memoria
+class: large-image
+
+![](images/fun/python-list-list.svg)
+
+---
+
+title: Number crunching in Python
+
+- `a + b` executed as:
+    - `a.__add__(b)`, or...
+    - `b.__radd__(a)`, if `__add__` not found
+- Python is **dynamic**
+    - *Monkey patching*
+    - Any method, special or not, can be changed or *decorated* at any time
+    - Lookup at each call
+
+---
+
+title: Method lookup
+
+- In general, methods are handled as attributes
+    - Complex lookup in multiple dictionaries
+    - Starts with `a.__getattribute__("something")`
+    - An *instance* has its own methods
+    - A *class* has its own methods
+    - A *base class* has its own methods
+    - A *metaclass* may also alter the lookup
+- “Special methods” are... *special*
+    - Cannot be set for a single instance
+    - Faster lookup
+    - Still possibly going through multiple dictionaries
+
+---
+
+title: NumPy
+class: segue dark
+
+---
+
+title: Modulo NumPy
+
+- Numeric, 1995; NumPy, 2006
+- Homogeneously typed, n-dimensional array
+- Efficient algorithms, implemented in Fortran, C/C++, Cython
+- Functionality comparable to basic MATLAB
+- Base of SciPy ecosystem: MatPlotLib, SymPy, Pandas, Scikit-learn, Scikit-image
+- Also used for images in Python bindings of OpenCV
+
+---
+
+title: NumPy arrays
+
+code: Python
+
+    >>> import numpy as np
+    >>> a = np.array([2, 3, 4])
+    >>> a
+    array([2, 3, 4])
+    >>> a.dtype
+    dtype('int64')
+
+code: Python
+
+    >>> b = np.array([1.2, 3.5, 5.1])
+    >>> b.dtype
+    dtype('float64')
+
+code: Python
+
+    c = np.array([[1, 2], [3, 4]], dtype=np.float64)
+    >>> c
+    array([[1., 2.],
+           [3., 4.]])
+
+---
+
+title: Zeros and ones
+
+code: Python
+
+    >>> np.zeros(4)
+    array([0., 0., 0., 0.])
+
+    >>> np.ones((2, 3), dtype=np.int16)  # dtype can also be specified
+    array([[[ 1, 1, 1],
+            [ 1, 1, 1]], dtype=int16)
+
+    >>> np.empty((2, 3))  # uninitialized, output may vary
+    array([[3.73603959e-262, 6.02658058e-154, 6.55490914e-260],
+           [5.30498948e-313, 3.14673309e-307, 1.00000000e+000]])
+
+    >>> np.random.random((2, 3))
+    array([[ 0.1528439 ,  0.00263175,  0.21967677],
+           [ 0.66804669,  0.84067279,  0.23624629]])
+
+---
+
+title: Range and shape
+
+code: Python
+
+    >>> np.arange(10, 30, 5)  # from 10, to 30, step 3
+    array([10, 15, 20, 25])
+
+code: Python
+
+    >>> np.linspace(0, 2, 5)  # 5 numbers from 0 to 2
+    array([0., 0.5, 1., 1.5, 2.])
+
+code: Python
+
+    >>> a = np.arange(15).reshape(3, 5)
+    >>> a
+    array([[ 0,  1,  2,  3,  4],
+           [ 5,  6,  7,  8,  9],
+           [10, 11, 12, 13, 14]])
+    >>> a.shape
+    (3, 5)
+
+- *Shape*: the number of elements along each axis
+
+---
+
+title: Elementwise operations
+
+- Most operators apply elementwise
+- A new array holds the result
+- Some ops act *in place*: `+=`, `*=`, ...
+
+code: Python
+
+    >>> a = np.array([20, 30, 40, 50])
+    >>> a < 35
+    array([True, True, False, False])
+
+    >>> b = np.arange(4)
+    >>> b ** 2
+    array([0, 1, 4, 9])
+    >>> a - b
+    array([20, 29, 38, 47])
+
+---
+
+title: Matrix multiplication
+
+code: Python
+
+    >>> A = np.array([[1, 1],
+    ...               [0, 1]])
+    >>> B = np.array([[2, 0],
+    ...               [3, 4]])
+    >>> A * B                       # elementwise product
+    array([[2, 0],
+           [0, 4]])
+    >>> A @ B                       # matrix product
+    array([[5, 4],
+           [3, 4]])
+    >>> A.dot(B)                    # another matrix product
+    array([[5, 4],
+           [3, 4]])
+
+---
+
+title: Aggregate functions
+
+- By default, array handled as a list of numbers, regardless of shape
+
+code: Python
+
+    >>> b = np.arange(12).reshape(3, 4)
+    >>> b
+    array([[ 0,  1,  2,  3],
+           [ 4,  5,  6,  7],
+           [ 8,  9, 10, 11]])
+    >>> b.sum()  ## guess also min and max
+    66
+    >>> b.sum(axis=0)                            # sum of each column
+    array([12, 15, 18, 21])
+    >>>
+    >>> b.min(axis=1)                            # min of each row
+    array([0, 4, 8])
+
+---
+
+title: Universal functions
+
+- Math funcs provided as “*universal functions*” (*ufunc*)
+    - Operate elementwise and return an array
+    - `sin`, `cos`, `exp` etc.
+
+code: Python
+
+    >>> A = np.linspace(0, np.pi/2, 4)
+    >>> np.sin(A)
+    array([0., 0.5, 0.8660254, 1.])
+
+code: Python
+
+    >>> B = np.arange(3)
+    >>> B
+    array([0, 1, 2])
+    >>> np.exp(B)
+    array([1., 2.71828183, 7.3890561])
+    >>> np.sqrt(B)
+    array([0., 1., 1.41421356])
+
+---
+
+title: Indexing and slicing
+
+- Multidimensional arrays: one index per axis
+    - Indices are given in a tuple separated by commas
+
+code: Python
+
+    >>> def f(y, x): return 10 * y + x
+    >>> b = np.fromfunction(f, (3, 4), dtype=int)
+    >>> b
+    array([[ 0,  1,  2,  3],
+           [10, 11, 12, 13],
+           [20, 21, 22, 23]])
+    >>> b[2, 3]
+    23
+    >>> b[:, 1]  # each row in the second column of b
+    array([1, 11, 21])
+    >>> b[1:3, 0:2]
+    array([[10, 11],
+           [20, 21]])
+
+---
+
+title: Dots
+
+- Dots (`...`) represent as many colons as needed
+    - ... to produce a complete indexing tuple
+
+code: Python
+
+    >>> c = np.array( [[[  0,  1,  2],    # a 3D array
+                        [ 10, 12, 13]],
+                       [[100,101,102],
+                        [110,112,113]]])
+    >>> c.shape
+    (2, 2, 3)
+    >>> c[1,...]  # same as c[1,:,:] or c[1]
+    array([[100, 101, 102],
+           [110, 112, 113]])
+    >>> c[...,2]  # same as c[:,:,2]
+    array([[  2,  13],
+           [102, 113]])
+
+---
+
+title: Iterating
+
+- Iterating over a multidim. array: wrt the first axis
+- The `flat` attribute is an iterator over all the elements
+
+code: Python
+
+    >>> b
+    array([[ 0,  1,  2,  3],
+           [10, 11, 12, 13],
+           [20, 21, 22, 23]])
+    >>> for row in b: print(row)
+    [0 1 2 3]
+    [10 11 12 13]
+    [20 21 22 23]
+    >>> for val in b.flat: print(val, end=" ")
+    0 1 2 3 10 11 12 13 20 21 22 23
+
+---
+
+title: Shape manipulation
+
+code: Python
+
+    >>> a = np.floor(10 * np.random.random((3, 4)))
+    >>> a
+    array([[ 2.,  8.,  0.,  6.],
+           [ 4.,  5.,  1.,  1.],
+           [ 8.,  9.,  3.,  6.]])
+    >>> a.ravel()  # returns a new view, flattened
+    array([ 2.,  8.,  0.,  6.,  4.,  5.,  1.,  1.,  8.,  9.,  3.,  6.])
+    >>> a.reshape(2, 6)  # new view, different shape
+    array([[ 2.,  8.,  0.,  6.,  4.,  5.],
+           [ 1.,  1.,  8.,  9.,  3.,  6.]])
+    >>> a.resize(2, 6)  # modifies the array itself
+    >>> a
+    array([[ 2.,  8.,  0.,  6.,  4.,  5.],
+           [ 1.,  1.,  8.,  9.,  3.,  6.]])
+
+---
+
+title: Transposition
+
+code: Python
+
+    >>> a = np.array([[ 2.,  8.,  0.],
+                      [ 4.,  5.,  1.]])
+    >>> a.T  # returns a transposed view, same as a.transpose()
+    array([[ 2.,  4.],
+           [ 8.,  5.],
+           [ 0.,  1.]])
+    >>> a.T.shape
+    (3, 2)
+    >>> a.shape
+    (2, 3)
+
+---
+
+title: Stacking
+
+code: Python
+
+    >>> a = np. array([[ 8.,  8.],
+                       [ 0.,  0.]])
+    >>> b = np.array([[ 1.,  8.],
+                      [ 0.,  4.]])
+    >>> np.vstack((a, b))
+    array([[ 8.,  8.],
+           [ 0.,  0.],
+           [ 1.,  8.],
+           [ 0.,  4.]])
+    >>> np.hstack((a, b))
+    array([[ 8.,  8.,  1.,  8.],
+           [ 0.,  0.,  0.,  4.]])
+
+---
+
+title: Splitting into several arrays
+
+- `hsplit` splits an array along its horizontal axis
+    - Specify the number of equally shaped arrays to return, or...
+    - Specifying the columns where division should occur
+- `vsplit` works on the vertical axis
+
+code: Python
+
+    >>> a = np.array([[9., 5., 6., 3., 6., 8., 0., 7., 9.],
+                      [1., 4., 9., 2., 2., 1., 0., 6., 2.]])
+    >>> np.hsplit(a, 3)   # Split a into 3
+    [array([[ 9.,  5.,  6.], [ 1.,  4.,  9.]]),
+     array([[ 3.,  6.,  8.], [ 2.,  2.,  1.]]),
+     array([[ 0.,  7.,  9.], [ 0.,  6.,  2.]])]
+    >>> np.hsplit(a, (3, 4))   # Split after 3rd and 4th column
+    [array([[ 9.,  5.,  6.], [ 1.,  4.,  9.]]),
+     array([[ 3.], [ 2.]]),
+     array([[ 6.,  8.,  0.,  7.,  9.], [ 2.,  1.,  0.,  6.,  2.]])]
+
+---
+
+title: Linear algebra
+
+    >>> a = np.array([[1.0, 2.0],
+                      [3.0, 4.0]])
+    >>> b = np.linalg.inv(a)
+    >>> b
+    array([[-2. ,  1. ],
+           [ 1.5, -0.5]])
+    >>> a @ b
+    array([[ 1.,  0. ],
+           [ 0.,  1. ]])
+    >>> u = np.eye(2)  # unit 2x2 matrix; "eye" represents "I"
+    >>> u
+    array([[ 1.,  0.],
+           [ 0.,  1.]])
+
+---
+
+title: At the end of the day
+
+- Cost of a ticket for a fair
+    - 4.00€ for adults
+    - 1,50€ for children
+- At the end of the day:
+    - 2200 visitors have entered (b1)
+    - 5050€ have been collected (b2)
+- How many adults (x1) and how many children (x2) have entered?
+    - Linear system (`a @ x = b`)
+    - Solve with matrix operations
+
+---
+
+title: Determinant and autovectors
+
+code: Python
+
+    >>> a = np.array([[1.0, 2.0],
+                      [3.0, 4.0]])
+    >>> np.linalg.det(a)
+    -2.0
+    >>> w, v = np.linalg.eig(a)
+    >>> w  ## eigenvalues
+    array([-0.37228132,  5.37228132])
+    >>> np.linalg.det(w[0] * np.eye(2) - a)  ## det(λI − A) = 0
+    0.0
+    >>> v.T  ## eigenvectors, normalized but transposed (!)
+    array([[-0.82456484,  0.56576746],
+           [-0.41597356, -0.90937671]])
+    >>> sum(v.T[0] ** 2)
+    1.0
+    >>> (w[0] * np.eye(2) - a) @ v.T[0]  ## (λI − A)v = 0	
+    array([ 0.,  0.])
+
+---
+
+title: Solve a linear system
+
+code: Python
+
+    >>> a = np.array([[1, 1],
+                      [4, 1.5]])
+    >>> b = np.array([2200, 5050])
+    >>> np.linalg.inv(a) @ b
+    array([  700.,  1500.])
+    >>> np.linalg.solve(a, b)	
+    array([  700.,  1500.])
+

@@ -103,17 +103,17 @@ figure: images/fun/multiplication-table.jpg
 
 code: python
 
-    MAX = 10
+    size = 10
     y = int(input("Insert a value: "))
-    for x in range(1, MAX + 1):
+    for x in range(1, size + 1):
         print(x * y, end = " ")
         # inserts a space, instead of a newline
     
 code: python
 
-    MAX = 10
-    for y in range(1, MAX + 1):
-        for x in range(1, MAX + 1):
+    size = 10
+    for y in range(1, size + 1):
+        for x in range(1, size + 1):
             val = x * y
             print(val, end = " ")
         print()
@@ -128,24 +128,23 @@ Per fare in modo che ciascun valore richieda almeno 3 caratteri:
 
 ---
 
-title: Procedure
-figure: images/fun/multiplication-table.jpg
+title: Procedura
 
-- *Procedura*: funzione senza `return`, solo I/O ed effetti collaterali
-	- Può essere riutilizzata (*astrazione*)
+- Funzione senza `return`, solo I/O ed effetti collaterali
+    - *Astrazione*, per riuso e leggibilità
     - Riduce i livelli di annidamento
 
 code: python
 
-    def print_raw(y: int, last: int):
-        for x in range(1, last + 1):
+    def print_row(y: int, size: int):
+        for x in range(1, size + 1):
             val = "{:3}".format(x * y)
             print(val, end=" ")
         print()
     
-    def print_table(last: int):
-        for y in range(1, last + 1):
-            print_raw(last)
+    def print_table(size: int):
+        for y in range(1, size + 1):
+            print_row(y, size)
 
     def main():
         print_table(10)
@@ -153,6 +152,7 @@ code: python
 ---
 
 title: Animazione
+figure: images/oop/anim-right.png
 
 code: python
 
@@ -162,13 +162,13 @@ code: python
         global x
         g2d.fill_canvas((255, 255, 255))  # Draw background        
         g2d.draw_image(image, (x, 50))    # Draw foreground
-        x = (x + 5) % 320                    # Update ball's position
+        x = (x + 5) % 320                 # Update ball's position
 
     g2d.init_canvas((320, 240))
     image = g2d.load_image("ball.png")
     x = 50
 
-    g2d.main_loop(update, 1000 // 30)   # Call update 30 times/second
+    g2d.main_loop(update, 1000 // 30)     # Call update 30 times/second
 
 ---
 
@@ -322,6 +322,7 @@ code: python
 ---
 
 title: Metodi
+figure: images/oop/anim-bounce.png
 
 - Espongono *servizi* ad altri oggetti
 

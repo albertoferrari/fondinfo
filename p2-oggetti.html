@@ -174,15 +174,15 @@ print(x)      # just for debug
       <figure>
         <img src="images/fun/multiplication-table.jpg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>MAX = 10
+      </figure><pre class="prettyprint" data-lang="python"><code>size = 10
 y = int(input("Insert a value: "))
-for x in range(1, MAX + 1):
+for x in range(1, size + 1):
     print(x * y, end = " ")
     # inserts a space, instead of a newline
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>MAX = 10
-for y in range(1, MAX + 1):
-    for x in range(1, MAX + 1):
+<pre class="prettyprint" data-lang="python"><code>size = 10
+for y in range(1, size + 1):
+    for x in range(1, size + 1):
         val = x * y
         print(val, end = " ")
     print()
@@ -198,29 +198,26 @@ for y in range(1, MAX + 1):
 <slide  >
   
     <hgroup>
-      <h2>Procedure</h2>
+      <h2>Procedura</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <figure>
-        <img src="images/fun/multiplication-table.jpg">
-        
-      </figure><ul>
-<li><em>Procedura</em>: funzione senza <code>return</code>, solo I/O ed effetti collaterali<ul>
-<li>Può essere riutilizzata (<em>astrazione</em>)</li>
+      <ul>
+<li>Funzione senza <code>return</code>, solo I/O ed effetti collaterali<ul>
+<li><em>Astrazione</em>, per riuso e leggibilità</li>
 <li>Riduce i livelli di annidamento</li>
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>def print_raw(y: int, last: int):
-    for x in range(1, last + 1):
+<pre class="prettyprint" data-lang="python"><code>def print_row(y: int, size: int):
+    for x in range(1, size + 1):
         val = "{:3}".format(x * y)
         print(val, end=" ")
     print()
 
-def print_table(last: int):
-    for y in range(1, last + 1):
-        print_raw(last)
+def print_table(size: int):
+    for y in range(1, size + 1):
+        print_row(y, size)
 
 def main():
     print_table(10)
@@ -235,19 +232,22 @@ def main():
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>import g2d
+      <figure>
+        <img src="images/oop/anim-right.png">
+        
+      </figure><pre class="prettyprint" data-lang="python"><code>import g2d
 
 def update():
     global x
     g2d.fill_canvas((255, 255, 255))  # Draw background        
     g2d.draw_image(image, (x, 50))    # Draw foreground
-    x = (x + 5) % 320                    # Update ball's position
+    x = (x + 5) % 320                 # Update ball's position
 
 g2d.init_canvas((320, 240))
 image = g2d.load_image("ball.png")
 x = 50
 
-g2d.main_loop(update, 1000 // 30)   # Call update 30 times/second
+g2d.main_loop(update, 1000 // 30)     # Call update 30 times/second
 </code></pre></article>
  
 </slide>
@@ -487,7 +487,10 @@ def rq(x: int) -&gt; int:
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
+      <figure>
+        <img src="images/oop/anim-bounce.png">
+        
+      </figure><ul>
 <li>Espongono <em>servizi</em> ad altri oggetti</li>
 </ul>
 <pre class="prettyprint" data-lang="python"><code>ARENA_W, ARENA_H = 320, 240
