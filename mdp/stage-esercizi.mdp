@@ -97,8 +97,8 @@ code: output
 
 >
 
-Incolonnamento: `txt = '{:6.2f}'.format(val)` <br>
-`txt` ha lunghezza ≥ 6, con 2 cifre decimali
+Incolonnamento: `txt = f"{val:6.2f}"` <br>
+`txt` rappresenta `val` con lunghezza ≥ 6, con 2 cifre decimali
 
 ---
 

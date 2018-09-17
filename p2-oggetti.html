@@ -177,19 +177,17 @@ print(x)      # just for debug
       </figure><pre class="prettyprint" data-lang="python"><code>size = 10
 y = int(input("Insert a value: "))
 for x in range(1, size + 1):
-    print(x * y, end = " ")
-    # inserts a space, instead of a newline
+    print(x * y, end=" ")  # ends with blank
+                           # no newline
 </code></pre>
 <pre class="prettyprint" data-lang="python"><code>size = 10
 for y in range(1, size + 1):
     for x in range(1, size + 1):
         val = x * y
-        print(val, end = " ")
+        print(f"{val:3}", end=" ")  # val represented as text
+                                    # with at least 3 chars
     print()
 </code></pre>
-<p>Per fare in modo che ciascun valore richieda almeno 3 caratteri:
-<br>
-<code>val = "{:3}".format(x * y)</code></p>
 <blockquote></blockquote>
 <p><a href="http://www.ce.unipr.it/brython/?p2_tables.py">http://www.ce.unipr.it/brython/?p2_tables.py</a></p></article>
  
@@ -211,8 +209,8 @@ for y in range(1, size + 1):
 </ul>
 <pre class="prettyprint" data-lang="python"><code>def print_row(y: int, size: int):
     for x in range(1, size + 1):
-        val = "{:3}".format(x * y)
-        print(val, end=" ")
+        val = x * y
+        print(f"{val:3}", end=" ")
     print()
 
 def print_table(size: int):

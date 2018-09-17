@@ -894,3 +894,156 @@ code: Python
     >>> np.linalg.solve(a, b)	
     array([  700.,  1500.])
 
+---
+
+title: Pandas
+class: segue dark
+
+---
+
+title: Pandas
+
+- Library of data *structures* and data *analysis tools*
+    - High-performance, easy-to-use
+    - Use cases are similar to R-lang
+- Often used with *Jupyter Notebook*, Web app to create and share documents
+    - Fragments of code in various languages
+    - Can be executed and modified
+    - Equations, visualizations, text
+    - Useful for data cleaning and transformation, numerical simulation, statistical modeling, data visualization, machine learning, etc.
+
+---
+
+title: Creating a DataFrame
+
+code: Python
+
+    >>> dates = pd.date_range('20130101', periods=6)
+    >>> dates
+    DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04',
+                   '2013-01-05', '2013-01-06'], dtype='datetime64[ns]', freq='D')
+    >>> df = pd.DataFrame(np.random.randn(6,4), index=dates, columns=list('ABCD'))
+    >>> df
+                       A         B         C         D
+    2013-01-01  0.469112 -0.282863 -1.509059 -1.135632
+    2013-01-02  1.212112 -0.173215  0.119209 -1.044236
+    2013-01-03 -0.861849 -2.104569 -0.494929  1.071804
+    2013-01-04  0.721555 -0.706771 -1.039575  0.271860
+    2013-01-05 -0.424972  0.567020  0.276232 -1.087401
+    2013-01-06 -0.673690  0.113648 -1.478427  0.524988
+
+---
+
+title: DataFrame from a dict
+
+code: Python
+
+    >>> df2 = pd.DataFrame({ 'A' : 1.,
+                             'B' : pd.Timestamp('20130102'),
+                             'C' : pd.Series(1,index=list(range(4)),dtype='float32'),
+                             'D' : np.array([3] * 4,dtype='int32'),
+                             'E' : pd.Categorical(["test","train","test","train"]),
+                             'F' : 'foo' })
+    >>> df2 
+         A          B    C  D      E    F
+    0  1.0 2013-01-02  1.0  3   test  foo
+    1  1.0 2013-01-02  1.0  3  train  foo
+    2  1.0 2013-01-02  1.0  3   test  foo
+    3  1.0 2013-01-02  1.0  3  train  foo
+
+---
+
+title: Data summary
+
+- View top or bottom rows: `df.head()`, `df.tail()`
+- Access index, columns, data: `df.index`, `df.columns`, `df.values`
+- Transpose: `df.T`
+- Show static summary
+
+code: Python
+
+    >>> df.describe()
+                  A         B         C         D
+    count  6.000000  6.000000  6.000000  6.000000
+    mean   0.073711 -0.431125 -0.687758 -0.233103
+    std    0.843157  0.922818  0.779887  0.973118
+    min   -0.861849 -2.104569 -1.509059 -1.135632
+    25%   -0.611510 -0.600794 -1.368714 -1.076610
+    50%    0.022070 -0.228039 -0.767252 -0.386188
+    75%    0.658444  0.041933 -0.034326  0.461706
+    max    1.212112  0.567020  0.276232  1.071804
+
+---
+
+title: Sorting by values or index
+
+code: Python
+
+    >>> df.sort_values(by='B')
+                       A         B         C         D
+    2013-01-03 -0.861849 -2.104569 -0.494929  1.071804
+    2013-01-04  0.721555 -0.706771 -1.039575  0.271860
+    2013-01-01  0.469112 -0.282863 -1.509059 -1.135632
+    2013-01-02  1.212112 -0.173215  0.119209 -1.044236
+    2013-01-06 -0.673690  0.113648 -1.478427  0.524988
+    2013-01-05 -0.424972  0.567020  0.276232 -1.087401
+
+    >>> df.sort_index(axis=1, ascending=False)
+                       D         C         B         A
+    2013-01-01 -1.135632 -1.509059 -0.282863  0.469112
+    2013-01-02 -1.044236  0.119209 -0.173215  1.212112
+    2013-01-03  1.071804 -0.494929 -2.104569 -0.861849
+    2013-01-04  0.271860 -1.039575 -0.706771  0.721555
+    2013-01-05 -1.087401  0.276232  0.567020 -0.424972
+    2013-01-06  0.524988 -1.478427  0.113648 -0.673690
+
+---
+
+title: Projection of columns
+
+code: Python
+
+    >>> df['A']
+    2013-01-01    0.469112
+    2013-01-02    1.212112
+    2013-01-03   -0.861849
+    2013-01-04    0.721555
+    2013-01-05   -0.424972
+    2013-01-06   -0.673690
+
+---
+
+title: Selection of rows
+
+code: Python
+
+    >>> df[0:3]
+                       A         B         C         D
+    2013-01-01  0.469112 -0.282863 -1.509059 -1.135632
+    2013-01-02  1.212112 -0.173215  0.119209 -1.044236
+    2013-01-03 -0.861849 -2.104569 -0.494929  1.071804
+
+    >>> df['20130102':'20130104']
+                       A         B         C         D
+    2013-01-02  1.212112 -0.173215  0.119209 -1.044236
+    2013-01-03 -0.861849 -2.104569 -0.494929  1.071804
+    2013-01-04  0.721555 -0.706771 -1.039575  0.271860
+
+---
+
+title: Slicing in both axis
+
+code: Python
+
+    >>> df.loc['20130102':'20130104',['A','B']]
+                       A         B
+    2013-01-02  1.212112 -0.173215
+    2013-01-03 -0.861849 -2.104569
+    2013-01-04  0.721555 -0.706771
+
+    >>> df.iloc[3:5,0:2]
+                       A         B
+    2013-01-04  0.721555 -0.706771
+    2013-01-05 -0.424972  0.567020
+
+
