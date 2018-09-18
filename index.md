@@ -1,26 +1,3 @@
-## Stage estivo di programmazione
-
-**Creare un videogioco in Python o Go**
-
-Stage formativo per studenti delle scuole superiori, 11-15 giugno 2018
-
-- [Locandina in PDF](http://tomamic.github.io/fondinfo/stage.pdf)
-- [Presentazione dello stage](http://tomamic.github.io/fondinfo/stage.html)
-- [Modulo richiesta di iscrizione](http://tomamic.github.io/fondinfo/stage-iscrizione.docx)
-- [Organizzazione dello stage](http://tomamic.github.io/fondinfo/stage-logistica.html)
-- [Autorizzazione soggiorno minorenne](http://tomamic.github.io/fondinfo/soggiorno-minore.pdf)
-- Python: [Lez.1](http://tomamic.github.io/fondinfo/p1-algoritmi.html),
-[Lez.2](http://tomamic.github.io/fondinfo/p2-liste-funzioni.html),
-[Lez.3](http://tomamic.github.io/fondinfo/p3-oggetti.html),
-[Playground](http://www.ce.unipr.it/brython/)
-- Go: [Lez.1](http://tomamic.github.io/fondinfo/go1-algoritmi.html),
-[Lez.2](http://tomamic.github.io/fondinfo/go2-liste-funzioni.html),
-[Lez.3](http://tomamic.github.io/fondinfo/go3-oggetti.html),
-[Playground](http://www.ce.unipr.it/gopherjs/)
-- [Questionario sullo stage](https://goo.gl/forms/CsZZjo9IzSRddVgV2)
-
-----
-
 ## Insegnamento per Ingegneria dell'Informazione
 
 - [Presentazione del corso](http://tomamic.github.io/fondinfo/intro.html)
@@ -85,6 +62,29 @@ Stage formativo per studenti delle scuole superiori, 11-15 giugno 2018
 - [Basi di dati](http://tomamic.github.io/fondinfo/x5-database.html)
 - [Gui con Tkinter](http://tomamic.github.io/fondinfo/x6-tkinter.html)
 - [Python su Android](http://tomamic.github.io/fondinfo/x7-android.html)
+
+---
+
+## Stage estivo di programmazione
+
+**Creare un videogioco in Python o Go**
+
+Stage formativo per studenti delle scuole superiori, 10-14 giugno 2019
+
+- [Locandina in PDF](http://tomamic.github.io/fondinfo/stage.pdf)
+- [Presentazione dello stage](http://tomamic.github.io/fondinfo/stage.html)
+- [Modulo richiesta di iscrizione](http://tomamic.github.io/fondinfo/stage-iscrizione.docx)
+- [Organizzazione dello stage](http://tomamic.github.io/fondinfo/stage-logistica.html)
+- [Autorizzazione soggiorno minorenne](http://tomamic.github.io/fondinfo/soggiorno-minore.pdf)
+- Python: [Lez.1](http://tomamic.github.io/fondinfo/p1-algoritmi.html),
+[Lez.2](http://tomamic.github.io/fondinfo/p2-liste-funzioni.html),
+[Lez.3](http://tomamic.github.io/fondinfo/p3-oggetti.html),
+[Playground](http://www.ce.unipr.it/brython/)
+- Go: [Lez.1](http://tomamic.github.io/fondinfo/go1-algoritmi.html),
+[Lez.2](http://tomamic.github.io/fondinfo/go2-liste-funzioni.html),
+[Lez.3](http://tomamic.github.io/fondinfo/go3-oggetti.html),
+[Playground](http://www.ce.unipr.it/gopherjs/)
+- [Questionario sullo stage](https://goo.gl/forms/CsZZjo9IzSRddVgV2)
 
 ----
 
