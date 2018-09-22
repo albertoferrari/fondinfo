@@ -139,7 +139,7 @@ class: large-figure
 - George Polya (1945). “_How to solve it_”
     - Soluzione di problemi matematici: processo raramente lineare <br>&nbsp;
 - **(1) See.** Capire il problema
-    - Quali dati, quali incognite?
+    - Quali dati? Quali incognite?
     - Quali condizioni? Soddisfacibili, ridondanti, contraddittorie?
     - Figure, notazione
 
@@ -153,34 +153,20 @@ title: Dal problema alla soluzione, e ritorno
 
 - **(2) Plan.** Elaborare un piano
     - Mettere in relazione dati e incognite
-    - Riduzione, analogia, divide et impera, composizione, astrazione...
-    - *Computational thinking*
+    - Riduzione, analogia, divide et impera, composizione, astrazione... *Pensiero computazionale*
     - Cominciare a risolvere un problema *più semplice* (vincoli rilassati)
-- **(3) Do.** Eseguire il piano
-    - Controllare ogni passo. È corretto?
+- **(3) Do.** Implementare il piano
+    - Realizzare il sistema da sperimentare
 - **(4) Check.** Controllare la soluzione
     - Corretta? Ottenibile in altro modo?
     - Risultato, o metodo, utilizzabile per altri problemi?
 
 > If you can't solve a problem... <br> then there is an easier problem you can solve: find it. *(G. Polya)*
 
----
-
-title: Elementi di un algoritmo
-figure: images/algo/recipe.png
-figcaption: Una ricetta di cucina è un esempio di algoritmo
-
-- *Algoritmo*: procedimento che risolve un determinato problema attraverso un numero finito di passi elementari (al-Khwarizmi, ~800)
-- **Dati**: iniziali (istanza problema), intermedi, finali (soluzione)
-- **Passi** elementari: azioni atomiche non scomponibili in azioni più semplici
-- **Processo**, o anche esecuzione: sequenza ordinata di passi
-- *Proprietà*: finitezza, non ambiguità, realizzabilità, efficienza...
-
-> Computer science is no more about computers than astronomy is about telescopes. *(E. Dijkstra...)*
 
 ---
 
-title: Ricerca in uno schedario
+title: Ricerca in uno schedario (++)
 figure: images/algo/catalogue.png
 
 - Es. in biblioteca: cercare la scheda di un certo libro
@@ -191,7 +177,7 @@ figure: images/algo/catalogue.png
 
 ---
 
-title: Cercare più velocemente
+title: Cercare più velocemente (++)
 
 - Su schedario *ordinato* si può fare più in fretta
     - **(1)** *Finchè* restano delle schede da esaminare: si prende tra loro la scheda centrale
@@ -203,7 +189,7 @@ title: Cercare più velocemente
 
 ---
 
-title: Complessità e calcolabilità
+title: Complessità e calcolabilità (++)
 
 - **Complessità**: classificare algoritmi (e problemi)
     - **Trattabili**: costo accettabile, “polinomiale”
@@ -378,14 +364,14 @@ figure: images/misc/snake.png
 
 ---
 
-title: Prato fiorito
+title: Campo minato
 figure: images/misc/mines.png
 
-- N <b>fiori nascosti</b> a caso in tabella rettangolare
+- N <b>mine nascoste</b> a caso in tabella rettangolare
 - Ad ogni turno, l'utente scopre una casella:
-    - Fiore → <i>partita persa</i>
-    - Solo N caselle coperte (con fiori) → <i>partita vinta</i>
-    - Altrimenti, <i>conteggio fiori</i> nelle 8 caselle adiacenti
+    - Mina → <i>partita persa</i>
+    - Solo N caselle coperte (con mine) → <i>partita vinta</i>
+    - Altrimenti, <i>conteggio mine</i> nelle 8 caselle adiacenti
 
 ---
 
@@ -456,6 +442,30 @@ figure: images/misc/tents.png
 >
 
 <http://www.brainbashers.com/tentshelp.asp>
+
+---
+
+title: Donkey Kong
+figure: images/misc/donkey-kong.png
+
+- Maro può camminare sulle piattaforme
+- Può saltare, se è su una piattaforma
+- Deve evitare i barili
+- Cade quando esce dalla piattaforma
+
+---
+
+title: Sudoku Skyscrapers
+figure: images/misc/skyscrapers.jpg
+
+- Celle tutte piene
+- Nessun numero ripetuto in una riga o colonna
+- Rispetto dei vincoli a margine
+    - Numero di tetti visibili, da quella posizione
+
+>
+
+<https://www.brainbashers.com/skyscrapers.asp>
 
 ---
 

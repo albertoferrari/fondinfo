@@ -290,7 +290,7 @@ pip3 install pygame cppyy
 </ul>
 </li>
 <li><strong>(1) See.</strong> Capire il problema<ul>
-<li>Quali dati, quali incognite?</li>
+<li>Quali dati? Quali incognite?</li>
 <li>Quali condizioni? Soddisfacibili, ridondanti, contraddittorie?</li>
 <li>Figure, notazione</li>
 </ul>
@@ -313,13 +313,12 @@ pip3 install pygame cppyy
       <ul>
 <li><strong>(2) Plan.</strong> Elaborare un piano<ul>
 <li>Mettere in relazione dati e incognite</li>
-<li>Riduzione, analogia, divide et impera, composizione, astrazione...</li>
-<li><em>Computational thinking</em></li>
+<li>Riduzione, analogia, divide et impera, composizione, astrazione... <em>Pensiero computazionale</em></li>
 <li>Cominciare a risolvere un problema <em>più semplice</em> (vincoli rilassati)</li>
 </ul>
 </li>
-<li><strong>(3) Do.</strong> Eseguire il piano<ul>
-<li>Controllare ogni passo. È corretto?</li>
+<li><strong>(3) Do.</strong> Implementare il piano<ul>
+<li>Realizzare il sistema da sperimentare</li>
 </ul>
 </li>
 <li><strong>(4) Check.</strong> Controllare la soluzione<ul>
@@ -337,30 +336,7 @@ pip3 install pygame cppyy
 <slide  >
   
     <hgroup>
-      <h2>Elementi di un algoritmo</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/algo/recipe.png">
-        <figcaption>Una ricetta di cucina è un esempio di algoritmo</figcaption>
-      </figure><ul>
-<li><em>Algoritmo</em>: procedimento che risolve un determinato problema attraverso un numero finito di passi elementari (al-Khwarizmi, ~800)</li>
-<li><strong>Dati</strong>: iniziali (istanza problema), intermedi, finali (soluzione)</li>
-<li><strong>Passi</strong> elementari: azioni atomiche non scomponibili in azioni più semplici</li>
-<li><strong>Processo</strong>, o anche esecuzione: sequenza ordinata di passi</li>
-<li><em>Proprietà</em>: finitezza, non ambiguità, realizzabilità, efficienza...</li>
-</ul>
-<blockquote>
-<p>Computer science is no more about computers than astronomy is about telescopes. <em>(E. Dijkstra...)</em></p>
-</blockquote></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Ricerca in uno schedario</h2>
+      <h2>Ricerca in uno schedario (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -382,7 +358,7 @@ pip3 install pygame cppyy
 <slide  >
   
     <hgroup>
-      <h2>Cercare più velocemente</h2>
+      <h2>Cercare più velocemente (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -403,7 +379,7 @@ pip3 install pygame cppyy
 <slide  >
   
     <hgroup>
-      <h2>Complessità e calcolabilità</h2>
+      <h2>Complessità e calcolabilità (++)</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -718,7 +694,7 @@ pip3 install pygame cppyy
 <slide  >
   
     <hgroup>
-      <h2>Prato fiorito</h2>
+      <h2>Campo minato</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -726,11 +702,11 @@ pip3 install pygame cppyy
         <img src="images/misc/mines.png">
         
       </figure><ul>
-<li>N <b>fiori nascosti</b> a caso in tabella rettangolare</li>
+<li>N <b>mine nascoste</b> a caso in tabella rettangolare</li>
 <li>Ad ogni turno, l'utente scopre una casella:<ul>
-<li>Fiore → <i>partita persa</i></li>
-<li>Solo N caselle coperte (con fiori) → <i>partita vinta</i></li>
-<li>Altrimenti, <i>conteggio fiori</i> nelle 8 caselle adiacenti</li>
+<li>Mina → <i>partita persa</i></li>
+<li>Solo N caselle coperte (con mine) → <i>partita vinta</i></li>
+<li>Altrimenti, <i>conteggio mine</i> nelle 8 caselle adiacenti</li>
 </ul>
 </li>
 </ul></article>
@@ -860,6 +836,48 @@ pip3 install pygame cppyy
 </ul>
 <blockquote></blockquote>
 <p><a href="http://www.brainbashers.com/tentshelp.asp">http://www.brainbashers.com/tentshelp.asp</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Donkey Kong</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/donkey-kong.png">
+        
+      </figure><ul>
+<li>Maro può camminare sulle piattaforme</li>
+<li>Può saltare, se è su una piattaforma</li>
+<li>Deve evitare i barili</li>
+<li>Cade quando esce dalla piattaforma</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Sudoku Skyscrapers</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/skyscrapers.jpg">
+        
+      </figure><ul>
+<li>Celle tutte piene</li>
+<li>Nessun numero ripetuto in una riga o colonna</li>
+<li>Rispetto dei vincoli a margine<ul>
+<li>Numero di tetti visibili, da quella posizione</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p><a href="https://www.brainbashers.com/skyscrapers.asp">https://www.brainbashers.com/skyscrapers.asp</a></p></article>
  
 </slide>
 
