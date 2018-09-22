@@ -103,7 +103,7 @@ figure: images/misc/books.png
 
 title: Altri testi e video
 
-- C. S. Horstmann: *Fondamenti di C++*, McGraw-Hill 2003, 978-8838661051 (~43€, 768pp.)
+- C.S. Horstmann: *Fondamenti di C++*, McGraw-Hill 2003, 978-8838661051 (~43€, 768pp.)
 - S.B. Lippman, J. Lajoie, B.E. Moo: *C++ Primer* 5e, Addison Wesley 2012, 978-0321714114 (~36€, 940pp.)
 - M. Dawson: *Python Programming for the Absolute Beginner* 3e, Course Tech. 2010, 978-1435455009 (~25€, 450pp.)
 - M. Dawson: *Beginning C++ Through Game Programming* 4e, Course Tech. 2014, 978-1305109919 (~28€, 390pp.)
@@ -118,9 +118,9 @@ title: Software
 figure: images/dev/python.png images/dev/codeblocks.png
 
 - Strumenti open source, multi-piattaforma
-    - [**Python.org**](https://www.python.org/downloads/release/python-370/#windows-users), v3.7, *battery included*
+    - [**Python.org**](https://www.python.org/ftp/python/3.7.0/python-3.7.0-webinstall.exe), v3.7, *battery included*
     - [Playground Python](http://www.ce.unipr.it/brython/)
-    - [**CodeBlocks.org**](http://codeblocks.org/downloads/26), C++ IDE, con MinGW e setup
+    - [**CodeBlocks.org**](http://sourceforge.net/projects/codeblocks/files/Binaries/17.12/Windows/codeblocks-17.12mingw-setup.exe), C++ IDE, *con MinGW e setup*
 - Installare Ubuntu in una VirtualBox
     - [WikiHow.com](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 
