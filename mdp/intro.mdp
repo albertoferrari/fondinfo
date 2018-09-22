@@ -109,7 +109,7 @@ title: Altri testi e video
 - M. Dawson: *Beginning C++ Through Game Programming* 4e, Course Tech. 2014, 978-1305109919 (~28€, 390pp.)
 - MIT: *Intro to CS and Programming in Python* - [Video delle lezioni](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/lecture-videos/index.htm)
 - Documentazione
-    - [Python.org](https://docs.python.org/3/) - [isocpp.org](http://isocpp.org/)
+    - [python.org](https://docs.python.org/3/) - [isocpp.org](http://isocpp.org/)
     - [cplusplus.com](http://cplusplus.com/reference/) - [cppreference.com](http://cppreference.com/)
 
 ---
@@ -120,7 +120,7 @@ figure: images/dev/python.png images/dev/codeblocks.png
 - Strumenti open source, multi-piattaforma
     - [**Python.org**](https://www.python.org/downloads/release/python-370/#windows-users), v3.7, *battery included*
     - [Playground Python](http://www.ce.unipr.it/brython/)
-    - [**C++ CodeBlocks.org**](http://codeblocks.org/downloads/26), con MinGW e setup
+    - [**CodeBlocks.org**](http://codeblocks.org/downloads/26), C++ IDE, con MinGW e setup
 - Installare Ubuntu in una VirtualBox
     - [WikiHow.com](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 
@@ -139,8 +139,8 @@ class: large-figure
 - George Polya (1945). “_How to solve it_”
     - Soluzione di problemi matematici: processo raramente lineare <br>&nbsp;
 - **(1) See.** Capire il problema
-    - Quali sono i dati, quali le incognite?
-    - Quali sono le condizioni? Sono soddisfacibili, ridondanti, contraddittorie?
+    - Quali dati, quali incognite?
+    - Quali condizioni? Soddisfacibili, ridondanti, contraddittorie?
     - Figure, notazione
 
 > Make things as simple as possible, but not simpler. *(A. Einstein)*
