@@ -121,6 +121,8 @@ figure: images/dev/python.png images/dev/codeblocks.png
     - [**Python.org**](https://www.python.org/downloads/release/python-370/#windows-users), v3.7, *battery included*
     - [Playground Python](http://www.ce.unipr.it/brython/)
     - [**C++ CodeBlocks.org**](http://codeblocks.org/downloads/26), con MinGW e setup
+- Installare Ubuntu in una VirtualBox
+    - [WikiHow.com](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 
 code: Shell
 
