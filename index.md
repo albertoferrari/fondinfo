@@ -49,9 +49,9 @@
 
 ## Libri, software e link
 
-- [Libri di testo](https://github.com/tomamic/fondinfo/wiki/Libri-di-testo)
-- [Strumenti software](https://github.com/tomamic/fondinfo/wiki/Strumenti-software)
-- [Link utili](https://github.com/tomamic/fondinfo/wiki/Link-utili)
+- [[Libri di testo]]
+- [[Strumenti software]]
+- [[Link utili]]
 
 ----
 
