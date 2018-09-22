@@ -4,13 +4,45 @@ figure: images/oop/modules.png
 
 ---
 
-title: Lista
+title: Python applications
+
+![](images/algo/python-cases.jpg)
+
+- Web, data analysis, scripting, teaching, games, hardware, multiplatform...
+
+---
+
+title: Perfect square
+figure: images/algo/perfect-square.svg
+
+code: python
+
+    n = 0
+    while n <= 0:
+        n = int(input("Positive val? "))
+
+    ans = 1
+    while ans * ans < n:
+        ans += 1
+
+    if ans * ans == n:
+        print("Square root:", ans)
+    else:
+        print("Not a perfect square")
+
+>
+
+<http://www.ce.unipr.it/brython/?p1_perfect_square.py>
+
+---
+
+title: List
 figure: images/fun/month-list.svg
 
-- Sequenza di elementi, *di solito* dello stesso **tipo**
-    - L'intera lista può essere assegnata ad una variabile, così diamo un **nome** alla lista
-- I singoli elementi sono **numerati**
-    - Gli indici partono da 0!
+- Sequence of elements, *usually* of the same **type**
+    - The whole list can be assigned to a variable, to give it a **name**
+- Single elements are **indexed**
+    - Indices start from 0!
 
 code: python
 
@@ -29,13 +61,13 @@ code: python
 
 ---
 
-title: Accesso agli elementi
+title: Access to elements
 figure: images/fun/wile-coyote.png
 
-- **Attenzione ad usare indici validi!**
-    - *Lunghezza* attuale di una lista `x`: `len(x)`
-    - Elementi *numerati* da `0` a `len(x)-1`
-    - Indici *negativi* contano dalla fine
+- **Attention: use valid indices!**
+    - Current *length* of a list `x`: `len(x)`
+    - Elements *enumerated* from `0` to `len(x)-1`
+    - *Negative* indices counts from the end
 
 code: python
 
@@ -51,7 +83,7 @@ code: python
 
 ---
 
-title: Appartenenza, inserimento, rimozione
+title: Membership, insertion, removal
 figure: images/fun/shopping-list.jpg
 
 code: python
@@ -73,7 +105,7 @@ code: python
 
 ---
 
-title: Slice: porzioni di lista
+title: Slice: part of list
 
 code: python
 
@@ -97,7 +129,7 @@ code: python
 
 ---
 
-title: Uguaglianza e identità
+title: Equality e identity
 
 code: python
 
@@ -112,10 +144,10 @@ code: python
 
 ---
 
-title: Stringhe e liste
+title: Strings and lists
 
-- **Stringa**: sequenza *immutabile* di caratteri
-- **`join`** e **`split`**: da lista a stringa e viceversa
+- **String**: *immutable* sequence of chars
+- **`join`** and **`split`**: from list to string and viceversa
 
 code: python
 
@@ -136,7 +168,7 @@ code: python
 
 title: Tupla
 
-- Sequenza **immutabile** di valori, anche di *tipo diverso*
+- **Immutable** sequence of values, even of *different type*
 
 code: python
 
@@ -153,7 +185,7 @@ code: python
 
 ---
 
-title: Cicli su liste: for
+title: Cycles on lists: for
 
 code: python
 
@@ -164,12 +196,12 @@ code: python
     for product in shopping_list:
         print(product)
 
-- Ad ogni iterazione, a `product` è assegnato un diverso elemento della lista `shopping_list`
-- Si può usare un ciclo `for` su qualsiasi sequenza, anche su una *stringa*
+- At each iteration, a different element of `shopping_list` is assigned to `product`
+- A `for` cycle can be used on every kind of sequence, also a *string*
 
 ---
 
-title: Funzioni su liste
+title: Functions on lists
 
 code: python
 
@@ -193,9 +225,9 @@ code: python
 title: List comprehension
 figure: images/misc/ninjago-green.jpg
 
-- Modo conciso per creare una lista
-- Ogni elemento: risultato di una operazione su un membro di altro iterabile
-- Condizione sugli elementi, opzionale
+- Terse way to create a list
+- Each element: result of an operation on a member of another iterable
+- Condition on elements, optional
 
 code: python
 
@@ -213,9 +245,9 @@ code: python
 title: Enumerate
 figure: images/repr/child-fingers.png
 
-- Accoppia ciascun valore di una sequenza ad un indice crescente
-- Genera una sequenza di tuple (coppie)
-- Spesso si usa nei cicli `for`, quando serve sia il valore che l'indice
+- To couple each value of a sequence to an increasing index
+- It generates a sequence of tuples (pairs)
+- Often it is used in `for` cycles, when both value and index are needed
 
 code: python
 
@@ -229,17 +261,19 @@ code: python
     for i, val in enumerate(shopping_list):
         print(i, val)
 
-Risultati in lista, solo (!) per visualizzarli <br>
-Altrimenti, Python non genera immediatamente i risultati (*lazy*)
+>
+
+Resuls in a list: only (!) to visualize them <br>
+Otherwise, Python doesn't generate results immediately (*lazy*)
 
 ---
 
 title: Zip
 figure: images/fun/zip.jpg
 
-- Accoppia gli elementi di due sequenze
-- Genera una sequenza di tuple (coppie)
-- Il risultato ha la lunghezza della sequenza più breve
+- Couples elements of two sequences
+- It generates a sequence of tuples (pairs)
+- The result has the len of the shortest sequence
 
 code: python
 
@@ -249,7 +283,9 @@ code: python
     [("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
     ("ketchup", "1 bottle")]
 
-Risultati in lista, solo (!) per visualizzarli
+>
+
+Results in a list: only (!) to visualize them
 
 ---
 
@@ -274,17 +310,19 @@ code: python
     >>> list(map(sqrt, range(5)))
     [0.0, 1.0, 1.4142, 1.7320, 2.0]
 
-Risultati in lista, solo (!) per visualizzarli
+>
+
+Results in a list: only (!) to visualize them
 
 ---
 
-title: Dizionario
+title: Dictionary
 figure: images/fun/dictionary.png
 
-- A volte chiamato *mappa* o *array associativo*
-- Insieme non ordinato di coppie chiave / valore
-    - Le chiavi sono *uniche*: come nelle liste fanno da *indice* per accedere al valore corrispondente
-    - Ma possono essere `int` o **`str`** (o altro tipo immutabile)
+- Sometimes called *map* or *associative array*
+- Unordered set of key / value pairs
+    - Keys are *unique*: like in lists, they serve as *indices* to access the corresponding value
+    - They can be `int` or **`str`** (or any other immutable type)
 
 code: python
 
@@ -295,14 +333,16 @@ code: python
     >>> tel
     {"graham": 4127, "terry": 4139, "john": 4098}
 
-Provare anche `list(tel)` e `list(tel.items())`
+>
+
+Try also `list(tel)` and `list(tel.items())`
 
 ---
 
-title: Liste multidimensionali
-- Liste di liste di ...
-    - Accesso agli elementi: due o più indici (o *dimensioni*)
-    - Se bidimensionali, denominate *matrici*
+title: Multidim lists
+- Lists of lists of ...
+    - Access to elements: two or more indices (or *dimensions*)
+    - If bidimensional, called *matrices*
 
 code: python
 
@@ -321,7 +361,7 @@ code: python
 
 ---
 
-title: Somma colonne: matrice
+title: Sum of columns: matrix
 
 code: python
 
@@ -340,7 +380,7 @@ code: python
 
 ---
 
-title: Lista come pseudo-matrice
+title: List as pseudo-matrix
 
 code: python
 
@@ -359,7 +399,7 @@ code: python
 
 ---
 
-title: Matrici di dimensioni note
+title: Matrix with known size
 
 code: python
 
@@ -377,26 +417,26 @@ code: python
 
 ---
 
-title: Flussi di dati
+title: Data streams
 figure: images/fun/magnetic-tape.png
 
-- **Stream**: astrazione per flussi di informazione
-    - Lettura o scrittura di informazioni su *qualunque* dispositivo I/O (*file, ma non solo*)
-- **File di testo**
-    - Varie codifiche (*UTF-8* o altro)
-    - Conversioni automatiche, es. `"\n"` → `"\r\n"`
-- **File binari**
-    - I/O preciso byte a byte, senza nessuna conversione
-    - Qualsiasi file... anche di testo!
+- **Stream**: abstraction for information stream
+    - Reading and writing information on *any* I/O device (*file, and more*)
+- **Text file**
+    - Various encodings (*UTF-8*, or other)
+    - Automatic conversions, e.g. `"\n"` → `"\r\n"`
+- **Binary file**
+    - Precise I/O, bytes are not converted
+    - Any file... also a text file!
 
 ---
 
-title: Scrittura su file
+title: Writing on file
 
-- Funzione `open` per accedere ad un file (di testo)
-    - Modalità scrittura o lettura: `"w"`, o `"r"`
-- Scrittura su file: funzione `print`, o metodo `write`
-- Blocco `with`: chiude il file al termine delle operazioni (anche in caso di errore)
+- `open` function to access a file (text, by default)
+    - Write or read mode: `"w"`, o `"r"` (def.)
+- Writing to file: `print` funtion, or `write` method
+- `with` section: at the end the file is closed (also in case of error)
 
 code: python
 
@@ -410,7 +450,7 @@ code: python
 
 ---
 
-title: Lettura da file
+title: Reading from file
 
 code: python
 
@@ -432,10 +472,49 @@ code: python
 
 ---
 
-title: I/O su stringhe e console
+title: Basic CSV files
 
-- Stringhe come stream: `io.StringIO`
-- Console come stream: `sys.stdin`, `sys.stdout`, `sys.stderr`
+code: Python
+
+    matrix = []
+    cols, rows = 0, 0
+
+    with open('matrix.csv', 'r') as file1:
+        for line in file1:
+            splitted = line.split(',')
+            vals = [int(i) for i in splitted]
+            matrix.append(vals)
+            ## matrix += vals  # for a simple list (ex. 4.5)
+            
+            if cols == 0:
+                cols = len(vals)
+            rows += 1
+
+---
+
+title: CSV module
+
+code: Python
+
+    import csv
+    with open('some.csv', newline='') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            print(row)
+
+code: Python
+
+    import csv
+    with open('some.csv', 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(someiterable)
+
+---
+
+title: I/O for strings and console
+
+- Strings as streams: `io.StringIO`
+- Console as stream: `sys.stdin`, `sys.stdout`, `sys.stderr`
 
 code: python
 
@@ -455,13 +534,13 @@ code: python
 
 ---
 
-title: Errori da file
+title: Errors on file
 figure: images/fun/garbled-tape.png
 
-- **Eccezioni**: per gestire separatamente i casi inattesi
-    - Errore all'interno di `try`: esecuzione interrotta subito
-    - Eseguito il blocco `except` che gestisce il tipo di errore verificatosi (possibile avere diversi blocchi `except`)
-    - Il blocco `with` assicura la chiusura del file
+- **Exceptions**: to handle unexpected cases separately
+    - Error inside `try`: esecution is interrupted immediately
+    - `except` section is executed, to handle the specific type of error (multiple `except` sections are allowed)
+    - A `with` section assures the file is closed
 
 code: python
 
@@ -474,7 +553,12 @@ code: python
 
 ---
 
-title: Liste in memoria
+title: Scientific Python
+class: segue dark
+
+---
+
+title: Lists in memory
 class: large-image
 
 ![](images/fun/python-list-list.svg)
@@ -506,6 +590,56 @@ title: Method lookup
     - Cannot be set for a single instance
     - Faster lookup
     - Still possibly going through multiple dictionaries
+
+---
+
+title: Anaconda
+figure: images/dev/jupyter-notebook.png
+class: large-figure
+
+- Popular open-source distribution of Python: <http://anaconda.com>
+- Based on the Scipy.org ecosystem
+- Modules for *data analysis* and *machine learning*
+- Conda: package management
+- Numba: JIT compiler, code vectorization
+- Jupyter Notebook: browser-based REPL
+    - `$ jupyter notebook`
+
+---
+
+title: Virtual environments
+
+- Standard Python provides *virtual environments*
+- To install different modules for different projects
+- Ex.: *create* `myenv` env., *activate* it, *install* some modules
+
+code: Shell
+
+    $ python3 -m venv myenv
+    $ source myenv/bin/activate
+    $ pip install numpy
+
+- First command creates new folder, with a copy of CPython
+- To change to another env, *deactivate* the current one
+    - To delete an env, delete its folder
+- On Windows, scripts are in the `Script` folder
+    - `sci-env\Scripts\activate.bat`
+
+---
+
+title: Anaconda environments
+
+code: Shell
+
+    $ conda create --name myenv
+    $ conda install -n myenv numpy
+    $ source activate myenv
+    ...
+    $ source deactivate myenv
+    $ conda remove --name myenv --all
+
+- It is also possible to specify a Python version
+    - `conda create -n myenv python=3.4`
 
 ---
 
@@ -595,6 +729,20 @@ code: Python
     (3, 5)
 
 - *Shape*: the number of elements along each axis
+
+---
+
+title: Exercise - Memory game
+figure: images/misc/memory.png
+
+- `np.tile(a, reps)` repeats the whole `a`
+- `np.repeat(a, reps)` repeats each element of `a`
+    - There's also a method of `ndarray`
+- `np.random.shuffle(a)` shuffles `a`
+- *Exercise*: create a matrix with couples
+    - Given `n = rows * cols`
+    - `n / 2` different symbols, each repeated twice
+    - But random positions
 
 ---
 
@@ -752,7 +900,7 @@ title: Shape manipulation
 
 code: Python
 
-    >>> a = np.floor(10 * np.random.random((3, 4)))
+    >>> a = np.random.randint(10, size=(3, 4))
     >>> a
     array([[ 2.,  8.,  0.,  6.],
            [ 4.,  5.,  1.,  1.],
@@ -845,15 +993,17 @@ title: Linear algebra
 
 ---
 
-title: At the end of the day
+title: Exercise - Fair tickets
+figure: images/misc/fair-tickets.jpg
+class: large-figure
 
 - Cost of a ticket for a fair
     - 4.00€ for adults
     - 1,50€ for children
-- At the end of the day:
-    - 2200 visitors have entered (b1)
-    - 5050€ have been collected (b2)
-- How many adults (x1) and how many children (x2) have entered?
+- At the end of the day
+    - 2200 visitors have entered (*b1*)
+    - 5050€ have been collected (*b2*)
+- How many adults (*x1*) and how many children (*x2*) have entered?
     - Linear system (`a @ x = b`)
     - Solve with matrix operations
 
@@ -1045,5 +1195,147 @@ code: Python
                        A         B
     2013-01-04  0.721555 -0.706771
     2013-01-05 -0.424972  0.567020
+
+---
+
+title: Boolean filtering
+
+code: Python
+
+    >>> df[df.A > 0]
+                       A         B         C         D
+    2013-01-01  0.469112 -0.282863 -1.509059 -1.135632
+    2013-01-02  1.212112 -0.173215  0.119209 -1.044236
+    2013-01-04  0.721555 -0.706771 -1.039575  0.271860
+
+    >>> df[df > 0]
+                       A         B         C         D
+    2013-01-01  0.469112       NaN       NaN       NaN
+    2013-01-02  1.212112       NaN  0.119209       NaN
+    2013-01-03       NaN       NaN       NaN  1.071804
+    2013-01-04  0.721555       NaN       NaN  0.271860
+    2013-01-05       NaN  0.567020  0.276232       NaN
+    2013-01-06       NaN  0.113648       NaN  0.524988
+
+---
+
+title: Setting
+
+code: Python
+
+    >>> df2 = df.copy()
+    >>> df2[df2 > 0] = -df2
+    >>> df2
+                       A         B         C  D    F
+    2013-01-01  0.000000  0.000000 -1.509059 -5  NaN
+    2013-01-02 -1.212112 -0.173215 -0.119209 -5 -1.0
+    2013-01-03 -0.861849 -2.104569 -0.494929 -5 -2.0
+    2013-01-04 -0.721555 -0.706771 -1.039575 -5 -3.0
+    2013-01-05 -0.424972 -0.567020 -0.276232 -5 -4.0
+    2013-01-06 -0.673690 -0.113648 -1.478427 -5 -5.0
+
+---
+
+title: Is-in
+
+code: Python
+
+    >>> df2 = df.copy()
+    >>> df2['E'] = ['one', 'one','two','three','four','three']
+    >>> df2
+                       A         B         C         D      E
+    2013-01-01  0.469112 -0.282863 -1.509059 -1.135632    one
+    2013-01-02  1.212112 -0.173215  0.119209 -1.044236    one
+    2013-01-03 -0.861849 -2.104569 -0.494929  1.071804    two
+    2013-01-04  0.721555 -0.706771 -1.039575  0.271860  three
+    2013-01-05 -0.424972  0.567020  0.276232 -1.087401   four
+    2013-01-06 -0.673690  0.113648 -1.478427  0.524988  three
+
+    >>> df2[df2['E'].isin(['two','four'])]
+                       A         B         C         D     E
+    2013-01-03 -0.861849 -2.104569 -0.494929  1.071804   two
+    2013-01-05 -0.424972  0.567020  0.276232 -1.087401  four
+
+---
+
+title: Histogramming
+
+code: Python
+
+    >>> s = pd.Series(np.random.randint(7, size=10))
+    >>> s
+    0    4
+    1    2
+    2    1
+    3    2
+    ...
+    dtype: int64
+    >>> s.value_counts()
+    4    5
+    6    2
+    2    2
+    1    1
+    dtype: int64
+
+---
+
+title: Concat and merge
+
+- Take multiple pandas and put them together
+- `concat()`: one piece below the other
+- `merge()`: rows are joined when they have the same `key`
+
+code: Python
+
+    >>> left = pd.DataFrame({'key': ['foo', 'bar'], 'lval': [1, 2]})
+    >>> right = pd.DataFrame({'key': ['foo', 'bar'], 'rval': [4, 5]})
+    >>> pd.merge(left, right, on='key')
+       key  lval  rval
+    0  foo     1     4
+    1  bar     2     5
+
+---
+
+title: Group-by
+
+- Split data into groups based on some criteria
+- Apply a function to each group independently
+- Combine the results into a data structure
+
+code: Python
+
+    >>> df = pd.DataFrame({'A' : ['foo', 'bar', 'foo', 'bar',
+                                  'foo', 'bar', 'foo', 'foo'],
+                           'B' : ['one', 'one', 'two', 'three',
+                                  'two', 'two', 'one', 'three'],
+                           'C' : np.random.randn(8),
+                           'D' : np.random.randn(8)})
+    >>> df.groupby('A').sum()
+                C        D
+    A                     
+    bar -2.802588  2.42611
+    foo  3.146492 -0.63958
+
+---
+
+title: Pivot table
+
+- Reshape the dataframe, using values as new rows and columns titles
+
+code: Python
+
+    >>> df = pd.DataFrame({'A' : ['one', 'one', 'two', 'three'] * 3,
+                           'B' : ['A', 'B', 'C'] * 4,
+                           'C' : ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2,
+                           'D' : np.random.randn(12),
+                           'E' : np.random.randn(12)})
+    >>> pd.pivot_table(df, values='D', index='A', columns='C')
+    C           bar       foo
+    A                        
+    one    0.463952  0.419066
+    three -0.660418  0.991739
+    two    0.091446  0.236650
+
+---
 
 

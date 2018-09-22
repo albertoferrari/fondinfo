@@ -27,6 +27,8 @@ code: python
             result = n * factorial(n - 1)
         return result
 
+>
+
 Ai primordi (Fortran 66 ecc.) solo allocazione statica <br> Spazio fisso ed unico per dati locali ad una funzione → no ricorsione
 
 ---
@@ -272,6 +274,8 @@ code: python
     for i, val in enumerate(shopping_list):
         print(i, val)
 
+>
+
 Risultati in lista, solo (!) per visualizzarli <br>
 Altrimenti, Python non genera immediatamente i risultati (*lazy*)
 
@@ -291,6 +295,8 @@ code: python
     >>> list(zip(shopping_list, quantities))
     [("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
     ("ketchup", "1 bottle")]
+
+>
 
 Risultati in lista, solo (!) per visualizzarli
 
@@ -316,7 +322,9 @@ code: python
     >>> from math import sqrt
     >>> list(map(sqrt, range(5)))
     [0.0, 1.0, 1.4142, 1.7320, 2.0]
-    
+
+>
+
 Risultati in lista, solo (!) per visualizzarli
 
 ---
@@ -337,6 +345,8 @@ code: python
     >>> tel["graham"] = 4127
     >>> tel
     {"graham": 4127, "terry": 4139, "john": 4098}
+
+>
 
 Provare anche `list(tel)` e `list(tel.items())`
     

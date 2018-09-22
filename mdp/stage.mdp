@@ -58,7 +58,7 @@ title: Come iscriversi?
 ---
 
 title: Strumenti utilizzati
-figure: images/misc/python.png images/misc/devices.png images/misc/raspberry-pi.png
+figure: images/dev/python.png images/dev/devices.png images/dev/raspberry-pi.png
 
 - Linguaggio **Python 3**, *battery included*
     - <http://python.org/>
