@@ -283,7 +283,7 @@ figcaption: Class diagram UML
 - **Incapsulamento** dei dati: *convenzione* sui nomi
     - Prefisso `_` per i nomi dei *campi privati*
 
-> Siamo tutti adulti consenzienti. *(GvR)*
+> We're all consenting adults here. *(GvR)*
       
 code: python
 

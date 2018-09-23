@@ -75,7 +75,7 @@ title: Tutor e assistenza
 
 ---
 
-title: Esame
+title: Modalità d'esame
 figure: images/misc/quiz.png
 
 - **(1)** Prova sull'*Introduzione all'informatica* (quiz)
@@ -114,7 +114,7 @@ title: Altri testi e video
 
 ---
 
-title: Software
+title: Strumenti software
 figure: images/dev/python.png images/dev/codeblocks.png
 
 - Strumenti open source, multi-piattaforma

@@ -1,10 +1,11 @@
 ## Insegnamento per Ingegneria dell'Informazione
 
 - [Presentazione del corso](http://tomamic.github.io/fondinfo/intro.html)
-- [Libri e link](https://github.com/tomamic/fondinfo/wiki/Libri-e-link)
-- [Notizie aggiornate](http://elly.dia.unipr.it/2017/mod/forum/view.php?id=808)
-- [Forum di discussione](http://elly.dia.unipr.it/2017/mod/forum/view.php?id=809)
-- [Registrazione per l'accesso ai lab](http://www.cedi.unipr.it/gestioneaccounts)
+- [Esercitazioni ed esame](http://tomamic.github.io/fondinfo/intro.html#4)
+- [Libri e software](http://tomamic.github.io/fondinfo/intro.html#8)
+- [Annunci](https://elly.dia.unipr.it/2018/mod/forum/view.php?id=1133)
+- [Forum di discussione](https://elly.dia.unipr.it/2018/mod/forum/view.php?id=1135)
+- [Accesso ai lab](http://www.cedi.unipr.it/gestioneaccounts)
 
 ----
 
@@ -23,11 +24,10 @@
 ## Introduzione alla programmazione
 
 - [Algoritmi in Python 3](http://tomamic.github.io/fondinfo/p1-algoritmi.html)
-- [Oggetti](http://tomamic.github.io/fondinfo/p2-oggetti.html)
-- [Composizione](http://tomamic.github.io/fondinfo/p3-composizione.html)
+- [Funzioni ed oggetti](http://tomamic.github.io/fondinfo/p2-oggetti.html)
+- [Liste e composizione](http://tomamic.github.io/fondinfo/p3-composizione.html)
 - [Ricorsione e file](http://tomamic.github.io/fondinfo/p4-ricorsione-file.html)
 - [Linguaggio C++11](http://tomamic.github.io/fondinfo/p5-cpp.html)
-- [Interfacce grafiche in Qt](http://tomamic.github.io/fondinfo/p6-gui.html)
 - [Slide in PDF (2x2, non aggiornate)](http://tomamic.github.io/fondinfo/programmazione-2x2.pdf)
 
 ----
@@ -42,15 +42,15 @@
 - [Esercitazioni in lab 2012](http://tomamic.github.io/fondinfo/esercizi-2012.html)
 - [Esercitazioni in lab 2011](http://tomamic.github.io/fondinfo/esercizi-2011.html)
 - [Esercitazioni in lab 2010](http://tomamic.github.io/fondinfo/esercizi-2010.pdf)
-- [Esercizi risolti ed esempi (su Github)](https://github.com/tomamic/fondinfo)
-- [Registrazione per l'accesso ai lab](http://www.cedi.unipr.it/gestioneaccounts)
+- [Esercizi risolti ed esempi](https://github.com/tomamic/fondinfo)
+- [Accesso ai lab](http://www.cedi.unipr.it/gestioneaccounts)
 
 ----
 
 ## Libri, software e link
 
-- [Libri di testo](https://github.com/tomamic/fondinfo/wiki/Libri-di-testo)
-- [Strumenti software](https://github.com/tomamic/fondinfo/wiki/Strumenti-software)
+- [Libri di testo](http://tomamic.github.io/fondinfo/intro.html#8)
+- [Strumenti software](http://tomamic.github.io/fondinfo/intro.html#10)
 - [Link utili](https://github.com/tomamic/fondinfo/wiki/Link-utili)
 
 ----
@@ -64,6 +64,7 @@
 - [Basi di dati](http://tomamic.github.io/fondinfo/x5-database.html)
 - [Gui con Tkinter](http://tomamic.github.io/fondinfo/x6-tkinter.html)
 - [Python su Android](http://tomamic.github.io/fondinfo/x7-android.html)
+- [Gui in Qt](http://tomamic.github.io/fondinfo/x8-qt.html)
 
 ---
 
