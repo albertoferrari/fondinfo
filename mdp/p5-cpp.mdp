@@ -18,9 +18,6 @@ code: c++
         cout << "Hello, C++!" << endl;
     }
 
-- Da *Qt Creator* (ambiente di sviluppo): *Create Project →  Non-Qt →  Plain C++*
-- **C++11**: aggiungere al file `.pro` (di progetto): `CONFIG += c++11`
-
 ---
 
 title: Leggere e scrivere
@@ -60,9 +57,9 @@ code: c++
     double h = 3.7;
     string s = "hello";
     
-    auto y = 5;               // type inference: C++11
+    auto y = 5;        // type inference: C++11
     auto k = 2.2;
-    auto t = string{"hola"};  // C++14: auto t = "hola"s;
+    auto t = "hola"s;  // auto t = string{"hola"};
 
 ---
 
