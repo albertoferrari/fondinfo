@@ -1,6 +1,6 @@
 title: Linguaggio C++11
 subtitle: Introduzione alla programmazione
-figure: images/misc/cpp-logo.jpg
+figure: images/dev/cpp.png
 
 ---
 
@@ -48,18 +48,17 @@ figure: images/algo/my-shoes.png
 - Una delle differenze principali: le comuni variabili non sono *riferimenti*, ma *contenitori* di dati
     - Occorrono **dichiarazioni** di tipo
     - Ma possibile *type inference* (`auto`)
-- Tipi principali: `int`, `float` (e `double`), `bool`
-- `string`: sequenza mutevole di byte (tipo `char`)
+- Tipi principali: `int`, `float` e `double`, `bool`, `string` e `char`
 
 code: c++
 
     int x = 10;
     double h = 3.7;
     string s = "hello";
-    
-    auto y = 5;        // type inference: C++11
+
+    auto y = 5;        // type inference
     auto k = 2.2;
-    auto t = "hola"s;  // auto t = string{"hola"};
+    auto t = "hola"s;  // compiler settings: -std=c++14
 
 ---
 
@@ -83,6 +82,7 @@ code: c++
 
 title: Stringhe
 
+- `string`: sequenza *mutevole* di byte (tipo `char`)
 - Operazioni di confronto; concatenazione: `+`
 - *Attenzione*: apici doppi per valori `string`, singoli per `char`
 
@@ -322,36 +322,6 @@ C++11 ha anche una libreria `random`, più avanzata <br>
 
 ---
 
-title:  Rettangoli e cerchi con Qt
-figure: images/qt/slogan.png images/oop/raster-coord.png
-
-code: C++
-
-    #include <QtWidgets>
-
-code: C++
-
-    QPixmap screen{600, 400}; QPainter painter{&screen};
-
-    painter.setBrush(QColor{255, 255, 0});
-    painter.drawRect(50, 75, 90, 50);
-
-    painter.setBrush(QColor{0, 0, 255});
-    painter.drawEllipse(QPoint{300, 50}, 20, 20);
-    
-    QLabel label; label.setPixmap(screen); label.show();
-
-code: Project
-
-    QT += widgets
-    CONFIG += console c++11
-
->
-
-Progetto: *Application* → *Qt Widgets Application*
-
----
-
 title: Lettura di dati (++)
 
 code: c++
@@ -555,11 +525,10 @@ code: file: ball.i
     %}
     %include "ball.h"
 
-code: cmd
+code: shell
 
     swig -python -c++ ball.i
-    g++ -fPIC -c ball.cpp ball_wrap.cxx -I/usr/include/python3.6m/ -std=c++11
-    g++ -shared ball.o ball_wrap.o -o _ball.so
+    g++ -fPIC -shared *.cpp *.cxx -I/usr/include/python3.6m -o _$module.so
 
 code: python
 
@@ -649,7 +618,7 @@ code: c++
     class Ghost: public Actor {
         // ...
         Ghost() { /* ... */ }
-        
+ 
         void move() {
             vector<int> vals = {-5, 0, 5};
             int dx = vals[rand() % 3];  // one of {-5, 0, +5}
@@ -658,6 +627,96 @@ code: c++
             y = (y + dy + arena->get_h()) % arena->get_h();
         }
     };
+
+---
+
+title: Fifteen – Gioco astratto
+figure: images/qt/fifteen-puzzle.jpg
+
+code: C++
+
+    class BoardGame {
+    public:
+        virtual void play_at(int x, int y) = 0;
+        virtual void flag_at(int x, int y) = 0;
+        virtual int cols() = 0;
+        virtual int rows() = 0;
+        virtual std::string get_val(int x, int y) = 0;
+        virtual bool finished() = 0;
+        virtual std::string message() = 0;
+
+        virtual ~BoardGame() {}
+    };
+
+---
+
+title: Stampa del gioco
+
+code: C++
+
+    void print_game(BoardGame* game) {
+        for (auto y = 0; y < game->rows(); ++y) {
+            for (auto x = 0; x < game->cols(); ++x) {
+                cout << setw(3) << game->get_val(x, y);
+            }
+            cout << endl;
+        }
+    }
+
+---
+
+title: Ciclo di gioco
+
+code: C++
+
+    void play_game(BoardGame* game) {
+        print_game(game);
+
+        while (! game->finished()) {
+            auto x = 0, y = 0;
+            cout << endl << "Move? ";
+            cin >> x >> y;
+
+            game->play_at(x, y);
+            print_game(game);
+        }
+        cout << game->message() << endl;
+    }
+
+---
+
+title: Qt
+class: segue dark break
+
+---
+
+title:  Rettangoli e cerchi con Qt
+figure: images/qt/slogan.png images/oop/raster-coord.png
+
+code: C++
+
+    #include <QtWidgets>
+
+code: C++
+
+    QPixmap screen{600, 400}; QPainter painter{&screen};
+
+    painter.setBrush(QColor{255, 255, 0});
+    painter.drawRect(50, 75, 90, 50);
+
+    painter.setBrush(QColor{0, 0, 255});
+    painter.drawEllipse(QPoint{300, 50}, 20, 20);
+
+    QLabel label; label.setPixmap(screen); label.show();
+
+code: Project
+
+    QT += widgets
+    CONFIG += console c++11
+
+>
+
+Progetto: *Application* → *Qt Widgets Application*
 
 ---
 
@@ -682,23 +741,6 @@ code: C++
 >
 
 Progetto: *Application* → *Qt Widgets Application*
-
----
-
-title: Fifteen – Gioco astratto
-figure: images/qt/fifteen-puzzle.jpg
-
-code: C++
-
-    class BoardGame {
-    public:
-        virtual void play_at(int x, int y) = 0;
-        virtual int cols() = 0;
-        virtual int rows() = 0;
-        virtual std::string get_val(int x, int y) = 0;
-        virtual bool finished() = 0;
-        virtual std::string message() = 0;
-    };
 
 ---
 

@@ -589,6 +589,69 @@ for y in range(rows):
 <slide  >
   
     <hgroup>
+      <h2>Fifteen – Gioco astratto</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/qt/fifteen-puzzle.jpg">
+        
+      </figure><pre class="prettyprint" data-lang="Python"><code>def abstract():
+    raise NotImplementedError("Abstract method")
+
+class BoardGame:
+    def play_at(self, x: int, y: int): abstract()
+    def flag_at(self, x: int, y: int): abstract()
+    def get_val(self, x: int, y: int) -&gt; str: abstract()
+    def cols(self) -&gt; int: abstract()
+    def rows(self) -&gt; int: abstract()
+    def finished(self) -&gt; bool: abstract()
+    def message(self) -&gt; str: abstract()
+</code></pre>
+<blockquote></blockquote>
+<p><em>Gui</em>: <a href="http://www.ce.unipr.it/brython/?p4_fifteen.py">http://www.ce.unipr.it/brython/?p4_fifteen.py</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ciclo di gioco</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="Python"><code>def print_game(game: BoardGame):
+    for y in range(game.rows()):
+        for x in range(game.cols()):
+            print('{:3}'.format(game.get_val(x, y)), end='')
+        print()
+
+def console_play(game: BoardGame):
+    print_game(game)
+    while not game.finished():
+        x, y = input().split()
+        game.play_at(int(x), int(y))
+        print_game(game)
+    print(game.message())
+</code></pre>
+<blockquote></blockquote>
+<p><em>Gui</em>: <a href="http://www.ce.unipr.it/brython/?boardgame_g2d.py">http://www.ce.unipr.it/brython/?boardgame_g2d.py</a></p></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Flussi di dati</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Flussi di dati</h2>
       <h3></h3>
     </hgroup>
@@ -684,7 +747,7 @@ with io.StringIO() as output:
     output.write("First line.\n")
     print("Second line.", file=output)
     # Retrieve stream contents, i.e. "First line.\nSecond line.\n"
-    contents = output.getvalue()        
+    contents = output.getvalue()
     sys.stdout.write(contents)
 </code></pre>
 <pre class="prettyprint" data-lang="python"><code>for line in sys.stdin:  # CTRL-D (Lin) or CTRL-Z (Win) to end the input

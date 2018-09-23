@@ -27,7 +27,7 @@ URL: https://code.google.com/p/io-2012-slides
   <aside class="gdbar"><img src="images/logo.png"></aside>
   <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
   <h1 data-config-title><!-- populated from slide_config.json --></h1>
-  <figure><img src="images/misc/cpp-logo.jpg"></figure>
+  <figure><img src="images/dev/cpp.png"></figure>
   <hgroup>
     <h2>Introduzione alla programmazione</h2>
     <p>Michele Tomaiuolo<br>Ingegneria dell'Informazione, UniPR</p>
@@ -103,16 +103,15 @@ int main() {
 <li>Ma possibile <em>type inference</em> (<code>auto</code>)</li>
 </ul>
 </li>
-<li>Tipi principali: <code>int</code>, <code>float</code> (e <code>double</code>), <code>bool</code></li>
-<li><code>string</code>: sequenza mutevole di byte (tipo <code>char</code>)</li>
+<li>Tipi principali: <code>int</code>, <code>float</code> e <code>double</code>, <code>bool</code>, <code>string</code> e <code>char</code></li>
 </ul>
 <pre class="prettyprint" data-lang="c++"><code>int x = 10;
 double h = 3.7;
 string s = "hello";
 
-auto y = 5;        // type inference: C++11
+auto y = 5;        // type inference
 auto k = 2.2;
-auto t = "hola"s;  // auto t = string{"hola"};
+auto t = "hola"s;  // compiler settings: -std=c++14
 </code></pre></article>
  
 </slide>
@@ -150,6 +149,7 @@ cout &lt;&lt; (3 &lt; 5 &amp;&amp; 5 &lt; 4) &lt;&lt; endl;  // 0
     </hgroup>
     <article >
       <ul>
+<li><code>string</code>: sequenza <em>mutevole</em> di byte (tipo <code>char</code>)</li>
 <li>Operazioni di confronto; concatenazione: <code>+</code></li>
 <li><em>Attenzione</em>: apici doppi per valori <code>string</code>, singoli per <code>char</code></li>
 </ul>
@@ -430,36 +430,6 @@ int main() {
 <slide  >
   
     <hgroup>
-      <h2>Rettangoli e cerchi con Qt</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/qt/slogan.png"><img src="images/oop/raster-coord.png">
-        
-      </figure><pre class="prettyprint" data-lang="C++"><code>#include &lt;QtWidgets&gt;
-</code></pre>
-<pre class="prettyprint" data-lang="C++"><code>QPixmap screen{600, 400}; QPainter painter{&amp;screen};
-
-painter.setBrush(QColor{255, 255, 0});
-painter.drawRect(50, 75, 90, 50);
-
-painter.setBrush(QColor{0, 0, 255});
-painter.drawEllipse(QPoint{300, 50}, 20, 20);
-
-QLabel label; label.setPixmap(screen); label.show();
-</code></pre>
-<pre class="prettyprint" data-lang="Project"><code>QT += widgets
-CONFIG += console c++11
-</code></pre>
-<blockquote></blockquote>
-<p>Progetto: <em>Application</em> → <em>Qt Widgets Application</em></p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Lettura di dati (++)</h2>
       <h3></h3>
     </hgroup>
@@ -710,9 +680,8 @@ int main() {
 %}
 %include "ball.h"
 </code></pre>
-<pre class="prettyprint" data-lang="cmd"><code>swig -python -c++ ball.i
-g++ -fPIC -c ball.cpp ball_wrap.cxx -I/usr/include/python3.6m/ -std=c++11
-g++ -shared ball.o ball_wrap.o -o _ball.so
+<pre class="prettyprint" data-lang="shell"><code>swig -python -c++ ball.i
+g++ -fPIC -shared *.cpp *.cxx -I/usr/include/python3.6m -o _$module.so
 </code></pre>
 <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from ball import Ball
 &gt;&gt;&gt; b = Ball(60, 60)
@@ -846,32 +815,6 @@ arena-&gt;move_all();
 <slide  >
   
     <hgroup>
-      <h2>Ciclo di animazione in Qt</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="C++"><code>// fields: int x = 0; QPixmap image{"ball.png"};
-
-Widget::Widget() {
-    startTimer(1000 / 60);  // 60 fps
-}
-void Widget::timerEvent(QTimerEvent* event) {
-    x = (x + 5) % 600;  // or width()
-    update();           // async: this widget should be redrawn
-}
-void Widget::paintEvent(QPaintEvent* event) {
-    QPainter painter{this};
-    painter.drawPixmap(x, 10, image);
-}
-</code></pre>
-<blockquote></blockquote>
-<p>Progetto: <em>Application</em> → <em>Qt Widgets Application</em></p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Fifteen – Gioco astratto</h2>
       <h3></h3>
     </hgroup>
@@ -882,11 +825,14 @@ void Widget::paintEvent(QPaintEvent* event) {
       </figure><pre class="prettyprint" data-lang="C++"><code>class BoardGame {
 public:
     virtual void play_at(int x, int y) = 0;
+    virtual void flag_at(int x, int y) = 0;
     virtual int cols() = 0;
     virtual int rows() = 0;
     virtual std::string get_val(int x, int y) = 0;
     virtual bool finished() = 0;
     virtual std::string message() = 0;
+
+    virtual ~BoardGame() {}
 };
 </code></pre></article>
  
@@ -895,176 +841,17 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Fifteen – Gui generica</h2>
+      <h2>Stampa del gioco</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <figure>
-        <img src="images/qt/puzzle.png">
-        
-      </figure><pre class="prettyprint" data-lang="C++"><code>class BoardGameGui : public QWidget {
-    Q_OBJECT
-public:
-    BoardGameGui(BoardGame* game);
-    void handle_click(int x, int y);
-    void update_button(int x, int y);
-    void update_all_buttons();
-private:
-    BoardGame* game_;
-    int cols_, rows_;
-};
-</code></pre></article>
- 
-</slide>
-
-<slide class="segue dark" >
-  
-    <aside class="gdbar"><img src="images/logo.png"></aside>
-    <hgroup class="auto-fadein">
-      <h2>Strutture dati lineari</h2>
-      <h3></h3>
-    </hgroup>
-  
-</slide>
-
-<slide class="large-figure" >
-  
-    <hgroup>
-      <h2>Vector, array dinamici</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/fun/dynamic-array.svg">
-        
-      </figure><ul>
-<li><strong>Array</strong>: area di memoria che contiene in <em>celle contigue</em> elementi tutti dello <em>stesso tipo</em></li>
-<li>Usato internamente dai <code>vector</code> del C++<ul>
-<li>Riallocazione dinamica e trasparente per inserimenti e rimozioni</li>
-</ul>
-</li>
-<li><code>Vector</code> come <strong>array dinamici</strong><ul>
-<li>Accesso casuale: <code>O(1)</code></li>
-<li>Aggiunta o rimozione in fondo all'array: <code>O(1)</code>, ma a volte riallocazione</li>
-<li>Inserimento o rimozione: <code>O(n)</code></li>
-</ul>
-</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Vector di float</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="C++"><code>class FloatVector {  // ...
-    int capacity_;
-    int size_;
-    float* data_;
-public:
-    FloatVector(int size, float val);
-    float get(int pos);
-    void set(int pos, float val);
-    void insert(int pos, float val);
-    float remove(int pos);
-    int size();
-};
-</code></pre>
-<p>Implementazione nel repository di esempi</p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Inserimento in vector</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="C++"><code>void FloatVector::insert(int pos, float val) {
-    if (pos &lt; 0 || pos &gt; size_) throw out_of_range("wrong pos");
-    if (size_ == capacity_) expand_capacity();
-    for (int i = size_; i &gt; pos; --i) data_[i] = data_[i - 1];
-    data_[pos] = val;
-    ++size_;
-}
-void FloatVector::expand_capacity() {
-    capacity_ *= 2;
-    float* bigger = new float[capacity_];
-    for (int i = 0; i &lt; size_; i++) bigger[i] = data_[i];
-    delete[] data_;
-    data_ = bigger;
-}
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Liste concatenate</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <p><img alt="" src="images/fun/linked-list.svg" /></p>
-<ul>
-<li>Ciascun <strong>nodo</strong> contiene un <em>valore</em> della lista ed un <em>puntatore</em> al nodo successivo<ul>
-<li>Accesso casuale: <code>O(n)</code></li>
-<li>Aggiunta o rimozione in testa all'array: <code>O(1)</code></li>
-<li>Aggiunta o rimozione in fondo all'array: <code>O(n)</code>, oppure <code>O(1)</code> se noto ultimo nodo</li>
-<li>Inserimento o rimozione: <code>O(1) + O(n)</code> per ricerca</li>
-</ul>
-</li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Lista di float</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="C++"><code>struct Node {
-    float val;
-    Node* next;
-};
-class FloatList {  // ...
-    Node* head_; int size_;
-public:
-    FloatList(int size, float val);
-    float get(int pos);
-    void set(int pos, float val);
-    void insert(int pos, float val);
-    float remove(int pos);
-    int size();
-};
-</code></pre>
-<p>Implementazione nel repository di esempi</p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Inserimento in lista</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="C++"><code>void FloatList::insert(int pos, float val) {
-    if (pos &lt; 0 || pos &gt; size_) throw out_of_range("wrong pos");
-    if (pos == 0) {
-        head_ = new Node{val, head_};
-    } else {
-        Node* n = head_;
-        for (int i = 0; i &lt; pos - 1; ++i) n = n-&gt;next;
-        n-&gt;next = new Node{val, n-&gt;next};
+      <pre class="prettyprint" data-lang="C++"><code>void print_game(BoardGame* game) {
+    for (auto y = 0; y &lt; game-&gt;rows(); ++y) {
+        for (auto x = 0; x &lt; game-&gt;cols(); ++x) {
+            cout &lt;&lt; setw(3) &lt;&lt; game-&gt;get_val(x, y);
+        }
+        cout &lt;&lt; endl;
     }
-    ++size_;
 }
 </code></pre></article>
  
@@ -1073,29 +860,23 @@ public:
 <slide  >
   
     <hgroup>
-      <h2>Template C++</h2>
+      <h2>Ciclo di gioco</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
-<li><strong>Programmazione generica</strong>: codice che opera su <em>tipi parametrizzati</em><ul>
-<li>Es. liste di <code>int</code>, <code>string</code> ecc.: cambia solo il tipo di dato!</li>
-</ul>
-</li>
-<li><strong>Template</strong>: meccanismo di programmazione generica in C++<ul>
-<li>Generaz. trasparente di codice specializzato per un tipo</li>
-<li>Es. <code>vector&lt;float&gt;</code> genera una classe ≈ <code>FloatVector</code></li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="C++"><code>template &lt;class T&gt;
-T max(T a, T b) {
-    if (a &gt;= b) return a;
-    return b;
+      <pre class="prettyprint" data-lang="C++"><code>void play_game(BoardGame* game) {
+    print_game(game);
+
+    while (! game-&gt;finished()) {
+        auto x = 0, y = 0;
+        cout &lt;&lt; endl &lt;&lt; "Move? ";
+        cin &gt;&gt; x &gt;&gt; y;
+
+        game-&gt;play_at(x, y);
+        print_game(game);
+    }
+    cout &lt;&lt; game-&gt;message() &lt;&lt; endl;
 }
-</code></pre>
-<pre class="prettyprint" data-lang="C++"><code>double x = max&lt;double&gt;(5.0, 3.5);  # &lt;double&gt;, &lt;int&gt;: optional
-int i = max&lt;int&gt;(4, 6);            # inferred from parameters
 </code></pre></article>
  
 </slide>
