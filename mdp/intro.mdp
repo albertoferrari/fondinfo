@@ -8,13 +8,14 @@ title: 1. Introduzione all'informatica
 figure: images/sys/globe.jpg
 
 - Rappresentazione dei dati
-    - Numeri; testi; immagini; suoni
+    - Numeri
+    - Testi, immagini e suoni
 - Teoria della computazione
-    - Linguaggi; automi e calcolabilità; complessità
+    - Linguaggi formali
+    - Automi e calcolatori
+    - Complessità computazionale
 - Sviluppo del software
     - Ciclo di vita; qualità e collaudo
-- Sistemi di elaborazione
-    - Calcolatori; sistemi operativi; Internet e Web
 
 ---
 
