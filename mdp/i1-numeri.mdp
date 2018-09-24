@@ -79,8 +79,9 @@ figure: images/repr/sum-binary.jpg
 title: Codifica decimale → binaria
 class: large-table
 
-- (1) Dividere il numero decimale per 2
-- (2) Il resto è il valore del nuovo bit, a sinistra *(loop)*
+- *(1)* Dividere il numero decimale per 2
+- *(2)* Il resto è il valore del nuovo bit, a sinistra
+- *(3)* Il quoziente è il numero con cui continuare *(loop)*
 - Ossia continuare a dividere per 2 il quoziente, finché non si annulla
 - Es.: `35~~10~~ = 00100011~~2~~`
 
@@ -284,8 +285,8 @@ title: Numeri reali
 title: Parte frazionaria in binario
 class: large-table
 
-- Moltiplicare la parte frazionaria per 2
-- Assegnare la parte intera del risultato come valore del bit *(loop)*
+- *(1)* Moltiplicare la parte frazionaria per 2
+- *(2)* Assegnare la parte intera del risultato come valore del bit *(loop)*
 - Ossia: continuare a moltiplicare per 2 la parte frazionaria del risultato... <br> finché non si annulla
 
 fract | fract*B | int | peso
