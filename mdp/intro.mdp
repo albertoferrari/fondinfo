@@ -35,8 +35,8 @@ title: 3. Esercitazioni in laboratorio
 figure: images/misc/geek-girl.jpg
 
 - Esercizi di base, in Python
+    - A riga di comando e con grafica
 - Piccoli progetti a oggetti
-    - Prima a riga di comando e poi con interfaccia grafica
     - Prima in Python e poi in C++
 - **Attenzione**: non sono sufficienti le poche ore in laboratorio per imparare a programmare!
     - “Venite già studiati”
