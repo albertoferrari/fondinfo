@@ -137,7 +137,8 @@ title: Problem solving
 figure: images/misc/problem-solving-cycle.svg
 class: large-figure
 
-- George Polya (1945). “_How to solve it_”
+- [“How to solve it”](https://archive.org/details/HowToSolveIt)
+    - George Polya, 1945
     - Soluzione di problemi matematici: processo raramente lineare <br>&nbsp;
 - **(1) See.** Capire il problema
     - Quali dati? Quali incognite?
