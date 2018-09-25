@@ -180,7 +180,8 @@ figure: images/comp/catalogue.png
 ---
 
 title: Cercare più velocemente (++)
-figure: images/comp/binary-search.jpg
+figure: images/comp/binary-search.png
+class: large-figure
 
 - Su schedario *ordinato* si può fare più in fretta
     - **(1)** *Finchè* restano delle schede da esaminare: si prende tra loro la scheda centrale
