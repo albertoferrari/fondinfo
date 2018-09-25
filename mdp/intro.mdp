@@ -169,7 +169,7 @@ title: Dal problema alla soluzione, e ritorno
 ---
 
 title: Ricerca in uno schedario (++)
-figure: images/algo/catalogue.png
+figure: images/comp/catalogue.png
 
 - Es. in biblioteca: cercare la scheda di un certo libro
     - **(1)** *Finchè* restano delle schede da esaminare: si prende la prima scheda non ancora controllata
@@ -180,7 +180,7 @@ figure: images/algo/catalogue.png
 ---
 
 title: Cercare più velocemente (++)
-figure: images/algo/catalogue.png
+figure: images/comp/binary-search.jpg
 
 - Su schedario *ordinato* si può fare più in fretta
     - **(1)** *Finchè* restano delle schede da esaminare: si prende tra loro la scheda centrale
