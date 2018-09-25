@@ -122,7 +122,7 @@ figure: images/dev/python.png images/dev/codeblocks.png
     - [**Python.org**](https://www.python.org/ftp/python/3.7.0/python-3.7.0-webinstall.exe), v3.7, *battery included*
     - [Playground Python](http://www.ce.unipr.it/brython/)
     - [**CodeBlocks.org**](http://sourceforge.net/projects/codeblocks/files/Binaries/17.12/Windows/codeblocks-17.12mingw-setup.exe), C++ IDE, *con MinGW e setup*
-- Installare Ubuntu in una VirtualBox
+- Installare [Ubuntu](http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso) in una [VirtualBox](http://download.virtualbox.org/virtualbox/5.2.18/VirtualBox-5.2.18-124319-Win.exe)
     - [WikiHow.com](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 
 code: Shell
