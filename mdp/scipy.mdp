@@ -166,7 +166,7 @@ code: python
 
 ---
 
-title: Tupla
+title: Tuple
 
 - **Immutable** sequence of values, even of *different type*
 
