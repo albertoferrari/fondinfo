@@ -168,6 +168,20 @@ title: Dal problema alla soluzione, e ritorno
 
 ---
 
+title: Elementi di un algoritmo
+figure: images/algo/recipe.png
+figcaption: Una ricetta di cucina è un esempio di algoritmo
+
+- *Algoritmo*: procedimento che risolve un determinato problema attraverso un numero finito di passi elementari (al-Khwarizmi, ~800)
+- **Dati**: iniziali (istanza problema), intermedi, finali (soluzione)
+- **Passi** elementari: azioni atomiche non scomponibili in azioni più semplici
+- **Processo**, o anche esecuzione: sequenza ordinata di passi
+- *Proprietà*: finitezza, non ambiguità, realizzabilità, efficienza...
+
+> Computer science is no more about computers than astronomy is about telescopes. *(E. Dijkstra...)*
+
+---
+
 title: Ricerca in uno schedario (++)
 figure: images/comp/catalogue.png
 
