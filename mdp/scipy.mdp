@@ -1338,4 +1338,170 @@ code: Python
 
 ---
 
+title: MatPlotLib
+class: segue dark
+
+---
+
+title: Basic plots
+figure: images/scipy/pyplot-1.png images/scipy/pyplot-2.png
+
+code: Python
+
+    import matplotlib.pyplot as plt
+    plt.plot([1, 2, 3, 4])
+    plt.ylabel('some numbers')
+    plt.show()
+
+code: Python
+
+    # plot x versus y
+    plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
+    plt.show()
+
+>
+
+[matplotlib.org](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot)
+
+---
+
+title: Formatting the plot
+figure: images/scipy/pyplot-3.png
+
+code: Python
+
+    plt.plot([1, 2, 3, 4], [1, 4, 9, 16], 'ro')
+    plt.axis([0, 6, 0, 20])  # xmin, xmax, ymin, ymax
+    plt.show()
+
+code: Python
+
+    # example format strings
+    'b'    # blue markers with default shape
+    'ro'   # red circles
+    'g-'   # green solid line
+    '--'   # dashed line with default color
+    'k^:'  # black triangle_up markers connected by a dotted line
+
+---
+
+title: Plotting NumPy arrays
+figure: images/scipy/pyplot-4.png
+
+code: Python
+
+    # evenly sampled time at 200ms intervals
+    t = np.arange(0., 5., 0.2)
+
+    # red dashes, blue squares and green triangles
+    plt.plot(t, t, 'r--',
+             t, t**2, 'bs',
+             t, t**3, 'g^')
+    plt.show()
+
+---
+
+title: Plotting data from dict
+figure: images/scipy/pyplot-5.png
+
+code: Python
+
+    data = {'a': np.arange(50),
+            'c': np.random.randint(0, 20, 50),
+            'd': np.abs(np.random.randn(50)) * 100}
+    data['b'] = data['a'] + 10 * np.random.randn(50)
+
+    plt.scatter('a', 'b', c='c', s='d', data=data)
+    plt.xlabel('entry a')
+    plt.ylabel('entry b')
+    plt.show()
+
+    # s for size, c for color
+    # 'c': one int out of 20 (index for a color-map)
+
+---
+
+title: Plotting with categorical variables
+figure: images/scipy/pyplot-6.png
+class: large-figure
+
+code: Python
+
+    names = ['group_a', 'group_b', 'group_c']
+    values = [1, 10, 100]
+
+    plt.figure(1, figsize=(9, 3))  # inches
+
+    plt.subplot(131)  # rows, cols, index
+    plt.bar(names, values)
+    plt.subplot(132)  # rows, cols, index
+    plt.scatter(names, values)
+    plt.subplot(133)  # rows, cols, index
+    plt.plot(names, values)
+    plt.suptitle('Categorical Plotting')
+    plt.show()
+
+---
+
+title: Multiple axis
+figure: images/scipy/pyplot-7.png
+
+code: Python
+
+    def f(t):
+        return np.exp(-t) * np.cos(2*np.pi*t)
+
+    t1 = np.arange(0.0, 5.0, 0.1)
+    t2 = np.arange(0.0, 5.0, 0.02)
+
+    plt.subplot(211)  # rows, cols, index
+    plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k')
+
+    plt.subplot(212)  # rows, cols, index
+    plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
+    plt.show()
+
+---
+
+title: Histogram and text
+figure: images/scipy/pyplot-8.png
+
+code: Python
+
+    mu, sigma = 100, 15
+    x = mu + sigma * np.random.randn(10000)
+
+    # histogram of data, with 50 “bins”
+    plt.hist(x, 50, density=1, facecolor='g')
+
+    plt.xlabel('Smarts')
+    plt.ylabel('Probability')
+    plt.title('Histogram of IQ')
+    plt.text(60, .025, r'$\mu=100,\ \sigma=15$')
+    plt.axis([40, 160, 0, 0.03])
+    plt.grid(True, alpha=0.75)
+    plt.show()
+
+---
+
+title: Nonlinear axes
+
+
+code: Python
+
+    # make up some data in the interval ]0, 1[
+    y = np.random.normal(loc=0.5, scale=0.4, size=1000)
+    y = y[(y > 0) & (y < 1)]
+    y.sort()
+    x = np.arange(len(y))
+
+    # log
+    plt.subplot(222)
+    plt.plot(x, y)
+    plt.yscale('log')
+    plt.title('log')
+    plt.grid(True)
+    plt.show()
+
+
 

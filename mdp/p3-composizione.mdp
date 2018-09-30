@@ -511,20 +511,7 @@ class: segue dark
 
 ---
 
-title: 3.1 Conteggio cifre
-figure: images/misc/numbers.jpg
-
-- Chiedere una riga di testo all'utente
-- Contare il numero complessivo di cifre presenti (da `'0'` a `'9'`)
-- Valutare anche la somma di tutte le singole cifre trovate
-
->
-
-Usare un ciclo `for` sulla stringa (sequenza di caratteri)
-
----
-
-title: 3.2 Array, precalcolo
+title: 3.1 Array, precalcolo
 figure: images/misc/sin-cos.png
 
 - Riempire una lista con i valori di `sin`
@@ -535,13 +522,13 @@ figure: images/misc/sin-cos.png
 
 >
 
-`math.Sin` opera su radianti
+`math.sin` opera su radianti
 
 Calcolare `math.sin(x * math.pi / 180)`, anzichè `math.sin(x)`
 
 ---
 
-title: 3.3 Istogramma con barre orizzontali
+title: 3.2 Istogramma con barre orizzontali
 figure: images/misc/histogram-rot.png
 
 - Chiedere all'utente una lista di valori positivi
@@ -552,7 +539,7 @@ figure: images/misc/histogram-rot.png
     
 ---
 
-title: 3.4 Spirale
+title: 3.3 Spirale
 figure: images/misc/spiral-circles.png
 
 - Mostrare l'*animazione* di un cerchio lungo una spirale
@@ -564,7 +551,7 @@ figure: images/misc/spiral-circles.png
 
 ---
 
-title: 3.5 Spirale
+title: 3.4 Spirale con classe
 figure: images/misc/spiral-circles.png
 
 - Mostrare l'*animazione* di un cerchio lungo una spirale
@@ -575,10 +562,10 @@ figure: images/misc/spiral-circles.png
     
 ---
 
-title: 3.6 Lista di alieni
+title: 3.5 Lista di alieni
 figure: images/misc/invaders-path.jpg
 
-- Riusare la classe `Alien` (es. 2.8)
+- Riusare la classe `Alien` (es. 2.9)
 - Creare inizialmente una lista di alieni, con posizioni di partenza diverse
     - Memorizzare la posizione di partenza di ciascun alieno in opportuni campi privati
     - Lasciare a ciascun alieno uno spazio orizzontale di movimento di 150 pixel, a destra della posizione di partenza
@@ -586,7 +573,7 @@ figure: images/misc/invaders-path.jpg
 
 ---
 
-title: 3.7 Alieni nell'arena
+title: 3.6 Alieni nell'arena
 figure: images/misc/invaders-path.jpg
 
 - Riusare la classe `Invader` (es. 3.6)
@@ -595,4 +582,58 @@ figure: images/misc/invaders-path.jpg
 - Aggiungere gli alieni all'arena
     - Nel metodo `__init__` chiamare `arena.add`
     - Poi, in `update` chiamare `arena.move_all`
+
+---
+
+title: 3.7 Pallottole
+figure: images/misc/invaders-path.jpg
+
+- Continuare l'es. 3.6
+- Aggiungere un attore `Bullet`
+- Parte dal fondo e si muove verso l'alto
+- Se esce dallo schermo, si rimuove dal gioco
+- Se si scontra con un alieno, entrambi si rimuovono dal gioco
+- Nella funzione `update`, generare casualmente dei `Bullet`
+
+---
+
+title: 3.8 Fattori primi
+
+- Funzione che trova tutti i fattori primi di un numero `n`
+    - Parametro: `n`
+    - Risultato: lista, contenente i fattori primi di `n`
+- Algoritmo: scorrere tutti i valori d'interesse, e cercare i divisori
+    - `x` è divisore di `n` sse `n % x == 0`
+    - Non considerare i fattori non primi
+- Provare la funzione con valori inseriti dall'utente
+
+>
+
+Quando si trova un divisore `x`, dividere ripetutamente `n` per `x`, finché resta divisibile <br>
+Valutare l'uso di un ciclo `while`, anzichè `for`
+
+---
+
+title: 3.9 Incolonnamento dati
+
+- Visualizzare due tabelle con i caratteri ASCII
+    - 8 righe x 12 colonne, codici da 32 a 126
+- Tabella 1: mostrare in ordine i caratteri, colonna per colonna
+- Tabella 2: mostrare in ordine i caratteri, riga per riga
+
+code: Tabella 1
+
+     (08@HPX`hpx
+    !)19AIQYaiqy
+    "*2:BJRZbjrz
+    #+3;CKS[cks{
+    $,4<DLT\dlt|
+    %-5=EMU]emu}
+    &.6>FNV^fnv~
+    '/7?GOW_gow 
+
+Usare sempre due cicli `for` annidati: esterno su `y`, interno su `x` <br>
+In ogni posizione, calcolare il carattere da visualizzare: `x * ROWS + y`...
+
+
 

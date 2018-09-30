@@ -474,7 +474,20 @@ Lasciare tra i riquadri un piccolo margine
 
 ---
 
-title: 2.4 Movimento orizzontale
+title: 2.4 Conteggio cifre
+figure: images/misc/numbers.jpg
+
+- Chiedere una riga di testo all'utente
+- Contare il numero complessivo di cifre presenti (da `'0'` a `'9'`)
+- Valutare anche la somma di tutte le singole cifre trovate
+
+>
+
+Usare un ciclo `for` sulla stringa (sequenza di caratteri)
+
+---
+
+title: 2.5 Movimento orizzontale
 figure: images/misc/street-fighter.jpg
 
 - Mostrare una pallina che si muove in orizzontale
@@ -484,17 +497,17 @@ figure: images/misc/street-fighter.jpg
 
 ---
 
-title: 2.5 Movimento a serpentina
+title: 2.6 Movimento a serpentina
 figure: images/misc/science-of-spaceships.jpg
 
 - Mostrare una pallina che si muove a serpentina
 - Partire dall'esercizio precedente
-    - Al momento del rimbalzo, imporre un spostamento verticale
+    - Al momento del rimbalzo, imporre un spostamento verso il basso
     - Fare in modo che, in ogni frame, lo spostamento sia solo orizzontale, o solo verticale, ma *non* diagonale
 
 ---
 
-title: 2.6 Ellisse
+title: 2.7 Ellisse
 figure: images/misc/ellipse.svg
 
 - Classe che modella un'ellisse
@@ -509,7 +522,7 @@ figure: images/misc/ellipse.svg
 
 ---
 
-title: 2.7 Animazione di una pallina
+title: 2.8 Animazione di una pallina
 figure: images/misc/street-fighter.jpg
 
 - Partire dalla classe `Ball` vista a lezione
@@ -523,12 +536,12 @@ figure: images/misc/street-fighter.jpg
 
 ---
 
-title: 2.8 Classe degli alieni
+title: 2.9 Classe degli alieni
 figure: images/misc/invaders-path.jpg
 
 - Creare una classe `Alien`, che contenga i dati ed il comportamento dell'alieno
     - Campi privati: `x`, `y`, `dx`
-    - Metodo `move` per avanzare
+    - Metodo `move` per avanzare come in es. 2.6
     - Metodo `position` per ottenere la posizione attuale
 - Istanziare un oggetto `Alien` e farlo muovere sullo schermo
     - Chiamare il metodo `move` ad ogni ciclo

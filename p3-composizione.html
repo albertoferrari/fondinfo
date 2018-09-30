@@ -715,27 +715,7 @@ print('ball @', ball.pos)
 <slide  >
   
     <hgroup>
-      <h2>3.1 Conteggio cifre</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/numbers.jpg">
-        
-      </figure><ul>
-<li>Chiedere una riga di testo all'utente</li>
-<li>Contare il numero complessivo di cifre presenti (da <code>'0'</code> a <code>'9'</code>)</li>
-<li>Valutare anche la somma di tutte le singole cifre trovate</li>
-</ul>
-<blockquote></blockquote>
-<p>Usare un ciclo <code>for</code> sulla stringa (sequenza di caratteri)</p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>3.2 Array, precalcolo</h2>
+      <h2>3.1 Array, precalcolo</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -754,7 +734,7 @@ print('ball @', ball.pos)
 </li>
 </ul>
 <blockquote></blockquote>
-<p><code>math.Sin</code> opera su radianti</p>
+<p><code>math.sin</code> opera su radianti</p>
 <p>Calcolare <code>math.sin(x * math.pi / 180)</code>, anzichè <code>math.sin(x)</code></p></article>
  
 </slide>
@@ -762,7 +742,7 @@ print('ball @', ball.pos)
 <slide  >
   
     <hgroup>
-      <h2>3.3 Istogramma con barre orizzontali</h2>
+      <h2>3.2 Istogramma con barre orizzontali</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -786,7 +766,7 @@ print('ball @', ball.pos)
 <slide  >
   
     <hgroup>
-      <h2>3.4 Spirale</h2>
+      <h2>3.3 Spirale</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -807,7 +787,7 @@ print('ball @', ball.pos)
 <slide  >
   
     <hgroup>
-      <h2>3.5 Spirale</h2>
+      <h2>3.4 Spirale con classe</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -829,7 +809,7 @@ print('ball @', ball.pos)
 <slide  >
   
     <hgroup>
-      <h2>3.6 Lista di alieni</h2>
+      <h2>3.5 Lista di alieni</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -837,7 +817,7 @@ print('ball @', ball.pos)
         <img src="images/misc/invaders-path.jpg">
         
       </figure><ul>
-<li>Riusare la classe <code>Alien</code> (es. 2.8)</li>
+<li>Riusare la classe <code>Alien</code> (es. 2.9)</li>
 <li>Creare inizialmente una lista di alieni, con posizioni di partenza diverse<ul>
 <li>Memorizzare la posizione di partenza di ciascun alieno in opportuni campi privati</li>
 <li>Lasciare a ciascun alieno uno spazio orizzontale di movimento di 150 pixel, a destra della posizione di partenza</li>
@@ -851,7 +831,7 @@ print('ball @', ball.pos)
 <slide  >
   
     <hgroup>
-      <h2>3.7 Alieni nell'arena</h2>
+      <h2>3.6 Alieni nell'arena</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -870,6 +850,82 @@ print('ball @', ball.pos)
 </ul>
 </li>
 </ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.7 Pallottole</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/invaders-path.jpg">
+        
+      </figure><ul>
+<li>Continuare l'es. 3.6</li>
+<li>Aggiungere un attore <code>Bullet</code></li>
+<li>Parte dal fondo e si muove verso l'alto</li>
+<li>Se esce dallo schermo, si rimuove dal gioco</li>
+<li>Se si scontra con un alieno, entrambi si rimuovono dal gioco</li>
+<li>Nella funzione <code>update</code>, generare casualmente dei <code>Bullet</code></li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.8 Fattori primi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Funzione che trova tutti i fattori primi di un numero <code>n</code><ul>
+<li>Parametro: <code>n</code></li>
+<li>Risultato: lista, contenente i fattori primi di <code>n</code></li>
+</ul>
+</li>
+<li>Algoritmo: scorrere tutti i valori d'interesse, e cercare i divisori<ul>
+<li><code>x</code> è divisore di <code>n</code> sse <code>n % x == 0</code></li>
+<li>Non considerare i fattori non primi</li>
+</ul>
+</li>
+<li>Provare la funzione con valori inseriti dall'utente</li>
+</ul>
+<blockquote></blockquote>
+<p>Quando si trova un divisore <code>x</code>, dividere ripetutamente <code>n</code> per <code>x</code>, finché resta divisibile <br>
+Valutare l'uso di un ciclo <code>while</code>, anzichè <code>for</code></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3.9 Incolonnamento dati</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Visualizzare due tabelle con i caratteri ASCII<ul>
+<li>8 righe x 12 colonne, codici da 32 a 126</li>
+</ul>
+</li>
+<li>Tabella 1: mostrare in ordine i caratteri, colonna per colonna</li>
+<li>Tabella 2: mostrare in ordine i caratteri, riga per riga</li>
+</ul>
+<pre class="prettyprint" data-lang="Tabella 1"><code> (08@HPX`hpx
+!)19AIQYaiqy
+"*2:BJRZbjrz
+#+3;CKS[cks{
+$,4&lt;DLT\dlt|
+%-5=EMU]emu}
+&amp;.6&gt;FNV^fnv~
+'/7?GOW_gow
+</code></pre>
+<p>Usare sempre due cicli <code>for</code> annidati: esterno su <code>y</code>, interno su <code>x</code> <br>
+In ogni posizione, calcolare il carattere da visualizzare: <code>x * ROWS + y</code>...</p></article>
  
 </slide>
 

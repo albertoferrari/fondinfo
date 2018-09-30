@@ -1747,14 +1747,213 @@ two    0.091446  0.236650
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>MatPlotLib</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
 <slide  >
   
     <hgroup>
-      <h2></h2>
+      <h2>Basic plots</h2>
       <h3></h3>
     </hgroup>
     <article >
-      </article>
+      <figure>
+        <img src="images/scipy/pyplot-1.png"><img src="images/scipy/pyplot-2.png">
+        
+      </figure><pre class="prettyprint" data-lang="Python"><code>import matplotlib.pyplot as plt
+plt.plot([1, 2, 3, 4])
+plt.ylabel('some numbers')
+plt.show()
+</code></pre>
+<pre class="prettyprint" data-lang="Python"><code># plot x versus y
+plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
+plt.show()
+</code></pre>
+<blockquote></blockquote>
+<p><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot">matplotlib.org</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Formatting the plot</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/scipy/pyplot-3.png">
+        
+      </figure><pre class="prettyprint" data-lang="Python"><code>plt.plot([1, 2, 3, 4], [1, 4, 9, 16], 'ro')
+plt.axis([0, 6, 0, 20])  # xmin, xmax, ymin, ymax
+plt.show()
+</code></pre>
+<pre class="prettyprint" data-lang="Python"><code># example format strings
+'b'    # blue markers with default shape
+'ro'   # red circles
+'g-'   # green solid line
+'--'   # dashed line with default color
+'k^:'  # black triangle_up markers connected by a dotted line
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Plotting NumPy arrays</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/scipy/pyplot-4.png">
+        
+      </figure><pre class="prettyprint" data-lang="Python"><code># evenly sampled time at 200ms intervals
+t = np.arange(0., 5., 0.2)
+
+# red dashes, blue squares and green triangles
+plt.plot(t, t, 'r--',
+         t, t**2, 'bs',
+         t, t**3, 'g^')
+plt.show()
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Plotting data from dict</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/scipy/pyplot-5.png">
+        
+      </figure><pre class="prettyprint" data-lang="Python"><code>data = {'a': np.arange(50),
+        'c': np.random.randint(0, 20, 50),
+        'd': np.abs(np.random.randn(50)) * 100}
+data['b'] = data['a'] + 10 * np.random.randn(50)
+
+plt.scatter('a', 'b', c='c', s='d', data=data)
+plt.xlabel('entry a')
+plt.ylabel('entry b')
+plt.show()
+
+# s for size, c for color
+# 'c': one int out of 20 (index for a color-map)
+</code></pre></article>
+ 
+</slide>
+
+<slide class="large-figure" >
+  
+    <hgroup>
+      <h2>Plotting with categorical variables</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/scipy/pyplot-6.png">
+        
+      </figure><pre class="prettyprint" data-lang="Python"><code>names = ['group_a', 'group_b', 'group_c']
+values = [1, 10, 100]
+
+plt.figure(1, figsize=(9, 3))  # inches
+
+plt.subplot(131)  # rows, cols, index
+plt.bar(names, values)
+plt.subplot(132)  # rows, cols, index
+plt.scatter(names, values)
+plt.subplot(133)  # rows, cols, index
+plt.plot(names, values)
+plt.suptitle('Categorical Plotting')
+plt.show()
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Multiple axis</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/scipy/pyplot-7.png">
+        
+      </figure><pre class="prettyprint" data-lang="Python"><code>def f(t):
+    return np.exp(-t) * np.cos(2*np.pi*t)
+
+t1 = np.arange(0.0, 5.0, 0.1)
+t2 = np.arange(0.0, 5.0, 0.02)
+
+plt.subplot(211)  # rows, cols, index
+plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k')
+
+plt.subplot(212)  # rows, cols, index
+plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
+plt.show()
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Histogram and text</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/scipy/pyplot-8.png">
+        
+      </figure><pre class="prettyprint" data-lang="Python"><code>mu, sigma = 100, 15
+x = mu + sigma * np.random.randn(10000)
+
+# histogram of data, with 50 “bins”
+plt.hist(x, 50, density=1, facecolor='g')
+
+plt.xlabel('Smarts')
+plt.ylabel('Probability')
+plt.title('Histogram of IQ')
+plt.text(60, .025, r'$\mu=100,\ \sigma=15$')
+plt.axis([40, 160, 0, 0.03])
+plt.grid(True, alpha=0.75)
+plt.show()
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Nonlinear axes</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="Python"><code># make up some data in the interval ]0, 1[
+y = np.random.normal(loc=0.5, scale=0.4, size=1000)
+y = y[(y &gt; 0) &amp; (y &lt; 1)]
+y.sort()
+x = np.arange(len(y))
+
+# log
+plt.subplot(222)
+plt.plot(x, y)
+plt.yscale('log')
+plt.title('log')
+plt.grid(True)
+plt.show()
+</code></pre></article>
  
 </slide>
 
