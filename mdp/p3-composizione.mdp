@@ -576,7 +576,7 @@ figure: images/misc/invaders-path.jpg
 title: 3.6 Alieni nell'arena
 figure: images/misc/invaders-path.jpg
 
-- Riusare la classe `Invader` (es. 3.6)
+- Partire dalla classe `Alien` (es. 3.5)
 - Renderla una implementazione concreta di `Actor`
     - Aggiungere i metodi `symbol` e `collide`, anche solo vuoti
 - Aggiungere gli alieni all'arena
