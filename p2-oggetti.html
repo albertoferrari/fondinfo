@@ -167,6 +167,30 @@ print(x)      # just for debug
 <slide  >
   
     <hgroup>
+      <h2>Cicli su stringhe</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Il ciclo <code>for</code> scorre i valori qualsiasi sequenza</li>
+<li>Una stringa è una sequenza di caratteri</li>
+</ul>
+<pre class="prettyprint" data-lang="Python"><code>text = input("text? ")
+first = input("First letter to uppercase? ")
+last = input("Last letter to uppercase? ")
+
+for c in text:
+    if first &lt;= c &lt;= last:
+        print(c.upper(), end="")
+    else:
+        print(c, end="")
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Cicli e annidamento</h2>
       <h3></h3>
     </hgroup>

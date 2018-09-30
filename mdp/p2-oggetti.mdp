@@ -98,6 +98,25 @@ code: python
 
 ---
 
+title: Cicli su stringhe
+
+- Il ciclo `for` scorre i valori qualsiasi sequenza
+- Una stringa è una sequenza di caratteri
+
+code: Python
+
+    text = input("text? ")
+    first = input("First letter to uppercase? ")
+    last = input("Last letter to uppercase? ")
+
+    for c in text:
+        if first <= c <= last:
+            print(c.upper(), end="")
+        else:
+            print(c, end="")
+
+---
+
 title: Cicli e annidamento
 figure: images/fun/multiplication-table.jpg
 
