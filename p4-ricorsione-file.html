@@ -301,52 +301,6 @@ def under_attack(board: list, x: int, y: int) -&gt; bool:
  
 </slide>
 
-<slide  >
-  
-    <hgroup>
-      <h2>Esercizio - Massimo Comun Divisore</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/hist/euclid.jpg">
-        
-      </figure><ul>
-<li>Leggere due numeri</li>
-<li>Calcolare in una funzione il loro Massimo Comun Divisore</li>
-<li>Visualizzare il risultato della funzione</li>
-</ul>
-<blockquote></blockquote>
-<p>Provare ad usare sia l'iterazione che la ricorsione</p>
-<p>Euclide: MCD(a, b) = a, se b = 0; <br>
-MCD(a, b) = MCD(b, a mod b), se b &gt; 0</p></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Esercizio - Torre di Hanoi</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/hanoi-tower.png">
-        
-      </figure><ul>
-<li>Tre paletti + N dischi di diametro decrescente</li>
-<li>Portare tutti i dischi dal primo all'ultimo paletto</li>
-<li>Si può spostare solo un disco alla volta</li>
-<li>Non si può mettere un disco su uno più piccolo</li>
-</ul>
-<blockquote></blockquote>
-<p>Usare la ricorsione. Immediato spostare un solo disco. <br>
-N dischi: spostarne N-1 sul piolo né origine né dest., <br>
-spostare l'ultimo disco sul piolo giusto, <br>
-spostare ancora gli altri N-1 dischi.</p></article>
- 
-</slide>
-
 <slide class="segue dark" >
   
     <aside class="gdbar"><img src="images/logo.png"></aside>
@@ -860,8 +814,30 @@ Stringa rimanente (senza prima e ultima lettera) palindroma</p>
 <li>Chiedere all'utente il livello di ricorsione desiderato</li>
 </ul>
 <blockquote></blockquote>
-<p><code>pygame.draw.line(screen, (r, g, b), (x1, y1), (x2, y2))</code></p>
-<p><a href="https://www.pygame.org/docs/ref/draw.html#pygame.draw.line">https://www.pygame.org/docs/ref/draw.html#pygame.draw.line</a></p></article>
+<p><a href="http://www.ce.unipr.it/brython/?p4_fun_htree.py">http://www.ce.unipr.it/brython/?p4_fun_htree.py</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Massimo Comun Divisore</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/hist/euclid.jpg">
+        
+      </figure><ul>
+<li>Leggere due numeri</li>
+<li>Calcolare in una funzione il loro Massimo Comun Divisore</li>
+<li>Visualizzare il risultato della funzione</li>
+</ul>
+<blockquote></blockquote>
+<p>Provare ad usare sia l'iterazione che la ricorsione</p>
+<p>Euclide: MCD(a, b) = a, se b = 0; <br>
+MCD(a, b) = MCD(b, a mod b), se b &gt; 0</p>
+<p><a href="http://www.ce.unipr.it/brython/?p4_fun_mcd.py">http://www.ce.unipr.it/brython/?p4_fun_mcd.py</a></p></article>
  
 </slide>
 
@@ -888,6 +864,38 @@ N dischi: spostarne N-1 sul piolo né origine né dest., <br>
 spostare l'ultimo disco sul piolo giusto, <br>
 spostare ancora gli altri N-1 dischi.</p>
 <p><a href="http://www.ce.unipr.it/brython/?p4_fun_hanoi.py">http://www.ce.unipr.it/brython/?p4_fun_hanoi.py</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>File CSV</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Leggere una matrice di interi da un file testuale CSV<ul>
+<li><em>Comma Sep. Values</em>: valori riga per riga, separati da virgola</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="File"><code>5,7,2,11
+1,3,12,9
+4,6,10,8
+</code></pre>
+<ul>
+<li>Memorizzare i dati in una lista semplice (pseudo-matrice)</li>
+<li>Inferire le dimensioni della matrice (<code>rows×cols</code>) in base a:<ul>
+<li>Numero di righe del file</li>
+<li>Numero di valori in una riga</li>
+</ul>
+</li>
+<li>Da angolo in basso a destra, sommare sulla diagonale</li>
+</ul>
+<blockquote></blockquote>
+<p>Nell'esempio, sommare: <code>8 + 12 + 7</code> (celle dove <code>cols - x == rows - y</code>)</p>
+<p><a href="http://www.ce.unipr.it/brython/?p4_file_csv.py">http://www.ce.unipr.it/brython/?p4_file_csv.py</a></p></article>
  
 </slide>
 
@@ -1002,6 +1010,35 @@ poi cambiare la direzione in senso orario</p>
 In generale: <code>(x', y') = (x⋅cos(θ) - y⋅sin(θ), x⋅sin(θ) + y⋅cos(θ))</code> <br></p>
 <blockquote></blockquote>
 <p><a href="http://www.ce.unipr.it/brython/?p4_mat_spiral.py">http://www.ce.unipr.it/brython/?p4_mat_spiral.py</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Fusione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/merge-sign.png">
+        
+      </figure><ul>
+<li>Due file di testo contengono sequenze di numeri<ul>
+<li>Un valore per ogni riga</li>
+<li>In ciascun file, i valori sono già ordinati</li>
+</ul>
+</li>
+<li>Scrivere in output i valori di entrambi i file<ul>
+<li>Sequenza di output tutta in ordine</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Ciclicamente, confrontare la coppia dei primi valori (ciascuno proveniente da uno dei due stream) <br>
+Scrivere il minore dei due sul file di uscita <br>
+Non estrarre un nuovo valore da uno stream, se quello precedente non è ancora stato scritto in output </p>
+<p><a href="http://www.ce.unipr.it/brython/?p4_file_merge.py">http://www.ce.unipr.it/brython/?p4_file_merge.py</a></p></article>
  
 </slide>
 

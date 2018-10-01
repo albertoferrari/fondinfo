@@ -197,39 +197,6 @@ code: python
 
 ---
 
-title: Esercizio - Massimo Comun Divisore
-figure: images/hist/euclid.jpg
-
-- Leggere due numeri
-- Calcolare in una funzione il loro Massimo Comun Divisore
-- Visualizzare il risultato della funzione
-
->
-
-Provare ad usare sia l'iterazione che la ricorsione
-
-Euclide: MCD(a, b) = a, se b = 0; <br>
-MCD(a, b) = MCD(b, a mod b), se b > 0
-
----
-
-title: Esercizio - Torre di Hanoi
-figure: images/misc/hanoi-tower.png
-
-- Tre paletti + N dischi di diametro decrescente
-- Portare tutti i dischi dal primo all'ultimo paletto
-- Si può spostare solo un disco alla volta
-- Non si può mettere un disco su uno più piccolo
-
->
-
-Usare la ricorsione. Immediato spostare un solo disco. <br>
-N dischi: spostarne N-1 sul piolo né origine né dest., <br>
-spostare l'ultimo disco sul piolo giusto, <br>
-spostare ancora gli altri N-1 dischi.
-
----
-
 title: Sequenze annidate
 class: segue dark
 
@@ -625,9 +592,25 @@ figure: images/fun/htree.png
 
 >
 
-`pygame.draw.line(screen, (r, g, b), (x1, y1), (x2, y2))`
+<http://www.ce.unipr.it/brython/?p4_fun_htree.py>
 
-<https://www.pygame.org/docs/ref/draw.html#pygame.draw.line>
+---
+
+title: Massimo Comun Divisore
+figure: images/hist/euclid.jpg
+
+- Leggere due numeri
+- Calcolare in una funzione il loro Massimo Comun Divisore
+- Visualizzare il risultato della funzione
+
+>
+
+Provare ad usare sia l'iterazione che la ricorsione
+
+Euclide: MCD(a, b) = a, se b = 0; <br>
+MCD(a, b) = MCD(b, a mod b), se b > 0
+
+<http://www.ce.unipr.it/brython/?p4_fun_mcd.py>
 
 ---
 
@@ -648,6 +631,31 @@ spostare l'ultimo disco sul piolo giusto, <br>
 spostare ancora gli altri N-1 dischi.
 
 <http://www.ce.unipr.it/brython/?p4_fun_hanoi.py>
+
+---
+
+title: File CSV
+
+- Leggere una matrice di interi da un file testuale CSV
+    - *Comma Sep. Values*: valori riga per riga, separati da virgola
+
+code: File
+
+    5,7,2,11
+    1,3,12,9
+    4,6,10,8
+
+- Memorizzare i dati in una lista semplice (pseudo-matrice)
+- Inferire le dimensioni della matrice (`rows×cols`) in base a:
+    - Numero di righe del file
+    - Numero di valori in una riga
+- Da angolo in basso a destra, sommare sulla diagonale
+
+>
+
+Nell'esempio, sommare: `8 + 12 + 7` (celle dove `cols - x == rows - y`)
+
+<http://www.ce.unipr.it/brython/?p4_file_csv.py>
 
 ---
 
@@ -735,8 +743,26 @@ poi cambiare la direzione in senso orario
 Coordinate raster, rotazione oraria di 90°: `(x', y') = (-y, x)` <br>
 In generale: `(x', y') = (x⋅cos(θ) - y⋅sin(θ), x⋅sin(θ) + y⋅cos(θ))` <br>
 
-
 >
 
 <http://www.ce.unipr.it/brython/?p4_mat_spiral.py>
+
+---
+
+title: Fusione
+figure: images/misc/merge-sign.png
+
+- Due file di testo contengono sequenze di numeri
+    - Un valore per ogni riga
+    - In ciascun file, i valori sono già ordinati
+- Scrivere in output i valori di entrambi i file
+    - Sequenza di output tutta in ordine
+
+>
+
+Ciclicamente, confrontare la coppia dei primi valori (ciascuno proveniente da uno dei due stream) <br>
+Scrivere il minore dei due sul file di uscita <br>
+Non estrarre un nuovo valore da uno stream, se quello precedente non è ancora stato scritto in output 
+
+<http://www.ce.unipr.it/brython/?p4_file_merge.py>
 
