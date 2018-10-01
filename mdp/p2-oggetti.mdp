@@ -106,11 +106,11 @@ title: Cicli su stringhe
 code: Python
 
     text = input("text? ")
-    first = input("First letter to uppercase? ")
-    last = input("Last letter to uppercase? ")
+    min_char = input("Min char to uppercase? ")
+    max_char = input("Max char to uppercase? ")
 
     for c in text:
-        if first <= c <= last:
+        if min_char <= c <= max_char:
             print(c.upper(), end="")
         else:
             print(c, end="")
@@ -205,7 +205,7 @@ code: python
 
 >
 
-<http://www.ce.unipr.it/brython/?p2_keyb.py>
+<http://www.ce.unipr.it/brython/?p2_fun_keyb.py>
     
 ---
 
@@ -378,7 +378,7 @@ code: python
 
 >
 
-<http://www.ce.unipr.it/brython/?p3_oop_ball.py>
+<http://www.ce.unipr.it/brython/?p2_oop_ball.py>
 
 ---
 
