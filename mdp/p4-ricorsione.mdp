@@ -1,0 +1,389 @@
+title: Ricorsione
+subtitle: Introduzione alla programmazione
+figure: images/fun/matryoshka.png
+
+---
+
+title: Programmazione ricorsiva
+
+- Molti linguaggi consentono ad una funzione (o procedura) di chiamare se stessa
+- Chiamata ricorsiva, diretta o indiretta
+
+![](images/fun/recursion.svg)
+
+---
+
+title: Fattoriale, ricorsione
+figure: images/fun/stack.svg
+
+- Ad ogni invocazione di una funzione, viene creato nello **stack** un nuovo record
+- **Contesto locale** alla particolare attivazione della funzione stessa
+
+code: python
+
+    def factorial(n: int) -> int:
+        result = 1
+        if n > 1:
+            result = n * factorial(n - 1)
+        return result
+
+>
+
+Ai primordi (Fortran 66 ecc.) solo allocazione statica <br> Spazio fisso ed unico per dati locali ad una funzione → no ricorsione
+
+---
+
+title: Stack dell'applicazione
+figure: images/fun/books-stack.png
+
+- Pila: memoria dinamica *LIFO (Last In First Out)*
+    - Dimensione massima prefissata
+- Il programma ci memorizza automaticamente:
+    - **Indirizzo di ritorno** per la funzione <br> Inserito alla chiamata, estratto all'uscita
+    - **Parametri** della funzione <br> Inseriti alla chiamata, eliminati all'uscita
+    - **Variabili locali**, definite nella funzione <br> Eliminate fuori dall'ambito di visibilità
+
+---
+
+title: Vista semplificata dello stack
+class: large-image
+
+![](images/fun/stack-content.svg)
+
+---
+
+title: Record di attivazione
+class: large-image
+
+![](images/fun/records.svg)
+
+---
+
+title: Visibilità di una variabile
+
+- Insieme di istruzioni da cui è accessibile
+    - *Ciclo di vita*: esistenza in memoria della var (etichetta)
+    - I valori (oggetti) in Python sono tutti gestiti dinamicamente
+- Visibilità **globale**
+    - Variabili fuori da ogni funzione - *Meglio evitare!*
+    - Allocazione *statica* in alcuni linguaggi
+- Visibilità **locale** alla funzione
+    - Variabili locali e parametri
+    - Allocazione *automatica* di spazio in *stack* ad ogni attivazione della funzione (possibile la ricorsione)
+- Visibilità locale al blocco (es. `if`): non in Python!
+
+---
+
+title: I conigli di Fibonacci
+class: large-image
+
+![](images/fun/fib-rabbits.png)
+
+>
+
+fib(0) = fib(1) = 1;  fib(n) = fib(n-1) + fib(n-2);
+
+---
+
+title: Fibonacci, ricorsione
+
+code: python
+
+    def fibonacci(n: int) -> int:
+        result = 1
+        if n > 1:
+            result = fibonacci(n-1) + fibonacci(n-2)
+        return result
+
+![](images/fun/fib-calls.svg)
+
+---
+
+title: Fibonacci, memoization
+
+code: python
+
+    _fibonacci_lookup = [1, 1]
+
+    def fibonacci(n: int) -> int:
+        if n < len(_fibonacci_lookup):
+            return _fibonacci_lookup[n]
+        result = fibonacci(n - 1) + fibonacci(n - 2)
+        _fibonacci_lookup.append(result)
+        return result
+
+code: python
+
+    from functools import lru_cache
+
+    @lru_cache()                   # function decoration
+    def fibonacci(n: int) -> int:
+        result = 1
+        if n > 1:
+            result = fibonacci(n-1) + fibonacci(n-2)
+        return result
+
+---
+
+title: Fibonacci, iterazione
+
+code: python
+
+    def fibonacci(n: int) -> int:
+        value = 1
+        previous = 0
+
+        for i in range(n):
+            value, previous = value + previous, value
+
+        return value
+
+---
+
+title: Tipo di dato ricorsivo
+figure: images/repr/html-page.svg
+class: large-figure
+
+- Un valore può *contenere* valori dello stesso tipo
+- *Lista collegata*
+    - Vuota, oppure...
+    - Nodo di testa, seguito da una lista collegata
+- *Albero*
+    - Vuoto, oppure...
+    - Nodo di testa, seguito da più alberi
+
+---
+
+title: Esercizi
+class: segue dark
+
+---
+
+title: Ricorsione, palindromo
+
+- *Palindromo*: testo che rimane uguale se letto al contrario
+- Scrivere una funzione ricorsiva per riconoscere i palindromi
+    - Parametro: testo da controllare
+    - Risultato: `bool`
+
+>
+
+Stringa palindroma: se ha lunghezza 0 o 1, oppure... <br>
+Prima lettera == ultima lettera e... <br>
+Stringa rimanente (senza prima e ultima lettera) palindroma
+
+<http://www.ce.unipr.it/brython/?p4_fun_palindrome.py>
+
+---
+
+title: Sierpinski carpet
+figure: images/fun/sierpinski-carpet.png
+
+- Disegnare un *frattale di Sierpinski*, di ordine `n` (scelto dall'utente)
+    - Dato un quadrato, dividerlo in 9 parti uguali
+    - Colorare la parte centrale
+    - Riapplicare l'algoritmo alle restanti 8 parti
+
+<http://www.ce.unipr.it/brython/?p4_fun_sierpinski.py>
+
+---
+
+title: Albero di H
+figure: images/fun/htree.png
+
+- Disegnare ricorsivamente un *H-Tree*
+    - Dividere l'area iniziale in due parti uguali
+    - Connettere con una linea i centri delle due aree
+    - Ripetere il procedimento per ciascuna delle due aree
+    - Alternare però la divisione delle aree in orizzontale e verticale
+- Chiedere all'utente il livello di ricorsione desiderato
+
+>
+
+<http://www.ce.unipr.it/brython/?p4_fun_htree.py>
+
+---
+
+title: Massimo Comun Divisore
+figure: images/hist/euclid.jpg
+
+- Leggere due numeri
+- Calcolare in una funzione il loro Massimo Comun Divisore
+- Visualizzare il risultato della funzione
+
+>
+
+Provare ad usare sia l'iterazione che la ricorsione
+
+Euclide: MCD(a, b) = a, se b = 0; <br>
+MCD(a, b) = MCD(b, a mod b), se b > 0
+
+<http://www.ce.unipr.it/brython/?p4_fun_mcd.py>
+
+---
+
+title: Bisezione, ricorsione
+figure: images/misc/cubic-function.png
+
+- Trovare lo zero della seguente funzione matematica
+    - *f(x) = x^^3^^ – x – 1, per 1 ≤ x ≤ 2*
+    - Trovare *x* t.c. *|f(x)| < 0.001*
+- Definire una funzione ricorsiva di bisezione
+    - Parametri necessari: *inizio intervallo* di ricerca, *fine intervallo* di ricerca
+    - Invocare ad ogni livello la funzione su un intervallo dimezzato
+
+<http://www.ce.unipr.it/brython/?p4_fun_bisection.py>
+
+---
+
+title: Combinazioni di simboli
+figure: images/fun/bike-lock.png
+
+- Scrivere una funzione per generare tutte le combinazioni di lunghezza 3
+    - Parametri: `str` contenente l'insieme dei simboli validi (presenti su ogni ruota)
+    - Risultato: lista di `str` (combinazioni)
+- Possibile approccio
+    - Usare 3 cicli `for` annidati
+    - Ogni `for` scorre tutto l'insieme di simboli
+    - Una combinazione è una `str`, ottenuta concatenando i 3 simboli correnti
+- Per test, fornire in input le vocali `"AEIOU"`, per ottenere:
+    - `["AAA", "AAE", "AAI", "AAO", "AAU", "AEA", "AEE", "AEI", "AEO", "AEU", "AIA", ...`
+
+>
+
+<http://www.ce.unipr.it/brython/?p4_fun_combine.py>
+
+---
+
+title: Anagrammi
+figure: images/fun/anagram.jpg
+
+- Generare tutti gli anagrammi (permutazioni) di una stringa
+- Risultato, una lista di stringhe
+- Algoritmo:
+    - Stringa vuota: solo se stessa
+    - Altrimenti: per ogni carattere...
+    - Concatenarlo con tutte le permutazioni dei rimanenti caratteri (*ricorsione*)
+
+>
+
+<http://www.ce.unipr.it/brython/?p4_fun_anagram.py>
+
+---
+
+title: Torre di Hanoi
+figure: images/fun/hanoi-tower.png
+
+- Tre paletti + N dischi di diametro decrescente
+- Portare tutti i dischi dal primo all'ultimo paletto
+- Si può spostare solo un disco alla volta
+- Non si può mettere un disco su uno più piccolo
+- Usare la ricorsione
+
+>
+
+Immediato spostare un solo disco. <br>
+N dischi: spostarne N-1 sul piolo né origine né dest., <br>
+spostare l'ultimo disco sul piolo giusto, <br>
+spostare ancora gli altri N-1 dischi.
+
+<http://www.ce.unipr.it/brython/?p4_fun_hanoi.py>
+
+---
+
+title: Notazione polacca
+
+- Leggere una riga di testo in una stringa
+- Scrivere una funzione che valuti la stringa come una espressione, nella forma:
+    - `"+ 2 7" (=9)`
+- Gli operandi possono essere a loro volta espressioni:
+    - `"+ * 3 4 15" (=27)`
+- Scrivere una seconda funzione che trasformi l'espressione nell'abituale notazione infissa:
+    - `"((3 * 4) + 15)"`
+- Usare la ricorsione
+
+>
+
+Supporre che i “token” siano tutti separati da spazio e che gli operatori abbiano tutti cardinalità fissa
+
+<http://www.ce.unipr.it/brython/?p4_fun_polish.py>
+
+---
+
+title: Documenti e cartelle
+figure: images/misc/sample-file-system.png
+
+- Un sistema gerarchico di gestione documenti è composto di due tipi di *nodi* (classe base)
+    - I *documenti*, caratterizzati da un nome e da un contenuto testuale (classe derivata)
+    - Le *cartelle*, caratterizzate da un nome e da una lista di nodi contenuti (classe derivata)
+- Creare una gerarchia delle tre classi: `Node`, `Document`, `Folder`
+    - Le cartelle dovrebbero avere un metodo `add_node(n: Node)`
+- Nel corpo principale del programma, istanziare ed organizzare vari nodi (senza input dell'utente)
+    - Ricreare con gli oggetti la struttura raffigurata a fianco
+
+>
+
+<http://www.ce.unipr.it/brython/?p4_tree_nodes.py>
+
+---
+
+title: Dimensione delle cartelle
+
+- Aggiungere a tutti i nodi (es. precedente) un metodo `size`
+    - Astratto nella classe base
+    - Per un documento, restituisce la lunghezza del contenuto testuale
+    - Per una cartella, restituisce la somma delle dimensioni dei nodi contenuti
+- Calcolare la dimensione della struttura precedente (es. 4.4), inventando dei contenuti per i documenti presenti
+- Aggiungere inoltre a tutti i nodi un metodo `print(indent: int)`, per mostrare a terminale la struttura ad albero
+    - Astratto nella classe base
+    - Mostra il nome di documenti e cartelle
+    - Indenta opportunamente i nodi, rispetto alla cartella che li contiene
+
+>
+
+<http://www.ce.unipr.it/brython/?p4_tree_nodes.py>
+
+---
+
+title: Espressioni
+
+- Definire una gerarchia di classi per rappresentare espressioni matematiche
+- La *classe base* **`Expression`** ha un metodo astratto `eval`
+    - Senza parametri, restituisce il valore `float` dell'espressione
+- Le *sottoclassi* concrete di una espressione sono:
+    - **`Literal`**, contenente un valore costante `float`
+    - **`Sum`**, contenente due operandi, entrambi espressioni
+    - **`Product`**, contenente due operandi, entrambi espr.
+- Istanziare (senza fare *parsing*!) oggetti per rappresentare questa espressione:
+    - `5 * (4 + 3 * 2)`
+- Calcolare il valore finale, chiamando `eval` sul nodo radice
+
+>
+
+<http://www.ce.unipr.it/brython/?p4_tree_expression.py>
+
+---
+
+title: Espressioni prefisse
+
+- Aggiungere un  metodo `prefix` a `Expression` (es. precedente)
+    - Genera una stringa in notazione prefissa (operatore seguito da operandi)
+- Risultato da espressione es. 5.7: `"* 5 + 4 * 3 2"`
+
+code: python
+
+                                              #   *  (prod2)
+    prod1 = Product(Literal(3), Literal(2))   #  / \
+    sum1 = Sum(Literal(4), prod1)             # 5   +  (sum1)
+    prod2 = Product(Literal(5), sum1)         #    / \
+    print(prod2.eval())                       #   4   *  (prod1)
+    print(prod2.prefix())                     #      / \
+                                              #     3   2
+
+>
+
+<https://it.wikipedia.org/wiki/Notazione_polacca>
+
+<http://www.ce.unipr.it/brython/?p4_tree_expression.py>
+
+
