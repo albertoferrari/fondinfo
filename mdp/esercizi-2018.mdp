@@ -1,0 +1,131 @@
+title: Esercizi 2018
+subtitle: Introduzione alla programmazione
+figure: images/misc/geek-girl.jpg
+
+---
+
+title: Esercitazione 1 (10-01)
+class: segue dark
+
+---
+
+title: 1.1 Hello, user!
+figure: images/misc/handshake.png
+
+- Compilare ed eseguire il programma “`Hello world`”
+- In una versione successiva del programma...
+- Chiedere il nome all'utente e aggiungere tale nome al messaggio di saluto
+- Se il nome dell'utente è “`admin`”, mostrare inoltre il messaggio speciale “`At your command`”
+
+---
+
+title: 1.2 Equazione di secondo grado
+figure: images/misc/quadratic-eq.svg images/misc/quadratic-formula.svg
+
+- Chiedere all'utente i tre coefficienti `a, b, c` di una equazione di secondo grado
+    - `ax^^2^^ + bx + c = 0`
+- Comunicare all'utente che tipo di soluzioni presenta l'equazione
+    - Due soluzioni reali
+    - Un'unica soluzione reale
+    - Nessuna soluzione reale
+
+>
+
+Non è richiesto il valore delle soluzioni
+
+---
+
+title: 1.3 Equazione di 2° grado, con ciclo
+figure: images/misc/quadratic-eq.svg images/misc/quadratic-formula.svg
+
+- Riprendere l'esercizio 1.2
+- In caso di soluzioni reali, mostrare all'utente il loro valore
+- Chiedere infine all'utente se vuole valutare altre equazioni
+
+>
+
+Racchiudere il programma in un ciclo `while` <br>
+Usare la funzione `sqrt` del modulo `math`
+
+---
+
+title: 1.4 Quadrati in diagonale
+figure: images/misc/diagonal-squares.png
+
+- Chiedere all'utente un numero `n`
+- Su un canvas 500x500, disegnare `n` quadrati
+    - Tutti delle stesse dimensioni
+    - Posizionati lungo tutta la diagonale
+    - Ciascuno con un colore casuale
+
+>
+
+Determinare il lato di ogni quadrato in base alla dimensione del canvas
+
+---
+
+title: 1.5 Sequenza di quadrati
+figure: images/misc/green-squares.png
+
+- Chiedere all'utente un numero `n`
+- Su un canvas 500x500, disegnare `n` quadrati
+    - Quadrati con lato decrescente
+    - Tutti allineati in alto e a sinistra
+- Far variare il colore dei quadrati
+	- Dal nero del quadrato più grande
+	- Fino al verde del quadrato più piccolo
+
+>
+
+Determinare automaticamente le variazioni migliori per lato e colore, prima di iniziare il ciclo
+
+---
+
+title: 1.6 Triangolo
+figure: images/misc/impossible-triangle.jpg
+
+- Chiedere all'utente le lunghezze dei tre lati
+- Controllare se il triangolo è:
+    - Equilatero
+    - Isoscele
+    - Scaleno
+    - Oppure se i tre lati non formano affatto un triangolo
+- Visualizzare il responso
+
+---
+
+title: 1.7 Multipli di 3 o 5
+
+- Chiedere all'utente un numero `n`
+- Calcolare la somma di tutti i multipli di 3 o 5 strettamente minori di `n`
+    - Un numero `x` è multiplo di `y` se `x % y == 0`
+
+>
+
+Es. `n = 10`. Se elenchiamo tutti numeri minori di 10 che sono multipli di 3 o 5, otteniamo 3, 5, 6 e 9. La somma di questi multipli è 23
+
+Ispirato da: <https://projecteuler.net/problem=1>
+
+---
+
+title: 1.8 Massimo pari
+figure: images/misc/data-sequence.png
+
+- Leggere, attraverso un ciclo, una sequenza di numeri naturali
+- La sequenza termina quando l'utente inserisce un valore negativo
+- Visualizzare il più grande numero pari tra quelli inseriti
+
+---
+
+title: 1.9 Tre carte
+figure: images/misc/three-cards.png
+
+- All'inizio l'utente ha 10 monete
+- Ad ogni turno:
+    - Viene estratto a sorte un numero segreto tra 1 e 3
+    - L'utente sceglie quante monete puntare e su quale numero
+    - Se indovina, gli viene sommato l'importo puntato
+    - Altrimenti gli viene sottratto lo stesso importo
+- Il gioco termina quando l'utente perde tutto o si ritira
+
+
