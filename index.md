@@ -34,6 +34,7 @@
 
 ## Esercizi di programmazione
 
+- [Esercitazioni in lab 2018](http://tomamic.github.io/fondinfo/esercizi-2018.html)
 - [Esercitazioni in lab 2017](http://tomamic.github.io/fondinfo/esercizi-2017.html)
 - [Esercitazioni in lab 2016](http://tomamic.github.io/fondinfo/esercizi-2016.html)
 - [Esercitazioni in lab 2015](http://tomamic.github.io/fondinfo/esercizi-2015.html)
