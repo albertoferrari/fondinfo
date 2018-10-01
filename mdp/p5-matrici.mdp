@@ -562,8 +562,7 @@ In generale: `(x', y') = (x⋅cos(θ) - y⋅sin(θ), x⋅sin(θ) + y⋅cos(θ))`
 
 ---
 
-
-title: 4.9 Puzzle di Cindy
+title: Puzzle di Cindy
 figure: images/misc/cindy1.png images/misc/cindy2.png
 
 - Piano di gioco: `2n+1` celle allineate
