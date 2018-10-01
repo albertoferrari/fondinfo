@@ -108,7 +108,7 @@ def main():
 main()  ## remove, if importing the module elsewhere
 </code></pre>
 <blockquote></blockquote>
-<p><a href="http://www.ce.unipr.it/brython/?p2_hypotenuse.py">http://www.ce.unipr.it/brython/?p2_hypotenuse.py</a></p></article>
+<p><a href="http://www.ce.unipr.it/brython/?p2_fun_hypotenuse.py">http://www.ce.unipr.it/brython/?p2_fun_hypotenuse.py</a></p></article>
  
 </slide>
 
@@ -213,7 +213,7 @@ for y in range(1, size + 1):
     print()
 </code></pre>
 <blockquote></blockquote>
-<p><a href="http://www.ce.unipr.it/brython/?p2_tables.py">http://www.ce.unipr.it/brython/?p2_tables.py</a></p></article>
+<p><a href="http://www.ce.unipr.it/brython/?p2_for_tables.py">http://www.ce.unipr.it/brython/?p2_for_tables.py</a></p></article>
  
 </slide>
 
@@ -293,7 +293,7 @@ g2d.handle_keyboard(keydown, keyup)
 </code></pre>
 <p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code</a></p>
 <blockquote></blockquote>
-<p><a href="http://www.ce.unipr.it/brython/?p2_anim.py">http://www.ce.unipr.it/brython/?p2_anim.py</a></p></article>
+<p><a href="http://www.ce.unipr.it/brython/?p2_keyb.py">http://www.ce.unipr.it/brython/?p2_keyb.py</a></p></article>
  
 </slide>
 
@@ -553,7 +553,7 @@ for i in range(25):
     b2.move()
 </code></pre>
 <blockquote></blockquote>
-<p><a href="http://www.ce.unipr.it/brython/?p3_ball.py">http://www.ce.unipr.it/brython/?p3_ball.py</a></p></article>
+<p><a href="http://www.ce.unipr.it/brython/?p3_oop_ball.py">http://www.ce.unipr.it/brython/?p3_oop_ball.py</a></p></article>
  
 </slide>
 
@@ -648,7 +648,7 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 <slide  >
   
     <hgroup>
-      <h2>2.1 Area di un'ellisse</h2>
+      <h2>Area di un'ellisse</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -667,40 +667,16 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 <li>Stampa il risultato ottenuto</li>
 </ul>
 </li>
-</ul></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>2.2 Cerchi concentrici</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/misc/red-circles.png">
-        
-      </figure><ul>
-<li>Chiedere all'utente il numero di cerchi da disegnare</li>
-<li>Disegnare i cerchi con raggio decrescente, ma tutti con lo stesso centro</li>
-<li>Far variare il colore dei cerchi<ul>
-<li>Dal rosso del livello più esterno</li>
-<li>Fino al nero del livello più interno</li>
-</ul>
-</li>
 </ul>
 <blockquote></blockquote>
-<p>Cominciare a disegnare un grosso cerchio rosso</p>
-<p>Poi, inserire l'operazione di disegno un ciclo, togliendo ad ogni passo <code>10</code> (p.es.) al raggio e al livello di rosso</p>
-<p>Infine, determinare automaticamente, prima del ciclo, le variazioni migliori per raggio e colore</p></article>
+<p><a href="http://www.ce.unipr.it/brython/?p2_fun_ellipse.py">http://www.ce.unipr.it/brython/?p2_fun_ellipse.py</a></p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>2.3 Griglia di colori (*)</h2>
+      <h2>Griglia di colori</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -716,14 +692,15 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 </ul>
 <blockquote></blockquote>
 <p>Cominciare a creare una griglia di riquadri tutti neri, con due cicli <code>for</code> annidati</p>
-<p>Lasciare tra i riquadri un piccolo margine</p></article>
+<p>Lasciare tra i riquadri un piccolo margine</p>
+<p><a href="http://www.ce.unipr.it/brython/?p2_for_color_grid.py">http://www.ce.unipr.it/brython/?p2_for_color_grid.py</a></p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>2.4 Conteggio cifre</h2>
+      <h2>Conteggio cifre</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -736,14 +713,33 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 <li>Valutare anche la somma di tutte le singole cifre trovate</li>
 </ul>
 <blockquote></blockquote>
-<p>Usare un ciclo <code>for</code> sulla stringa (sequenza di caratteri)</p></article>
+<p>Usare un ciclo <code>for</code> sulla stringa (sequenza di caratteri)</p>
+<p><a href="http://www.ce.unipr.it/brython/?p2_for_digits.py">http://www.ce.unipr.it/brython/?p2_for_digits.py</a></p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>2.5 Movimento orizzontale</h2>
+      <h2>Testo tra parentesi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Chiedere all'utente un testo</li>
+<li>Riscrivere il testo in output, ma...</li>
+<li>Escludere le parti racchiuse tra parentesi '(', ')'</li>
+</ul>
+<blockquote></blockquote>
+<p>Segnare in un bool se si è letta una parentesi aperta, ma non ancora una parentesi chiusa</p>
+<p><a href="http://www.ce.unipr.it/brython/?p2_for_parens.py">http://www.ce.unipr.it/brython/?p2_for_parens.py</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Movimento orizzontale</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -757,14 +753,16 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 <li>Cambiare segno a <code>dx</code> quando <code>x &lt; 0</code> oppure <code>x + w &gt; screen_width</code></li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p2_fun_anim.py">http://www.ce.unipr.it/brython/?p2_fun_anim.py</a></p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>2.6 Movimento a serpentina</h2>
+      <h2>Movimento a serpentina</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -778,14 +776,39 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 <li>Fare in modo che, in ogni frame, lo spostamento sia solo orizzontale, o solo verticale, ma <em>non</em> diagonale</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p2_fun_serpentine.py">http://www.ce.unipr.it/brython/?p2_fun_serpentine.py</a></p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>2.7 Ellisse</h2>
+      <h2>Spirale</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/spiral-circles.png">
+        
+      </figure><ul>
+<li>Mostrare l'<em>animazione</em> di un cerchio lungo una spirale</li>
+<li>Ruotare attorno ad un centro fisso <code>(xc, yc)</code></li>
+<li>Amentare dist. <code>r</code> dal centro ad ogni passo</li>
+<li>Cancellare lo sfondo ad ogni passo</li>
+<li>Disegnare un cerchio sempre più grande</li>
+<li>Dopo <code>n</code> passi, ricominciare daccapo</li>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p2_fun_spiral.py">http://www.ce.unipr.it/brython/?p2_fun_spiral.py</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ellisse</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -808,14 +831,16 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 <li>Visualizzare area e distanza focale dell'ellisse</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p2_oop_ellipse.py">http://www.ce.unipr.it/brython/?p2_oop_ellipse.py</a></p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>2.8 Animazione di una pallina</h2>
+      <h2>Animazione di una pallina</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -835,14 +860,16 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 <li>Se esce dal bordo destro, ricompare al bordo sinistro e viceversa</li>
 </ul>
 </li>
-</ul></article>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p2_oop_hcycle.py">http://www.ce.unipr.it/brython/?p2_oop_hcycle.py</a></p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>2.9 Classe degli alieni</h2>
+      <h2>Classe degli alieni</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -852,7 +879,7 @@ g2d.main_loop(update, 1000 // 30)  # Millis
       </figure><ul>
 <li>Creare una classe <code>Alien</code>, che contenga i dati ed il comportamento dell'alieno<ul>
 <li>Campi privati: <code>x</code>, <code>y</code>, <code>dx</code></li>
-<li>Metodo <code>move</code> per avanzare come in es. 2.6</li>
+<li>Metodo <code>move</code> per avanzare a serpentina</li>
 <li>Metodo <code>position</code> per ottenere la posizione attuale</li>
 </ul>
 </li>
@@ -863,7 +890,32 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 </li>
 </ul>
 <blockquote></blockquote>
-<p>Definire nella classe delle opportune costanti</p></article>
+<p>Definire nella classe delle opportune costanti</p>
+<p><a href="http://www.ce.unipr.it/brython/?p2_oop_alien.py">http://www.ce.unipr.it/brython/?p2_oop_alien.py</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Spirale con classe</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/spiral-circles.png">
+        
+      </figure><ul>
+<li>Mostrare l'<em>animazione</em> di un cerchio lungo una spirale</li>
+<li>Realizzare una classe per gestire dati e comportamento del cerchio</li>
+<li>Implementare il movimento in un metodo <code>move()</code> </li>
+<li>Campi: <code>xc</code>, <code>yc</code>, <code>i</code><ul>
+<li><code>i</code> conta i passi; se accede il limite, torna a 0</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p2_oop_spiral.py">http://www.ce.unipr.it/brython/?p2_oop_spiral.py</a></p></article>
  
 </slide>
 

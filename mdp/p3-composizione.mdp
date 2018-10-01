@@ -539,64 +539,6 @@ figure: images/misc/histogram-rot.png
     
 ---
 
-title: 3.3 Spirale
-figure: images/misc/spiral-circles.png
-
-- Mostrare l'*animazione* di un cerchio lungo una spirale
-- Ruotare attorno ad un centro fisso `(xc, yc)`
-- Amentare dist. `r` dal centro ad ogni passo
-- Cancellare lo sfondo ad ogni passo
-- Disegnare un cerchio sempre più grande
-- Dopo `n` passi, ricominciare daccapo
-
----
-
-title: 3.4 Spirale con classe
-figure: images/misc/spiral-circles.png
-
-- Mostrare l'*animazione* di un cerchio lungo una spirale
-- Realizzare una classe per gestire dati e comportamento del cerchio
-- Implementare il movimento in un metodo `move()` 
-- Campi: `xc`, `yc`, `i`
-    - `i` conta i passi; se accede il limite, torna a 0
-    
----
-
-title: 3.5 Lista di alieni
-figure: images/misc/invaders-path.jpg
-
-- Riusare la classe `Alien` (es. 2.9)
-- Creare inizialmente una lista di alieni, con posizioni di partenza diverse
-    - Memorizzare la posizione di partenza di ciascun alieno in opportuni campi privati
-    - Lasciare a ciascun alieno uno spazio orizzontale di movimento di 150 pixel, a destra della posizione di partenza
-- Farli avanzare tutti ad ogni ciclo, chiamando il metodo `move` di ciascuno di essi
-
----
-
-title: 3.6 Alieni nell'arena
-figure: images/misc/invaders-path.jpg
-
-- Partire dalla classe `Alien` (es. 3.5)
-- Renderla una implementazione concreta di `Actor`
-    - Aggiungere i metodi `symbol` e `collide`, anche solo vuoti
-- Aggiungere gli alieni all'arena
-    - Nel metodo `__init__` chiamare `arena.add`
-    - Poi, in `update` chiamare `arena.move_all`
-
----
-
-title: 3.7 Pallottole
-figure: images/misc/invaders-path.jpg
-
-- Continuare l'es. 3.6
-- Aggiungere un attore `Bullet`
-- Parte dal fondo e si muove verso l'alto
-- Se esce dallo schermo, si rimuove dal gioco
-- Se si scontra con un alieno, entrambi si rimuovono dal gioco
-- Nella funzione `update`, generare casualmente dei `Bullet`
-
----
-
 title: 3.8 Fattori primi
 
 - Funzione che trova tutti i fattori primi di un numero `n`
@@ -614,26 +556,48 @@ Valutare l'uso di un ciclo `while`, anzichè `for`
 
 ---
 
-title: 3.9 Incolonnamento dati
+title: Lista di alieni
+figure: images/misc/invaders-path.jpg
 
-- Visualizzare due tabelle con i caratteri ASCII
-    - 8 righe x 12 colonne, codici da 32 a 126
-- Tabella 1: mostrare in ordine i caratteri, colonna per colonna
-- Tabella 2: mostrare in ordine i caratteri, riga per riga
+- Riusare la classe `Alien` (es. 2.9)
+- Creare inizialmente una lista di alieni, con posizioni di partenza diverse
+    - Memorizzare la posizione di partenza di ciascun alieno in opportuni campi privati
+    - Lasciare a ciascun alieno uno spazio orizzontale di movimento di 150 pixel, a destra della posizione di partenza
+- Farli avanzare tutti ad ogni ciclo, chiamando il metodo `move` di ciascuno di essi
 
-code: Tabella 1
+>
 
-     (08@HPX`hpx
-    !)19AIQYaiqy
-    "*2:BJRZbjrz
-    #+3;CKS[cks{
-    $,4<DLT\dlt|
-    %-5=EMU]emu}
-    &.6>FNV^fnv~
-    '/7?GOW_gow 
+<http://www.ce.unipr.it/brython/?p3_oop_aliens.py>
 
-Usare sempre due cicli `for` annidati: esterno su `y`, interno su `x` <br>
-In ogni posizione, calcolare il carattere da visualizzare: `x * ROWS + y`...
+---
 
+title: Alieni nell'arena
+figure: images/misc/invaders-path.jpg
 
+- Partire dalla classe `Alien` (es. 3.5)
+- Renderla una implementazione concreta di `Actor`
+    - Aggiungere i metodi `symbol` e `collide`, anche solo vuoti
+- Aggiungere gli alieni all'arena
+    - Nel metodo `__init__` chiamare `arena.add`
+    - Poi, in `update` chiamare `arena.move_all`
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_oop_alien.py>
+
+---
+
+title: Pallottole
+figure: images/misc/invaders-path.jpg
+
+- Continuare l'es. 3.6
+- Aggiungere un attore `Bullet`
+- Parte dal fondo e si muove verso l'alto
+- Se esce dallo schermo, si rimuove dal gioco
+- Se si scontra con un alieno, entrambi si rimuovono dal gioco
+- Nella funzione `update`, generare casualmente dei `Bullet`
+
+>
+
+<http://www.ce.unipr.it/brython/?p3_oop_bullet.py>
 

@@ -579,7 +579,12 @@ code: python
 
 ---
 
-title: Esercizio - Memory
+title: Esercizi
+class segue dark
+
+---
+
+title: 4.x Esercizio - Memory
 figure: images/misc/memory.png
 
 - Allocare una lista, di dimensione `rows×cols`
@@ -601,7 +606,30 @@ Per cominciare, inserire nella lista valori numerici crescenti, anzichè lettere
 
 ---
 
-title: Esercizio - Scitala spartana
+title: 4.x Incolonnamento dati
+
+- Visualizzare due tabelle con i caratteri ASCII
+    - 8 righe x 12 colonne, codici da 32 a 126
+- Tabella 1: mostrare in ordine i caratteri, colonna per colonna
+- Tabella 2: mostrare in ordine i caratteri, riga per riga
+
+code: Tabella 1
+
+     (08@HPX`hpx
+    !)19AIQYaiqy
+    "*2:BJRZbjrz
+    #+3;CKS[cks{
+    $,4<DLT\dlt|
+    %-5=EMU]emu}
+    &.6>FNV^fnv~
+    '/7?GOW_gow 
+
+Usare sempre due cicli `for` annidati: esterno su `y`, interno su `x` <br>
+In ogni posizione, calcolare il carattere da visualizzare: `x * ROWS + y`...
+
+---
+
+title: 4.x Scitala spartana
 figure: images/hist/scytale.png
 
 - Leggere un intero file di testo
@@ -620,7 +648,7 @@ Usare una lista di liste (con dimensioni predefinite)
 
 ---
 
-title: Esercizio - Spirale
+title: 4.x Spirale
 figure: images/misc/spiral.png
 
 - Scrivere una funzione per riempire di numeri crescenti una matrice quadrata (o rettangolare)

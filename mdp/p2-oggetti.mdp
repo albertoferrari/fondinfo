@@ -56,7 +56,7 @@ code: python
 
 >
 
-<http://www.ce.unipr.it/brython/?p2_hypotenuse.py>
+<http://www.ce.unipr.it/brython/?p2_fun_hypotenuse.py>
     
 ---
 
@@ -139,7 +139,7 @@ code: python
     
 >
 
-<http://www.ce.unipr.it/brython/?p2_tables.py>
+<http://www.ce.unipr.it/brython/?p2_for_tables.py>
 
 ---
 
@@ -205,7 +205,7 @@ code: python
 
 >
 
-<http://www.ce.unipr.it/brython/?p2_anim.py>
+<http://www.ce.unipr.it/brython/?p2_keyb.py>
     
 ---
 
@@ -378,7 +378,7 @@ code: python
 
 >
 
-<http://www.ce.unipr.it/brython/?p3_ball.py>
+<http://www.ce.unipr.it/brython/?p3_oop_ball.py>
 
 ---
 
@@ -444,7 +444,7 @@ class: segue dark
 
 ---
 
-title: 2.1 Area di un'ellisse
+title: Area di un'ellisse
 figure: images/misc/ellipse.svg
 
 - Definire una *funzione* `ellipse_area` che:
@@ -455,28 +455,13 @@ figure: images/misc/ellipse.svg
     - Invoca la funzione `ellipse_area` con questi parametri
     - Stampa il risultato ottenuto
 
----
-
-title: 2.2 Cerchi concentrici
-figure: images/misc/red-circles.png
-
-- Chiedere all'utente il numero di cerchi da disegnare
-- Disegnare i cerchi con raggio decrescente, ma tutti con lo stesso centro
-- Far variare il colore dei cerchi
-	  - Dal rosso del livello più esterno
-	  - Fino al nero del livello più interno
-
 >
 
-Cominciare a disegnare un grosso cerchio rosso
-
-Poi, inserire l'operazione di disegno un ciclo, togliendo ad ogni passo `10` (p.es.) al raggio e al livello di rosso
-
-Infine, determinare automaticamente, prima del ciclo, le variazioni migliori per raggio e colore
+<http://www.ce.unipr.it/brython/?p2_fun_ellipse.py>
 
 ---
 
-title: 2.3 Griglia di colori (*)
+title: Griglia di colori
 figure: images/misc/color-grid.png images/oop/raster-tile.png
 
 - Chiedere all'utente dei valori per `rows` e `cols`
@@ -491,9 +476,11 @@ Cominciare a creare una griglia di riquadri tutti neri, con due cicli `for` anni
 
 Lasciare tra i riquadri un piccolo margine
 
+<http://www.ce.unipr.it/brython/?p2_for_color_grid.py>
+
 ---
 
-title: 2.4 Conteggio cifre
+title: Conteggio cifre
 figure: images/misc/numbers.jpg
 
 - Chiedere una riga di testo all'utente
@@ -504,9 +491,25 @@ figure: images/misc/numbers.jpg
 
 Usare un ciclo `for` sulla stringa (sequenza di caratteri)
 
+<http://www.ce.unipr.it/brython/?p2_for_digits.py>
+
 ---
 
-title: 2.5 Movimento orizzontale
+title: Testo tra parentesi
+
+- Chiedere all'utente un testo
+- Riscrivere il testo in output, ma...
+- Escludere le parti racchiuse tra parentesi '(', ')'
+
+>
+
+Segnare in un bool se si è letta una parentesi aperta, ma non ancora una parentesi chiusa
+
+<http://www.ce.unipr.it/brython/?p2_for_parens.py>
+
+---
+
+title: Movimento orizzontale
 figure: images/misc/street-fighter.jpg
 
 - Mostrare una pallina che si muove in orizzontale
@@ -514,9 +517,13 @@ figure: images/misc/street-fighter.jpg
     - Memorizzare in una variabile `dx` lo spostamento orizzontale da effettuare ad ogni ciclo
     - Cambiare segno a `dx` quando `x < 0` oppure `x + w > screen_width`
 
+>
+
+<http://www.ce.unipr.it/brython/?p2_fun_anim.py>
+
 ---
 
-title: 2.6 Movimento a serpentina
+title: Movimento a serpentina
 figure: images/misc/science-of-spaceships.jpg
 
 - Mostrare una pallina che si muove a serpentina
@@ -524,9 +531,29 @@ figure: images/misc/science-of-spaceships.jpg
     - Al momento del rimbalzo, imporre un spostamento verso il basso
     - Fare in modo che, in ogni frame, lo spostamento sia solo orizzontale, o solo verticale, ma *non* diagonale
 
+>
+
+<http://www.ce.unipr.it/brython/?p2_fun_serpentine.py>
+
 ---
 
-title: 2.7 Ellisse
+title: Spirale
+figure: images/misc/spiral-circles.png
+
+- Mostrare l'*animazione* di un cerchio lungo una spirale
+- Ruotare attorno ad un centro fisso `(xc, yc)`
+- Amentare dist. `r` dal centro ad ogni passo
+- Cancellare lo sfondo ad ogni passo
+- Disegnare un cerchio sempre più grande
+- Dopo `n` passi, ricominciare daccapo
+
+>
+
+<http://www.ce.unipr.it/brython/?p2_fun_spiral.py>
+
+---
+
+title: Ellisse
 figure: images/misc/ellipse.svg
 
 - Classe che modella un'ellisse
@@ -539,9 +566,13 @@ figure: images/misc/ellipse.svg
     - Creare un oggetto con dati forniti dall'utente
     - Visualizzare area e distanza focale dell'ellisse
 
+>
+
+<http://www.ce.unipr.it/brython/?p2_oop_ellipse.py>
+
 ---
 
-title: 2.8 Animazione di una pallina
+title: Animazione di una pallina
 figure: images/misc/street-fighter.jpg
 
 - Partire dalla classe `Ball` vista a lezione
@@ -553,14 +584,18 @@ figure: images/misc/street-fighter.jpg
     - La pallina non si sposta verticalmente
     - Se esce dal bordo destro, ricompare al bordo sinistro e viceversa
 
+>
+
+<http://www.ce.unipr.it/brython/?p2_oop_hcycle.py>
+
 ---
 
-title: 2.9 Classe degli alieni
+title: Classe degli alieni
 figure: images/misc/invaders-path.jpg
 
 - Creare una classe `Alien`, che contenga i dati ed il comportamento dell'alieno
     - Campi privati: `x`, `y`, `dx`
-    - Metodo `move` per avanzare come in es. 2.6
+    - Metodo `move` per avanzare a serpentina
     - Metodo `position` per ottenere la posizione attuale
 - Istanziare un oggetto `Alien` e farlo muovere sullo schermo
     - Chiamare il metodo `move` ad ogni ciclo
@@ -570,4 +605,21 @@ figure: images/misc/invaders-path.jpg
 
 Definire nella classe delle opportune costanti
 
+<http://www.ce.unipr.it/brython/?p2_oop_alien.py>
+
+---
+
+title: Spirale con classe
+figure: images/misc/spiral-circles.png
+
+- Mostrare l'*animazione* di un cerchio lungo una spirale
+- Realizzare una classe per gestire dati e comportamento del cerchio
+- Implementare il movimento in un metodo `move()` 
+- Campi: `xc`, `yc`, `i`
+    - `i` conta i passi; se accede il limite, torna a 0
+
+>
+
+<http://www.ce.unipr.it/brython/?p2_oop_spiral.py>
+    
 
