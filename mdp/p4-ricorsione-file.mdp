@@ -580,19 +580,86 @@ code: python
 ---
 
 title: Esercizi
-class segue dark
+class: segue dark
 
 ---
 
-title: 4.x Esercizio - Memory
+title: Ricorsione, palindromo
+
+- *Palindromo*: testo che rimane uguale se letto al contrario
+- Scrivere una funzione ricorsiva per riconoscere i palindromi
+    - Parametro: testo da controllare
+    - Risultato: `bool`
+
+>
+
+Stringa palindroma: se ha lunghezza 0 o 1, oppure... <br>
+Prima lettera == ultima lettera e... <br>
+Stringa rimanente (senza prima e ultima lettera) palindroma
+
+<http://www.ce.unipr.it/brython/?p4_fun_palindrome.py>
+
+---
+
+title: Sierpinski carpet
+figure: images/fun/sierpinski-carpet.png
+
+- Disegnare un *frattale di Sierpinski*, di ordine `n` (scelto dall'utente)
+    - Dato un quadrato, dividerlo in 9 parti uguali
+    - Colorare la parte centrale
+    - Riapplicare l'algoritmo alle restanti 8 parti
+
+<http://www.ce.unipr.it/brython/?p4_fun_sierpinski.py>
+
+---
+
+title: Albero di H
+figure: images/fun/htree.png
+
+- Disegnare ricorsivamente un *H-Tree*
+    - Dividere l'area iniziale in due parti uguali
+    - Connettere con una linea i centri delle due aree
+    - Ripetere il procedimento per ciascuna delle due aree
+    - Alternare però la divisione delle aree in orizzontale e verticale
+- Chiedere all'utente il livello di ricorsione desiderato
+
+>
+
+`pygame.draw.line(screen, (r, g, b), (x1, y1), (x2, y2))`
+
+<https://www.pygame.org/docs/ref/draw.html#pygame.draw.line>
+
+---
+
+title: Torre di Hanoi
+figure: images/fun/hanoi-tower.png
+
+- Tre paletti + N dischi di diametro decrescente
+- Portare tutti i dischi dal primo all'ultimo paletto
+- Si può spostare solo un disco alla volta
+- Non si può mettere un disco su uno più piccolo
+- Usare la ricorsione
+
+>
+
+Immediato spostare un solo disco. <br>
+N dischi: spostarne N-1 sul piolo né origine né dest., <br>
+spostare l'ultimo disco sul piolo giusto, <br>
+spostare ancora gli altri N-1 dischi.
+
+<http://www.ce.unipr.it/brython/?p4_fun_hanoi.py>
+
+---
+
+title: Memory
 figure: images/misc/memory.png
 
-- Allocare una lista, di dimensione `rows×cols`
-    - L'utente sceglie `rows` e `cols`, però celle in numero pari
+- L'utente sceglie `rows` e `cols`
+- Allocare una lista di dimensione `n=rows×cols` (pari)
 - Inserire in ordine le prime lettere dell'alfabeto, ciascuna ripetuta due volte
 - Mescolare le celle
     - Per ciascuna cella, scegliere una posizione a caso e scambiare il contenuto delle celle
-- Mostrare all'utente la lista risultante, andando a capo per ogni riga
+- Mostrare la lista, andando a capo per ogni riga
 
 >
 
@@ -604,32 +671,34 @@ Cella a fine riga: `i % cols == cols - 1`
 
 Per cominciare, inserire nella lista valori numerici crescenti, anzichè lettere
 
+<http://www.ce.unipr.it/brython/?p4_mat_couples.py>
+
 ---
 
-title: 4.x Incolonnamento dati
+title: Incolonnamento dati
 
 - Visualizzare due tabelle con i caratteri ASCII
-    - 8 righe x 12 colonne, codici da 32 a 126
+    - 4 righe x 24 colonne, codici da 32 a 126
 - Tabella 1: mostrare in ordine i caratteri, colonna per colonna
 - Tabella 2: mostrare in ordine i caratteri, riga per riga
 
 code: Tabella 1
 
-     (08@HPX`hpx
-    !)19AIQYaiqy
-    "*2:BJRZbjrz
-    #+3;CKS[cks{
-    $,4<DLT\dlt|
-    %-5=EMU]emu}
-    &.6>FNV^fnv~
-    '/7?GOW_gow 
+     $(,048<@DHLPTX\`dhlptx|
+    !%)-159=AEIMQUY]aeimquy}
+    "&*.26:>BFJNRVZ^bfjnrvz~
+    #'+/37;?CGKOSW[_cgkosw{
+
+>
 
 Usare sempre due cicli `for` annidati: esterno su `y`, interno su `x` <br>
 In ogni posizione, calcolare il carattere da visualizzare: `x * ROWS + y`...
 
+<http://www.ce.unipr.it/brython/?p4_mat_ascii.py>
+
 ---
 
-title: 4.x Scitala spartana
+title: Scitala spartana
 figure: images/hist/scytale.png
 
 - Leggere un intero file di testo
@@ -646,9 +715,11 @@ figure: images/hist/scytale.png
 
 Usare una lista di liste (con dimensioni predefinite)
 
+<http://www.ce.unipr.it/brython/?p4_mat_scytale.py>
+
 ---
 
-title: 4.x Spirale
+title: Spirale
 figure: images/misc/spiral.png
 
 - Scrivere una funzione per riempire di numeri crescenti una matrice quadrata (o rettangolare)
@@ -664,4 +735,8 @@ poi cambiare la direzione in senso orario
 Coordinate raster, rotazione oraria di 90°: `(x', y') = (-y, x)` <br>
 In generale: `(x', y') = (x⋅cos(θ) - y⋅sin(θ), x⋅sin(θ) + y⋅cos(θ))` <br>
 
+
+>
+
+<http://www.ce.unipr.it/brython/?p4_mat_spiral.py>
 

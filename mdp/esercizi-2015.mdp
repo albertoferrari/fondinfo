@@ -457,7 +457,7 @@ figure: images/misc/frogger.png
 ---
 
 title: 4.4 Albero di H
-figure: images/misc/htree.png
+figure: images/fun/htree.png
 
 - Disegnare ricorsivamente un *H-Tree*
     - Dividere l'area iniziale in due parti uguali

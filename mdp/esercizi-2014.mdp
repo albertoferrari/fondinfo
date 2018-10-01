@@ -493,7 +493,7 @@ title: 4.5 Dimensione delle cartelle
 ---
 
 title: 4.6 Sierpinski carpet
-figure: images/misc/sierpinski-carpet.png
+figure: images/fun/sierpinski-carpet.png
 
 - Disegnare un *frattale di Sierpinski*, di ordine `n` (scelto dall'utente)
     - Dato un quadrato, dividerlo in 9 parti uguali
