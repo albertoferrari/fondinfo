@@ -659,30 +659,6 @@ Nell'esempio, sommare: `8 + 12 + 7` (celle dove `cols - x == rows - y`)
 
 ---
 
-title: Memory
-figure: images/misc/memory.png
-
-- L'utente sceglie `rows` e `cols`
-- Allocare una lista di dimensione `n=rows×cols` (pari)
-- Inserire in ordine le prime lettere dell'alfabeto, ciascuna ripetuta due volte
-- Mescolare le celle
-    - Per ciascuna cella, scegliere una posizione a caso e scambiare il contenuto delle celle
-- Mostrare la lista, andando a capo per ogni riga
-
->
-
-Usare una lista semplice, ma nella visualizzazione introdurre dei ritorni a capo
-
-Cella a inizio riga: il suo indice `i` è multiplo di `cols`, ossia `i % cols == 0`
-<br>
-Cella a fine riga: `i % cols == cols - 1`
-
-Per cominciare, inserire nella lista valori numerici crescenti, anzichè lettere
-
-<http://www.ce.unipr.it/brython/?p4_mat_couples.py>
-
----
-
 title: Incolonnamento dati
 
 - Visualizzare due tabelle con i caratteri ASCII
