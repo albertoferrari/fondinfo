@@ -408,6 +408,10 @@ code: python
                 board[y] = None  # no luck, backtrack
         return False
 
+>
+
+<http://www.ce.unipr.it/brython/?p5_solve_queens.py>
+
 ---
 
 title: Esercizi
@@ -556,4 +560,23 @@ In generale: `(x', y') = (x⋅cos(θ) - y⋅sin(θ), x⋅sin(θ) + y⋅cos(θ))`
 
 <http://www.ce.unipr.it/brython/?p5_mat_spiral.py>
 
+---
+
+
+title: 4.9 Puzzle di Cindy
+figure: images/misc/cindy1.png images/misc/cindy2.png
+
+- Piano di gioco: `2n+1` celle allineate
+    - Si parte con `n` pedine rosse tutte a sinistra, `n` pedine verdi tutte a destra, ed una cella libera in mezzo
+    - Le pedine rosse si possono spostare solo a destra, quelle verdi solo a sinistra (senza poter tornare indietro)
+- Ad ogni mossa, una qualsiasi pedina può:
+    - Avanzare di una posizione, se davanti ha una cella libera
+    - Oppure scavalcare esattamente una pedina dell'altro colore, se c'è una cella libera subito dopo
+- L'applicazione deve trovare *automaticamente* le mosse per invertire la posizione di tutte le pedine
+
+>
+
+<http://www.cis.upenn.edu/~matuszek/cit594-2012/Pages/backtracking.html>
+
+<http://www.ce.unipr.it/brython/?p5_solve_cindy.py>
 

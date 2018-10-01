@@ -542,7 +542,9 @@ def under_attack(board: list, x: int, y: int) -&gt; bool:
 
             board[y] = None  # no luck, backtrack
     return False
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p5_solve_queens.py">http://www.ce.unipr.it/brython/?p5_solve_queens.py</a></p></article>
  
 </slide>
 
@@ -755,6 +757,34 @@ poi cambiare la direzione in senso orario</p>
 In generale: <code>(x', y') = (x⋅cos(θ) - y⋅sin(θ), x⋅sin(θ) + y⋅cos(θ))</code> <br></p>
 <blockquote></blockquote>
 <p><a href="http://www.ce.unipr.it/brython/?p5_mat_spiral.py">http://www.ce.unipr.it/brython/?p5_mat_spiral.py</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <p>title: 4.9 Puzzle di Cindy
+figure: images/misc/cindy1.png images/misc/cindy2.png</p>
+<ul>
+<li>Piano di gioco: <code>2n+1</code> celle allineate<ul>
+<li>Si parte con <code>n</code> pedine rosse tutte a sinistra, <code>n</code> pedine verdi tutte a destra, ed una cella libera in mezzo</li>
+<li>Le pedine rosse si possono spostare solo a destra, quelle verdi solo a sinistra (senza poter tornare indietro)</li>
+</ul>
+</li>
+<li>Ad ogni mossa, una qualsiasi pedina può:<ul>
+<li>Avanzare di una posizione, se davanti ha una cella libera</li>
+<li>Oppure scavalcare esattamente una pedina dell'altro colore, se c'è una cella libera subito dopo</li>
+</ul>
+</li>
+<li>L'applicazione deve trovare <em>automaticamente</em> le mosse per invertire la posizione di tutte le pedine</li>
+</ul>
+<blockquote></blockquote>
+<p><a href="http://www.cis.upenn.edu/~matuszek/cit594-2012/Pages/backtracking.html">http://www.cis.upenn.edu/~matuszek/cit594-2012/Pages/backtracking.html</a></p>
+<p><a href="http://www.ce.unipr.it/brython/?p5_solve_cindy.py">http://www.ce.unipr.it/brython/?p5_solve_cindy.py</a></p></article>
  
 </slide>
 
