@@ -429,6 +429,8 @@ figure: images/misc/data-sequence.png
 - Invocare la funzione con un nome di file inserito dall'utente
 - Visualizzare il risultato
 
+>
+
 <http://www.ce.unipr.it/brython/?p5_data_maxmin.py>
 
 ---
@@ -535,6 +537,8 @@ figure: images/fun/neighborhood4.png
     - Sommare e contare solo i valori disponibili
     - 4 valori ai bordi, 3 valori agli angoli
 - Verificare la funzione con alcune matrici di test
+
+>
 
 <http://www.ce.unipr.it/brython/?p5_mat_smooth.py>
 
