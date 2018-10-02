@@ -209,28 +209,6 @@ code: python
     
 ---
 
-title: Modulo main (++)
-
-- Nome del modulo in esecuzione: `__name__`
-    - É il nome del file, senza estensione
-- Il modulo di avvio dell'app ha nome speciale
-    - In *CPython*, nome `"__main__"`
-    - In *Brython* nome `"script..."`; il “trucco” non funziona
-
-code: python
-  
-    # def hypotenuse ...
-    def main():
-        side1 = float(input("1st side? "))
-        side2 = float(input("2nd side? "))
-        print("3rd side:", hypotenuse(side1, side2))
-
-    # if this module is imported, main is not executed
-    if __name__ == "__main__":
-        main()
-    
----
-
 title: Effetti collaterali (++)
 
 - Modifica di oggetti passati come parametri o variabili globali, operazioni di lettura/scrittura...
@@ -264,7 +242,7 @@ code: python
 
 >
 
-Se `x, y = 3, 4`, ad esempio, i due risultati sono `-2` e `4`
+Con `x = 3` e `y = 4`, ad esempio, i due risultati sono `-2` e `4`
 
 ---
 
@@ -621,5 +599,28 @@ figure: images/misc/spiral-circles.png
 >
 
 <http://www.ce.unipr.it/brython/?p2_oop_spiral.py>
+    
+---
+
+title: Modulo main (++)
+class: break
+
+- Nome del modulo in esecuzione: `__name__`
+    - É il nome del file, senza estensione
+- Il modulo di avvio dell'app ha nome speciale
+    - In *CPython*, nome `"__main__"`
+    - In *Brython* nome `"script..."`; il “trucco” non funziona
+
+code: python
+  
+    # def hypotenuse ...
+    def main():
+        side1 = float(input("1st side? "))
+        side2 = float(input("2nd side? "))
+        print("3rd side:", hypotenuse(side1, side2))
+
+    # if this module is imported, main is not executed
+    if __name__ == "__main__":
+        main()
     
 

@@ -300,37 +300,6 @@ g2d.handle_keyboard(keydown, keyup)
 <slide  >
   
     <hgroup>
-      <h2>Modulo main (++)</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <ul>
-<li>Nome del modulo in esecuzione: <code>__name__</code><ul>
-<li>É il nome del file, senza estensione</li>
-</ul>
-</li>
-<li>Il modulo di avvio dell'app ha nome speciale<ul>
-<li>In <em>CPython</em>, nome <code>"__main__"</code></li>
-<li>In <em>Brython</em> nome <code>"script..."</code>; il “trucco” non funziona</li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code># def hypotenuse ...
-def main():
-    side1 = float(input("1st side? "))
-    side2 = float(input("2nd side? "))
-    print("3rd side:", hypotenuse(side1, side2))
-
-# if this module is imported, main is not executed
-if __name__ == "__main__":
-    main()
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>Effetti collaterali (++)</h2>
       <h3></h3>
     </hgroup>
@@ -379,7 +348,7 @@ def rq(x: int) -&gt; int:
     return x + base_value
 </code></pre>
 <blockquote></blockquote>
-<p>Se <code>x, y = 3, 4</code>, ad esempio, i due risultati sono <code>-2</code> e <code>4</code></p></article>
+<p>Con <code>x = 3</code> e <code>y = 4</code>, ad esempio, i due risultati sono <code>-2</code> e <code>4</code></p></article>
  
 </slide>
 

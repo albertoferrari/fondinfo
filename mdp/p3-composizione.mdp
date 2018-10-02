@@ -526,6 +526,8 @@ figure: images/misc/sin-cos.png
 
 Calcolare `math.sin(x * math.pi / 180)`, anzichè `math.sin(x)`
 
+<http://www.ce.unipr.it/brython/?p3_list_sin.py>
+
 ---
 
 title: Istogramma con barre orizzontali
@@ -536,7 +538,44 @@ figure: images/misc/histogram-rot.png
 - Mostrare un istogramma
     - Larghezza di ciascuna barra proporzionale al valore corrispondente
     - La barra più lunga occupa tutto lo spazio disponibile
+
+>
     
+<http://www.ce.unipr.it/brython/?p3_list_histogram.py>
+
+---
+
+title: Risultati casuali
+figure: images/misc/dice.png
+
+- Simulare `n` lanci di una coppia di dadi
+    - `n` scelto dall'utente
+- Contare quante volte si presenta ciascun risultato
+    - Risultati possibili: da 2 a 12
+    - Somma dei due dadi
+
+>
+
+Per conteggiare i vari risultati, usare una lista di (almeno) 11 valori
+
+<http://www.ce.unipr.it/brython/?p3_list_dice.py>
+
+---
+
+title: Conteggio caratteri
+figure: images/misc/characters.png
+
+- Chiedere una riga di testo all'utente
+- Contare separatamente le occorrenze di ciascuna lettera maiuscola (da `'A'` a `'Z'`)
+
+>
+
+Creare una lista (array) di 26 elementi, inizialmente tutti posti a `0` <br>
+Ciascun elemento è il contatore per una certa lettera <br>
+L'indice del contatore corrispondente ad una lettera `val` può essere ottenuto come `ord(val) - ord('A')`
+
+<http://www.ce.unipr.it/brython/?p3_list_letters.py>
+
 ---
 
 title: Fattori primi
@@ -553,6 +592,8 @@ title: Fattori primi
 
 Quando si trova un divisore `x`, dividere ripetutamente `n` per `x`, finché resta divisibile <br>
 Valutare l'uso di un ciclo `while`, anzichè `for`
+
+<http://www.ce.unipr.it/brython/?p3_list_factors.py>
 
 ---
 
