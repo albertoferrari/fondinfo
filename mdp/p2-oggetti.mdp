@@ -401,6 +401,10 @@ code: python
     g2d.init_canvas((ARENA_W, ARENA_H))
     g2d.main_loop(update, 1000 // 30)  # Millis
 
+>
+
+<http://www.ce.unipr.it/brython/?p2_oop_ball_anim.py>
+
 ---
 
 title: Variabili locali, parametri, campi
