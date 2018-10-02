@@ -342,7 +342,8 @@ title: Applicazione
 
 code: python
 
-    from p3_ball import Ball  # Ball is defined in p3_ball.py
+    from p2_oop_ball import Ball  # Ball is defined
+                                  # in p2_oop_ball.py
 
     # Create two objects, instances of the Ball class
     b1 = Ball(40, 80)
@@ -386,7 +387,7 @@ title: Animazione di due palline
 code: python
 
     import g2d
-    from p3_ball import Ball, ARENA_W, ARENA_H
+    from p2_oop_ball import Ball, ARENA_W, ARENA_H
 
     def update():
         g2d.fill_canvas((255, 255, 255))  # BG

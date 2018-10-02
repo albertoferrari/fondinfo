@@ -26,8 +26,9 @@
 - [Algoritmi in Python 3](http://tomamic.github.io/fondinfo/p1-algoritmi.html)
 - [Funzioni ed oggetti](http://tomamic.github.io/fondinfo/p2-oggetti.html)
 - [Liste e composizione](http://tomamic.github.io/fondinfo/p3-composizione.html)
-- [Ricorsione e file](http://tomamic.github.io/fondinfo/p4-ricorsione-file.html)
-- [Linguaggio C++11](http://tomamic.github.io/fondinfo/p5-cpp.html)
+- [Ricorsione](http://tomamic.github.io/fondinfo/p4-ricorsione.html)
+- [Dati e matrici](http://tomamic.github.io/fondinfo/p5-matrici.html)
+- [Linguaggio C++11](http://tomamic.github.io/fondinfo/p6-cpp.html)
 - [Slide in PDF (2x2, non aggiornate)](http://tomamic.github.io/fondinfo/programmazione-2x2.pdf)
 
 ----
