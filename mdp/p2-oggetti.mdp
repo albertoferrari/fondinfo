@@ -173,18 +173,23 @@ code: python
 
     import g2d
 
+    x, y, dx = 50, 50, 5
+    ARENA_W, ARENA_H = 320, 240
+    image = g2d.load_image("ball.png")
+    
     def update():
         global x
         g2d.fill_canvas((255, 255, 255))  # Draw background        
-        g2d.draw_image(image, (x, 50))    # Draw foreground
-        x = (x + 5) % 320                 # Update ball's position
+        g2d.draw_image(image, (x, y))     # Draw foreground
+        x = (x + dx) ##% ARENA_W          # Update ball's position
 
-    g2d.init_canvas((320, 240))
-    image = g2d.load_image("ball.png")
-    x = 50
-
+    g2d.init_canvas((ARENA_W, ARENA_H))
     g2d.main_loop(update, 1000 // 30)     # <-- Call update 30 times/second
 
+>
+
+<http://www.ce.unipr.it/brython/?p2_fun_anim.py>
+    
 ---
 
 title: Eventi della tastiera
@@ -203,9 +208,9 @@ code: python
     g2d.handle_keyboard(keydown, keyup)  # <-- Keyb events
     g2d.main_loop()
 
-<https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
-
 >
+
+<https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
 
 <http://www.ce.unipr.it/brython/?p2_fun_keyb.py>
     
@@ -492,9 +497,10 @@ title: Movimento orizzontale
 figure: images/misc/street-fighter.jpg
 
 - Mostrare una pallina che si muove in orizzontale
+    - Variabile `dx` indica lo spostamento da effettuare ad ogni ciclo
 - La pallina rimbalza sui bordi
-    - Memorizzare in una variabile `dx` lo spostamento orizzontale da effettuare ad ogni ciclo
-    - Cambiare segno a `dx` quando `x < 0` oppure `x + w > screen_width`
+    - Cambiare segno a `dx`
+    - Quando `x` raggiunge un bordo
 
 >
 

@@ -259,18 +259,21 @@ def main():
         
       </figure><pre class="prettyprint" data-lang="python"><code>import g2d
 
+x, y, dx = 50, 50, 5
+ARENA_W, ARENA_H = 320, 240
+image = g2d.load_image("ball.png")
+
 def update():
     global x
     g2d.fill_canvas((255, 255, 255))  # Draw background        
-    g2d.draw_image(image, (x, 50))    # Draw foreground
-    x = (x + 5) % 320                 # Update ball's position
+    g2d.draw_image(image, (x, y))     # Draw foreground
+    x = (x + dx) ##% ARENA_W          # Update ball's position
 
-g2d.init_canvas((320, 240))
-image = g2d.load_image("ball.png")
-x = 50
-
+g2d.init_canvas((ARENA_W, ARENA_H))
 g2d.main_loop(update, 1000 // 30)     # &lt;-- Call update 30 times/second
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p2_fun_anim.py">http://www.ce.unipr.it/brython/?p2_fun_anim.py</a></p></article>
  
 </slide>
 
@@ -293,8 +296,8 @@ g2d.init_canvas((320, 240))
 g2d.handle_keyboard(keydown, keyup)  # &lt;-- Keyb events
 g2d.main_loop()
 </code></pre>
-<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code</a></p>
 <blockquote></blockquote>
+<p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code</a></p>
 <p><a href="http://www.ce.unipr.it/brython/?p2_fun_keyb.py">http://www.ce.unipr.it/brython/?p2_fun_keyb.py</a></p></article>
  
 </slide>
@@ -716,10 +719,13 @@ g2d.main_loop(update, 1000 // 30)  # Millis
         <img src="images/misc/street-fighter.jpg">
         
       </figure><ul>
-<li>Mostrare una pallina che si muove in orizzontale</li>
+<li>Mostrare una pallina che si muove in orizzontale<ul>
+<li>Variabile <code>dx</code> indica lo spostamento da effettuare ad ogni ciclo</li>
+</ul>
+</li>
 <li>La pallina rimbalza sui bordi<ul>
-<li>Memorizzare in una variabile <code>dx</code> lo spostamento orizzontale da effettuare ad ogni ciclo</li>
-<li>Cambiare segno a <code>dx</code> quando <code>x &lt; 0</code> oppure <code>x + w &gt; screen_width</code></li>
+<li>Cambiare segno a <code>dx</code></li>
+<li>Quando <code>x</code> raggiunge un bordo</li>
 </ul>
 </li>
 </ul>
