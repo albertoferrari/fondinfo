@@ -183,7 +183,7 @@ code: python
     image = g2d.load_image("ball.png")
     x = 50
 
-    g2d.main_loop(update, 1000 // 30)     # Call update 30 times/second
+    g2d.main_loop(update, 1000 // 30)     # <-- Call update 30 times/second
 
 ---
 
@@ -199,7 +199,9 @@ code: python
     def keyup(code: str):
         print("Key released: ", code)
 
-    g2d.handle_keyboard(keydown, keyup)
+    g2d.init_canvas((320, 240))
+    g2d.handle_keyboard(keydown, keyup)  # <-- Keyb events
+    g2d.main_loop()
 
 <https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
 
@@ -242,7 +244,7 @@ code: python
 
 >
 
-Con `x = 3` e `y = 4`, ad esempio, i due risultati sono `-2` e `4`
+Ad esempio, con `x = 3` e `y = 4` i due risultati sono `-2` e `4`
 
 ---
 
@@ -346,12 +348,11 @@ code: python
                                   # in p2_oop_ball.py
 
     # Create two objects, instances of the Ball class
-    b1 = Ball(40, 80)
-    b2 = Ball(80, 40)
+    b1 = Ball(140, 180)
+    b2 = Ball(180, 140)
 
     for i in range(25):
-        print('Ball 1 @', b1.position())
-        print('Ball 2 @', b2.position())
+        print("b1 @", b1.position(), "b2 @", b2.position())
         b1.move()
         b2.move()
 
@@ -374,11 +375,10 @@ code: python
     
 code: python
 
-    b1 = Ball(40, 80)  # also, automatically call
-                       # Ball.__init__(b1, 40, 80)
+    # Python internals, DON'T do this!
+    b1 = object.__new__(Ball)
+    Ball.__init__(b1, 40, 80)
     Ball.move(b1)
-
-**Nota.** Meglio usare la prima notazione, che evidenzia l'*oggetto* anzichè la classe!
 
 ---
 

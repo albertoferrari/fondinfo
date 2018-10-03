@@ -269,7 +269,7 @@ g2d.init_canvas((320, 240))
 image = g2d.load_image("ball.png")
 x = 50
 
-g2d.main_loop(update, 1000 // 30)     # Call update 30 times/second
+g2d.main_loop(update, 1000 // 30)     # &lt;-- Call update 30 times/second
 </code></pre></article>
  
 </slide>
@@ -289,7 +289,9 @@ def keydown(code: str):
 def keyup(code: str):
     print("Key released: ", code)
 
-g2d.handle_keyboard(keydown, keyup)
+g2d.init_canvas((320, 240))
+g2d.handle_keyboard(keydown, keyup)  # &lt;-- Keyb events
+g2d.main_loop()
 </code></pre>
 <p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code</a></p>
 <blockquote></blockquote>
@@ -348,7 +350,7 @@ def rq(x: int) -&gt; int:
     return x + base_value
 </code></pre>
 <blockquote></blockquote>
-<p>Con <code>x = 3</code> e <code>y = 4</code>, ad esempio, i due risultati sono <code>-2</code> e <code>4</code></p></article>
+<p>Ad esempio, con <code>x = 3</code> e <code>y = 4</code> i due risultati sono <code>-2</code> e <code>4</code></p></article>
  
 </slide>
 
@@ -513,12 +515,11 @@ class Ball:
                               # in p2_oop_ball.py
 
 # Create two objects, instances of the Ball class
-b1 = Ball(40, 80)
-b2 = Ball(80, 40)
+b1 = Ball(140, 180)
+b2 = Ball(180, 140)
 
 for i in range(25):
-    print('Ball 1 @', b1.position())
-    print('Ball 2 @', b2.position())
+    print("b1 @", b1.position(), "b2 @", b2.position())
     b1.move()
     b2.move()
 </code></pre>
@@ -542,11 +543,11 @@ for i in range(25):
 <pre class="prettyprint" data-lang="python"><code>b1 = Ball(40, 80)
 b1.move()
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>b1 = Ball(40, 80)  # also, automatically call
-                   # Ball.__init__(b1, 40, 80)
+<pre class="prettyprint" data-lang="python"><code># Python internals, DON'T do this!
+b1 = object.__new__(Ball)
+Ball.__init__(b1, 40, 80)
 Ball.move(b1)
-</code></pre>
-<p><strong>Nota.</strong> Meglio usare la prima notazione, che evidenzia l'<em>oggetto</em> anzichè la classe!</p></article>
+</code></pre></article>
  
 </slide>
 
