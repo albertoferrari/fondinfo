@@ -293,8 +293,6 @@ code: python
             self._y = y
             self._dx = 5
             self._dy = 5
-            self._w = 20
-            self._h = 20
         # ...
 
 ---
@@ -324,28 +322,26 @@ figure: images/oop/anim-bounce.png
 code: python
 
     ARENA_W, ARENA_H = 320, 240
+    BALL_W, BALL_H = 20, 20
 
     class Ball:
         # ...
         def move(self):
-            if not (0 <= self._x + self._dx <= ARENA_W - self._w):
+            if not (0 <= self._x + self._dx <= ARENA_W - BALL_W):
                 self._dx = -self._dx
-            if not (0 <= self._y + self._dy <= ARENA_H - self._h):
+            if not (0 <= self._y + self._dy <= ARENA_H - BALL_H):
                 self._dy = -self._dy
             self._x += self._dx
             self._y += self._dy
 
         def position(self) -> (int, int, int, int):
-            return self._x, self._y, self._w, self._h
+            return self._x, self._y, BALL_W, BALL_H
 
 ---
 
-title: Applicazione
+title: Uso degli oggetti
 
 code: python
-
-    from p2_oop_ball import Ball  # Ball is defined
-                                  # in p2_oop_ball.py
 
     # Create two objects, instances of the Ball class
     b1 = Ball(140, 180)

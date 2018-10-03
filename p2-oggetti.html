@@ -438,8 +438,6 @@ def rq(x: int) -&gt; int:
         self._y = y
         self._dx = 5
         self._dy = 5
-        self._w = 20
-        self._h = 20
     # ...
 </code></pre></article>
  
@@ -487,19 +485,20 @@ def rq(x: int) -&gt; int:
 <li>Espongono <em>servizi</em> ad altri oggetti</li>
 </ul>
 <pre class="prettyprint" data-lang="python"><code>ARENA_W, ARENA_H = 320, 240
+BALL_W, BALL_H = 20, 20
 
 class Ball:
     # ...
     def move(self):
-        if not (0 &lt;= self._x + self._dx &lt;= ARENA_W - self._w):
+        if not (0 &lt;= self._x + self._dx &lt;= ARENA_W - BALL_W):
             self._dx = -self._dx
-        if not (0 &lt;= self._y + self._dy &lt;= ARENA_H - self._h):
+        if not (0 &lt;= self._y + self._dy &lt;= ARENA_H - BALL_H):
             self._dy = -self._dy
         self._x += self._dx
         self._y += self._dy
 
     def position(self) -&gt; (int, int, int, int):
-        return self._x, self._y, self._w, self._h
+        return self._x, self._y, BALL_W, BALL_H
 </code></pre></article>
  
 </slide>
@@ -507,14 +506,11 @@ class Ball:
 <slide  >
   
     <hgroup>
-      <h2>Applicazione</h2>
+      <h2>Uso degli oggetti</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>from p2_oop_ball import Ball  # Ball is defined
-                              # in p2_oop_ball.py
-
-# Create two objects, instances of the Ball class
+      <pre class="prettyprint" data-lang="python"><code># Create two objects, instances of the Ball class
 b1 = Ball(140, 180)
 b2 = Ball(180, 140)
 
