@@ -213,7 +213,7 @@ code: python
 
 >
 
-<http://www.ce.unipr.it/brython/?p3_ball_anim.py>
+<http://www.ce.unipr.it/brython/?p3_oop_balls.py>
 
 ---
 
@@ -234,10 +234,9 @@ code: python
             for b in self._balls:
                 b.move()
 
-code: python
-
     arena = BallArena()
-    arena.add(Ball(40, 80)); arena.add(Ball(80, 40)) # ...
+    arena.add(Ball(40, 80))
+    arena.add(Ball(80, 40)) # ...
     arena.move_all()
 
 ---
@@ -253,13 +252,26 @@ figure: images/oop/inheritance.png
 - Relazione **is-a** tra classi: ogni sottoclasse...
     - Eredita le caratteristiche della classe base
     - Ma introduce delle specializzazioni
+
+---
+
+title: Fattoria parlante
+figure: images/oop/animals.png images/oop/peppa.jpg
+
 - Noi definiremo una *classe base* come **interfaccia astratta**
+- Es. `Animal`:
     - Tutti gli animali fanno un verso (*interfaccia*)
     - Ogni animale fa un verso diverso (*polimorfismo*)
 
+code: python
+
+    class Animal:
+        def say(self):
+            raise NotImplementedError("Abstract method")
+
 >
 
-<http://www.ce.unipr.it/brython/?p3_animals.py>
+<http://www.ce.unipr.it/brython/?p3_oop_animals.py>
 
 ---
 

@@ -291,7 +291,7 @@ g2d.init_canvas((ARENA_W, ARENA_H))
 g2d.main_loop(update, 1000 // 30)  # Millis
 </code></pre>
 <blockquote></blockquote>
-<p><a href="http://www.ce.unipr.it/brython/?p3_ball_anim.py">http://www.ce.unipr.it/brython/?p3_ball_anim.py</a></p></article>
+<p><a href="http://www.ce.unipr.it/brython/?p3_oop_balls.py">http://www.ce.unipr.it/brython/?p3_oop_balls.py</a></p></article>
  
 </slide>
 
@@ -319,9 +319,10 @@ g2d.main_loop(update, 1000 // 30)  # Millis
     def move_all(self):
         for b in self._balls:
             b.move()
-</code></pre>
-<pre class="prettyprint" data-lang="python"><code>arena = BallArena()
-arena.add(Ball(40, 80)); arena.add(Ball(80, 40)) # ...
+
+arena = BallArena()
+arena.add(Ball(40, 80))
+arena.add(Ball(80, 40)) # ...
 arena.move_all()
 </code></pre></article>
  
@@ -350,14 +351,34 @@ arena.move_all()
 <li>Ma introduce delle specializzazioni</li>
 </ul>
 </li>
-<li>Noi definiremo una <em>classe base</em> come <strong>interfaccia astratta</strong><ul>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Fattoria parlante</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/animals.png"><img src="images/oop/peppa.jpg">
+        
+      </figure><ul>
+<li>Noi definiremo una <em>classe base</em> come <strong>interfaccia astratta</strong></li>
+<li>Es. <code>Animal</code>:<ul>
 <li>Tutti gli animali fanno un verso (<em>interfaccia</em>)</li>
 <li>Ogni animale fa un verso diverso (<em>polimorfismo</em>)</li>
 </ul>
 </li>
 </ul>
+<pre class="prettyprint" data-lang="python"><code>class Animal:
+    def say(self):
+        raise NotImplementedError("Abstract method")
+</code></pre>
 <blockquote></blockquote>
-<p><a href="http://www.ce.unipr.it/brython/?p3_animals.py">http://www.ce.unipr.it/brython/?p3_animals.py</a></p></article>
+<p><a href="http://www.ce.unipr.it/brython/?p3_oop_animals.py">http://www.ce.unipr.it/brython/?p3_oop_animals.py</a></p></article>
  
 </slide>
 

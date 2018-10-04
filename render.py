@@ -92,7 +92,10 @@ if __name__ == '__main__':
             if (not os.path.isfile(outpath) or
                 os.path.getmtime(outpath) < os.path.getmtime(inpath)):
                 process_slides(inpath, outpath)
+        period = 5
         if len(sys.argv) > 1:
-            time.sleep(int(sys.argv[1]))
+            period = int(sys.argv[1])
+        if period > 0:
+            time.sleep(period)
         else:
             sys.exit()
