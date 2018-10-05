@@ -7,35 +7,33 @@ figure: images/oop/modules.png
 title: Lista
 figure: images/fun/month-list.svg
 
-- Sequenza di elementi, *di solito* dello stesso **tipo**
-    - L'intera lista può essere assegnata ad una variabile, così diamo un **nome** alla lista
+- *Sequenza mutabile* di elementi, *di solito* dello stesso **tipo**
+- Variabile, per dare un **nome** alla lista
+- **Lunghezza** attuale di una lista `x`: `len(x)`
 - I singoli elementi sono **numerati**
-    - Gli indici partono da 0!
+    - Da `0` a `len(x)-1`
       
 code: python
 
-    to_buy = ["spam", "eggs", "beans"]
+    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
 code: python
 
-    rainfall_data = [13, 24, 18, 15]
-    
+    num_days = [31, 28, 31, 30, 31, 30,
+                31, 31, 30, 31, 30, 31]
+
 code: python
 
-    months = ["Jan", "Feb", "Mar",
-              "Apr", "May", "Jun", 
-              "Jul", "Aug", "Sep", 
-              "Oct", "Nov", "Dec"]
-    
+    results_by_month = [0] * 12  # List repetition
+
 ---
 
-title: Accesso agli elementi
+title: Elementi e slice
 figure: images/fun/wile-coyote.png
 
 - **Attenzione ad usare indici validi!**
-    - *Lunghezza* attuale di una lista `x`: `len(x)`
-    - Elementi *numerati* da `0` a `len(x)-1`
-    - Indici *negativi* contano dalla fine
+    - Ma indici *negativi* contano dalla fine
 
 code: python
 
@@ -45,53 +43,32 @@ code: python
 
 code: python
 
-    to_buy = ["spam", "eggs", "beans"]
-    
-    to_buy[1] = "ketchup"      # replace an element
-
----
-
-title: Appartenenza, inserimento, rimozione
-figure: images/fun/shopping-list.jpg
-
-code: python
-
-    to_buy = ["spam", "eggs", "beans"]
-    
-    "eggs" in to_buy           # True, to_buy contains "eggs"
-
-code: python
-
-    to_buy.append("bacon")     # add an element to the end
-    to_buy.pop()               # remove (and return) last element
-    
-    to_buy.insert(1, "bacon")  # other elements shift
-    removed = to_buy.pop(1)    # remove (and return) element at index
-    
-    to_buy.remove("eggs")      # remove an element by value
-
----
-
-title: Slice: porzioni di lista
-
-code: python
-
     spring = months[2:5]       # ["Mar", "Apr", "May"]
     quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
     quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
-    whole_year = months[:]     # Copy the whole list
+    whole_year = months[:]     # Copy of the whole list
+
+---
+
+title: Inserimento e rimozione
+figure: images/fun/shopping-list.png
 
 code: python
 
     list1 = ["spam", "eggs", "beans"]
-    list2 = ["sausage", "mushrooms"]
-    to_buy = list1 + list2     # List concatenation
+    list2 = ["sausage", "mushrooms", "cheese"]
+    grocery = list1 + list2     # List concatenation
+    
+    grocery[0] = "ketchup"      # replace an element
 
-code: python
-
-    so_boring = [1, 2] * 3     # List repetition:
-                               # [1, 2, 1, 2, 1, 2]
-    results_by_month = [0] * 12
+    grocery.append("bacon")     # add an element to the end
+    grocery.pop()               # remove (and return) last element
+    
+    grocery.insert(1, "bacon")  # other elements shift
+    removed = grocery.pop(1)    # remove (and return) element at index
+    
+    if "eggs" in grocery:       # True, grocery contains "eggs"
+        grocery.remove("eggs")  # remove an element by value
 
 ---
 
@@ -106,7 +83,7 @@ code: python
                    # (try and modify one of them...) 
     c = a
     c is a         # True, same object in memory 
-                   # (try and modify one of them...) 
+                   # (try and modify one of them...)
 
 ---
 
@@ -118,9 +95,8 @@ title: Stringhe e liste
 code: python
 
     txt = "Monty Python's Flying Circus"
-    txt[0]    # 'M'
-    txt[1]    # 'o'
-    txt[-1]   # 's'
+    txt[3]    # 't'
+    txt[-2]   # 'u'
     txt[6:12] # "Python"
     txt[-6:]  # "Circus"
 
@@ -152,18 +128,19 @@ code: python
 ---
 
 title: Cicli su liste: for
+figure: images/fun/shopping-list.png
 
 code: python
 
-    shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+    grocery = ["spam", "eggs", "beans"]
         
     print("Your shopping list contains:")
 
-    for product in shopping_list:
+    for product in grocery:
         print(product)
     
-- Ad ogni iterazione, a `product` è assegnato un diverso elemento della lista `shopping_list`
-- Si può usare un ciclo `for` su qualsiasi sequenza, anche su una *stringa*
+- Ad ogni iterazione, a `product` è assegnato un elemento di `grocery`
+- Ciclo `for` per qualsiasi tipo di sequenza: lista, stringa, tupla, range...
 
 ---
 
@@ -220,7 +197,7 @@ code: python
 title: Composizione
 figure: images/oop/ball-arena.svg
 
-- Associazione di tipo **has-a**, **part-of** tra oggetti
+- Associazione **has-a**, **part-of** tra oggetti
     - Una *arena* può *contenere* diverse *palline*
 
 code: python

@@ -88,23 +88,18 @@ else:
         <img src="images/fun/month-list.svg">
         
       </figure><ul>
-<li>Sequence of elements, <em>usually</em> of the same <strong>type</strong><ul>
-<li>The whole list can be assigned to a variable, to give it a <strong>name</strong></li>
+<li><strong>Mutable</strong> sequence of elements</li>
+<li><em>Usually</em> of the same <em>type</em></li>
+<li>Current <em>length</em> of a list <code>x</code>: <code>len(x)</code></li>
+<li>Elements <em>enumerated</em> from <code>0</code> to <code>len(x)-1</code></li>
 </ul>
-</li>
-<li>Single elements are <strong>indexed</strong><ul>
-<li>Indices start from 0!</li>
-</ul>
-</li>
-</ul>
-<pre class="prettyprint" data-lang="python"><code>to_buy = ["spam", "eggs", "beans"]
+<pre class="prettyprint" data-lang="python"><code>months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>rainfall_data = [13, 24, 18, 15]
+<pre class="prettyprint" data-lang="python"><code>num_days = [31, 28, 31, 30, 31, 30,
+            31, 31, 30, 31, 30, 31]
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>months = ["Jan", "Feb", "Mar",
-          "Apr", "May", "Jun",
-          "Jul", "Aug", "Sep",
-          "Oct", "Nov", "Dec"]
+<pre class="prettyprint" data-lang="python"><code>results_by_month = [0] * 12  # List repetition
 </code></pre></article>
  
 </slide>
@@ -112,7 +107,7 @@ else:
 <slide  >
   
     <hgroup>
-      <h2>Access to elements</h2>
+      <h2>Elements and slices</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -121,19 +116,18 @@ else:
         
       </figure><ul>
 <li><strong>Attention: use valid indices!</strong><ul>
-<li>Current <em>length</em> of a list <code>x</code>: <code>len(x)</code></li>
-<li>Elements <em>enumerated</em> from <code>0</code> to <code>len(x)-1</code></li>
-<li><em>Negative</em> indices counts from the end</li>
+<li>But <em>negative</em> indices counts from the end</li>
 </ul>
 </li>
 </ul>
 <pre class="prettyprint" data-lang="python"><code>n = len(months)            # 12
 months[3]                  # "Apr"
 months[-2]                 # "Nov", same as n - 2
-</code></pre>
-<pre class="prettyprint" data-lang="python"><code>to_buy = ["spam", "eggs", "beans"]
 
-to_buy[1] = "ketchup"      # replace an element
+spring = months[2:5]       # ["Mar", "Apr", "May"]
+quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
+quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
+whole_year = months[:]     # Copy of the whole list
 </code></pre></article>
  
 </slide>
@@ -141,49 +135,27 @@ to_buy[1] = "ketchup"      # replace an element
 <slide  >
   
     <hgroup>
-      <h2>Membership, insertion, removal</h2>
+      <h2>Insertion and removal</h2>
       <h3></h3>
     </hgroup>
     <article >
       <figure>
-        <img src="images/fun/shopping-list.jpg">
+        <img src="images/fun/shopping-list.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>to_buy = ["spam", "eggs", "beans"]
-
-"eggs" in to_buy           # True, to_buy contains "eggs"
-</code></pre>
-<pre class="prettyprint" data-lang="python"><code>to_buy.append("bacon")     # add an element to the end
-to_buy.pop()               # remove (and return) last element
-
-to_buy.insert(1, "bacon")  # other elements shift
-removed = to_buy.pop(1)    # remove (and return) element at index
-# del to_buy[1]            # only remove element at index
-
-to_buy.remove("eggs")      # remove an element by value
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Slice: part of list</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="python"><code>spring = months[2:5]       # ["Mar", "Apr", "May"]
-quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
-quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
-but_spring = months[:]     # Copy the whole list
-del but_spring[2:5]        # Remove spring months
-</code></pre>
-<pre class="prettyprint" data-lang="python"><code>list1 = ["spam", "eggs", "beans"]
+      </figure><pre class="prettyprint" data-lang="python"><code>list1 = ["spam", "eggs", "beans"]
 list2 = ["sausage", "mushrooms"]
-to_buy = list1 + list2     # List concatenation
-</code></pre>
-<pre class="prettyprint" data-lang="python"><code>so_boring = [1, 2] * 3     # List repetition:
-                           # [1, 2, 1, 2, 1, 2]
-results_by_month = [0] * 12
+grocery = list1 + list2     # List concatenation
+
+grocery[0] = "ketchup"      # replace an element
+
+grocery.append("bacon")     # add an element to the end
+grocery.pop()               # remove (and return) last element
+
+grocery.insert(1, "bacon")  # other elements shift
+removed = grocery.pop(1)    # remove (and return) element at index
+
+if "eggs" in grocery:       # True, grocery contains "eggs"    
+    grocery.remove("eggs")  # remove an element by value
 </code></pre></article>
  
 </slide>
@@ -191,7 +163,7 @@ results_by_month = [0] * 12
 <slide  >
   
     <hgroup>
-      <h2>Equality e identity</h2>
+      <h2>Equality and identity</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -219,9 +191,8 @@ c is a         # True, same object in memory
 <li><strong><code>join</code></strong> and <strong><code>split</code></strong>: from list to string and viceversa</li>
 </ul>
 <pre class="prettyprint" data-lang="python"><code>txt = "Monty Python's Flying Circus"
-txt[0]    # 'M'
-txt[1]    # 'o'
-txt[-1]   # 's'
+txt[3]    # 't'
+txt[-2]   # 'u'
 txt[6:12] # "Python"
 txt[-6:]  # "Circus"
 
@@ -265,16 +236,16 @@ a, b = b, a
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+      <pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "eggs", "bacon", "ketchup"]
 
 print("Your shopping list contains:")
 
-for product in shopping_list:
+for product in grocery:
     print(product)
 </code></pre>
 <ul>
-<li>At each iteration, a different element of <code>shopping_list</code> is assigned to <code>product</code></li>
-<li>A <code>for</code> cycle can be used on every kind of sequence, also a <em>string</em></li>
+<li>At each iteration, a different element of <code>grocery</code> is assigned to <code>product</code></li>
+<li>A <code>for</code> cycle can be used on any kind of sequence: list, string, tuple, range...</li>
 </ul></article>
  
 </slide>
@@ -325,6 +296,10 @@ main()
 #    squares.append(x ** 2)
 </code></pre>
 <pre class="prettyprint" data-lang="python"><code>even_nums = [str(x) for x in range(12) if (x % 2) == 0]
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code># Simple cases: list repetition
+so_boring = [1, 2] * 3  # [1, 2, 1, 2, 1, 2]
+results_by_month = [0] * 12
 </code></pre></article>
  
 </slide>
@@ -353,7 +328,7 @@ for i, val in enumerate(shopping_list):
     print(i, val)
 </code></pre>
 <blockquote></blockquote>
-<p>Resuls in a list: only (!) to visualize them <br>
+<p>Results in a list: only (!) to visualize them <br>
 Otherwise, Python doesn't generate results immediately (<em>lazy</em>)</p></article>
  
 </slide>

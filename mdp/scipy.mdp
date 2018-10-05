@@ -39,35 +39,32 @@ code: python
 title: List
 figure: images/fun/month-list.svg
 
-- Sequence of elements, *usually* of the same **type**
-    - The whole list can be assigned to a variable, to give it a **name**
-- Single elements are **indexed**
-    - Indices start from 0!
+- **Mutable** sequence of elements
+- *Usually* of the same *type*
+- Current *length* of a list `x`: `len(x)`
+- Elements *enumerated* from `0` to `len(x)-1`
 
 code: python
 
-    to_buy = ["spam", "eggs", "beans"]
+    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 code: python
 
-    rainfall_data = [13, 24, 18, 15]
+    num_days = [31, 28, 31, 30, 31, 30,
+                31, 31, 30, 31, 30, 31]
 
 code: python
 
-    months = ["Jan", "Feb", "Mar",
-              "Apr", "May", "Jun",
-              "Jul", "Aug", "Sep",
-              "Oct", "Nov", "Dec"]
+    results_by_month = [0] * 12  # List repetition
 
 ---
 
-title: Access to elements
+title: Elements and slices
 figure: images/fun/wile-coyote.png
 
 - **Attention: use valid indices!**
-    - Current *length* of a list `x`: `len(x)`
-    - Elements *enumerated* from `0` to `len(x)-1`
-    - *Negative* indices counts from the end
+    - But *negative* indices counts from the end
 
 code: python
 
@@ -75,61 +72,36 @@ code: python
     months[3]                  # "Apr"
     months[-2]                 # "Nov", same as n - 2
 
-code: python
-
-    to_buy = ["spam", "eggs", "beans"]
-
-    to_buy[1] = "ketchup"      # replace an element
-
----
-
-title: Membership, insertion, removal
-figure: images/fun/shopping-list.jpg
-
-code: python
-
-    to_buy = ["spam", "eggs", "beans"]
-
-    "eggs" in to_buy           # True, to_buy contains "eggs"
-
-code: python
-
-    to_buy.append("bacon")     # add an element to the end
-    to_buy.pop()               # remove (and return) last element
-
-    to_buy.insert(1, "bacon")  # other elements shift
-    removed = to_buy.pop(1)    # remove (and return) element at index
-    # del to_buy[1]            # only remove element at index
-
-    to_buy.remove("eggs")      # remove an element by value
-
----
-
-title: Slice: part of list
-
-code: python
-
     spring = months[2:5]       # ["Mar", "Apr", "May"]
     quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
     quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
-    but_spring = months[:]     # Copy the whole list
-    del but_spring[2:5]        # Remove spring months
+    whole_year = months[:]     # Copy of the whole list
+
+---
+
+title: Insertion and removal
+figure: images/fun/shopping-list.png
 
 code: python
 
     list1 = ["spam", "eggs", "beans"]
     list2 = ["sausage", "mushrooms"]
-    to_buy = list1 + list2     # List concatenation
+    grocery = list1 + list2     # List concatenation
 
-code: python
+    grocery[0] = "ketchup"      # replace an element
 
-    so_boring = [1, 2] * 3     # List repetition:
-                               # [1, 2, 1, 2, 1, 2]
-    results_by_month = [0] * 12
+    grocery.append("bacon")     # add an element to the end
+    grocery.pop()               # remove (and return) last element
+
+    grocery.insert(1, "bacon")  # other elements shift
+    removed = grocery.pop(1)    # remove (and return) element at index
+
+    if "eggs" in grocery:       # True, grocery contains "eggs"    
+        grocery.remove("eggs")  # remove an element by value
 
 ---
 
-title: Equality e identity
+title: Equality and identity
 
 code: python
 
@@ -152,9 +124,8 @@ title: Strings and lists
 code: python
 
     txt = "Monty Python's Flying Circus"
-    txt[0]    # 'M'
-    txt[1]    # 'o'
-    txt[-1]   # 's'
+    txt[3]    # 't'
+    txt[-2]   # 'u'
     txt[6:12] # "Python"
     txt[-6:]  # "Circus"
 
@@ -189,15 +160,15 @@ title: Cycles on lists: for
 
 code: python
 
-    shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+    grocery = ["spam", "eggs", "bacon", "ketchup"]
 
     print("Your shopping list contains:")
 
-    for product in shopping_list:
+    for product in grocery:
         print(product)
 
-- At each iteration, a different element of `shopping_list` is assigned to `product`
-- A `for` cycle can be used on every kind of sequence, also a *string*
+- At each iteration, a different element of `grocery` is assigned to `product`
+- A `for` cycle can be used on any kind of sequence: list, string, tuple, range...
 
 ---
 
@@ -240,6 +211,12 @@ code: python
 
     even_nums = [str(x) for x in range(12) if (x % 2) == 0]
 
+code: python
+
+    # Simple cases: list repetition
+    so_boring = [1, 2] * 3  # [1, 2, 1, 2, 1, 2]
+    results_by_month = [0] * 12  
+
 ---
 
 title: Enumerate
@@ -263,7 +240,7 @@ code: python
 
 >
 
-Resuls in a list: only (!) to visualize them <br>
+Results in a list: only (!) to visualize them <br>
 Otherwise, Python doesn't generate results immediately (*lazy*)
 
 ---

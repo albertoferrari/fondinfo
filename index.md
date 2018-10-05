@@ -103,3 +103,4 @@ Stage formativo per studenti delle scuole superiori, 10-14 giugno 2019
 - [C++: inheritance](http://tomamic.github.io/fondinfo/cpp3.html)
 - [Go: basics](http://tomamic.github.io/fondinfo/golang.html)
 - [More](http://sowide.ce.unipr.it/teaching/linguaggi)
+- [Python for data analysis](http://tomamic.github.io/fondinfo/scipy.html)
