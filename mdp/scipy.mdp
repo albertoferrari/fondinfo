@@ -36,6 +36,24 @@ code: python
 
 ---
 
+title: Functions
+figure: images/fun/function.png
+
+- **`def`**, to define a function
+- **`return`**, to (optionally) return the result
+- Then, you **call** a function to execute it
+- Type *annotations* for params and return value are optional and not verified
+
+code: python
+
+    def hypotenuse(leg1: float, leg2: float) -> float:
+        hyp = (leg1 ** 2 + leg2 ** 2) ** 0.5
+        return hyp
+
+    result = hypotenuse(3, 4)  # 5.0
+
+---
+
 title: List
 figure: images/fun/month-list.svg
 
@@ -84,11 +102,9 @@ figure: images/fun/shopping-list.png
 
 code: python
 
-    list1 = ["spam", "eggs", "beans"]
-    list2 = ["sausage", "mushrooms"]
-    grocery = list1 + list2     # List concatenation
+    grocery = ["spam", "egg", "beans"]
 
-    grocery[0] = "ketchup"      # replace an element
+    grocery[0] = "sausage"      # replace an element
 
     grocery.append("bacon")     # add an element to the end
     grocery.pop()               # remove (and return) last element
@@ -96,8 +112,8 @@ code: python
     grocery.insert(1, "bacon")  # other elements shift
     removed = grocery.pop(1)    # remove (and return) element at index
 
-    if "eggs" in grocery:       # True, grocery contains "eggs"    
-        grocery.remove("eggs")  # remove an element by value
+    if "egg" in grocery:       # True, grocery contains "egg"    
+        grocery.remove("egg")  # remove an element by value
 
 ---
 
@@ -105,14 +121,17 @@ title: Equality and identity
 
 code: python
 
-    a = [3, 4, 5]
-    b = a[:]       # b = [3, 4, 5] -- a new list!
-    b == a         # True, they contain the same values
-    b is a         # False, they are two objects in memory
-                   # (try and modify one of them...)
+    a = ["spam", "egg", "beans"]
+    b = a[:]         # new list!
+    b == a           # True, they contain the same values
+    b is a           # False, they are two objects in memory
+                     # (try and modify one of them...)
     c = a
-    c is a         # True, same object in memory
-                   # (try and modify one of them...)
+    c is a           # True, same object in memory
+                     # (try and modify one of them...)
+
+    d = ["sausage", "mushrooms"]
+    grocery = c + d  # list concatenation --> new list!
 
 ---
 
@@ -156,19 +175,24 @@ code: python
 
 ---
 
-title: Cycles on lists: for
+title: Cycles on sequences: for
 
 code: python
 
-    grocery = ["spam", "eggs", "bacon", "ketchup"]
-
-    print("Your shopping list contains:")
-
+    grocery = ["spam", "egg", "bacon", "sausage"]
     for product in grocery:
         print(product)
 
+code: python
+
+    for val in range(0, 5):
+        print(val * val, end=" ")  # 0 1 4 9 16
+
 - At each iteration, a different element of `grocery` is assigned to `product`
 - A `for` cycle can be used on any kind of sequence: list, string, tuple, range...
+- **`range`**: range of consecutive values
+    - Lower end *included* (defaults to 0)
+    - Upper end *excluded*
 
 ---
 
@@ -194,7 +218,7 @@ code: python
 ---
 
 title: List comprehension
-figure: images/misc/ninjago-green.jpg
+figure: images/dev/computer-ninja.png
 
 - Terse way to create a list
 - Each element: result of an operation on a member of another iterable
@@ -211,12 +235,6 @@ code: python
 
     even_nums = [str(x) for x in range(12) if (x % 2) == 0]
 
-code: python
-
-    # Simple cases: list repetition
-    so_boring = [1, 2] * 3  # [1, 2, 1, 2, 1, 2]
-    results_by_month = [0] * 12  
-
 ---
 
 title: Enumerate
@@ -224,18 +242,18 @@ figure: images/repr/child-fingers.png
 
 - To couple each value of a sequence to an increasing index
 - It generates a sequence of tuples (pairs)
-- Often it is used in `for` cycles, when both value and index are needed
+- In `for` cycles, using both value and index
 
 code: python
 
-    >>> shopping_list = ["spam", "eggs", "bacon", "ketchup"]
-    >>> list(enumerate(shopping_list))
-    [(0, "spam"), (1, "eggs"), (2, "bacon"), (3, "ketchup")]
+    >>> grocery = ["spam", "egg", "bacon", "sausage"]
+    >>> list(enumerate(grocery))
+    [(0, "spam"), (1, "egg"), (2, "bacon"), (3, "sausage")]
 
 code: python
 
-    shopping_list = ["spam", "eggs", "bacon", "ketchup"]
-    for i, val in enumerate(shopping_list):
+    grocery = ["spam", "egg", "bacon", "sausage"]
+    for i, val in enumerate(grocery):
         print(i, val)
 
 >
@@ -246,7 +264,7 @@ Otherwise, Python doesn't generate results immediately (*lazy*)
 ---
 
 title: Zip
-figure: images/fun/zip.jpg
+figure: images/fun/zip.png
 
 - Couples elements of two sequences
 - It generates a sequence of tuples (pairs)
@@ -254,11 +272,11 @@ figure: images/fun/zip.jpg
 
 code: python
 
-    >>> shopping_list = ["spam", "eggs", "bacon", "ketchup"]
-    >>> quantities = ["100 g", "6 pc", "200 g", "1 bottle", "too much"]
-    >>> list(zip(shopping_list, quantities))
-    [("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
-    ("ketchup", "1 bottle")]
+    >>> grocery = ["spam", "egg", "bacon", "sausage"]
+    >>> quantities = ["100 g", "6 pc", "200 g", "500 g", "too much"]
+    >>> list(zip(grocery, quantities))
+    [("spam", "100 g"), ("egg", "6 pc"), ("bacon", "200 g"),
+    ("sausage", "500 g")]
 
 >
 
@@ -269,10 +287,10 @@ Results in a list: only (!) to visualize them
 title: Map
 figure: images/fun/legomap.png
 
-- Prende come parametri una funzione ed una sequenza
-- *Funzione di ordine superiore*
-- Applica la funzione a ciascuno dei valori
-- Restituisce la sequenza di risultati
+- Takes a function and a sequence as params
+- *Higher order function*
+- Applies the function to each value
+- Returns the sequence of results
 
 code: python
 
@@ -293,12 +311,38 @@ Results in a list: only (!) to visualize them
 
 ---
 
+title: Sort and reverse
+
+code: python
+
+    >>> grocery = ["spam", "egg", "bacon", "sausage"]
+    >>> sorted(grocery)
+    ['bacon', 'egg', 'sausage', 'spam']
+    >>> sorted(grocery, reverse=True)
+    ['spam', 'sausage', 'egg', 'bacon']
+    >>> sorted(grocery, key=len)  # lengths of elements are compared
+    ['egg', 'spam', 'bacon', 'sausage']
+
+code: python
+
+    >>> list(reversed(grocery))
+    ['sausage', 'bacon', 'egg', 'spam']
+
+code: python
+
+    >>> grocery.sort()     # in-place
+    >>> grocery.reverse()  # in-place
+    >>> grocery
+    ['spam', 'sausage', 'egg', 'bacon']
+
+---
+
 title: Dictionary
 figure: images/fun/dictionary.png
 
 - Sometimes called *map* or *associative array*
 - Unordered set of key / value pairs
-    - Keys are *unique*: like in lists, they serve as *indices* to access the corresponding value
+    - Keys are *unique*: like *indices* for lists, to access the associated value
     - They can be `int` or **`str`** (or any other immutable type)
 
 code: python
@@ -474,17 +518,17 @@ title: CSV module
 code: Python
 
     import csv
+    matrix = []
     with open('some.csv', newline='') as f:
         reader = csv.reader(f)
         for row in reader:
-            print(row)
-
-code: Python
-
-    import csv
+            matrix.append(row)
+    print(matrix)
+    
     with open('some.csv', 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerows(someiterable)
+        for row in matrix
+            writer.writerow(row)
 
 ---
 
@@ -538,12 +582,16 @@ class: segue dark
 title: Lists in memory
 class: large-image
 
-![](images/fun/python-list-list.svg)
+![](images/scipy/python-list-list.svg)
 
 ---
 
 title: Number crunching in Python
 
+- Inefficient **memory** layout
+    - Multiple *dereferencing* steps
+    - Each value is a “*fat*” object, an `int` takes dozens of bytes
+    - Values are *not contiguous*, not cache friendly
 - `a + b` executed as:
     - `a.__add__(b)`, or...
     - `b.__radd__(a)`, if `__add__` not found
@@ -626,13 +674,20 @@ class: segue dark
 ---
 
 title: Modulo NumPy
+figure: images/scipy/numpy-mem.png
+class: large-figure
 
 - Numeric, 1995; NumPy, 2006
-- Homogeneously typed, n-dimensional array
-- Efficient algorithms, implemented in Fortran, C/C++, Cython
-- Functionality comparable to basic MATLAB
-- Base of SciPy ecosystem: MatPlotLib, SymPy, Pandas, Scikit-learn, Scikit-image
-- Also used for images in Python bindings of OpenCV
+- **N-dimensional array**
+    - Homogeneously typed
+    - Efficient memory layout (~ C)
+- Efficient **algorithms**
+    - Impl. Fortran, C/C++, Cython
+    - Functionality comparable to basic *MATLAB*
+- Base of *SciPy* ecosystem
+    - MatPlotLib, SymPy, Pandas, Scikit-learn, Scikit-image
+- Also used for *images*
+    - In PyGame, Python bindings of OpenCV, etc.
 
 ---
 

@@ -1,6 +1,6 @@
 title: Esercizi 2013
 subtitle: Introduzione alla programmazione
-figure: images/misc/geek-girl.jpg
+figure: images/dev/geek-girl.jpg
 
 ---
 
@@ -768,7 +768,7 @@ class: segue dark
 ---
 
 title: Tents con Qt
-figure: images/misc/recycle.png
+figure: images/dev/recycle.png
 
 - Aggiungere una **interfaccia grafica** al progetto
     - Creare una sottoclasse di `QWidget` o `QMainWindow`

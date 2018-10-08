@@ -1,6 +1,6 @@
 title: Esercizi 2014
 subtitle: Introduzione alla programmazione
-figure: images/misc/geek-girl.jpg
+figure: images/dev/geek-girl.jpg
 
 ---
 
@@ -752,7 +752,7 @@ code: C++
 ---
 
 title: Interfaccia grafica, opzionale
-figure: images/misc/recycle.png
+figure: images/dev/recycle.png
 
 - Aggiungere una *interfaccia grafica* al progetto
     - Creare una sottoclasse di `QWidget` o `QMainWindow`

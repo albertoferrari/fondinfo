@@ -1,6 +1,6 @@
 title: Liste e composizione
 subtitle: Introduzione alla programmazione
-figure: images/oop/modules.png
+figure: images/oop/lego-blocks.png
 
 ---
 
@@ -55,11 +55,9 @@ figure: images/fun/shopping-list.png
 
 code: python
 
-    list1 = ["spam", "eggs", "beans"]
-    list2 = ["sausage", "mushrooms", "cheese"]
-    grocery = list1 + list2     # List concatenation
-    
-    grocery[0] = "ketchup"      # replace an element
+    grocery = ["spam", "egg", "beans"]
+
+    grocery[0] = "sausage"      # replace an element
 
     grocery.append("bacon")     # add an element to the end
     grocery.pop()               # remove (and return) last element
@@ -67,8 +65,8 @@ code: python
     grocery.insert(1, "bacon")  # other elements shift
     removed = grocery.pop(1)    # remove (and return) element at index
     
-    if "eggs" in grocery:       # True, grocery contains "eggs"
-        grocery.remove("eggs")  # remove an element by value
+    if "egg" in grocery:       # True, grocery contains "egg"
+        grocery.remove("egg")  # remove an element by value
 
 ---
 
@@ -76,14 +74,17 @@ title: Uguaglianza e identità
 
 code: python
 
-    a = [3, 4, 5]
-    b = a[:]       # b = [3, 4, 5] -- a new list!
-    b == a         # True, they contain the same values
-    b is a         # False, they are two objects in memory
-                   # (try and modify one of them...) 
+    a = ["spam", "egg", "beans"]
+    b = a[:]         # new list!
+    b == a           # True, they contain the same values
+    b is a           # False, they are two objects in memory
+                     # (try and modify one of them...)
     c = a
-    c is a         # True, same object in memory 
-                   # (try and modify one of them...)
+    c is a           # True, same object in memory
+                     # (try and modify one of them...)
+
+    d = ["sausage", "tomato"]
+    grocery = c + d  # list concatenation --> new list!
 
 ---
 
@@ -132,7 +133,7 @@ figure: images/fun/shopping-list.png
 
 code: python
 
-    grocery = ["spam", "eggs", "beans"]
+    grocery = ["spam", "egg", "bacon", "sausage"]
         
     print("Your shopping list contains:")
 
@@ -233,7 +234,7 @@ figure: images/oop/inheritance.png
 ---
 
 title: Fattoria parlante
-figure: images/oop/animals.png images/oop/peppa.jpg
+figure: images/oop/animals.png
 
 - Noi definiremo una *classe base* come **interfaccia astratta**
 - Es. `Animal`:
@@ -246,13 +247,34 @@ code: python
         def say(self):
             raise NotImplementedError("Abstract method")
 
+---
+
+title: Classi concrete
+figure: images/oop/polymorphism.png images/oop/peppa.png
+
+code: python
+
+    class Dog(Animal):
+        def __init__(self, name):
+            self._name = name
+        def say(self):
+            print("I'm", self._name, "Dog.",
+                  "I say: WOOF!")
+
+    class Cat(Animal):
+        def __init__(self, name):
+            self._name = name
+        def say(self):
+            print("I'm", self._name, "Cat.",
+                  "I say: MEOW!")
+
 >
 
 <http://www.ce.unipr.it/brython/?p3_oop_animals.py>
 
 ---
 
-title: Interfacce astratte
+title: Interfaccia dei personaggi
 figure: images/oop/actors.svg
 
 - `Actor`: *interfaccia astratta*

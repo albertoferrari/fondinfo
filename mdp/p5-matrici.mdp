@@ -107,7 +107,7 @@ class: segue dark
 ---
 
 title: List comprehension (++)
-figure: images/misc/ninjago-green.jpg
+figure: images/dev/computer-ninja.png
 
 - Modo conciso per creare una lista
 - Ogni elemento: risultato di una operazione su un membro di altro iterabile
@@ -128,6 +128,7 @@ code: python
 
 title: Enumerate (++)
 figure: images/repr/child-fingers.png
+/home/mic/Documents/didattica/fondinfo/images/misc/finger-counting.png
 
 - Accoppia ciascun valore di una sequenza ad un indice crescente
 - Genera una sequenza di tuple (coppie)
@@ -135,14 +136,14 @@ figure: images/repr/child-fingers.png
 
 code: python
 
-    >>> shopping_list = ["spam", "eggs", "bacon", "ketchup"]
-    >>> list(enumerate(shopping_list))
+    >>> grocery = ["spam", "eggs", "bacon", "ketchup"]
+    >>> list(enumerate(grocery))
     [(0, "spam"), (1, "eggs"), (2, "bacon"), (3, "ketchup")]
 
 code: python
 
-    shopping_list = ["spam", "eggs", "bacon", "ketchup"]
-    for i, val in enumerate(shopping_list):
+    grocery = ["spam", "eggs", "bacon", "ketchup"]
+    for i, val in enumerate(grocery):
         print(i, val)
 
 >
@@ -161,9 +162,9 @@ figure: images/fun/zip.jpg
 
 code: python
 
-    >>> shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+    >>> grocery = ["spam", "eggs", "bacon", "ketchup"]
     >>> quantities = ["100 g", "6 pc", "200 g", "1 bottle", "too much"]
-    >>> list(zip(shopping_list, quantities))
+    >>> list(zip(grocery, quantities))
     [("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
     ("ketchup", "1 bottle")]
 
@@ -197,6 +198,32 @@ code: python
 >
 
 Risultati in lista, solo (!) per visualizzarli
+
+---
+
+title: Liste ordinate o rovesciate
+
+code: python
+
+    >>> grocery = ["spam", "egg", "bacon", "sausage"]
+    >>> sorted(grocery)
+    ['bacon', 'egg', 'sausage', 'spam']
+    >>> sorted(grocery, reverse=True)
+    ['spam', 'sausage', 'egg', 'bacon']
+    >>> sorted(grocery, key=len)  # lengths of elements are compared
+    ['egg', 'spam', 'bacon', 'sausage']
+
+code: python
+
+    >>> list(reversed(grocery))
+    ['sausage', 'bacon', 'egg', 'spam']
+
+code: python
+
+    >>> grocery.sort()     # in-place
+    >>> grocery.reverse()  # in-place
+    >>> grocery
+    ['spam', 'sausage', 'egg', 'bacon']
 
 ---
 

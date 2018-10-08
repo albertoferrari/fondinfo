@@ -1,6 +1,6 @@
 title: Esercizi 2012
 subtitle: Introduzione alla programmazione
-figure: images/misc/geek-girl.jpg
+figure: images/dev/geek-girl.jpg
 
 ---
 
@@ -145,7 +145,7 @@ Poi racchiudere tutto in un ciclo for esterno, per variare `y`: <br>
 ---
 
 title: 2.3 Conteggio spazi
-figure: images/misc/finger-counting.png
+figure: images/repr/finger-counting.png
 
 - Leggere una riga di testo
 - Contare il numero di spazi presenti
@@ -576,7 +576,7 @@ code: C++
 ---
 
 title: Othello - GUI
-figure: images/misc/recycle.png
+figure: images/dev/recycle.png
 
 - Aggiungere una **interfaccia grafica** al progetto
     - Creare una sottoclasse di `QWidget` o `QMainWindow`

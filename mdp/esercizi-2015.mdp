@@ -1,6 +1,6 @@
 title: Esercizi 2015
 subtitle: Introduzione alla programmazione
-figure: images/misc/geek-girl.jpg
+figure: images/dev/geek-girl.jpg
 
 ---
 
@@ -790,7 +790,7 @@ code: C++
 ---
 
 title: Funzionamento a console e gui
-figure: images/misc/recycle.png
+figure: images/dev/recycle.png
 
 - Aggiungere una *interfaccia grafica* al progetto
     - Fornita una gui che sfrutta l'astrazione `Game`

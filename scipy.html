@@ -80,6 +80,31 @@ else:
 <slide  >
   
     <hgroup>
+      <h2>Functions</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/function.png">
+        
+      </figure><ul>
+<li><strong><code>def</code></strong>, to define a function</li>
+<li><strong><code>return</code></strong>, to (optionally) return the result</li>
+<li>Then, you <strong>call</strong> a function to execute it</li>
+<li>Type <em>annotations</em> for params and return value are optional and not verified</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>def hypotenuse(leg1: float, leg2: float) -&gt; float:
+    hyp = (leg1 ** 2 + leg2 ** 2) ** 0.5
+    return hyp
+
+result = hypotenuse(3, 4)  # 5.0
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>List</h2>
       <h3></h3>
     </hgroup>
@@ -142,11 +167,9 @@ whole_year = months[:]     # Copy of the whole list
       <figure>
         <img src="images/fun/shopping-list.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>list1 = ["spam", "eggs", "beans"]
-list2 = ["sausage", "mushrooms"]
-grocery = list1 + list2     # List concatenation
+      </figure><pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "egg", "beans"]
 
-grocery[0] = "ketchup"      # replace an element
+grocery[0] = "sausage"      # replace an element
 
 grocery.append("bacon")     # add an element to the end
 grocery.pop()               # remove (and return) last element
@@ -154,8 +177,8 @@ grocery.pop()               # remove (and return) last element
 grocery.insert(1, "bacon")  # other elements shift
 removed = grocery.pop(1)    # remove (and return) element at index
 
-if "eggs" in grocery:       # True, grocery contains "eggs"    
-    grocery.remove("eggs")  # remove an element by value
+if "egg" in grocery:       # True, grocery contains "egg"    
+    grocery.remove("egg")  # remove an element by value
 </code></pre></article>
  
 </slide>
@@ -167,14 +190,17 @@ if "eggs" in grocery:       # True, grocery contains "eggs"
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>a = [3, 4, 5]
-b = a[:]       # b = [3, 4, 5] -- a new list!
-b == a         # True, they contain the same values
-b is a         # False, they are two objects in memory
-               # (try and modify one of them...)
+      <pre class="prettyprint" data-lang="python"><code>a = ["spam", "egg", "beans"]
+b = a[:]         # new list!
+b == a           # True, they contain the same values
+b is a           # False, they are two objects in memory
+                 # (try and modify one of them...)
 c = a
-c is a         # True, same object in memory
-               # (try and modify one of them...)
+c is a           # True, same object in memory
+                 # (try and modify one of them...)
+
+d = ["sausage", "mushrooms"]
+grocery = c + d  # list concatenation --&gt; new list!
 </code></pre></article>
  
 </slide>
@@ -232,20 +258,25 @@ a, b = b, a
 <slide  >
   
     <hgroup>
-      <h2>Cycles on lists: for</h2>
+      <h2>Cycles on sequences: for</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "eggs", "bacon", "ketchup"]
-
-print("Your shopping list contains:")
-
+      <pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "egg", "bacon", "sausage"]
 for product in grocery:
     print(product)
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>for val in range(0, 5):
+    print(val * val, end=" ")  # 0 1 4 9 16
 </code></pre>
 <ul>
 <li>At each iteration, a different element of <code>grocery</code> is assigned to <code>product</code></li>
 <li>A <code>for</code> cycle can be used on any kind of sequence: list, string, tuple, range...</li>
+<li><strong><code>range</code></strong>: range of consecutive values<ul>
+<li>Lower end <em>included</em> (defaults to 0)</li>
+<li>Upper end <em>excluded</em></li>
+</ul>
+</li>
 </ul></article>
  
 </slide>
@@ -283,7 +314,7 @@ main()
     </hgroup>
     <article >
       <figure>
-        <img src="images/misc/ninjago-green.jpg">
+        <img src="images/dev/computer-ninja.png">
         
       </figure><ul>
 <li>Terse way to create a list</li>
@@ -296,10 +327,6 @@ main()
 #    squares.append(x ** 2)
 </code></pre>
 <pre class="prettyprint" data-lang="python"><code>even_nums = [str(x) for x in range(12) if (x % 2) == 0]
-</code></pre>
-<pre class="prettyprint" data-lang="python"><code># Simple cases: list repetition
-so_boring = [1, 2] * 3  # [1, 2, 1, 2, 1, 2]
-results_by_month = [0] * 12
 </code></pre></article>
  
 </slide>
@@ -317,14 +344,14 @@ results_by_month = [0] * 12
       </figure><ul>
 <li>To couple each value of a sequence to an increasing index</li>
 <li>It generates a sequence of tuples (pairs)</li>
-<li>Often it is used in <code>for</code> cycles, when both value and index are needed</li>
+<li>In <code>for</code> cycles, using both value and index</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; shopping_list = ["spam", "eggs", "bacon", "ketchup"]
-&gt;&gt;&gt; list(enumerate(shopping_list))
-[(0, "spam"), (1, "eggs"), (2, "bacon"), (3, "ketchup")]
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "bacon", "sausage"]
+&gt;&gt;&gt; list(enumerate(grocery))
+[(0, "spam"), (1, "egg"), (2, "bacon"), (3, "sausage")]
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>shopping_list = ["spam", "eggs", "bacon", "ketchup"]
-for i, val in enumerate(shopping_list):
+<pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "egg", "bacon", "sausage"]
+for i, val in enumerate(grocery):
     print(i, val)
 </code></pre>
 <blockquote></blockquote>
@@ -341,18 +368,18 @@ Otherwise, Python doesn't generate results immediately (<em>lazy</em>)</p></arti
     </hgroup>
     <article >
       <figure>
-        <img src="images/fun/zip.jpg">
+        <img src="images/fun/zip.png">
         
       </figure><ul>
 <li>Couples elements of two sequences</li>
 <li>It generates a sequence of tuples (pairs)</li>
 <li>The result has the len of the shortest sequence</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; shopping_list = ["spam", "eggs", "bacon", "ketchup"]
-&gt;&gt;&gt; quantities = ["100 g", "6 pc", "200 g", "1 bottle", "too much"]
-&gt;&gt;&gt; list(zip(shopping_list, quantities))
-[("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
-("ketchup", "1 bottle")]
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "bacon", "sausage"]
+&gt;&gt;&gt; quantities = ["100 g", "6 pc", "200 g", "500 g", "too much"]
+&gt;&gt;&gt; list(zip(grocery, quantities))
+[("spam", "100 g"), ("egg", "6 pc"), ("bacon", "200 g"),
+("sausage", "500 g")]
 </code></pre>
 <blockquote></blockquote>
 <p>Results in a list: only (!) to visualize them</p></article>
@@ -370,10 +397,10 @@ Otherwise, Python doesn't generate results immediately (<em>lazy</em>)</p></arti
         <img src="images/fun/legomap.png">
         
       </figure><ul>
-<li>Prende come parametri una funzione ed una sequenza</li>
-<li><em>Funzione di ordine superiore</em></li>
-<li>Applica la funzione a ciascuno dei valori</li>
-<li>Restituisce la sequenza di risultati</li>
+<li>Takes a function and a sequence as params</li>
+<li><em>Higher order function</em></li>
+<li>Applies the function to each value</li>
+<li>Returns the sequence of results</li>
 </ul>
 <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from math import sqrt
 &gt;&gt;&gt; values = [0, 1, 2, 3, 4]
@@ -392,6 +419,32 @@ Otherwise, Python doesn't generate results immediately (<em>lazy</em>)</p></arti
 <slide  >
   
     <hgroup>
+      <h2>Sort and reverse</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "bacon", "sausage"]
+&gt;&gt;&gt; sorted(grocery)
+['bacon', 'egg', 'sausage', 'spam']
+&gt;&gt;&gt; sorted(grocery, reverse=True)
+['spam', 'sausage', 'egg', 'bacon']
+&gt;&gt;&gt; sorted(grocery, key=len)  # lengths of elements are compared
+['egg', 'spam', 'bacon', 'sausage']
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; list(reversed(grocery))
+['sausage', 'bacon', 'egg', 'spam']
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery.sort()     # in-place
+&gt;&gt;&gt; grocery.reverse()  # in-place
+&gt;&gt;&gt; grocery
+['spam', 'sausage', 'egg', 'bacon']
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>Dictionary</h2>
       <h3></h3>
     </hgroup>
@@ -402,7 +455,7 @@ Otherwise, Python doesn't generate results immediately (<em>lazy</em>)</p></arti
       </figure><ul>
 <li>Sometimes called <em>map</em> or <em>associative array</em></li>
 <li>Unordered set of key / value pairs<ul>
-<li>Keys are <em>unique</em>: like in lists, they serve as <em>indices</em> to access the corresponding value</li>
+<li>Keys are <em>unique</em>: like <em>indices</em> for lists, to access the associated value</li>
 <li>They can be <code>int</code> or <strong><code>str</code></strong> (or any other immutable type)</li>
 </ul>
 </li>
@@ -621,15 +674,17 @@ with open('matrix.csv', 'r') as file1:
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="Python"><code>import csv
+matrix = []
 with open('some.csv', newline='') as f:
     reader = csv.reader(f)
     for row in reader:
-        print(row)
-</code></pre>
-<pre class="prettyprint" data-lang="Python"><code>import csv
+        matrix.append(row)
+print(matrix)
+
 with open('some.csv', 'w', newline='') as f:
     writer = csv.writer(f)
-    writer.writerows(someiterable)
+    for row in matrix
+        writer.writerow(row)
 </code></pre></article>
  
 </slide>
@@ -705,7 +760,7 @@ except IOError as err:
       <h3></h3>
     </hgroup>
     <article >
-      <p><img alt="" src="images/fun/python-list-list.svg" /></p></article>
+      <p><img alt="" src="images/scipy/python-list-list.svg" /></p></article>
  
 </slide>
 
@@ -717,6 +772,12 @@ except IOError as err:
     </hgroup>
     <article >
       <ul>
+<li>Inefficient <strong>memory</strong> layout<ul>
+<li>Multiple <em>dereferencing</em> steps</li>
+<li>Each value is a “<em>fat</em>” object, an <code>int</code> takes dozens of bytes</li>
+<li>Values are <em>not contiguous</em>, not cache friendly</li>
+</ul>
+</li>
 <li><code>a + b</code> executed as:<ul>
 <li><code>a.__add__(b)</code>, or...</li>
 <li><code>b.__radd__(a)</code>, if <code>__add__</code> not found</li>
@@ -846,20 +907,36 @@ $ conda remove --name myenv --all
   
 </slide>
 
-<slide  >
+<slide class="large-figure" >
   
     <hgroup>
       <h2>Modulo NumPy</h2>
       <h3></h3>
     </hgroup>
     <article >
-      <ul>
+      <figure>
+        <img src="images/scipy/numpy-mem.png">
+        
+      </figure><ul>
 <li>Numeric, 1995; NumPy, 2006</li>
-<li>Homogeneously typed, n-dimensional array</li>
-<li>Efficient algorithms, implemented in Fortran, C/C++, Cython</li>
-<li>Functionality comparable to basic MATLAB</li>
-<li>Base of SciPy ecosystem: MatPlotLib, SymPy, Pandas, Scikit-learn, Scikit-image</li>
-<li>Also used for images in Python bindings of OpenCV</li>
+<li><strong>N-dimensional array</strong><ul>
+<li>Homogeneously typed</li>
+<li>Efficient memory layout (~ C)</li>
+</ul>
+</li>
+<li>Efficient <strong>algorithms</strong><ul>
+<li>Impl. Fortran, C/C++, Cython</li>
+<li>Functionality comparable to basic <em>MATLAB</em></li>
+</ul>
+</li>
+<li>Base of <em>SciPy</em> ecosystem<ul>
+<li>MatPlotLib, SymPy, Pandas, Scikit-learn, Scikit-image</li>
+</ul>
+</li>
+<li>Also used for <em>images</em><ul>
+<li>In PyGame, Python bindings of OpenCV, etc.</li>
+</ul>
+</li>
 </ul></article>
  
 </slide>

@@ -1,6 +1,6 @@
 title: Esercizi 2017
 subtitle: Introduzione alla programmazione
-figure: images/misc/geek-girl.jpg
+figure: images/dev/geek-girl.jpg
 
 ---
 
@@ -886,7 +886,7 @@ Usare la ricorsione -- Simile ad es. 5.7 del 2011, su Github
 ---
 
 title: 9.6 Skyscrapers: GUI
-figure: images/misc/recycle.png
+figure: images/dev/recycle.png
 
 - Caricare la partita da file (CSV)
     - Costruttore con parametro `filename`

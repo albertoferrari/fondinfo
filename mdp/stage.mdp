@@ -5,7 +5,7 @@ figure: images/misc/videogames.png
 ---
 
 title: A chi è rivolto lo stage?
-figure: images/misc/young-programmer.png
+figure: images/dev/young-programmer.png
 
 - A **tutti** gli studenti delle scuole superiori
 - Senza particolari prerequisiti
@@ -16,7 +16,7 @@ figure: images/misc/young-programmer.png
 ---
 
 title: Come si svolgerà? 
-figure: images/misc/geek-girl.jpg
+figure: images/dev/geek-girl.jpg
 class: large-image
 
 - Ogni giorno, dalle 9:00 alle 13:00

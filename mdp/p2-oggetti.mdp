@@ -1,6 +1,6 @@
 title: Funzioni e oggetti
 subtitle: Introduzione alla programmazione
-figure: images/fun/function.png
+figure: images/oop/balls.png
 
 ---
 
@@ -89,12 +89,12 @@ title: Documentazione di funzioni
 
 code: python
 
-    def hypotenuse(cathetus1: float, cathetus2: float) -> float:
+    def hypotenuse(leg1: float, leg2: float) -> float:
         '''
         Return the hypotenuse of a right triangle,
         given both its legs (catheti).
         '''
-        return (cathetus1 ** 2 + cathetus2 ** 2) ** 0.5
+        return (leg1 ** 2 + leg2 ** 2) ** 0.5
 
 ---
 
@@ -213,6 +213,29 @@ code: python
 <https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
 
 <http://www.ce.unipr.it/brython/?p2_fun_keyb.py>
+    
+---
+
+title: Funzione per rimbalzi
+figure: images/oop/anim-bounce.png
+
+- Le funzioni forniscono limitata astrazione
+    - Incapsulano il comportamento
+    - Ma espongono i dati
+
+code: python
+
+    def move_ball(x: int, y: int,
+                  dx: int, dy: int) -> (int, int, int, int):
+        if x + dx < 0 or x + dx + BALL_W > ARENA_W:
+            dx = -dx
+        x += dx
+        if y + dy < 0 or y + dy + BALL_H > ARENA_H:
+            dy = -dy
+        y += dy
+        return x, y, dx, dy    
+
+<http://www.ce.unipr.it/brython/?p2_fun_ball.py>
     
 ---
 
@@ -345,6 +368,7 @@ code: python
 ---
 
 title: Uso degli oggetti
+figure: images/oop/balls.png
 
 code: python
 
@@ -353,7 +377,8 @@ code: python
     b2 = Ball(180, 140)
 
     for i in range(25):
-        print("b1 @", b1.position(), "b2 @", b2.position())
+        print("b1 @", b1.position(),
+              "b2 @", b2.position())
         b1.move()
         b2.move()
 

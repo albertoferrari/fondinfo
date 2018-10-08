@@ -188,7 +188,7 @@ except IOError as err:
     </hgroup>
     <article >
       <figure>
-        <img src="images/misc/ninjago-green.jpg">
+        <img src="images/dev/computer-ninja.png">
         
       </figure><ul>
 <li>Modo conciso per creare una lista</li>
@@ -220,12 +220,12 @@ except IOError as err:
 <li>Genera una sequenza di tuple (coppie)</li>
 <li>Spesso si usa nei cicli <code>for</code>, quando serve sia il valore che l'indice</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; shopping_list = ["spam", "eggs", "bacon", "ketchup"]
-&gt;&gt;&gt; list(enumerate(shopping_list))
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "eggs", "bacon", "ketchup"]
+&gt;&gt;&gt; list(enumerate(grocery))
 [(0, "spam"), (1, "eggs"), (2, "bacon"), (3, "ketchup")]
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>shopping_list = ["spam", "eggs", "bacon", "ketchup"]
-for i, val in enumerate(shopping_list):
+<pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "eggs", "bacon", "ketchup"]
+for i, val in enumerate(grocery):
     print(i, val)
 </code></pre>
 <blockquote></blockquote>
@@ -249,9 +249,9 @@ Altrimenti, Python non genera immediatamente i risultati (<em>lazy</em>)</p></ar
 <li>Genera una sequenza di tuple (coppie)</li>
 <li>Il risultato ha la lunghezza della sequenza più breve</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; shopping_list = ["spam", "eggs", "bacon", "ketchup"]
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "eggs", "bacon", "ketchup"]
 &gt;&gt;&gt; quantities = ["100 g", "6 pc", "200 g", "1 bottle", "too much"]
-&gt;&gt;&gt; list(zip(shopping_list, quantities))
+&gt;&gt;&gt; list(zip(grocery, quantities))
 [("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
 ("ketchup", "1 bottle")]
 </code></pre>
@@ -287,6 +287,32 @@ Altrimenti, Python non genera immediatamente i risultati (<em>lazy</em>)</p></ar
 </code></pre>
 <blockquote></blockquote>
 <p>Risultati in lista, solo (!) per visualizzarli</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Liste ordinate o rovesciate</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "bacon", "sausage"]
+&gt;&gt;&gt; sorted(grocery)
+['bacon', 'egg', 'sausage', 'spam']
+&gt;&gt;&gt; sorted(grocery, reverse=True)
+['spam', 'sausage', 'egg', 'bacon']
+&gt;&gt;&gt; sorted(grocery, key=len)  # lengths of elements are compared
+['egg', 'spam', 'bacon', 'sausage']
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; list(reversed(grocery))
+['sausage', 'bacon', 'egg', 'spam']
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery.sort()     # in-place
+&gt;&gt;&gt; grocery.reverse()  # in-place
+&gt;&gt;&gt; grocery
+['spam', 'sausage', 'egg', 'bacon']
+</code></pre></article>
  
 </slide>
 

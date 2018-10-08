@@ -1,11 +1,11 @@
 title: Python su Android
 subtitle: Introduzione alla programmazione
-figure: images/mobi/android-python.jpg
+figure: images/dev/android-python.jpg
 
 ---
 
 title: QPython
-figure: images/mobi/qpython-00.png
+figure: images/dev/qpython-00.png
 
 - App scaricabile dallo *store* Android
     - Gratuita ed open source
@@ -25,9 +25,9 @@ figure: images/mobi/qpython-00.png
 ---
 
 title: QPython, sviluppo su/per Android
-figure: images/mobi/qpython-02.png images/mobi/qpython-03.png
+figure: images/dev/qpython-02.png images/dev/qpython-03.png
 
-![](images/mobi/qpython-05.png)
+![](images/dev/qpython-05.png)
 
 >
 
@@ -38,7 +38,7 @@ In alternativa, QPython include un server FTP sul cell/tablet
 ---
 
 title: Hello, Py4A developer!
-figure: images/mobi/qpython-10.png
+figure: images/dev/qpython-10.png
 
 code: Python
 
@@ -76,7 +76,7 @@ title: Le facade di Py4A
 ---
 
 title: Kivy
-figure: images/mobi/kivy-logo.png
+figure: images/dev/kivy-logo.png
 
 - Libreria moderna e flessibile, per interfacce grafiche
 - Portabile tra diversi sistemi
@@ -166,7 +166,7 @@ code: Python
 ---
 
 title: Widget e grafica
-figure: images/mobi/kivy-coord.png
+figure: images/dev/kivy-coord.png
 
 code: Python
 
@@ -186,7 +186,7 @@ code: Python
 ---
 
 title: Multi-touch
-figure: images/mobi/kivy-android.jpg
+figure: images/dev/kivy-android.jpg
 
 code: Python
 
@@ -206,7 +206,7 @@ http://kivy.org/docs/guide/firstwidget.html
 ---
 
 title: Ridisegno periodico
-figure: images/mobi/kivy-coord.png
+figure: images/dev/kivy-coord.png
 
 code: Python
 

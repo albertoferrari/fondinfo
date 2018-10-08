@@ -1,6 +1,6 @@
 title: Esercizi stage
 subtitle: Introduzione alla programmazione
-figure: images/misc/geek-girl.jpg
+figure: images/dev/geek-girl.jpg
 
 ---
 
@@ -103,7 +103,7 @@ Incolonnamento: `txt = f"{val:6.2f}"` <br>
 ---
 
 title: 1.7 Conteggio cifre (*)
-figure: images/misc/finger-counting.png
+figure: images/repr/finger-counting.png
 
 - Leggere un numero intero positivo
 - Determinare di quante cifre è composto

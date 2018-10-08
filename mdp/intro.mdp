@@ -1,6 +1,6 @@
 title: Presentazione del corso
 subtitle: Fondamenti di informatica + Lab
-figure: images/misc/theory-practice.png
+figure: images/dev/theory-practice.png
 
 ---
 
@@ -20,7 +20,7 @@ figure: images/sys/globe.jpg
 ---
 
 title: 2.  Introduzione alla programmazione
-figure: images/misc/problem-solving.jpg
+figure: images/dev/problem-solving.jpg
 class: large-figure
 
 - Algoritmi in *Python 3*
@@ -32,7 +32,7 @@ class: large-figure
 ---
 
 title: 3. Esercitazioni in laboratorio
-figure: images/misc/geek-girl.jpg
+figure: images/dev/geek-girl.jpg
 
 - Esercizi di base, in Python
     - A riga di comando e con grafica
@@ -134,7 +134,7 @@ code: Shell
 ---
 
 title: Problem solving
-figure: images/misc/problem-solving-cycle.svg
+figure: images/dev/problem-solving-cycle.svg
 class: large-figure
 
 - [“How to solve it”](https://archive.org/details/HowToSolveIt)

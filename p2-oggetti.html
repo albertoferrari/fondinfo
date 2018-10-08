@@ -27,7 +27,7 @@ URL: https://code.google.com/p/io-2012-slides
   <aside class="gdbar"><img src="images/logo.png"></aside>
   <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
   <h1 data-config-title><!-- populated from slide_config.json --></h1>
-  <figure><img src="images/fun/function.png"></figure>
+  <figure><img src="images/oop/balls.png"></figure>
   <hgroup>
     <h2>Introduzione alla programmazione</h2>
     <p>Michele Tomaiuolo<br>Ingegneria dell'Informazione, UniPR</p>
@@ -154,12 +154,12 @@ print(x)      # just for debug
 <li><strong>Docstring</strong>: descrizione testuale di una funzione</li>
 <li><strong><code>help</code></strong>: funzione per visualizzare la documentazione</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>def hypotenuse(cathetus1: float, cathetus2: float) -&gt; float:
+<pre class="prettyprint" data-lang="python"><code>def hypotenuse(leg1: float, leg2: float) -&gt; float:
     '''
     Return the hypotenuse of a right triangle,
     given both its legs (catheti).
     '''
-    return (cathetus1 ** 2 + cathetus2 ** 2) ** 0.5
+    return (leg1 ** 2 + leg2 ** 2) ** 0.5
 </code></pre></article>
  
 </slide>
@@ -299,6 +299,37 @@ g2d.main_loop()
 <blockquote></blockquote>
 <p><a href="https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code">https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code</a></p>
 <p><a href="http://www.ce.unipr.it/brython/?p2_fun_keyb.py">http://www.ce.unipr.it/brython/?p2_fun_keyb.py</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Funzione per rimbalzi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/anim-bounce.png">
+        
+      </figure><ul>
+<li>Le funzioni forniscono limitata astrazione<ul>
+<li>Incapsulano il comportamento</li>
+<li>Ma espongono i dati</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>def move_ball(x: int, y: int,
+              dx: int, dy: int) -&gt; (int, int, int, int):
+    if x + dx &lt; 0 or x + dx + BALL_W &gt; ARENA_W:
+        dx = -dx
+    x += dx
+    if y + dy &lt; 0 or y + dy + BALL_H &gt; ARENA_H:
+        dy = -dy
+    y += dy
+    return x, y, dx, dy
+</code></pre>
+<p><a href="http://www.ce.unipr.it/brython/?p2_fun_ball.py">http://www.ce.unipr.it/brython/?p2_fun_ball.py</a></p></article>
  
 </slide>
 
@@ -513,12 +544,16 @@ class Ball:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code># Create two objects, instances of the Ball class
+      <figure>
+        <img src="images/oop/balls.png">
+        
+      </figure><pre class="prettyprint" data-lang="python"><code># Create two objects, instances of the Ball class
 b1 = Ball(140, 180)
 b2 = Ball(180, 140)
 
 for i in range(25):
-    print("b1 @", b1.position(), "b2 @", b2.position())
+    print("b1 @", b1.position(),
+          "b2 @", b2.position())
     b1.move()
     b2.move()
 </code></pre>
