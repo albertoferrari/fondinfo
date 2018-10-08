@@ -250,6 +250,246 @@ Usare la funzione <code>sqrt</code> del modulo <code>math</code></p></article>
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 2 (10-08)</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.1 Funzione, Erone</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/triangle-notations.svg">
+        
+      </figure><ul>
+<li>Definire una funzione <code>heron</code> per il calcolo dell'area di un triangolo<ul>
+<li>Parametri: tre lati come <code>float</code></li>
+<li>Risultato: area come <code>float</code></li>
+</ul>
+</li>
+<li>Invocare la funzione dalla shell interattiva</li>
+<li>Aggiungere poi al programma una funzione <code>main</code><ul>
+<li><em>Procedura, senza parametri e senza risultato</em></li>
+<li>Chiedere all'utente tre valori (chiamando <code>input</code>)</li>
+<li>Poi chiamare <code>heron</code> con questi parametri</li>
+<li>Infine mostrare all'utente il risultato (chiamando <code>print</code>)</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Formula di Erone: <code>area = sqrt(s * (s - a) * (s - b) * (s - c))</code> <br>
+Con <code>s = (a + b + c) / 2</code>, semiperimetro</p>
+<p><a href="http://en.wikipedia.org/wiki/Heron%27s_formula">http://en.wikipedia.org/wiki/Heron%27s_formula</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.2 Conteggio di 0 e 1</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/repr/binary-tunnel.jpg">
+        
+      </figure><ul>
+<li>Definire una funzione che conta separatamente il numero di cifre <code>0</code> ed <code>1</code> presenti in un testo<ul>
+<li>Parametro: stringa di testo da elaborare</li>
+<li>Risultato: tupla dei due valori conteggiati</li>
+</ul>
+</li>
+<li>Invocarla da una funzione <code>main</code><ul>
+<li>I/O con l'utente solo nella funzione <code>main</code></li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Nella funzione, usare un ciclo <code>for</code> sulla stringa</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.3 Classe dei cavi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/ohm.svg">
+        
+      </figure><ul>
+<li>Definire una classe per i cavi di rame</li>
+<li>Costruttore con parametri: lunghezza (in <em>m</em>) e sezione (in <em>mm²</em>)</li>
+<li>Campo costante per resistività<ul>
+<li><code>rho = 0.0171    # Ohm*mm²/m</code></li>
+</ul>
+</li>
+<li>Metodo per calcolare la resistenza (in  <em>Ohm</em>)<ul>
+<li><code>rho * length / area</code></li>
+</ul>
+</li>
+<li>Metodo per calcolare l'intensità di corrente (in <em>Ampere</em>), data la tensione (parametro, in <em>Volt</em>)<ul>
+<li><code>voltage / resistance</code></li>
+</ul>
+</li>
+<li>Nel corpo principale del programma...<ul>
+<li>Creare un oggetto con dati forniti dall'utente</li>
+<li>Visualizzare resistenza e corrente del cavo</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.4 Triangolo di cerchi colorati</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/xmas-triangle.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente un numero <code>n</code></li>
+<li>Generare <code>n</code> righe di cerchi, allineate a sinistra</li>
+<li>Il numero di riga corrisponde al numero di cerchi da disegnare</li>
+<li>Ogni cerchio ha un colore casuale</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.5 Animazione pallina</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/anim-wrap.png">
+        
+      </figure><ul>
+<li>Partire dall'esempio dell'animazione orizzontale, senza classi<ul>
+<li>Aggiungere ad ogni turno anche uno spostamento verticale</li>
+<li>Quando la pallina arriva ad uno dei 4 bordi...</li>
+<li>Ricompare dal bordo opposto</li>
+</ul>
+</li>
+<li>Direzione di movimento scelta dall'utente<ul>
+<li>All'inizio chiedere all'utente <code>dx</code> e <code>dy</code></li>
+<li>Ciascuno limitato tra -5 e +5</li>
+</ul>
+</li>
+<li>Mostrare l'animazione di una pallina su un canvas</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.6 Conteggio fotogrammi</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/anim-wrap.png">
+        
+      </figure><ul>
+<li>Ripetere l'esercizio 2.5, senza classi, ma fermare la pallina dopo 5 fotogrammi</li>
+<li>Alla pressione di un tasto, se la pallina è ferma:<ul>
+<li>Far ripartire l'animazione, per soli altri 5 fotogrammi</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Usare una variabile globale per contare i fotogrammi</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.7 Pallina modificata</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/anim-wrap.png">
+        
+      </figure><ul>
+<li>Partire dalla classe <code>Ball</code> vista a lezione</li>
+<li>Modificare il metodo <code>move</code><ul>
+<li>Quando la pallina arriva ad uno dei 4 bordi...</li>
+<li>Ricompare dal bordo opposto</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.8 Pallina con conteggio</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/anim-wrap.png">
+        
+      </figure><ul>
+<li>Definire una propria classe <code>Ball</code></li>
+<li>Incapsula il movimento dell'esercizio 2.6<ul>
+<li>Campi x, y, dx, dy</li>
+<li>Metodi <code>move</code> e <code>position</code></li>
+<li>Campo per contare i fotogrammi</li>
+<li>Metodo <code>go</code> per far ripartire la pallina (solo se ferma)</li>
+</ul>
+</li>
+<li>Mostrare l'animazione di una pallina su un canvas<ul>
+<li>Alla pressione di un tasto, viene chiamato il metodo <code>go</code></li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Il metodo <code>go</code> riavvia solo il conteggio, ma non sposta la pallina</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2.9 Albero di cerchi colorati</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/xmas-tree.png">
+        
+      </figure><ul>
+<li>Chiedere all'utente un numero <code>n</code></li>
+<li>Generare <code>n</code> righe di cerchi, allineate al centro</li>
+<li>Il numero di riga corrisponde al numero di cerchi da disegnare</li>
+<li>Ogni cerchio ha un colore casuale</li>
+<li>Aggiungere in fondo una riga con un solo cerchio</li>
+</ul></article>
+ 
+</slide>
+
 
 <slide class="thank-you-slide segue nobackground">
   <aside class="gdbar right"><img src="images/logo.png"></aside>
