@@ -742,7 +742,7 @@ title: Range and shape
 
 code: Python
 
-    >>> np.arange(10, 30, 5)  # from 10, to 30, step 3
+    >>> np.arange(10, 30, 5)  # from 10, to 30, step 5
     array([10, 15, 20, 25])
 
 code: Python
