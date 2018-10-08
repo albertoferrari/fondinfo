@@ -17,7 +17,7 @@
 - [Automi e calcolo](http://tomamic.github.io/fondinfo/i4-automi.html)
 - [Complessità computazionale](http://tomamic.github.io/fondinfo/i5-complessita.html)
 - [Qualità del software](http://tomamic.github.io/fondinfo/i6-qualita.html)
-- [Slide in PDF (2x2, non aggiornate)](http://tomamic.github.io/fondinfo/informatica-2x2.pdf)
+- [Slide in PDF (2x2, non aggiornate)](https://www.dropbox.com/s/qlyzeet068hjw05/informatica-2x2.pdf?dl=0)
 
 ----
 
@@ -29,7 +29,7 @@
 - [Ricorsione](http://tomamic.github.io/fondinfo/p4-ricorsione.html)
 - [Dati e matrici](http://tomamic.github.io/fondinfo/p5-matrici.html)
 - [Linguaggio C++11](http://tomamic.github.io/fondinfo/p6-cpp.html)
-- [Slide in PDF (2x2, non aggiornate)](http://tomamic.github.io/fondinfo/programmazione-2x2.pdf)
+- [Slide in PDF (2x2, non aggiornate)](https://www.dropbox.com/s/h9ffglpx53275z2/programmazione-2x2.pdf?dl=0)
 
 ----
 
@@ -43,7 +43,7 @@
 - [Esercitazioni in lab 2013](http://tomamic.github.io/fondinfo/esercizi-2013.html)
 - [Esercitazioni in lab 2012](http://tomamic.github.io/fondinfo/esercizi-2012.html)
 - [Esercitazioni in lab 2011](http://tomamic.github.io/fondinfo/esercizi-2011.html)
-- [Esercitazioni in lab 2010](http://tomamic.github.io/fondinfo/esercizi-2010.pdf)
+- [Esercitazioni in lab 2010](https://www.dropbox.com/s/ay7nhfs7d41cd34/esercizi-2010.pdf?dl=0)
 - [Esercizi risolti ed esempi](https://github.com/tomamic/fondinfo)
 - [Accesso ai lab](http://www.cedi.unipr.it/gestioneaccounts)
 
@@ -76,11 +76,11 @@
 
 Stage formativo per studenti delle scuole superiori, 10-14 giugno 2019
 
-- [Locandina in PDF](http://tomamic.github.io/fondinfo/stage.pdf)
+- [Locandina in PDF](https://www.dropbox.com/s/tjh1qtybm28gyq1/stage.pdf?dl=0)
 - [Presentazione dello stage](http://tomamic.github.io/fondinfo/stage.html)
-- [Modulo richiesta di iscrizione](http://tomamic.github.io/fondinfo/stage-iscrizione.docx)
+- [Modulo richiesta di iscrizione](https://www.dropbox.com/s/31xnvgpowos349c/stage-iscrizione.docx?dl=0)
 - [Organizzazione dello stage](http://tomamic.github.io/fondinfo/stage-logistica.html)
-- [Autorizzazione soggiorno minorenne](http://tomamic.github.io/fondinfo/soggiorno-minore.pdf)
+- [Autorizzazione soggiorno minorenne](https://www.dropbox.com/s/aqg7rr0h3wx3fam/soggiorno-minore.pdf?dl=0)
 - Python: [Lez.1](http://tomamic.github.io/fondinfo/p1-algoritmi.html),
 [Lez.2](http://tomamic.github.io/fondinfo/p2-liste-funzioni.html),
 [Lez.3](http://tomamic.github.io/fondinfo/p3-oggetti.html),
