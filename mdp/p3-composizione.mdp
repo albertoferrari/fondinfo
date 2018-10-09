@@ -370,7 +370,7 @@ code: python
 
 >
 
-<http://www.ce.unipr.it/brython/?p3_bounce.py>
+<http://www.ce.unipr.it/brython/?p3_oop_bounce.py>
 
 ---
 
@@ -385,7 +385,7 @@ figure: images/oop/bounce.png
 code: python
 
     import g2d
-    from p3_bounce import Arena, Ball, Ghost, Turtle
+    from p3_oop_bounce import Arena, Ball, Ghost, Turtle
 
     def update():
         arena.move_all()  # Game logic
@@ -426,7 +426,7 @@ code: python
 
 >
 
-<http://www.ce.unipr.it/brython/?p3_bounce_anim.py>
+<http://www.ce.unipr.it/brython/?p3_oop_bounce_anim.py>
 
 ---
 
