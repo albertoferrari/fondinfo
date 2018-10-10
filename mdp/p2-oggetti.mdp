@@ -448,6 +448,30 @@ title: Variabili locali, parametri, campi
 
 ---
 
+title: Proprietà (++)
+
+- Permettono un accesso controllato allo stato
+
+code: python
+
+    class Ball:
+
+        @property  # a getter for the pos property
+        def pos(self) -> (int, int):
+            return self._x, self._y
+
+        # @pos.setter  # if you also really need a setter
+        # def pos(self, val: (int, int)):
+        #     self._x, self._y = val
+
+code: python
+
+    ball = Ball(40, 80)
+    print('ball @', ball.pos)
+    # ball.pos = (60, 20)   # with the setter, you could change the pos
+
+---
+
 title: Esercizi
 class: segue dark
 
@@ -655,4 +679,31 @@ code: python
     if __name__ == "__main__":
         main()
     
+---
+
+title: Ciclo di vita di un oggetto (++)
+figure: images/dev/garbage-truck.jpg
+
+- Creazione di un oggetto: allocata memoria per tenere lo stato dell’oggetto
+- In Python: variabile = riferimento ad un oggetto
+    - *Oggetti*: *allocazione dinamica*, in memoria *heap*
+    - *Variabili*: *allocazione automatica*, in memoria *stack*
+- Oggetto non più associato a nessuna variabile: necessario liberare memoria
+- **Garbage collection**: gestione automatica della restituzione di memoria
+
+---
+
+title: Garbage collection (++)
+
+- Vantaggi
+    - Non è possibile dimenticare di liberare la memoria (*memory leak*)
+    - Non è possibile liberare della memoria che dovrà essere utilizzata in seguito (*dangling pointer*)
+- Svantaggi
+    - Decide autonomamente quando liberare la memoria
+    - Liberare e compattare la memoria richiede del calcolo
+- Diversi algoritmi
+    - *Reference counting*: idea di base, ma cicli…
+    - *Mark & sweep*: parte da riferimenti locali/globali, marca oggetti raggiungibili
+    - *Generational garbage collection*: controlla spesso oggetti recenti
+
 

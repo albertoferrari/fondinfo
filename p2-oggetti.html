@@ -642,6 +642,33 @@ g2d.main_loop(update, 1000 // 30)  # Millis
  
 </slide>
 
+<slide  >
+  
+    <hgroup>
+      <h2>Proprietà (++)</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Permettono un accesso controllato allo stato</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>class Ball:
+
+    @property  # a getter for the pos property
+    def pos(self) -&gt; (int, int):
+        return self._x, self._y
+
+    # @pos.setter  # if you also really need a setter
+    # def pos(self, val: (int, int)):
+    #     self._x, self._y = val
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>ball = Ball(40, 80)
+print('ball @', ball.pos)
+# ball.pos = (60, 20)   # with the setter, you could change the pos
+</code></pre></article>
+ 
+</slide>
+
 <slide class="segue dark" >
   
     <aside class="gdbar"><img src="images/logo.png"></aside>
