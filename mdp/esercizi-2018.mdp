@@ -344,6 +344,7 @@ Inserire nella lista delle tuple, cioè coppie *(nome, valore)*
 ---
 
 title: 3.6 Frogger, rana
+figure: images/misc/frogger.png
 
 - Ridenominare come `Frog` la classe `Turtle` dell'esempio `bounce`
 - Alla pressione di un tasto freccia, la rana comincia a muoversi
@@ -355,6 +356,7 @@ title: 3.6 Frogger, rana
 ---
 
 title: 3.7 Frogger, animazione opzionale
+figure: images/misc/frogger.png
 
 - Cambiare il file con le icone dei personaggi
 - Per la rana, visualizzare icone diverse durante il salto
