@@ -263,4 +263,101 @@ figure: images/misc/xmas-tree.png
 - Ogni cerchio ha un colore casuale
 - Aggiungere in fondo una riga con un solo cerchio
 
+---
+
+title: Esercitazione 3 (10-15 *)
+class: segue dark
+
+---
+
+title: 3.1 Distanza di Manhattan
+figure: images/misc/manhattan-distance.svg
+
+- Definire una funzione per calcolare la *distanza di Manhattan* tra due punti
+    - Parametri: `x0, y0, x1, y1`
+    - Risultato: `abs(x0 - x1) + abs(y0 - y1)`
+- Definire una funzione `main`, in cui:
+    - L'utente inserisce le quattro coordinate
+    - Viene chiamata la prima funzione
+    - Viene stampato il risultato
+
+>
+
+Non usare variabili globali
+
+---
+
+title: 3.2 Classe delle ambulanze
+
+- Un oggetto ambulanza ha tra i suoi campi
+    - Codice identificativo testuale (nome)
+    - Posizione attuale sulla mappa: `x0, y0`
+- Metodo `manhattan_distance(x1, y1)`
+    - Calcola la distanza tra ambulanza e punto d'intervento
+    - (Percorso su strade ortogonali, non in linea retta)
+    - Parametri `x1, y1` indicano il punto d'intervento
+- Nella funzione `main`, istanziare un oggetto ambulanza
+    - Poi, l'utente fornisce ripetutamente un nuovo punto di intervento
+    - Il sistema comunica la distanza stimata dell'ambulanza
+
+---
+
+title: 3.3 Percentuale di maiuscole
+figure: images/misc/troll-key.png
+
+- Chiedere una riga di testo all'utente
+- Mostrare la percentuale di lettere maiuscole presenti
+
+>
+
+Usare un ciclo `for` sulla stringa
+
+---
+
+title: 3.4 Valori sopra e sotto la media
+
+- Chiedere all'utente una sequenza di interi, terminata da 0
+- Calcolare e mostrare il valore medio
+- Elencare i valori sotto alla media
+- Elencare i valori sopra (o uguali) alla media
+
+>
+
+Aggiungere ciascun valore ad una lista inizialmente vuota, con `append`
+
+---
+
+title: 3.5 Nomi sopra e sotto la media
+figure: images/misc/high-scores.jpg
+
+- Chiedere all'utente una sequenza di dati, come coppie *(nome, valore)*
+    - Ciascun nome (`str`) è associato ad un valore (`int`)
+    - La sequenza termina quando il nome è vuoto
+- Calcolare e mostrare il valore medio
+- Elencare i nomi con valori sotto alla media
+- Elencare i nomi con valori sopra (o uguali) alla media
+
+>
+
+Inserire nella lista delle tuple, cioè coppie *(nome, valore)*
+
+---
+
+title: 3.6 Frogger, rana
+
+- Ridenominare come `Frog` la classe `Turtle` dell'esempio `bounce`
+- Alla pressione di un tasto freccia, la rana comincia a muoversi
+    - Il movimento prosegue per 5 fotogrammi
+    - Poi la rana si ferma
+    - I tasti sono inefficaci se la rana è già in movimento
+- Il rilascio del tasto non ferma la rana
+
+---
+
+title: 3.7 Frogger, animazione opzionale
+
+- Cambiare il file con le icone dei personaggi
+- Per la rana, visualizzare icone diverse durante il salto
+- Nel metodo `symbol`, utilizzare il contatore e la direzione per scegliere l'icona
+
 

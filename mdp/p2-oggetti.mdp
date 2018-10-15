@@ -239,7 +239,7 @@ code: python
     
 ---
 
-title: Effetti collaterali (++)
+title: Effetti collaterali (⨳)
 
 - Modifica di oggetti passati come parametri o variabili globali, operazioni di lettura/scrittura...
 - Annullano la **trasparenza referenziale**
@@ -252,7 +252,7 @@ title: Effetti collaterali (++)
 
 ---
 
-title: Funzioni non idempotenti (++)
+title: Funzioni non idempotenti (⨳)
 
 - Esempio di semplificazione
     - `p = rq(x) + rq(y) * (rq(x) – rq(x))`
@@ -448,7 +448,7 @@ title: Variabili locali, parametri, campi
 
 ---
 
-title: Proprietà (++)
+title: Proprietà (⨳)
 
 - Permettono un accesso controllato allo stato
 
@@ -658,7 +658,7 @@ figure: images/misc/spiral-circles.png
     
 ---
 
-title: Modulo main (++)
+title: Modulo main (⨳)
 class: break
 
 - Nome del modulo in esecuzione: `__name__`
@@ -681,7 +681,7 @@ code: python
     
 ---
 
-title: Ciclo di vita di un oggetto (++)
+title: Ciclo di vita di un oggetto (⨳)
 figure: images/dev/garbage-truck.jpg
 
 - Creazione di un oggetto: allocata memoria per tenere lo stato dell’oggetto
@@ -693,7 +693,7 @@ figure: images/dev/garbage-truck.jpg
 
 ---
 
-title: Garbage collection (++)
+title: Garbage collection (⨳)
 
 - Vantaggi
     - Non è possibile dimenticare di liberare la memoria (*memory leak*)

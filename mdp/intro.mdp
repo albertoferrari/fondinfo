@@ -198,7 +198,7 @@ figcaption: Una ricetta di cucina è un esempio di algoritmo
 
 ---
 
-title: Ricerca in uno schedario (++)
+title: Ricerca in uno schedario (⨳)
 figure: images/comp/catalogue.png
 
 - Es. in biblioteca: cercare la scheda di un certo libro
@@ -209,7 +209,7 @@ figure: images/comp/catalogue.png
 
 ---
 
-title: Cercare più velocemente (++)
+title: Cercare più velocemente (⨳)
 figure: images/comp/binary-search.png
 class: large-figure
 
@@ -223,7 +223,7 @@ class: large-figure
 
 ---
 
-title: Complessità e calcolabilità (++)
+title: Complessità e calcolabilità (⨳)
 
 - **Complessità**: classificare algoritmi (e problemi)
     - **Trattabili**: costo accettabile, “polinomiale”

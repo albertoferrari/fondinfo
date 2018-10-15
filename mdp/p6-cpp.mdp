@@ -322,7 +322,7 @@ C++11 ha anche una libreria `random`, più avanzata <br>
 
 ---
 
-title: Lettura di dati (++)
+title: Lettura di dati (⨳)
 
 code: c++
 
@@ -351,7 +351,7 @@ code: c++
 
 ---
 
-title: Do-while (++)
+title: Do-while (⨳)
 
 code: c++
 
@@ -370,7 +370,7 @@ code: c++
 
 ---
 
-title: Switch (++)
+title: Switch (⨳)
 
 code: c++
 
@@ -383,7 +383,7 @@ code: c++
 
 ---
 
-title: Parametri per riferimento (++)
+title: Parametri per riferimento (⨳)
 
 - Parametri passati per riferimento sono *alias*
     - Le modifiche riguardano anche le variabili esterne

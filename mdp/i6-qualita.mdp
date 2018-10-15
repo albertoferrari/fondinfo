@@ -557,7 +557,7 @@ code: Python
 
 ---
 
-title: Controllare le eccezioni (++)
+title: Controllare le eccezioni (⨳)
 
 - Mestiere del programmatore
     - Codice che completa correttamente l'esecuzione nei casi normali...
@@ -575,7 +575,7 @@ code: Python
 
 ---
 
-title: Fixture (++)
+title: Fixture (⨳)
 
 - Due o più test operano su insiemi di oggetti uguali o simili
     - Questa configurazione iniziale comune si definisce *fixture*
@@ -589,7 +589,7 @@ title: Fixture (++)
 
 ---
 
-title: Esempio di fixture (++)
+title: Esempio di fixture (⨳)
 
 - Numerosi metodi di test che operano su stessi dati iniziali
     - Esempio, una combinazione di palline in posizioni predefinite
@@ -606,7 +606,7 @@ code: Python
 
 ---
 
-title: Test suite (++)
+title: Test suite (⨳)
 
 - Meccanismo per *raggruppare* logicamente dei test ed *eseguirli assieme*
 - La classe `TestSuite` rappresenta una test suite
