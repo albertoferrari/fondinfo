@@ -477,7 +477,7 @@ Ciclicamente, confrontare la coppia dei primi valori (ciascuno proveniente da un
 Scrivere il minore dei due sul file di uscita <br>
 Non estrarre un nuovo valore da uno stream, se quello precedente non è ancora stato scritto in output 
 
-<http://www.ce.unipr.it/brython/?p5_file_merge.py>
+<http://www.ce.unipr.it/brython/?p5_data_merge.py>
 
 ---
 
@@ -502,7 +502,7 @@ code: File
 
 Nell'esempio, sommare: `8 + 12 + 7` (celle dove `cols - x == rows - y`)
 
-<http://www.ce.unipr.it/brython/?p5_file_csv.py>
+<http://www.ce.unipr.it/brython/?p5_data_csv.py>
 
 ---
 

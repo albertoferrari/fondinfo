@@ -179,10 +179,11 @@ Stringa rimanente (senza prima e ultima lettera) palindroma
 title: Sierpinski carpet
 figure: images/fun/sierpinski-carpet.png
 
-- Disegnare un *frattale di Sierpinski*, di ordine `n` (scelto dall'utente)
+- Disegnare un *frattale di Sierpinski*
     - Dato un quadrato, dividerlo in 9 parti uguali
     - Colorare la parte centrale
     - Riapplicare l'algoritmo alle restanti 8 parti
+    - Non disegnare però niente in meno di 1 pixel
 
 <http://www.ce.unipr.it/brython/?p4_fun_sierpinski.py>
 
