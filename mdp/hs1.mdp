@@ -555,22 +555,22 @@ figure: images/fun/month-list.svg
 - A sequence of elements, *usually* of the same **type**
     - The whole list can be assigned to a varible, to have a **name**
 - Single elements are **numbered**, from 0
-      
+
 code: python
 
     to_buy = ["spam", "eggs", "beans"]
-    
+
 code: python
 
     rainfall_data = [13, 24, 18, 15]
-    
+
 code: python
 
     months = ["Jan", "Feb", "Mar",
-              "Apr", "May", "Jun", 
-              "Jul", "Aug", "Sep", 
+              "Apr", "May", "Jun",
+              "Jul", "Aug", "Sep",
               "Oct", "Nov", "Dec"]
-    
+
 ---
 
 title: Access to elements
@@ -590,7 +590,7 @@ code: python
 code: python
 
     to_buy = ["spam", "eggs", "beans"]
-    
+
     to_buy[1] = "ketchup"      # replace an element
 
 ---
@@ -600,17 +600,17 @@ title: Membership and modification
 code: python
 
     to_buy = ["spam", "eggs", "beans"]
-    
+
     "eggs" in to_buy           # True, to_buy contains "eggs"
 
 code: python
 
     to_buy.append("bacon")     # add an element to the end
     to_buy.pop()               # remove (and return) last element
-    
+
     to_buy.insert(1, "bacon")  # other elements shift
     removed = to_buy.pop(1)    # remove (and return) element at index
-    
+
     to_buy.remove("eggs")      # remove an element by value
 
 ---
@@ -646,10 +646,10 @@ code: python
     b = a[:]       # b = [3, 4, 5] -- a new list!
     b == a         # True, they contain the same values
     b is a         # False, they are two objects in memory
-                   # (try and modify one of them...) 
+                   # (try and modify one of them...)
     c = a
-    c is a         # True, same object in memory 
-                   # (try and modify one of them...) 
+    c is a         # True, same object in memory
+                   # (try and modify one of them...)
 
 ---
 
@@ -666,7 +666,7 @@ code: python
     >>> range(5, 15, 2)
     range(5, 15, 2)
     >>> for v in range(5, 15, 2): print(v, end=' ')
-    
+
     5 7 9 11 13
     >>> list(range(5, 15, 2))
     [5, 7, 9, 11, 13]
@@ -685,7 +685,7 @@ code: python
         while a <= max:
             result.append(a)
             a, b = b, a + b
-            
+
         return result
 
 
@@ -703,7 +703,7 @@ title: Iterables and iterators
 - **Iterator**: an object that implements `__next__`
     - `__next__` returns the next element of the iterable
     - Raises a `StopIteration` exception when no more elements are available
-- *Simplest case*: iterable implements `__next__` itself and returns `self` in `__iter__` 
+- *Simplest case*: iterable implements `__next__` itself and returns `self` in `__iter__`
 
 ---
 
@@ -740,7 +740,7 @@ code: python
     <__main__.Fib object at 0x7fc31dbbdbe0>
     >>> for v in f: print(v, end=' ')
 
-    1 1 2 3 5 8 13 
+    1 1 2 3 5 8 13
     >>> list(f)
     [1, 1, 2, 3, 5, 8, 13]
 
@@ -983,7 +983,7 @@ code: python
     >>> list(enumerate("ABCD"))
     [(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
     >>> for i, v in enumerate([17, 21, 19]): print(i, v)
-    ... 
+    ...
     0 17
     1 21
     2 19

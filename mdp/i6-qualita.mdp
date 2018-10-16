@@ -87,7 +87,7 @@ figure: images/dev/gearwheel.png
 
 ---
 
-title: Pre- e post-condizioni 
+title: Pre- e post-condizioni
 
 - **Precondizioni**
     - Stabiliscono se è possibile chiamare un metodo
@@ -216,7 +216,7 @@ code: Python
             raise ValueError("sqrt: arg < 0")
 
         # ...
-        
+
         assert abs(result * result - x) <= 0.00001
         return result
 
@@ -353,7 +353,7 @@ class: large-figure
 code: Python
 
     def f():
-        // entry 
+        // entry
         while a:
             x()
             if b:
@@ -492,7 +492,7 @@ title: Esecuzione dei test
     - Implementata anche una semplice forma di *test discovery*
 
 code: cmd
-    
+
     python -m unittest test_module1 test_module2
     python -m unittest test_module.TestClass
     python -m unittest test_module.TestClass.test_method
@@ -547,7 +547,7 @@ code: Python
 
         def test_move(self):
             test_values = ()  # same values...
-            
+
             for param in test_values:
                 with self.subTest(param=param):
                     x0, y0, x1, y1 = param
@@ -557,7 +557,7 @@ code: Python
 
 ---
 
-title: Controllare le eccezioni (⨳)
+title: Controllare le eccezioni 🤔
 
 - Mestiere del programmatore
     - Codice che completa correttamente l'esecuzione nei casi normali...
@@ -566,16 +566,16 @@ title: Controllare le eccezioni (⨳)
     - Usare il metodo `assertRaises` direttamente, passando una funzione ed i parametri
     - Oppure creare un *contesto* con `with`
 - Esempio: `Ball` solleva effettivamente una eccezione attesa?
-    
+
 code: Python
 
-    def test_out_of_arena(self): 
+    def test_out_of_arena(self):
         with self.assertRaises(ValueError):
             b = Ball(-1, -1)
 
 ---
 
-title: Fixture (⨳)
+title: Fixture 🤔
 
 - Due o più test operano su insiemi di oggetti uguali o simili
     - Questa configurazione iniziale comune si definisce *fixture*
@@ -589,7 +589,7 @@ title: Fixture (⨳)
 
 ---
 
-title: Esempio di fixture (⨳)
+title: Esempio di fixture 🤔
 
 - Numerosi metodi di test che operano su stessi dati iniziali
     - Esempio, una combinazione di palline in posizioni predefinite
@@ -597,8 +597,8 @@ title: Esempio di fixture (⨳)
 code: Python
 
     class SimpleBallTest(unittest.TestCase):
-        
-        def setUp(self): 
+
+        def setUp(self):
             self.b1 = Ball(80, 40)
             self.b2 = Ball(40, 80)
             self.b3 = Ball(120, 20)
@@ -606,7 +606,7 @@ code: Python
 
 ---
 
-title: Test suite (⨳)
+title: Test suite 🤔
 
 - Meccanismo per *raggruppare* logicamente dei test ed *eseguirli assieme*
 - La classe `TestSuite` rappresenta una test suite

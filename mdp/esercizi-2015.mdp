@@ -319,7 +319,7 @@ figure: images/misc/holly-benji.jpg
 Aggiungere un metodo `number`, per ottenere il numero di maglia
 
 Aggiungere un metodo `name`, per ottenere il nome completo
- 
+
 ---
 
 title: 3.3 Movimento ciclico
@@ -563,7 +563,7 @@ title: Progetto 1
     - *Polimorfismo* per interazione reciproca
 - Ma ciclo principale, interazione con l'utente e grafica *fuori da queste classi*
     - Funzionamento con grafica oppure con console testuale
- 
+
 ---
 
 title: Pac-Man - Personaggi
@@ -742,7 +742,7 @@ figure: images/misc/slitherlink-solved.png
     - Escluderne la presenza (mostrare `x`)
     - (L'utente posiziona liberamente le linee)
 - Controllare il completamento del gioco
-    - I numeri indicano quante linee devono esserci attorno 
+    - I numeri indicano quante linee devono esserci attorno
     - Attorno ai segni `+` devono esserci `2` o `0` linee
     - (Solo inizialmente... trascurare la regola del "single loop")
 
@@ -851,7 +851,7 @@ title: Ulteriori suggerimenti (opzionale)
     - Operare su due copie del gioco
     - Su ciascuna copia, applicare tutti gli autocompletamenti possibili (scorsa esercitazione)
     - Se si finisce in un vicolo cieco (`wrong`), allora il segno giusto è l'altro
-    
+
 code: C++
 
     auto copy1 = *this; copy1.board_[y][x] = '-'; copy1.autocomplete();

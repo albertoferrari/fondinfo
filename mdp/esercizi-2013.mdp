@@ -328,7 +328,7 @@ code: Tabella 1
     $,4<DLT\dlt|
     %-5=EMU]emu}
     &.6>FNV^fnv~
-    '/7?GOW_gow 
+    '/7?GOW_gow
 
 Usare sempre due cicli `for` annidati: esterno su `y`, interno su `x` <br>
 In ogni posizione, calcolare il carattere da visualizzare: `x * ROWS + y`...
@@ -500,7 +500,7 @@ figure: images/misc/merge-sign.png
 
 Ciclicamente, confrontare la coppia dei primi valori (ciascuno proveniente da uno dei due stream) <br>
 Scrivere il minore dei due sul file di uscita <br>
-Non estrarre un nuovo valore da uno stream, se quello precedente non è ancora stato scritto in output 
+Non estrarre un nuovo valore da uno stream, se quello precedente non è ancora stato scritto in output
 
 ---
 
@@ -614,7 +614,7 @@ title: Progetto 1
 - Inizialmente, I/O tramite console...
     - Con attesa dell'input da parte dell'utente
     - Ma ciclo principale e interazione con l'utente **fuori da queste classi**
- 
+
 ---
 
 title: Snake
@@ -751,7 +751,7 @@ code: C++
         // ...
         int cols_ = 5;
         int rows_ = 5;
-        vector<char> board_ = {' ', 'T', ' ', ' ', ' ', 
+        vector<char> board_ = {' ', 'T', ' ', ' ', ' ',
                                ' ', ' ', ' ', ' ', 'T',
                                ' ', 'T', ' ', 'T', ' ',
                                ' ', ' ', ' ', ' ', 'T',

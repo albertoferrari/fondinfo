@@ -1269,7 +1269,7 @@ title: Read and write on files
 
 code:haskell
 
-    import System.IO 
+    import System.IO
     import Data.Char
 
     main = do

@@ -12,12 +12,12 @@ figure: images/fun/month-list.svg
 - **Lunghezza** attuale di una lista `x`: `len(x)`
 - I singoli elementi sono **numerati**
     - Da `0` a `len(x)-1`
-      
+
 code: python
 
-    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
               "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    
+
 code: python
 
     num_days = [31, 28, 31, 30, 31, 30,
@@ -61,10 +61,10 @@ code: python
 
     grocery.append("bacon")     # add an element to the end
     grocery.pop()               # remove (and return) last element
-    
+
     grocery.insert(1, "bacon")  # other elements shift
     removed = grocery.pop(1)    # remove (and return) element at index
-    
+
     if "egg" in grocery:       # True, grocery contains "egg"
         grocery.remove("egg")  # remove an element by value
 
@@ -106,7 +106,7 @@ code: python
 
     days = "mon|wed|fri".split("|")
     # ["mon", "wed", "fri"]
-    
+
 ---
 
 title: Tupla
@@ -125,7 +125,7 @@ code: python
     x, y, colour = pt  # sequence unpacking
     a, b = 3, 4
     a, b = b, a
-    
+
 ---
 
 title: Cicli su liste: for
@@ -134,12 +134,12 @@ figure: images/fun/shopping-list.png
 code: python
 
     grocery = ["spam", "egg", "bacon", "sausage"]
-        
+
     print("Your shopping list contains:")
 
     for product in grocery:
         print(product)
-    
+
 - Ad ogni iterazione, a `product` è assegnato un elemento di `grocery`
 - Ciclo `for` per qualsiasi tipo di sequenza: lista, stringa, tupla, range...
 
@@ -163,7 +163,7 @@ code: python
         print(data)
 
     main()
-    
+
 ---
 
 title: Composizione
@@ -355,12 +355,12 @@ title: Attori e arena
 code: python
 
     class Ghost(Actor):
-    
+
         def __init__(self, arena, x, y):
             self._x, self._y = x, y
             self._arena = arena  # save a ref to the arena
             arena.add(self)      # register yourself into the arena
-            
+
         def move(self):
             dx = random.choice([-5, 0, 5])
             dy = random.choice([-5, 0, 5])
@@ -441,7 +441,7 @@ figure: images/oop/collision.svg images/oop/reflection.png
 - Possibili errori nel calcolo del rimbalzo
     - Di solito accettabili
     - Altrimenti, applicare correzioni
-    
+
 ---
 
 title: Urti delle palline
@@ -500,7 +500,7 @@ figure: images/misc/histogram-rot.png
     - La barra più lunga occupa tutto lo spazio disponibile
 
 >
-    
+
 <http://www.ce.unipr.it/brython/?p3_list_histogram.py>
 
 ---

@@ -741,7 +741,7 @@ title: Lambdas and currying
 - Functional programmers often replace lambdas with currying and partial application
     - `map (+3) [1,6,3,2]`
     - `map (\x -> x + 3) [1,6,3,2]`
-    
+
 - Like normal functions, lambdas can take any number of parameters:
 
 code: haskell
@@ -770,7 +770,7 @@ code: haskell
 code: haskell
 
     f a b c = a * b + c
-    
+
     f' a b = \c -> a * b + c
 
 ---
@@ -838,13 +838,13 @@ code: python
     >>> values = [0, 1, 2, 3, 4]
     >>> list(map(sqrt, values))
     [0.0, 1.0, 1.4142, 1.7320, 2.0]
-    
+
 code: python
 
     >>> from math import sqrt
     >>> list(map(sqrt, range(5)))
     [0.0, 1.0, 1.4142, 1.7320, 2.0]
-    
+
 ---
 
 title: Multiprocessing
@@ -1120,7 +1120,7 @@ title: Right vs. left fold
 - Folding over `[3,4,5,6]`, with `f` and `z` (as f. and accumulator)
     - Right folding: `f 3 (f 4 (f 5 (f 6 z)))`
     - Left folding: `f (f (f (f z 3) 4) 5) 6`
-  
+
 
 - Ex.: left fold for `map`
     - The `++` f. is much more expensive than `:`
@@ -1232,7 +1232,7 @@ title: Using dollar
 - Apart from getting rid of parentheses...
     - `$` means that f. application is *yet another* f.
     - Map f. application over a list of f.s
-    
+
 code: haskell
 
     Prelude> map ($ 3) [(4+), (10*), (^2), sqrt]
@@ -1270,7 +1270,7 @@ title: Use of composition
 
 code: haskell
 
-    Prelude> map (negate . abs) [5,-3,-6,7,-3,2] 
+    Prelude> map (negate . abs) [5,-3,-6,7,-3,2]
     [-5,-3,-6,-7,-3,-2]
     Prelude> map (\x -> negate (abs x)) [5,-3,-6,7,-3,2]
     [-5,-3,-6,-7,-3,-2]
@@ -1376,5 +1376,5 @@ code: haskell
     rev xs = rev' xs [] where
       rev' [] acc = acc
       rev' (x:xs) acc = rev' xs (x:acc)
-  
+
 

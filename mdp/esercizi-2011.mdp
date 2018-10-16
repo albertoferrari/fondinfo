@@ -205,7 +205,7 @@ figure: images/misc/typewriter-caps-lock.jpg
 - Riscriverlo a console, ma convertito in maiuscolo
 - Trasformare le sequenze di punteggiatura e spazi in un singolo trattino
     - Es. “`It's 2011... yet`” → “`IT-S-2011-YET`”
-    
+
 >
 
 Lettere minuscole vengono dopo le maiuscole: sottrarre la costante `'a'-'A'`

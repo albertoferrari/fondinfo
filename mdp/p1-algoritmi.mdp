@@ -299,7 +299,7 @@ code: python
 
     while i < n:
         val = int(input("Val? "))
-        
+
         total += val  # total = total + val
         i += 1        # i = i + 1
 
@@ -316,7 +316,7 @@ code: python
     count = 0
 
     val = int(input("Val? (0 to finish) "))
-    
+
     while val != 0:
         total += val
         count += 1
@@ -397,7 +397,7 @@ figure: images/oop/raster-coord.png
 code: python
 
     import g2d
-    
+
     # Create canvas, width=600, height=400
     g2d.init_canvas((600, 400))
 
@@ -419,15 +419,15 @@ figure: images/oop/raster-coord.png
 code: python
 
     import g2d
-    
+
     g2d.init_canvas((600, 400))
-    
+
     # Green line from (150, 300) to (400, 100)
     g2d.draw_line((0, 255, 0), (150, 300), (400, 100))
-    
+
     # Red text, left=150, top=100, size=40
     g2d.draw_text("Hello", (255, 0, 0), (150, 100), 40)
-    
+
     g2d.main_loop()
 
 >
@@ -447,7 +447,7 @@ figure: images/algo/sum10.svg
 code: python
 
     # Add up numbers from 1 to 10
-       
+
     total = 0
     for i in range(1, 11):
         total += i
@@ -455,7 +455,7 @@ code: python
     # total = 0;  i = 1
     # while i < 11:
     #     total += i;  i += 1
-    
+
 ---
 
 title: Sequenza di quadrati

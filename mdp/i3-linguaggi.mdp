@@ -44,7 +44,7 @@ title: Concatenazione di stringhe
     - `x^^n^^ = x • x • x • x … (n volte)`
 - Elemento neutro `ε`
     - Stringa vuota, `∀ x ∈ Σ*, ε • x = x • ε = x`
-    
+
 >
 
 `<Σ*, •, ε>`: monoide
@@ -331,7 +331,7 @@ title: Linguaggi non contestuali
 - **Linguaggi di programmazione** comuni: grammatiche CF
     - Parentesi bilanciate: `S → SS | (S) | ε`
 - Definizione con notazione Extended **Backus-Naur Form** (EBNF)
-    - `{...}`: parte ripetibile (0+), `[...]`: parte opzionale, 
+    - `{...}`: parte ripetibile (0+), `[...]`: parte opzionale,
     - `(...)`: raggruppamento, `|`: scelta
     - Terminali tra virgolette
 
@@ -383,7 +383,7 @@ code: ebnf
 
 ---
 
-title: Linguaggi LL(1) (⨳)
+title: Linguaggi LL(1) 🤔
 
 - Sottoclasse dei linguaggi CF
 - Ogni produzione relativa a stesso non-terminale (a sx)... <br> genera come primo simbolo un terminale diverso
@@ -393,7 +393,7 @@ title: Linguaggi LL(1) (⨳)
 
 ---
 
-title: Pumping lemma REG (⨳)
+title: Pumping lemma REG 🤔
 figure: images/comp/pumping-lemma-3.svg
 
 - Formalmente, `∀ L` regolare...
@@ -412,7 +412,7 @@ Esempio con `G~~1~~`: `S → b | aA; A → aS`
 
 ---
 
-title: Pumping lemma CF (⨳)
+title: Pumping lemma CF 🤔
 figure: images/comp/pumping-lemma-2.svg
 
 - Formalmente, `∀ L` non contestuale...
@@ -426,7 +426,7 @@ figure: images/comp/pumping-lemma-2.svg
 
 ---
 
-title: Corollari dei due lemmi (⨳)
+title: Corollari dei due lemmi 🤔
 
 - ⇒ `L = {a^^n^^b^^n^^ : n ≥ 0}` non è REG
     * Si prende `a^^m^^b^^m^^, con m > k ⇒ |uv| < m`, sono tutte `a`…
@@ -553,7 +553,7 @@ title: Paradigmi di sviluppo
 title: Linguaggi e paradigmi
 
 - **Imperativi / procedurali**
-    - Cobol, Fortran, Algol, C, Pascal 
+    - Cobol, Fortran, Algol, C, Pascal
 - **Orientati agli oggetti**
     - Simula, Smalltalk, Eiffel, C++, Delphi, Java, C#, VB.NET
 - **Scripting**
@@ -586,7 +586,7 @@ class: large-figure
 
 - Traduzione da ling. alto livello a ling. macchina
     - Analisi: lessicale, grammaticale, contestuale
-    - *Rappresentazione intermedia*: albero sintattico annotato (**AST**) 
+    - *Rappresentazione intermedia*: albero sintattico annotato (**AST**)
     - Generazione codice oggetto
 - Codice oggetto: non ancora eseguibile
     - Linker, loader
@@ -604,7 +604,7 @@ code: Python
             a = a − b
         else:
             b = b − a
-    return a 
+    return a
 
 Algoritmo di Euclide per MCD
 

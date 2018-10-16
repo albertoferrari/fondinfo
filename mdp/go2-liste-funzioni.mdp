@@ -11,15 +11,15 @@ figure: images/fun/shopping-list.jpg
     - L'intera lista (*slice*) può essere assegnata ad una variabile, così diamo un **nome** alla lista
 - I singoli elementi sono **numerati**
     - Gli indici partono da 0!
-      
+
 code: go
 
     toBuy := []string{"spam", "eggs", "beans"}
-    
+
 code: go
 
     rainfallData := []int{13, 24, 18, 15}
-    
+
 code: go
 
     resultsByMonth := make([]int, 12)  // 12 times 0
@@ -35,7 +35,7 @@ figure: images/fun/wile-coyote.png
 
 code: go
 
-    toBuy := []string{"spam", "eggs", "beans", "bacon"}    
+    toBuy := []string{"spam", "eggs", "beans", "bacon"}
     n := len(toBuy)        // 4
 
     Println(toBuy[0])      // "spam"
@@ -57,9 +57,9 @@ figure: images/fun/month-list.svg
 code: go
 
     months := []string{"Jan", "Feb", "Mar",
-                       "Apr", "May", "Jun", 
-                       "Jul", "Aug", "Sep", 
-                       "Oct", "Nov", "Dec"}    
+                       "Apr", "May", "Jun",
+                       "Jul", "Aug", "Sep",
+                       "Oct", "Nov", "Dec"}
 
     spring := months[2:5]       // [Mar Apr May]
     quart1 := months[:3]        // [Jan Feb Mar]
@@ -113,7 +113,7 @@ title: Cicli su liste: for
 code: go
 
     shoppingList := []string{"spam", "eggs", "bacon", "ketchup"}
-        
+
     Println("Your shopping list contains:")
 
     for _, value := range shoppingList {
@@ -152,19 +152,19 @@ figure: images/algo/sum10.svg
 code: go
 
     // Add up numbers from 1 to 10
-       
+
     total := 0
     for i := 1; i < 11; i++ {
         total += i
     }
-    
+
     // total := 0
     // i := 1
     // for i < 11 {
     //     total = total + i
     //     i = i + 1
     // }
-    
+
 ---
 
 title: Sequenza di quadrati
@@ -221,7 +221,7 @@ code: go
         }
         Println()
     }
-    
+
 ---
 
 title: Funzioni
@@ -257,7 +257,7 @@ title: Chiamata di funzioni
     - **Parametri effettivi**: oggetti passati alla funz.
 - Parametri passati “*per valore*”
     - Variabili all'esterno: non vengono modificate
-    
+
 code: go
 
     func main() {
@@ -266,7 +266,7 @@ code: go
         side3 := Hypotenuse(side1, side2)
         Println("3rd side: ", side3)
     }
-    
+
 ---
 
 title: Effetti collaterali
@@ -314,7 +314,7 @@ code: go
     var x = 50
 
     func update() {
-        FillCanvas(Color{255, 255, 255})  // Draw background        
+        FillCanvas(Color{255, 255, 255})  // Draw background
         DrawImage(image, Point{x, 50})    // Draw foreground
         x = (x + 5) % 320                 // Update ball's position
     }
@@ -458,7 +458,7 @@ figure: images/misc/histogram-rot.png
 - Mostrare un istogramma
     - Larghezza di ciascuna barra proporzionale al valore corrispondente
     - La barra più lunga occupa tutto lo spazio disponibile
-    
+
 ---
 
 title: 2.9 Spirale (*)

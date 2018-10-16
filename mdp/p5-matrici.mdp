@@ -59,7 +59,7 @@ code: python
 
 ---
 
-title: I/O su stringhe e console (⨳)
+title: I/O su stringhe e console 🤔
 
 - Stringhe come stream: `io.StringIO`
 - Console come stream: `sys.stdin`, `sys.stdout`, `sys.stderr`
@@ -82,7 +82,7 @@ code: python
 
 ---
 
-title: Errori da file (⨳)
+title: Errori da file 🤔
 figure: images/fun/garbled-tape.png
 
 - **Eccezioni**: per gestire separatamente i casi inattesi
@@ -106,7 +106,7 @@ class: segue dark
 
 ---
 
-title: List comprehension (⨳)
+title: List comprehension 🤔
 figure: images/dev/computer-ninja.png
 
 - Modo conciso per creare una lista
@@ -126,7 +126,7 @@ code: python
 
 ---
 
-title: Enumerate (⨳)
+title: Enumerate 🤔
 figure: images/repr/child-fingers.png
 /home/mic/Documents/didattica/fondinfo/images/misc/finger-counting.png
 
@@ -153,7 +153,7 @@ Altrimenti, Python non genera immediatamente i risultati (*lazy*)
 
 ---
 
-title: Zip (⨳)
+title: Zip 🤔
 figure: images/fun/zip.jpg
 
 - Accoppia gli elementi di due sequenze
@@ -174,7 +174,7 @@ Risultati in lista, solo (!) per visualizzarli
 
 ---
 
-title: Map (⨳)
+title: Map 🤔
 figure: images/fun/legomap.png
 
 - Prende come parametri una funzione ed una sequenza
@@ -201,7 +201,7 @@ Risultati in lista, solo (!) per visualizzarli
 
 ---
 
-title: Liste ordinate o rovesciate (⨳)
+title: Liste ordinate o rovesciate 🤔
 
 code: python
 
@@ -227,7 +227,7 @@ code: python
 
 ---
 
-title: Dizionario (⨳)
+title: Dizionario 🤔
 figure: images/fun/dictionary.png
 
 - A volte chiamato *mappa* o *array associativo*
@@ -475,7 +475,7 @@ figure: images/misc/merge-sign.png
 
 Ciclicamente, confrontare la coppia dei primi valori (ciascuno proveniente da uno dei due stream) <br>
 Scrivere il minore dei due sul file di uscita <br>
-Non estrarre un nuovo valore da uno stream, se quello precedente non è ancora stato scritto in output 
+Non estrarre un nuovo valore da uno stream, se quello precedente non è ancora stato scritto in output
 
 <http://www.ce.unipr.it/brython/?p5_data_merge.py>
 

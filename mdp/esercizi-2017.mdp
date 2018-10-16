@@ -293,7 +293,7 @@ figure: images/misc/ellipse.svg
 - Nel corpo principale del programma...
     - Creare un oggetto con dati forniti dall'utente
     - Visualizzare area e distanza focale dell'ellisse
-    
+
 >
 
 Opzionalmente, nell'inizializzazione: se `a < b`, scambiarne i valori
@@ -645,7 +645,7 @@ figure: images/oop/personal-data.png
 - Nella funzione `main`
     - Chiedere all'utente i dati, per istanziare `Person`
     - Chiedere la data odierna ed invocare `age`
-     
+
 ---
 
 title: 6.2 Rappresentazione in binario
@@ -986,7 +986,7 @@ figure: images/misc/dead-end.jpg
 
 ---
 
-title: 11.2 Ulteriori suggerimenti (++)
+title: 11.2 Ulteriori suggerimenti 🤔
 figure: images/misc/artificial-intelligence.png
 
 - Provare tutte le possibili permutazioni su una riga o colonna
@@ -1002,7 +1002,7 @@ code: C++
 
 ---
 
-title: 11.3 Ulteriori suggerimenti (++)
+title: 11.3 Ulteriori suggerimenti 🤔
 figure: images/misc/artificial-intelligence.png
 
 - Provare tutte le possibili permutazioni su una riga o colonna
@@ -1012,7 +1012,7 @@ figure: images/misc/artificial-intelligence.png
 
 ---
 
-title: 11.4 Soluzione ricorsiva (++)
+title: 11.4 Soluzione ricorsiva 🤔
 figure: images/misc/artificial-intelligence.png
 
 code: C++

@@ -260,7 +260,7 @@ figure: images/misc/histogram-rot.png
 - Mostrare un istogramma
     - Larghezza di ciascuna barra proporzionale al valore corrispondente
     - La barra più lunga occupa tutto lo spazio disponibile
-    
+
 ---
 
 title: 2.9 Istogramma con barre verticali
@@ -501,7 +501,7 @@ Non modificare le classi dei personaggi, nè `Arena`
 
 Aggiugere invece un *offset*, in fase di visualizzazione, alle coordinate dei personaggi per decidere il punto in cui disegnarli nella finestra
 
-Usare lo stesso *offset* anche per ritagliare la parte giusta dall'immagine di sfondo 
+Usare lo stesso *offset* anche per ritagliare la parte giusta dall'immagine di sfondo
 
 ---
 
@@ -619,7 +619,7 @@ code: python
                 border_left, border_right = x - self.W, x + w
                 border_top, border_bottom = y - self.H, y + h
                 # now set either self._x or self._y, to the nearest border
-            
+
 ---
 
 title: 5.3 Stampa per righe
@@ -637,7 +637,7 @@ code: Tabella 1
     PQRSTUVWXYZ[
     \]^_`abcdefg
     hijklmnopqrs
-    tuvwxyz{|}~ 
+    tuvwxyz{|}~
 
 Usare solo due cicli `for` annidati: esterno su `y`, interno su `x` <br>
 In ogni posizione, calcolare il codice da visualizzare: `y * COLS + x + ...`
@@ -661,7 +661,7 @@ code: Tabella 2
     $,4<DLT\dlt|
     %-5=EMU]emu}
     &.6>FNV^fnv~
-    '/7?GOW_gow 
+    '/7?GOW_gow
 
 Usare solo due cicli `for` annidati: esterno su `y`, interno su `x` <br>
 In ogni posizione, calcolare il codice da visualizzare: `x * ROWS + y + ...`
@@ -703,7 +703,7 @@ figure: images/misc/merge-sign.png
 
 Ciclicamente, confrontare la coppia dei primi valori (ciascuno proveniente da uno dei due stream) <br>
 Scrivere il minore dei due sul file di uscita <br>
-Non estrarre un nuovo valore da uno stream, se quello precedente non è ancora stato scritto in output 
+Non estrarre un nuovo valore da uno stream, se quello precedente non è ancora stato scritto in output
 
 ---
 
@@ -744,7 +744,7 @@ code: python
 
 ---
 
-title: 5.9 Dominating knights (++)
+title: 5.9 Dominating knights 🤔
 figure: images/misc/dom-knights.png
 
 - Problemi di dominio (o copertura)
@@ -777,7 +777,7 @@ title: Progetto 1
     - *Polimorfismo* per interazione reciproca
 - Ma ciclo principale, interazione con l'utente e grafica *fuori da queste classi*
     - Funzionamento con grafica oppure con console testuale
- 
+
 ---
 
 title: Super Mario - Personaggi
@@ -938,7 +938,7 @@ title: Akari - Funzionalità di base
 - Rappresentare lo stato del gioco in forma testuale
     - Per ciascuna cella, indicare anche se è illuminata (`'+'`)
 - Nota: la tabella di gioco può essere rettangolare (*rows ≠ cols*)
-    
+
 ---
 
 title: Bozza della classe
@@ -1052,7 +1052,7 @@ title: Ulteriori suggerimenti (opzionale)
     - Operare su due copie del gioco
     - Su ciascuna copia, applicare tutti gli autocompletamenti possibili (scorsa esercitazione)
     - Se si finisce in un vicolo cieco (`wrong`), allora il segno giusto è l'altro
-    
+
 code: C++
 
     auto copy1 = *this; copy1.board_[y][x] = '@'; copy1.autocomplete();

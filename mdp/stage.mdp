@@ -15,7 +15,7 @@ figure: images/dev/young-programmer.png
 
 ---
 
-title: Come si svolgerà? 
+title: Come si svolgerà?
 figure: images/dev/geek-girl.jpg
 class: large-image
 
@@ -79,6 +79,6 @@ figure: images/misc/books.png
 - MIT: *Intro to CS and Programming in Python* - [Video delle lezioni](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/lecture-videos/index.htm)
 - Go: *Documentazione e tour* - <https://golang.org/doc/>
 - A.A. Donovan e B.W. Kernighan: *The Go Programming Language*, Addison-Wesley, 2015, 978-0134190440
- 
+
 [**Continua**](intro.html#11)
 

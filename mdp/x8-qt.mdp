@@ -410,7 +410,7 @@ code: C++
         BoardGame* game;
     public:
         BoardGameGui(BoardGame* g);
-        void update_buttons();        
+        void update_buttons();
     };
 
 ---
@@ -426,7 +426,7 @@ code: C++
         setLayout(grid);
         for (auto y = 0; y < game->rows(); y++) {
             for (auto x = 0; x < game->cols(); x++) {
-                auto b = new QPushButton; 
+                auto b = new QPushButton;
                 grid->addWidget(b, y, x);
                 connect(b, &QPushButton::clicked, [=]{
                     game->play_at(x, y);  // lambda function ...
@@ -492,7 +492,7 @@ code: python
 
     class BoardGameGui(QWidget):
         # ...
-        
+
         def update_buttons(self):
             for y in range(self._game.rows()):
                 for x in range(self._game.cols()):
@@ -683,14 +683,14 @@ code: C++
     signals:
         void rightClicked();  // new signal, in addition to QPushButton::clicked
     };
-    
+
 code: C++
-    
+
     void RightPushButton::mouseReleaseEvent(QMouseEvent* e) {
         if (e->button() == Qt::RightButton) emit rightClicked();
         QPushButton::mouseReleaseEvent(e);  // base class behaviour
     }
-        
+
 ---
 
 title: Altre caratteristiche di Qt

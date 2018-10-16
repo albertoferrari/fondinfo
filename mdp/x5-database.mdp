@@ -191,7 +191,7 @@ title: Chiave primaria
 
 - Una tabella (relazione) non dovrebbe contenere due righe identiche
     - Sempre possibile scegliere un sottoinsieme di campi t.c. ...
-    - Ciascuna riga della tabella identificata univocamente 
+    - Ciascuna riga della tabella identificata univocamente
 - **Chiave primaria** (*primary key, PK*) di una tabella:
     - Minimo sottoinsieme di campi che permette di...
     - Identificare univocamente le righe della tabella

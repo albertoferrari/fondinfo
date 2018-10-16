@@ -27,7 +27,7 @@ title: Chiamata di funzioni
     - Parametri e variabili hanno **ambito locale**
     - Non visibili nel resto del programma
     - Nomi uguali, definiti in ambiti diversi, restano distinti
-    
+
 code: python
 
     side1 = float(input('1st side? '))
@@ -43,7 +43,7 @@ title: Funzione main
     - In questo modo si limitano le **variabili globali**
 
 code: python
-  
+
     # def hypotenuse ...
 
     def main():
@@ -57,7 +57,7 @@ code: python
 >
 
 <http://www.ce.unipr.it/brython/?p2_fun_hypotenuse.py>
-    
+
 ---
 
 title: Parametri di funzioni
@@ -136,7 +136,7 @@ code: python
             print(f"{val:3}", end=" ")  # val represented as text
                                         # with at least 3 chars
         print()
-    
+
 >
 
 <http://www.ce.unipr.it/brython/?p2_for_tables.py>
@@ -156,7 +156,7 @@ code: python
             val = x * y
             print(f"{val:3}", end=" ")
         print()
-    
+
     def print_table(size: int):
         for y in range(1, size + 1):
             print_row(y, size)
@@ -176,10 +176,10 @@ code: python
     x, y, dx = 50, 50, 5
     ARENA_W, ARENA_H = 320, 240
     image = g2d.load_image("ball.png")
-    
+
     def update():
         global x
-        g2d.fill_canvas((255, 255, 255))  # Draw background        
+        g2d.fill_canvas((255, 255, 255))  # Draw background
         g2d.draw_image(image, (x, y))     # Draw foreground
         x = (x + dx) ##% ARENA_W          # Update ball's position
 
@@ -189,7 +189,7 @@ code: python
 >
 
 <http://www.ce.unipr.it/brython/?p2_fun_anim.py>
-    
+
 ---
 
 title: Eventi della tastiera
@@ -213,7 +213,7 @@ code: python
 <https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent/code>
 
 <http://www.ce.unipr.it/brython/?p2_fun_keyb.py>
-    
+
 ---
 
 title: Funzione per rimbalzi
@@ -233,13 +233,13 @@ code: python
         if y + dy < 0 or y + dy + BALL_H > ARENA_H:
             dy = -dy
         y += dy
-        return x, y, dx, dy    
+        return x, y, dx, dy
 
 <http://www.ce.unipr.it/brython/?p2_fun_ball.py>
-    
+
 ---
 
-title: Effetti collaterali (⨳)
+title: Effetti collaterali 🤔
 
 - Modifica di oggetti passati come parametri o variabili globali, operazioni di lettura/scrittura...
 - Annullano la **trasparenza referenziale**
@@ -252,7 +252,7 @@ title: Effetti collaterali (⨳)
 
 ---
 
-title: Funzioni non idempotenti (⨳)
+title: Funzioni non idempotenti 🤔
 
 - Esempio di semplificazione
     - `p = rq(x) + rq(y) * (rq(x) – rq(x))`
@@ -297,7 +297,7 @@ figure: images/oop/cookie-cutter.png
 
 - Ogni *oggetto* ha una **classe** di origine
     - La classe dà la stessa forma iniziale (campi e metodi) a tutti i suoi oggetti
-- Ma ogni *oggetto* ha la sua **identità** 
+- Ma ogni *oggetto* ha la sua **identità**
     - Stato e locazione in memoria distinti da quelli di altri oggetti
     - Sia instanze di classi diverse che della stessa classe
 
@@ -311,7 +311,7 @@ figcaption: Class diagram UML
     - Prefisso `_` per i nomi dei *campi privati*
 
 > We're all consenting adults here. *(GvR)*
-      
+
 code: python
 
     class Ball:
@@ -398,7 +398,7 @@ code: python
 
     b1 = Ball(40, 80)
     b1.move()
-    
+
 code: python
 
     # Python internals, DON'T do this!
@@ -448,7 +448,7 @@ title: Variabili locali, parametri, campi
 
 ---
 
-title: Proprietà (⨳)
+title: Proprietà 🤔
 
 - Permettono un accesso controllato allo stato
 
@@ -648,17 +648,17 @@ figure: images/misc/spiral-circles.png
 
 - Mostrare l'*animazione* di un cerchio lungo una spirale
 - Realizzare una classe per gestire dati e comportamento del cerchio
-- Implementare il movimento in un metodo `move()` 
+- Implementare il movimento in un metodo `move()`
 - Campi: `xc`, `yc`, `i`
     - `i` conta i passi; se accede il limite, torna a 0
 
 >
 
 <http://www.ce.unipr.it/brython/?p2_oop_spiral.py>
-    
+
 ---
 
-title: Modulo main (⨳)
+title: Modulo main 🤔
 class: break
 
 - Nome del modulo in esecuzione: `__name__`
@@ -668,7 +668,7 @@ class: break
     - In *Brython* nome `"script..."`; il “trucco” non funziona
 
 code: python
-  
+
     # def hypotenuse ...
     def main():
         side1 = float(input("1st side? "))
@@ -678,10 +678,10 @@ code: python
     # if this module is imported, main is not executed
     if __name__ == "__main__":
         main()
-    
+
 ---
 
-title: Ciclo di vita di un oggetto (⨳)
+title: Ciclo di vita di un oggetto 🤔
 figure: images/dev/garbage-truck.jpg
 
 - Creazione di un oggetto: allocata memoria per tenere lo stato dell’oggetto
@@ -693,7 +693,7 @@ figure: images/dev/garbage-truck.jpg
 
 ---
 
-title: Garbage collection (⨳)
+title: Garbage collection 🤔
 
 - Vantaggi
     - Non è possibile dimenticare di liberare la memoria (*memory leak*)

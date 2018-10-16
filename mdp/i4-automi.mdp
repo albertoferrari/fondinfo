@@ -261,7 +261,7 @@ title: Macchina di Turing universale (UTM)
 - ⇔ `M` realizza la computazione: `(q~~0~~, x) →* (α, q~~f~~, β)`
     - `q~~0~~`, stato iniziale; `q~~f~~`, stato finale; `x`, input
 - Regole di transizione di `M` → Sequenza di quintuple
-    - `D~~M~~ = d~~1~~##d~~2~~## ... ##d~~n~~` 
+    - `D~~M~~ = d~~1~~##d~~2~~## ... ##d~~n~~`
     - `q~~i~~#σ~~j~~#q~~h~~#σ~~k~~#t~~l~~ ⇔ δ(q~~i~~, σ~~j~~) = (q~~h~~, σ~~k~~, t~~l~~)`
 
 ---
@@ -345,7 +345,7 @@ code: Python
     - Correttezza: il programma calcola la funzione desiderata?
     - Chiamata: una procedura (o istruzione) sarà eseguita?
     - Equivalenza, ambiguità di grammatiche CF …
-    
+
 ---
 
 title: Macchine a registri
@@ -372,7 +372,7 @@ figure: images/hist/von-neumann.jpg images/sys/bus.svg
 - Calcolatore con dati e programma in memoria centrale
 - Realizzazione del modello teorico UTM (Turing, 1936)
 - 1945, JvN: “*Draft di report per EDVAC*”
-- 1949, EDVAC (Princeton) 
+- 1949, EDVAC (Princeton)
     - Successore di ENIAC
     - Progetto di Eckert & Mauchly, consulenza di JvN
 
@@ -480,7 +480,7 @@ title: Interpretazione istruzioni
     - Codice operativo = **`0100`**
     - Es. Leggi una parola dal registro delle periferiche...
     - E memorizzala in un indirizzo di memoria (operando)
-    
+
 ---
 
 title: Esecuzione istruzioni

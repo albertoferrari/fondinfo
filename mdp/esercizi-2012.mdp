@@ -133,7 +133,7 @@ code: output
     333
     22
     1
-    
+
 >
 
 Usare due cicli for annidati
@@ -547,7 +547,7 @@ title: Othello - Metodi base per...
     - Poter passare il turno, se non ci sono mosse
     - Giocare su tavole di diverse dimensioni
     - Leggere lo stato del gioco da uno stream generico
-    
+
 >
 
 Partita tra due utenti, non contro il computer!

@@ -68,7 +68,7 @@ code: C++
     int int_sorter(const void * a, const void * b) {
         return *(int*)a - *(int*)b;
     }
-    
+
     int main() {
         int array[10];
         for (int i = 0; i < 10; ++i) {
@@ -137,7 +137,7 @@ title: Function objects
 title: Functor example
 
 code: c++
- 
+
     class MyFunctorClass {
     public:
         MyFunctorClass (int x) : x_(x) {}
@@ -145,10 +145,10 @@ code: c++
     private:
         int x_;
     };
-     
+
     int main() {
         MyFunctorClass addFive(5);
-        std::cout << addFive(6);     
+        std::cout << addFive(6);
         return 0;
     }
 
@@ -161,7 +161,7 @@ title: Lambda functions
     - `[a,&b]`, captures `a` by *copy*, and `b` by *reference*
     - `[&]`, captures everything by *reference*
     - `[=]`, captures everything by *copy*
-    - `[]` captures nothing 
+    - `[]` captures nothing
 
 code: c++
 
@@ -258,7 +258,7 @@ figure: images/oop/cpp-struct-layout-a.png
     - Members laid out in their declaration order
     - Implementation defined alignment padding
 - *Note*: C++ structs are like classes, defaulting to `public`
-    
+
 code: C++
 
     struct A {  // or class
@@ -304,7 +304,7 @@ code: C++
         int c1;
         void cf();
     };
-    
+
     struct D : C {
         int d1;
         void df();
@@ -333,7 +333,7 @@ code: C++
     - Layout used by *all* known C++ *implementations*
     - Address of `C` object within `D` == first byte of `D` object
     - No displacement for *upcasting*, to obtain address of embedded `C`
-    
+
 ---
 
 title: Multiple inheritance
@@ -440,7 +440,7 @@ code: C++
 
     C* pc;
     pc->c1; // *(pc + dCc1);
-   
+
 - Single inheritance, displacement is `0`
 
 code: C++
@@ -457,7 +457,7 @@ code: C++
     pf->c1; // *(pf + dFC + dCc1); // *(pf + dFc1);
     pf->e1; // *(pf + dFE + dEe1); // *(pf + dFe1);
     pf->f1; // *(pf + dFf1);
- 
+
 ---
 
 title: Access to virtual base
@@ -527,7 +527,7 @@ code: C++
         void pf();           // new
         virtual void pvf();  // new
     };
-    
+
 ---
 
 title: The hidden this
@@ -562,7 +562,7 @@ code: C++
         void pvf();          // overrides P::pvf
         virtual void qvf();  // new
     };
-    
+
 ---
 
 title: Non-virtual override

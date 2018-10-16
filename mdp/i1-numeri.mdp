@@ -114,7 +114,7 @@ class: large-table
 
   Dec  | Bin       | Hex |   Dec  | Bin       | Hex |   Dec  | Bin       | Hex
 -------|-----------|-----|--------|-----------|-----|--------|-----------|----
-**00** | 0000 0000 |  00 | **16** | 0001 0000 |  10 | **32** | 0010 0000 |  20 
+**00** | 0000 0000 |  00 | **16** | 0001 0000 |  10 | **32** | 0010 0000 |  20
 **01** | 0000 0001 |  01 | **17** | 0001 0001 |  11 | **33** | 0010 0001 |  21
 **02** | 0000 0010 |  02 | **18** | 0001 0010 |  12 | **34** | 0010 0010 |  22
 **03** | 0000 0011 |  03 | **19** | 0001 0011 |  13 | **35** | 0010 0011 |  23
@@ -148,7 +148,7 @@ title: Somma e sottrazione
 code: Binary
 
         1   1
-    0 0 0 1 0 1 1 0 +
+    0 0 0 1 0 1 1 0
     0 0 0 1 0 1 0 1 =
     -----------------
     0 0 1 0 1 0 1 1
@@ -160,7 +160,7 @@ code: Binary
     0 0 0 0 0 1 0 1 =
     -----------------
     0 0 0 0 1 0 0 1
-    
+
 Attenzione a riporto e prestito (in alto)
 
 ---
@@ -172,13 +172,13 @@ code: Binary
             1 0 1 1 x
             1 1 0 1 =
             ---------
-            1 0 1 1 +
+            1 0 1 1
           0 0 0 0
         -------------
-          0 1 0 1 1 +
+          0 1 0 1 1
         1 0 1 1
       ---------------
-        1 1 0 1 1 1 +
+        1 1 0 1 1 1
       1 0 1 1
     -----------------
     1 0 0 0 1 1 1 1
@@ -228,7 +228,7 @@ figure: images/repr/4bits-sign.png
     - Complemento il numero <br> (gli 1 diventano 0 e viceversa)
     - Sommo 1
 - Anche così, il primo bit indica il segno
-    - 0 positivo, 1 negativo 
+    - 0 positivo, 1 negativo
 - *Attenzione*: bisogna conoscere codifica e num bit
     - Esempi seguenti: ogni intero con segno memorizzato in un singolo byte
 
@@ -244,7 +244,7 @@ code: Binary
 
     0 0 1 0 0 0 1 1 ¬
     -----------------
-    1 1 0 1 1 1 0 0 +
+    1 1 0 1 1 1 0 0
                   1 =
     -----------------
     1 1 0 1 1 1 0 1
@@ -263,7 +263,7 @@ title: Somma con segno
 
 code: Binary
 
-    0 0 0 0 1 1 0 0 +
+    0 0 0 0 1 1 0 0
     1 1 0 1 1 1 0 1 =
     -----------------
     1 1 1 0 1 0 0 1
@@ -423,7 +423,7 @@ Nor       | ↓
 
 ---
 
-title: Proprietà degli operatori 
+title: Proprietà degli operatori
 class: large-table
 
 Proprietà    | Not
@@ -469,7 +469,7 @@ class: large-table
 
 ---
 
-title: Operazioni bit a bit in Python (⨳)
+title: Operazioni bit a bit in Python 🤔
 
 code: Python
 
@@ -483,7 +483,7 @@ code: Python
 
     z = 0x0B    # hex value (11 dec)
     z = 0b1011  # bin value (11 dec)
-    
+
     hex(11)     # '0x0b' (text)
     bin(0x0B)   # '0b1011' (text)
 

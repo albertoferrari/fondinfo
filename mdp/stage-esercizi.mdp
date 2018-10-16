@@ -318,7 +318,7 @@ title: 3.2 Tartaruga con gravità
 - Aggiungere alla tartaruga un effetto gravità
     - Nel metodo `move`, incrementare `dy`
     - Fissare `dy_max`, un valore massimo per `dy`
-    - La tartaruga inoltre si ferma sul fondo dello schermo 
+    - La tartaruga inoltre si ferma sul fondo dello schermo
 - Permettere alla tartaruga di saltare
     - Quando la tartaruga è sul fondo dello schermo, può saltare
     - Il salto comincia a comando dell'utente

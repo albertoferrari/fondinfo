@@ -112,7 +112,7 @@ code: python
     grocery.insert(1, "bacon")  # other elements shift
     removed = grocery.pop(1)    # remove (and return) element at index
 
-    if "egg" in grocery:       # True, grocery contains "egg"    
+    if "egg" in grocery:       # True, grocery contains "egg"
         grocery.remove("egg")  # remove an element by value
 
 ---
@@ -506,7 +506,7 @@ code: Python
             vals = [int(i) for i in splitted]
             matrix.append(vals)
             ## matrix += vals  # for a simple list (ex. 4.5)
-            
+
             if cols == 0:
                 cols = len(vals)
             rows += 1
@@ -524,7 +524,7 @@ code: Python
         for row in reader:
             matrix.append(row)
     print(matrix)
-    
+
     with open('some.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         for row in matrix
@@ -1126,7 +1126,7 @@ code: Python
                              'D' : np.array([3] * 4,dtype='int32'),
                              'E' : pd.Categorical(["test","train","test","train"]),
                              'F' : 'foo' })
-    >>> df2 
+    >>> df2
          A          B    C  D      E    F
     0  1.0 2013-01-02  1.0  3   test  foo
     1  1.0 2013-01-02  1.0  3  train  foo
@@ -1344,7 +1344,7 @@ code: Python
                            'D' : np.random.randn(8)})
     >>> df.groupby('A').sum()
                 C        D
-    A                     
+    A
     bar -2.802588  2.42611
     foo  3.146492 -0.63958
 
@@ -1363,7 +1363,7 @@ code: Python
                            'E' : np.random.randn(12)})
     >>> pd.pivot_table(df, values='D', index='A', columns='C')
     C           bar       foo
-    A                        
+    A
     one    0.463952  0.419066
     three -0.660418  0.991739
     two    0.091446  0.236650

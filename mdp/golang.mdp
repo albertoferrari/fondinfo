@@ -111,7 +111,7 @@ code: go
 
     for {
     }
-    
+
 ---
 
 title: Ranges
@@ -531,7 +531,7 @@ code: go
         // plan9, windows...
         fmt.Printf("%s.", os)
     }
-    
+
 ---
 
 title: Switch w/o condition
@@ -684,7 +684,7 @@ code: go
     for i := 0; i < len(board); i++ {
         fmt.Printf("%s\n", board[i])
     }
-    
+
 ---
 
 title: Appending to a slice
@@ -718,7 +718,7 @@ code: go
     x := make(map[string]int)
     x["key"] = 10
     fmt.Println(x["key"])
-    
+
 ---
 
 title: Map literals
@@ -867,7 +867,7 @@ code: go
 
     //f = i.(float64) // panic
     fmt.Println(f)
-    
+
 ---
 
 title: Type switches

@@ -43,7 +43,7 @@ figure: images/oop/cookie-cutter.png
 
 - Ogni *oggetto* ha una **classe** di origine
     - La classe dà la stessa forma iniziale (campi e metodi) a tutti i suoi oggetti
-- Ma ogni *oggetto* ha la sua **identità** 
+- Ma ogni *oggetto* ha la sua **identità**
     - Stato e locazione in memoria distinti da quelli di altri oggetti
     - Sia instanze di classi diverse che della stessa classe
 
@@ -56,7 +56,7 @@ figcaption: Class diagram UML
 - **Incapsulamento** dei dati
     - Campi in minuscolo: visibilità limitata al modulo
     - Funzione costruttore in maiuscolo: esportata
-      
+
 code: go
 
     type Ball struct {
@@ -139,7 +139,7 @@ code: go
 
     var b1 = NewBall(40, 80)
     var b2 = NewBall(80, 40)
-    
+
     func update() {
         FillCanvas(Color{255, 255, 255})  // BG
         b1.Move()
@@ -147,7 +147,7 @@ code: go
         DrawRect(Color{200, 100, 100}, b1.Position())  // FG
         DrawRect(Color{100, 100, 200}, b2.Position())  // FG
     }
-    
+
     func main() {
         InitCanvas(Size{ArenaW, ArenaH})
         MainLoop(update, 1000 / 30)
@@ -222,7 +222,7 @@ figure: images/oop/inheritance.png
 - Ogni sottoclasse...
     - Eredita le caratteristiche della classe base
     - Ma introduce delle specializzazioni
-- In **Go** non c'è *ereditarietà*, ma **interfacce** 
+- In **Go** non c'è *ereditarietà*, ma **interfacce**
 
 >
 
@@ -358,7 +358,7 @@ code: go
         InitCanvas(arena.Size())
         MainLoop(update, 1000 / 30)
     }
-    
+
 ---
 
 title:  Controllo da tastiera
@@ -397,7 +397,7 @@ figure: images/oop/collision.svg images/oop/reflection.png
 - Possibili errori nel calcolo del rimbalzo
     - Di solito accettabili
     - Altrimenti, applicare correzioni
-    
+
 ---
 
 title: Urti delle palline
@@ -410,7 +410,7 @@ code: python
 		    op := other.Position()
 		    if op.X < b.x { b.dx = b.speed }
 		    else { b.dx = -b.speed }
-		    if op.Y < b.y { b.dy = b.speed } 
+		    if op.Y < b.y { b.dy = b.speed }
 		    else { b.dy = -b.speed }
 	    }
     }

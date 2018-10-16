@@ -9,7 +9,7 @@ class: segue dark
 
 ---
 
-title: Grafica con PyGame (++)
+title: Grafica con PyGame 🤔
 figure: images/oop/pygame-logo.png images/oop/pygame-loop.png
 
 - Libreria per giochi 2D
@@ -25,7 +25,7 @@ figure: images/oop/pygame-logo.png images/oop/pygame-loop.png
 
 ---
 
-title:  Disegno con PyGame (++)
+title:  Disegno con PyGame 🤔
 figure: images/oop/pygame-logo.png images/oop/raster-coord.png
 figcaption: → pygame.org/docs
 
@@ -49,7 +49,7 @@ code: python
 
 ---
 
-title: Animazione con PyGame (++)
+title: Animazione con PyGame 🤔
 
 code: python
 
@@ -63,7 +63,7 @@ code: python
     while playing:
         for e in pygame.event.get():  # Handle events: mouse, keyb etc.
             if e.type == pygame.QUIT: playing = False
-        screen.fill((255, 255, 255))  # Draw background        
+        screen.fill((255, 255, 255))  # Draw background
         screen.blit(image, (x, 50))   # Draw foreground
         x = (x + 5) % 320             # Update ball's position
         pygame.display.flip()         # Surface ready, show it!
@@ -72,7 +72,7 @@ code: python
 
 ---
 
-title: Ciclo di animazione (++)
+title: Ciclo di animazione 🤔
 
 code: python
 
@@ -86,7 +86,7 @@ code: python
     while playing:
         for e in pygame.event.get():  # Handle events: mouse, keyb etc.
             if e.type == pygame.QUIT: playing = False
-        screen.fill((255, 255, 255))  # Draw background        
+        screen.fill((255, 255, 255))  # Draw background
         screen.blit(image, (x, 50))   # Draw foreground
         x = (x + 5) % 320             # Update ball's position
         pygame.display.flip()         # Surface ready, show it!
@@ -95,13 +95,13 @@ code: python
 
 ---
 
-title:  Rimbalzi in PyGame (++)
+title:  Rimbalzi in PyGame 🤔
 figure: images/oop/bounce.png
 
 code: python
 
     arena = Arena(320, 240)
-    Ball(arena, 40, 80); Ball(arena, 80, 40); 
+    Ball(arena, 40, 80); Ball(arena, 80, 40);
     Ghost(arena, 120, 80) # ...
     # a map from an actor type to an image
     images = {Ball: pygame.image.load('ball.png'),
@@ -120,7 +120,7 @@ code: python
 
 ---
 
-title:  Tastiera e mouse (++)
+title:  Tastiera e mouse 🤔
 
 code: python
 
@@ -142,7 +142,7 @@ code: python
 
 ---
 
-title: Testo e suoni (++)
+title: Testo e suoni 🤔
 
 code: python
 
@@ -230,7 +230,7 @@ code: Python
         def quit(self):
             if messagebox.askokcancel('Quit', 'Are you sure?'):
                 self.destroy()
-                
+
     win = Notepad()
     win.mainloop()
 
@@ -256,7 +256,7 @@ code: Python
             menu_file.add_command(label='Save...', command=self.save)
             menu_file.add_command(label='Quit', command=self.quit)
         # ...
-            
+
 ---
 
 title: Scelta file
@@ -278,7 +278,7 @@ code: Python
                 with open(fn, mode='w') as f:
                     contents = self._text_edit.get(1.0, END)
                     f.write(contents)
-            
+
 ---
 
 title: Disposizione widget
@@ -348,7 +348,7 @@ code: Python
                                      self.update_buttons()))
                     b.grid(column=x, row=y)
             self.update_buttons()
-            
+
         # ...
 
 ---

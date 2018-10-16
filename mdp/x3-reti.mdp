@@ -19,7 +19,7 @@ title: Reti di calcolatori
 
 title: Dimensione e capacità
 
-- **Dimensione**: tipico criterio di classificazione delle reti 
+- **Dimensione**: tipico criterio di classificazione delle reti
     - *LAN*: Local Area Network (ufficio o edificio)
     - *MAN*: Metropolitan Area Network (campus o città)
     - *WAN*: Wide Area Network (rete geografica)
@@ -113,7 +113,7 @@ title: Transmission Control Protocol
 
 ---
 
-title: Modello OSI/ISO 
+title: Modello OSI/ISO
 
 Liv. | Definizione   | Descrizione
 -----|---------------|-------------
@@ -122,7 +122,7 @@ Liv. | Definizione   | Descrizione
 5    | Sessione      | Protocolli dei servizi: FTP, HTTP, SMTP, RPC, TELNET...
 4    | Trasporto     | Protocolli TCP e UDP
 3    | Rete          | Protocollo IP
-2    | Colleg. dati  | Trasmissione dati dipendente da livello fisico 
+2    | Colleg. dati  | Trasmissione dati dipendente da livello fisico
 1    | Fisico        | Hardware
 
 ---
