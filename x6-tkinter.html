@@ -48,7 +48,7 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Grafica con PyGame (++)</h2>
+      <h2>Grafica con PyGame 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -71,7 +71,7 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Disegno con PyGame (++)</h2>
+      <h2>Disegno con PyGame 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -100,7 +100,7 @@ pygame.quit()
 <slide  >
   
     <hgroup>
-      <h2>Animazione con PyGame (++)</h2>
+      <h2>Animazione con PyGame 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -114,7 +114,7 @@ x = 50; playing = True
 while playing:
     for e in pygame.event.get():  # Handle events: mouse, keyb etc.
         if e.type == pygame.QUIT: playing = False
-    screen.fill((255, 255, 255))  # Draw background        
+    screen.fill((255, 255, 255))  # Draw background
     screen.blit(image, (x, 50))   # Draw foreground
     x = (x + 5) % 320             # Update ball's position
     pygame.display.flip()         # Surface ready, show it!
@@ -127,7 +127,7 @@ pygame.quit()                     # Close the window
 <slide  >
   
     <hgroup>
-      <h2>Ciclo di animazione (++)</h2>
+      <h2>Ciclo di animazione 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -141,7 +141,7 @@ x = 50; playing = True
 while playing:
     for e in pygame.event.get():  # Handle events: mouse, keyb etc.
         if e.type == pygame.QUIT: playing = False
-    screen.fill((255, 255, 255))  # Draw background        
+    screen.fill((255, 255, 255))  # Draw background
     screen.blit(image, (x, 50))   # Draw foreground
     x = (x + 5) % 320             # Update ball's position
     pygame.display.flip()         # Surface ready, show it!
@@ -154,7 +154,7 @@ pygame.quit()                     # Close the window
 <slide  >
   
     <hgroup>
-      <h2>Rimbalzi in PyGame (++)</h2>
+      <h2>Rimbalzi in PyGame 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -162,7 +162,7 @@ pygame.quit()                     # Close the window
         <img src="images/oop/bounce.png">
         
       </figure><pre class="prettyprint" data-lang="python"><code>arena = Arena(320, 240)
-Ball(arena, 40, 80); Ball(arena, 80, 40); 
+Ball(arena, 40, 80); Ball(arena, 80, 40);
 Ghost(arena, 120, 80) # ...
 # a map from an actor type to an image
 images = {Ball: pygame.image.load('ball.png'),
@@ -185,7 +185,7 @@ while playing:
 <slide  >
   
     <hgroup>
-      <h2>Tastiera e mouse (++)</h2>
+      <h2>Tastiera e mouse 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -211,7 +211,7 @@ for e in pygame.event.get():
 <slide  >
   
     <hgroup>
-      <h2>Testo e suoni (++)</h2>
+      <h2>Testo e suoni 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >

@@ -81,7 +81,7 @@ URL: https://code.google.com/p/io-2012-slides
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="go"><code>toBuy := []string{"spam", "eggs", "beans", "bacon"}    
+<pre class="prettyprint" data-lang="go"><code>toBuy := []string{"spam", "eggs", "beans", "bacon"}
 n := len(toBuy)        // 4
 
 Println(toBuy[0])      // "spam"
@@ -112,8 +112,8 @@ Println(toBuy[1])      // "ketchup"
 </li>
 </ul>
 <pre class="prettyprint" data-lang="go"><code>months := []string{"Jan", "Feb", "Mar",
-                   "Apr", "May", "Jun", 
-                   "Jul", "Aug", "Sep", 
+                   "Apr", "May", "Jun",
+                   "Jul", "Aug", "Sep",
                    "Oct", "Nov", "Dec"}
 
 spring := months[2:5]       // [Mar Apr May]
@@ -458,7 +458,7 @@ func rq(x int) int {
 var x = 50
 
 func update() {
-    FillCanvas(Color{255, 255, 255})  // Draw background        
+    FillCanvas(Color{255, 255, 255})  // Draw background
     DrawImage(image, Point{x, 50})    // Draw foreground
     x = (x + 5) % 320                 // Update ball's position
 }

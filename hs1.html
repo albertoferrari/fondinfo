@@ -852,8 +852,8 @@ Prelude&gt; concat (replicate 3 "LOL ")
 <pre class="prettyprint" data-lang="python"><code>rainfall_data = [13, 24, 18, 15]
 </code></pre>
 <pre class="prettyprint" data-lang="python"><code>months = ["Jan", "Feb", "Mar",
-          "Apr", "May", "Jun", 
-          "Jul", "Aug", "Sep", 
+          "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep",
           "Oct", "Nov", "Dec"]
 </code></pre></article>
  
@@ -944,9 +944,9 @@ results_by_month = [0] * 12
 b = a[:]       # b = [3, 4, 5] -- a new list!
 b == a         # True, they contain the same values
 b is a         # False, they are two objects in memory
-               # (try and modify one of them...) 
+               # (try and modify one of them...)
 c = a
-c is a         # True, same object in memory 
+c is a         # True, same object in memory
                # (try and modify one of them...)
 </code></pre></article>
  
@@ -1025,7 +1025,7 @@ range(5, 15, 2)
 <li>Raises a <code>StopIteration</code> exception when no more elements are available</li>
 </ul>
 </li>
-<li><em>Simplest case</em>: iterable implements <code>__next__</code> itself and returns <code>self</code> in <code>__iter__</code> </li>
+<li><em>Simplest case</em>: iterable implements <code>__next__</code> itself and returns <code>self</code> in <code>__iter__</code></li>
 </ul></article>
  
 </slide>
@@ -1070,7 +1070,7 @@ range(5, 15, 2)
 &lt;__main__.Fib object at 0x7fc31dbbdbe0&gt;
 &gt;&gt;&gt; for v in f: print(v, end=' ')
 
-1 1 2 3 5 8 13 
+1 1 2 3 5 8 13
 &gt;&gt;&gt; list(f)
 [1, 1, 2, 3, 5, 8, 13]
 </code></pre>
@@ -1399,7 +1399,7 @@ Prelude&gt; zip [1 .. 5] ["one", "two", "three", "four", "five"]
 &gt;&gt;&gt; list(enumerate("ABCD"))
 [(0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')]
 &gt;&gt;&gt; for i, v in enumerate([17, 21, 19]): print(i, v)
-... 
+...
 0 17
 1 21
 2 19

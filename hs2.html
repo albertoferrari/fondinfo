@@ -1771,7 +1771,7 @@ f . g = \x -&gt; f (g x)
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (negate . abs) [5,-3,-6,7,-3,2] 
+<pre class="prettyprint" data-lang="haskell"><code>Prelude&gt; map (negate . abs) [5,-3,-6,7,-3,2]
 [-5,-3,-6,-7,-3,-2]
 Prelude&gt; map (\x -&gt; negate (abs x)) [5,-3,-6,7,-3,2]
 [-5,-3,-6,-7,-3,-2]

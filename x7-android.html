@@ -248,7 +248,7 @@ if __name__ == '__main__':
         b3 = Button(text='Exit')
         b3.bind(on_release=lambda btn: stopTouchApp())
 
-        bar = BoxLayout(orientation='vertical', 
+        bar = BoxLayout(orientation='vertical',
                         size_hint=(None, None), pos_hint={'top': 1})
         bar.add_widget(b1); bar.add_widget(b2); bar.add_widget(b3)
 
@@ -360,7 +360,7 @@ if __name__ == '__main__':
         self._kbd = None
 
     def kbd_down(self, kbd, keycode, text, modifiers):
-        print('Key pressed:', keycode, text, modifiers)            
+        print('Key pressed:', keycode, text, modifiers)
         if keycode[1] == 'escape':  # keycode: (int, str)
             kbd.release()
         return True  # accept the key

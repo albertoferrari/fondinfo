@@ -265,7 +265,7 @@ image = g2d.load_image("ball.png")
 
 def update():
     global x
-    g2d.fill_canvas((255, 255, 255))  # Draw background        
+    g2d.fill_canvas((255, 255, 255))  # Draw background
     g2d.draw_image(image, (x, y))     # Draw foreground
     x = (x + dx) ##% ARENA_W          # Update ball's position
 
@@ -336,7 +336,7 @@ g2d.main_loop()
 <slide  >
   
     <hgroup>
-      <h2>Effetti collaterali (⨳)</h2>
+      <h2>Effetti collaterali 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -362,7 +362,7 @@ g2d.main_loop()
 <slide  >
   
     <hgroup>
-      <h2>Funzioni non idempotenti (⨳)</h2>
+      <h2>Funzioni non idempotenti 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -437,7 +437,7 @@ def rq(x: int) -&gt; int:
 <li>La classe dà la stessa forma iniziale (campi e metodi) a tutti i suoi oggetti</li>
 </ul>
 </li>
-<li>Ma ogni <em>oggetto</em> ha la sua <strong>identità</strong> <ul>
+<li>Ma ogni <em>oggetto</em> ha la sua <strong>identità</strong><ul>
 <li>Stato e locazione in memoria distinti da quelli di altri oggetti</li>
 <li>Sia instanze di classi diverse che della stessa classe</li>
 </ul>
@@ -645,7 +645,7 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 <slide  >
   
     <hgroup>
-      <h2>Proprietà (⨳)</h2>
+      <h2>Proprietà 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -945,7 +945,7 @@ print('ball @', ball.pos)
       </figure><ul>
 <li>Mostrare l'<em>animazione</em> di un cerchio lungo una spirale</li>
 <li>Realizzare una classe per gestire dati e comportamento del cerchio</li>
-<li>Implementare il movimento in un metodo <code>move()</code> </li>
+<li>Implementare il movimento in un metodo <code>move()</code></li>
 <li>Campi: <code>xc</code>, <code>yc</code>, <code>i</code><ul>
 <li><code>i</code> conta i passi; se accede il limite, torna a 0</li>
 </ul>

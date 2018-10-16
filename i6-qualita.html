@@ -648,7 +648,7 @@ URL: https://code.google.com/p/io-2012-slides
         <img src="images/dev/flow-chart.png">
         
       </figure><pre class="prettyprint" data-lang="Python"><code>def f():
-    // entry 
+    // entry
     while a:
         x()
         if b:
@@ -963,7 +963,7 @@ python -m unittest discover
 <slide  >
   
     <hgroup>
-      <h2>Controllare le eccezioni (⨳)</h2>
+      <h2>Controllare le eccezioni 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -980,7 +980,7 @@ python -m unittest discover
 </li>
 <li>Esempio: <code>Ball</code> solleva effettivamente una eccezione attesa?</li>
 </ul>
-<pre class="prettyprint" data-lang="Python"><code>def test_out_of_arena(self): 
+<pre class="prettyprint" data-lang="Python"><code>def test_out_of_arena(self):
     with self.assertRaises(ValueError):
         b = Ball(-1, -1)
 </code></pre></article>
@@ -990,7 +990,7 @@ python -m unittest discover
 <slide  >
   
     <hgroup>
-      <h2>Fixture (⨳)</h2>
+      <h2>Fixture 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1017,7 +1017,7 @@ python -m unittest discover
 <slide  >
   
     <hgroup>
-      <h2>Esempio di fixture (⨳)</h2>
+      <h2>Esempio di fixture 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -1029,7 +1029,7 @@ python -m unittest discover
 </ul>
 <pre class="prettyprint" data-lang="Python"><code>class SimpleBallTest(unittest.TestCase):
 
-    def setUp(self): 
+    def setUp(self):
         self.b1 = Ball(80, 40)
         self.b2 = Ball(40, 80)
         self.b3 = Ball(120, 20)
@@ -1040,7 +1040,7 @@ python -m unittest discover
 <slide  >
   
     <hgroup>
-      <h2>Test suite (⨳)</h2>
+      <h2>Test suite 🤔</h2>
       <h3></h3>
     </hgroup>
     <article >

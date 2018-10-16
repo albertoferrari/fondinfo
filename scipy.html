@@ -177,7 +177,7 @@ grocery.pop()               # remove (and return) last element
 grocery.insert(1, "bacon")  # other elements shift
 removed = grocery.pop(1)    # remove (and return) element at index
 
-if "egg" in grocery:       # True, grocery contains "egg"    
+if "egg" in grocery:       # True, grocery contains "egg"
     grocery.remove("egg")  # remove an element by value
 </code></pre></article>
  
@@ -1502,7 +1502,7 @@ DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04',
                          'D' : np.array([3] * 4,dtype='int32'),
                          'E' : pd.Categorical(["test","train","test","train"]),
                          'F' : 'foo' })
-&gt;&gt;&gt; df2 
+&gt;&gt;&gt; df2
      A          B    C  D      E    F
 0  1.0 2013-01-02  1.0  3   test  foo
 1  1.0 2013-01-02  1.0  3  train  foo
@@ -1767,7 +1767,7 @@ dtype: int64
                        'D' : np.random.randn(8)})
 &gt;&gt;&gt; df.groupby('A').sum()
             C        D
-A                     
+A
 bar -2.802588  2.42611
 foo  3.146492 -0.63958
 </code></pre></article>
@@ -1791,7 +1791,7 @@ foo  3.146492 -0.63958
                        'E' : np.random.randn(12)})
 &gt;&gt;&gt; pd.pivot_table(df, values='D', index='A', columns='C')
 C           bar       foo
-A                        
+A
 one    0.463952  0.419066
 three -0.660418  0.991739
 two    0.091446  0.236650

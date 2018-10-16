@@ -628,7 +628,7 @@ public:
     BoardGame* game;
 public:
     BoardGameGui(BoardGame* g);
-    void update_buttons();        
+    void update_buttons();
 };
 </code></pre></article>
  
@@ -650,7 +650,7 @@ public:
     setLayout(grid);
     for (auto y = 0; y &lt; game-&gt;rows(); y++) {
         for (auto x = 0; x &lt; game-&gt;cols(); x++) {
-            auto b = new QPushButton; 
+            auto b = new QPushButton;
             grid-&gt;addWidget(b, y, x);
             connect(b, &amp;QPushButton::clicked, [=]{
                 game-&gt;play_at(x, y);  // lambda function ...
