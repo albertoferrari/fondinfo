@@ -101,155 +101,6 @@ code: python
 
 ---
 
-title: Funzioni su sequenze
-class: segue dark
-
----
-
-title: List comprehension 🤔
-figure: images/dev/computer-ninja.png
-
-- Modo conciso per creare una lista
-- Ogni elemento: risultato di una operazione su un membro di altro iterabile
-- Condizione sugli elementi, opzionale
-
-code: python
-
-    squares = [x ** 2 for x in range(12)]
-    # squares = []
-    # for x in range(12):
-    #    squares.append(x ** 2)
-
-code: python
-
-    even_nums = [str(x) for x in range(12) if (x % 2) == 0]
-
----
-
-title: Enumerate 🤔
-figure: images/repr/child-fingers.png
-/home/mic/Documents/didattica/fondinfo/images/misc/finger-counting.png
-
-- Accoppia ciascun valore di una sequenza ad un indice crescente
-- Genera una sequenza di tuple (coppie)
-- Spesso si usa nei cicli `for`, quando serve sia il valore che l'indice
-
-code: python
-
-    >>> grocery = ["spam", "eggs", "bacon", "ketchup"]
-    >>> list(enumerate(grocery))
-    [(0, "spam"), (1, "eggs"), (2, "bacon"), (3, "ketchup")]
-
-code: python
-
-    grocery = ["spam", "eggs", "bacon", "ketchup"]
-    for i, val in enumerate(grocery):
-        print(i, val)
-
->
-
-Risultati in lista, solo (!) per visualizzarli <br>
-Altrimenti, Python non genera immediatamente i risultati (*lazy*)
-
----
-
-title: Zip 🤔
-figure: images/fun/zip.jpg
-
-- Accoppia gli elementi di due sequenze
-- Genera una sequenza di tuple (coppie)
-- Il risultato ha la lunghezza della sequenza più breve
-
-code: python
-
-    >>> grocery = ["spam", "eggs", "bacon", "ketchup"]
-    >>> quantities = ["100 g", "6 pc", "200 g", "1 bottle", "too much"]
-    >>> list(zip(grocery, quantities))
-    [("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
-    ("ketchup", "1 bottle")]
-
->
-
-Risultati in lista, solo (!) per visualizzarli
-
----
-
-title: Map 🤔
-figure: images/fun/legomap.png
-
-- Prende come parametri una funzione ed una sequenza
-- *Funzione di ordine superiore*
-- Applica la funzione a ciascuno dei valori
-- Restituisce la sequenza di risultati
-
-code: python
-
-    >>> from math import sqrt
-    >>> values = [0, 1, 2, 3, 4]
-    >>> list(map(sqrt, values))
-    [0.0, 1.0, 1.4142, 1.7320, 2.0]
-
-code: python
-
-    >>> from math import sqrt
-    >>> list(map(sqrt, range(5)))
-    [0.0, 1.0, 1.4142, 1.7320, 2.0]
-
->
-
-Risultati in lista, solo (!) per visualizzarli
-
----
-
-title: Liste ordinate o rovesciate 🤔
-
-code: python
-
-    >>> grocery = ["spam", "egg", "bacon", "sausage"]
-    >>> sorted(grocery)
-    ['bacon', 'egg', 'sausage', 'spam']
-    >>> sorted(grocery, reverse=True)
-    ['spam', 'sausage', 'egg', 'bacon']
-    >>> sorted(grocery, key=len)  # lengths of elements are compared
-    ['egg', 'spam', 'bacon', 'sausage']
-
-code: python
-
-    >>> list(reversed(grocery))
-    ['sausage', 'bacon', 'egg', 'spam']
-
-code: python
-
-    >>> grocery.sort()     # in-place
-    >>> grocery.reverse()  # in-place
-    >>> grocery
-    ['spam', 'sausage', 'egg', 'bacon']
-
----
-
-title: Dizionario 🤔
-figure: images/fun/dictionary.png
-
-- A volte chiamato *mappa* o *array associativo*
-- Insieme non ordinato di coppie chiave / valore
-    - Le chiavi sono *uniche*: come nelle liste fanno da *indice* per accedere al valore corrispondente
-    - Ma possono essere `int` o **`str`** (o altro tipo immutabile)
-
-code: python
-
-    >>> tel = {"john": 4098, "terry": 4139}
-    >>> tel["john"]
-    4098
-    >>> tel["graham"] = 4127
-    >>> tel
-    {"graham": 4127, "terry": 4139, "john": 4098}
-
->
-
-Provare anche `list(tel)` e `list(tel.items())`
-
----
-
 title: Matrici
 class: segue dark
 
@@ -382,6 +233,79 @@ code: Python
 
 title: Backtracking
 class: segue dark
+
+---
+
+title: Constraint Satisfaction Problem
+figure: images/fun/8-queens.svg
+
+- Problema di *soddisfacimento di vincoli* (CSP), caratterizzato da:
+	- **Insieme di variabili**, che possono assumere valori in un certo *dominio*
+	- **Insieme di vincoli**, che devono essere rispettati dai valori delle variabili
+- Esempio: *Problema delle 8 regine*
+	- Posizionare `8` regine su una scacchiera `8x8`
+	- In modo che nessuna di esse possa catturarne un'altra
+	- Nessuna regina deve avere una colonna, riga o diagonale in comune con un'altra regina
+
+---
+
+title: Generate & Test
+figure: images/fun/generate-and-test.png
+
+- Tecnica per risolvere problemi di soddisfacimento di vincoli
+- Si assegna un *valore* ad ogni variabile
+- Si verifica se tutti i *vincoli* sono soddisfatti
+	- Se i vincoli sono *soddisfatti* ⇒ trovata una *soluzione*
+	- Altrimenti, si prova con valori diversi
+- Il procedimento *continua*
+	- Finché non ci sono più assegnamenti nuovi da testare
+	- Tutte le soluzioni sono testate
+
+---
+
+title: 8 regine: G&T
+figure: images/fun/8-queens.svg
+
+- *Generate*
+	- Inserire `8` regine in tutte le possibili combinazioni in una scacchiera `8x8`
+	- `~ 4 miliardi`
+- *Test*
+	- Per ogni combinazione verificare se nessuna regina può catturarne un’altra
+	- Solo `92` soluzioni
+
+>
+
+Esempio del più generale problema delle `N` regine su una scacchiera `N×N`
+
+---
+
+title: 8 regine: G&T ridotto
+figure: images/fun/queens-sol.svg
+
+- Dai vincoli si evince che *ogni riga*
+	- Può contenere al massimo 1 regina
+	- Deve contenere esattamente 1 regina
+- È possibile quindi rappresentare una *lista*
+	- I valori rappresentano la colonna in cui è posizionata la regina sulla riga
+	- `8` elementi con indici `0..7` e con valori `0..7`
+	- (`N` elementi con indici `0..N-1` e con valori `0..N-1`)
+- *Generate*
+	- Tutte le combinazioni di 8 valori: `8^^8^^ = ~ 16 milioni`
+- *Test*
+	- Per ogni combinazione, verificare i vincoli
+
+---
+
+title: Standard backtracking
+figure: images/fun/backtracking.png
+class: large-figure
+
+- Scarta subito gli assegnamenti che non soddisfano i vincoli
+- A seguito di *ogni assegnamento* si verificano i vincoli
+- Se non ci sono *vincoli già violati*, si continua con gli assegnamenti delle variabili rimanenti
+- Altrimenti si verifica se la variabile appena assegnata ha ancora valori da provare
+	- Se sì, si prova con un nuovo valore
+	- Altrimenti, si torna indietro e si modifica una nuova variabile già assegnata
 
 ---
 
@@ -597,8 +521,8 @@ title: Puzzle di Cindy
 figure: images/misc/cindy1.png images/misc/cindy2.png
 
 - Piano di gioco: `2n+1` celle allineate
-    - Si parte con `n` pedine rosse tutte a sinistra, `n` pedine verdi tutte a destra, ed una cella libera in mezzo
-    - Le pedine rosse si possono spostare solo a destra, quelle verdi solo a sinistra (senza poter tornare indietro)
+    - Si parte con `n` pedine rosse a sinistra, `n` pedine verdi a destra
+    - Le rosse si possono sempre spostare solo a destra, le verdi solo a sinistra
 - Ad ogni mossa, una qualsiasi pedina può:
     - Avanzare di una posizione, se davanti ha una cella libera
     - Oppure scavalcare esattamente una pedina dell'altro colore, se c'è una cella libera subito dopo
@@ -610,3 +534,18 @@ figure: images/misc/cindy1.png images/misc/cindy2.png
 
 <http://www.ce.unipr.it/brython/?p5_solve_cindy.py>
 
+---
+
+title: Soluzioni delle 8 regine
+figure: images/fun/queens-sol.svg
+
+- Trovare tutte le soluzioni possibili, con il *backtracking*
+	- Modificare il codice proposto
+	- Visualizzare il numero di tentativi effettuati e il numero di soluzioni trovate
+- Trovare tutte le soluzioni, usando la metodologia *Generate & Test*
+	- Versione semplificata – una sola regina per riga
+	- Visualizzare il numero di tentativi effettuati e il numero di soluzioni trovate
+
+>
+
+<http://www.ce.unipr.it/brython/?p5_solve_queens.py>

@@ -658,9 +658,9 @@ code: Shell
 
     $ conda create --name myenv
     $ conda install -n myenv numpy
-    $ source activate myenv
+    $ conda activate myenv
     ...
-    $ source deactivate myenv
+    $ conda deactivate myenv
     $ conda remove --name myenv --all
 
 - It is also possible to specify a Python version

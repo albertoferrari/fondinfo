@@ -154,6 +154,155 @@ class: large-figure
 
 ---
 
+title: Funzioni su sequenze
+class: segue dark
+
+---
+
+title: List comprehension 🤔
+figure: images/dev/computer-ninja.png
+
+- Modo conciso per creare una lista
+- Ogni elemento: risultato di una operazione su un membro di altro iterabile
+- Condizione sugli elementi, opzionale
+
+code: python
+
+    squares = [x ** 2 for x in range(12)]
+    # squares = []
+    # for x in range(12):
+    #    squares.append(x ** 2)
+
+code: python
+
+    even_nums = [str(x) for x in range(12) if (x % 2) == 0]
+
+---
+
+title: Enumerate 🤔
+figure: images/repr/child-fingers.png
+/home/mic/Documents/didattica/fondinfo/images/misc/finger-counting.png
+
+- Accoppia ciascun valore di una sequenza ad un indice crescente
+- Genera una sequenza di tuple (coppie)
+- Spesso si usa nei cicli `for`, quando serve sia il valore che l'indice
+
+code: python
+
+    >>> grocery = ["spam", "eggs", "bacon", "ketchup"]
+    >>> list(enumerate(grocery))
+    [(0, "spam"), (1, "eggs"), (2, "bacon"), (3, "ketchup")]
+
+code: python
+
+    grocery = ["spam", "eggs", "bacon", "ketchup"]
+    for i, val in enumerate(grocery):
+        print(i, val)
+
+>
+
+Risultati in lista, solo (!) per visualizzarli <br>
+Altrimenti, Python non genera immediatamente i risultati (*lazy*)
+
+---
+
+title: Zip 🤔
+figure: images/fun/zip.jpg
+
+- Accoppia gli elementi di due sequenze
+- Genera una sequenza di tuple (coppie)
+- Il risultato ha la lunghezza della sequenza più breve
+
+code: python
+
+    >>> grocery = ["spam", "eggs", "bacon", "ketchup"]
+    >>> quantities = ["100 g", "6 pc", "200 g", "1 bottle", "too much"]
+    >>> list(zip(grocery, quantities))
+    [("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
+    ("ketchup", "1 bottle")]
+
+>
+
+Risultati in lista, solo (!) per visualizzarli
+
+---
+
+title: Map 🤔
+figure: images/fun/legomap.png
+
+- Prende come parametri una funzione ed una sequenza
+- *Funzione di ordine superiore*
+- Applica la funzione a ciascuno dei valori
+- Restituisce la sequenza di risultati
+
+code: python
+
+    >>> from math import sqrt
+    >>> values = [0, 1, 2, 3, 4]
+    >>> list(map(sqrt, values))
+    [0.0, 1.0, 1.4142, 1.7320, 2.0]
+
+code: python
+
+    >>> from math import sqrt
+    >>> list(map(sqrt, range(5)))
+    [0.0, 1.0, 1.4142, 1.7320, 2.0]
+
+>
+
+Risultati in lista, solo (!) per visualizzarli
+
+---
+
+title: Liste ordinate o rovesciate 🤔
+
+code: python
+
+    >>> grocery = ["spam", "egg", "bacon", "sausage"]
+    >>> sorted(grocery)
+    ['bacon', 'egg', 'sausage', 'spam']
+    >>> sorted(grocery, reverse=True)
+    ['spam', 'sausage', 'egg', 'bacon']
+    >>> sorted(grocery, key=len)  # lengths of elements are compared
+    ['egg', 'spam', 'bacon', 'sausage']
+
+code: python
+
+    >>> list(reversed(grocery))
+    ['sausage', 'bacon', 'egg', 'spam']
+
+code: python
+
+    >>> grocery.sort()     # in-place
+    >>> grocery.reverse()  # in-place
+    >>> grocery
+    ['spam', 'sausage', 'egg', 'bacon']
+
+---
+
+title: Dizionario 🤔
+figure: images/fun/dictionary.png
+
+- A volte chiamato *mappa* o *array associativo*
+- Insieme non ordinato di coppie chiave / valore
+    - Le chiavi sono *uniche*: come nelle liste fanno da *indice* per accedere al valore corrispondente
+    - Ma possono essere `int` o **`str`** (o altro tipo immutabile)
+
+code: python
+
+    >>> tel = {"john": 4098, "terry": 4139}
+    >>> tel["john"]
+    4098
+    >>> tel["graham"] = 4127
+    >>> tel
+    {"graham": 4127, "terry": 4139, "john": 4098}
+
+>
+
+Provare anche `list(tel)` e `list(tel.items())`
+
+---
+
 title: Esercizi
 class: segue dark
 

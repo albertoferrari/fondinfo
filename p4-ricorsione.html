@@ -257,6 +257,182 @@ def fibonacci(n: int) -&gt; int:
   
     <aside class="gdbar"><img src="images/logo.png"></aside>
     <hgroup class="auto-fadein">
+      <h2>Funzioni su sequenze</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>List comprehension 🤔</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/dev/computer-ninja.png">
+        
+      </figure><ul>
+<li>Modo conciso per creare una lista</li>
+<li>Ogni elemento: risultato di una operazione su un membro di altro iterabile</li>
+<li>Condizione sugli elementi, opzionale</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>squares = [x ** 2 for x in range(12)]
+# squares = []
+# for x in range(12):
+#    squares.append(x ** 2)
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>even_nums = [str(x) for x in range(12) if (x % 2) == 0]
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Enumerate 🤔</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/repr/child-fingers.png">
+        
+      </figure><ul>
+<li>Accoppia ciascun valore di una sequenza ad un indice crescente</li>
+<li>Genera una sequenza di tuple (coppie)</li>
+<li>Spesso si usa nei cicli <code>for</code>, quando serve sia il valore che l'indice</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "eggs", "bacon", "ketchup"]
+&gt;&gt;&gt; list(enumerate(grocery))
+[(0, "spam"), (1, "eggs"), (2, "bacon"), (3, "ketchup")]
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "eggs", "bacon", "ketchup"]
+for i, val in enumerate(grocery):
+    print(i, val)
+</code></pre>
+<blockquote></blockquote>
+<p>Risultati in lista, solo (!) per visualizzarli <br>
+Altrimenti, Python non genera immediatamente i risultati (<em>lazy</em>)</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Zip 🤔</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/zip.jpg">
+        
+      </figure><ul>
+<li>Accoppia gli elementi di due sequenze</li>
+<li>Genera una sequenza di tuple (coppie)</li>
+<li>Il risultato ha la lunghezza della sequenza più breve</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "eggs", "bacon", "ketchup"]
+&gt;&gt;&gt; quantities = ["100 g", "6 pc", "200 g", "1 bottle", "too much"]
+&gt;&gt;&gt; list(zip(grocery, quantities))
+[("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
+("ketchup", "1 bottle")]
+</code></pre>
+<blockquote></blockquote>
+<p>Risultati in lista, solo (!) per visualizzarli</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Map 🤔</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/legomap.png">
+        
+      </figure><ul>
+<li>Prende come parametri una funzione ed una sequenza</li>
+<li><em>Funzione di ordine superiore</em></li>
+<li>Applica la funzione a ciascuno dei valori</li>
+<li>Restituisce la sequenza di risultati</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from math import sqrt
+&gt;&gt;&gt; values = [0, 1, 2, 3, 4]
+&gt;&gt;&gt; list(map(sqrt, values))
+[0.0, 1.0, 1.4142, 1.7320, 2.0]
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from math import sqrt
+&gt;&gt;&gt; list(map(sqrt, range(5)))
+[0.0, 1.0, 1.4142, 1.7320, 2.0]
+</code></pre>
+<blockquote></blockquote>
+<p>Risultati in lista, solo (!) per visualizzarli</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Liste ordinate o rovesciate 🤔</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "bacon", "sausage"]
+&gt;&gt;&gt; sorted(grocery)
+['bacon', 'egg', 'sausage', 'spam']
+&gt;&gt;&gt; sorted(grocery, reverse=True)
+['spam', 'sausage', 'egg', 'bacon']
+&gt;&gt;&gt; sorted(grocery, key=len)  # lengths of elements are compared
+['egg', 'spam', 'bacon', 'sausage']
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; list(reversed(grocery))
+['sausage', 'bacon', 'egg', 'spam']
+</code></pre>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery.sort()     # in-place
+&gt;&gt;&gt; grocery.reverse()  # in-place
+&gt;&gt;&gt; grocery
+['spam', 'sausage', 'egg', 'bacon']
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Dizionario 🤔</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/dictionary.png">
+        
+      </figure><ul>
+<li>A volte chiamato <em>mappa</em> o <em>array associativo</em></li>
+<li>Insieme non ordinato di coppie chiave / valore<ul>
+<li>Le chiavi sono <em>uniche</em>: come nelle liste fanno da <em>indice</em> per accedere al valore corrispondente</li>
+<li>Ma possono essere <code>int</code> o <strong><code>str</code></strong> (o altro tipo immutabile)</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; tel = {"john": 4098, "terry": 4139}
+&gt;&gt;&gt; tel["john"]
+4098
+&gt;&gt;&gt; tel["graham"] = 4127
+&gt;&gt;&gt; tel
+{"graham": 4127, "terry": 4139, "john": 4098}
+</code></pre>
+<blockquote></blockquote>
+<p>Provare anche <code>list(tel)</code> e <code>list(tel.items())</code></p></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
       <h2>Esercizi</h2>
       <h3></h3>
     </hgroup>
