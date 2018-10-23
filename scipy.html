@@ -1480,7 +1480,8 @@ array([  700.,  1500.])
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; dates = pd.date_range('20130101', periods=6)
+      <pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; import pandas as pd
+&gt;&gt;&gt; dates = pd.date_range('20130101', periods=6)
 &gt;&gt;&gt; dates
 DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03',
                '2013-01-04', '2013-01-05', '2013-01-06'],
@@ -1869,7 +1870,9 @@ plt.show()
 'g-'   # green solid line
 '--'   # dashed line with default color
 'k^:'  # black triangle_up markers connected by a dotted line
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="https://www.mathworks.com/help/matlab/ref/linespec.html">https://www.mathworks.com/help/matlab/ref/linespec.html</a></p></article>
  
 </slide>
 
@@ -2009,7 +2012,8 @@ plt.show()
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="Python"><code># make up some data in the interval ]0, 1[
-y = np.random.normal(loc=0.5, scale=0.4, size=1000)
+mu, sigma = 0.5, 0.4
+y = mu + sigma * np.random.randn(1000)
 y = y[(y &gt; 0) &amp; (y &lt; 1)]
 y.sort()
 x = np.arange(len(y))
