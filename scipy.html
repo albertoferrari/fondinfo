@@ -1038,7 +1038,7 @@ array([[ 0,  1,  2,  3,  4],
 <li><code>np.random.shuffle(a)</code> shuffles <code>a</code></li>
 <li><em>Exercise</em>: create a matrix with couples<ul>
 <li>Given <code>n = rows * cols</code></li>
-<li><code>n / 2</code> different symbols, each repeated twice</li>
+<li><code>n / 2</code> different values, each repeated twice</li>
 <li>But random positions</li>
 </ul>
 </li>
@@ -1078,17 +1078,20 @@ array([20, 29, 38, 47])
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; A = np.array([[1, 1],
+      <figure>
+        <img src="images/scipy/matrix-mult.svg">
+        
+      </figure><pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; A = np.array([[1, 1],
 ...               [0, 1]])
 &gt;&gt;&gt; B = np.array([[2, 0],
 ...               [3, 4]])
-&gt;&gt;&gt; A * B                       # elementwise product
+&gt;&gt;&gt; A * B                 # elementwise product
 array([[2, 0],
        [0, 4]])
-&gt;&gt;&gt; A @ B                       # matrix product
+&gt;&gt;&gt; A @ B                 # matrix product (Py3.5)
 array([[5, 4],
        [3, 4]])
-&gt;&gt;&gt; A.dot(B)                    # another matrix product
+&gt;&gt;&gt; A.dot(B)              # another matrix product
 array([[5, 4],
        [3, 4]])
 </code></pre></article>
@@ -1110,13 +1113,14 @@ array([[5, 4],
 array([[ 0,  1,  2,  3],
        [ 4,  5,  6,  7],
        [ 8,  9, 10, 11]])
-&gt;&gt;&gt; b.sum()  ## guess also min and max
+&gt;&gt;&gt; b.sum()              # guess also min and max
 66
-&gt;&gt;&gt; b.sum(axis=0)                            # sum of each column
-array([12, 15, 18, 21])
-&gt;&gt;&gt;
-&gt;&gt;&gt; b.min(axis=1)                            # min of each row
-array([0, 4, 8])
+&gt;&gt;&gt; b.sum(axis=1)        # sum of each row
+array([ 6, 22, 38])
+&gt;&gt;&gt; b / b.max(axis=0)    # morm each column
+array([[0.  , 0.11, 0.2 , 0.27],
+       [0.5 , 0.55, 0.6 , 0.63],
+       [1.  , 1.  , 1.  , 1.  ]])
 </code></pre></article>
  
 </slide>
@@ -1268,14 +1272,18 @@ array([[ 2.,  8.,  0.,  6.,  4.,  5.],
     <article >
       <pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; a = np.array([[ 2.,  8.,  0.],
                   [ 4.,  5.,  1.]])
+&gt;&gt;&gt; a.shape
+(2, 3)
+&gt;&gt;&gt; a.strides
+(24, 8)
 &gt;&gt;&gt; a.T  # returns a transposed view, same as a.transpose()
 array([[ 2.,  4.],
        [ 8.,  5.],
        [ 0.,  1.]])
 &gt;&gt;&gt; a.T.shape
 (3, 2)
-&gt;&gt;&gt; a.shape
-(2, 3)
+&gt;&gt;&gt; a.T.strides
+(8, 24)
 </code></pre></article>
  
 </slide>
@@ -1312,8 +1320,8 @@ array([[ 8.,  8.,  1.,  8.],
     <article >
       <ul>
 <li><code>hsplit</code> splits an array along its horizontal axis<ul>
-<li>Specify the number of equally shaped arrays to return, or...</li>
-<li>Specifying the columns where division should occur</li>
+<li>Specify num of equally shaped arrays to return, or...</li>
+<li>Specifying columns where division should occur</li>
 </ul>
 </li>
 <li><code>vsplit</code> works on the vertical axis</li>
@@ -1398,16 +1406,16 @@ array([[ 1.,  0.],
 &gt;&gt;&gt; np.linalg.det(a)
 -2.0
 &gt;&gt;&gt; w, v = np.linalg.eig(a)
-&gt;&gt;&gt; w  ## eigenvalues
+&gt;&gt;&gt; w  # eigenvalues
 array([-0.37228132,  5.37228132])
-&gt;&gt;&gt; np.linalg.det(w[0] * np.eye(2) - a)  ## det(λI − A) = 0
+&gt;&gt;&gt; np.linalg.det(w[0] * np.eye(2) - a)  # det(λI − A) = 0
 0.0
-&gt;&gt;&gt; v.T  ## eigenvectors, normalized but transposed (!)
+&gt;&gt;&gt; v.T  # eigenvectors, normalized but transposed (!)
 array([[-0.82456484,  0.56576746],
        [-0.41597356, -0.90937671]])
-&gt;&gt;&gt; sum(v.T[0] ** 2)
+&gt;&gt;&gt; sum(v.T[0] ** 2)  # magnitude = 1
 1.0
-&gt;&gt;&gt; (w[0] * np.eye(2) - a) @ v.T[0]  ## (λI − A)v = 0   
+&gt;&gt;&gt; (w[0] * np.eye(2) - a) @ v.T[0]  # (λI − A)v = 0    
 array([ 0.,  0.])
 </code></pre></article>
  
@@ -1474,9 +1482,11 @@ array([  700.,  1500.])
     <article >
       <pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; dates = pd.date_range('20130101', periods=6)
 &gt;&gt;&gt; dates
-DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04',
-               '2013-01-05', '2013-01-06'], dtype='datetime64[ns]', freq='D')
-&gt;&gt;&gt; df = pd.DataFrame(np.random.randn(6,4), index=dates, columns=list('ABCD'))
+DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03',
+               '2013-01-04', '2013-01-05', '2013-01-06'],
+              dtype='datetime64[ns]', freq='D')
+&gt;&gt;&gt; df = pd.DataFrame(np.random.randn(6,4), index=dates,
+                      columns=list('ABCD'))
 &gt;&gt;&gt; df
                    A         B         C         D
 2013-01-01  0.469112 -0.282863 -1.509059 -1.135632
@@ -1496,12 +1506,13 @@ DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04',
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; df2 = pd.DataFrame({ 'A' : 1.,
-                         'B' : pd.Timestamp('20130102'),
-                         'C' : pd.Series(1,index=list(range(4)),dtype='float32'),
-                         'D' : np.array([3] * 4,dtype='int32'),
-                         'E' : pd.Categorical(["test","train","test","train"]),
-                         'F' : 'foo' })
+      <pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; df2 = pd.DataFrame({
+        'A' : 1.,
+        'B' : pd.Timestamp('20130102'),
+        'C' : pd.Series(1,index=list(range(4)),dtype='float32'),
+        'D' : np.array([3] * 4,dtype='int32'),
+        'E' : pd.Categorical(["test","train","test","train"]),
+        'F' : 'foo' })
 &gt;&gt;&gt; df2
      A          B    C  D      E    F
 0  1.0 2013-01-02  1.0  3   test  foo
@@ -1546,7 +1557,7 @@ max    1.212112  0.567020  0.276232  1.071804
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; df.sort_values(by='B')
+      <pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; df.sort_values(by='B')  # asc values of B
                    A         B         C         D
 2013-01-03 -0.861849 -2.104569 -0.494929  1.071804
 2013-01-04  0.721555 -0.706771 -1.039575  0.271860
@@ -1555,7 +1566,7 @@ max    1.212112  0.567020  0.276232  1.071804
 2013-01-06 -0.673690  0.113648 -1.478427  0.524988
 2013-01-05 -0.424972  0.567020  0.276232 -1.087401
 
-&gt;&gt;&gt; df.sort_index(axis=1, ascending=False)
+&gt;&gt;&gt; df.sort_index(axis=1, ascending=False)  # desc column names
                    D         C         B         A
 2013-01-01 -1.135632 -1.509059 -0.282863  0.469112
 2013-01-02 -1.044236  0.119209 -0.173215  1.212112
@@ -1782,13 +1793,18 @@ foo  3.146492 -0.63958
     </hgroup>
     <article >
       <ul>
-<li>Reshape the dataframe, using values as new rows and columns titles</li>
+<li>Reshape the dataframe<ul>
+<li>Using values as new rows and columns titles</li>
+<li>Cells contain averages, i.e., <code>aggfunc=np.mean</code></li>
 </ul>
-<pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; df = pd.DataFrame({'A' : ['one', 'one', 'two', 'three'] * 3,
-                       'B' : ['A', 'B', 'C'] * 4,
-                       'C' : ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2,
-                       'D' : np.random.randn(12),
-                       'E' : np.random.randn(12)})
+</li>
+</ul>
+<pre class="prettyprint" data-lang="Python"><code>&gt;&gt;&gt; df = pd.DataFrame({
+        'A' : ['one', 'one', 'two', 'three'] * 3,
+        'B' : ['A', 'B', 'C'] * 4,
+        'C' : ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2,
+        'D' : np.random.randn(12),
+        'E' : np.random.randn(12)})
 &gt;&gt;&gt; pd.pivot_table(df, values='D', index='A', columns='C')
 C           bar       foo
 A
@@ -1999,7 +2015,6 @@ y.sort()
 x = np.arange(len(y))
 
 # log
-plt.subplot(222)
 plt.plot(x, y)
 plt.yscale('log')
 plt.title('log')

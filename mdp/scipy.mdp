@@ -773,7 +773,7 @@ figure: images/misc/memory.png
 - `np.random.shuffle(a)` shuffles `a`
 - *Exercise*: create a matrix with couples
     - Given `n = rows * cols`
-    - `n / 2` different symbols, each repeated twice
+    - `n / 2` different values, each repeated twice
     - But random positions
 
 ---
@@ -799,6 +799,7 @@ code: Python
 ---
 
 title: Matrix multiplication
+figure: images/scipy/matrix-mult.svg
 
 code: Python
 
@@ -806,13 +807,13 @@ code: Python
     ...               [0, 1]])
     >>> B = np.array([[2, 0],
     ...               [3, 4]])
-    >>> A * B                       # elementwise product
+    >>> A * B                 # elementwise product
     array([[2, 0],
            [0, 4]])
-    >>> A @ B                       # matrix product
+    >>> A @ B                 # matrix product (Py3.5)
     array([[5, 4],
            [3, 4]])
-    >>> A.dot(B)                    # another matrix product
+    >>> A.dot(B)              # another matrix product
     array([[5, 4],
            [3, 4]])
 
@@ -829,13 +830,14 @@ code: Python
     array([[ 0,  1,  2,  3],
            [ 4,  5,  6,  7],
            [ 8,  9, 10, 11]])
-    >>> b.sum()  ## guess also min and max
+    >>> b.sum()              # guess also min and max
     66
-    >>> b.sum(axis=0)                            # sum of each column
-    array([12, 15, 18, 21])
-    >>>
-    >>> b.min(axis=1)                            # min of each row
-    array([0, 4, 8])
+    >>> b.sum(axis=1)        # sum of each row
+    array([ 6, 22, 38])
+    >>> b / b.max(axis=0)    # morm each column
+    array([[0.  , 0.11, 0.2 , 0.27],
+           [0.5 , 0.55, 0.6 , 0.63],
+           [1.  , 1.  , 1.  , 1.  ]])
 
 ---
 
@@ -955,14 +957,18 @@ code: Python
 
     >>> a = np.array([[ 2.,  8.,  0.],
                       [ 4.,  5.,  1.]])
+    >>> a.shape
+    (2, 3)
+    >>> a.strides
+    (24, 8)
     >>> a.T  # returns a transposed view, same as a.transpose()
     array([[ 2.,  4.],
            [ 8.,  5.],
            [ 0.,  1.]])
     >>> a.T.shape
     (3, 2)
-    >>> a.shape
-    (2, 3)
+    >>> a.T.strides
+    (8, 24)
 
 ---
 
@@ -988,8 +994,8 @@ code: Python
 title: Splitting into several arrays
 
 - `hsplit` splits an array along its horizontal axis
-    - Specify the number of equally shaped arrays to return, or...
-    - Specifying the columns where division should occur
+    - Specify num of equally shaped arrays to return, or...
+    - Specifying columns where division should occur
 - `vsplit` works on the vertical axis
 
 code: Python
@@ -1050,16 +1056,16 @@ code: Python
     >>> np.linalg.det(a)
     -2.0
     >>> w, v = np.linalg.eig(a)
-    >>> w  ## eigenvalues
+    >>> w  # eigenvalues
     array([-0.37228132,  5.37228132])
-    >>> np.linalg.det(w[0] * np.eye(2) - a)  ## det(λI − A) = 0
+    >>> np.linalg.det(w[0] * np.eye(2) - a)  # det(λI − A) = 0
     0.0
-    >>> v.T  ## eigenvectors, normalized but transposed (!)
+    >>> v.T  # eigenvectors, normalized but transposed (!)
     array([[-0.82456484,  0.56576746],
            [-0.41597356, -0.90937671]])
-    >>> sum(v.T[0] ** 2)
+    >>> sum(v.T[0] ** 2)  # magnitude = 1
     1.0
-    >>> (w[0] * np.eye(2) - a) @ v.T[0]  ## (λI − A)v = 0	
+    >>> (w[0] * np.eye(2) - a) @ v.T[0]  # (λI − A)v = 0	
     array([ 0.,  0.])
 
 ---
@@ -1102,9 +1108,11 @@ code: Python
 
     >>> dates = pd.date_range('20130101', periods=6)
     >>> dates
-    DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04',
-                   '2013-01-05', '2013-01-06'], dtype='datetime64[ns]', freq='D')
-    >>> df = pd.DataFrame(np.random.randn(6,4), index=dates, columns=list('ABCD'))
+    DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03',
+                   '2013-01-04', '2013-01-05', '2013-01-06'],
+                  dtype='datetime64[ns]', freq='D')
+    >>> df = pd.DataFrame(np.random.randn(6,4), index=dates,
+                          columns=list('ABCD'))
     >>> df
                        A         B         C         D
     2013-01-01  0.469112 -0.282863 -1.509059 -1.135632
@@ -1120,12 +1128,13 @@ title: DataFrame from a dict
 
 code: Python
 
-    >>> df2 = pd.DataFrame({ 'A' : 1.,
-                             'B' : pd.Timestamp('20130102'),
-                             'C' : pd.Series(1,index=list(range(4)),dtype='float32'),
-                             'D' : np.array([3] * 4,dtype='int32'),
-                             'E' : pd.Categorical(["test","train","test","train"]),
-                             'F' : 'foo' })
+    >>> df2 = pd.DataFrame({
+            'A' : 1.,
+            'B' : pd.Timestamp('20130102'),
+            'C' : pd.Series(1,index=list(range(4)),dtype='float32'),
+            'D' : np.array([3] * 4,dtype='int32'),
+            'E' : pd.Categorical(["test","train","test","train"]),
+            'F' : 'foo' })
     >>> df2
          A          B    C  D      E    F
     0  1.0 2013-01-02  1.0  3   test  foo
@@ -1161,7 +1170,7 @@ title: Sorting by values or index
 
 code: Python
 
-    >>> df.sort_values(by='B')
+    >>> df.sort_values(by='B')  # asc values of B
                        A         B         C         D
     2013-01-03 -0.861849 -2.104569 -0.494929  1.071804
     2013-01-04  0.721555 -0.706771 -1.039575  0.271860
@@ -1170,7 +1179,7 @@ code: Python
     2013-01-06 -0.673690  0.113648 -1.478427  0.524988
     2013-01-05 -0.424972  0.567020  0.276232 -1.087401
 
-    >>> df.sort_index(axis=1, ascending=False)
+    >>> df.sort_index(axis=1, ascending=False)  # desc column names
                        D         C         B         A
     2013-01-01 -1.135632 -1.509059 -0.282863  0.469112
     2013-01-02 -1.044236  0.119209 -0.173215  1.212112
@@ -1352,15 +1361,18 @@ code: Python
 
 title: Pivot table
 
-- Reshape the dataframe, using values as new rows and columns titles
+- Reshape the dataframe
+	- Using values as new rows and columns titles
+	- Cells contain averages, i.e., `aggfunc=np.mean`
 
 code: Python
 
-    >>> df = pd.DataFrame({'A' : ['one', 'one', 'two', 'three'] * 3,
-                           'B' : ['A', 'B', 'C'] * 4,
-                           'C' : ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2,
-                           'D' : np.random.randn(12),
-                           'E' : np.random.randn(12)})
+    >>> df = pd.DataFrame({
+            'A' : ['one', 'one', 'two', 'three'] * 3,
+            'B' : ['A', 'B', 'C'] * 4,
+            'C' : ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2,
+            'D' : np.random.randn(12),
+            'E' : np.random.randn(12)})
     >>> pd.pivot_table(df, values='D', index='A', columns='C')
     C           bar       foo
     A
@@ -1528,7 +1540,6 @@ code: Python
     x = np.arange(len(y))
 
     # log
-    plt.subplot(222)
     plt.plot(x, y)
     plt.yscale('log')
     plt.title('log')
