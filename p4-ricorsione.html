@@ -64,7 +64,7 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Ad ogni invocazione di una funzione, viene creato nello <strong>stack</strong> un nuovo record</li>
 <li><strong>Contesto locale</strong> alla particolare attivazione della funzione stessa</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>def factorial(n: int) -&gt; int:
+<pre class="prettyprint" data-lang="py"><code>def factorial(n: int) -&gt; int:
     result = 1
     if n &gt; 0:
         result = n * factorial(n - 1)
@@ -170,7 +170,7 @@ URL: https://code.google.com/p/io-2012-slides
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>def fibonacci(n: int) -&gt; int:
+      <pre class="prettyprint" data-lang="py"><code>def fibonacci(n: int) -&gt; int:
     result = 1
     if n &gt; 1:
         result = fibonacci(n-1) + fibonacci(n-2)
@@ -187,7 +187,7 @@ URL: https://code.google.com/p/io-2012-slides
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>_fibonacci_lookup = [1, 1]
+      <pre class="prettyprint" data-lang="py"><code>_fibonacci_lookup = [1, 1]
 
 def fibonacci(n: int) -&gt; int:
     if n &lt; len(_fibonacci_lookup):
@@ -196,7 +196,7 @@ def fibonacci(n: int) -&gt; int:
     _fibonacci_lookup.append(result)
     return result
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>from functools import lru_cache
+<pre class="prettyprint" data-lang="py"><code>from functools import lru_cache
 
 @lru_cache()                   # function decoration
 def fibonacci(n: int) -&gt; int:
@@ -215,7 +215,7 @@ def fibonacci(n: int) -&gt; int:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>def fibonacci(n: int) -&gt; int:
+      <pre class="prettyprint" data-lang="py"><code>def fibonacci(n: int) -&gt; int:
     value = 1
     previous = 0
 
@@ -278,12 +278,12 @@ def fibonacci(n: int) -&gt; int:
 <li>Ogni elemento: risultato di una operazione su un membro di altro iterabile</li>
 <li>Condizione sugli elementi, opzionale</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>squares = [x ** 2 for x in range(10)]
+<pre class="prettyprint" data-lang="py"><code>squares = [x ** 2 for x in range(10)]
 # squares = []
 # for x in range(12):
 #    squares.append(x ** 2)
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>a = ord('A')  # 65
+<pre class="prettyprint" data-lang="py"><code>a = ord('A')  # 65
 even_chars = [chr(x + a) for x in range(26) if x % 2 == 0]
 </code></pre></article>
  
@@ -304,11 +304,11 @@ even_chars = [chr(x + a) for x in range(26) if x % 2 == 0]
 <li>Genera una sequenza di tuple (coppie)</li>
 <li>Spesso si usa nei cicli <code>for</code>, quando serve sia il valore che l'indice</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "bacon", "sausage"]
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "bacon", "sausage"]
 &gt;&gt;&gt; list(enumerate(grocery))
 [(0, "spam"), (1, "egg"), (2, "bacon"), (3, "sausage")]
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "egg", "bacon", "sausage"]
+<pre class="prettyprint" data-lang="py"><code>grocery = ["spam", "egg", "bacon", "sausage"]
 for i, val in enumerate(grocery):
     print(i, val)
 </code></pre>
@@ -333,7 +333,7 @@ Altrimenti, Python non genera immediatamente i risultati (<em>lazy</em>)</p></ar
 <li>Genera una sequenza di tuple (coppie)</li>
 <li>Il risultato ha la lunghezza della sequenza più breve</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "beans"]
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "beans"]
 &gt;&gt;&gt; quantities = ["100 g", "6 pc", "200 g", "too much"]
 &gt;&gt;&gt; list(zip(grocery, quantities))
 [('spam', '100 g'), ('egg', '6 pc'), ('beans', '200 g')]
@@ -359,12 +359,12 @@ Altrimenti, Python non genera immediatamente i risultati (<em>lazy</em>)</p></ar
 <li>Applica la funzione a ciascuno dei valori</li>
 <li>Restituisce la sequenza di risultati</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from math import sqrt
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; from math import sqrt
 &gt;&gt;&gt; values = [0, 1, 2, 3, 4]
 &gt;&gt;&gt; list(map(sqrt, values))
 [0.0, 1.0, 1.4142, 1.7320, 2.0]
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from math import sqrt
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; from math import sqrt
 &gt;&gt;&gt; list(map(sqrt, range(5)))
 [0.0, 1.0, 1.4142, 1.7320, 2.0]
 </code></pre>
@@ -380,7 +380,7 @@ Altrimenti, Python non genera immediatamente i risultati (<em>lazy</em>)</p></ar
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "bacon", "sausage"]
+      <pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "bacon", "sausage"]
 &gt;&gt;&gt; sorted(grocery)
 ['bacon', 'egg', 'sausage', 'spam']
 &gt;&gt;&gt; sorted(grocery, reverse=True)
@@ -388,10 +388,10 @@ Altrimenti, Python non genera immediatamente i risultati (<em>lazy</em>)</p></ar
 &gt;&gt;&gt; sorted(grocery, key=len)  # lengths of elements are compared
 ['egg', 'spam', 'bacon', 'sausage']
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; list(reversed(grocery))
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; list(reversed(grocery))
 ['sausage', 'bacon', 'egg', 'spam']
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery.sort()     # in-place
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; grocery.sort()     # in-place
 &gt;&gt;&gt; grocery.reverse()  # in-place
 &gt;&gt;&gt; grocery
 ['spam', 'sausage', 'egg', 'bacon']
@@ -417,7 +417,7 @@ Altrimenti, Python non genera immediatamente i risultati (<em>lazy</em>)</p></ar
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; tel = {"john": 4098, "terry": 4139}
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; tel = {"john": 4098, "terry": 4139}
 &gt;&gt;&gt; tel["john"]
 4098
 &gt;&gt;&gt; tel["graham"] = 4127
@@ -772,7 +772,7 @@ spostare ancora gli altri N-1 dischi.</p>
 </li>
 <li>Risultato da espressione es. 5.7: <code>"* 5 + 4 * 3 2"</code></li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>                                          #   *  (prod2)
+<pre class="prettyprint" data-lang="py"><code>                                          #   *  (prod2)
 prod1 = Product(Literal(3), Literal(2))   #  / \
 sum1 = Sum(Literal(4), prod1)             # 5   +  (sum1)
 prod2 = Product(Literal(5), sum1)         #    / \

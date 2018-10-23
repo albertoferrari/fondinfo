@@ -19,7 +19,7 @@ figure: images/fun/stack.svg
 - Ad ogni invocazione di una funzione, viene creato nello **stack** un nuovo record
 - **Contesto locale** alla particolare attivazione della funzione stessa
 
-code: python
+code: py
 
     def factorial(n: int) -> int:
         result = 1
@@ -87,7 +87,7 @@ fib(0) = fib(1) = 1;  fib(n) = fib(n-1) + fib(n-2);
 
 title: Fibonacci, ricorsione
 
-code: python
+code: py
 
     def fibonacci(n: int) -> int:
         result = 1
@@ -101,7 +101,7 @@ code: python
 
 title: Fibonacci, memoization
 
-code: python
+code: py
 
     _fibonacci_lookup = [1, 1]
 
@@ -112,7 +112,7 @@ code: python
         _fibonacci_lookup.append(result)
         return result
 
-code: python
+code: py
 
     from functools import lru_cache
 
@@ -127,7 +127,7 @@ code: python
 
 title: Fibonacci, iterazione
 
-code: python
+code: py
 
     def fibonacci(n: int) -> int:
         value = 1
@@ -166,14 +166,14 @@ figure: images/dev/computer-ninja.png
 - Ogni elemento: risultato di una operazione su un membro di altro iterabile
 - Condizione sugli elementi, opzionale
 
-code: python
+code: py
 
     squares = [x ** 2 for x in range(10)]
     # squares = []
     # for x in range(12):
     #    squares.append(x ** 2)
 
-code: python
+code: py
 
     a = ord('A')  # 65
     even_chars = [chr(x + a) for x in range(26) if x % 2 == 0]
@@ -188,13 +188,13 @@ figure: images/repr/child-fingers.png
 - Genera una sequenza di tuple (coppie)
 - Spesso si usa nei cicli `for`, quando serve sia il valore che l'indice
 
-code: python
+code: py
 
     >>> grocery = ["spam", "egg", "bacon", "sausage"]
     >>> list(enumerate(grocery))
     [(0, "spam"), (1, "egg"), (2, "bacon"), (3, "sausage")]
 
-code: python
+code: py
 
     grocery = ["spam", "egg", "bacon", "sausage"]
     for i, val in enumerate(grocery):
@@ -214,7 +214,7 @@ figure: images/fun/zip.jpg
 - Genera una sequenza di tuple (coppie)
 - Il risultato ha la lunghezza della sequenza più breve
 
-code: python
+code: py
 
     >>> grocery = ["spam", "egg", "beans"]
     >>> quantities = ["100 g", "6 pc", "200 g", "too much"]
@@ -235,14 +235,14 @@ figure: images/fun/legomap.png
 - Applica la funzione a ciascuno dei valori
 - Restituisce la sequenza di risultati
 
-code: python
+code: py
 
     >>> from math import sqrt
     >>> values = [0, 1, 2, 3, 4]
     >>> list(map(sqrt, values))
     [0.0, 1.0, 1.4142, 1.7320, 2.0]
 
-code: python
+code: py
 
     >>> from math import sqrt
     >>> list(map(sqrt, range(5)))
@@ -256,7 +256,7 @@ Risultati in lista, solo (!) per visualizzarli
 
 title: Liste ordinate o rovesciate 🤔
 
-code: python
+code: py
 
     >>> grocery = ["spam", "egg", "bacon", "sausage"]
     >>> sorted(grocery)
@@ -266,12 +266,12 @@ code: python
     >>> sorted(grocery, key=len)  # lengths of elements are compared
     ['egg', 'spam', 'bacon', 'sausage']
 
-code: python
+code: py
 
     >>> list(reversed(grocery))
     ['sausage', 'bacon', 'egg', 'spam']
 
-code: python
+code: py
 
     >>> grocery.sort()     # in-place
     >>> grocery.reverse()  # in-place
@@ -288,7 +288,7 @@ figure: images/fun/dictionary.png
     - Le chiavi sono *uniche*: come nelle liste fanno da *indice* per accedere al valore corrispondente
     - Ma possono essere `int` o **`str`** (o altro tipo immutabile)
 
-code: python
+code: py
 
     >>> tel = {"john": 4098, "terry": 4139}
     >>> tel["john"]
@@ -520,7 +520,7 @@ title: Espressioni prefisse
     - Genera una stringa in notazione prefissa (operatore seguito da operandi)
 - Risultato da espressione es. 5.7: `"* 5 + 4 * 3 2"`
 
-code: python
+code: py
 
                                               #   *  (prod2)
     prod1 = Product(Literal(3), Literal(2))   #  / \

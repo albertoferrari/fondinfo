@@ -1552,5 +1552,17 @@ code: Python
     plt.grid(True)
     plt.show()
 
+---
 
+title: Example: students' questionnaires
+figure: images/dii/quiz.png
+
+- Students' answers to questionnaires about courses
+- Data transformation to evaluate marks
+- Distribution of marks and density plots
+- Use of multiple figures
+
+>
+
+<https://github.com/tomamic/paradigmi/tree/master/questionari>
 

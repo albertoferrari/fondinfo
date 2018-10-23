@@ -11,7 +11,7 @@ figure: images/fun/function.png
     - **`def`** per definire una funzione
     - **`return`** per terminare e restituire un risultato
 
-code: python
+code: py
 
     def hypotenuse(a, b):
         c = (a ** 2 + b ** 2) ** 0.5
@@ -28,7 +28,7 @@ title: Chiamata di funzioni
     - Non visibili nel resto del programma
     - Nomi uguali, definiti in ambiti diversi, restano distinti
 
-code: python
+code: py
 
     side1 = float(input('1st side? '))
     side2 = float(input('2nd side? '))
@@ -42,7 +42,7 @@ title: Funzione main
 - A volte si preferisce creare una *funzione principale*
     - In questo modo si limitano le **variabili globali**
 
-code: python
+code: py
 
     # def hypotenuse ...
 
@@ -70,7 +70,7 @@ title: Parametri di funzioni
 - Si possono restituire più valori, come *tupla*
     - `return 7, 5, 'black'`
 
-code: python
+code: py
 
     def inc(a):
         a += 1
@@ -87,7 +87,7 @@ title: Documentazione di funzioni
 - **Docstring**: descrizione testuale di una funzione
 - **`help`**: funzione per visualizzare la documentazione
 
-code: python
+code: py
 
     def hypotenuse(leg1: float, leg2: float) -> float:
         '''
@@ -103,7 +103,7 @@ title: Cicli su stringhe
 - Il ciclo `for` scorre i valori qualsiasi sequenza
 - Una stringa è una sequenza di caratteri
 
-code: Python
+code: py
 
     text = input("text? ")
     min_char = input("Min char to uppercase? ")
@@ -120,14 +120,14 @@ code: Python
 title: Cicli e annidamento
 figure: images/fun/multiplication-table.jpg
 
-code: python
+code: py
 
     size = 10
     y = int(input("Insert a value: "))
     for x in range(1, size + 1):
         print(x * y, end=" ")  # ends with blank
                                # no newline
-code: python
+code: py
 
     size = 10
     for y in range(1, size + 1):
@@ -149,7 +149,7 @@ title: Procedura
     - *Astrazione*, per riuso e leggibilità
     - Riduce i livelli di annidamento
 
-code: python
+code: py
 
     def print_row(y: int, size: int):
         for x in range(1, size + 1):
@@ -169,7 +169,7 @@ code: python
 title: Animazione
 figure: images/oop/anim-right.png
 
-code: python
+code: py
 
     import g2d
 
@@ -194,7 +194,7 @@ code: python
 
 title: Eventi della tastiera
 
-code: python
+code: py
 
     import g2d
 
@@ -223,7 +223,7 @@ figure: images/oop/anim-bounce.png
     - Incapsulano il comportamento
     - Ma espongono i dati
 
-code: python
+code: py
 
     def move_ball(x: int, y: int,
                   dx: int, dy: int) -> (int, int, int, int):
@@ -261,7 +261,7 @@ title: Funzioni non idempotenti 🤔
     - `p = rq(x)`
 - Ma se `rq` ha effetti collaterali, non si può!
 
-code: python
+code: py
 
     base_value = 0  # global variable
 
@@ -312,7 +312,7 @@ figcaption: Class diagram UML
 
 > We're all consenting adults here. *(GvR)*
 
-code: python
+code: py
 
     class Ball:
 
@@ -336,7 +336,7 @@ figure: images/oop/bob-builder.jpg
     - Assegnato l'oggetto di cui si chiama il metodo
     - Permette ai metodi di accedere ai campi
 
-code: python
+code: py
 
     ball = Ball(40, 80)  # Allocation and initialization
 
@@ -347,7 +347,7 @@ figure: images/oop/anim-bounce.png
 
 - Espongono *servizi* ad altri oggetti
 
-code: python
+code: py
 
     ARENA_W, ARENA_H = 320, 240
     BALL_W, BALL_H = 20, 20
@@ -370,7 +370,7 @@ code: python
 title: Uso degli oggetti
 figure: images/oop/balls.png
 
-code: python
+code: py
 
     # Create two objects, instances of the Ball class
     b1 = Ball(140, 180)
@@ -394,12 +394,12 @@ title: Il primo parametro, self
 - L'oggetto, di cui viene invocato il metodo, viene assegnato come valore di `self`
 - In Python, una chiamata a metodo è interpretata così:
 
-code: python
+code: py
 
     b1 = Ball(40, 80)
     b1.move()
 
-code: python
+code: py
 
     # Python internals, DON'T do this!
     b1 = object.__new__(Ball)
@@ -410,7 +410,7 @@ code: python
 
 title: Animazione di due palline
 
-code: python
+code: py
 
     import g2d
     from p2_oop_ball import Ball, ARENA_W, ARENA_H
@@ -452,7 +452,7 @@ title: Proprietà 🤔
 
 - Permettono un accesso controllato allo stato
 
-code: python
+code: py
 
     class Ball:
 
@@ -464,7 +464,7 @@ code: python
         # def pos(self, val: (int, int)):
         #     self._x, self._y = val
 
-code: python
+code: py
 
     ball = Ball(40, 80)
     print('ball @', ball.pos)
@@ -667,7 +667,7 @@ class: break
     - In *CPython*, nome `"__main__"`
     - In *Brython* nome `"script..."`; il “trucco” non funziona
 
-code: python
+code: py
 
     # def hypotenuse ...
     def main():

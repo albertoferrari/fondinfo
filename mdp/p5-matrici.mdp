@@ -25,7 +25,7 @@ title: Scrittura su file
 - Scrittura su file: funzione `print`, o metodo `write`
 - Blocco `with`: chiude il file al termine delle operazioni (anche in caso di errore)
 
-code: python
+code: py
 
     with open("some_file.txt", "w") as f1:
         f1.write("First line\n")   # explicit newline
@@ -39,7 +39,7 @@ code: python
 
 title: Lettura da file
 
-code: python
+code: py
 
     with open("some_file.txt", "r") as f1:
         first_line = f1.readline()
@@ -64,7 +64,7 @@ title: I/O su stringhe e console 🤔
 - Stringhe come stream: `io.StringIO`
 - Console come stream: `sys.stdin`, `sys.stdout`, `sys.stderr`
 
-code: python
+code: py
 
     import io, sys
 
@@ -75,7 +75,7 @@ code: python
         contents = output.getvalue()
         sys.stdout.write(contents)
 
-code: python
+code: py
 
     for line in sys.stdin:  # CTRL-D (Lin) or CTRL-Z (Win) to end the input
         print(len(line))    # notice '\n' at the end
@@ -90,7 +90,7 @@ figure: images/fun/garbled-tape.png
     - Eseguito il blocco `except` che gestisce il tipo di errore verificatosi (possibile avere diversi blocchi `except`)
     - Il blocco `with` assicura la chiusura del file
 
-code: python
+code: py
 
     try:
         with open("other_file.txt", "r") as f:
@@ -111,7 +111,7 @@ title: Liste multidimensionali
     - Accesso agli elementi: due o più indici (o *dimensioni*)
     - Se bidimensionali, denominate *matrici*
 
-code: python
+code: py
 
     a = [['A', 'B', 'C', 'D'],
          ['E', 'F', 'G', 'H'],
@@ -130,7 +130,7 @@ code: python
 
 title: Somma colonne: matrice
 
-code: python
+code: py
 
     matrix = [[2, 4, 3, 8],
               [9, 3, 2, 7],
@@ -149,7 +149,7 @@ code: python
 
 title: Lista come pseudo-matrice
 
-code: python
+code: py
 
     matrix = [2, 4, 3, 8,
               9, 3, 2, 7,
@@ -168,12 +168,12 @@ code: python
 
 title: Matrici di dimensioni note
 
-code: python
+code: py
 
     matrix = [[' ' for x in range(cols)] for y in range(rows)]
     # all elements are inited as ' ' -- your need may vary
 
-code: python
+code: py
 
     matrix = []
     for y in range(rows):
@@ -187,7 +187,7 @@ code: python
 title: Fifteen – Gioco astratto
 figure: images/qt/fifteen-puzzle.jpg
 
-code: Python
+code: py
 
     def abstract():
         raise NotImplementedError("Abstract method")
@@ -209,7 +209,7 @@ code: Python
 
 title: Ciclo di gioco
 
-code: Python
+code: py
 
     def print_game(game: BoardGame):
         for y in range(game.rows()):
@@ -319,7 +319,7 @@ class: large-image
 title: N regine, verifica
 figure: images/fun/queens-sol.svg
 
-code: python
+code: py
 
     def print_board(board: list):
         for y in range(len(board)):
@@ -343,7 +343,7 @@ code: python
 
 title: N regine, ricorsione
 
-code: python
+code: py
 
     def place_queens(board: list, y=0) -> bool:
         if y == len(board):

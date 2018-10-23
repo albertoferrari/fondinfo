@@ -54,13 +54,13 @@ URL: https://code.google.com/p/io-2012-slides
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+<pre class="prettyprint" data-lang="py"><code>months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>num_days = [31, 28, 31, 30, 31, 30,
+<pre class="prettyprint" data-lang="py"><code>num_days = [31, 28, 31, 30, 31, 30,
             31, 31, 30, 31, 30, 31]
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>results_by_month = [0] * 12  # List repetition
+<pre class="prettyprint" data-lang="py"><code>results_by_month = [0] * 12  # List repetition
 </code></pre></article>
  
 </slide>
@@ -81,11 +81,11 @@ URL: https://code.google.com/p/io-2012-slides
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>n = len(months)            # 12
+<pre class="prettyprint" data-lang="py"><code>n = len(months)            # 12
 months[3]                  # "Apr"
 months[-2]                 # "Nov", same as n - 2
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>spring = months[2:5]       # ["Mar", "Apr", "May"]
+<pre class="prettyprint" data-lang="py"><code>spring = months[2:5]       # ["Mar", "Apr", "May"]
 quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
 quart4 = months[-3:]       # ["Oct", "Nov", "Dec"]
 whole_year = months[:]     # Copy of the whole list
@@ -103,7 +103,7 @@ whole_year = months[:]     # Copy of the whole list
       <figure>
         <img src="images/fun/shopping-list.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "egg", "beans"]
+      </figure><pre class="prettyprint" data-lang="py"><code>grocery = ["spam", "egg", "beans"]
 
 grocery[0] = "sausage"      # replace an element
 
@@ -126,7 +126,7 @@ if "egg" in grocery:       # True, grocery contains "egg"
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>a = ["spam", "egg", "beans"]
+      <pre class="prettyprint" data-lang="py"><code>a = ["spam", "egg", "beans"]
 b = a[:]         # new list!
 b == a           # True, they contain the same values
 b is a           # False, they are two objects in memory
@@ -152,7 +152,7 @@ grocery = c + d  # list concatenation --&gt; new list!
 <li><strong>Stringa</strong>: sequenza <em>immutabile</em> di caratteri</li>
 <li><strong><code>join</code></strong> e <strong><code>split</code></strong>: da lista a stringa e viceversa</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>txt = "Monty Python's Flying Circus"
+<pre class="prettyprint" data-lang="py"><code>txt = "Monty Python's Flying Circus"
 txt[3]    # 't'
 txt[-2]   # 'u'
 txt[6:12] # "Python"
@@ -177,7 +177,7 @@ days = "mon|wed|fri".split("|")
       <ul>
 <li>Sequenza <strong>immutabile</strong> di valori, anche di <em>tipo diverso</em></li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code># Tuple packing
+<pre class="prettyprint" data-lang="py"><code># Tuple packing
 pt = 5, 6, "red"
 pt[0]  # 5
 pt[1]  # 6
@@ -201,7 +201,7 @@ a, b = b, a
       <figure>
         <img src="images/fun/shopping-list.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "egg", "bacon", "sausage"]
+      </figure><pre class="prettyprint" data-lang="py"><code>grocery = ["spam", "egg", "bacon", "sausage"]
 
 print("Your shopping list contains:")
 
@@ -222,7 +222,7 @@ for product in grocery:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>def limit_values(values, max_val):
+      <pre class="prettyprint" data-lang="py"><code>def limit_values(values, max_val):
     # procedure: process data, no direct result
     for i in range(len(values)):
         if values[i] &gt; max_val:
@@ -257,7 +257,7 @@ main()
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>import g2d
+      <pre class="prettyprint" data-lang="py"><code>import g2d
 from p3_oop_ball import Ball, ARENA_W, ARENA_H
 
 def update():
@@ -291,7 +291,7 @@ g2d.main_loop(update, 1000 // 30)  # Millis
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>class BallArena:  # ...
+<pre class="prettyprint" data-lang="py"><code>class BallArena:  # ...
     def __init__(self):
         self._balls = []
     def add(self, b: Ball):
@@ -353,7 +353,7 @@ arena.move_all()
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>class Animal:
+<pre class="prettyprint" data-lang="py"><code>class Animal:
     def say(self):
         raise NotImplementedError("Abstract method")
 </code></pre></article>
@@ -370,7 +370,7 @@ arena.move_all()
       <figure>
         <img src="images/oop/polymorphism.png"><img src="images/oop/peppa.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>class Dog(Animal):
+      </figure><pre class="prettyprint" data-lang="py"><code>class Dog(Animal):
     def __init__(self, name):
         self._name = name
     def say(self):
@@ -410,7 +410,7 @@ class Cat(Animal):
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>class Actor:
+<pre class="prettyprint" data-lang="py"><code>class Actor:
     def move(self):
         raise NotImplementedError("Abstract method")
 </code></pre></article>
@@ -424,7 +424,7 @@ class Cat(Animal):
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>class Arena:  # ...
+      <pre class="prettyprint" data-lang="py"><code>class Arena:  # ...
     def __init__(self, w, h):
         self._w, self._h = w, h
         self._actors = []
@@ -455,7 +455,7 @@ class Cat(Animal):
       <figure>
         <img src="images/oop/actors.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>arena.add(Ball(40, 80))
+      </figure><pre class="prettyprint" data-lang="py"><code>arena.add(Ball(40, 80))
 arena.add(Ghost(120, 40)) # ...
 arena.move_all()
 </code></pre>
@@ -487,7 +487,7 @@ arena.move_all()
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>class Ghost(Actor):  # ...
+<pre class="prettyprint" data-lang="py"><code>class Ghost(Actor):  # ...
     def move(self):
         dx = random.choice([-5, 0, 5])
         dy = random.choice([-5, 0, 5])
@@ -504,7 +504,7 @@ arena.move_all()
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>class Ghost(Actor):
+      <pre class="prettyprint" data-lang="py"><code>class Ghost(Actor):
 
     def __init__(self, arena, x, y):
         self._x, self._y = x, y
@@ -543,7 +543,7 @@ arena.move_all()
       <figure>
         <img src="images/oop/bounce.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>import g2d
+      </figure><pre class="prettyprint" data-lang="py"><code>import g2d
 from p3_oop_bounce import Arena, Ball, Ghost, Turtle
 
 def update():
@@ -573,7 +573,7 @@ g2d.main_loop(update, 1000 // 30)  # Millis
       <figure>
         <img src="images/oop/bounce.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>def keydown(code):
+      </figure><pre class="prettyprint" data-lang="py"><code>def keydown(code):
     # print(code)
     if code == "ArrowUp":
         turtle.go_up()
@@ -630,7 +630,7 @@ g2d.handle_keyboard(keydown, keyup)
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>class Ball(Actor):
+      <pre class="prettyprint" data-lang="py"><code>class Ball(Actor):
     # ...
     def collide(self, other):
         if not isinstance(other, Ghost):

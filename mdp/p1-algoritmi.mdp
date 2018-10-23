@@ -24,7 +24,7 @@ title: Tipi di dati
     - `int, float, bool, str`
     - Operazioni aritmetiche e logiche, confronti
 
-code: python
+code: py
 
     >>> 3 + 4
     7
@@ -47,7 +47,7 @@ title: Valori numerici e booleani
     - Operazioni consentite: `and, or, not`
     - I confronti danno un risultato booleano
 
-code: python
+code: py
 
     >>> -2 // 3    # floored integer division
     -1
@@ -68,7 +68,7 @@ class: large-figure
     - Alla destra un valore
 - *Non confondere* con confronto di uguaglianza `==`
 
-code: python
+code: py
 
     >>> pi = 3.14  # Assignment
     >>> radius = 2.2
@@ -87,7 +87,7 @@ figure: images/algo/var-label.svg
     - Il **tipo** dipende dal valore attualmente assegnato
     - Una var. non dev'essere *dichiarata*, ma dev'essere *inizializzata*
 
-code: python
+code: py
 
     >>> x = 100
     >>> DELTA = 5          # Constants: UPPER_CASE
@@ -103,7 +103,7 @@ title: Stringhe di testo
     - A capo: `'\n'` (10, o 13-10... ma conversione automatica)
     - Tabulazione: `'\t'` (9)
 
-code: python
+code: py
 
     >>> str1 = "Monty Python's "
     >>> str2 = 'Flying Circus'
@@ -125,7 +125,7 @@ title: Confronto tra stringhe
 - Confronto tra stringhe, in ordine *lessicografico*
     - `<, <=, >, >=, ==, !=`
 
-code: python
+code: py
 
     >>> 'first' < 'second'
     True
@@ -146,7 +146,7 @@ figure: images/algo/hello-user.svg
 - **`print`** scrive una serie di valori su una riga
     - Tra i valori (parametri) viene inserito uno spazio
 
-code: python
+code: py
 
     user = input("What's your name? ")
 
@@ -157,7 +157,7 @@ code: python
 title: Somma di tre numeri
 figure: images/algo/sum3.svg
 
-code: python
+code: py
 
     # File sum3.py - to run: python3 sum3.py
 
@@ -183,7 +183,7 @@ title: Selezione: if
 
 > Readability counts *(The Zen of Python)*
 
-code: python
+code: py
 
     # File tooyoung.py - to run: python3 tooyoung.py
 
@@ -201,7 +201,7 @@ code: python
 title: Valore assoluto
 figure: images/algo/abs.svg
 
-code: python
+code: py
 
     x = float(input("insert a value: "))
     y = 0.0
@@ -223,7 +223,7 @@ code: python
 title: Confronto tra parole
 figure: images/algo/words.svg
 
-code: python
+code: py
 
     a = input("First word? ")
     b = input("Second word? ")
@@ -246,7 +246,7 @@ code: python
 title: Operazioni aritmetiche
 figure: images/algo/calc.svg
 
-code: python
+code: py
 
     a = float(input())
     b = float(input())
@@ -271,7 +271,7 @@ figure: images/algo/sum1n.svg
 - Condizione booleana di *permanenza* nel ciclo
 - Controllo *preliminare*, possibile che il corpo non sia mai eseguito
 
-code: python
+code: py
 
     # Sum of the numbers from 1 to n
     total = 0
@@ -291,7 +291,7 @@ code: python
 title: Somma di N valori dell'utente
 figure: images/algo/sumn.svg
 
-code: python
+code: py
 
     n = int(input("How many values? "))
     total = 0
@@ -310,7 +310,7 @@ code: python
 title: Ciclo con sentinella
 figure: images/algo/average.svg
 
-code: python
+code: py
 
     total = 0
     count = 0
@@ -331,18 +331,18 @@ title: Moduli
 
 - *Python Standard Library*: <http://docs.python.org/3/library/>
 
-code: python
+code: py
 
     import math
     y = math.sin(math.pi / 4)
     print(y)
 
-code: python
+code: py
 
     from math import sin, pi
     print(sin(pi / 4))
 
-code: python
+code: py
 
     from random import randint
     die1 = randint(1, 6)  # like rolling a die
@@ -365,7 +365,7 @@ title: Tupla
     - *Size*: `(width, height)`<br>
     - *Rect*: `(left, top, width, height)`
 
-code: python
+code: py
 
     center = (150, 100)
     color = (10, 10, 200)  # ~ blue
@@ -394,7 +394,7 @@ Per l'esecuzione locale, copiare nella carella di lavoro il file `g2d.py`, da `e
 title: Disegno nel browser
 figure: images/oop/raster-coord.png
 
-code: python
+code: py
 
     import g2d
 
@@ -416,7 +416,7 @@ code: python
 title: Linee e testi
 figure: images/oop/raster-coord.png
 
-code: python
+code: py
 
     import g2d
 
@@ -444,7 +444,7 @@ figure: images/algo/sum10.svg
     - Estremo superiore *escluso*
     - Iterabile con un ciclo `for`
 
-code: python
+code: py
 
     # Add up numbers from 1 to 10
 
@@ -461,7 +461,7 @@ code: python
 title: Sequenza di quadrati
 figure: images/misc/red-squares.png
 
-code: python
+code: py
 
     import g2d
 
@@ -518,7 +518,7 @@ Altrimenti ...
 
 title: Calcolo dell'età
 
-code: python
+code: py
 
     birth_year = int(input("Birth year? "))
     birth_month = int(input("Birth month? "))
@@ -655,7 +655,7 @@ R~~s~~ = ∑ R~~i~~
 title: Quadrato perfetto (*)
 figure: images/algo/perfect-square.svg
 
-code: python
+code: py
 
     n = 0
     while n <= 0:

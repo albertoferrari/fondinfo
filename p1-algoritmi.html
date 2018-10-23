@@ -74,7 +74,7 @@ URL: https://code.google.com/p/io-2012-slides
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; 3 + 4
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; 3 + 4
 7
 &gt;&gt;&gt; 3 / 4
 0.75
@@ -106,7 +106,7 @@ True
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; -2 // 3    # floored integer division
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; -2 // 3    # floored integer division
 -1
 &gt;&gt;&gt; -2 % 3     # reminder is always positive
 1
@@ -135,7 +135,7 @@ True
 </li>
 <li><em>Non confondere</em> con confronto di uguaglianza <code>==</code></li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; pi = 3.14  # Assignment
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; pi = 3.14  # Assignment
 &gt;&gt;&gt; radius = 2.2
 &gt;&gt;&gt; area = pi * (radius ** 2)
 &gt;&gt;&gt; area
@@ -163,7 +163,7 @@ True
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; x = 100
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; x = 100
 &gt;&gt;&gt; DELTA = 5          # Constants: UPPER_CASE
 &gt;&gt;&gt; x = x + DELTA      # Variables: lower_case
 &gt;&gt;&gt; next_position = x  # Use explicative names!
@@ -186,7 +186,7 @@ True
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; str1 = "Monty Python's "
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; str1 = "Monty Python's "
 &gt;&gt;&gt; str2 = 'Flying Circus'
 &gt;&gt;&gt; result = str1 + str2
 &gt;&gt;&gt; result
@@ -219,7 +219,7 @@ True
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; 'first' &lt; 'second'
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; 'first' &lt; 'second'
 True
 &gt;&gt;&gt; 'Second' &lt;  'first'
 True
@@ -251,7 +251,7 @@ True
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>user = input("What's your name? ")
+<pre class="prettyprint" data-lang="py"><code>user = input("What's your name? ")
 
 print("Hello,", user)
 </code></pre></article>
@@ -268,7 +268,7 @@ print("Hello,", user)
       <figure>
         <img src="images/algo/sum3.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code># File sum3.py - to run: python3 sum3.py
+      </figure><pre class="prettyprint" data-lang="py"><code># File sum3.py - to run: python3 sum3.py
 
 a = float(input("Insert 1st val: "))
 b = float(input("Insert 2nd val: "))
@@ -307,7 +307,7 @@ print("The sum is", total)
 <blockquote>
 <p>Readability counts <em>(The Zen of Python)</em></p>
 </blockquote>
-<pre class="prettyprint" data-lang="python"><code># File tooyoung.py - to run: python3 tooyoung.py
+<pre class="prettyprint" data-lang="py"><code># File tooyoung.py - to run: python3 tooyoung.py
 
 age = int(input("Age? "))
 
@@ -334,7 +334,7 @@ if age &lt; 14:
       <figure>
         <img src="images/algo/abs.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>x = float(input("insert a value: "))
+      </figure><pre class="prettyprint" data-lang="py"><code>x = float(input("insert a value: "))
 y = 0.0
 
 if x &gt;= 0:
@@ -363,7 +363,7 @@ print("abs =", y)
       <figure>
         <img src="images/algo/words.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>a = input("First word? ")
+      </figure><pre class="prettyprint" data-lang="py"><code>a = input("First word? ")
 b = input("Second word? ")
 
 if a &lt; b:
@@ -393,7 +393,7 @@ else:
       <figure>
         <img src="images/algo/calc.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>a = float(input())
+      </figure><pre class="prettyprint" data-lang="py"><code>a = float(input())
 b = float(input())
 op = input()
 
@@ -425,7 +425,7 @@ else:
 <li>Condizione booleana di <em>permanenza</em> nel ciclo</li>
 <li>Controllo <em>preliminare</em>, possibile che il corpo non sia mai eseguito</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code># Sum of the numbers from 1 to n
+<pre class="prettyprint" data-lang="py"><code># Sum of the numbers from 1 to n
 total = 0
 count = 1
 n = int(input("n? "))
@@ -450,7 +450,7 @@ print("The sum is", total)
       <figure>
         <img src="images/algo/sumn.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>n = int(input("How many values? "))
+      </figure><pre class="prettyprint" data-lang="py"><code>n = int(input("How many values? "))
 total = 0
 i = 0
 
@@ -475,7 +475,7 @@ print("The sum is", total)
       <figure>
         <img src="images/algo/average.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>total = 0
+      </figure><pre class="prettyprint" data-lang="py"><code>total = 0
 count = 0
 
 val = int(input("Val? (0 to finish) "))
@@ -501,14 +501,14 @@ if count != 0:
       <ul>
 <li><em>Python Standard Library</em>: <a href="http://docs.python.org/3/library/">http://docs.python.org/3/library/</a></li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>import math
+<pre class="prettyprint" data-lang="py"><code>import math
 y = math.sin(math.pi / 4)
 print(y)
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>from math import sin, pi
+<pre class="prettyprint" data-lang="py"><code>from math import sin, pi
 print(sin(pi / 4))
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>from random import randint
+<pre class="prettyprint" data-lang="py"><code>from random import randint
 die1 = randint(1, 6)  # like rolling a die
 die2 = randint(1, 6)  # like rolling a die
 print(die1, die2)
@@ -536,7 +536,7 @@ print(die1, die2)
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>center = (150, 100)
+<pre class="prettyprint" data-lang="py"><code>center = (150, 100)
 color = (10, 10, 200)  # ~ blue
 size = (640, 480)
 rectangle = (150, 100, 200, 200)  # square
@@ -581,7 +581,7 @@ rectangle = (150, 100, 200, 200)  # square
       <figure>
         <img src="images/oop/raster-coord.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>import g2d
+      </figure><pre class="prettyprint" data-lang="py"><code>import g2d
 
 # Create canvas, width=600, height=400
 g2d.init_canvas((600, 400))
@@ -609,7 +609,7 @@ g2d.main_loop()
       <figure>
         <img src="images/oop/raster-coord.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>import g2d
+      </figure><pre class="prettyprint" data-lang="py"><code>import g2d
 
 g2d.init_canvas((600, 400))
 
@@ -644,7 +644,7 @@ g2d.main_loop()
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code># Add up numbers from 1 to 10
+<pre class="prettyprint" data-lang="py"><code># Add up numbers from 1 to 10
 
 total = 0
 for i in range(1, 11):
@@ -667,7 +667,7 @@ for i in range(1, 11):
       <figure>
         <img src="images/misc/red-squares.png">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>import g2d
+      </figure><pre class="prettyprint" data-lang="py"><code>import g2d
 
 g2d.init_canvas((300, 300))
 
@@ -744,7 +744,7 @@ Altrimenti ...</p>
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>birth_year = int(input("Birth year? "))
+      <pre class="prettyprint" data-lang="py"><code>birth_year = int(input("Birth year? "))
 birth_month = int(input("Birth month? "))
 birth_day = int(input("Birth day? "))
 current_year = int(input("Current year? "))
@@ -921,7 +921,7 @@ Anno 3: 114.12€ ...
       <figure>
         <img src="images/algo/perfect-square.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>n = 0
+      </figure><pre class="prettyprint" data-lang="py"><code>n = 0
 while n &lt;= 0:
     n = int(input("Positive val? "))
 

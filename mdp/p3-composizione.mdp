@@ -13,17 +13,17 @@ figure: images/fun/month-list.svg
 - I singoli elementi sono **numerati**
     - Da `0` a `len(x)-1`
 
-code: python
+code: py
 
     months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
               "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-code: python
+code: py
 
     num_days = [31, 28, 31, 30, 31, 30,
                 31, 31, 30, 31, 30, 31]
 
-code: python
+code: py
 
     results_by_month = [0] * 12  # List repetition
 
@@ -35,13 +35,13 @@ figure: images/fun/wile-coyote.png
 - **Attenzione ad usare indici validi!**
     - Ma indici *negativi* contano dalla fine
 
-code: python
+code: py
 
     n = len(months)            # 12
     months[3]                  # "Apr"
     months[-2]                 # "Nov", same as n - 2
 
-code: python
+code: py
 
     spring = months[2:5]       # ["Mar", "Apr", "May"]
     quart1 = months[:3]        # ["Jan", "Feb", "Mar"]
@@ -53,7 +53,7 @@ code: python
 title: Inserimento e rimozione
 figure: images/fun/shopping-list.png
 
-code: python
+code: py
 
     grocery = ["spam", "egg", "beans"]
 
@@ -72,7 +72,7 @@ code: python
 
 title: Uguaglianza e identità
 
-code: python
+code: py
 
     a = ["spam", "egg", "beans"]
     b = a[:]         # new list!
@@ -93,7 +93,7 @@ title: Stringhe e liste
 - **Stringa**: sequenza *immutabile* di caratteri
 - **`join`** e **`split`**: da lista a stringa e viceversa
 
-code: python
+code: py
 
     txt = "Monty Python's Flying Circus"
     txt[3]    # 't'
@@ -113,7 +113,7 @@ title: Tupla
 
 - Sequenza **immutabile** di valori, anche di *tipo diverso*
 
-code: python
+code: py
 
     # Tuple packing
     pt = 5, 6, "red"
@@ -131,7 +131,7 @@ code: python
 title: Cicli su liste: for
 figure: images/fun/shopping-list.png
 
-code: python
+code: py
 
     grocery = ["spam", "egg", "bacon", "sausage"]
 
@@ -147,7 +147,7 @@ code: python
 
 title: Funzioni su liste
 
-code: python
+code: py
 
     def limit_values(values, max_val):
         # procedure: process data, no direct result
@@ -173,7 +173,7 @@ class: segue dark
 
 title: Lista di palline
 
-code: python
+code: py
 
     import g2d
     from p3_oop_ball import Ball, ARENA_W, ARENA_H
@@ -201,7 +201,7 @@ figure: images/oop/ball-arena.svg
 - Associazione **has-a**, **part-of** tra oggetti
     - Una *arena* può *contenere* diverse *palline*
 
-code: python
+code: py
 
     class BallArena:  # ...
         def __init__(self):
@@ -241,7 +241,7 @@ figure: images/oop/animals.png
     - Tutti gli animali fanno un verso (*interfaccia*)
     - Ogni animale fa un verso diverso (*polimorfismo*)
 
-code: python
+code: py
 
     class Animal:
         def say(self):
@@ -252,7 +252,7 @@ code: python
 title: Classi concrete
 figure: images/oop/polymorphism.png images/oop/peppa.png
 
-code: python
+code: py
 
     class Dog(Animal):
         def __init__(self, name):
@@ -283,7 +283,7 @@ figure: images/oop/actor.svg
     - Realizzano i metodi di `Actor`, definendo i comportamenti specifici
     - Possono definire ulteriori metodi
 
-code: python
+code: py
 
     class Actor:
         def move(self):
@@ -293,7 +293,7 @@ code: python
 
 title: Generalizzazione e riuso
 
-code: python
+code: py
 
     class Arena:  # ...
         def __init__(self, w, h):
@@ -315,7 +315,7 @@ code: python
 title: Sostituzione
 figure: images/oop/actors.svg
 
-code: python
+code: py
 
     arena.add(Ball(40, 80))
     arena.add(Ghost(120, 40)) # ...
@@ -339,7 +339,7 @@ title: Polimorfismo
     - Implementato in forme diverse nelle *classi concrete*
     - Attori diversi possono muoversi in modo diverso
 
-code: python
+code: py
 
     class Ghost(Actor):  # ...
         def move(self):
@@ -352,7 +352,7 @@ code: python
 
 title: Attori e arena
 
-code: python
+code: py
 
     class Ghost(Actor):
 
@@ -382,7 +382,7 @@ class: segue dark
 title:  Rimbalzi nel browser
 figure: images/oop/bounce.png
 
-code: python
+code: py
 
     import g2d
     from p3_oop_bounce import Arena, Ball, Ghost, Turtle
@@ -406,7 +406,7 @@ code: python
 title:  Controllo da tastiera
 figure: images/oop/bounce.png
 
-code: python
+code: py
 
     def keydown(code):
         # print(code)
@@ -446,7 +446,7 @@ figure: images/oop/collision.svg images/oop/reflection.png
 
 title: Urti delle palline
 
-code: python
+code: py
 
     class Ball(Actor):
         # ...

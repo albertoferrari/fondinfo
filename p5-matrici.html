@@ -79,7 +79,7 @@ URL: https://code.google.com/p/io-2012-slides
 <li>Scrittura su file: funzione <code>print</code>, o metodo <code>write</code></li>
 <li>Blocco <code>with</code>: chiude il file al termine delle operazioni (anche in caso di errore)</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>with open("some_file.txt", "w") as f1:
+<pre class="prettyprint" data-lang="py"><code>with open("some_file.txt", "w") as f1:
     f1.write("First line\n")   # explicit newline
     f1.write("Second line\n")  # continue writing here...
 
@@ -97,7 +97,7 @@ with open("other_file.txt", "w") as f2:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>with open("some_file.txt", "r") as f1:
+      <pre class="prettyprint" data-lang="py"><code>with open("some_file.txt", "r") as f1:
     first_line = f1.readline()
     second_line = f1.readline()
     # both strings contain '\n' at the end
@@ -127,7 +127,7 @@ with open("last_file.txt", "r") as f3:
 <li>Stringhe come stream: <code>io.StringIO</code></li>
 <li>Console come stream: <code>sys.stdin</code>, <code>sys.stdout</code>, <code>sys.stderr</code></li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>import io, sys
+<pre class="prettyprint" data-lang="py"><code>import io, sys
 
 with io.StringIO() as output:
     output.write("First line.\n")
@@ -136,7 +136,7 @@ with io.StringIO() as output:
     contents = output.getvalue()
     sys.stdout.write(contents)
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>for line in sys.stdin:  # CTRL-D (Lin) or CTRL-Z (Win) to end the input
+<pre class="prettyprint" data-lang="py"><code>for line in sys.stdin:  # CTRL-D (Lin) or CTRL-Z (Win) to end the input
     print(len(line))    # notice '\n' at the end
 </code></pre></article>
  
@@ -160,7 +160,7 @@ with io.StringIO() as output:
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>try:
+<pre class="prettyprint" data-lang="py"><code>try:
     with open("other_file.txt", "r") as f:
         whole_text = f.read()
         # do stg with whole_text
@@ -187,7 +187,7 @@ except IOError as err:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>a = [['A', 'B', 'C', 'D'],
+      <pre class="prettyprint" data-lang="py"><code>a = [['A', 'B', 'C', 'D'],
      ['E', 'F', 'G', 'H'],
      ['I', 'L', 'M', 'N']]          # 2D
 
@@ -210,7 +210,7 @@ x = i % cols                        # 1D -&gt; 2D
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>matrix = [[2, 4, 3, 8],
+      <pre class="prettyprint" data-lang="py"><code>matrix = [[2, 4, 3, 8],
           [9, 3, 2, 7],
           [5, 6, 9, 1]]
 rows = len(matrix)
@@ -233,7 +233,7 @@ for x in range(cols):
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>matrix = [2, 4, 3, 8,
+      <pre class="prettyprint" data-lang="py"><code>matrix = [2, 4, 3, 8,
           9, 3, 2, 7,
           5, 6, 9, 1]
 rows = 3  # Cannot be guessed from matrix alone
@@ -256,10 +256,10 @@ for x in range(cols):
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>matrix = [[' ' for x in range(cols)] for y in range(rows)]
+      <pre class="prettyprint" data-lang="py"><code>matrix = [[' ' for x in range(cols)] for y in range(rows)]
 # all elements are inited as ' ' -- your need may vary
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>matrix = []
+<pre class="prettyprint" data-lang="py"><code>matrix = []
 for y in range(rows):
     new_row = []
     for x in range(cols):
@@ -279,7 +279,7 @@ for y in range(rows):
       <figure>
         <img src="images/qt/fifteen-puzzle.jpg">
         
-      </figure><pre class="prettyprint" data-lang="Python"><code>def abstract():
+      </figure><pre class="prettyprint" data-lang="py"><code>def abstract():
     raise NotImplementedError("Abstract method")
 
 class BoardGame:
@@ -303,7 +303,7 @@ class BoardGame:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="Python"><code>def print_game(game: BoardGame):
+      <pre class="prettyprint" data-lang="py"><code>def print_game(game: BoardGame):
     for y in range(game.rows()):
         for x in range(game.cols()):
             print('{:3}'.format(game.get_val(x, y)), end='')
@@ -490,7 +490,7 @@ def console_play(game: BoardGame):
       <figure>
         <img src="images/fun/queens-sol.svg">
         
-      </figure><pre class="prettyprint" data-lang="python"><code>def print_board(board: list):
+      </figure><pre class="prettyprint" data-lang="py"><code>def print_board(board: list):
     for y in range(len(board)):
         for x in range(len(board)):
             if x == board[y]: print('|Q', end='')
@@ -516,7 +516,7 @@ def under_attack(board: list, x: int, y: int) -&gt; bool:
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="python"><code>def place_queens(board: list, y=0) -&gt; bool:
+      <pre class="prettyprint" data-lang="py"><code>def place_queens(board: list, y=0) -&gt; bool:
     if y == len(board):
         return True  # all queens already placed
     for x in range(len(board)):
