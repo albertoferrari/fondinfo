@@ -344,7 +344,6 @@ Inserire nella lista delle tuple, cioè coppie *(nome, valore)*
 ---
 
 title: 3.6 Frogger, rana
-figure: images/misc/frogger.png
 
 - Ridenominare come `Frog` la classe `Turtle` dell'esempio `bounce`
 - Alla pressione di un tasto freccia, la rana comincia a muoversi
@@ -356,10 +355,121 @@ figure: images/misc/frogger.png
 ---
 
 title: 3.7 Frogger, animazione opzionale
-figure: images/misc/frogger.png
 
 - Cambiare il file con le icone dei personaggi
 - Per la rana, visualizzare icone diverse durante il salto
 - Nel metodo `symbol`, utilizzare il contatore e la direzione per scegliere l'icona
+
+---
+
+title: Esercitazione 4 (10-22)
+class: segue dark
+
+---
+
+title: 4.1 Lista rovesciata
+
+- Scrivere una funzione ricorsiva per rovesciare una lista
+    - Parametro: `list`
+    - Risultato: `list`
+- L'output contiene gli stessi elementi dell'input, però in ordine opposto
+    `[2, 3, 1, 4]` -> `[4, 1, 3, 2]`
+
+>
+
+Saranno accettate esclusivamente le soluzioni ricorsive
+
+Se lunghezza < 2: la lista resta uguale
+
+Altrimenti: la lista di output è ottenuta rovesciando la lista di input, ad esclusione del primo elemento (ricorsione); al risultato si concatena infine il primo elemento della lista di input
+
+---
+
+title: 4.2 Tabelline in file
+figure: images/fun/multiplication-table.jpg
+
+- Chiedere all'utente un numero N
+- Stampare a video la tavola pitagorica, fino ad N
+    - In ciascuna riga, valori separati da virgola
+- Salvare la stessa tavola in un file
+
+---
+
+title: 4.3  Valori in file
+figure: images/misc/data-sequence.png
+
+- Si supponga, per esempio, che una misura venga ripetuta due volte al giorno, per più giorni
+    - Le misure vengono riportate in un file
+    - Una riga del file per ogni giornata
+    - Quindi, due misure per ogni riga
+- Leggere tutti i valori contenuti in un file di questo tipo
+    - Ogni riga riporta due valori reali, separati da virgola
+- Visualizzare massimo, minimo e media di tutti i valori letti
+
+>
+
+Usare l'operazione `split` su stringa
+
+Se necessario, provare prima ad elaborare un file con un solo valore per riga
+
+---
+
+title: 4.4 Istogramma con barre orizzontali
+figure: images/misc/histogram-rot.png
+
+- Leggere da un file una sequenza di valori (positivi)
+- Mostrare un istogramma, in un canvas 600x600
+    - Larghezza di ciascuna barra proporzionale al valore corrispondente
+    - Rosso di ciascuna barra proporzionale al valore corrispondente
+        - Verde e blu invece sempre al massimo
+    - La barra più lunga occupa tutto lo spazio disponibile
+    - L'altezza del canvas è divisa equamente per le barre
+
+>
+
+Memorizzare i valori in una lista
+
+---
+
+title: 4.5 Lista di ambulanze
+
+- Leggere da un file i dati di una lista di ambulanze (es. 3.2)
+    - In ogni riga ci sono i dati completi di una ambulanza: nome e posizione
+- Poi, in un ciclo, chiedere all'utente il punto in cui intervenire
+- Il sistema sceglie l'ambulanza più rapida per l'intervento
+- Comunica all'utente:
+    - Il nome dell'ambulanza
+    - La stima della distanza di Manhattan tra ambulanza e punto di intervento
+
+---
+
+title: 4.6 Circular infinity
+figure: images/misc/crop-circle.jpg
+
+- In un riquadro assegnato, disegnare ricorsivamente dei cerchi, con i centri allineati in verticale
+- Tracciare un cerchio contenuto nel riquadro `(x, y, w, h)`
+    - `r = h / 2, xc = x + w / 2, yc = y + h / 2`
+- Dividere il riquadro in due metà
+- Applicare a ciascuno dei due riquadri il processo, ricorsivamente
+- Ad ogni livello, cambiare o alternare il colore del cerchio disegnato
+- Non disegnare cerchi più piccoli di un pixel
+
+>
+
+Saranno accettate esclusivamente le soluzioni ricorsive
+
+---
+
+title: 4.7 Frogger, automobili
+figure: images/misc/frogger.png
+
+- Modificare la classe `Ball` dell'esempio `bounce`
+- Il movimento è solo orizzontale
+- Quando un oggetto esce da un bordo, riappare dal bordo opposto
+- Dare però al movimento uno spazio più ampio dell'arena visibile
+    - Ammesse coordinate negative o maggiori del bordo destro
+    - In questo modo, l'oggetto riappare con un certo ritardo
+- Inserire la classe nel gioco, come `Vehicle`
+- Rimuovere la rana quando urta un veicolo
 
 

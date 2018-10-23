@@ -625,10 +625,7 @@ Con <code>s = (a + b + c) / 2</code>, semiperimetro</p>
       <h3></h3>
     </hgroup>
     <article >
-      <figure>
-        <img src="images/misc/frogger.png">
-        
-      </figure><ul>
+      <ul>
 <li>Ridenominare come <code>Frog</code> la classe <code>Turtle</code> dell'esempio <code>bounce</code></li>
 <li>Alla pressione di un tasto freccia, la rana comincia a muoversi<ul>
 <li>Il movimento prosegue per 5 fotogrammi</li>
@@ -648,13 +645,195 @@ Con <code>s = (a + b + c) / 2</code>, semiperimetro</p>
       <h3></h3>
     </hgroup>
     <article >
+      <ul>
+<li>Cambiare il file con le icone dei personaggi</li>
+<li>Per la rana, visualizzare icone diverse durante il salto</li>
+<li>Nel metodo <code>symbol</code>, utilizzare il contatore e la direzione per scegliere l'icona</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 4 (10-22)</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.1 Lista rovesciata</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Scrivere una funzione ricorsiva per rovesciare una lista<ul>
+<li>Parametro: <code>list</code></li>
+<li>Risultato: <code>list</code></li>
+</ul>
+</li>
+<li>L'output contiene gli stessi elementi dell'input, però in ordine opposto
+    <code>[2, 3, 1, 4]</code> -&gt; <code>[4, 1, 3, 2]</code></li>
+</ul>
+<blockquote></blockquote>
+<p>Saranno accettate esclusivamente le soluzioni ricorsive</p>
+<p>Se lunghezza &lt; 2: la lista resta uguale</p>
+<p>Altrimenti: la lista di output è ottenuta rovesciando la lista di input, ad esclusione del primo elemento (ricorsione); al risultato si concatena infine il primo elemento della lista di input</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.2 Tabelline in file</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/multiplication-table.jpg">
+        
+      </figure><ul>
+<li>Chiedere all'utente un numero N</li>
+<li>Stampare a video la tavola pitagorica, fino ad N<ul>
+<li>In ciascuna riga, valori separati da virgola</li>
+</ul>
+</li>
+<li>Salvare la stessa tavola in un file</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.3  Valori in file</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/data-sequence.png">
+        
+      </figure><ul>
+<li>Si supponga, per esempio, che una misura venga ripetuta due volte al giorno, per più giorni<ul>
+<li>Le misure vengono riportate in un file</li>
+<li>Una riga del file per ogni giornata</li>
+<li>Quindi, due misure per ogni riga</li>
+</ul>
+</li>
+<li>Leggere tutti i valori contenuti in un file di questo tipo<ul>
+<li>Ogni riga riporta due valori reali, separati da virgola</li>
+</ul>
+</li>
+<li>Visualizzare massimo, minimo e media di tutti i valori letti</li>
+</ul>
+<blockquote></blockquote>
+<p>Usare l'operazione <code>split</code> su stringa</p>
+<p>Se necessario, provare prima ad elaborare un file con un solo valore per riga</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.4 Istogramma con barre orizzontali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/histogram-rot.png">
+        
+      </figure><ul>
+<li>Leggere da un file una sequenza di valori (positivi)</li>
+<li>Mostrare un istogramma, in un canvas 600x600<ul>
+<li>Larghezza di ciascuna barra proporzionale al valore corrispondente</li>
+<li>Rosso di ciascuna barra proporzionale al valore corrispondente<ul>
+<li>Verde e blu invece sempre al massimo</li>
+</ul>
+</li>
+<li>La barra più lunga occupa tutto lo spazio disponibile</li>
+<li>L'altezza del canvas è divisa equamente per le barre</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Memorizzare i valori in una lista</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.5 Lista di ambulanze</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Leggere da un file i dati di una lista di ambulanze (es. 3.2)<ul>
+<li>In ogni riga ci sono i dati completi di una ambulanza: nome e posizione</li>
+</ul>
+</li>
+<li>Poi, in un ciclo, chiedere all'utente il punto in cui intervenire</li>
+<li>Il sistema sceglie l'ambulanza più rapida per l'intervento</li>
+<li>Comunica all'utente:<ul>
+<li>Il nome dell'ambulanza</li>
+<li>La stima della distanza di Manhattan tra ambulanza e punto di intervento</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.6 Circular infinity</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/crop-circle.jpg">
+        
+      </figure><ul>
+<li>In un riquadro assegnato, disegnare ricorsivamente dei cerchi, con i centri allineati in verticale</li>
+<li>Tracciare un cerchio contenuto nel riquadro <code>(x, y, w, h)</code><ul>
+<li><code>r = h / 2, xc = x + w / 2, yc = y + h / 2</code></li>
+</ul>
+</li>
+<li>Dividere il riquadro in due metà</li>
+<li>Applicare a ciascuno dei due riquadri il processo, ricorsivamente</li>
+<li>Ad ogni livello, cambiare o alternare il colore del cerchio disegnato</li>
+<li>Non disegnare cerchi più piccoli di un pixel</li>
+</ul>
+<blockquote></blockquote>
+<p>Saranno accettate esclusivamente le soluzioni ricorsive</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4.7 Frogger, automobili</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
       <figure>
         <img src="images/misc/frogger.png">
         
       </figure><ul>
-<li>Cambiare il file con le icone dei personaggi</li>
-<li>Per la rana, visualizzare icone diverse durante il salto</li>
-<li>Nel metodo <code>symbol</code>, utilizzare il contatore e la direzione per scegliere l'icona</li>
+<li>Modificare la classe <code>Ball</code> dell'esempio <code>bounce</code></li>
+<li>Il movimento è solo orizzontale</li>
+<li>Quando un oggetto esce da un bordo, riappare dal bordo opposto</li>
+<li>Dare però al movimento uno spazio più ampio dell'arena visibile<ul>
+<li>Ammesse coordinate negative o maggiori del bordo destro</li>
+<li>In questo modo, l'oggetto riappare con un certo ritardo</li>
+</ul>
+</li>
+<li>Inserire la classe nel gioco, come <code>Vehicle</code></li>
+<li>Rimuovere la rana quando urta un veicolo</li>
 </ul></article>
  
 </slide>
