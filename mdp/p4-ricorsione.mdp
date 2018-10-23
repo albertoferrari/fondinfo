@@ -368,7 +368,7 @@ Provare ad usare sia l'iterazione che la ricorsione
 Euclide: MCD(a, b) = a, se b = 0; <br>
 MCD(a, b) = MCD(b, a mod b), se b > 0
 
-<http://www.ce.unipr.it/brython/?p4_fun_mcd.py>
+<http://www.ce.unipr.it/brython/?p4_fun_gcd.py>
 
 ---
 
