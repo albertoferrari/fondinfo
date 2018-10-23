@@ -278,12 +278,13 @@ def fibonacci(n: int) -&gt; int:
 <li>Ogni elemento: risultato di una operazione su un membro di altro iterabile</li>
 <li>Condizione sugli elementi, opzionale</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>squares = [x ** 2 for x in range(12)]
+<pre class="prettyprint" data-lang="python"><code>squares = [x ** 2 for x in range(10)]
 # squares = []
 # for x in range(12):
 #    squares.append(x ** 2)
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>even_nums = [str(x) for x in range(12) if (x % 2) == 0]
+<pre class="prettyprint" data-lang="python"><code>a = ord('A')  # 65
+even_chars = [chr(x + a) for x in range(26) if x % 2 == 0]
 </code></pre></article>
  
 </slide>

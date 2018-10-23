@@ -168,14 +168,15 @@ figure: images/dev/computer-ninja.png
 
 code: python
 
-    squares = [x ** 2 for x in range(12)]
+    squares = [x ** 2 for x in range(10)]
     # squares = []
     # for x in range(12):
     #    squares.append(x ** 2)
 
 code: python
 
-    even_nums = [str(x) for x in range(12) if (x % 2) == 0]
+    a = ord('A')  # 65
+    even_chars = [chr(x + a) for x in range(26) if x % 2 == 0]
 
 ---
 
