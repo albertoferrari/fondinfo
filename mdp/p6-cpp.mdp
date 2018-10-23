@@ -530,7 +530,7 @@ code: shell
     swig -python -c++ ball.i
     g++ -fPIC -shared *.cpp *.cxx -I/usr/include/python3.6m -o _$module.so
 
-code: python
+code: py
 
     >>> from ball import Ball
     >>> b = Ball(60, 60)

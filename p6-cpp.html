@@ -683,7 +683,7 @@ int main() {
 <pre class="prettyprint" data-lang="shell"><code>swig -python -c++ ball.i
 g++ -fPIC -shared *.cpp *.cxx -I/usr/include/python3.6m -o _$module.so
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; from ball import Ball
+<pre class="prettyprint" data-lang="py"><code>&gt;&gt;&gt; from ball import Ball
 &gt;&gt;&gt; b = Ball(60, 60)
 &gt;&gt;&gt; b.move()
 &gt;&gt;&gt; print(b.get_x(), b.get_y())
