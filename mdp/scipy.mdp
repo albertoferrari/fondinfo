@@ -1487,7 +1487,7 @@ code: Python
 
 ---
 
-title: Multiple axis
+title: Subplots in column
 figure: images/scipy/pyplot-7.png
 
 code: Python
@@ -1516,7 +1516,7 @@ code: Python
     x = mu + sigma * np.random.randn(10000)
 
     # histogram of data, with 50 “bins”
-    plt.hist(x, 50, density=1, facecolor='g')
+    plt.hist(x, 50, facecolor='g')
 
     plt.xlabel('Smarts')
     plt.ylabel('Probability')
