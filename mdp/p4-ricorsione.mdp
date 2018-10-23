@@ -190,13 +190,13 @@ figure: images/repr/child-fingers.png
 
 code: python
 
-    >>> grocery = ["spam", "eggs", "bacon", "ketchup"]
+    >>> grocery = ["spam", "egg", "bacon", "sausage"]
     >>> list(enumerate(grocery))
-    [(0, "spam"), (1, "eggs"), (2, "bacon"), (3, "ketchup")]
+    [(0, "spam"), (1, "egg"), (2, "bacon"), (3, "sausage")]
 
 code: python
 
-    grocery = ["spam", "eggs", "bacon", "ketchup"]
+    grocery = ["spam", "egg", "bacon", "sausage"]
     for i, val in enumerate(grocery):
         print(i, val)
 
@@ -216,11 +216,10 @@ figure: images/fun/zip.jpg
 
 code: python
 
-    >>> grocery = ["spam", "eggs", "bacon", "ketchup"]
-    >>> quantities = ["100 g", "6 pc", "200 g", "1 bottle", "too much"]
+    >>> grocery = ["spam", "egg", "beans"]
+    >>> quantities = ["100 g", "6 pc", "200 g", "too much"]
     >>> list(zip(grocery, quantities))
-    [("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
-    ("ketchup", "1 bottle")]
+    [('spam', '100 g'), ('egg', '6 pc'), ('beans', '200 g')]
 
 >
 

@@ -304,11 +304,11 @@ even_chars = [chr(x + a) for x in range(26) if x % 2 == 0]
 <li>Genera una sequenza di tuple (coppie)</li>
 <li>Spesso si usa nei cicli <code>for</code>, quando serve sia il valore che l'indice</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "eggs", "bacon", "ketchup"]
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "bacon", "sausage"]
 &gt;&gt;&gt; list(enumerate(grocery))
-[(0, "spam"), (1, "eggs"), (2, "bacon"), (3, "ketchup")]
+[(0, "spam"), (1, "egg"), (2, "bacon"), (3, "sausage")]
 </code></pre>
-<pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "eggs", "bacon", "ketchup"]
+<pre class="prettyprint" data-lang="python"><code>grocery = ["spam", "egg", "bacon", "sausage"]
 for i, val in enumerate(grocery):
     print(i, val)
 </code></pre>
@@ -333,11 +333,10 @@ Altrimenti, Python non genera immediatamente i risultati (<em>lazy</em>)</p></ar
 <li>Genera una sequenza di tuple (coppie)</li>
 <li>Il risultato ha la lunghezza della sequenza più breve</li>
 </ul>
-<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "eggs", "bacon", "ketchup"]
-&gt;&gt;&gt; quantities = ["100 g", "6 pc", "200 g", "1 bottle", "too much"]
+<pre class="prettyprint" data-lang="python"><code>&gt;&gt;&gt; grocery = ["spam", "egg", "beans"]
+&gt;&gt;&gt; quantities = ["100 g", "6 pc", "200 g", "too much"]
 &gt;&gt;&gt; list(zip(grocery, quantities))
-[("spam", "100 g"), ("eggs", "6 pc"), ("bacon", "200 g"),
-("ketchup", "1 bottle")]
+[('spam', '100 g'), ('egg', '6 pc'), ('beans', '200 g')]
 </code></pre>
 <blockquote></blockquote>
 <p>Risultati in lista, solo (!) per visualizzarli</p></article>
