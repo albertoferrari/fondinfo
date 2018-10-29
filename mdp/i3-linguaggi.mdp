@@ -69,7 +69,7 @@ title: Operazioni su linguaggi
 - `L~~1~~` ed `L~~2~~` linguaggi su `Σ*` (due insiemi di stringhe)
 - Unione: `L~~1~~ ∪ L~~2~~ = {x ∈ Σ* : x ∈ L~~1~~ ∨ x ∈ L~~2~~}`
 - Intersezione: `L~~1~~ ∩ L~~2~~ = {x ∈ Σ* : x ∈ L~~1~~ ∧ x ∈ L~~2~~}`
-- Complementazione: `̅L~~1~~ = {x ∈ Σ* : x ∉ L~~1~~}`
+- Complementazione: `L^^c^^ = {x ∈ Σ* : x ∉ L}`
 
 ---
 

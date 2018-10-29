@@ -532,7 +532,7 @@ title: Testo tra parentesi
 
 - Chiedere all'utente un testo
 - Riscrivere il testo in output, ma...
-- Escludere le parti racchiuse tra parentesi '(', ')'
+- Escludere le parti racchiuse tra parentesi: `( )`
 
 >
 

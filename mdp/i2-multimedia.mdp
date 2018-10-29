@@ -83,7 +83,7 @@ class: large-image
 - Se bit più alto a 0:
     - Simbolo ASCII su 7 bit
 - Altrimenti:
-    - Numero 1 in byte iniziale = numero di byte per *code-point*
+    - Numero 1 in byte iniziale = numero di byte per simbolo <br> (num. *code-unit* per codificare un *code-point*)
     - Byte seguenti cominciano tutti con `10`
 
 ![](images/repr/utf8-examples.png)

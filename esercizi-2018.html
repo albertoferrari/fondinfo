@@ -838,6 +838,187 @@ Con <code>s = (a + b + c) / 2</code>, semiperimetro</p>
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 5 (10-29)</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.1 Selezione da file</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Leggere riga per riga un file di testo</li>
+<li>Riscrivere in un file di output le stesse righe</li>
+<li>Ma, di ciascuna riga, scrivere solo il testo compreso tra parentesi quadre</li>
+</ul>
+<blockquote></blockquote>
+<p>Segnare in un <code>bool</code> se si è letta una parentesi aperta, ma non ancora una parentesi chiusa</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.2 Veicoli ed elicotteri</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Definire una classe astratta per i <em>veicoli</em> d'intervento<ul>
+<li>Metodo <code>estimate_time(x, y)</code> per il calcolo del tempo d'intervento</li>
+</ul>
+</li>
+<li>Ridefinire l'<em>ambulanza</em> (es. 3.2) come sottoclasse di <em>veicolo</em><ul>
+<li>Richiede <code>1 minuto</code> di preparazione alla partenza</li>
+<li>Viaggia a <code>90 Km/h</code>, per la distanza di Manhattan</li>
+</ul>
+</li>
+<li>Definire una classe <em>elicottero</em> come sottoclasse di <em>veicolo</em><ul>
+<li>Richiede <code>5 minuti</code> di preparazione</li>
+<li>Viaggia in linea d'aria a <code>250 Km/h</code></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.3 Lista di veicoli</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Leggere da un file i dati di una lista di <em>veicoli</em> (<em>elicotteri</em> o <em>ambulanze</em>, es. 5.2)<ul>
+<li>In ogni riga ci sono i dati completi di un veicolo, compreso il tipo</li>
+</ul>
+</li>
+<li>Poi, in un ciclo, chiedere all'utente il punto in cui intervenire</li>
+<li>Il sistema sceglie il veicolo più rapido per l'intervento</li>
+<li>Comunica all'utente:<ul>
+<li>Il nome del veicolo</li>
+<li>La stima del tempo di intervento</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.4 Istogramma con barre verticali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/histogram.png">
+        
+      </figure><ul>
+<li>Leggere da un file una sequenza di valori (positivi)</li>
+<li>Mostrare un istogramma, in un canvas 600x600<ul>
+<li>Altezza di ciascuna barra proporzionale al valore corrispondente</li>
+<li>La barra più alta occupa tutto lo spazio disponibile</li>
+<li>Barre in blu, per valori sotto alla media</li>
+<li>Barre in rosso, per valori sopra (o uguali) alla media</li>
+<li>La larghezza del canvas è divisa equamente per le barre</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.5 Percorso del cavallo</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/knight-moves.png">
+        
+      </figure><ul>
+<li>L'utente sceglie dim. scacchiera (&gt;= 5)</li>
+<li>Allocare matrice quadrata di interi (tutti 0)</li>
+<li>In un ciclo, chiedere all'utente x ed y<ul>
+<li>Segnare nella cella il numero di mosse fatte</li>
+<li>Si può giocare solo nelle celle vuote, ad “L” dall'ultima giocata</li>
+<li>Dopo ogni mossa, stampare la matrice aggiornata</li>
+<li>Controllare se la matrice è piena</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="output"><code>    1   14    9   20    3
+   24   19    2   15   10
+   13    8   25    4   21
+   18   23    6   11   16
+    7   12   17   22    5
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.6 Frogger, zattere</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/frogger.png">
+        
+      </figure><ul>
+<li>Modificare la classe <code>Ball</code> dell'esempio <code>bounce</code><ul>
+<li>Il movimento è solo orizzontale (destra o sinistra)</li>
+<li>Quando un oggetto esce da un bordo, riappare dal bordo opposto</li>
+<li>Dare però al movimento uno spazio più ampio dell'arena visibile</li>
+</ul>
+</li>
+<li>Inserire la classe nel gioco, come <code>Raft</code></li>
+<li>La rana viene trascinata, quando poggia su una zattera<ul>
+<li>Controllare che il centro della rana sia dentro la zattera</li>
+<li>Quando la rana collide con una zattera, può memorizzarla in un campo</li>
+<li>Metodo <em>getter</em> che ottenere la velocità di una zattera</li>
+<li>La rana muore, se trascinata fuori dallo schermo</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5.7 Frogger, fiume</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/frogger.png">
+        
+      </figure><ul>
+<li>Aggiungere il fiume al gioco Frogger<ul>
+<li>Personaggio fisso</li>
+<li>Disposto sotto alle zattere (prima, nell'arena)</li>
+</ul>
+</li>
+<li>Se la rana urta il fiume (ma non una zattera), muore</li>
+<li>Se la rana attraversa il fiume, vince</li>
+</ul></article>
+ 
+</slide>
+
 
 <slide class="thank-you-slide segue nobackground">
   <aside class="gdbar right"><img src="images/logo.png"></aside>
