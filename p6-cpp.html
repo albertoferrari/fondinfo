@@ -226,6 +226,22 @@ if (count &gt; 0) {
       </figure><pre class="prettyprint" data-lang="c++"><code>#include &lt;vector&gt;
 // ...
 
+vector&lt;string&gt; grocery = {"spam", "egg", "beans"};
+
+cout &lt;&lt; grocery[1] &lt;&lt; endl;
+cout &lt;&lt; grocery.size() &lt;&lt; endl;              // 3
+grocery[0] = "sausage";                      // replace an element
+
+grocery.push_back("bacon")                   // add an element to the end
+grocery.pop_back()                           // remove last element
+
+grocery.insert(begin(grocery) + 1, "bacon")  // other elements shift
+grocery.erase(begin(grocery) + 1)            // remove element at index
+
+if "egg" in grocery:       # True, grocery contains "egg"
+    grocery.remove("egg")  # remove an element by value
+
+
 vector&lt;string&gt; shopping_list = {"milk", "cocoa",
                                 "yogurt"};
 cout &lt;&lt; shopping_list[1] &lt;&lt; endl;  // cocoa

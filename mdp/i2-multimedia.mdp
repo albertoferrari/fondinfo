@@ -231,7 +231,7 @@ figure: images/repr/sampled-signal.svg images/repr/digital-signal.svg
 - Grandezza analogica → discretizzazione
     - **Campionamento** (*sampling*) nel tempo
     - **Quantizzazione** (*quantizing*) nelle ampiezze
-    - Qualità CD: 44 kHz, 16bit
+    - Qualità CD: stereo, 44 kHz, 16bit
     - Spettro udibile: 20-20k Hz, Nyquist-Shannon
 
 ---
@@ -283,6 +283,7 @@ title: Documenti strutturati
 
 title: WYSIWYG
 
+- *What You See Is What You Get*
 - Focus su grafica, si perde di vista la struttura logica
     - Grafica: non con i comandi grafici...
     - Ma definendo gli **stili** delle varie parti di doc, come *ruoli* logici

@@ -203,7 +203,9 @@ code: py
 
 >
 
-*Gui*: <http://www.ce.unipr.it/brython/?p5_mat_fifteen.py>
+*BoardGame*: <http://www.ce.unipr.it/brython/?boardgame.py>
+
+*Fifteen*: <http://www.ce.unipr.it/brython/?p5_mat_fifteen.py>
 
 ---
 
@@ -240,12 +242,12 @@ title: Constraint Satisfaction Problem
 figure: images/fun/8-queens.svg
 
 - Problema di *soddisfacimento di vincoli* (CSP), caratterizzato da:
-	- **Insieme di variabili**, che possono assumere valori in un certo *dominio*
-	- **Insieme di vincoli**, che devono essere rispettati dai valori delle variabili
+    - **Insieme di variabili**, che possono assumere valori in un certo *dominio*
+    - **Insieme di vincoli**, che devono essere rispettati dai valori delle variabili
 - Esempio: *Problema delle 8 regine*
-	- Posizionare `8` regine su una scacchiera `8x8`
-	- In modo che nessuna di esse possa catturarne un'altra
-	- Nessuna regina deve avere una colonna, riga o diagonale in comune con un'altra regina
+    - Posizionare `8` regine su una scacchiera `8x8`
+    - In modo che nessuna di esse possa catturarne un'altra
+    - Nessuna regina deve avere una colonna, riga o diagonale in comune con un'altra regina
 
 ---
 
@@ -255,11 +257,11 @@ figure: images/fun/generate-and-test.png
 - Tecnica per risolvere problemi di soddisfacimento di vincoli
 - Si assegna un *valore* ad ogni variabile
 - Si verifica se tutti i *vincoli* sono soddisfatti
-	- Se i vincoli sono *soddisfatti* ⇒ trovata una *soluzione*
-	- Altrimenti, si prova con valori diversi
+    - Se i vincoli sono *soddisfatti* ⇒ trovata una *soluzione*
+    - Altrimenti, si prova con valori diversi
 - Il procedimento *continua*
-	- Finché non ci sono più assegnamenti nuovi da testare
-	- Tutte le soluzioni sono testate
+    - Finché non ci sono più assegnamenti nuovi da testare
+    - Tutte le soluzioni sono testate
 
 ---
 
@@ -267,11 +269,11 @@ title: 8 regine: G&T
 figure: images/fun/8-queens.svg
 
 - *Generate*
-	- Inserire `8` regine in tutte le possibili combinazioni in una scacchiera `8x8`
-	- `~ 4 miliardi`
+    - Inserire `8` regine in tutte le possibili combinazioni in una scacchiera `8x8`
+    - `~ 4 miliardi`
 - *Test*
-	- Per ogni combinazione verificare se nessuna regina può catturarne un’altra
-	- Solo `92` soluzioni
+    - Per ogni combinazione verificare se nessuna regina può catturarne un’altra
+    - Solo `92` soluzioni
 
 >
 
@@ -283,16 +285,16 @@ title: 8 regine: G&T ridotto
 figure: images/fun/queens-sol.svg
 
 - Dai vincoli si evince che *ogni riga*
-	- Può contenere al massimo 1 regina
-	- Deve contenere esattamente 1 regina
+    - Può contenere al massimo 1 regina
+    - Deve contenere esattamente 1 regina
 - È possibile quindi rappresentare una *lista*
-	- I valori rappresentano la colonna in cui è posizionata la regina sulla riga
-	- `8` elementi con indici `0..7` e con valori `0..7`
-	- (`N` elementi con indici `0..N-1` e con valori `0..N-1`)
+    - I valori rappresentano la colonna in cui è posizionata la regina sulla riga
+    - `8` elementi con indici `0..7` e con valori `0..7`
+    - (`N` elementi con indici `0..N-1` e con valori `0..N-1`)
 - *Generate*
-	- Tutte le combinazioni di 8 valori: `8^^8^^ = ~ 16 milioni`
+    - Tutte le combinazioni di 8 valori: `8^^8^^ = ~ 16 milioni`
 - *Test*
-	- Per ogni combinazione, verificare i vincoli
+    - Per ogni combinazione, verificare i vincoli
 
 ---
 
@@ -304,8 +306,8 @@ class: large-figure
 - A seguito di *ogni assegnamento* si verificano i vincoli
 - Se non ci sono *vincoli già violati*, si continua con gli assegnamenti delle variabili rimanenti
 - Altrimenti si verifica se la variabile appena assegnata ha ancora valori da provare
-	- Se sì, si prova con un nuovo valore
-	- Altrimenti, si torna indietro e si modifica una nuova variabile già assegnata
+    - Se sì, si prova con un nuovo valore
+    - Altrimenti, si torna indietro e si modifica una nuova variabile già assegnata
 
 ---
 
@@ -540,11 +542,11 @@ title: Soluzioni delle 8 regine
 figure: images/fun/queens-sol.svg
 
 - Trovare tutte le soluzioni possibili, con il *backtracking*
-	- Modificare il codice proposto
-	- Visualizzare il numero di tentativi effettuati e il numero di soluzioni trovate
+    - Modificare il codice proposto
+    - Visualizzare il numero di tentativi effettuati e il numero di soluzioni trovate
 - Trovare tutte le soluzioni, usando la metodologia *Generate & Test*
-	- Versione semplificata – una sola regina per riga
-	- Visualizzare il numero di tentativi effettuati e il numero di soluzioni trovate
+    - Versione semplificata – una sola regina per riga
+    - Visualizzare il numero di tentativi effettuati e il numero di soluzioni trovate
 
 >
 

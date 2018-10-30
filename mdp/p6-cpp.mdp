@@ -143,6 +143,22 @@ code: c++
     #include <vector>
     // ...
 
+    vector<string> grocery = {"spam", "egg", "beans"};
+
+    cout << grocery[1] << endl;
+    cout << grocery.size() << endl;              // 3
+    grocery[0] = "sausage";                      // replace an element
+
+    grocery.push_back("bacon")                   // add an element to the end
+    grocery.pop_back()                           // remove last element
+
+    grocery.insert(begin(grocery) + 1, "bacon")  // other elements shift
+    grocery.erase(begin(grocery) + 1)            // remove element at index
+
+    if "egg" in grocery:       # True, grocery contains "egg"
+        grocery.remove("egg")  # remove an element by value
+
+
     vector<string> shopping_list = {"milk", "cocoa",
                                     "yogurt"};
     cout << shopping_list[1] << endl;  // cocoa
