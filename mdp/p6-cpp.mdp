@@ -120,17 +120,17 @@ figure: images/algo/average.svg
 
 code: c++
 
-    int val, tot = 0, count = 0;
+    int val, total = 0, count = 0;
     cout << "Val (0 to end)? ";
     cin >> val;
     while (val != 0) {
-        tot += val;
+        total += val;
         ++count;
         cout << "Val (0 to end)? ";
         cin >> val;
     }
     if (count > 0) {
-        cout << "Avg: " << tot / float(count);
+        cout << "Avg: " << total / float(count);
     }
 
 ---
@@ -154,23 +154,6 @@ code: c++
 
     grocery.insert(begin(grocery) + 1, "bacon")  // other elements shift
     grocery.erase(begin(grocery) + 1)            // remove element at index
-
-    if "egg" in grocery:       # True, grocery contains "egg"
-        grocery.remove("egg")  # remove an element by value
-
-
-    vector<string> shopping_list = {"milk", "cocoa",
-                                    "yogurt"};
-    cout << shopping_list[1] << endl;  // cocoa
-    shopping_list[1] = "coffee";
-    shopping_list.push_back("corn flakes");
-    cout << shopping_list.size() << endl;  // 4
-
-    shopping_list.erase(begin(shopping_list) + 2);
-    shopping_list.insert(begin(shopping_list) + 2, "biscuits");
-
-    vector<string> another_list;
-    another_list.assign(10, ""); // 10 strings
 
 ---
 
@@ -214,10 +197,30 @@ code: c++
         cout << "Col #" << x << " sums to " << total << endl;
     }
 
+---
+
+title: Appartenenza e allocazione
+
 code: c++
 
-    vector<vector<char>> another_matrix;
-    another_matrix.assign(rows, vector<char>(cols, '-'));
+    #include <algorithm>
+    // ...
+
+    auto pos = find(begin(grocery), end(grocery), "egg");
+    if (pos != end(grocery)) {
+        // true, grocery contains "egg"
+        grocery.erase(pos);
+    }
+
+code: c++
+
+    vector<string> some_list;
+    some_list.assign(10, ""); // 10 strings
+
+code: c++
+
+    vector<vector<char>> some_matrix;
+    some_matrix.assign(rows, vector<char>(cols, '-'));
 
 ---
 
@@ -440,7 +443,8 @@ title: Oggetti
 ---
 
 title: Definizione: ball.h
-figure: images/oop/ball-object.svg
+figure: images/oop/ball-object.svg images/oop/ball-uml.svg
+figcaption: Class diagram UML
 
 code: c++
 
@@ -464,6 +468,7 @@ code: c++
 ---
 
 title: Implementazione: ball.cpp
+figure: images/oop/anim-bounce.png
 
 code: c++
 
@@ -487,22 +492,22 @@ code: c++
 ---
 
 title: Applicazione: main.cpp
+figure: images/oop/balls.png
 
 code: c++
 
     #include "ball.h"
     // ...
     int main() {
-        Ball ball1{40, 80};
-        Ball ball2{80, 40};
+        Ball b1{40, 80};
+        Ball b2{80, 40};
 
-        string line;
-        while (getline(cin, line)) {
-            ball1.move();
-            ball2.move();
+        for (auto i = 0; i < 25; ++i) {
+            b1.move();
+            b2.move();
 
-            cout << ball1.get_x() << ", " << ball1.get_y() << endl;
-            cout << ball2.get_x() << ", " << ball2.get_y() << endl << endl;
+            cout << b1.get_x() << ", " << b1.get_y() << endl;
+            cout << b2.get_x() << ", " << b2.get_y() << endl << endl;
         }
     }
 
@@ -514,18 +519,18 @@ code: c++
 
     // ...
     int main() {
-        Ball ball1{40, 80};
-        Ball* ball2 = new Ball{80, 40};
-        // Ball* alias1 = &ball1; // no new ball is created
-        // Ball* alias2 = ball2;  // no new ball is created
+        Ball b1{40, 80};
+        Ball* b2 = new Ball{80, 40};
+        // Ball* alias1 = &b1; // no new ball is created
+        // Ball* alias2 = b2;  // no new ball is created
 
-        for (string line; getline(cin, line);) {
-            ball1.move();
-            ball2->move();
-            cout << ball1.get_x() << ", " << ball1.get_y() << endl;
-            cout << ball2->get_x() << ", " << ball2->get_y() << endl << endl;
+        for (auto i = 0; i < 25; ++i) {
+            b1.move();
+            b2->move();
+            cout << b1.get_x() << ", " << b1.get_y() << endl;
+            cout << b2->get_x() << ", " << b2->get_y() << endl << endl;
         }
-        delete ball2;
+        delete b2;
     }
 
 ---
@@ -582,7 +587,7 @@ class: segue dark
 ---
 
 title: Livelli di astrazione
-figure: images/oop/actors.svg
+figure: images/oop/actor.svg
 
 - `Actor`: *classe base*
     - Dichiara un metodo `move` ecc.
@@ -599,6 +604,7 @@ code: c++
 ---
 
 title: Composizione
+figure: images/oop/actors.svg
 
 code: c++
 
