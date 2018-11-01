@@ -97,7 +97,9 @@ print('3rd side:', side3)
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="py"><code># def hypotenuse ...
+<pre class="prettyprint" data-lang="py"><code>def hypotenuse(a, b):
+    c = (a ** 2 + b ** 2) ** 0.5
+    return c
 
 def main():
     side1 = float(input("1st side? "))

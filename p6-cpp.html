@@ -177,13 +177,15 @@ int val = stoi(txt);  // see also `stod`, `stof`...
       </figure><pre class="prettyprint" data-lang="c++"><code>string a, b;
 cin &gt;&gt; a &gt;&gt; b;
 if (a &lt; b) {
-    cout &lt;&lt; "The words are ordered";
+    cout &lt;&lt; "The words are ordered" &lt;&lt; endl;
 } else if (a &gt; b) {
-    cout &lt;&lt; "The words are inverted";
+    cout &lt;&lt; "The words are inverted" &lt;&lt; endl;
 } else {
-    cout &lt;&lt; "The words are equal";
+    cout &lt;&lt; "The words are equal" &lt;&lt; endl;
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://tomamic.github.io/fondinfo/p1-algoritmi.html#16">http://tomamic.github.io/fondinfo/p1-algoritmi.html#16</a></p></article>
  
 </slide>
 
@@ -198,18 +200,20 @@ if (a &lt; b) {
         <img src="images/algo/average.svg">
         
       </figure><pre class="prettyprint" data-lang="c++"><code>int val, total = 0, count = 0;
-cout &lt;&lt; "Val (0 to end)? ";
+cout &lt;&lt; "Val (0 to finish)? ";
 cin &gt;&gt; val;
 while (val != 0) {
     total += val;
     ++count;
-    cout &lt;&lt; "Val (0 to end)? ";
+    cout &lt;&lt; "Val (0 to finish)? ";
     cin &gt;&gt; val;
 }
 if (count &gt; 0) {
-    cout &lt;&lt; "Avg: " &lt;&lt; total / float(count);
+    cout &lt;&lt; "Avg: " &lt;&lt; total / float(count) &lt;&lt; endl;
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://tomamic.github.io/fondinfo/p1-algoritmi.html#20">http://tomamic.github.io/fondinfo/p1-algoritmi.html#20</a></p></article>
  
 </slide>
 
@@ -227,8 +231,7 @@ if (count &gt; 0) {
 // ...
 
 vector&lt;string&gt; grocery = {"spam", "egg", "beans"};
-
-cout &lt;&lt; grocery[1] &lt;&lt; endl;
+cout &lt;&lt; grocery[1] &lt;&lt; endl;                  // egg
 cout &lt;&lt; grocery.size() &lt;&lt; endl;              // 3
 grocery[0] = "sausage";                      // replace an element
 
@@ -237,7 +240,9 @@ grocery.pop_back()                           // remove last element
 
 grocery.insert(begin(grocery) + 1, "bacon")  // other elements shift
 grocery.erase(begin(grocery) + 1)            // remove element at index
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://tomamic.github.io/fondinfo/p3-composizione.html#4">http://tomamic.github.io/fondinfo/p3-composizione.html#4</a></p></article>
  
 </slide>
 
@@ -248,23 +253,22 @@ grocery.erase(begin(grocery) + 1)            // remove element at index
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>// for-each, C++11
-for (auto x : shopping_list) {
-    cout &lt;&lt; x &lt;&lt; endl;
+      <pre class="prettyprint" data-lang="c++"><code>for (auto product : grocery) {  // for-each, C++11
+    cout &lt;&lt; product &lt;&lt; endl;
 }
-
-// range, C++98
-for (int i = 0; i &lt; shopping_list.size(); ++i) {
-    cout &lt;&lt; shopping_list[i] &lt;&lt; endl;
+</code></pre>
+<pre class="prettyprint" data-lang="c++"><code>for (int i = 0; i &lt; grocery.size(); ++i) {  // range, C++98
+    cout &lt;&lt; grocery[i] &lt;&lt; endl;
 }
-
-// equivalent while
-int i = 0;
-while (i &lt; shopping_list.size()) {
-    cout &lt;&lt; shopping_list[i] &lt;&lt; endl;
+</code></pre>
+<pre class="prettyprint" data-lang="c++"><code>int i = 0;
+while (i &lt; grocery.size()) {  // equivalent while
+    cout &lt;&lt; grocery[i] &lt;&lt; endl;
     ++i;
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://tomamic.github.io/fondinfo/p3-composizione.html#8">http://tomamic.github.io/fondinfo/p3-composizione.html#8</a></p></article>
  
 </slide>
 
@@ -287,7 +291,9 @@ for (auto x = 0; x &lt; cols; ++x) {
     }
     cout &lt;&lt; "Col #" &lt;&lt; x &lt;&lt; " sums to " &lt;&lt; total &lt;&lt; endl;
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://tomamic.github.io/fondinfo/p5-matrici.html#9">http://tomamic.github.io/fondinfo/p5-matrici.html#9</a></p></article>
  
 </slide>
 
@@ -298,10 +304,9 @@ for (auto x = 0; x &lt; cols; ++x) {
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>#include &lt;algorithm&gt;
-// ...
-
-auto pos = find(begin(grocery), end(grocery), "egg");
+      <pre class="prettyprint" data-lang="c++"><code>#include &lt;algorithm&gt;  // find, etc.
+</code></pre>
+<pre class="prettyprint" data-lang="c++"><code>auto pos = find(begin(grocery), end(grocery), "egg");
 if (pos != end(grocery)) {
     // true, grocery contains "egg"
     grocery.erase(pos);
@@ -312,7 +317,9 @@ some_list.assign(10, ""); // 10 strings
 </code></pre>
 <pre class="prettyprint" data-lang="c++"><code>vector&lt;vector&lt;char&gt;&gt; some_matrix;
 some_matrix.assign(rows, vector&lt;char&gt;(cols, '-'));
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://tomamic.github.io/fondinfo/p3-composizione.html#4">http://tomamic.github.io/fondinfo/p3-composizione.html#4</a></p></article>
  
 </slide>
 
@@ -337,7 +344,9 @@ int main() {
     auto side3 = hypotenuse(side1, side2);
     cout &lt;&lt; "3rd side: " &lt;&lt; side3 &lt;&lt; endl;
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://tomamic.github.io/fondinfo/p2-oggetti.html#4">http://tomamic.github.io/fondinfo/p2-oggetti.html#4</a></p></article>
  
 </slide>
 
@@ -349,9 +358,8 @@ int main() {
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="c++"><code>#include &lt;fstream&gt;
-// ...
-
-int n; float r; string w;
+</code></pre>
+<pre class="prettyprint" data-lang="c++"><code>int n; float r; string w;
 ifstream file1{"input.txt"};   // file input stream
 if (file1.good()) {            // is stream available?
     file1 &gt;&gt; n &gt;&gt; r &gt;&gt; w;
@@ -389,7 +397,9 @@ getline(file1, whole_text, '\0');
 while (getline(file1, line)) {  // for each line in file1...
     cout &lt;&lt; line &lt;&lt; endl;
 }
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://tomamic.github.io/fondinfo/p5-matrici.html#4">http://tomamic.github.io/fondinfo/p5-matrici.html#4</a></p></article>
  
 </slide>
 

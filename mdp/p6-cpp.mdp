@@ -106,12 +106,16 @@ code: c++
     string a, b;
     cin >> a >> b;
     if (a < b) {
-        cout << "The words are ordered";
+        cout << "The words are ordered" << endl;
     } else if (a > b) {
-        cout << "The words are inverted";
+        cout << "The words are inverted" << endl;
     } else {
-        cout << "The words are equal";
+        cout << "The words are equal" << endl;
     }
+
+>
+
+<http://tomamic.github.io/fondinfo/p1-algoritmi.html#16>
 
 ---
 
@@ -121,17 +125,21 @@ figure: images/algo/average.svg
 code: c++
 
     int val, total = 0, count = 0;
-    cout << "Val (0 to end)? ";
+    cout << "Val (0 to finish)? ";
     cin >> val;
     while (val != 0) {
         total += val;
         ++count;
-        cout << "Val (0 to end)? ";
+        cout << "Val (0 to finish)? ";
         cin >> val;
     }
     if (count > 0) {
-        cout << "Avg: " << total / float(count);
+        cout << "Avg: " << total / float(count) << endl;
     }
+
+>
+
+<http://tomamic.github.io/fondinfo/p1-algoritmi.html#20>
 
 ---
 
@@ -144,8 +152,7 @@ code: c++
     // ...
 
     vector<string> grocery = {"spam", "egg", "beans"};
-
-    cout << grocery[1] << endl;
+    cout << grocery[1] << endl;                  // egg
     cout << grocery.size() << endl;              // 3
     grocery[0] = "sausage";                      // replace an element
 
@@ -155,28 +162,37 @@ code: c++
     grocery.insert(begin(grocery) + 1, "bacon")  // other elements shift
     grocery.erase(begin(grocery) + 1)            // remove element at index
 
+>
+
+<http://tomamic.github.io/fondinfo/p3-composizione.html#4>
+
 ---
 
 title: Cicli for
 
 code: c++
 
-    // for-each, C++11
-    for (auto x : shopping_list) {
-        cout << x << endl;
+    for (auto product : grocery) {  // for-each, C++11
+        cout << product << endl;
     }
 
-    // range, C++98
-    for (int i = 0; i < shopping_list.size(); ++i) {
-        cout << shopping_list[i] << endl;
+code: c++
+
+    for (int i = 0; i < grocery.size(); ++i) {  // range, C++98
+        cout << grocery[i] << endl;
     }
 
-    // equivalent while
+code: c++
+
     int i = 0;
-    while (i < shopping_list.size()) {
-        cout << shopping_list[i] << endl;
+    while (i < grocery.size()) {  // equivalent while
+        cout << grocery[i] << endl;
         ++i;
     }
+
+>
+
+<http://tomamic.github.io/fondinfo/p3-composizione.html#8>
 
 ---
 
@@ -197,14 +213,19 @@ code: c++
         cout << "Col #" << x << " sums to " << total << endl;
     }
 
+>
+
+<http://tomamic.github.io/fondinfo/p5-matrici.html#9>
+
 ---
 
 title: Appartenenza e allocazione
 
 code: c++
 
-    #include <algorithm>
-    // ...
+    #include <algorithm>  // find, etc.
+
+code: c++
 
     auto pos = find(begin(grocery), end(grocery), "egg");
     if (pos != end(grocery)) {
@@ -221,6 +242,10 @@ code: c++
 
     vector<vector<char>> some_matrix;
     some_matrix.assign(rows, vector<char>(cols, '-'));
+
+>
+
+<http://tomamic.github.io/fondinfo/p3-composizione.html#4>
 
 ---
 
@@ -243,6 +268,10 @@ code: c++
         cout << "3rd side: " << side3 << endl;
     }
 
+>
+
+<http://tomamic.github.io/fondinfo/p2-oggetti.html#4>
+
 ---
 
 title: Flussi e file
@@ -250,7 +279,8 @@ title: Flussi e file
 code: c++
 
     #include <fstream>
-    // ...
+
+code: c++
 
     int n; float r; string w;
     ifstream file1{"input.txt"};   // file input stream
@@ -292,6 +322,10 @@ code: c++
     while (getline(file1, line)) {  // for each line in file1...
         cout << line << endl;
     }
+
+>
+
+<http://tomamic.github.io/fondinfo/p5-matrici.html#4>
 
 ---
 

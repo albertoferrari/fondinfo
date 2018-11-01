@@ -44,7 +44,9 @@ title: Funzione main
 
 code: py
 
-    # def hypotenuse ...
+    def hypotenuse(a, b):
+        c = (a ** 2 + b ** 2) ** 0.5
+        return c
 
     def main():
         side1 = float(input("1st side? "))
