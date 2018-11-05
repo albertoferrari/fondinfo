@@ -72,8 +72,8 @@ figure: images/misc/green-squares.png
     - Quadrati con lato decrescente
     - Tutti allineati in alto e a sinistra
 - Far variare il colore dei quadrati
-	- Dal nero del quadrato più grande
-	- Fino al verde del quadrato più piccolo
+    - Dal nero del quadrato più grande
+    - Fino al verde del quadrato più piccolo
 
 >
 
@@ -575,3 +575,96 @@ figure: images/misc/frogger.png
 - Se la rana urta il fiume (ma non una zattera), muore
 - Se la rana attraversa il fiume, vince
 
+---
+
+title: Esercitazione 6 (11-05 *)
+class: segue dark
+
+---
+
+title: 6.1 Minimo valore, con ricorsione
+figure: images/fun/matryoshka.png
+
+- Definire una funzione ricorsiva `min_char`
+    - Cerca, in una stringa di testo, il carattere con codice Unicode minimo
+- Se il testo ha lunghezza 0, errore
+    - `raise ValueError("Empty string")`
+- Se il testo ha lunghezza 1, l'unico carattere è il risultato
+- Altrimenti il risultato è pari al minore tra:
+    - Il primo carattere
+    - Il carattere con codice minimo tra tutti gli altri (ricorsione)
+
+>
+
+Saranno accettate esclusivamente le soluzioni ricorsive
+
+---
+
+title: 6.2 Maiuscole in ogni riga
+
+- Leggere un file riga per riga
+- Calcolare e visualizzare la percentuale di maiuscole in ogni riga
+- Calcolare e visualizzare la percentuale di maiuscole in tutto il file
+
+---
+
+title: 6.3 Matrice casuale
+
+- Chiedere all'utente le dimensioni `w, h` di una matrice
+- Riempire la matrice di numeri interi casuali, compresi tra 0 e 15
+- Salvare la matrice in un file di testo (*CSV*)
+    - Ogni riga della matrice in una riga del file
+    - Valori separati tra loro da una virgola
+- In un ciclo
+    - Chiedere un valore all'utente
+    - Contare quante volte quel valore è presente nelle celle di bordo
+
+---
+
+title: 6.4 Knigth's tour, classe
+figure: images/misc/knight-moves.png
+
+- Incapsulare il gioco 5.5 in una classe
+- Campi per matrice ed altro
+- Metodi
+    - `play_at(x, y)` per giocare nella data posizione
+    - `get_val(x, y)` per conoscere il valore nella data posizione
+    - `finished()`, booleano: matrice piena?
+- Oggetto istanziato all'avvio del programma
+- In un ciclo, esterno alla classe
+    - L'utente sceglie x, y per la nuova mossa (chiamata `play_at`)
+    - Si stampa la matrice (chiamate `get_val`)
+
+---
+
+title: 6.5 Knigth's tour, GUI
+
+- Utilizzare la classe dell'es. 6.4 con la GUI degli esempi
+- Se un giocatore gioca in una cella già piena, tutti i numeri più alti del valore presente vengono rimossi
+
+---
+
+title: 6.6 Frogger, estensioni opzionali
+figure: images/misc/frogger.png
+
+- Gioco con due rane, guidate con tasti diversi (ma possibilmente stessa classe)
+- Veicoli e zattere con aspetto e dimesione diversa (ma possibilmente stessa classe)
+- Tartarughe che si sommergono, coccodrilli ed altri personaggi
+- Conteggio delle rane salve, per la conclusione
+- Punti, livelli e bonus vari
+- Altre estensioni, a fantasia
+
+---
+
+title: 6.7 Frogger, bella copia
+figure: images/misc/fair-copy.png
+
+- **Codice leggibile**
+    - *Costanti*, anzichè numeri “*magici*” sparsi nel codice
+    - *Nomi esplicativi* e semplici
+    - *Regole di stile*: `variable_name`, `function_name`, `ClassName`, `CONSTANT_NAME`
+    - *Commenti*, quando utili: *function annotation*, *docstring*
+- **Codice ben organizzato**
+    - *No copia&incolla* del codice: funzioni parametrizzate e/o cicli
+    - *Programmazione strutturata*: preferibilmente `return` a fine funzione, cicli senza `break`
+    - *OOP*: *incapsulamento*, *ereditarietà*, *polimorfismo*

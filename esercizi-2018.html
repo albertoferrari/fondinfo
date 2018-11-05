@@ -1019,6 +1019,178 @@ Con <code>s = (a + b + c) / 2</code>, semiperimetro</p>
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 6 (11-05 *)</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.1 Minimo valore, con ricorsione</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/fun/matryoshka.png">
+        
+      </figure><ul>
+<li>Definire una funzione ricorsiva <code>min_char</code><ul>
+<li>Cerca, in una stringa di testo, il carattere con codice Unicode minimo</li>
+</ul>
+</li>
+<li>Se il testo ha lunghezza 0, errore<ul>
+<li><code>raise ValueError("Empty string")</code></li>
+</ul>
+</li>
+<li>Se il testo ha lunghezza 1, l'unico carattere è il risultato</li>
+<li>Altrimenti il risultato è pari al minore tra:<ul>
+<li>Il primo carattere</li>
+<li>Il carattere con codice minimo tra tutti gli altri (ricorsione)</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Saranno accettate esclusivamente le soluzioni ricorsive</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.2 Maiuscole in ogni riga</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Leggere un file riga per riga</li>
+<li>Calcolare e visualizzare la percentuale di maiuscole in ogni riga</li>
+<li>Calcolare e visualizzare la percentuale di maiuscole in tutto il file</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.3 Matrice casuale</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Chiedere all'utente le dimensioni <code>w, h</code> di una matrice</li>
+<li>Riempire la matrice di numeri interi casuali, compresi tra 0 e 15</li>
+<li>Salvare la matrice in un file di testo (<em>CSV</em>)<ul>
+<li>Ogni riga della matrice in una riga del file</li>
+<li>Valori separati tra loro da una virgola</li>
+</ul>
+</li>
+<li>In un ciclo<ul>
+<li>Chiedere un valore all'utente</li>
+<li>Contare quante volte quel valore è presente nelle celle di bordo</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.4 Knigth's tour, classe</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/knight-moves.png">
+        
+      </figure><ul>
+<li>Incapsulare il gioco 5.5 in una classe</li>
+<li>Campi per matrice ed altro</li>
+<li>Metodi<ul>
+<li><code>play_at(x, y)</code> per giocare nella data posizione</li>
+<li><code>get_val(x, y)</code> per conoscere il valore nella data posizione</li>
+<li><code>finished()</code>, booleano: matrice piena?</li>
+</ul>
+</li>
+<li>Oggetto istanziato all'avvio del programma</li>
+<li>In un ciclo, esterno alla classe<ul>
+<li>L'utente sceglie x, y per la nuova mossa (chiamata <code>play_at</code>)</li>
+<li>Si stampa la matrice (chiamate <code>get_val</code>)</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.5 Knigth's tour, GUI</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Utilizzare la classe dell'es. 6.4 con la GUI degli esempi</li>
+<li>Se un giocatore gioca in una cella già piena, tutti i numeri più alti del valore presente vengono rimossi</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.6 Frogger, estensioni opzionali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/frogger.png">
+        
+      </figure><ul>
+<li>Gioco con due rane, guidate con tasti diversi (ma possibilmente stessa classe)</li>
+<li>Veicoli e zattere con aspetto e dimesione diversa (ma possibilmente stessa classe)</li>
+<li>Tartarughe che si sommergono, coccodrilli ed altri personaggi</li>
+<li>Conteggio delle rane salve, per la conclusione</li>
+<li>Punti, livelli e bonus vari</li>
+<li>Altre estensioni, a fantasia</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6.7 Frogger, bella copia</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/fair-copy.png">
+        
+      </figure><ul>
+<li><strong>Codice leggibile</strong><ul>
+<li><em>Costanti</em>, anzichè numeri “<em>magici</em>” sparsi nel codice</li>
+<li><em>Nomi esplicativi</em> e semplici</li>
+<li><em>Regole di stile</em>: <code>variable_name</code>, <code>function_name</code>, <code>ClassName</code>, <code>CONSTANT_NAME</code></li>
+<li><em>Commenti</em>, quando utili: <em>function annotation</em>, <em>docstring</em></li>
+</ul>
+</li>
+<li><strong>Codice ben organizzato</strong><ul>
+<li><em>No copia&amp;incolla</em> del codice: funzioni parametrizzate e/o cicli</li>
+<li><em>Programmazione strutturata</em>: preferibilmente <code>return</code> a fine funzione, cicli senza <code>break</code></li>
+<li><em>OOP</em>: <em>incapsulamento</em>, <em>ereditarietà</em>, <em>polimorfismo</em></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
 
 <slide class="thank-you-slide segue nobackground">
   <aside class="gdbar right"><img src="images/logo.png"></aside>

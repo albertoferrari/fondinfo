@@ -172,21 +172,21 @@ title: Cicli for
 
 code: c++
 
-    for (auto product : grocery) {  // for-each, C++11
+    for (auto product : grocery) {  // for each product in grocery
         cout << product << endl;
     }
 
 code: c++
 
-    for (int i = 0; i < grocery.size(); ++i) {  // range, C++98
-        cout << grocery[i] << endl;
+    for (int i = 0; i < 5; ++i) {  // for each i : 0 <= i < 5
+        cout << i * i << endl;
     }
 
 code: c++
 
     int i = 0;
-    while (i < grocery.size()) {  // equivalent while
-        cout << grocery[i] << endl;
+    while (i < 5) {  // equivalent while
+        cout << i * i << endl;
         ++i;
     }
 
@@ -274,7 +274,7 @@ code: c++
 
 ---
 
-title: Flussi e file
+title: Output su file
 
 code: c++
 
@@ -282,15 +282,8 @@ code: c++
 
 code: c++
 
-    int n; float r; string w;
-    ifstream file1{"input.txt"};   // file input stream
-    if (file1.good()) {            // is stream available?
-        file1 >> n >> r >> w;
-    }
-    file1.close();
-
     ofstream file2{"output.txt"};  // file output stream
-    if (file2.good()) {            // is stream available?
+    if (file2) {                   // is stream available?
         file2 << "Values: " << n << " " << r << " " << w << endl;
     }
     file2.close();
@@ -301,25 +294,23 @@ title: Lettura di righe
 
 code: c++
 
-    ifstream file1{"input.txt"};
+    ifstream file1{"input.txt"};  // when finished, close file1!
 
 code: c++
 
     string first_line, second_line;
-    getline(file1, first_line);
-    getline(file1, second_line);
-    // first_line and second_line do not include newlines
+    getline(file1, first_line);   // no newline at end
+    getline(file1, second_line);  // no newline at end
 
 code: c++
 
     string whole_text;
-    getline(file1, whole_text, '\0');
-    // read the whole file, including newlines
+    getline(file1, whole_text, '\0');  // read whole file
 
 code: c++
 
-    string line;
-    while (getline(file1, line)) {  // for each line in file1...
+    // for each line in file1...
+    for (string line; getline(file1, line);) {
         cout << line << endl;
     }
 
@@ -337,14 +328,11 @@ title: Flussi e stringhe
 
 code: c++
 
-    /* Split a text into a vector of strings */
+    /* Split a text into a sequence of strings */
     string text = "one:two::three";
-    vector<string> values;
-
-    istringstream sstr{text};
-    string item;
-    while (getline(sstr, item, ':')) {
-        values.push_back(item);
+    istringstream sstr{text};  // a stream view on a string
+    for (string item; getline(sstr, item, ':');) {
+        cout << item << endl;
     }
 
 ---
@@ -361,9 +349,8 @@ code: C++
     int main() {
         srand(time(nullptr));           // just once! (initial seed
                                         // for random numbers)
-
-        for (int i = 0; i < 10; ++i) {  // generate 10 random numbers
-            int r = rand() % 90;  // 0 <= r < 90
+        for (int i = 0; i < 10; ++i) {
+            int r = rand() % 90;        // random value: 0 <= r < 90
             cout << r << endl;
         }
     }
@@ -383,24 +370,23 @@ code: c++
 
 code: c++
 
-    int val;  // or float, string ...
-    while (file1 >> val) {
+    if (file1) {                         // is stream available?
+        int n; float r; string w;
+        file1 >> n >> r >> w;
+    }
+
+code: c++
+
+    for (int val; file1 >> val;) {       // or float, string ...
         cout << setw(4) << val << endl;  // val occupies 4 chars
     }                                    // setw in <iomanip>
 
 code: c++
 
-    char val;           // scan each character ...
-    file1 >> noskipws;  // ... including whitespaces
-    while (file1 >> val) {
+    file1 >> noskipws;                   // scan also whitespaces
+    for (char val; file1 >> val;) {      // for each char in file1
         cout << val << endl;
     }
-
-code: c++
-
-    int n; float r; string w;
-    istringstream sstr{"5 7.5 hello"};  // istringstream in <sstream>
-    sstr >> n >> r >> w;                // a stream view on a string
 
 ---
 
@@ -539,7 +525,6 @@ code: c++
         for (auto i = 0; i < 25; ++i) {
             b1.move();
             b2.move();
-
             cout << b1.get_x() << ", " << b1.get_y() << endl;
             cout << b2.get_x() << ", " << b2.get_y() << endl << endl;
         }
@@ -673,14 +658,12 @@ code: c++
 
     class Ghost: public Actor {
         // ...
-        Ghost() { /* ... */ }
-
         void move() {
             vector<int> vals = {-5, 0, 5};
             int dx = vals[rand() % 3];  // one of {-5, 0, +5}
             int dy = vals[rand() % 3];
-            x = (x + dx + arena->get_w()) % arena->get_w();
-            y = (y + dy + arena->get_h()) % arena->get_h();
+            x = (x + dx + arena->width()) % arena->width();
+            y = (y + dy + arena->height()) % arena->height();
         }
     };
 

@@ -253,17 +253,17 @@ grocery.erase(begin(grocery) + 1)            // remove element at index
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>for (auto product : grocery) {  // for-each, C++11
+      <pre class="prettyprint" data-lang="c++"><code>for (auto product : grocery) {  // for each product in grocery
     cout &lt;&lt; product &lt;&lt; endl;
 }
 </code></pre>
-<pre class="prettyprint" data-lang="c++"><code>for (int i = 0; i &lt; grocery.size(); ++i) {  // range, C++98
-    cout &lt;&lt; grocery[i] &lt;&lt; endl;
+<pre class="prettyprint" data-lang="c++"><code>for (int i = 0; i &lt; 5; ++i) {  // for each i : 0 &lt;= i &lt; 5
+    cout &lt;&lt; i * i &lt;&lt; endl;
 }
 </code></pre>
 <pre class="prettyprint" data-lang="c++"><code>int i = 0;
-while (i &lt; grocery.size()) {  // equivalent while
-    cout &lt;&lt; grocery[i] &lt;&lt; endl;
+while (i &lt; 5) {  // equivalent while
+    cout &lt;&lt; i * i &lt;&lt; endl;
     ++i;
 }
 </code></pre>
@@ -353,21 +353,14 @@ int main() {
 <slide  >
   
     <hgroup>
-      <h2>Flussi e file</h2>
+      <h2>Output su file</h2>
       <h3></h3>
     </hgroup>
     <article >
       <pre class="prettyprint" data-lang="c++"><code>#include &lt;fstream&gt;
 </code></pre>
-<pre class="prettyprint" data-lang="c++"><code>int n; float r; string w;
-ifstream file1{"input.txt"};   // file input stream
-if (file1.good()) {            // is stream available?
-    file1 &gt;&gt; n &gt;&gt; r &gt;&gt; w;
-}
-file1.close();
-
-ofstream file2{"output.txt"};  // file output stream
-if (file2.good()) {            // is stream available?
+<pre class="prettyprint" data-lang="c++"><code>ofstream file2{"output.txt"};  // file output stream
+if (file2) {                   // is stream available?
     file2 &lt;&lt; "Values: " &lt;&lt; n &lt;&lt; " " &lt;&lt; r &lt;&lt; " " &lt;&lt; w &lt;&lt; endl;
 }
 file2.close();
@@ -382,19 +375,17 @@ file2.close();
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>ifstream file1{"input.txt"};
+      <pre class="prettyprint" data-lang="c++"><code>ifstream file1{"input.txt"};  // when finished, close file1!
 </code></pre>
 <pre class="prettyprint" data-lang="c++"><code>string first_line, second_line;
-getline(file1, first_line);
-getline(file1, second_line);
-// first_line and second_line do not include newlines
+getline(file1, first_line);   // no newline at end
+getline(file1, second_line);  // no newline at end
 </code></pre>
 <pre class="prettyprint" data-lang="c++"><code>string whole_text;
-getline(file1, whole_text, '\0');
-// read the whole file, including newlines
+getline(file1, whole_text, '\0');  // read whole file
 </code></pre>
-<pre class="prettyprint" data-lang="c++"><code>string line;
-while (getline(file1, line)) {  // for each line in file1...
+<pre class="prettyprint" data-lang="c++"><code>// for each line in file1...
+for (string line; getline(file1, line);) {
     cout &lt;&lt; line &lt;&lt; endl;
 }
 </code></pre>
@@ -417,14 +408,11 @@ while (getline(file1, line)) {  // for each line in file1...
 </ul>
 </li>
 </ul>
-<pre class="prettyprint" data-lang="c++"><code>/* Split a text into a vector of strings */
+<pre class="prettyprint" data-lang="c++"><code>/* Split a text into a sequence of strings */
 string text = "one:two::three";
-vector&lt;string&gt; values;
-
-istringstream sstr{text};
-string item;
-while (getline(sstr, item, ':')) {
-    values.push_back(item);
+istringstream sstr{text};  // a stream view on a string
+for (string item; getline(sstr, item, ':');) {
+    cout &lt;&lt; item &lt;&lt; endl;
 }
 </code></pre></article>
  
@@ -445,9 +433,8 @@ using namespace std;
 int main() {
     srand(time(nullptr));           // just once! (initial seed
                                     // for random numbers)
-
-    for (int i = 0; i &lt; 10; ++i) {  // generate 10 random numbers
-        int r = rand() % 90;  // 0 &lt;= r &lt; 90
+    for (int i = 0; i &lt; 10; ++i) {
+        int r = rand() % 90;        // random value: 0 &lt;= r &lt; 90
         cout &lt;&lt; r &lt;&lt; endl;
     }
 }
@@ -467,20 +454,19 @@ int main() {
     <article >
       <pre class="prettyprint" data-lang="c++"><code>ifstream file1{"input.txt"};
 </code></pre>
-<pre class="prettyprint" data-lang="c++"><code>int val;  // or float, string ...
-while (file1 &gt;&gt; val) {
+<pre class="prettyprint" data-lang="c++"><code>if (file1) {                         // is stream available?
+    int n; float r; string w;
+    file1 &gt;&gt; n &gt;&gt; r &gt;&gt; w;
+}
+</code></pre>
+<pre class="prettyprint" data-lang="c++"><code>for (int val; file1 &gt;&gt; val;) {       // or float, string ...
     cout &lt;&lt; setw(4) &lt;&lt; val &lt;&lt; endl;  // val occupies 4 chars
 }                                    // setw in &lt;iomanip&gt;
 </code></pre>
-<pre class="prettyprint" data-lang="c++"><code>char val;           // scan each character ...
-file1 &gt;&gt; noskipws;  // ... including whitespaces
-while (file1 &gt;&gt; val) {
+<pre class="prettyprint" data-lang="c++"><code>file1 &gt;&gt; noskipws;                   // scan also whitespaces
+for (char val; file1 &gt;&gt; val;) {      // for each char in file1
     cout &lt;&lt; val &lt;&lt; endl;
 }
-</code></pre>
-<pre class="prettyprint" data-lang="c++"><code>int n; float r; string w;
-istringstream sstr{"5 7.5 hello"};  // istringstream in &lt;sstream&gt;
-sstr &gt;&gt; n &gt;&gt; r &gt;&gt; w;                // a stream view on a string
 </code></pre></article>
  
 </slide>
@@ -667,7 +653,6 @@ int main() {
     for (auto i = 0; i &lt; 25; ++i) {
         b1.move();
         b2.move();
-
         cout &lt;&lt; b1.get_x() &lt;&lt; ", " &lt;&lt; b1.get_y() &lt;&lt; endl;
         cout &lt;&lt; b2.get_x() &lt;&lt; ", " &lt;&lt; b2.get_y() &lt;&lt; endl &lt;&lt; endl;
     }
@@ -837,14 +822,12 @@ arena-&gt;move_all();
 </code></pre>
 <pre class="prettyprint" data-lang="c++"><code>class Ghost: public Actor {
     // ...
-    Ghost() { /* ... */ }
-
     void move() {
         vector&lt;int&gt; vals = {-5, 0, 5};
         int dx = vals[rand() % 3];  // one of {-5, 0, +5}
         int dy = vals[rand() % 3];
-        x = (x + dx + arena-&gt;get_w()) % arena-&gt;get_w();
-        y = (y + dy + arena-&gt;get_h()) % arena-&gt;get_h();
+        x = (x + dx + arena-&gt;width()) % arena-&gt;width();
+        y = (y + dy + arena-&gt;height()) % arena-&gt;height();
     }
 };
 </code></pre></article>
