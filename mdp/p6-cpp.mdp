@@ -282,6 +282,9 @@ code: c++
 
 code: c++
 
+    int n; float r; string w;
+    cin >> n >> r >> w;
+
     ofstream file2{"output.txt"};  // file output stream
     if (file2) {                   // is stream available?
         file2 << "Values: " << n << " " << r << " " << w << endl;

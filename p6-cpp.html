@@ -359,7 +359,10 @@ int main() {
     <article >
       <pre class="prettyprint" data-lang="c++"><code>#include &lt;fstream&gt;
 </code></pre>
-<pre class="prettyprint" data-lang="c++"><code>ofstream file2{"output.txt"};  // file output stream
+<pre class="prettyprint" data-lang="c++"><code>int n; float r; string w;
+cin &gt;&gt; n &gt;&gt; r &gt;&gt; w;
+
+ofstream file2{"output.txt"};  // file output stream
 if (file2) {                   // is stream available?
     file2 &lt;&lt; "Values: " &lt;&lt; n &lt;&lt; " " &lt;&lt; r &lt;&lt; " " &lt;&lt; w &lt;&lt; endl;
 }
