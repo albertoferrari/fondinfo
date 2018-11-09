@@ -335,8 +335,15 @@ code: c++
     string text = "one:two::three";
     istringstream sstr{text};  // a stream view on a string
     for (string item; getline(sstr, item, ':');) {
-        cout << item << endl;
+        cout << "- " << item << endl;
     }
+
+code: output
+
+    - one
+    - two
+    -
+    - three
 
 ---
 
@@ -539,21 +546,20 @@ title: Allocazione dinamica
 
 code: c++
 
-    // ...
-    int main() {
-        Ball b1{40, 80};
-        Ball* b2 = new Ball{80, 40};
-        // Ball* alias1 = &b1; // no new ball is created
-        // Ball* alias2 = b2;  // no new ball is created
+    Ball b1{40, 80};
+    Ball* b2 = new Ball{80, 40};
+    // Ball* alias1 = &b1; // no new ball is created
+    // Ball* alias2 = b2;  // no new ball is created
 
-        for (auto i = 0; i < 25; ++i) {
-            b1.move();
-            b2->move();
-            cout << b1.get_x() << ", " << b1.get_y() << endl;
-            cout << b2->get_x() << ", " << b2->get_y() << endl << endl;
-        }
-        delete b2;
+    for (auto i = 0; i < 25; ++i) {
+        b1.move();
+        b2->move();
+        cout << b1.get_x() << ", " << b1.get_y() << endl;
+        cout << b2->get_x() << ", " << b2->get_y() << endl << endl;
     }
+    delete b2;
+
+- No *garbage collection*: a `new` deve corrispondere `delete`
 
 ---
 
@@ -597,10 +603,6 @@ code: c++
     *p = *p + 1;  // ++i
     p = nullptr;  // ptr to nothing
 
-- No *garbage collection*: a `new` deve corrispondere `delete`
-- *Resource Acquisition Is Initialization (RAII)*
-    - *Costruttore* alloca risorse, *distruttore* le libera: `~Ball()`
-
 ---
 
 title: Livelli di astrazione
@@ -608,13 +610,81 @@ class: segue dark
 
 ---
 
-title: Livelli di astrazione
+title: Fattoria parlante
+figure: images/oop/animals.png
+
+- *Classe base* come **interfaccia astratta**
+- Es. `Animal`:
+    - Tutti fanno un verso (*interfaccia*)
+    - Ognuno lo fa diverso (*polimorfismo*)
+
+code: c++
+
+    class Animal {
+    public:
+        virtual void say() = 0;
+    };
+
+>
+
+<https://github.com/tomamic/fondinfo/blob/master/cpp/animals/main.cpp>
+
+---
+
+title: Classi concrete
+figure: images/oop/polymorphism.png
+
+code: c++
+
+    class Dog : public Animal {
+        string name_;
+    public:
+        Dog(string name) { name_ = name; }
+        void say() {
+            cout << "I'm " << name_
+                 << " Dog. I say: WOOF!" << endl;
+        }
+    };
+
+    class Cat : public Animal {
+        /* ... */
+        void say() {
+            cout << "I'm " << name_ << " Cat. I say: MEOW!" << endl;
+        }
+    };
+
+---
+
+title: Lista di puntatori ad oggetti
+figure: images/oop/peppa.png
+
+code: c++
+
+    auto d = new Dog("Danny");
+    auto c = new Cat("Candy");
+    auto p1 = new Pig("Peppa");
+    auto p2 = new Pig("George");
+    // Polimorphism requires pointers to objects.
+    // Elements can be added with push_back, too.
+    vector<Animal*> animals = {d, c, p1, p2};
+    for (auto a : animals) { a->say(); }
+
+code: output
+
+    I'm Danny Dog. I say: WOOF!
+    I'm Candy Cat. I say: MEOW!
+    I'm Peppa Pig. I say: OINK!
+    I'm George Pig. I say: OINK!
+
+---
+
+title: Metodi virtuali puri
 figure: images/oop/actor.svg
 
-- `Actor`: *classe base*
-    - Dichiara un metodo `move` ecc.
+- Es.: metodo `move` di `Actor`
     - `virtual`: il metodo può essere ridefinito nelle sottoclassi (*polimorfo*)
     - `= 0`: il metodo non è implementato qui (la classe è *astratta*)
+    - Polimorfismo C++ funziona solo con puntatori a oggetti
 
 code: c++
 
@@ -623,10 +693,63 @@ code: c++
         // ...
     };
 
+>
+
+<https://github.com/tomamic/fondinfo/blob/master/cpp/bounce/actor.h>
+
+---
+
+title: Fifteen – Gioco astratto
+figure: images/qt/fifteen-puzzle.jpg
+
+code: C++
+
+    class BoardGame {
+    public:
+        virtual void play_at(int x, int y) = 0;
+        virtual void flag_at(int x, int y) = 0;
+        virtual int cols() = 0;
+        virtual int rows() = 0;
+        virtual string get_val(int x, int y) = 0;
+        virtual bool finished() = 0;
+        virtual string message() = 0;
+
+        virtual ~BoardGame() {}
+    };
+
+>
+
+<https://github.com/tomamic/fondinfo/blob/master/cpp/boardgames/boardgame.h>
+
+---
+
+title: Gioco a console
+
+code: C++
+
+    void print_game(BoardGame* game) {
+        for (auto y = 0; y < game->rows(); ++y) {
+            for (auto x = 0; x < game->cols(); ++x) {
+                cout << setw(3) << game->get_val(x, y);
+            }
+            cout << endl;
+        }
+    }
+    void play_game(BoardGame* game) {
+        print_game(game);
+        while (! game->finished()) {
+            int x, y; cin >> x >> y;
+            game->play_at(x, y);
+            print_game(game);
+        }
+        cout << game->message() << endl;
+    }
+
 ---
 
 title: Composizione
 figure: images/oop/actors.svg
+class: break
 
 code: c++
 
@@ -669,61 +792,6 @@ code: c++
             y = (y + dy + arena->height()) % arena->height();
         }
     };
-
----
-
-title: Fifteen – Gioco astratto
-figure: images/qt/fifteen-puzzle.jpg
-
-code: C++
-
-    class BoardGame {
-    public:
-        virtual void play_at(int x, int y) = 0;
-        virtual void flag_at(int x, int y) = 0;
-        virtual int cols() = 0;
-        virtual int rows() = 0;
-        virtual std::string get_val(int x, int y) = 0;
-        virtual bool finished() = 0;
-        virtual std::string message() = 0;
-
-        virtual ~BoardGame() {}
-    };
-
----
-
-title: Stampa del gioco
-
-code: C++
-
-    void print_game(BoardGame* game) {
-        for (auto y = 0; y < game->rows(); ++y) {
-            for (auto x = 0; x < game->cols(); ++x) {
-                cout << setw(3) << game->get_val(x, y);
-            }
-            cout << endl;
-        }
-    }
-
----
-
-title: Ciclo di gioco
-
-code: C++
-
-    void play_game(BoardGame* game) {
-        print_game(game);
-
-        while (! game->finished()) {
-            auto x = 0, y = 0;
-            cout << endl << "Move? ";
-            cin >> x >> y;
-
-            game->play_at(x, y);
-            print_game(game);
-        }
-        cout << game->message() << endl;
-    }
 
 ---
 

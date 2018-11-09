@@ -247,10 +247,14 @@ code: py
         def say(self):
             raise NotImplementedError("Abstract method")
 
+>
+
+<http://www.ce.unipr.it/brython/?p3_oop_animals.py>
+
 ---
 
 title: Classi concrete
-figure: images/oop/polymorphism.png images/oop/peppa.png
+figure: images/oop/polymorphism.png
 
 code: py
 
@@ -268,9 +272,29 @@ code: py
             print("I'm", self._name, "Cat.",
                   "I say: MEOW!")
 
->
+---
 
-<http://www.ce.unipr.it/brython/?p3_oop_animals.py>
+title: Lista di oggetti
+figure: images/oop/peppa.png
+
+code: py
+
+    d = Dog("Danny")
+    c = Cat("Candy")
+    p1 = Pig("Peppa")
+    p2 = Pig("George")
+
+    # a list of Animal objects
+    animals = [d, c, p1, p2]
+    for a in animals:
+        a.say()
+
+code: output
+
+    I'm Danny Dog. I say: WOOF!
+    I'm Candy Cat. I say: MEOW!
+    I'm Peppa Pig. I say: OINK!
+    I'm George Pig. I say: OINK!
 
 ---
 
@@ -288,6 +312,10 @@ code: py
     class Actor:
         def move(self):
             raise NotImplementedError("Abstract method")
+
+>
+
+<http://www.ce.unipr.it/brython/?actor.py>
 
 ---
 
@@ -325,10 +353,6 @@ code: py
     - Si può sempre usare un oggetto di una *classe derivata*, al posto di uno della *classe base*
 - Relazione *has-a* tra un oggetto `Arena` e gli oggetti `Actor` che contiene
 - Relazione *is-a* tra classi concrete (`Ball` e `Ghost`) e interfaccia (`Actor`)
-
->
-
-<http://www.ce.unipr.it/brython/?actor.py>
 
 ---
 
@@ -477,8 +501,8 @@ figure: images/misc/sin-cos.png
 - Riempire una lista con i valori di `sin`
     - 360 elementi, indice `x` tra 0 e 359
 - Poi, ciclicamente...
-	- Chiedere un angolo all'utente
-	- Visualizzare il corrispondente valore precalcolato del seno
+    - Chiedere un angolo all'utente
+    - Visualizzare il corrispondente valore precalcolato del seno
 
 >
 

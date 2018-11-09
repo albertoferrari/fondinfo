@@ -415,8 +415,13 @@ for (string line; getline(file1, line);) {
 string text = "one:two::three";
 istringstream sstr{text};  // a stream view on a string
 for (string item; getline(sstr, item, ':');) {
-    cout &lt;&lt; item &lt;&lt; endl;
+    cout &lt;&lt; "- " &lt;&lt; item &lt;&lt; endl;
 }
+</code></pre>
+<pre class="prettyprint" data-lang="output"><code>- one
+- two
+-
+- three
 </code></pre></article>
  
 </slide>
@@ -671,22 +676,22 @@ int main() {
       <h3></h3>
     </hgroup>
     <article >
-      <pre class="prettyprint" data-lang="c++"><code>// ...
-int main() {
-    Ball b1{40, 80};
-    Ball* b2 = new Ball{80, 40};
-    // Ball* alias1 = &amp;b1; // no new ball is created
-    // Ball* alias2 = b2;  // no new ball is created
+      <pre class="prettyprint" data-lang="c++"><code>Ball b1{40, 80};
+Ball* b2 = new Ball{80, 40};
+// Ball* alias1 = &amp;b1; // no new ball is created
+// Ball* alias2 = b2;  // no new ball is created
 
-    for (auto i = 0; i &lt; 25; ++i) {
-        b1.move();
-        b2-&gt;move();
-        cout &lt;&lt; b1.get_x() &lt;&lt; ", " &lt;&lt; b1.get_y() &lt;&lt; endl;
-        cout &lt;&lt; b2-&gt;get_x() &lt;&lt; ", " &lt;&lt; b2-&gt;get_y() &lt;&lt; endl &lt;&lt; endl;
-    }
-    delete b2;
+for (auto i = 0; i &lt; 25; ++i) {
+    b1.move();
+    b2-&gt;move();
+    cout &lt;&lt; b1.get_x() &lt;&lt; ", " &lt;&lt; b1.get_y() &lt;&lt; endl;
+    cout &lt;&lt; b2-&gt;get_x() &lt;&lt; ", " &lt;&lt; b2-&gt;get_y() &lt;&lt; endl &lt;&lt; endl;
 }
-</code></pre></article>
+delete b2;
+</code></pre>
+<ul>
+<li>No <em>garbage collection</em>: a <code>new</code> deve corrispondere <code>delete</code></li>
+</ul></article>
  
 </slide>
 
@@ -737,14 +742,7 @@ char* p;      // a ptr to some byte (uninitialized)
 p = &amp;i;       // now p points to i
 *p = *p + 1;  // ++i
 p = nullptr;  // ptr to nothing
-</code></pre>
-<ul>
-<li>No <em>garbage collection</em>: a <code>new</code> deve corrispondere <code>delete</code></li>
-<li><em>Resource Acquisition Is Initialization (RAII)</em><ul>
-<li><em>Costruttore</em> alloca risorse, <em>distruttore</em> le libera: <code>~Ball()</code></li>
-</ul>
-</li>
-</ul></article>
+</code></pre></article>
  
 </slide>
 
@@ -761,7 +759,92 @@ p = nullptr;  // ptr to nothing
 <slide  >
   
     <hgroup>
-      <h2>Livelli di astrazione</h2>
+      <h2>Fattoria parlante</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/animals.png">
+        
+      </figure><ul>
+<li><em>Classe base</em> come <strong>interfaccia astratta</strong></li>
+<li>Es. <code>Animal</code>:<ul>
+<li>Tutti fanno un verso (<em>interfaccia</em>)</li>
+<li>Ognuno lo fa diverso (<em>polimorfismo</em>)</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint" data-lang="c++"><code>class Animal {
+public:
+    virtual void say() = 0;
+};
+</code></pre>
+<blockquote></blockquote>
+<p><a href="https://github.com/tomamic/fondinfo/blob/master/cpp/animals/main.cpp">https://github.com/tomamic/fondinfo/blob/master/cpp/animals/main.cpp</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Classi concrete</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/polymorphism.png">
+        
+      </figure><pre class="prettyprint" data-lang="c++"><code>class Dog : public Animal {
+    string name_;
+public:
+    Dog(string name) { name_ = name; }
+    void say() {
+        cout &lt;&lt; "I'm " &lt;&lt; name_
+             &lt;&lt; " Dog. I say: WOOF!" &lt;&lt; endl;
+    }
+};
+
+class Cat : public Animal {
+    /* ... */
+    void say() {
+        cout &lt;&lt; "I'm " &lt;&lt; name_ &lt;&lt; " Cat. I say: MEOW!" &lt;&lt; endl;
+    }
+};
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lista di puntatori ad oggetti</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/peppa.png">
+        
+      </figure><pre class="prettyprint" data-lang="c++"><code>auto d = new Dog("Danny");
+auto c = new Cat("Candy");
+auto p1 = new Pig("Peppa");
+auto p2 = new Pig("George");
+// Polimorphism requires pointers to objects.
+// Elements can be added with push_back, too.
+vector&lt;Animal*&gt; animals = {d, c, p1, p2};
+for (auto a : animals) { a-&gt;say(); }
+</code></pre>
+<pre class="prettyprint" data-lang="output"><code>I'm Danny Dog. I say: WOOF!
+I'm Candy Cat. I say: MEOW!
+I'm Peppa Pig. I say: OINK!
+I'm George Pig. I say: OINK!
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Metodi virtuali puri</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -769,10 +852,10 @@ p = nullptr;  // ptr to nothing
         <img src="images/oop/actor.svg">
         
       </figure><ul>
-<li><code>Actor</code>: <em>classe base</em><ul>
-<li>Dichiara un metodo <code>move</code> ecc.</li>
+<li>Es.: metodo <code>move</code> di <code>Actor</code><ul>
 <li><code>virtual</code>: il metodo può essere ridefinito nelle sottoclassi (<em>polimorfo</em>)</li>
 <li><code>= 0</code>: il metodo non è implementato qui (la classe è <em>astratta</em>)</li>
+<li>Polimorfismo C++ funziona solo con puntatori a oggetti</li>
 </ul>
 </li>
 </ul>
@@ -780,60 +863,9 @@ p = nullptr;  // ptr to nothing
     virtual void move() = 0;
     // ...
 };
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Composizione</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <figure>
-        <img src="images/oop/actors.svg">
-        
-      </figure><pre class="prettyprint" data-lang="c++"><code>class Arena {  // ...
-public:
-    void add(Actor* a);
-    void move_all();
-private:
-    vector&lt;Actor*&gt; actors;
-};
 </code></pre>
-<pre class="prettyprint" data-lang="c++"><code>void Arena::add(Actor* c) {
-    actors.push_back(a);
-}
-void Arena::move_all() {
-    for (auto a : actors) a-&gt;move();
-}
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Ereditarietà e polimorfismo</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="c++"><code>arena-&gt;add(new Ball(4, 8));
-arena-&gt;add(new Ghost(12,4));
-arena-&gt;move_all();
-</code></pre>
-<pre class="prettyprint" data-lang="c++"><code>class Ghost: public Actor {
-    // ...
-    void move() {
-        vector&lt;int&gt; vals = {-5, 0, 5};
-        int dx = vals[rand() % 3];  // one of {-5, 0, +5}
-        int dy = vals[rand() % 3];
-        x = (x + dx + arena-&gt;width()) % arena-&gt;width();
-        y = (y + dy + arena-&gt;height()) % arena-&gt;height();
-    }
-};
-</code></pre></article>
+<blockquote></blockquote>
+<p><a href="https://github.com/tomamic/fondinfo/blob/master/cpp/bounce/actor.h">https://github.com/tomamic/fondinfo/blob/master/cpp/bounce/actor.h</a></p></article>
  
 </slide>
 
@@ -853,20 +885,22 @@ public:
     virtual void flag_at(int x, int y) = 0;
     virtual int cols() = 0;
     virtual int rows() = 0;
-    virtual std::string get_val(int x, int y) = 0;
+    virtual string get_val(int x, int y) = 0;
     virtual bool finished() = 0;
-    virtual std::string message() = 0;
+    virtual string message() = 0;
 
     virtual ~BoardGame() {}
 };
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="https://github.com/tomamic/fondinfo/blob/master/cpp/boardgames/boardgame.h">https://github.com/tomamic/fondinfo/blob/master/cpp/boardgames/boardgame.h</a></p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>Stampa del gioco</h2>
+      <h2>Gioco a console</h2>
       <h3></h3>
     </hgroup>
     <article >
@@ -878,25 +912,10 @@ public:
         cout &lt;&lt; endl;
     }
 }
-</code></pre></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Ciclo di gioco</h2>
-      <h3></h3>
-    </hgroup>
-    <article >
-      <pre class="prettyprint" data-lang="C++"><code>void play_game(BoardGame* game) {
+void play_game(BoardGame* game) {
     print_game(game);
-
     while (! game-&gt;finished()) {
-        auto x = 0, y = 0;
-        cout &lt;&lt; endl &lt;&lt; "Move? ";
-        cin &gt;&gt; x &gt;&gt; y;
-
+        int x, y; cin &gt;&gt; x &gt;&gt; y;
         game-&gt;play_at(x, y);
         print_game(game);
     }

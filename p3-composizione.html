@@ -356,7 +356,9 @@ arena.move_all()
 <pre class="prettyprint" data-lang="py"><code>class Animal:
     def say(self):
         raise NotImplementedError("Abstract method")
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?p3_oop_animals.py">http://www.ce.unipr.it/brython/?p3_oop_animals.py</a></p></article>
  
 </slide>
 
@@ -368,7 +370,7 @@ arena.move_all()
     </hgroup>
     <article >
       <figure>
-        <img src="images/oop/polymorphism.png"><img src="images/oop/peppa.png">
+        <img src="images/oop/polymorphism.png">
         
       </figure><pre class="prettyprint" data-lang="py"><code>class Dog(Animal):
     def __init__(self, name):
@@ -383,9 +385,35 @@ class Cat(Animal):
     def say(self):
         print("I'm", self._name, "Cat.",
               "I say: MEOW!")
+</code></pre></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Lista di oggetti</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/oop/peppa.png">
+        
+      </figure><pre class="prettyprint" data-lang="py"><code>d = Dog("Danny")
+c = Cat("Candy")
+p1 = Pig("Peppa")
+p2 = Pig("George")
+
+# a list of Animal objects
+animals = [d, c, p1, p2]
+for a in animals:
+    a.say()
 </code></pre>
-<blockquote></blockquote>
-<p><a href="http://www.ce.unipr.it/brython/?p3_oop_animals.py">http://www.ce.unipr.it/brython/?p3_oop_animals.py</a></p></article>
+<pre class="prettyprint" data-lang="output"><code>I'm Danny Dog. I say: WOOF!
+I'm Candy Cat. I say: MEOW!
+I'm Peppa Pig. I say: OINK!
+I'm George Pig. I say: OINK!
+</code></pre></article>
  
 </slide>
 
@@ -413,7 +441,9 @@ class Cat(Animal):
 <pre class="prettyprint" data-lang="py"><code>class Actor:
     def move(self):
         raise NotImplementedError("Abstract method")
-</code></pre></article>
+</code></pre>
+<blockquote></blockquote>
+<p><a href="http://www.ce.unipr.it/brython/?actor.py">http://www.ce.unipr.it/brython/?actor.py</a></p></article>
  
 </slide>
 
@@ -466,9 +496,7 @@ arena.move_all()
 </li>
 <li>Relazione <em>has-a</em> tra un oggetto <code>Arena</code> e gli oggetti <code>Actor</code> che contiene</li>
 <li>Relazione <em>is-a</em> tra classi concrete (<code>Ball</code> e <code>Ghost</code>) e interfaccia (<code>Actor</code>)</li>
-</ul>
-<blockquote></blockquote>
-<p><a href="http://www.ce.unipr.it/brython/?actor.py">http://www.ce.unipr.it/brython/?actor.py</a></p></article>
+</ul></article>
  
 </slide>
 
