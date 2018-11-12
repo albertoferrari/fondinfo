@@ -433,7 +433,8 @@ Memorizzare i valori in una lista
 
 title: 4.5 Lista di ambulanze
 
-- Leggere da un file i dati di una lista di ambulanze (es. 3.2)
+- Leggere da un file i dati di una lista di ambulanze
+    - Oggetti dell'es. 3.2
     - In ogni riga ci sono i dati completi di una ambulanza: nome e posizione
 - Poi, in un ciclo, chiedere all'utente il punto in cui intervenire
 - Il sistema sceglie l'ambulanza più rapida per l'intervento
@@ -495,6 +496,7 @@ title: 5.2 Veicoli ed elicotteri
 
 - Definire una classe astratta per i *veicoli* d'intervento
     - Metodo `estimate_time(x, y)` per il calcolo del tempo d'intervento
+    - Metodo `name`
 - Ridefinire l'*ambulanza* (es. 3.2) come sottoclasse di *veicolo*
     - Richiede `1 minuto` di preparazione alla partenza
     - Viaggia a `90 Km/h`, per la distanza di Manhattan
@@ -669,3 +671,54 @@ figure: images/misc/fair-copy.png
     - *No copia&incolla* del codice: funzioni parametrizzate e/o cicli
     - *Programmazione strutturata*: preferibilmente `return` a fine funzione, cicli senza `break`
     - *OOP*: *incapsulamento*, *ereditarietà*, *polimorfismo*
+
+---
+
+title: Esercitazione 7 (11-12)
+class: segue dark
+
+---
+
+title: Esercizi C++
+figure: images/dev/cpp.png
+
+- Es. 1.1
+- Es. 1.7
+- Es. 2.2 -- Restituire un `vector` con due `int`
+- Es. 3.3
+- Es. 3.4
+
+---
+
+title: 7.6 Campo minato in C++, conteggio
+figure: images/misc/mines.png
+
+- Generare una matrice di dimensioni `w, h` e posizionare `n` mine in posizione casuale
+    - `w, h, n` scelti dall'utente
+    - Le mine non si sovrappongono
+- Mostrare la matrice
+- In un ciclo
+    - Chiedere all'utente una posizione `x, y`
+    - Contare quante mine sono presenti nelle 8 celle intorno alla posizione
+
+>
+
+Scegliere il tipo di matrice da utilizzare
+
+---
+
+title: 7.7 FroggerGame e FroggerGui, opzionali
+
+- Classe `FroggerGame`, per gestire il gioco Frogger
+    - Inizializzare i personaggi, prendendo i dati da un file di configurazione
+    - Incapsulare personaggi ed arena
+    - Controllare la conclusione della partita, positiva o negativa
+    - Guardare l'esempio nei commenti in `bounce_anim`
+- Classe `FroggerGui` per la rappresentazione del gioco
+    - Disegno immagini e funzionalità legate a `g2d`
+    - Metodi `update`, `key_down` e `key_up`
+    - Prendere spunto da `BoardGameGui`
+
+>
+
+Consegna definitiva del progetto: lunedì 19 novembre

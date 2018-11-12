@@ -262,14 +262,14 @@ code: py
         def __init__(self, name):
             self._name = name
         def say(self):
-            print("I'm", self._name, "Dog.",
+            print("I am", self._name, "Dog.",
                   "I say: WOOF!")
 
     class Cat(Animal):
         def __init__(self, name):
             self._name = name
         def say(self):
-            print("I'm", self._name, "Cat.",
+            print("I am", self._name, "Cat.",
                   "I say: MEOW!")
 
 ---
@@ -291,10 +291,10 @@ code: py
 
 code: output
 
-    I'm Danny Dog. I say: WOOF!
-    I'm Candy Cat. I say: MEOW!
-    I'm Peppa Pig. I say: OINK!
-    I'm George Pig. I say: OINK!
+    I am Danny Dog. I say: WOOF!
+    I am Candy Cat. I say: MEOW!
+    I am Peppa Pig. I say: OINK!
+    I am George Pig. I say: OINK!
 
 ---
 

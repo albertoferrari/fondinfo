@@ -641,15 +641,15 @@ code: c++
     public:
         Dog(string name) { name_ = name; }
         void say() {
-            cout << "I'm " << name_
-                 << " Dog. I say: WOOF!" << endl;
+            cout << "I am " << name_ << " Dog. "
+                 << "I say: WOOF!" << endl;
         }
     };
-
     class Cat : public Animal {
         /* ... */
         void say() {
-            cout << "I'm " << name_ << " Cat. I say: MEOW!" << endl;
+            cout << "I am " << name_ << " Cat. "
+                 << "I say: MEOW!" << endl;
         }
     };
 
@@ -671,10 +671,10 @@ code: c++
 
 code: output
 
-    I'm Danny Dog. I say: WOOF!
-    I'm Candy Cat. I say: MEOW!
-    I'm Peppa Pig. I say: OINK!
-    I'm George Pig. I say: OINK!
+    I am Danny Dog. I say: WOOF!
+    I am Candy Cat. I say: MEOW!
+    I am Peppa Pig. I say: OINK!
+    I am George Pig. I say: OINK!
 
 ---
 

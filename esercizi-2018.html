@@ -772,7 +772,8 @@ Con <code>s = (a + b + c) / 2</code>, semiperimetro</p>
     </hgroup>
     <article >
       <ul>
-<li>Leggere da un file i dati di una lista di ambulanze (es. 3.2)<ul>
+<li>Leggere da un file i dati di una lista di ambulanze<ul>
+<li>Oggetti dell'es. 3.2</li>
 <li>In ogni riga ci sono i dati completi di una ambulanza: nome e posizione</li>
 </ul>
 </li>
@@ -875,6 +876,7 @@ Con <code>s = (a + b + c) / 2</code>, semiperimetro</p>
       <ul>
 <li>Definire una classe astratta per i <em>veicoli</em> d'intervento<ul>
 <li>Metodo <code>estimate_time(x, y)</code> per il calcolo del tempo d'intervento</li>
+<li>Metodo <code>name</code></li>
 </ul>
 </li>
 <li>Ridefinire l'<em>ambulanza</em> (es. 3.2) come sottoclasse di <em>veicolo</em><ul>
@@ -1189,6 +1191,91 @@ Con <code>s = (a + b + c) / 2</code>, semiperimetro</p>
 </ul>
 </li>
 </ul></article>
+ 
+</slide>
+
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Esercitazione 7 (11-12)</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Esercizi C++</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/dev/cpp.png">
+        
+      </figure><ul>
+<li>Es. 1.1</li>
+<li>Es. 1.7</li>
+<li>Es. 2.2 -- Restituire un <code>vector</code> con due <code>int</code></li>
+<li>Es. 3.3</li>
+<li>Es. 3.4</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>7.6 Campo minato in C++, conteggio</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <figure>
+        <img src="images/misc/mines.png">
+        
+      </figure><ul>
+<li>Generare una matrice di dimensioni <code>w, h</code> e posizionare <code>n</code> mine in posizione casuale<ul>
+<li><code>w, h, n</code> scelti dall'utente</li>
+<li>Le mine non si sovrappongono</li>
+</ul>
+</li>
+<li>Mostrare la matrice</li>
+<li>In un ciclo<ul>
+<li>Chiedere all'utente una posizione <code>x, y</code></li>
+<li>Contare quante mine sono presenti nelle 8 celle intorno alla posizione</li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Scegliere il tipo di matrice da utilizzare</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>7.7 FroggerGame e FroggerGui, opzionali</h2>
+      <h3></h3>
+    </hgroup>
+    <article >
+      <ul>
+<li>Classe <code>FroggerGame</code>, per gestire il gioco Frogger<ul>
+<li>Inizializzare i personaggi, prendendo i dati da un file di configurazione</li>
+<li>Incapsulare personaggi ed arena</li>
+<li>Controllare la conclusione della partita, positiva o negativa</li>
+<li>Guardare l'esempio nei commenti in <code>bounce_anim</code></li>
+</ul>
+</li>
+<li>Classe <code>FroggerGui</code> per la rappresentazione del gioco<ul>
+<li>Disegno immagini e funzionalità legate a <code>g2d</code></li>
+<li>Metodi <code>update</code>, <code>key_down</code> e <code>key_up</code></li>
+<li>Prendere spunto da <code>BoardGameGui</code></li>
+</ul>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>Consegna definitiva del progetto: lunedì 19 novembre</p></article>
  
 </slide>
 

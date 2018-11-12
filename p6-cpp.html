@@ -799,15 +799,15 @@ public:
 public:
     Dog(string name) { name_ = name; }
     void say() {
-        cout &lt;&lt; "I'm " &lt;&lt; name_
-             &lt;&lt; " Dog. I say: WOOF!" &lt;&lt; endl;
+        cout &lt;&lt; "I am " &lt;&lt; name_ &lt;&lt; " Dog. "
+             &lt;&lt; "I say: WOOF!" &lt;&lt; endl;
     }
 };
-
 class Cat : public Animal {
     /* ... */
     void say() {
-        cout &lt;&lt; "I'm " &lt;&lt; name_ &lt;&lt; " Cat. I say: MEOW!" &lt;&lt; endl;
+        cout &lt;&lt; "I am " &lt;&lt; name_ &lt;&lt; " Cat. "
+             &lt;&lt; "I say: MEOW!" &lt;&lt; endl;
     }
 };
 </code></pre></article>
@@ -833,10 +833,10 @@ auto p2 = new Pig("George");
 vector&lt;Animal*&gt; animals = {d, c, p1, p2};
 for (auto a : animals) { a-&gt;say(); }
 </code></pre>
-<pre class="prettyprint" data-lang="output"><code>I'm Danny Dog. I say: WOOF!
-I'm Candy Cat. I say: MEOW!
-I'm Peppa Pig. I say: OINK!
-I'm George Pig. I say: OINK!
+<pre class="prettyprint" data-lang="output"><code>I am Danny Dog. I say: WOOF!
+I am Candy Cat. I say: MEOW!
+I am Peppa Pig. I say: OINK!
+I am George Pig. I say: OINK!
 </code></pre></article>
  
 </slide>
