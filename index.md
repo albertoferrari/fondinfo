@@ -2,7 +2,7 @@
 
 - [Presentazione del corso](http://tomamic.github.io/fondinfo/intro.html)
 - [Esercitazioni ed esame](http://tomamic.github.io/fondinfo/intro.html#4)
-- [Libri e software](http://tomamic.github.io/fondinfo/intro.html#8)
+- [Libri e software](http://tomamic.github.io/fondinfo/intro.html#9)
 - [Annunci](https://elly.dia.unipr.it/2018/mod/forum/view.php?id=1133)
 - [Forum di discussione](https://elly.dia.unipr.it/2018/mod/forum/view.php?id=1135)
 - [Accesso ai lab](http://www.cedi.unipr.it/gestioneaccounts)
